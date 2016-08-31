@@ -1,0 +1,9 @@
+{
+  "name": "HorizontCMS",
+  "version": "0.8.1",
+  "devDependencies": {
+    "grunt": "*",
+    "load-grunt-tasks": "*",
+    "grunt-contrib-compress": "*"
+  }
+}
