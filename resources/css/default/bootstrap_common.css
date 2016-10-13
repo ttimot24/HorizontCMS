@@ -1,0 +1,19 @@
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 97%;
+    max-width:1300px;
+  }
+}
+
+
+div#whatsup{
+      display:none;
+      background-color:rgba(0, 0, 0, 0.1);
+      left:15px;
+      bottom:10px;
+      min-height:60px;
+      position:fixed;
+      padding:10px;
+      min-width:200px;
+      max-width:350px;
+}

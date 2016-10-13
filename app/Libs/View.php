@@ -1,0 +1,53 @@
+<?php 
+
+namespace App\Libs;
+
+use Config;
+
+class View{
+
+	public $data = [];
+
+	public $css = [];
+
+	public $js = [];
+
+	public $meta = [];
+
+
+	public function __construct(){
+		$this->data['title'] = null;
+		$this->data['meta'][] = ['viewport','width=device-width, initial-scale=1'];
+		$this->data['css'] = Config::get('horizontcms.css');
+		$this->data['js'] = Config::get('horizontcms.js');
+	}
+
+	public function title($title){
+		$this->data['title'] = $title;
+	}
+
+	public function render($view_file,array $data = []){
+
+		return view($view_file,array_merge($this->data,$data));
+	}
+
+
+	public function css($file){
+		$this->data['css'][] = $file;
+	}
+
+
+	public function js($file){
+		$this->data['js'][] = $file;
+	}
+
+
+	public function meta($name,$content){
+		$this->data['meta'][] = [$name,$content];
+	}
+
+
+
+
+}
+
