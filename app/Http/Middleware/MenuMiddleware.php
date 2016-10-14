@@ -35,9 +35,20 @@ class MenuMiddleware
 
 
 
-            $menu->add(trans('navbar.pages'), 'item-2-url');
-            $menu->add(trans('navbar.media'), 'item-2-url');
-            $menu->add(trans('navbar.themes_apps'), 'item-2-url');
+            $menu->add(trans('navbar.pages'), '#');
+            $menu->item(strtolower(trans('navbar.pages')))->add(trans('navbar.page_list'), $prefix.'/page');
+            $menu->item(strtolower(trans('navbar.pages')))->add(trans('navbar.page_add'), $prefix.'/page/create');
+            
+            $menu->add(trans('navbar.media'), '#');
+            $menu->item(strtolower(trans('navbar.media')))->add(trans('navbar.header_images'), $prefix.'/headerimage');
+            $menu->item(strtolower(trans('navbar.media')))->add(trans('navbar.filemanager'), $prefix.'/filemanager');
+            $menu->item(strtolower(trans('navbar.media')))->add(trans('navbar.gallery'), $prefix.'/gallery');
+            
+            
+            $menu->add(trans('navbar.themes_apps'), '#');
+            $menu->item(strtolower(trans('navbar.themes_apps')))->add(trans('navbar.theme'), $prefix.'/theme');
+            $menu->item(strtolower(trans('navbar.themes_apps')))->add(trans('navbar.plugin'), $prefix.'/plugin');
+            $menu->item(strtolower(trans('navbar.themes_apps')))->add(trans('navbar.develop'), $prefix.'/develop');
 
         });
 
