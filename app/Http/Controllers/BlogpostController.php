@@ -6,21 +6,22 @@ use Illuminate\Http\Request;
 
 use App\Model\Blogpost;
 
-class BlogpostController extends Controller
-{
+class BlogpostController extends Controller{
+  
+    protected $itemPerPage = 15;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug)
-    {
+    public function index($slug){
 
 
         $this->view->title("Blogposts");
         return $this->view->render('blogposts/index',[
                                                         'number_of_blogposts' => Blogpost::count(),
-                                                        'all_blogposts' => Blogpost::all(),
+                                                        'all_blogposts' => Blogpost::paginate($this->itemPerPage),
                                                     ]);
     }
 
@@ -29,8 +30,7 @@ class BlogpostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         //
     }
 
@@ -40,8 +40,7 @@ class BlogpostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         //
     }
 
@@ -51,8 +50,7 @@ class BlogpostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){
         //
     }
 
@@ -62,8 +60,7 @@ class BlogpostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         //
     }
 
@@ -74,8 +71,7 @@ class BlogpostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         //
     }
 
@@ -85,8 +81,7 @@ class BlogpostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         //
     }
 }

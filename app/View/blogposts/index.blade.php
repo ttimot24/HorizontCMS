@@ -38,9 +38,9 @@
   
 
   <td><?= date('Y-m-d',$blogpost->date); ?></br><font size='2'><i>at</i> <?= date('H:i:s',$blogpost->date) ?></font></td>
-         <td><a href=admin/user/view/<?php //$blogpost->get_author()->id ?> >
-         <?php //$blogpost->get_author()->username ?></a></td>
-         <td><span class="label label-success" style='font-size:14px; display:block'><?php // $blogpost->get_category()->name ?></span></td>
+         <td><a href=admin/user/view/<?php //$blogpost->getAuthor()->id ?> >
+         <?php //$blogpost->getAuthor()->username ?></a></td>
+         <td><span class="label label-success" style='font-size:14px; display:block'>{{ $blogpost->getCategory()->name }}</span></td>
 
 
 
@@ -49,7 +49,7 @@
 
        <div class="btn-group" role="group">
            <a href=admin/blogpost/update/<?= $blogpost->id ?> type="button" class="btn btn-warning btn-sm" style='min-width:70px;'>Edit</a>
-           <a type="button" data-toggle='modal' data-target=.delete_<?= $blogpost->id ?> class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+           <a type="button" data-toggle='modal' data-target=.delete_<?= $blogpost->id ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
        </div>
 
         </center>
@@ -99,4 +99,4 @@
 
 
 </div>
-@stop
+@endsection

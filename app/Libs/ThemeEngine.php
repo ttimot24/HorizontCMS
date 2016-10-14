@@ -4,7 +4,7 @@ namespace App\Libs;
 
 class ThemeEngine{
 
-
+	protected $theme;
 
 	public function render($theme){
 		$this->theme = $theme;
