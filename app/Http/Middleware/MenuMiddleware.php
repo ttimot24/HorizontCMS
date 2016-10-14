@@ -46,9 +46,9 @@ class MenuMiddleware
             
             
             $menu->add(trans('navbar.themes_apps'), '#');
-            $menu->item(strtolower(trans('navbar.themes_apps')))->add(trans('navbar.theme'), $prefix.'/theme');
+        /*    $menu->item(strtolower(trans('navbar.themes_apps')))->add(trans('navbar.theme'), $prefix.'/theme');
             $menu->item(strtolower(trans('navbar.themes_apps')))->add(trans('navbar.plugin'), $prefix.'/plugin');
-            $menu->item(strtolower(trans('navbar.themes_apps')))->add(trans('navbar.develop'), $prefix.'/develop');
+            $menu->item(strtolower(trans('navbar.themes_apps')))->add(trans('navbar.develop'), $prefix.'/develop');*/
 
         });
 

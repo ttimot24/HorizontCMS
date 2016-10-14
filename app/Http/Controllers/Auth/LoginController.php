@@ -29,17 +29,42 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = 'admin/dashboard';
+    protected $redirectAfterLogout = 'admin/login';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(){
-
+    public function __construct(Request $request){
+        parent::__construct($request);
 
         $this->middleware('guest', ['except' => 'logout']);
     }
 
+
+    /**
+    *
+    * Returns if email or username is for authentication.
+    */
+
+    public function username(){
+        return 'username';
+    }
+
+
+    /**
+     * Show the application login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm(){
+
+        $this->view->title('Welcome');
+        return $this->view->render('auth/login',[
+                                                    'app_name' => \Config::get('app.name'),
+                                                    'admin_logo' => url(\Config::get('horizontcms.admin_logo')),
+                                                ]);
+    }
     
 }
