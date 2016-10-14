@@ -17,6 +17,15 @@ return [
 	'user_list' => 'User list',
 	'user_add' => 'Add user',
 	'user_groups' => 'User groups',
+	'page_list' => 'Page list',
+	'page_add' => 'Add page',
+	'header_images' => 'Header Images',
+	'filemanager' => 'Files',
+	'gallery' => 'Gallery',
+	'theme' => 'Themes',
+	'plugin' => 'Plugins',
+	'develop' => 'Develop',
+	
 
 
 ];
