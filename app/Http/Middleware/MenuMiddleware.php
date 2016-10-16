@@ -19,7 +19,6 @@ class MenuMiddleware
 
             $prefix = \Config::get('horizontcms.backend_prefix');
 
-
             $menu->add("<span class='glyphicon glyphicon-th-large' aria-hidden='true'></span> ".trans('navbar.dashboard'), $prefix."/dashboard");
 
             $menu->add(trans('navbar.news'), '#')->id('news');
@@ -51,15 +50,24 @@ class MenuMiddleware
             $menu->find('themes_apps')->add("<i class='fa fa-code'></i> ".trans('navbar.develop'), $prefix.'/develop');
 
         });
+  
+
+        \Menu::make('RightMenu', function($menu) {
 
 
-       /* \Menu::make('RightMenu', function($menu) {
+            $menu->add('current_user', '#')->id('current_user');
 
-            $menu->add(trans('navbar.dashboard'), 'item-1-url');
-            $menu->add(trans('navbar.news'), 'item-2-url');
-            $menu->add(trans('navbar.users'), 'item-3-url');
+            $menu->add("<i class='fa fa-cogs'></i> ", '#')->id('settings');
 
-        });*/
+            $menu->add("<i class='fa fa-power-off'></i> ", '#')->id('shutdown');
+            $menu->find('shutdown')->add("<i class='fa fa-lock'></i> ".trans('navbar.lock_screen'), ['url'=>'#','onclick'=>'alert(\'lock\')'])->id('lock_screen');
+            $menu->find('lock_screen')->divide();
+            $menu->find('shutdown')->add("<i class='fa fa-external-link'></i> ".trans('navbar.visit_site',['url'=>'asdasd']), '');
+            $menu->find('shutdown')->add("<i class='fa fa-sign-out'></i> ".trans('navbar.logout'), ['onclick' => 'event.preventDefault(); document.getElementById(\'logout-form\').submit();']);
+
+        
+
+        });
 
 
 

@@ -30,7 +30,7 @@
   <td><?= $blogpost->id ?></td>
 
 
-  <td><img src=<?php //$blogpost->get_thumb(); ?>  class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> </td>
+  <td><img src='{{$blogpost->getThumb()}}'  class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> </td>
 
 
   <td  class='col-md-5'><a href=admin/blogpost/view/<?= $blogpost->id; ?> ><?= $blogpost->title; ?></a></td>
@@ -39,7 +39,7 @@
 
   <td><?= date('Y-m-d',$blogpost->date); ?></br><font size='2'><i>at</i> <?= date('H:i:s',$blogpost->date) ?></font></td>
          <td><a href=admin/user/view/<?php //$blogpost->getAuthor()->id ?> >
-         <?php //$blogpost->getAuthor()->username ?></a></td>
+         <?php //echo $blogpost->getAuthor()->id ?></a></td>
          <td><span class="label label-success" style='font-size:14px; display:block'>{{ $blogpost->getCategory()->name }}</span></td>
 
 

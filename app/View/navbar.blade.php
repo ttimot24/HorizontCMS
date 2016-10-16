@@ -24,11 +24,13 @@
                 </ul>
 
                 <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                        <li class="dropdown">
+                <ul class="nav navbar-nav navbar-right" style='padding-right:25px;'>
+
+                    @include(config('laravel-menu.views.bootstrap-items'), array('items' => $RightMenu->roots()))
+                    
+                       <!-- <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->username }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
@@ -39,12 +41,15 @@
                                         Logout
                                     </a>
 
-                                    <form id="logout-form" action="{{ url(Config::get('horizontcms.backend_prefix').'/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
+
                                 </li>
                             </ul>
-                        </li>
+                        </li>-->
+
+                    <form id="logout-form" action="{{ url(Config::get('horizontcms.backend_prefix').'/logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+
                 </ul>
             </div>
         </div>

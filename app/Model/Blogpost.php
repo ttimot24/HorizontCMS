@@ -9,7 +9,7 @@ class Blogpost extends Model{
 
 
     public function getAuthor(){
-    	//return User::find($this->author);
+    	return $this->belongsTo('App\User');
     }   
 
 	public function getCategory(){
@@ -17,8 +17,23 @@ class Blogpost extends Model{
 	}
 
 
+	public function getComments(){
+		 
+	}
+
+
+	public function getThumb(){
+		return $this->getImage();
+	}
+
     public function getImage(){
-    	return url("blogpost image url");
+    	
+    	if(file_exists("storage/images/blogposts/".$this->image)){
+    		return url("storage/images/blogposts/".$this->image);
+    	}else{
+    		return "";
+    	}
+
     }
 
 

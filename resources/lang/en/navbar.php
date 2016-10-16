@@ -25,6 +25,11 @@ return [
 	'theme' => 'Themes',
 	'plugin' => 'Plugins',
 	'develop' => 'Develop',
+
+	'lock_screen' => 'Lock Screen',
+	'visit_site' => 'Visit :url',
+	'logout' => 'Logout',
+	'about' => 'About',
 	
 
 

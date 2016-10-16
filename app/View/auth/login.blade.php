@@ -1,5 +1,5 @@
 @extends('layout')
-    <div class='jumbotron' style='margin-top: -4.65%;'>
+    <div class='jumbotron' style='margin-top: -55px;'>
         <div class='container'>
        
         <img src='{{$admin_logo}}' width='100' class='pull-left' alt="">

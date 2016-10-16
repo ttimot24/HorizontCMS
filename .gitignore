@@ -5,4 +5,4 @@
 Homestead.json
 Homestead.yaml
 .env
-composer.json
+/storage
