@@ -38,7 +38,7 @@ Route::post('admin/logout', 'Auth\LoginController@logout');
 Route::group(['prefix'=> Config::get('horizontcms.backend_prefix'),'middleware' => 'auth'],function(){
 
 	Route::any('/{controller?}/{action?}/{args?}/', 
-		function($controller, $action = 'index', $args = null){
+		function($controller = 'dashboard', $action = 'index', $args = null){
 		        $controllerClass = 'App\\Http\\Controllers\\'.ucfirst($controller).'Controller';
 
 		        $action = studly_case($action); // optional, converts foo-bar into FooBar for example

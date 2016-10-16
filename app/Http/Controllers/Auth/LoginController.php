@@ -66,5 +66,19 @@ class LoginController extends Controller
                                                     'admin_logo' => url(\Config::get('horizontcms.admin_logo')),
                                                 ]);
     }
+
+
+
+    public function logout(Request $request){
+
+        $this->guard()->logout();
+        /*$request->session()->flush();
+        $request->session()->regenerate();*/
+
+        return redirect($this->redirectAfterLogout);
+    }
+
+
+
     
 }
