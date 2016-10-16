@@ -12,7 +12,7 @@
 	@endforeach
 
 </head>
-<body style='padding-top: 55px'>
+<body @if(Auth::user()) style='padding-top: 55px' @endif>
 
   @if (!Auth::guest())
 	@include('navbar')

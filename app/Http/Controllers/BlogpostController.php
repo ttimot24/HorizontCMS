@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Libs\Controller;
 
 use App\Model\Blogpost;
 
 class BlogpostController extends Controller{
   
-    protected $itemPerPage = 15;
+    protected $itemPerPage = 25;
 
     /**
      * Display a listing of the resource.
@@ -21,7 +22,7 @@ class BlogpostController extends Controller{
         $this->view->title("Blogposts");
         return $this->view->render('blogposts/index',[
                                                         'number_of_blogposts' => Blogpost::count(),
-                                                        'all_blogposts' => Blogpost::paginate($this->itemPerPage),
+                                                        'all_blogposts' => Blogpost::orderBy('id','desc')->paginate($this->itemPerPage),
                                                     ]);
     }
 
@@ -51,7 +52,9 @@ class BlogpostController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function show($id){
-        //
+
+        $this->view->title('View blogpost');
+        return $this->view->render('blogposts/view',['blogpost' => Blogpost::find($id)]);
     }
 
     /**

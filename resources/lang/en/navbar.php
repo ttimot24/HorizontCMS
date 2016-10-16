@@ -4,14 +4,14 @@ return [
 
 	/*Main menus*/
 	'dashboard' => 'Dashboard',
-	'news' => 'News',
+	'news' => 'Blog',
 	'users' => 'Users',
 	'pages' => 'Pages',
 	'media' => 'Media',
 	'themes_apps' => 'Themes & Apps',
 
 	/*Sumbmenus*/
-	'posted_news' => 'Posted news',
+	'posted_news' => 'Blogpost list',
 	'create_post' => 'Create post',
 	'categories' => 'Categories',
 	'user_list' => 'User list',
@@ -27,7 +27,7 @@ return [
 	'develop' => 'Develop',
 
 	'lock_screen' => 'Lock Screen',
-	'visit_site' => 'Visit :url',
+	'visit_site' => 'Visit :site_name',
 	'logout' => 'Logout',
 	'about' => 'About',
 	

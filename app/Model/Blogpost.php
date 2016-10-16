@@ -8,8 +8,8 @@ class Blogpost extends Model{
     
 
 
-    public function getAuthor(){
-    	return $this->belongsTo('App\User');
+    public function author(){
+    	 return $this->belongsTo(User::class,'author','id');
     }   
 
 	public function getCategory(){
@@ -17,8 +17,8 @@ class Blogpost extends Model{
 	}
 
 
-	public function getComments(){
-		 
+	public function comments(){
+		 return $this->hasMany(BlogpostComment::class,'blogpost_id','id');
 	}
 
 
@@ -27,11 +27,11 @@ class Blogpost extends Model{
 	}
 
     public function getImage(){
-    	
+
     	if(file_exists("storage/images/blogposts/".$this->image)){
     		return url("storage/images/blogposts/".$this->image);
     	}else{
-    		return "";
+    		return url("resources/images/icons/newspaper.png");
     	}
 
     }

@@ -33,8 +33,8 @@
   <td><img src='{{$blogpost->getThumb()}}'  class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> </td>
 
 
-  <td  class='col-md-5'><a href=admin/blogpost/view/<?= $blogpost->id; ?> ><?= $blogpost->title; ?></a></td>
-  		 <td><center><span class="badge" style='font-size:14px'><?php //count($blogpost->get_comments()) ?></span></center></td>
+  <td  class='col-md-5'><a href='blogpost/show/{{ $blogpost->id }}' >{{ $blogpost->title }}</a></td>
+  		 <td><center><span class="badge" style='font-size:14px'>{{ count($blogpost->comments) }}</span></center></td>
   
 
   <td><?= date('Y-m-d',$blogpost->date); ?></br><font size='2'><i>at</i> <?= date('H:i:s',$blogpost->date) ?></font></td>
@@ -75,28 +75,9 @@
 </tbody>
   </table>
 
-
-<!--
-<?php //if($data['show_pagination']!=FALSE): ?>
-<hr/><b>Page:&nbsp&nbsp</b>
-<div class='page_list' style='clear:both;'>
-<ul class='pagination'>
-<?php 
-        /*  for($i=1;$i<=$data['pages_number'];$i++){
-
-            if($data['page']==$i){
-              echo "<li class='active'><a href='admin/blogpost/page/".$i."'>" .$i."</a></li>&nbsp&nbsp";
-            }else{
-              echo "<li><a href='admin/blogpost/page/".$i."'>" .$i ."</a></li>&nbsp&nbsp";
-            }
-
-          }*/
-
-?>
-
-</ul></div>
-<?php //endif; ?>-->
-
+    <center>
+        {{$all_blogposts->links()}}
+    </center>
 
 </div>
 @endsection

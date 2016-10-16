@@ -1,5 +1,5 @@
 @extends('layout')
-    <div class='jumbotron' style='margin-top: -55px;'>
+    <div class='jumbotron'>
         <div class='container'>
        
         <img src='{{$admin_logo}}' width='100' class='pull-left' alt="">
@@ -15,7 +15,7 @@
         
         {{ csrf_field() }}
 
-            <div class='col-xs-12 col-md-4 pull-left'>  
+            <div class='col-xs-12 col-md-3 pull-left'>  
               <div class="form-group {{ $errors->has('username') ? ' has-error' : '' }}">
                 <label for='text'>{{trans('login.username')}}:</label>
                 <input type='text' class='form-control' id='username' name='username' placeholder="{{trans('login.enter_username')}}" autofocus required>
