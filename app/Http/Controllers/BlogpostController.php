@@ -19,6 +19,8 @@ class BlogpostController extends Controller{
     public function index($slug){
 
 
+        dd(\App\Model\BlogpostCategory::find(1)->blogposts);
+
         $this->view->title("Blogposts");
         return $this->view->render('blogposts/index',[
                                                         'number_of_blogposts' => Blogpost::count(),
@@ -32,7 +34,9 @@ class BlogpostController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function create(){
-        //
+        
+
+        return $this->view->render('blogposts/create');
     }
 
     /**
@@ -64,7 +68,7 @@ class BlogpostController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
-        //
+        return $this->view->render('blogposts/edit');
     }
 
     /**
@@ -87,4 +91,21 @@ class BlogpostController extends Controller{
     public function destroy($id){
         //
     }
+
+
+    /**
+     * Remove the specified resource from database.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id){
+        
+
+
+
+
+    }
+
+
 }

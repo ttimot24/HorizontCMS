@@ -9,11 +9,12 @@ class Blogpost extends Model{
 
 
     public function author(){
-    	 return $this->belongsTo(User::class,'author','id');
+    	 return $this->belongsTo(\App\User::class,'author_id','id'); //In db it has to be author_id else it won't work because Laravel priority is attr -> function
     }   
 
-	public function getCategory(){
-		return BlogpostCategory::find($this->category);
+	public function category(){
+
+        return $this->hasOne(BlogpostCategory::class,'id','category_id'); //In db it has to be category_id else it won't work because Laravel priority is attr -> function
 	}
 
 
@@ -23,7 +24,13 @@ class Blogpost extends Model{
 
 
 	public function getThumb(){
-		return $this->getImage();
+
+        if(file_exists("storage/images/blogposts/thumbs/".$this->image)){
+            return url("storage/images/blogposts/thumbs/".$this->image);
+        }else{
+            return $this->getImage();
+        }
+
 	}
 
     public function getImage(){

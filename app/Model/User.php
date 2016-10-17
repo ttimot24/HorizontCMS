@@ -26,4 +26,33 @@ class User extends Authenticatable{
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+
+    public function blogposts(){
+        return $this->hasMany(\App\Model\Blogpost::class,'author','id');
+    }
+
+
+    public function getThumb(){
+
+        if(file_exists("storage/images/users/thumbs/".$this->image)){
+            return url("storage/images/users/thumbs/".$this->image);
+        }else{
+            return $this->getImage();
+        }
+
+    }
+
+    public function getImage(){
+
+        if(file_exists("storage/images/users/".$this->image)){
+            return url("storage/images/users/".$this->image);
+        }else{
+            return url("resources/images/icons/newspaper.png");
+        }
+
+    }
+
+
 }

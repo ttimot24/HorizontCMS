@@ -5,7 +5,7 @@
 
 <h2>Posted news <small class='pull-right' style='margin-top:1.5%;'>All: {{$number_of_blogposts}}</small></h2></br>
 <div class='container'>
-  <a href='admin/blogpost/newpost' class='btn btn-primary' style='margin-bottom:20px;'>New post</a>
+  <a href='blogpost/create' class='btn btn-primary' style='margin-bottom:20px;'>New post</a>
 </div>
 
 <table class='table table-hover'>
@@ -38,9 +38,9 @@
   
 
   <td><?= date('Y-m-d',$blogpost->date); ?></br><font size='2'><i>at</i> <?= date('H:i:s',$blogpost->date) ?></font></td>
-         <td><a href=admin/user/view/<?php //$blogpost->getAuthor()->id ?> >
-         <?php //echo $blogpost->getAuthor()->id ?></a></td>
-         <td><span class="label label-success" style='font-size:14px; display:block'>{{ $blogpost->getCategory()->name }}</span></td>
+         <td><a href='user/show/{{ $blogpost->author->id }}' >
+         {{ $blogpost->author->username }}</a></td>
+         <td><span class="label label-success" style='font-size:14px; display:block'>{{ $blogpost->category->name }}</span></td>
 
 
 
@@ -58,7 +58,7 @@
 
 <?php 
 
- /*  Bootstrap::delete_confirmation(
+  /* Bootstrap::delete_confirmation(
     "delete_".$blogpost->id."",
     "Are you sure?",
     "<b>Delete this post: </b>".$blogpost->title." <b>?</b>",
