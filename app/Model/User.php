@@ -49,7 +49,7 @@ class User extends Authenticatable{
         if(file_exists("storage/images/users/".$this->image)){
             return url("storage/images/users/".$this->image);
         }else{
-            return url("resources/images/icons/newspaper.png");
+            return url("resources/images/icons/no-user.png");
         }
 
     }

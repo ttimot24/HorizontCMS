@@ -48,9 +48,9 @@ $key = array_search($data['instance']->id,$indexes);
   </div>
 
 
-    </br></br><b>Author : </br><a href='admin/user/view/<?php //echo $data["instance"]->get_author()->id?>'><?php //echo $data['instance']->get_author()->username ?></a></b>
+    </br></br><b>Author : </br><a href='admin/user/view/{{ $blogpost->author->id }}'>{{ $blogpost->author->username }}</a></b>
     </br></br><b>Published on : </br><a><?= date('Y.m.d. H:i:s',$blogpost->date) ?></a></b>
-    </br></br><b>Category : </br><a><?= $blogpost->getCategory()->name ?></a></b>
+    </br></br><b>Category : </br><a><?= $blogpost->category->name ?></a></b>
     </br></br><b>Characters : <br><a><?= strlen($blogpost->text) ?></a></b>
     </br></br><b>Words : <br><a><?= str_word_count($blogpost->text) ?></a></b>
     </br></br><b>Comments : <a><?= count($blogpost->comments); ?></a></b>
