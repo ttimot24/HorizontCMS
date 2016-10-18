@@ -48,7 +48,7 @@ Route::group(['prefix'=> Config::get('horizontcms.backend_prefix'),'middleware' 
 		            return $controller->callAction($action, [$args]);
 		        }
 		        else{
-		            return "Can't find controller action!";
+		            throw new Exception("Couldn't find action: <b>".$action."</b>");
 		        }
   		 })->where('args', '(.*)');
 	

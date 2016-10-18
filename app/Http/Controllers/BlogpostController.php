@@ -19,8 +19,6 @@ class BlogpostController extends Controller{
     public function index($slug){
 
 
-        dd(\App\Model\BlogpostCategory::find(1)->blogposts);
-
         $this->view->title("Blogposts");
         return $this->view->render('blogposts/index',[
                                                         'number_of_blogposts' => Blogpost::count(),
@@ -35,8 +33,12 @@ class BlogpostController extends Controller{
      */
     public function create(){
         
+        $this->view->js('resources/assets/ckeditor/ckeditor.js');
 
-        return $this->view->render('blogposts/create');
+        $this->view->title('New blogpost');
+        return $this->view->render('blogposts/create',[
+                                                        'categories' => \App\Model\BlogpostCategory::all(),
+                                                        ]);
     }
 
     /**
@@ -68,7 +70,15 @@ class BlogpostController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
-        return $this->view->render('blogposts/edit');
+
+
+        $this->view->js('resources/assets/ckeditor/ckeditor.js');
+
+        $this->view->title('New blogpost');
+
+        return $this->view->render('blogposts/edit',[
+                                                        'blogpost' => Blogpost::find($id),
+                                                    ]);
     }
 
     /**

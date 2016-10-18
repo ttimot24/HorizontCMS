@@ -5,7 +5,7 @@
 
 <h2>Posted news <small class='pull-right' style='margin-top:1.5%;'>All: {{$number_of_blogposts}}</small></h2></br>
 <div class='container'>
-  <a href='blogpost/create' class='btn btn-primary' style='margin-bottom:20px;'>New post</a>
+  <a href='blogpost/create' class='btn btn-primary' style='margin-bottom:20px;'>{{trans('blogpost.new_post_button')}}</a>
 </div>
 
 <table class='table table-hover'>
@@ -48,7 +48,7 @@
     <center>
 
        <div class="btn-group" role="group">
-           <a href=admin/blogpost/update/<?= $blogpost->id ?> type="button" class="btn btn-warning btn-sm" style='min-width:70px;'>Edit</a>
+           <a href='blogpost/edit/{{ $blogpost->id }}' type="button" class="btn btn-warning btn-sm" style='min-width:70px;'>Edit</a>
            <a type="button" data-toggle='modal' data-target=.delete_<?= $blogpost->id ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
        </div>
 

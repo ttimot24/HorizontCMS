@@ -8,7 +8,7 @@
 	@endforeach
 
 	@foreach ($js as $each_js)
-    		<script type="text/javascript" src="{{$each_js}}"></script>
+    		<script type="text/javascript" src="{{url($each_js)}}"></script>
 	@endforeach
 
 </head>
