@@ -8,7 +8,8 @@ use App\Libs\Controller;
 use App\Model\Blogpost;
 
 class BlogpostController extends Controller{
-  
+ 
+
     protected $itemPerPage = 25;
 
     /**
@@ -32,6 +33,27 @@ class BlogpostController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function create(){
+
+
+       
+
+        if($this->request->isMethod('POST')){
+
+            $blogpost = new Blogpost();
+            $blogpost->title = $this->request->input('title');
+            $blogpost->category_id = $this->request->input('category_id');
+            $blogpost->summary = $this->request->input('summary');
+            $blogpost->text = $this->request->input('text');
+            $blogpost->author_id = \Auth::user()->id;
+
+            if($blogpost->save()){
+                return $this->insideLink('blogpost/edit/'.$blogpost->id);
+            }
+
+            
+        }
+
+
         
         $this->view->js('resources/assets/ckeditor/ckeditor.js');
 
@@ -78,6 +100,7 @@ class BlogpostController extends Controller{
 
         return $this->view->render('blogposts/edit',[
                                                         'blogpost' => Blogpost::find($id),
+                                                        'categories' => \App\Model\BlogpostCategory::all(),
                                                     ]);
     }
 

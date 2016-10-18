@@ -1,14 +1,17 @@
+@extends('layout')
+
+@section('content')
 <div class='container main-container'>
   <h2>Edit post</h2>
-  <form role='form' action='admin/blogpost/update/<?php echo $data['instance']->id ?>' method='POST' enctype='multipart/form-data'>
+  <form role='form' action='blogpost/update/{{$blogpost->id}}' method='POST' enctype='multipart/form-data'>
      <div class='form-group pull-left col-xs-12 col-md-8'>
-    <input type='hidden' name='id' value=<?php echo $data['instance']->id ?>>
+    <input type='hidden' name='id' value=<?= $blogpost->id ?>>
       <label for='title'>Title:</label>
-      <input type='text' class='form-control' id='title' name='title' value='<?= htmlspecialchars($data['instance']->title,ENT_QUOTES) ?>' required>
+      <input type='text' class='form-control' id='title' name='title' value='<?= htmlspecialchars($blogpost->title,ENT_QUOTES) ?>' required>
     </div>
 
-<button type='button' class='btn btn-link pull-right' data-toggle='modal' data-target='.<?= $data['instance']->id ?>-modal-xl'>
-    <img src=<?php echo $data['instance']->get_image(); ?> width=300 class='img img-thumbnail' >
+<button type='button' class='btn btn-link pull-right' data-toggle='modal' data-target='.<?= $blogpost->id ?>-modal-xl'>
+    <img src=<?= $blogpost->getImage(); ?> width=300 class='img img-thumbnail' >
 </button>
 
 
@@ -20,11 +23,13 @@
 
 <?php  
 
-    foreach($data['categories'] as $category){
-    	if($data['instance']->category == $category->id){
-    		print "<option value='".$category->id."' selected>".$category->name."</option>";
+    foreach($categories as $category){
+
+
+    	if($blogpost->category->is($category)){
+    		echo "<option value='".$category->id."' selected>".$category->name."</option>";
     	}else{
-    		print "<option value='".$category->id."'>".$category->name."</option>";
+    		echo "<option value='".$category->id."' >".$category->name."</option>";
     	}
     	
     }
@@ -34,7 +39,7 @@
 
  <div class='form-group pull-left col-xs-12 col-md-8'>
  <label for='title'>Summary:</label>
-      <input type='text' class='form-control' id='title' name='summary' value='<?= htmlspecialchars($data['instance']->summary,ENT_QUOTES) ?>' ></br>
+      <input type='text' class='form-control' id='title' name='summary' value='<?= htmlspecialchars($blogpost->summary,ENT_QUOTES) ?>' ></br>
 </div>
 
  <div class='form-group pull-left col-xs-12 col-md-12'>
@@ -43,7 +48,7 @@
 
 <!---------------------------------------- jQUERY TEXT EDITOR ------------------------------------------------>
 
-<textarea name='text' id='editor' rows="15" cols="80"><?= htmlspecialchars($data['instance']->text,ENT_QUOTES) ?></textarea>
+<textarea name='text' id='editor' rows="15" cols="80"><?= htmlspecialchars($blogpost->text,ENT_QUOTES) ?></textarea>
 
 
             <script>
@@ -57,7 +62,7 @@
             </script>
 
 
-<!--<textarea name='text' class='jqte-test'><?php echo $data['instance']->text ?></textarea>
+<!--<textarea name='text' class='jqte-test'><?php echo $blogpost->text ?></textarea>
 
 ---------------------------------------------- jQUERY TEXT EDITOR ------------------------------------------------>
 
@@ -78,4 +83,5 @@
   </form>
 </div>
 
-<?php Bootstrap::image_details($data['instance']->id,$data['instance']->get_image()) ?>
+<?php //Bootstrap::image_details($blogpost->id,$blogpost->getImage()) ?>
+@endsection

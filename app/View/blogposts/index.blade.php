@@ -37,7 +37,7 @@
   		 <td><center><span class="badge" style='font-size:14px'>{{ count($blogpost->comments) }}</span></center></td>
   
 
-  <td><?= date('Y-m-d',$blogpost->date); ?></br><font size='2'><i>at</i> <?= date('H:i:s',$blogpost->date) ?></font></td>
+  <td><?= $blogpost->created_at->format('Y-m-d'); ?></br><font size='2'><i>at</i> <?= $blogpost->created_at->format('H:i:s'); ?></font></td>
          <td><a href='user/show/{{ $blogpost->author->id }}' >
          {{ $blogpost->author->username }}</a></td>
          <td><span class="label label-success" style='font-size:14px; display:block'>{{ $blogpost->category->name }}</span></td>

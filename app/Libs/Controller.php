@@ -22,4 +22,10 @@ class Controller extends BaseController{
     	return redirect($location);
     }
 
+
+    public function insideLink($location){
+    	return redirect(\Config::get('horizontcms.backend_prefix')."/".$location);
+    }
+
+
 }

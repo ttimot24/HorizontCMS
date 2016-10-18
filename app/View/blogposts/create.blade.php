@@ -6,9 +6,7 @@
   <h2>{{trans('blogpost.new_blogpost')}}</h2>
  
   <form  role='form' action='' method='POST' enctype='multipart/form-data'>
- 
-
-
+    {{ csrf_field() }}
     <br><br>
 
     <div class='form-group pull-left col-xs-12 col-md-8'>
@@ -28,16 +26,14 @@
 
    <div class='form-group pull-left col-xs-12 col-md-5' style='margin-top:2%;'>
   <label for='sel1'>Select category:</label>
-  <select class='form-control' name='category' id='sel1'>
+  <select class='form-control' name='category_id' id='sel1'>
 
 
 
 <?php  
-
     foreach($categories as $category){
 
     	echo "<option value='".$category->id."'>".$category->name."</option>";
-
     	
     }
 ?>
@@ -64,9 +60,10 @@
             <script>
 
                 CKEDITOR.replace( 'editor' );
-                CKEDITOR.config.language= 'en';
+                CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
                 CKEDITOR.config.removeButtons = 'Save';
                 CKEDITOR.config.height = 350;
+                CKEDITOR.extraPlugins = 'imageuploader';
 
 
             </script>
@@ -93,8 +90,8 @@
 
 
      <div class='form-group pull-left col-xs-12 col-md-12'>
-    <button id='submit-btn' name='submit_clicked' type='submit' class='btn btn-primary btn-lg' onclick='window.onbeforeunload = null;'>Publish</button> 
-    <a href='admin/blogpost/index' type='button' class='btn btn-default'>Cancel</a>
+    <button id='submit-btn' type='submit' class='btn btn-primary btn-lg' onclick='window.onbeforeunload = null;'>Publish</button> 
+    <a href='blogpost/index' type='button' class='btn btn-default'>Cancel</a>
     </div>
   </form>
 </div>

@@ -16,9 +16,12 @@
 
   @if (!Auth::guest())
 	@include('navbar')
+	@include('messages')
   @endif
 
-	@yield('content')
+  
+
+  @yield('content')
 
 
 <div id='whatsup' class='panel panel-primary' ></div>
@@ -29,7 +32,9 @@
 <footer id='footer' style='bottom:0;position:relative;'>
         <div class='container main-container'>
             <p class='text-muted credit' >
-	HorizontCMS &copy 2015 - <?= date('Y'); ?> <a href='http://www.twitter.com/timottarjani'>Timot Tarjani</a>
+	          HorizontCMS &copy 2015 - <?= date('Y'); ?> <a href='http://www.twitter.com/timottarjani'>Timot Tarjani</a> 
+	          &nbsp&nbsp<a href='https://github.com/ttimot24/HorizontCMS'><i style='font-size: 18px;' class="fa fa-github" aria-hidden="true"></i></a>
+
 			</p>
 		</div>	
 </footer>
