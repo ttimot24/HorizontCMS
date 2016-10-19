@@ -1,3 +1,6 @@
+@extends('layout')
+
+@section('content')
 <div class='container main-container'>
 
 <h2>{{trans('user.registered_users')}} <small class='pull-right' style='margin-top:1.5%;'>{{trans('user.all')}}: {{$number_of_users}}  | {{trans('user.active')}}: {{$active_users}} | {{trans('user.inactive')}}: {{$number_of_users-$active_users}}</small></h2>
@@ -111,3 +114,4 @@ echo "</tbody>
     </center>
 
 </div>
+@endsection

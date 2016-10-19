@@ -11,6 +11,8 @@ return [
 	'active' => 'Active',
 	'inactive' => 'Inactive',
 	'new_user_button' => 'New user',
+	'logins' => 'Logins',
+	'pws_not_equal' => 'Passwords doesn\'t match!',
 
 	//Table headers
 	'th_id' => 'Id',
@@ -22,4 +24,14 @@ return [
 	'th_session' => 'Session',
 
 
+	//Create
+	'create_name' => 'Name',
+	'create_upload_image' => 'Upload image',
+	'create_username' => 'Username',
+	'create_password' => 'Password',
+	'create_password_again' => 'Password again',
+	'create_email' => 'Email',
+	'create_select_rank' => 'Select rank',
+	'create_add_user_button' => 'Add user',
+	
 ];
