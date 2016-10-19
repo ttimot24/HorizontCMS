@@ -3,7 +3,7 @@
 @section('content')
 <div class='container main-container'>
 
-<h2>Posted news <small class='pull-right' style='margin-top:1.5%;'>All: {{$number_of_blogposts}}</small></h2></br>
+<h2>{{trans('blogpost.blogposts')}} <small class='pull-right' style='margin-top:1.5%;'>{{trans('blogpost.all')}}: {{$number_of_blogposts}}</small></h2></br>
 <div class='container'>
   <a href='blogpost/create' class='btn btn-primary' style='margin-bottom:20px;'>{{trans('blogpost.new_post_button')}}</a>
 </div>
@@ -11,14 +11,14 @@
 <table class='table table-hover'>
     <thead>
       <tr>
-      	<th>Id</th>
-        <th>Image</th>
-      	<th>Title</th>
-      	<th>Comments</th>
-        <th>Date</th>
-        <th>Author</th>
-        <th>Category</th>
-        <th><center>Action</center></th>
+      	<th>{{trans('blogpost.th_id')}}</th>
+        <th>{{trans('blogpost.th_image')}}</th>
+      	<th>{{trans('blogpost.th_title')}}</th>
+      	<th>{{trans('blogpost.th_comments')}}</th>
+        <th>{{trans('blogpost.th_date')}}</th>
+        <th>{{trans('blogpost.th_author')}}</th>
+        <th>{{trans('blogpost.th_category')}}</th>
+        <th><center>{{trans('action.th_action')}}</center></th>
       </tr>
     </thead><tbody>
 
@@ -48,7 +48,7 @@
     <center>
 
        <div class="btn-group" role="group">
-           <a href='blogpost/edit/{{ $blogpost->id }}' type="button" class="btn btn-warning btn-sm" style='min-width:70px;'>Edit</a>
+           <a href='blogpost/edit/{{ $blogpost->id }}' type="button" class="btn btn-warning btn-sm" style='min-width:70px;'>{{trans('actions.edit')}}</a>
            <a type="button" data-toggle='modal' data-target=.delete_<?= $blogpost->id ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
        </div>
 

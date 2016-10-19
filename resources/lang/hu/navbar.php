@@ -23,5 +23,10 @@ return [
 	'theme' => 'Témák',
 	'plugin' => 'Kiegészítők',
 	'develop' => 'Fejlesztés',
+
+	'lock_screen' => 'Képernyő zárolása',
+	'visit_site' => 'Irány a(z) :site_name',
+	'logout' => 'Kijelentkezés',
+	'about' => 'Tulajdonságok',
 	
 ];

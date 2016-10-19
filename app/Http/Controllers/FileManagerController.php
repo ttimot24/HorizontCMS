@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Libs\Controller;
 
-use App\User;
 
-class UserController extends Controller{
+class FileManagerController extends Controller{
  
 
-    protected $itemPerPage = 100;
 
     /**
      * Display a listing of the resource.
@@ -19,13 +17,6 @@ class UserController extends Controller{
      */
     public function index($slug){
 
-
-        $this->view->title(trans('user.users'));
-        return $this->view->render('users/index',[
-                                                        'number_of_users' => User::count(),
-                                                        'all_users' => User::paginate($this->itemPerPage),
-                                                        'active_users' => User::where('active',1);
-                                                    ]);
     }
 
     /**
@@ -36,8 +27,6 @@ class UserController extends Controller{
     public function create(){
 
 
-        $this->view->title(trans('user.create_user'));
-        return $this->view->render('users/create',[]);
     }
 
     /**
@@ -58,8 +47,6 @@ class UserController extends Controller{
      */
     public function show($id){
 
-        $this->view->title(trans('user.view_user'));
-        return $this->view->render('users/view',['user' => User::find($id)]);
     }
 
     /**
@@ -70,8 +57,6 @@ class UserController extends Controller{
      */
     public function edit($id){
 
-        $this->view->title(trans('user.edit_user'));
-        return $this->view->render('users/edit',['user' => User::find($id)]);
     }
 
     /**
@@ -104,10 +89,6 @@ class UserController extends Controller{
      */
     public function delete($id){
         
-
-
-
-
     }
 
 
