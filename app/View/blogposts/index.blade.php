@@ -18,7 +18,7 @@
         <th>{{trans('blogpost.th_date')}}</th>
         <th>{{trans('blogpost.th_author')}}</th>
         <th>{{trans('blogpost.th_category')}}</th>
-        <th><center>{{trans('action.th_action')}}</center></th>
+        <th><center>{{trans('actions.th_action')}}</center></th>
       </tr>
     </thead><tbody>
 
@@ -58,13 +58,13 @@
 
 <?php 
 
-  /* Bootstrap::delete_confirmation(
+   Bootstrap::delete_confirmation(
     "delete_".$blogpost->id."",
     "Are you sure?",
     "<b>Delete this post: </b>".$blogpost->title." <b>?</b>",
-    "<a href='admin/blogpost/delete/".$blogpost->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
+    "<a href='blogpost/delete/".$blogpost->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
-    );*/
+    );
 
 ?>
 

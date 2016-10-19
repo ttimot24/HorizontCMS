@@ -135,9 +135,9 @@ class BlogpostController extends Controller{
     public function delete($id){
         
 
+        Blogpost::find($id)->delete();
 
-
-
+        return $this->redirectToSelf();
     }
 
 

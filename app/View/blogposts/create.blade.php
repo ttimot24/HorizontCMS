@@ -63,7 +63,8 @@
                 CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
                 CKEDITOR.config.removeButtons = 'Save';
                 CKEDITOR.config.height = 350;
-                CKEDITOR.extraPlugins = 'imageuploader';
+                CKEDITOR.config.filebrowserBrowseUrl = '<?= url('/filemanager/browse') ?>';
+                CKEDITOR.config.filebrowserUploadUrl = '<?= url('/filemanager/browse') ?>';
 
 
             </script>

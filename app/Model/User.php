@@ -30,9 +30,16 @@ class User extends Authenticatable{
 
 
     public function blogposts(){
-        return $this->hasMany(\App\Model\Blogpost::class,'author','id');
+        return $this->hasMany(\App\Model\Blogpost::class,'author_id','id');
     }
 
+    public function role(){
+        return $this->belongsTo(\App\Model\UserRole::class,'rank','id');
+    }
+
+    public function comments(){
+    
+    }
 
     public function getThumb(){
 

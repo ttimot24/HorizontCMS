@@ -179,7 +179,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 
-        'Lavary\Menu\ServiceProvider',
+        Lavary\Menu\ServiceProvider::class,
+    //    Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 

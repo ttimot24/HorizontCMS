@@ -48,7 +48,7 @@
 <?php
 
    
-    foreach($data['ranks'] as $each){
+    foreach($roles as $each){
       echo "<option value='" .$each->id ."'>".$each->name."</option>";
     }
 

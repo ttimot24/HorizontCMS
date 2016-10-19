@@ -92,4 +92,14 @@ class FileManagerController extends Controller{
     }
 
 
+    public function browse(){
+        return "asd";
+    }
+
+
+    public function upload(){
+        
+    }
+
+
 }

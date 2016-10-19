@@ -5,8 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class MenuMiddleware
-{
+class MenuMiddleware{
     /**
      * Handle an incoming request.
      *
@@ -15,6 +14,7 @@ class MenuMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next){
+
 
         \Menu::make('MainMenu', function($menu) {
 
@@ -29,8 +29,8 @@ class MenuMiddleware
 
 
             $menu->add(trans('navbar.users'), '#')->id('users');
-            $menu->find('users')->add("<i class='fa fa-users'></i> ".trans('navbar.user_list'), $prefix.'/users');
-            $menu->find('users')->add("<i class='fa fa-user-plus'></i> ".trans('navbar.user_add'), $prefix.'/users/create');
+            $menu->find('users')->add("<i class='fa fa-users'></i> ".trans('navbar.user_list'), $prefix.'/user');
+            $menu->find('users')->add("<i class='fa fa-user-plus'></i> ".trans('navbar.user_add'), $prefix.'/user/create');
             $menu->find('users')->add("<i class='fa fa-gavel'></i> ".trans('navbar.user_groups'), $prefix.'/usergroups');
 
 
@@ -57,7 +57,7 @@ class MenuMiddleware
 
             $prefix = \Config::get('horizontcms.backend_prefix');
 
-            $menu->add('current_user', '#')->id('current_user');
+           /// $menu->add('current_user', '#')->id('current_user');
 
             $menu->add("<i class='fa fa-cogs'></i> ", $prefix.'/settings')->id('settings');
 

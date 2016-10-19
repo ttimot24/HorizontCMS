@@ -56,7 +56,7 @@ $key = array_search($user->id,$indexes);
     
     </br></br><b>Full name : <a>{{ $user->name }}</a></b>
     </br></br><b>Username : <a>{{ $user->username }}</a></b>
-    </br></br><b>Rank : <a>{{ $user->get_rank()->name }}</a></b>
+    </br></br><b>Rank : <a>{{ $user->role->name }}</a></b>
      </br></br><b>Email : <a>{{ $user->email }}</a></b>
     </br></br><b>Registered on : </br><a>{{ date("Y.m.d - H:i:s",$user->reg_date) }}</a></b>
      </br></br><b>{{trans('user.logins')}} : <a>{{ $user->visits }}</a></b>
@@ -93,7 +93,7 @@ $key = array_search($user->id,$indexes);
 
   if($user->rank>3){
 
-    echo "<h2>Posts(".count($data['blogposts']).")</h2>";
+    echo "<h2>Posts(".$user->blogposts->count().")</h2>";
 
     echo "<table class='table table-condensed table-hover'>
     <thead>
@@ -103,13 +103,13 @@ $key = array_search($user->id,$indexes);
         <th>Date</th>
       </tr>
     </thead><tbody>";
-  foreach($data['blogposts'] as $each){
+  foreach($user->blogposts as $each){
 
     echo "<tr>";
-    echo "<td><a href='admin/blogpost/view/".$each->id."'>";
-      echo Html::img($each->get_thumb(),"class='img img-thumbnail', width='280' style='object-fit:cover;height:170px;'");
+    echo "<td><a href='blogpost/view/".$each->id."'>";
+      echo Html::img($each->getThumb(),"class='img img-thumbnail', width='280' style='object-fit:cover;height:170px;'");
     echo "</a></td>";
-    echo "<td><a href='admin/blogpost/view/".$each->id."'>" .$each->title ."</a></td>";
+    echo "<td><a href='blogpost/view/".$each->id."'>" .$each->title ."</a></td>";
      
     echo "<td>".date("Y.m.d",$each->date)."</br><font size='2'><i>at</i> ".date("H:i:s",$each->date)."</font></td>";
     echo "</tr>";
@@ -126,16 +126,16 @@ $key = array_search($user->id,$indexes);
   }
 
 
-    //Bootstrap::image_details($user->id,$user->get_image());
+    Bootstrap::image_details($user->id,$user->get_image());
 
 
-   /* Bootstrap::delete_confirmation(
+    Bootstrap::delete_confirmation(
     "delete",
     "Are you sure?",
     "<b>Delete this user: </b>".$user->username." <b>?</b>",
-    "<a href='admin/user/delete/".$user->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
+    "<a href='user/delete/".$user->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
-    ); */
+    );
 
 
 ?>

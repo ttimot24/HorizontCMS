@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Libs\Controller;
 
 use App\Http\Requests;
-use App\Blogpost;
+use App\Model\Settings;
 use App\Libs\ThemeEngine;
 
 class WebsiteController extends Controller

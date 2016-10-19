@@ -24,7 +24,7 @@ class UserController extends Controller{
         return $this->view->render('users/index',[
                                                         'number_of_users' => User::count(),
                                                         'all_users' => User::paginate($this->itemPerPage),
-                                                        'active_users' => User::where('active',1);
+                                                        'active_users' => User::where('active',1)->count(),
                                                     ]);
     }
 
@@ -37,7 +37,7 @@ class UserController extends Controller{
 
 
         $this->view->title(trans('user.create_user'));
-        return $this->view->render('users/create',[]);
+        return $this->view->render('users/create',['roles' => \App\Model\UserRole::all()]);
     }
 
     /**
@@ -104,9 +104,9 @@ class UserController extends Controller{
      */
     public function delete($id){
         
+        User::find($id)->delete();
 
-
-
+        return $this->redirectToSelf();
 
     }
 

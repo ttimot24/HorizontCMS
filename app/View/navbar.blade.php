@@ -26,6 +26,15 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right" style='padding-right:25px;'>
 
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <img style='height:30px;margin-top:-10px;margin-bottom:-10px;object-fit:cover;border-radius:3px;' src='{{Auth::user()->getThumb()}}' />  {{ Auth::user()->username }} <span class="caret"></span>
+                        </a>
+
+                         <ul class="dropdown-menu" role="menu">
+                         </ul>
+                    </li>
+
                     @include(config('laravel-menu.views.bootstrap-items'), array('items' => $RightMenu->roots()))
                     
                        <!-- <li class="dropdown">
