@@ -38,7 +38,7 @@ class User extends Authenticatable{
     }
 
     public function comments(){
-    
+    	return $this->hasMany(\App\Model\UserRole::class,'user_id','id');
     }
 
     public function getThumb(){
@@ -56,7 +56,7 @@ class User extends Authenticatable{
         if(file_exists("storage/images/users/".$this->image)){
             return url("storage/images/users/".$this->image);
         }else{
-            return url("resources/images/icons/no-user.png");
+            return url("resources/images/icons/profile.png");
         }
 
     }

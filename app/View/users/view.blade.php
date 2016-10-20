@@ -58,7 +58,7 @@ $key = array_search($user->id,$indexes);
     </br></br><b>Username : <a>{{ $user->username }}</a></b>
     </br></br><b>Rank : <a>{{ $user->role->name }}</a></b>
      </br></br><b>Email : <a>{{ $user->email }}</a></b>
-    </br></br><b>Registered on : </br><a>{{ date("Y.m.d - H:i:s",$user->reg_date) }}</a></b>
+    </br></br><b>Registered on : </br><a>{{ $user->created_at->format('Y.m.d - H:i:s') }}</a></b>
      </br></br><b>{{trans('user.logins')}} : <a>{{ $user->visits }}</a></b>
      <hr/>
     </center>
@@ -70,7 +70,7 @@ $key = array_search($user->id,$indexes);
 
   if($user->active==0){
 
-     $datediff = $user->reg_date - time();
+     $datediff = $user->created_at->timestamp - time();
      $days = floor($datediff/(60*60*24));
 
      $days<=0? $days=0: $days=$days;
@@ -111,7 +111,7 @@ $key = array_search($user->id,$indexes);
     echo "</a></td>";
     echo "<td><a href='blogpost/view/".$each->id."'>" .$each->title ."</a></td>";
      
-    echo "<td>".date("Y.m.d",$each->date)."</br><font size='2'><i>at</i> ".date("H:i:s",$each->date)."</font></td>";
+    echo "<td>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format("H:i:s")."</font></td>";
     echo "</tr>";
     }
 
@@ -126,15 +126,15 @@ $key = array_search($user->id,$indexes);
   }
 
 
-    Bootstrap::image_details($user->id,$user->get_image());
+    Bootstrap::image_details($user->id,$user->getImage());
 
 
-    Bootstrap::delete_confirmation(
-    "delete",
-    "Are you sure?",
-    "<b>Delete this user: </b>".$user->username." <b>?</b>",
-    "<a href='user/delete/".$user->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
-    <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
+   Bootstrap::delete_confirmation(
+    "delete_".$each->id."",
+    trans('actions.are_you_sure'),
+    "<b>{{trans('actions.delete_this','user')}}: </b>".$each->username." <b>?</b>",
+    "<a href='user/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.delete')}}</a>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
 
 
@@ -142,7 +142,7 @@ $key = array_search($user->id,$indexes);
 
 
 
-<h2>Comments (<?= count($data['comments']) ?>)</h2>
+<h2>Comments ({{$user->comments->count()}})</h2>
 
 <table class='table table-condensed table-hover'>
     <thead>
@@ -155,10 +155,10 @@ $key = array_search($user->id,$indexes);
 
 <?php    
 
-  if(count($data['comments'])>0){
-    foreach($data['comments'] as $each){
+  if($user->comments->count()>0){
+    foreach($user->comments as $each){
 
-      $news = $each->getBlogpost();
+      $news = $each->blogpost;
 
       if($news!=NULL){
 
@@ -166,7 +166,7 @@ $key = array_search($user->id,$indexes);
         echo "<td class='col-md-3'><a href='admin/blogpost/view/".$news->id."'>".$news->title."</a></td>";
         echo "<td class='col-md-8' style='text-align:justify;'>" .$each->comment ."</td>";
 
-        echo "<td class='col-md-1'>".date("Y.m.d",$each->date)."</br><font size='2'><i>at</i> ".date("H:i:s",$each->date)."</font></td>";
+        echo "<td class='col-md-1'>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format('H:i:s')."</font></td>";
         echo "</tr>";
       }
     }

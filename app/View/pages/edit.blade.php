@@ -1,17 +1,21 @@
+@extends('layout')
+
+@section('content')
 <div class='container main-container'>
   <h2>Edit page</h2>
-  <form role='form' action='admin/page/update/<?= $data['instance']->id ?>' method='POST' enctype='multipart/form-data'>
+  <form role='form' action='admin/page/update/<?= $page->id ?>' method='POST' enctype='multipart/form-data'>
+          {{ csrf_field() }}
 
-<button type='button' class='btn btn-link pull-right' style='margin-top:-2%;' data-toggle='modal' data-target='.<?= $data['instance']->id ?>-modal-xl'>
-  <img src='<?= $data['instance']->get_thumb() ?>' class='img img-thumbnail' width=300  >
+<button type='button' class='btn btn-link pull-right' style='margin-top:-2%;' data-toggle='modal' data-target='.<?= $page->id ?>-modal-xl'>
+  <img src='<?= $page->getThumb() ?>' class='img img-thumbnail' width=300  >
 </button>
 
   <br><br>
-  <input type='hidden' name='id' value='<?= $data['instance']->id ?>'>
+  <input type='hidden' name='id' value='<?= $page->id ?>'>
   <div class='form-group pull-left col-xs-12 col-md-8' >
       <label for='title'>Menu:</label>
-      <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" value='<?= htmlspecialchars($data['instance']->name,ENT_QUOTES) ?>' required></input>
-      <small><b>Semantic url:</b>&nbsp&nbsp&nbsp<?= $data['domain'].rtrim(BASE_DIR,'/') ?><a class='text-muted' id='ajaxSlug'><?= "/".UrlManager::seo_url($data['instance']->name) ?></a> </small>
+      <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" value='<?= htmlspecialchars($page->name,ENT_QUOTES) ?>' required></input>
+      <small><b>Semantic url:</b>&nbsp&nbsp&nbsp<?= $data['domain'].rtrim(BASE_DIR,'/') ?><a class='text-muted' id='ajaxSlug'><?= "/".UrlManager::seo_url($page->name) ?></a> </small>
     </div>
 
 <br>
@@ -22,8 +26,8 @@
         <option value=''>Default</option>
         <?php 
 
-          foreach($data['page_templates'] as $template){
-            echo "<option value='".$template."' "; if($template==$data['instance']->url){ echo "selected"; } echo ">"
+          foreach($page_templates as $template){
+            echo "<option value='".$template."' "; if($template==$page->url){ echo "selected"; } echo ">"
                     .ucfirst(rtrim($template,".php")).
                   "</option>";
           }
@@ -38,8 +42,8 @@
 echo "<div class='form-group pull-left col-xs-12 col-md-6' id='level' >
   <label for='level'>Level:</label>
   <select class='form-control' name='parent_select' >  
-          <option value='0' "; if($data['instance']->parent==0){echo "selected";}echo">Main menu</option>
-          <option value='1' "; if($data['instance']->parent!=0){echo "selected";}echo">Submenu</option>";
+          <option value='0' "; if($page->parent==0){echo "selected";} echo">Main menu</option>
+          <option value='1' "; if($page->parent!=0){echo "selected";} echo">Submenu</option>";
 echo "</select></div>";
 
 echo "<div class='form-group pull-left col-xs-12 col-md-6' id='submenus'>
@@ -48,11 +52,11 @@ echo "<div class='form-group pull-left col-xs-12 col-md-6' id='submenus'>
       
       echo "<option value='0'>None</option>"; 
 
-      foreach($data['all'] as $each){
+      foreach($all_page as $each){
 
-      	if($data['instance']->id==$each->id){continue;}
+      	if($page->id==$each->id){continue;}
 
-      	if($data['instance']->parent==$each->id){
+      	if($page->parent==$each->id){
       		echo "<option value='".$each->id."' selected >".$each->name."</option>"; 
   		}else{
    			echo "<option value='".$each->id ."'>".$each->name."</option>"; 
@@ -63,19 +67,19 @@ echo "</select></div>";
 
 /*echo "<div class='form-group pull-left col-xs-12 col-md-8' >
           <label for='title'>Visibility:&nbsp&nbsp&nbsp&nbsp</label>
-              <input type='radio' name='visibility' value='1' "; if($data['instance']->visibility==1){echo "checked";}echo">Visible&nbsp&nbsp&nbsp&nbsp&nbsp
-              <input type='radio' name='visibility' value='0' "; if($data['instance']->visibility==0){echo "checked";}echo">Invisible&nbsp&nbsp&nbsp&nbsp&nbsp
+              <input type='radio' name='visibility' value='1' "; if($page->visibility==1){echo "checked";}echo">Visible&nbsp&nbsp&nbsp&nbsp&nbsp
+              <input type='radio' name='visibility' value='0' "; if($page->visibility==0){echo "checked";}echo">Invisible&nbsp&nbsp&nbsp&nbsp&nbsp
       </div></br>";*/
 
 echo "  
 <div class='form-group pull-left col-xs-12 col-md-8' style='margin-top:20px;margin-bottom:20px;'>
   <label style='margin-right:10px;'>Visibility:</label> 
         <div class='radio radio-info radio-inline'>
-                        <input type='radio' id='inlineRadio1' value='1' name='visibility' "; if($data['instance']->visibility==1){echo "checked";}echo">
+                        <input type='radio' id='inlineRadio1' value='1' name='visibility' "; if($page->visibility==1){echo "checked";}echo">
                         <label for='inlineRadio1'> Visible </label>
                     </div>
                     <div class='radio radio-inline'>
-                        <input type='radio' id='inlineRadio2' value='0' name='visibility' "; if($data['instance']->visibility==0){echo "checked";}echo">
+                        <input type='radio' id='inlineRadio2' value='0' name='visibility' "; if($page->visibility==0){echo "checked";}echo">
                         <label for='inlineRadio2'> Invisible </label>
                     </div>
 </div>
@@ -87,7 +91,7 @@ echo "
 
 <!-------------------------------------------------- jQUERY TEXT EDITOR ------------------------------------------------------>
 
-<textarea name='page' id='editor' rows="15" cols="80"><?php echo $data['instance']->page ?></textarea>
+<textarea name='page' id='editor' rows="15" cols="80"><?php echo $page->page ?></textarea>
 
 
             <script>
@@ -100,7 +104,7 @@ echo "
             </script>
 
 
-<!--echo "<textarea name='page' class='jqte-test'>".$data['instance']->page."</textarea>
+<!--echo "<textarea name='page' class='jqte-test'>".$page->page."</textarea>
 
 <!-------------------------------------------------------- jQUERY TEXT EDITOR ------------------------------------------------------>
 
@@ -120,7 +124,7 @@ echo "
 </div>
 
 <?php
-Bootstrap::image_details($data['instance']->id,$data['instance']->get_image());
+Bootstrap::image_details($page->id,$page->get_image());
 ?>
 
 <script type='text/javascript'>
@@ -171,3 +175,5 @@ Bootstrap::image_details($data['instance']->id,$data['instance']->get_image());
 
   }
 </script>
+
+@endsection;

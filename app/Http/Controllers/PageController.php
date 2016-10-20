@@ -100,6 +100,8 @@ class PageController extends Controller{
 
         return $this->view->render('pages/edit',[
                                                         'page' => Page::find($id),
+                                                        'all_page' => Page::all(),
+                                                         //'page_templates' => array_slice(scandir('themes/'.Settings::get('theme')."/page_templates"),2);
                                                     ]);
     }
 

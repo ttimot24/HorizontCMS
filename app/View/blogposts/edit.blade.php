@@ -4,6 +4,9 @@
 <div class='container main-container'>
   <h2>Edit post</h2>
   <form role='form' action='blogpost/update/{{$blogpost->id}}' method='POST' enctype='multipart/form-data'>
+
+  {{ csrf_field() }}
+
      <div class='form-group pull-left col-xs-12 col-md-8'>
     <input type='hidden' name='id' value=<?= $blogpost->id ?>>
       <label for='title'>Title:</label>

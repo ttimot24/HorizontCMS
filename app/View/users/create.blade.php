@@ -8,6 +8,7 @@
 
 
   <form role='form' action='user/create' method='POST' enctype='multipart/form-data'>
+          {{ csrf_field() }}
 
    <div class='form-group pull-left col-xs-12 col-md-8' >
       <label for='title'>{{trans('user.create_name')}}:</label>

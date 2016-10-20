@@ -7,6 +7,7 @@ extends('layout')
   <h2>Add new page</h2><br><br>
 
   <form role='form' action='' method='POST' enctype='multipart/form-data'>
+          {{ csrf_field() }}
 
   <section class='col-xs-12 col-md-8'>
 
