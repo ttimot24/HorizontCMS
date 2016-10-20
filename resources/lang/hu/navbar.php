@@ -9,8 +9,8 @@ return [
 	'themes_apps' => 'Témák és Appok',
   
 	/*Sumbmenus*/
-	'posted_news' => 'Minden poszt',
-	'create_post' => 'Új poszt',
+	'posted_news' => 'Minden bejegyzés',
+	'create_post' => 'Új bejegyzés',
 	'categories' => 'Kategóriák',
 	'user_list' => 'Felhasználó lista',
 	'user_add' => 'Új felhasználó',

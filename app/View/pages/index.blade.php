@@ -26,7 +26,7 @@ tr #hidden-home a:hover{
 
 <br>
 <div class='col-md-6'>
-  <a href='page/create' class='btn btn-info' style='margin-bottom:20px;'>{{trans('page.create_page_button')}}</a>
+  <a href='admin/page/create' class='btn btn-info' style='margin-bottom:20px;'>{{trans('page.create_page_button')}}</a>
 </div>
 <div class='col-md-6' style='text-align:right;'>
   <a class='btn btn-default' id='orderer' onclick='$(this).toggle(dragndroporder());' style='margin-bottom:20px;'><i class='fa fa-arrows-v' style='font-size:15px;'  aria-hidden='true'></i> {{trans('page.order')}}</a>
@@ -50,12 +50,12 @@ tr #hidden-home a:hover{
 
 foreach($all_pages as $each){
 
-if($each->visibility==0)  {
+if($each->visibility==0){
     $class = 'danger';
 }
-else if($each->parent->id!=0){
+/*else if($each->parent->id!=0){
    $class = 'bg-info';
-}
+}*/
 else{
    $class = '';
 }
@@ -66,11 +66,11 @@ echo  "<td>" .$each->id;
 
   //echo " <i class='clickable fa fa-plus' data-toggle='collapse' id='row1' data-target='.row1' style='font-size:20px;'></i>&nbsp&nbsp&nbsp";
 
-  if($each->is($welcome_page)){
+  if($each->is($home_page)){
     echo " <i class='fa fa-home' style='font-size:20px;'></i>";
   }
   else{
-    echo " <a href='#' data-toggle='modal' data-target='.mo-".$each->id."'><i class='fa fa-home' id='hidden-home' style='font-size:20px;'></i></a>";  
+    echo " <a href='admin/#' data-toggle='modal' data-target='.mo-".$each->id."'><i class='fa fa-home' id='hidden-home' style='font-size:20px;'></i></a>";  
   }
 
     $each->language = 'EN';
@@ -98,24 +98,24 @@ echo "<br><span class='label label-default label-sm'>".$each->language."</span>"
   echo "</td>
         <td>";
 
-        if($each->parent==0){
+        if($each->parent==NULL){
           echo "<b>Main</b>";
         }
         else{
-          echo "Submenu <i>of</i></br><b>".$each->get_parent_page()->name."</b>";
+          echo "Submenu <i>of</i></br><b>".$each->parent->name."</b>";
         }
 
     echo "</td>";
 
         
-    echo "<td style='padding-left:45px;'><span class='badge'>" .count($each->get_child_pages())."</span></td>";
+    echo "<td style='padding-left:45px;'><span class='badge'>" .$each->subpages->count()."</span></td>";
 
 
       echo   "<td><center>";
 
       echo "
        <div class='btn-group' role='group'>
-           <a href='page/update/".$each->id."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;'>{{trans('actions.edit')}}</a>
+           <a href='admin/page/update/".$each->id."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;'>".trans('actions.edit')."</a>
            <a  type='button' data-toggle='modal' data-target='.delete_".$each->id."' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>
        </div>";
       
@@ -147,8 +147,8 @@ echo '
    Bootstrap::delete_confirmation(
     "delete_".$each->id."",
     trans('actions.are_you_sure'),
-    "<b>{{trans('actions.delete_this','page')}}: </b>".$each->name." <b>?</b>",
-    "<a href='page/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.delete')}}</a>
+    "<b>".trans('actions.delete_this',['content_type'=>'page']).": </b>".$each->name." <b>?</b>",
+    "<a href='admin/page/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete') ."</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
 
@@ -164,7 +164,7 @@ echo '
                   echo " <i class='fa fa-home' style='font-size:20px;'></i>";
                 }
                 else{
-                  echo " <a href='#' data-toggle='modal' data-target='.mo-".$child_page->id."'><i class='fa fa-home' id='hidden-home' style='font-size:20px;'></i></a>";  
+                  echo " <a href='admin/#' data-toggle='modal' data-target='.mo-".$child_page->id."'><i class='fa fa-home' id='hidden-home' style='font-size:20px;'></i></a>";  
                 }
 
 
@@ -197,7 +197,7 @@ echo '
             <td><span class='badge'>" .count($child_page->get_child_pages())."</span></td>  
             <td>
              <div class='btn-group' role='group'>
-                 <a href='page/update/".$child_page->id."' type='button' class='btn btn-warning btn-sm'><i class='fa fa-pencil' aria-hidden='true'></i></a>
+                 <a href='admin/page/update/".$child_page->id."' type='button' class='btn btn-warning btn-sm'><i class='fa fa-pencil' aria-hidden='true'></i></a>
                  <a  type='button' data-toggle='modal' data-target='.delete_".$child_page->id."' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>
              </div></center></td>
               </tr></td>";
@@ -231,7 +231,7 @@ echo '
                   "delete_".$child_page->id."",
                   "Are you sure?",
                   "<b>Delete this page: </b>".$child_page->name." <b>?</b>",
-                  "<a href='page/delete/".$child_page->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
+                  "<a href='admin/page/delete/".$child_page->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
                   <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
                   );
 

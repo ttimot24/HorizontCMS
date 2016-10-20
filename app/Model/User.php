@@ -43,7 +43,7 @@ class User extends Authenticatable{
 
     public function getThumb(){
 
-        if(file_exists("storage/images/users/thumbs/".$this->image)){
+        if(file_exists("storage/images/users/thumbs/".$this->image) && $this->image!=""){
             return url("storage/images/users/thumbs/".$this->image);
         }else{
             return $this->getImage();
@@ -53,7 +53,7 @@ class User extends Authenticatable{
 
     public function getImage(){
 
-        if(file_exists("storage/images/users/".$this->image)){
+        if(file_exists("storage/images/users/".$this->image)  && $this->image!=""){
             return url("storage/images/users/".$this->image);
         }else{
             return url("resources/images/icons/profile.png");

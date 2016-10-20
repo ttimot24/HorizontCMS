@@ -17,7 +17,7 @@ return [
 	'th_id' => 'Id',
 	'th_image' => 'Kép',
 	'th_name' => 'Név',
-	'th_template' => 'Sablon'
+	'th_template' => 'Sablon',
 	'th_visibility' => 'Láthatóság',
 	'th_type' => 'Típus',
 	'th_child_links' => 'Almenük',

@@ -5,9 +5,7 @@ namespace App\Http;
 class RouteResolver{
 
 
-
-
-	public function resolve($controller = 'dashboard',$action = 'index', $args){
+	public function resolve($controller = 'dashboard',$action = 'index', $args = null){
 
 				$controller_name = ucfirst($controller).'Controller';
 
@@ -20,7 +18,7 @@ class RouteResolver{
 		        $action = studly_case($action); // optional, converts foo-bar into FooBar for example
 
 		        if(method_exists($controllerClass, $action)){
-		            $controller = App::make($controllerClass);
+		            $controller = \App::make($controllerClass);
 		            return $controller->callAction($action, [$args]);
 		        }
 		        else{

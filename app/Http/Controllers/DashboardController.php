@@ -25,7 +25,7 @@ class DashboardController extends Controller{
                                                     'blogposts'  => \App\Model\Blogpost::count(),
                                                     'users' => \App\User::count(),
                                                     'visits' => 0,
-                                                  /*  'visits' => $this->system->visits(),*/
+                                                    'visits' => \App\Model\Visits::count(),
                                                     'admin_logo' => \Config::get('horizontcms.admin_logo'),
                                                     'disk_space' => @(disk_free_space("/")/disk_total_space("/"))*100,
                                                     'latest_version' => 7.5,

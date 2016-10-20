@@ -81,7 +81,7 @@
 
      <div class='form-group pull-left col-xs-12 col-md-12'>
     <button id='submit-btn' name='submit_clicked' type='submit' class='btn btn-success btn-lg' onclick='window.onbeforeunload = null;'>Update</button> 
-    <a href='admin/blogpost/index' type='button' class='btn btn-default'>Cancel</a>
+    <a href='admin/admin/blogpost/index' type='button' class='btn btn-default'>Cancel</a>
     </div>
   </form>
 </div>

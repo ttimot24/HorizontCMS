@@ -20,6 +20,9 @@ class BlogpostController extends Controller{
     public function index($slug){
 
 
+//        var_dump(\Config::get('app.url'));
+  //      exit;
+
         $this->view->title(trans('blogpost.blogposts'));
         return $this->view->render('blogposts/index',[
                                                         'number_of_blogposts' => Blogpost::count(),
@@ -45,6 +48,12 @@ class BlogpostController extends Controller{
             $blogpost->summary = $this->request->input('summary');
             $blogpost->text = $this->request->input('text');
             $blogpost->author_id = \Auth::user()->id;
+
+            if ($this->request->hasFile('up_file')){
+                 
+                 $blogpost->image = str_replace('images/blogposts/','',$this->request->up_file->store('images/blogposts'));
+
+            }
 
             if($blogpost->save()){
                 return $this->insideLink('blogpost/edit/'.$blogpost->id);

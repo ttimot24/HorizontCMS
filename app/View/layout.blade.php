@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+	<base href="{{ Config::get('app.url') }}" />
 	<title>{{ $title }} - {{ Config::get('app.name') }}</title>
 
 	@foreach ($css as $each_css)

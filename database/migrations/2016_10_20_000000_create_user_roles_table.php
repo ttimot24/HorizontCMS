@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserRankTable extends Migration
+class CreateUserRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUserRankTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_ranks', function (Blueprint $table) {
+        Schema::create('user_roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('permission');
@@ -28,6 +28,6 @@ class CreateUserRankTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_ranks');
+        Schema::drop('user_roles');
     }
 }

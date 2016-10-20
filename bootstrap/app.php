@@ -1,5 +1,7 @@
 <?php
 
+require_once('bootstrap/base.php');
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application

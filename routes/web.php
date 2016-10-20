@@ -40,21 +40,14 @@ Route::group(['prefix'=> Config::get('horizontcms.backend_prefix'),'middleware' 
 	Route::any('/{controller?}/{action?}/{args?}/', 
 		function($controller = 'dashboard', $action = 'index', $args = null){
 
-				if(!file_exists('app'.DIRECTORY_SEPARATOR.'Http'.DIRECTORY_SEPARATOR.'Controllers'.DIRECTORY_SEPARATOR.ucfirst($controller).'Controller.php')){
-					throw new Exception('No such file <b>'.ucfirst($controller).'Controller.php'.'</b>');
-				} 
 
-		        $controllerClass = 'App\\Http\\Controllers\\'.ucfirst($controller).'Controller';
+		       $route = new \App\Http\RouteResolver();
 
-		        $action = studly_case($action); // optional, converts foo-bar into FooBar for example
+		        return $route->resolve($controller,$action,$args);
 
-		        if(method_exists($controllerClass, $action)){
-		            $controller = App::make($controllerClass);
-		            return $controller->callAction($action, [$args]);
-		        }
-		        else{
-		            throw new Exception("Couldn't find action: <b>".$action."</b>");
-		        }
+
+
+
   		 })->where('args', '(.*)');
 	
 });

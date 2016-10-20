@@ -26,7 +26,7 @@ class PageController extends Controller{
                                                         'number_of_pages' => Page::count(),
                                                         'all_pages' => Page::paginate($this->itemPerPage),
                                                         'visible_pages' => Page::where('visibility',1)->count(), 
-                                                        'welcome_page' => Page::find(Settings::get('welcome_page')),
+                                                        'home_page' => Page::find(Settings::get('home_page')),
                                                     ]);
     }
 

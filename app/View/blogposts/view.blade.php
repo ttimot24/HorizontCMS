@@ -39,8 +39,8 @@ $key = array_search($data['instance']->id,$indexes);
 </button>
 </br><center>
   <div class='btn-group' role='group'>
-    <a href='' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> Primary</a>
-    <a href='blogpost/edit/{{ $blogpost->id }}' type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}} post</a>
+    <a href='admin/' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> Primary</a>
+    <a href='admin/blogpost/edit/{{ $blogpost->id }}' type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}} post</a>
     
     <button type='button' class='btn btn-danger' data-toggle='modal' data-target='.delete'>
     <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.remove')}}
@@ -48,7 +48,7 @@ $key = array_search($data['instance']->id,$indexes);
   </div>
 
 
-    </br></br><b>Author : </br><a href='admin/user/view/{{ $blogpost->author->id }}'>{{ $blogpost->author->username }}</a></b>
+    </br></br><b>Author : </br><a href='admin/admin/user/view/{{ $blogpost->author->id }}'>{{ $blogpost->author->username }}</a></b>
     </br></br><b>Published on : </br><a>{{ $blogpost->created_at->format('Y.m.d. H:i:s') }}</a></b>
     </br></br><b>Category : </br><a><?= $blogpost->category->name ?></a></b>
     </br></br><b>Characters : <br><a><?= strlen($blogpost->text) ?></a></b>
@@ -81,7 +81,7 @@ $key = array_search($data['instance']->id,$indexes);
     "delete",
     "Are you sure?",
     "<b>Delete this post: </b>". $blogpost->title." <b>?</b>",
-    "<a href='blogpost/delete/".$blogpost->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
+    "<a href='admin/blogpost/delete/".$blogpost->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
     );
 ?>

@@ -71,7 +71,10 @@ class UserController extends Controller{
     public function edit($id){
 
         $this->view->title(trans('user.edit_user'));
-        return $this->view->render('users/edit',['user' => User::find($id)]);
+        return $this->view->render('users/edit',[
+                                                'user' => User::find($id),
+                                                'user_roles' => \App\Model\UserRole::all(),
+                                                ]);
     }
 
     /**

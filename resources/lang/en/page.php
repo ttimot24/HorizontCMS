@@ -17,7 +17,7 @@ return [
 	'th_id' => 'Id',
 	'th_image' => 'Image',
 	'th_name' => 'Name',
-	'th_template' => 'Template'
+	'th_template' => 'Template',
 	'th_visibility' => 'Visibility',
 	'th_type' => 'Type',
 	'th_child_links' => 'Child links',

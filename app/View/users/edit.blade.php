@@ -8,7 +8,7 @@
   <img src='{{ $user->getThumb() }}' class='img img-thumbnail' width='320' >
 </button>
 
-<form role='form' action='user/update/{{ $user->id }}' method='POST' enctype='multipart/form-data'>
+<form role='form' action='admin/user/edit/{{ $user->id }}' method='POST' enctype='multipart/form-data'>
         {{ csrf_field() }}
 
 <div class='form-group pull-left col-xs-12 col-md-8' >
@@ -46,8 +46,8 @@
     
 <?php     
 
-    foreach($data['ranks'] as $each){
-      if($each->id == $user->rank){
+    foreach($user_roles as $each){
+      if($each->is($user->role)){
          echo "<option value='" .$each->id ."' selected>".htmlspecialchars($each->name,ENT_QUOTES)."</option>";
       }
       else{
@@ -67,7 +67,7 @@
     </div>
 
     <div class='form-group pull-left col-xs-12 col-md-12' > 
-    <button id='submit-btn' type='submit' class='btn btn-lg btn-primary'>{{trans('actions.update')}</button>
+    <button id='submit-btn' type='submit' class='btn btn-lg btn-primary'>{{trans('actions.update')}}</button>
     </div>
   </form>
 

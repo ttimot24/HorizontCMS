@@ -21,10 +21,10 @@ $key = array_search($user->id,$indexes);
 
 
   if(isset($indexes[$key+1])){
-  echo "<li class='next' id='next'><a href='admin/user/view/". $indexes[$key+1] ."'>Next <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a></li>";
+  echo "<li class='next' id='next'><a href='admin/admin/user/view/". $indexes[$key+1] ."'>Next <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a></li>";
   	}
   if(isset($indexes[$key-1])){
-  echo "<li class='next' id='prev'><a href='admin/user/view/". $indexes[$key-1] ."'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> Previous</a></li>";
+  echo "<li class='next' id='prev'><a href='admin/admin/user/view/". $indexes[$key-1] ."'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> Previous</a></li>";
   }
 */
 
@@ -46,8 +46,8 @@ $key = array_search($user->id,$indexes);
 
 </br><center>
   <div class='btn-group' role='group'>
-    <a href='<?= $user->id ?>' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> Deactivate</a>
-    <a href='user/update/<?= $user->id ?>' type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
+    <a href='admin/<?= $user->id ?>' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> Deactivate</a>
+    <a href='admin/user/update/<?= $user->id ?>' type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
   </div>    
     <button type='button' class='btn btn-danger' data-toggle='modal' data-target='.delete'>
     <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.remove')}}
@@ -106,10 +106,10 @@ $key = array_search($user->id,$indexes);
   foreach($user->blogposts as $each){
 
     echo "<tr>";
-    echo "<td><a href='blogpost/view/".$each->id."'>";
+    echo "<td><a href='admin/blogpost/view/".$each->id."'>";
       echo Html::img($each->getThumb(),"class='img img-thumbnail', width='280' style='object-fit:cover;height:170px;'");
     echo "</a></td>";
-    echo "<td><a href='blogpost/view/".$each->id."'>" .$each->title ."</a></td>";
+    echo "<td><a href='admin/blogpost/view/".$each->id."'>" .$each->title ."</a></td>";
      
     echo "<td>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format("H:i:s")."</font></td>";
     echo "</tr>";
@@ -133,7 +133,7 @@ $key = array_search($user->id,$indexes);
     "delete_".$each->id."",
     trans('actions.are_you_sure'),
     "<b>{{trans('actions.delete_this','user')}}: </b>".$each->username." <b>?</b>",
-    "<a href='user/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.delete')}}</a>
+    "<a href='admin/user/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.delete')}}</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
 
@@ -163,7 +163,7 @@ $key = array_search($user->id,$indexes);
       if($news!=NULL){
 
         echo "<tr>";
-        echo "<td class='col-md-3'><a href='admin/blogpost/view/".$news->id."'>".$news->title."</a></td>";
+        echo "<td class='col-md-3'><a href='admin/admin/blogpost/view/".$news->id."'>".$news->title."</a></td>";
         echo "<td class='col-md-8' style='text-align:justify;'>" .$each->comment ."</td>";
 
         echo "<td class='col-md-1'>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format('H:i:s')."</font></td>";
