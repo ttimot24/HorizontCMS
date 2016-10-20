@@ -41,7 +41,7 @@
 </select></div>
 
  <div class='form-group pull-left col-xs-12 col-md-8' style='margin-top:2%;'>
- <label for='title'>Summary:</label>
+ <label for='title'>{{trans('blogpost.summary')}}:</label>
       <input type='text' class='form-control' id='title' name='summary' value=></br>
 </div>
 
@@ -91,7 +91,7 @@
 
 
      <div class='form-group pull-left col-xs-12 col-md-12'>
-    <button id='submit-btn' type='submit' class='btn btn-primary btn-lg' onclick='window.onbeforeunload = null;'>Publish</button> 
+    <button id='submit-btn' type='submit' class='btn btn-primary btn-lg' onclick='window.onbeforeunload = null;'>{{trans('actions.publish')}}</button> 
     <a href='blogpost/index' type='button' class='btn btn-default'>Cancel</a>
     </div>
   </form>

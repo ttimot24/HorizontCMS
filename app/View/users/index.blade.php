@@ -72,7 +72,7 @@ $disabled = "";
 
 echo "
        <div class='btn-group' role='group'>
-           <a href='user/update/".$each->id."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;' ".$disabled.">Edit</a>";
+           <a href='user/update/".$each->id."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;' ".$disabled.">{{trans('actions.edit')}}</a>";
          
            echo "<a type='button' data-toggle='modal' data-target='.delete_".$each->id."' class='btn btn-danger btn-sm' ".$disabled."><i class='fa fa-trash-o' aria-hidden='true'></i></a>";
 
@@ -86,10 +86,10 @@ echo "</div>";
   if($each->id!=1){
    Bootstrap::delete_confirmation(
     "delete_".$each->id."",
-    "Are you sure?",
-    "<b>Delete this user: </b>".$each->username." <b>?</b>",
-    "<a href='user/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
-    <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
+    trans('actions.are_you_sure'),
+    "<b>{{trans('actions.delete_this','user')}}: </b>".$each->username." <b>?</b>",
+    "<a href='user/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.delete')}}</a>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
  }
 

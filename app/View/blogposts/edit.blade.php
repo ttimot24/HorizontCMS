@@ -54,7 +54,7 @@
             <script>
 
                 CKEDITOR.replace( 'editor' );
-                CKEDITOR.config.language= 'en';
+                CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
                 CKEDITOR.config.removeButtons = 'Save';
                 CKEDITOR.config.height = 350;
 

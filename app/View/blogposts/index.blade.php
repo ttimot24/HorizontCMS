@@ -60,10 +60,10 @@
 
    Bootstrap::delete_confirmation(
     "delete_".$blogpost->id."",
-    "Are you sure?",
-    "<b>Delete this post: </b>".$blogpost->title." <b>?</b>",
-    "<a href='blogpost/delete/".$blogpost->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
-    <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
+    trans('actions.are_you_sure'),
+    "<b>{{trans('actions.delete_this','post')}}: </b>".$blogpost->title." <b>?</b>",
+    "<a href='blogpost/delete/".$blogpost->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.delete')}}</a>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
 
 ?>
