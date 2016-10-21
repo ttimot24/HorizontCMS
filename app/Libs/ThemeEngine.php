@@ -6,8 +6,13 @@ class ThemeEngine{
 
 	protected $theme;
 
-	public function render($theme){
+
+	public function addTheme(\App\Libs\Theme $theme){
 		$this->theme = $theme;
+	}
+
+
+	public function render(){
 		
 		$this->require_file('header.php');
 		$this->require_file('index.php');
@@ -17,8 +22,8 @@ class ThemeEngine{
 
 
 	private function require_file($file){
-		if(file_exists(base_path().DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$this->theme.DIRECTORY_SEPARATOR.$file)){
-			require_once(base_path().DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$this->theme.DIRECTORY_SEPARATOR.$file);
+		if(file_exists(base_path().DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$this->theme->root_dir.DIRECTORY_SEPARATOR.$file)){
+			require_once(base_path().DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$this->theme->root_dir.DIRECTORY_SEPARATOR.$file);
 		}
 	}
 

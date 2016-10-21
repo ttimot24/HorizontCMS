@@ -19,8 +19,9 @@ class WebsiteController extends Controller
     public function index($slug)
     {
         $theme_engine = new ThemeEngine();
+        $theme_engine->addTheme(new \App\Libs\Theme(Settings::get('theme')));
 
-        return $theme_engine->render(Settings::get('theme'));
+        return $theme_engine->render();
     }
 
 

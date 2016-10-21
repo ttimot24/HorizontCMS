@@ -35,6 +35,32 @@ class UserController extends Controller{
      */
     public function create(){
 
+         if($this->request->isMethod('POST')){
+
+            $user = new User();
+            $user->name = $this->request->input('name');
+            $user->username = $this->request->input('username');
+            $user->password = Hash::make($this->request->input('password'));
+            $user->role_id = $this->request->input('role_id');
+            $user->session = 0;
+            $user->visits = 0;
+            $user->active = 1;
+
+
+            if ($this->request->hasFile('up_file')){
+                 
+                 $user->image = str_replace('images/users/','',$this->request->up_file->store('images/users'));
+
+            }
+
+            if($user->save()){
+                return $this->insideLink('user/edit/'.$user->id);
+            }
+
+            
+        }
+
+
 
         $this->view->title(trans('user.create_user'));
         return $this->view->render('users/create',['roles' => \App\Model\UserRole::all()]);

@@ -43,7 +43,20 @@ class PageController extends Controller{
         if($this->request->isMethod('POST')){
 
             $page = new Page();
+            $page->name = $this->request->input('name');
+            $page->url = $this->request->input('url');
+            $page->visibility = $this->request->input('visibility');
+            $page->parent_id = $this->request->input('parent_id');
+            $page->queue = $this->request->input('queue');
+            $page->page = $this->request->input('page');
+            $page->author_id = \Auth::user()->id;
 
+
+            if ($this->request->hasFile('up_file')){
+                 
+                 $page->image = str_replace('images/pages/','',$this->request->up_file->store('images/pages'));
+
+            }
 
             if($page->save()){
                 return $this->insideLink('page/edit/'.$page->id);
@@ -59,7 +72,7 @@ class PageController extends Controller{
         $this->view->title(trans('page.new_page'));
         return $this->view->render('pages/create',[
                                                     'all_page' => Page::all(),
-                                                    //'page_templates' => array_slice(scandir('themes/'.Settings::get('theme')."/page_templates"),2);
+                                                    'page_templates' => (new App\Libs\Theme(Settings::get('theme')))->templates();
                                                     ]);
     }
 
@@ -101,7 +114,7 @@ class PageController extends Controller{
         return $this->view->render('pages/edit',[
                                                         'page' => Page::find($id),
                                                         'all_page' => Page::all(),
-                                                         //'page_templates' => array_slice(scandir('themes/'.Settings::get('theme')."/page_templates"),2);
+                                                        'page_templates' => (new App\Libs\Theme(Settings::get('theme')))->templates();
                                                     ]);
     }
 

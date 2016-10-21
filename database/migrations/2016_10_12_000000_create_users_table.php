@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->string('email')->unique();
-            $table->integer('rank')->default(2);
+            $table->integer('role_id')->default(2);
             $table->integer('session')->default(0);
             $table->integer('visits')->default(0);
             $table->string('image')->nullable();
