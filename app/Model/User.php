@@ -34,7 +34,7 @@ class User extends Authenticatable{
     }
 
     public function role(){
-        return $this->belongsTo(\App\Model\UserRole::class,'rank','id');
+        return $this->belongsTo(\App\Model\UserRole::class,'role_id','id');
     }
 
     public function comments(){

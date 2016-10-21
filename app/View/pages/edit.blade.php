@@ -15,7 +15,7 @@
   <div class='form-group pull-left col-xs-12 col-md-8' >
       <label for='title'>Menu:</label>
       <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" value='<?= htmlspecialchars($page->name,ENT_QUOTES) ?>' required></input>
-      <small><b>Semantic url:</b>&nbsp&nbsp&nbsp<?= $data['domain'].rtrim(BASE_DIR,'/') ?><a class='text-muted' id='ajaxSlug'><?= "/".UrlManager::seo_url($page->name) ?></a> </small>
+      <small><b>Semantic url:</b>&nbsp&nbsp&nbsp<?php //echo $data['domain'].rtrim(BASE_DIR,'/') ?><a class='text-muted' id='ajaxSlug'><?php //echo "/".UrlManager::seo_url($page->name) ?></a> </small>
     </div>
 
 <br>
@@ -124,7 +124,7 @@ echo "
 </div>
 
 <?php
-Bootstrap::image_details($page->id,$page->get_image());
+Bootstrap::image_details($page->id,$page->getImage());
 ?>
 
 <script type='text/javascript'>

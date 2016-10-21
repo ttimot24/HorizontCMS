@@ -44,7 +44,7 @@ echo "<td>".$each->username."</td>";
 echo "<td>".$each->email."</td>";
 
         echo "<td>";
-        if($each->rank<4){
+        if($each->role_id<4){
           echo  "<span class='label label-default' style='font-size:13px; display:block;'>".$each->role->name ."</span>";
         }else{
           echo "<span class='label label-danger' style='font-size:13px; display:block;'>".$each->role->name."</span>";
@@ -66,7 +66,7 @@ echo "<td>".$each->email."</td>";
 echo   "</b></td><td><center>";
 
 $disabled = "";
-      if($each->rank>=\Auth::user()->rank && !$each->is(Auth::user())){
+      if($each->role_id>=\Auth::user()->role_id && !$each->is(Auth::user())){
         $disabled='disabled';
       }   
 

@@ -115,7 +115,7 @@ echo "<br><span class='label label-default label-sm'>".$each->language."</span>"
 
       echo "
        <div class='btn-group' role='group'>
-           <a href='admin/page/update/".$each->id."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;'>".trans('actions.edit')."</a>
+           <a href='admin/page/edit/".$each->id."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;'>".trans('actions.edit')."</a>
            <a  type='button' data-toggle='modal' data-target='.delete_".$each->id."' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>
        </div>";
       

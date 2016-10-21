@@ -53,7 +53,7 @@ $key = array_search($data['instance']->id,$indexes);
     </br></br><b>{{trans('blogpost.category')}} : </br><a>{{ $blogpost->category->name }}</a></b>
     </br></br><b>{{trans('blogpost.characters')}} : <br><a>{{ strlen($blogpost->text) }}</a></b>
     </br></br><b>{{trans('blogpost.words')}} : <br><a>{{ str_word_count($blogpost->text) }}</a></b>
-    </br></br><b>{{trans('blogpost.commments')}} : <a>{{ count($blogpost->comments) }}</a></b>
+    </br></br><b>{{trans('blogpost.comments')}} : <a>{{ count($blogpost->comments) }}</a></b>
     </center>
 </div>
 

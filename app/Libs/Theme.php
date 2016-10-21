@@ -16,7 +16,7 @@ class Theme{
 			return array_slice(scandir('themes/'.$this->root_dir.'/page_templates'),2);
 		}
 	
-		return null;
+		return [];
 	}
 
 

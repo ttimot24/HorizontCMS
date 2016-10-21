@@ -25,7 +25,7 @@ class Blogpost extends Model{
 
 	public function getThumb(){
 
-        if(file_exists("storage/images/blogposts/thumbs/".$this->image)){
+        if(file_exists("storage/images/blogposts/thumbs/".$this->image) && $this->image!=""){
             return url("storage/images/blogposts/thumbs/".$this->image);
         }else{
             return $this->getImage();
@@ -35,7 +35,7 @@ class Blogpost extends Model{
 
     public function getImage(){
 
-    	if(file_exists("storage/images/blogposts/".$this->image)){
+    	if(file_exists("storage/images/blogposts/".$this->image) && $this->image!=""){
     		return url("storage/images/blogposts/".$this->image);
     	}else{
     		return url("resources/images/icons/newspaper.png");

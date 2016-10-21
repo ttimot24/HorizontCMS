@@ -9,11 +9,11 @@ class RouteResolver{
 
 				$controller_name = ucfirst($controller).'Controller';
 
-				if(!file_exists('app'.DIRECTORY_SEPARATOR.'Http'.DIRECTORY_SEPARATOR.'Controllers'.DIRECTORY_SEPARATOR.$controller_name.'.php')){
+				if(!file_exists('app'.DIRECTORY_SEPARATOR.'Controllers'.DIRECTORY_SEPARATOR.$controller_name.'.php')){
 					throw new Exception('No such file <b>'.$controller_name.'.php'.'</b>');
 				} 
 
-		        $controllerClass = 'App\\Http\\Controllers\\'.$controller_name;
+		        $controllerClass = 'App\\Controllers\\'.$controller_name;
 
 		        $action = studly_case($action); // optional, converts foo-bar into FooBar for example
 

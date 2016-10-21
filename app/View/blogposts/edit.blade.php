@@ -3,7 +3,7 @@
 @section('content')
 <div class='container main-container'>
   <h2>{{trans('blogpost.edit_blogpost')}}</h2>
-  <form role='form' action='blogpost/update/{{$blogpost->id}}' method='POST' enctype='multipart/form-data'>
+  <form role='form' action='admin/blogpost/update/{{$blogpost->id}}' method='POST' enctype='multipart/form-data'>
 
   {{ csrf_field() }}
 

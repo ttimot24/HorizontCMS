@@ -24,7 +24,7 @@
             "app/Helpers"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
         }
     },
     "autoload-dev": {
