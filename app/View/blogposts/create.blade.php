@@ -17,7 +17,7 @@
 
     <div class='form-group col-xs-12 col-md-4 pull-right' style='max-height:100px;'>
       <center>
-      <label for='file'>Upload image:</label><br>
+      <label for='file'>{{trans('actions.upload_image')}}:</label><br>
       <input name='up_file' id='input-2' type='file' class='file' multiple='false' accept='image/*' data-show-upload='false' data-show-caption='false'>
       </center>
     </div>
@@ -25,7 +25,7 @@
 
 
    <div class='form-group pull-left col-xs-12 col-md-5' style='margin-top:2%;'>
-  <label for='sel1'>Select category:</label>
+  <label for='sel1'>{{trans('blogpost.select_category')}}:</label>
   <select class='form-control' name='category_id' id='sel1'>
 
 
@@ -46,7 +46,7 @@
 </div>
 
  <div class='form-group pull-left col-xs-12 col-md-12'>
-      <label for='text'>Post:</label>
+      <label for='text'>{{trans('blogpost.post')}}:</label>
       
 
 <!---------------------------------------- jQUERY TEXT EDITOR ------------------------------------------------>

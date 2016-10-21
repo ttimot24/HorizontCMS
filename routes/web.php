@@ -16,11 +16,8 @@ Route::get('/laravelwelcome', function () {
 });
 
 
-//Auth::routes();
-
-
 Route::group(['prefix'=>'install'],function(){
-	///Route::any('/{controller?}/{action?}/{args?}', 'InstallController@index')->where('args', '(.*)');
+	Route::any('/{step?}', 'InstallController@index')->where('args', '(.*)');
 });
 
 
@@ -40,13 +37,9 @@ Route::group(['prefix'=> Config::get('horizontcms.backend_prefix'),'middleware' 
 	Route::any('/{controller?}/{action?}/{args?}/', 
 		function($controller = 'dashboard', $action = 'index', $args = null){
 
-
 		       $route = new \App\Http\RouteResolver();
 
 		        return $route->resolve($controller,$action,$args);
-
-
-
 
   		 })->where('args', '(.*)');
 	

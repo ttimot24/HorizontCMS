@@ -11,6 +11,9 @@ return [
 	'view_blogpost' => 'View blogpost',
 	'summary' => 'Summary',
 	'all' => 'All',
+	'select_category' => 'Select category',
+	'post' => 'Post',
+	'primary' => 'Primary',
 
 	//Table header
 	'th_id' => 'Id',
@@ -21,5 +24,14 @@ return [
 	'th_author' => 'Author',
 	'th_category' => 'Category',
 	'th_action' => 'Action',
+
+	//View
+	'author' => 'Author',
+	'published_on' => 'Published on',
+	'category' => 'Category',
+	'characters' => 'Characters',
+	'words' => 'Words',
+	'comments' => 'Comments',
+
 
 ];

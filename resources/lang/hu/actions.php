@@ -11,5 +11,7 @@ return [
 	'cancel' => 'Mégse',
 	'are_you_sure' => 'Biztos vagy benne?',
 	'delete_this' => 'Törlöd ezt a(z) :content_type -t',
+	'upload_image' => 'Kép feltöltés',
+	'deactivate' => 'Tiltás',
 
 ];

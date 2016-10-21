@@ -11,7 +11,6 @@ return [
 	'active' => 'Active',
 	'inactive' => 'Inactive',
 	'new_user_button' => 'New user',
-	'logins' => 'Logins',
 	'pws_not_equal' => 'Passwords doesn\'t match!',
 
 	//Table headers
@@ -33,5 +32,14 @@ return [
 	'create_email' => 'Email',
 	'create_select_rank' => 'Select rank',
 	'create_add_user_button' => 'Add user',
+
+	//View
+	'view_full_name' => 'Full name',
+	'view_user_name' => 'Username',
+	'view_rank' => 'Rank',
+	'view_email' => 'Email',
+	'view_registered_on' => 'Registered on',
+	'view_logins' => 'Logins',
 	
+
 ];

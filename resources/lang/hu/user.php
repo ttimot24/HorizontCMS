@@ -33,4 +33,12 @@ return [
 	'create_select_rank' => 'Jogkör',
 	'create_add_user_button' => 'Létrehoz',
 
+	//View
+	'view_full_name' => 'Teljes név',
+	'view_user_name' => 'Felhasználónév',
+	'view_rank' => 'Rang',
+	'view_email' => 'E-mail',
+	'view_registered_on' => 'Regisztrált',
+	'view_logins' => 'Belépve',
+
 ];

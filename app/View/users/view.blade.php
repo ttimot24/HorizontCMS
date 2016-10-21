@@ -46,7 +46,7 @@ $key = array_search($user->id,$indexes);
 
 </br><center>
   <div class='btn-group' role='group'>
-    <a href='admin/<?= $user->id ?>' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> Deactivate</a>
+    <a href='admin/<?= $user->id ?>' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('actions.deactivate')}}</a>
     <a href='admin/user/update/<?= $user->id ?>' type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
   </div>    
     <button type='button' class='btn btn-danger' data-toggle='modal' data-target='.delete'>
@@ -54,12 +54,12 @@ $key = array_search($user->id,$indexes);
     </button>
 
     
-    </br></br><b>Full name : <a>{{ $user->name }}</a></b>
-    </br></br><b>Username : <a>{{ $user->username }}</a></b>
-    </br></br><b>Rank : <a>{{ $user->role->name }}</a></b>
-     </br></br><b>Email : <a>{{ $user->email }}</a></b>
-    </br></br><b>Registered on : </br><a>{{ $user->created_at->format('Y.m.d - H:i:s') }}</a></b>
-     </br></br><b>{{trans('user.logins')}} : <a>{{ $user->visits }}</a></b>
+    </br></br><b>{{trans('user.full_name')}} : <a>{{ $user->name }}</a></b>
+    </br></br><b>{{trans('user.user_name')}} : <a>{{ $user->username }}</a></b>
+    </br></br><b>{{trans('user.view_rank')}} : <a>{{ $user->role->name }}</a></b>
+     </br></br><b>{{trans('user.view_email')}} : <a>{{ $user->email }}</a></b>
+    </br></br><b>{{trans('user.view_registered_on')}} : </br><a>{{ $user->created_at->format('Y.m.d - H:i:s') }}</a></b>
+     </br></br><b>{{trans('user.view_logins')}} : <a>{{ $user->visits }}</a></b>
      <hr/>
     </center>
 </div>
@@ -132,8 +132,8 @@ $key = array_search($user->id,$indexes);
    Bootstrap::delete_confirmation(
     "delete_".$each->id."",
     trans('actions.are_you_sure'),
-    "<b>{{trans('actions.delete_this','user')}}: </b>".$each->username." <b>?</b>",
-    "<a href='admin/user/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.delete')}}</a>
+    "<b>".trans('actions.delete_this','user').": </b>".$each->username." <b>?</b>",
+    "<a href='admin/user/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
 
@@ -163,7 +163,7 @@ $key = array_search($user->id,$indexes);
       if($news!=NULL){
 
         echo "<tr>";
-        echo "<td class='col-md-3'><a href='admin/admin/blogpost/view/".$news->id."'>".$news->title."</a></td>";
+        echo "<td class='col-md-3'><a href='admin/blogpost/view/".$news->id."'>".$news->title."</a></td>";
         echo "<td class='col-md-8' style='text-align:justify;'>" .$each->comment ."</td>";
 
         echo "<td class='col-md-1'>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format('H:i:s')."</font></td>";

@@ -62,7 +62,7 @@
 
 
     <div class='form-group pull-left col-xs-12 col-md-12' >
-      <label for='file'>{{trans('user.create_upload_image')}}:</label>
+      <label for='file'>{{trans('actions.upload_image')}}:</label>
       <input name='up_file' id='input-2' type='file' class='file' multiple='true' data-show-upload='false' data-show-caption='true'>
     </div>
 

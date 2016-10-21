@@ -2,14 +2,14 @@
 
 @section('content')
 <div class='container main-container'>
-  <h2>Edit post</h2>
+  <h2>{{trans('blogpost.edit_blogpost')}}</h2>
   <form role='form' action='blogpost/update/{{$blogpost->id}}' method='POST' enctype='multipart/form-data'>
 
   {{ csrf_field() }}
 
      <div class='form-group pull-left col-xs-12 col-md-8'>
     <input type='hidden' name='id' value=<?= $blogpost->id ?>>
-      <label for='title'>Title:</label>
+      <label for='title'>{{trans('blogpost.title')}}:</label>
       <input type='text' class='form-control' id='title' name='title' value='<?= htmlspecialchars($blogpost->title,ENT_QUOTES) ?>' required>
     </div>
 
@@ -19,7 +19,7 @@
 
 
    <div class='form-group pull-left col-xs-12 col-md-5'>
-  <label for='sel1'>Select category:</label>
+  <label for='sel1'>{{trans('blogpost.select_category')}}:</label>
   <select class='form-control' name='category' id='sel1'>
 
 
@@ -41,12 +41,12 @@
 </select></div>
 
  <div class='form-group pull-left col-xs-12 col-md-8'>
- <label for='title'>Summary:</label>
+ <label for='title'>{{trans('blogpost.summary')}}:</label>
       <input type='text' class='form-control' id='title' name='summary' value='<?= htmlspecialchars($blogpost->summary,ENT_QUOTES) ?>' ></br>
 </div>
 
  <div class='form-group pull-left col-xs-12 col-md-12'>
-      <label for='text'>Post:</label>
+      <label for='text'>{{trans('blogpost.post')}}:</label>
       
 
 <!---------------------------------------- jQUERY TEXT EDITOR ------------------------------------------------>
@@ -75,16 +75,16 @@
 
 
      <div class='form-group pull-left col-xs-12 col-md-12'>
-      <label for='file'>Upload file:</label>
+      <label for='file'>{{trans('actions.upload_image')}}:</label>
       <input name='up_file' id='input-2' type='file' class='file' multiple='false' data-show-upload='false' data-show-caption='true'>
     </div>
 
      <div class='form-group pull-left col-xs-12 col-md-12'>
-    <button id='submit-btn' name='submit_clicked' type='submit' class='btn btn-success btn-lg' onclick='window.onbeforeunload = null;'>Update</button> 
-    <a href='admin/admin/blogpost/index' type='button' class='btn btn-default'>Cancel</a>
+    <button id='submit-btn' name='submit_clicked' type='submit' class='btn btn-success btn-lg' onclick='window.onbeforeunload = null;'>{{trans('actions.update')}}</button> 
+    <a href='admin/blogpost/index' type='button' class='btn btn-default'>{{trans('actions.cancel')}}</a>
     </div>
   </form>
 </div>
 
-<?php //Bootstrap::image_details($blogpost->id,$blogpost->getImage()) ?>
+<?php Bootstrap::image_details($blogpost->id,$blogpost->getImage()) ?>
 @endsection

@@ -11,6 +11,9 @@ return [
 	'view_blogpost' => 'Blogbejegyzés megtekintése',
 	'summary' => 'Rövid leírás',
 	'all' => 'Összes',
+	'select_category' => 'Kategória',
+	'post' => 'Tartalom',
+	'primary' => 'Kiemel',
 
 
 	//Table header
@@ -23,6 +26,13 @@ return [
 	'th_category' => 'Kategória',
 	'th_action' => 'Műveletek',
 
+	//View
+	'author' => 'Szerző',
+	'published_on' => 'Közzétéve',
+	'category' => 'Kategória',
+	'characters' => 'Karakterek száma',
+	'words' => 'Szavak száma',
+	'comments' => 'Hozzászólások',
 
 
 ];

@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //DB::listen(function ($query) {
+            //catch all sql that runs inside the app;
+        //});
     }
 
     /**

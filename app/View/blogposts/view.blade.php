@@ -5,7 +5,7 @@
 
 
 <section class='row'>
-<h1 class='col-md-8'>Blogpost view</h1>
+<h1 class='col-md-8'>{{trans('blogpost.view_blogpost')}}</h1>
 
 <nav class='col-xs-12 col-md-4 '>
   <ul class='pager'>
@@ -39,7 +39,7 @@ $key = array_search($data['instance']->id,$indexes);
 </button>
 </br><center>
   <div class='btn-group' role='group'>
-    <a href='admin/' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> Primary</a>
+    <a href='#' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('blogpost.primary')}}</a>
     <a href='admin/blogpost/edit/{{ $blogpost->id }}' type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}} post</a>
     
     <button type='button' class='btn btn-danger' data-toggle='modal' data-target='.delete'>
@@ -48,21 +48,21 @@ $key = array_search($data['instance']->id,$indexes);
   </div>
 
 
-    </br></br><b>Author : </br><a href='admin/admin/user/view/{{ $blogpost->author->id }}'>{{ $blogpost->author->username }}</a></b>
-    </br></br><b>Published on : </br><a>{{ $blogpost->created_at->format('Y.m.d. H:i:s') }}</a></b>
-    </br></br><b>Category : </br><a><?= $blogpost->category->name ?></a></b>
-    </br></br><b>Characters : <br><a><?= strlen($blogpost->text) ?></a></b>
-    </br></br><b>Words : <br><a><?= str_word_count($blogpost->text) ?></a></b>
-    </br></br><b>Comments : <a><?= count($blogpost->comments); ?></a></b>
+    </br></br><b>{{trans('blogpost.author')}} : </br><a href='admin/user/view/{{ $blogpost->author->id }}'>{{ $blogpost->author->username }}</a></b>
+    </br></br><b>{{trans('blogpost.published_on')}} : </br><a>{{ $blogpost->created_at->format('Y.m.d. H:i:s') }}</a></b>
+    </br></br><b>{{trans('blogpost.category')}} : </br><a>{{ $blogpost->category->name }}</a></b>
+    </br></br><b>{{trans('blogpost.characters')}} : <br><a>{{ strlen($blogpost->text) }}</a></b>
+    </br></br><b>{{trans('blogpost.words')}} : <br><a>{{ str_word_count($blogpost->text) }}</a></b>
+    </br></br><b>{{trans('blogpost.commments')}} : <a>{{ count($blogpost->comments) }}</a></b>
     </center>
 </div>
 
 <div class="col-md-8" style='text-align:justify;padding-top:2.5%;'>
   <div class='well'>
-    <h3><?= $blogpost->title ?></h3><hr/>
-    <b><?= $blogpost->summary ?></b>
+    <h3>{{ $blogpost->title }}</h3><hr/>
+    <b>{{ $blogpost->summary }}</b>
     <p style='margin-top:40px;'>
-    <?= $blogpost->text ?>
+    {{ $blogpost->text }}
     </p>
   </div>  
     </td>
@@ -79,11 +79,12 @@ $key = array_search($data['instance']->id,$indexes);
 
   Bootstrap::delete_confirmation(
     "delete",
-    "Are you sure?",
-    "<b>Delete this post: </b>". $blogpost->title." <b>?</b>",
-    "<a href='admin/blogpost/delete/".$blogpost->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
-    <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
+    trans('actions.are_you_sure'),
+    "<b>".trans('actions.delete_this',['content_type'=>'post']).": </b>". $blogpost->title." <b>?</b>",
+    "<a href='admin/blogpost/delete/".$blogpost->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
+
 ?>
 
 
