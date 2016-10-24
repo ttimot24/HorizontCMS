@@ -11,7 +11,7 @@
 
     <div class='form-group pull-left col-xs-12 col-md-8'>
       <label for='title'>{{trans('blogpost.title')}}:</label>
-      <input type='text' class='form-control' id='title' name='title' required>
+      <input type='text' class='form-control' id='title' name='title' required autofocus>
     </div>
 
 

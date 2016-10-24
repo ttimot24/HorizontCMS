@@ -40,8 +40,8 @@ $key = array_search($user->id,$indexes);
 
 <section class='row'>
 <div class='col-md-3' valign='top'>
-<a class='btn btn-link' data-toggle='modal' data-target='.<?= $user->id ?>-modal-xl'>
-  <img src='{{$user->getImage() }}' class='img img-thumbnail' style='margin-top:20px;' >
+<a class='btn btn-link' data-toggle='modal' data-target='.{{$user->id}}-modal-xl'>
+  <img src='{{$user->getImage()}}' class='img img-thumbnail' style='margin-top:20px;' >
 </a>
 
 </br><center>
@@ -73,15 +73,14 @@ $key = array_search($user->id,$indexes);
      $datediff = $user->created_at->timestamp - time();
      $days = floor($datediff/(60*60*24));
 
-     $days<=0? $days=0: $days=$days;
+     $days = ($days<=0)? 0 : $days;
 
      echo "<div class='panel panel-danger' style='margin-top:4%;'>
             <div class='panel-heading'>
               <h3 class='panel-title'><b>Inactive user</b></h3>
             </div>
               <div class='panel-body'><center><font size='4'>
-              This user is inactive about 
-              ". $days ." days!
+              ".trans('user.inactive_about',['day_count' => $days])."
               </font></center>
               </div>
             </div>";
@@ -93,7 +92,7 @@ $key = array_search($user->id,$indexes);
 
   if($user->rank>3){
 
-    echo "<h2>Posts(".$user->blogposts->count().")</h2>";
+    echo "<h2>".trans('blogpost.blogposts')."(".$user->blogposts->count().")</h2>";
 
     echo "<table class='table table-condensed table-hover'>
     <thead>
@@ -142,14 +141,14 @@ $key = array_search($user->id,$indexes);
 
 
 
-<h2>Comments ({{$user->comments->count()}})</h2>
+<h2>{{trans('blogpost.comments')}} ({{$user->comments->count()}})</h2>
 
 <table class='table table-condensed table-hover'>
     <thead>
       <tr>
-        <th>Post</th>
-        <th>Comment</th>
-        <th>Date</th>
+        <th>{{trans('blogpost.post')}}</th>
+        <th>{{trans('blogpost.th_comment')}}</th>
+        <th>{{trans('blogpost.th_date')}}</th>
       </tr>
     </thead><tbody>
 

@@ -4,6 +4,7 @@
 
 return [
 	'blogposts' => 'Blogposts',
+	'post' => 'Post',
 	'new_post_button' => 'New post',
 	'new_blogpost' => 'New Blogpost',
 	'edit_blogpost' => 'Edit blogpost',
@@ -14,11 +15,13 @@ return [
 	'select_category' => 'Select category',
 	'post' => 'Post',
 	'primary' => 'Primary',
+	'comments' => 'Comments',
 
 	//Table header
 	'th_id' => 'Id',
 	'th_image' => 'Image',
 	'th_title' => 'Title',
+	'th_comment' => 'Comment', //Viewban comment
 	'th_comments' => 'Comments',
 	'th_date' => 'Date',
 	'th_author' => 'Author',

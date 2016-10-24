@@ -13,6 +13,7 @@ return [
 	'new_user_button' => 'Új felhasználó',
 	'logins' => 'Belépve',
 	'pws_not_equal' => 'Nem egyezik a két jelszó!',
+	'inactive_about' => 'Ez a felhasználó inaktív :day_count napja!',
 
 	//Table headers
 	'th_id' => 'Id',

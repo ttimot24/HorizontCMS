@@ -13,7 +13,7 @@ extends('layout')
 
     <div class='form-group col-xs-12 col-md-12' >
       <label for='title'>Menu:</label>
-      <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" placeholder='Write menu name here' required>
+      <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" placeholder='Write menu name here' required autofocus>
       <small><b>Semantic url:</b>&nbsp&nbsp&nbsp<?= $data['domain'].rtrim(BASE_DIR,'/') ?><a class='text-primary' id='ajaxSlug'></a> </small>
     </div>
 <br><br>
