@@ -7,7 +7,10 @@ Lightweight CMS built on Laravel 5.3.
 ###Try out
 
 Frontend: [https://horizontcms.herokuapp.com/](https://horizontcms.herokuapp.com/)
+
 Backend: [https://horizontcms.herokuapp.com/](https://horizontcms.herokuapp.com/admin)
+
+##
 
 Project by Timot Tarjani
 

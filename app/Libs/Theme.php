@@ -14,6 +14,8 @@ class Theme{
 	
 		if(file_exists('themes/'.$this->root_dir.'/page_templates')){
 			return array_slice(scandir('themes/'.$this->root_dir.'/page_templates'),2);
+		}else{
+			new \Exception('Couldn\'t render the theme!');
 		}
 	
 		return [];

@@ -98,6 +98,7 @@ class UserController extends Controller{
 
         $this->view->title(trans('user.edit_user'));
         return $this->view->render('users/edit',[
+                                                'current_user' => \Auth::user(),
                                                 'user' => User::find($id),
                                                 'user_roles' => \App\Model\UserRole::all(),
                                                 ]);

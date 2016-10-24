@@ -15,6 +15,7 @@ class MenuMiddleware{
      */
     public function handle($request, Closure $next){
 
+
         \App::setLocale(\App\Model\Settings::get('language'));
 
 
@@ -59,7 +60,7 @@ class MenuMiddleware{
 
             $prefix = \Config::get('horizontcms.backend_prefix');
 
-           /// $menu->add('current_user', '#')->id('current_user');
+           // $menu->add('current_user', $request->user()->username)->id('current_user');
 
             $menu->add("<i class='fa fa-cogs'></i> ", $prefix.'/settings')->id('settings');
 

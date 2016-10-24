@@ -42,7 +42,7 @@ tr #hidden-home a:hover{
         <th>{{trans('page.th_visibility')}}</th>
         <th>{{trans('page.th_type')}}</th>
         <th>{{trans('page.th_child_links')}}</th>
-        <th><center>{{trans('actions.action')}}</center></th>
+        <th><center>{{trans('actions.th_action')}}</center></th>
       </tr>
     </thead><tbody>
 
@@ -99,10 +99,10 @@ echo "<br><span class='label label-default label-sm'>".$each->language."</span>"
         <td>";
 
         if($each->parent==NULL){
-          echo "<b>".trans('pages.menu_type1')."</b>";
+          echo "<b>".trans('page.menu_type1')."</b>";
         }
         else{
-          echo trans('pages.menu_type2',['parent_menu'=> $each->parent->name]);
+          echo trans('page.menu_type2',['parent_menu'=> $each->parent->name]);
         }
 
     echo "</td>";

@@ -11,8 +11,6 @@ return[
 
 	'admin_logo' => 'resources/logo.png',
 
-	'error_reporting' => TRUE,
-
 	'css' => [
 			'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
 			'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',

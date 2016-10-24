@@ -41,6 +41,19 @@ class User extends Authenticatable{
     	return $this->hasMany(\App\Model\UserRole::class,'user_id','id');
     }
 
+
+    public function hasRole($role){
+
+        $rights = json_decode($this->role->rights);
+
+        if(!isset($rights) || $rights==NULL || $rights==""){
+            return false;
+        }
+
+        return in_array($role, $rights);
+    }
+
+
     public function getThumb(){
 
         if(file_exists("storage/images/users/thumbs/".$this->image) && $this->image!=""){

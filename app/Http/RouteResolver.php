@@ -10,7 +10,7 @@ class RouteResolver{
 				$controller_name = ucfirst($controller).'Controller';
 
 				if(!file_exists('app'.DIRECTORY_SEPARATOR.'Controllers'.DIRECTORY_SEPARATOR.$controller_name.'.php')){
-					throw new Exception('No such file <b>'.$controller_name.'.php'.'</b>');
+					throw new \Exception('No such file <b>'.$controller_name.'.php'.'</b>');
 				} 
 
 		        $controllerClass = 'App\\Controllers\\'.$controller_name;
@@ -22,7 +22,7 @@ class RouteResolver{
 		            return $controller->callAction($action, [$args]);
 		        }
 		        else{
-		            throw new Exception("Couldn't find action: <b>".$action."</b>");
+		            throw new \Exception("Couldn't find action: <b>".$action."</b>");
 		        }
 
 	}

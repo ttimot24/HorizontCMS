@@ -16,7 +16,9 @@ class InstallController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function index($step){
-        
+       
+        \Artisan::call('migrate');
+
     }
 
     /**

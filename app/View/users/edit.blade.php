@@ -23,7 +23,7 @@
     </div>
 
 
-@if($user->is(\Auth::user()))
+@if($user->is($current_user))
         <div class='form-group pull-left col-xs-12 col-md-8' >
           <label for='title'>{{trans('user.create_password')}}:</label>
           <input type='password' class='form-control' id='title' name='password'  required>
