@@ -17,7 +17,7 @@ tr #hidden-home a:hover{
 
 </style>
 
-<script type="text/javascript" src='src/View/pages/dragndrop.js'></script>
+<script type="text/javascript" src='app/View/pages/dragndrop.js'></script>
 
 <div class='container main-container'>
 
@@ -89,20 +89,20 @@ echo "<br><span class='label label-default label-sm'>".$each->language."</span>"
         <td>";
 
         if($each->visibility==1){
-          echo "<font color='green'>Visible</font>";
+          echo "<font color='green'>".trans('pages.visible')."</font>";
         }
         else{
-          echo "<font color='red'>Invisible</font>";
+          echo "<font color='red'>".trans('pages.invisible')."</font>";
         } 
 
   echo "</td>
         <td>";
 
         if($each->parent==NULL){
-          echo "<b>Main</b>";
+          echo "<b>".trans('pages.menu_type1')."</b>";
         }
         else{
-          echo "Submenu <i>of</i></br><b>".$each->parent->name."</b>";
+          echo trans('pages.menu_type2',['parent_menu'=> $each->parent->name]);
         }
 
     echo "</td>";
@@ -128,14 +128,14 @@ echo '
     <div class="modal-content">
       <div class="modal-header modal-header-warning">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Change HomePage</h4>
+        <h4 class="modal-title" id="myModalLabel">'.trans("pages.change_homepage").'</h4>
       </div>
       <div class="modal-body">
-        Are you sure you want to set <b>'.$each->name.'</b> as HomePage?
+        '.trans("page.are_you_sure_to_set",["page_name" => $each->name]).'
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <a href="page/home/'.$each->id.'" type="button" class="btn btn-primary">Set as Homepage</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">'.trans('actions.close').'</button>
+        <a href="page/home/'.$each->id.'" type="button" class="btn btn-primary">'.trans('actions.set').'</a>
       </div>
     </div>
   </div>

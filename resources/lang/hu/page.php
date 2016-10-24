@@ -11,6 +11,10 @@ return [
 	'visible' => 'Látható',
 	'invisible' => 'Nem látható',
 	'order' => 'Rendezés',
+	'change_homepage' => 'Kezdő oldal módosítása',
+	'are_you_sure_to_set' => 'Biztos hogy beállítod a(z) <b>:page_name</b> -t kezdőoldalként?',
+	'menu_type1' => 'Főmenü',
+	'menu_type2' => '<b>:parent_menu</b> <br> aloldala',
 
 
 	//Table

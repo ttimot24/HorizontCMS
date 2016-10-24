@@ -32,7 +32,7 @@ Route::post('admin/login', 'Auth\LoginController@login');
 Route::post('admin/logout', 'Auth\LoginController@logout');
 
 
-Route::group(['prefix'=> Config::get('horizontcms.backend_prefix'),'middleware' => 'auth'],function(){
+Route::group(['prefix'=> Config::get('horizontcms.backend_prefix'),'middleware' => 'admin'],function(){
 
 	Route::any('/{controller?}/{action?}/{args?}/', 
 		function($controller = 'dashboard', $action = 'index', $args = null){
