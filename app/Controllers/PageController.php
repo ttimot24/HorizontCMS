@@ -72,7 +72,8 @@ class PageController extends Controller{
         $this->view->title(trans('page.new_page'));
         return $this->view->render('pages/create',[
                                                     'all_page' => Page::all(),
-                                                    'page_templates' => (new App\Libs\Theme(Settings::get('theme')))->templates(),
+                                                    'page_templates' => (new \App\Libs\Theme(Settings::get('theme')))->templates(),
+                                                    'domain' => $_SERVER['SERVER_NAME'],
                                                     ]);
     }
 

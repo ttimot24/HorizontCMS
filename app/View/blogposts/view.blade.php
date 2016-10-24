@@ -40,7 +40,7 @@ $key = array_search($data['instance']->id,$indexes);
 </br><center>
   <div class='btn-group' role='group'>
     <a href='#' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('blogpost.primary')}}</a>
-    <a href='admin/blogpost/edit/{{ $blogpost->id }}' type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}} post</a>
+    <a href='admin/blogpost/edit/{{ $blogpost->id }}' type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}} </a>
     
     <button type='button' class='btn btn-danger' data-toggle='modal' data-target='.delete'>
     <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.remove')}}

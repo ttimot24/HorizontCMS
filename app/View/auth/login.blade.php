@@ -5,7 +5,7 @@
         <img src='{{$admin_logo}}' width='100' class='pull-left' alt="">
 
             <h1>{{$app_name}}</h1>
-            <p style='margin-left:15%;'><q><i>Closer to the web</i></q></p>
+            <p style='margin-left:15%;'><q><i>Closer to the web </i></q></p>
         </div>
     </div>
 
@@ -51,13 +51,6 @@
 
             </div>
     </form>
-
- 
-
-    <?php// include(VIEW_DIR."default/showcase.php") ?>
-
-
-
 
 
     </div>

@@ -63,8 +63,8 @@
                 CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
                 CKEDITOR.config.removeButtons = 'Save';
                 CKEDITOR.config.height = 350;
-                CKEDITOR.config.filebrowserBrowseUrl = '<?= url('/filemanager/browse') ?>';
-                CKEDITOR.config.filebrowserUploadUrl = '<?= url('/filemanager/browse') ?>';
+                CKEDITOR.config.filebrowserBrowseUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/browse') ?>';
+                CKEDITOR.config.filebrowserUploadUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/upload') ?>';
 
 
             </script>
