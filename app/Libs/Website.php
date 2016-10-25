@@ -28,22 +28,18 @@ class Website{
 
 		self::$_THEME_PATH = 'themes/'.\App\Model\Settings::get('theme');
 
+		self::$_CURRENT_USER = \Auth::user();
+
 		/*$system = new System();
 
-		Session::start();
-
-
-		$theme = new Theme();
 		$url = UrlManager::get_slugs();
-
 
 		self::$_BLOGPOST = new Blogpost();
 		self::$_USER = new User();
 		self::$_PAGE = new Page();
 		self::$_PLUGINS = new Plugin();
 		self::$_REQUESTED_PAGE = self::$_PAGE->get_instance_by_name($url[0]);
-		self::$_SETTINGS = $system->settings;
-		self::$_THEME_PATH = $theme->get_active_theme()->path;
+
 		self::$_SLUGS = $url;
 		self::$_HEADER_IMAGES = new HeaderImage();
 		self::$_SOCIAL_MEDIA = new Socialmedia();

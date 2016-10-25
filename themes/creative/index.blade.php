@@ -38,8 +38,6 @@
 
 @include('theme::sitelinks')
 
-<?php Website::require_theme_file("sitelinks.php"); ?>
-
     <header>
         <div class="header-content">
             <div class="header-content-inner">
