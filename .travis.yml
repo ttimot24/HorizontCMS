@@ -14,8 +14,8 @@ before_script:
   - composer install
 
 script:
-  - php artisan migrate
-  - php artisan db:seed
+  - php artisan migrate --no-interaction
+  - php artisan db:seed --no-interaction
 
 
 
