@@ -13,17 +13,17 @@
   <br><br>
   <input type='hidden' name='id' value='<?= $page->id ?>'>
   <div class='form-group pull-left col-xs-12 col-md-8' >
-      <label for='title'>Menu:</label>
+      <label for='title'>{trans('page.menu_name')}}</label>
       <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" value='<?= htmlspecialchars($page->name,ENT_QUOTES) ?>' required></input>
-      <small><b>Semantic url:</b>&nbsp&nbsp&nbsp<?php //echo $data['domain'].rtrim(BASE_DIR,'/') ?><a class='text-muted' id='ajaxSlug'><?php //echo "/".UrlManager::seo_url($page->name) ?></a> </small>
+      <small><b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp<?php echo $domain.rtrim(BASE_DIR,'/') ?><a class='text-muted' id='ajaxSlug'><?php //echo "/".UrlManager::seo_url($page->name) ?></a> </small>
     </div>
 
 <br>
     <div class='form-group pull-left col-xs-12 col-md-8' >
-         <label for='title'>Page template:</label>
+         <label for='title'>{trans('page.page_template')}}</label>
 
       <select class='form-control' name='url'>
-        <option value=''>Default</option>
+        <option value=''>{{trans('page.default_template')}}</option>
         <?php 
 
           foreach($page_templates as $template){
@@ -40,8 +40,9 @@
 <?php
 
 echo "<div class='form-group pull-left col-xs-12 col-md-6' id='level' >
-  <label for='level'>Level:</label>
+  <label for='level'>".trans('page.page_level')."</label>
   <select class='form-control' name='parent_select' >  
+  <?php 
           <option value='0' "; if($page->parent==0){echo "selected";} echo">Main menu</option>
           <option value='1' "; if($page->parent!=0){echo "selected";} echo">Submenu</option>";
 echo "</select></div>";
@@ -87,11 +88,11 @@ echo "
 ?>
 
 <div class='form-group pull-left col-xs-12 col-md-12' >
-      <label for='text'>Page content:</label>
+      <label for='text'>{{trans('page.page_content')}}</label>
 
 <!-------------------------------------------------- jQUERY TEXT EDITOR ------------------------------------------------------>
 
-<textarea name='page' id='editor' rows="15" cols="80"><?php echo $page->page ?></textarea>
+<textarea name='page' id='editor' rows="15" cols="80">{{$page->page}}</textarea>
 
 
             <script>

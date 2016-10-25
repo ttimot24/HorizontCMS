@@ -4,7 +4,7 @@
 <div class='container main-container'>
 
 
-  <h2>Add new page</h2><br><br>
+  <h2>{{trans('page.add_new_page_title')}}</h2><br><br>
 
   <form role='form' action='' method='POST' enctype='multipart/form-data'>
           {{ csrf_field() }}
@@ -12,17 +12,17 @@
   <section class='col-xs-12 col-md-8'>
 
     <div class='form-group col-xs-12 col-md-12' >
-      <label for='title'>Menu:</label>
+      <label for='title'>{{trans('page.menu_name')}}</label>
       <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" placeholder='Write menu name here' required autofocus>
-      <small><b>Semantic url:</b>&nbsp&nbsp&nbsp<?= $domain.rtrim(BASE_DIR,'/') ?><a class='text-primary' id='ajaxSlug'></a> </small>
+      <small><b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp<?= $domain.rtrim(BASE_DIR,'/') ?><a class='text-primary' id='ajaxSlug'></a> </small>
     </div>
 <br><br>
     <div class='form-group col-xs-12 col-md-12' >
 
-      <label for='title'>Page template:</label>
+      <label for='title'>{{trans('page.page_template')}}</label>
 
       <select class='form-control' name='url'>
-        <option value='' selected>Default</option>
+        <option value='' selected>{{trans('page.default_template')}}</option>
         <?php 
 
           foreach($page_templates as $template){
@@ -37,19 +37,19 @@
 <br><br>
 
 <div class='form-group col-xs-12 col-md-6' >
-  <label for='sel1'>Level:</label>
+  <label for='sel1'>{{trans('page.page_level')}}</label>
   <select class='form-control' name='parent_select' id='level'>  
-          <option value='1'>Main menu</option>
-          <option value='0'>Submenu</option>";
+          <option value='1'>{{trans('page.main_menu')}}</option>
+          <option value='0'>{{trans('page.submenu')}}</option>";
 </select></div>
 
 
 <div class='form-group pull-left col-xs-12 col-md-6' id='submenus'>
-  <label for='submenus'>Parent menu:</label>
+  <label for='submenus'>{{trans('page.parent_menu')}}</label>
   <select class='form-control' name='parent' >";  
       
 <?php     
-      echo "<option value='0'>None</option>"; 
+      echo "<option value='0'>".trans('page.none')."</option>"; 
 
       foreach($all_page as $each){
          echo "<option value='".$each->id."'>".$each->name."</option>"; 
@@ -61,14 +61,14 @@
 
 
 <div class='form-group pull-left col-xs-12 col-md-8' style='margin-top:20px;margin-bottom:20px;'>
-  <label style='margin-right:10px;'>Visibility:</label> 
+  <label style='margin-right:10px;'>{{trans('page.visibility')}}</label> 
         <div class="radio radio-primary radio-inline">
                         <input type="radio" id="inlineRadio1" value="1" name='visibility' checked>
-                        <label for="inlineRadio1"> Visible </label>
+                        <label for="inlineRadio1"> {{trans('page.visible')}} </label>
                     </div>
                     <div class="radio radio-inline">
                         <input type="radio" id="inlineRadio2" value="0" name='visibility'>
-                        <label for="inlineRadio2"> Invisible </label>
+                        <label for="inlineRadio2"> {{trans('page.invisible')}} </label>
                     </div>
 </div>
 
@@ -99,7 +99,7 @@ Add image
 </section>
 
 <div class='form-group pull-left col-xs-12 col-md-12' >
-      <label for='text'>Page content:</label>
+      <label for='text'>{{trans('page.page_content')}}</label>
 
 
 

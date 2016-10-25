@@ -16,6 +16,21 @@ return [
 	'menu_type1' => 'Main',
 	'menu_type2' => 'Submenu <i>of</i></br><b>:parent_menu</b>',
 
+	//Create page
+
+	'add_new_page_title' => 'Add new page',
+	'menu_name' => 'Menu',
+	'semantic_url' => 'Semantic url',
+	'page_template' => 'Page template',
+	'default_template' => 'Default',
+	'page_level' => 'Level',
+	'main_menu' => 'Main menu',
+	'submenu' => 'Submenu',
+	'parent_menu' => 'Parent menu',
+	'none' => 'None',
+	'visibility' => 'Visibility',
+	'page_content' => 'Page content',
+
 
 	//Table
 	'th_id' => 'Id',
