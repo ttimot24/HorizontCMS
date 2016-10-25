@@ -7,3 +7,4 @@ Homestead.yaml
 .env
 /storage
 /composer.lock
+/themes/twentyt

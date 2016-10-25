@@ -30,19 +30,19 @@ class Website{
 
 		self::$_CURRENT_USER = \Auth::user();
 
+		$url = UrlManager::get_slugs();
+
+		self::$_REQUESTED_PAGE = \App\Model\Page::where('slug', '=' ,$url[0])->get()->first();
+
+
 		/*$system = new System();
 
 		$url = UrlManager::get_slugs();
 
-		self::$_BLOGPOST = new Blogpost();
-		self::$_USER = new User();
-		self::$_PAGE = new Page();
 		self::$_PLUGINS = new Plugin();
 		self::$_REQUESTED_PAGE = self::$_PAGE->get_instance_by_name($url[0]);
 
 		self::$_SLUGS = $url;
-		self::$_HEADER_IMAGES = new HeaderImage();
-		self::$_SOCIAL_MEDIA = new Socialmedia();
 
 		Session::get('id')==NULL ? : self::$_CURRENT_USER = self::$_USER->get_instance(Session::get('id'));
 
@@ -76,7 +76,8 @@ class Website{
             	}
             	else{
             		echo "<h1>".Website::$_REQUESTED_PAGE->name."</h1>";
-            		echo "<p>".Plugin::triggerPagePlugin(Website::$_REQUESTED_PAGE->page)."</p>";
+            		//echo "<p>".Plugin::triggerPagePlugin(Website::$_REQUESTED_PAGE->page)."</p>";
+            		echo "<p>".Website::$_REQUESTED_PAGE->page."</p>";
             	}
 
             }

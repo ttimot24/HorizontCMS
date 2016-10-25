@@ -41,6 +41,7 @@
 
         </br></br></br><center>
         <form class='form-inline' action='admin/search/index' method='POST'>
+            {{ csrf_field() }}
           <div class='form-group'>
             <div class='input-group'>
             <input type='text' class='form-control' name='search' id='exampleInputAmount' style='min-width:250px;'  placeholder='{{ trans('dashboard.search_bar') }}' required>

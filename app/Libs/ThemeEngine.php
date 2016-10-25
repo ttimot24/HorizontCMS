@@ -5,6 +5,11 @@ namespace App\Libs;
 class ThemeEngine{
 
 	protected $theme;
+	public $request;
+
+	public function __construct(\Illuminate\Http\Request $request){
+		$this->request = $request;
+	}
 
 
 	public function addTheme(\App\Libs\Theme $theme){

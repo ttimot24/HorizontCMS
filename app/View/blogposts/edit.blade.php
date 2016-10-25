@@ -7,8 +7,9 @@
 
   {{ csrf_field() }}
 
+    <input type='hidden' name='id' value='{{ $blogpost->id }}'>
+
      <div class='form-group pull-left col-xs-12 col-md-8'>
-    <input type='hidden' name='id' value=<?= $blogpost->id ?>>
       <label for='title'>{{trans('blogpost.title')}}:</label>
       <input type='text' class='form-control' id='title' name='title' value='<?= htmlspecialchars($blogpost->title,ENT_QUOTES) ?>' required>
     </div>

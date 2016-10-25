@@ -8,7 +8,7 @@
         "php": ">=5.6.4",
         "laravel/framework": "5.3.*",
         "lavary/laravel-menu": "dev-master",
-        "twbs/bootstrap" : "3.3.7"
+        "twbs/bootstrap" : "3.3.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -21,8 +21,7 @@
         "classmap": [
             "database",
             "app/Model",
-            "app/Helpers",
-            "app/Libs/Website.php"
+            "app/Helpers"
         ],
         "psr-4": {
             "App\\": "app/"

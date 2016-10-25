@@ -34,7 +34,7 @@ class MenuMiddleware{
             $menu->add(trans('navbar.users'), '#')->id('users');
             $menu->find('users')->add("<i class='fa fa-users'></i> ".trans('navbar.user_list'), $prefix.'/user');
             $menu->find('users')->add("<i class='fa fa-user-plus'></i> ".trans('navbar.user_add'), $prefix.'/user/create');
-            $menu->find('users')->add("<i class='fa fa-gavel'></i> ".trans('navbar.user_groups'), $prefix.'/usergroups');
+            $menu->find('users')->add("<i class='fa fa-gavel'></i> ".trans('navbar.user_groups'), $prefix.'/userrole');
 
 
 

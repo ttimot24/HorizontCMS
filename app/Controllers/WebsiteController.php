@@ -19,7 +19,7 @@ class WebsiteController extends Controller
     public function index($slug)
     {
 
-        $theme_engine = new \App\Libs\BladeThemeEngine();
+        $theme_engine = new \App\Libs\ThemeEngine($this->request);
         $theme_engine->addTheme(new \App\Libs\Theme(Settings::get('theme')));
 
 

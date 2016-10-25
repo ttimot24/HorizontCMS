@@ -44,6 +44,7 @@ class PageController extends Controller{
 
             $page = new Page();
             $page->name = $this->request->input('name');
+            $page->slug = str_slug($this->request->input('name'), "-");
             $page->url = $this->request->input('url');
             $page->visibility = $this->request->input('visibility');
             $page->parent_id = $this->request->input('parent_id');

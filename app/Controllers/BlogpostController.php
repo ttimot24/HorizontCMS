@@ -35,7 +35,6 @@ class BlogpostController extends Controller{
      */
     public function create(){
 
-
        
 
         if($this->request->isMethod('POST')){
@@ -54,7 +53,9 @@ class BlogpostController extends Controller{
             }
 
             if($blogpost->save()){
-                return redirect("admin/blogpost/edit/".$blogpost->id)->withMessage(['success' => 'Siker']);
+                return $this->redirect("admin/blogpost/edit/".$blogpost->id)->withMessage(['success' => trans('message.successfully_created_blogpost')]);
+            }else{
+            	return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
 
             
@@ -118,8 +119,12 @@ class BlogpostController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
-        //
+    public function update($id){
+      	$blogpost = Blogpost::find($id);
+
+      	
+
+      	return $this->redirectToSelf();
     }
 
     /**
@@ -142,9 +147,13 @@ class BlogpostController extends Controller{
     public function delete($id){
         
 
-        Blogpost::find($id)->delete();
+        if(Blogpost::find($id)->delete()){
+			return $this->redirect('admin/blogpost')->withMessage(['success' => trans('message.successfully_deleted_blogpost')]);
+        }
 
-        return $this->redirectToSelf();
+
+        return $this->redirect('admin/blogpost')->withMessage(['danger' => trans('message.something_went_wrong')]);
+
     }
 
 
