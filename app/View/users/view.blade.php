@@ -9,26 +9,14 @@
 <nav class='col-md-4'>
   <ul class='pager'>
 
-<?php
 
-/*$indexes = array();
+    @if($previous_user)
+        <li class='next' id='prev'><a href='admin/blogpost/show/{{$previous_user->id}}'> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+    @endif
 
-foreach($data['all'] as $each){
-	array_push($indexes,$each->id);
-}
-
-$key = array_search($user->id,$indexes);
-
-
-  if(isset($indexes[$key+1])){
-  echo "<li class='next' id='next'><a href='admin/admin/user/view/". $indexes[$key+1] ."'>Next <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a></li>";
-  	}
-  if(isset($indexes[$key-1])){
-  echo "<li class='next' id='prev'><a href='admin/admin/user/view/". $indexes[$key-1] ."'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> Previous</a></li>";
-  }
-*/
-
-?>
+    @if($next_user)
+        <li class='next' id='prev'><a href='admin/blogpost/show/{{$next_user->id}}'> <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> {{trans('actions.next')}}</a></li>
+    @endif
 
   </ul>
 </nav>
@@ -46,8 +34,8 @@ $key = array_search($user->id,$indexes);
 
 </br><center>
   <div class='btn-group' role='group'>
-    <a href='admin/<?= $user->id ?>' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('actions.deactivate')}}</a>
-    <a href='admin/user/update/<?= $user->id ?>' type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
+    <a href='admin/{{$user->id}} ' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('actions.deactivate')}}</a>
+    <a href='admin/user/update/{{ $user->id }}' type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
   </div>    
     <button type='button' class='btn btn-danger' data-toggle='modal' data-target='.delete'>
     <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.remove')}}
@@ -90,7 +78,7 @@ $key = array_search($user->id,$indexes);
 
 
 
-  if($user->rank>3){
+  if($user->isAdmin()){
 
     echo "<h2>".trans('blogpost.blogposts')."(".$user->blogposts->count().")</h2>";
 
@@ -187,11 +175,11 @@ $key = array_search($user->id,$indexes);
 $(document).keydown(function(e) {
     switch(e.which) {
         case 37: // left
-                 window.location.replace('admin/user/view/' + <?= $indexes[$key-1]; ?>);
+                 window.location.replace('admin/user/view/{{$previous_user->id}}');
                  break;
 
         case 39: // right
-                  window.location.replace('admin/user/view/' + <?= $indexes[$key+1]; ?>);
+                  window.location.replace('admin/user/view/{{$next_user->id}}');
                   break;
 
         default: return; // exit this handler for other keys

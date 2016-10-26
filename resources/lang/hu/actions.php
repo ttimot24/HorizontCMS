@@ -13,6 +13,8 @@ return [
 	'yes' => 'Igen',
 	'no' => 'Nem', 
 	'close' => 'Bezár', 
+	'next' => 'következő',
+	'previous' => 'Előző',
 	'are_you_sure' => 'Biztos vagy benne?',
 	'delete_this' => 'Törlöd ezt a(z) :content_type -t',
 	'upload_image' => 'Kép feltöltés',

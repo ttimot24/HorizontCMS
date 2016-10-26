@@ -53,6 +53,18 @@ class User extends Authenticatable{
         return in_array($role, $rights);
     }
 
+    /**
+    *
+    * Checking that the user role which the user assegned to,
+    * has the right to enter into the admin area. Therefore
+    * the user is an admingroup (default: editor, manager, admin) user. 
+    * Don't mix up with Admin as a role! 
+    *
+    */
+    public function isAdmin(){
+        return $this->hasRole('admin_area');
+    }
+
 
     public function getThumb(){
 
@@ -73,6 +85,9 @@ class User extends Authenticatable{
         }
 
     }
+
+
+
 
 
 }

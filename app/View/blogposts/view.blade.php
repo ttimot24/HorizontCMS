@@ -9,23 +9,15 @@
 
 <nav class='col-xs-12 col-md-4 '>
   <ul class='pager'>
-<?php 
 
-/*$indexes = array();
-foreach($data['all'] as $each){
-  array_push($indexes,$each->id);
-}
+    @if($previous_blogpost)
+        <li class='next' id='prev'><a href='admin/blogpost/show/{{$previous_blogpost->id}}'> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+    @endif
 
-$key = array_search($data['instance']->id,$indexes);
+    @if($next_blogpost)
+        <li class='next' id='prev'><a href='admin/blogpost/show/{{$next_blogpost->id}}'> <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> {{trans('actions.next')}}</a></li>
+    @endif
 
-  if(isset($indexes[$key+1])){
-  echo "<li class='next' id='next'><a href='admin/blogpost/view/". $indexes[$key+1] ."'>Newer  <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a></li>";
-    }
-  if(isset($indexes[$key-1])){
-  echo "<li class='next' id='prev'><a href='admin/blogpost/view/". $indexes[$key-1] ."'> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> Older</a></li>";
-  }*/
-
-?>
 
   </ul>
 </nav>
@@ -106,21 +98,21 @@ $key = array_search($data['instance']->id,$indexes);
 
 <script>
 
-/*$(window).keydown(function(event) {
+$(window).keydown(function(event) {
     switch(event.which) {
         case 37: // left
-                 window.location.replace('admin/blogpost/view/' + <?php //echo $indexes[$key-1]; ?>);
+                 window.location.replace('admin/blogpost/show/{{$previous_blogpost->id}}');
                  break;
 
         case 39: // right
-                  window.location.replace('admin/blogpost/view/' + <?php //echo $indexes[$key+1]; ?>);
+                  window.location.replace('admin/blogpost/show/{{$next_blogpost->id}}');
                   break;
 
         default: return; // exit this handler for other keys
     
     }
     e.preventDefault();
-});*/
+});
 
 
 </script>

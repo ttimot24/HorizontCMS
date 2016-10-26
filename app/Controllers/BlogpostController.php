@@ -90,7 +90,11 @@ class BlogpostController extends Controller{
     public function show($id){
 
         $this->view->title(trans('blogpost.view_blogpost'));
-        return $this->view->render('blogposts/view',['blogpost' => Blogpost::find($id)]);
+        return $this->view->render('blogposts/view',[
+                                                        'blogpost' => Blogpost::find($id),
+                                                        'previous_blogpost' => Blogpost::where('id', '<', $id)->max('id'),
+                                                        'next_blogpost' =>  Blogpost::where('id', '>', $id)->min('id'),
+                                                    ]);
     }
 
     /**
@@ -120,11 +124,29 @@ class BlogpostController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function update($id){
-      	$blogpost = Blogpost::find($id);
+      	 
 
-      	
+         $blogpost = Blogpost::find($id);
 
-      	return $this->redirectToSelf();
+      	 $blogpost->title = $this->request->input('title');
+         $blogpost->category_id = $this->request->input('category_id');
+         $blogpost->summary = $this->request->input('summary');
+         $blogpost->text = $this->request->input('text');
+         $blogpost->author_id = \Auth::user()->id;
+
+         if ($this->request->hasFile('up_file')){
+              
+              $blogpost->image = str_replace('images/blogposts/','',$this->request->up_file->store('images/blogposts'));
+
+         }
+
+         if($blogpost->save()){
+             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
+         }else{
+             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+         }
+
+
     }
 
     /**

@@ -41,7 +41,9 @@ class UserRoleController extends Controller{
     public function show($id){
 
         $this->view->title(trans('user.view_user'));
-        return $this->view->render('users/view',['user' => User::find($id)]);
+        return $this->view->render('users/view',[
+                                                    'user' => User::find($id),
+                                                ]);
     }
 
     /**

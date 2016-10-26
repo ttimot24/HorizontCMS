@@ -22,6 +22,14 @@ class WebsiteController extends Controller
         $theme_engine = new \App\Libs\ThemeEngine($this->request);
         $theme_engine->addTheme(new \App\Libs\Theme(Settings::get('theme')));
 
+        /*
+            Website page template loading logic goes here
+
+            $theme_engine->pageTemplate();
+
+            theme engine render method modification!
+        */
+
 
        return $theme_engine->render();
     }

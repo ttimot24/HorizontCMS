@@ -6,6 +6,8 @@ Lightweight CMS built on Laravel 5.3.
 [![Github All Releases](https://img.shields.io/github/downloads/ttimot24/horizontcms/total.svg)]()
 
 
+There are a lot of work here still. DO NOT USE IN PRODUCTION!
+
 ###Try out
 
 Frontend: [https://horizontcms.herokuapp.com/](https://horizontcms.herokuapp.com/)

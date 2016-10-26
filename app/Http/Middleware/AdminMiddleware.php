@@ -14,7 +14,7 @@ class AdminMiddleware{
      */
     public function handle($request, Closure $next){
         
-        if(!$request->user()->hasRole('admin_area')){
+        if(!$request->user()->isAdmin()){
 
             \Auth::logout();
             return redirect()->back();
