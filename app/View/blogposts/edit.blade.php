@@ -21,7 +21,7 @@
 
    <div class='form-group pull-left col-xs-12 col-md-5'>
   <label for='sel1'>{{trans('blogpost.select_category')}}:</label>
-  <select class='form-control' name='category' id='sel1'>
+  <select class='form-control' name='category_id' id='sel1'>
 
 
 
@@ -59,8 +59,10 @@
 
                 CKEDITOR.replace( 'editor' );
                 CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
-                CKEDITOR.config.removeButtons = 'Save';
+                CKEDITOR.config.removeButtons = 'Save,Font';
                 CKEDITOR.config.height = 350;
+                CKEDITOR.config.filebrowserBrowseUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/browse') ?>';
+                CKEDITOR.config.filebrowserUploadUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/upload') ?>';
 
 
             </script>

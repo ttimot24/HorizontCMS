@@ -55,7 +55,7 @@ echo "<td>".$each->email."</td>";
 
 
 
-        if($each->session==1){
+        if($each->isOnline()){
           echo "<font color='green'>Online</font>";	
         }
         else{

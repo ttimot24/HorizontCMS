@@ -5,17 +5,17 @@
 
 
 <section class='row'>
-<h1 class='col-md-8'>{{trans('blogpost.view_blogpost')}}</h1>
+<h1 class='col-md-9'>{{trans('blogpost.view_blogpost')}}</h1>
 
-<nav class='col-xs-12 col-md-4 '>
+<nav class='col-xs-12 col-md-3 '>
   <ul class='pager'>
 
     @if($previous_blogpost)
-        <li class='next' id='prev'><a href='admin/blogpost/show/{{$previous_blogpost->id}}'> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+        <li class='previous' id='prev'><a href='admin/blogpost/show/{{$previous_blogpost}}'> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
     @endif
 
     @if($next_blogpost)
-        <li class='next' id='prev'><a href='admin/blogpost/show/{{$next_blogpost->id}}'> <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> {{trans('actions.next')}}</a></li>
+        <li class='next' id='prev'><a href='admin/blogpost/show/{{$next_blogpost}}'>{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
     @endif
 
 
@@ -101,11 +101,11 @@
 $(window).keydown(function(event) {
     switch(event.which) {
         case 37: // left
-                 window.location.replace('admin/blogpost/show/{{$previous_blogpost->id}}');
+                 window.location.replace('admin/blogpost/show/{{$previous_blogpost}}');
                  break;
 
         case 39: // right
-                  window.location.replace('admin/blogpost/show/{{$next_blogpost->id}}');
+                  window.location.replace('admin/blogpost/show/{{$next_blogpost}}');
                   break;
 
         default: return; // exit this handler for other keys

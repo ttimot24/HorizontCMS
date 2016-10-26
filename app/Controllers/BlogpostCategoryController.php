@@ -7,7 +7,7 @@ use App\Libs\Controller;
 
 use App\Model\Blogpost;
 
-class BlogpostController extends Controller{
+class BlogpostCategoryController extends Controller{
  
 
     protected $itemPerPage = 25;
@@ -22,7 +22,7 @@ class BlogpostController extends Controller{
 
 
         $this->view->title(trans('blogpost.blogposts'));
-        return $this->view->render('blogposts/index',[
+        return $this->view->render('blogposts/category/index',[
                                                         'number_of_blogposts' => Blogpost::count(),
                                                         'all_blogposts' => Blogpost::orderBy('id','desc')->paginate($this->itemPerPage),
                                                     ]);
@@ -169,12 +169,12 @@ class BlogpostController extends Controller{
     public function delete($id){
         
 
-        if(Blogpost::find($id)->delete()){
-			return $this->redirect('admin/blogpost')->withMessage(['success' => trans('message.successfully_deleted_blogpost')]);
+        if(BlogpostCategory::find($id)->delete()){
+			return $this->redirect('admin/blogpostcategory')->withMessage(['success' => trans('message.successfully_deleted_blogpostcategory')]);
         }
 
 
-        return $this->redirect('admin/blogpost')->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return $this->redirect('admin/blogpostcategory')->withMessage(['danger' => trans('message.something_went_wrong')]);
 
     }
 

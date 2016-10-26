@@ -42,7 +42,6 @@ class UserController extends Controller{
             $user->username = $this->request->input('username');
             $user->password = \Hash::make($this->request->input('password'));
             $user->role_id = $this->request->input('role_id');
-            $user->session = 0;
             $user->visits = 0;
             $user->active = 1;
 

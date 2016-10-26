@@ -99,13 +99,14 @@ echo "
 
                 CKEDITOR.replace( 'editor' );
                 CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
-                CKEDITOR.config.removeButtons = 'Save';
+                CKEDITOR.config.removeButtons = 'Save,Font';
                 CKEDITOR.config.height = 350;
+                CKEDITOR.config.filebrowserBrowseUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/browse') ?>';
+                CKEDITOR.config.filebrowserUploadUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/upload') ?>';
+
 
             </script>
 
-
-<!--echo "<textarea name='page' class='jqte-test'>".$page->page."</textarea>
 
 <!-------------------------------------------------------- jQUERY TEXT EDITOR ------------------------------------------------------>
 

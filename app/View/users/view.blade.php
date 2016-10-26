@@ -11,11 +11,11 @@
 
 
     @if($previous_user)
-        <li class='next' id='prev'><a href='admin/blogpost/show/{{$previous_user->id}}'> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+        <li class='previous' id='prev'><a href='admin/blogpost/show/{{$previous_user}}'> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
     @endif
 
     @if($next_user)
-        <li class='next' id='prev'><a href='admin/blogpost/show/{{$next_user->id}}'> <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> {{trans('actions.next')}}</a></li>
+        <li class='next' id='prev'><a href='admin/blogpost/show/{{$next_user}}'>{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
     @endif
 
   </ul>
@@ -119,7 +119,7 @@
    Bootstrap::delete_confirmation(
     "delete_".$each->id."",
     trans('actions.are_you_sure'),
-    "<b>".trans('actions.delete_this','user').": </b>".$each->username." <b>?</b>",
+    "<b>".trans('actions.delete_this',['content_type' => 'user']).": </b>".$each->username." <b>?</b>",
     "<a href='admin/user/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
@@ -175,11 +175,11 @@
 $(document).keydown(function(e) {
     switch(e.which) {
         case 37: // left
-                 window.location.replace('admin/user/view/{{$previous_user->id}}');
+                 window.location.replace('admin/user/view/{{$previous_user}}');
                  break;
 
         case 39: // right
-                  window.location.replace('admin/user/view/{{$next_user->id}}');
+                  window.location.replace('admin/user/view/{{$next_user}}');
                   break;
 
         default: return; // exit this handler for other keys

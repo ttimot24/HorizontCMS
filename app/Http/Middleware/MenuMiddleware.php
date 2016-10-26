@@ -28,7 +28,7 @@ class MenuMiddleware{
             $menu->add(trans('navbar.news'), '#')->id('news');
             $menu->find('news')->add("<i class='fa fa-newspaper-o'></i> ".trans('navbar.posted_news'), $prefix."/blogpost");
             $menu->find('news')->add("<i class='fa fa-pencil'></i> ".trans('navbar.create_post'), $prefix."/blogpost/create");
-            $menu->find('news')->add("<i class='fa fa-list-ul'></i> ".trans('navbar.categories'), $prefix.'/categories');
+            $menu->find('news')->add("<i class='fa fa-list-ul'></i> ".trans('navbar.categories'), $prefix.'/blogpostcategory');
 
 
             $menu->add(trans('navbar.users'), '#')->id('users');
