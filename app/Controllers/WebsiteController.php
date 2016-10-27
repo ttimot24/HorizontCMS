@@ -19,15 +19,24 @@ class WebsiteController extends Controller
     public function index($slug)
     {
 
+
         $theme_engine = new \App\Libs\ThemeEngine($this->request);
         $theme_engine->addTheme(new \App\Libs\Theme(Settings::get('theme')));
 
         /*
-            Website page template loading logic goes here
+            if(is_array($slug)){
+                $slug = $slug[0];
+            }
 
-            $theme_engine->pageTemplate();
+            $requested_page = Page::findBySlug($slug);
 
-            theme engine render method modification!
+            if($requested_page){
+                $template = $requested_page->url;
+            }else{
+                 $template = 404;
+            }
+
+            $theme_engine->pageTemplate($template);
         */
 
 

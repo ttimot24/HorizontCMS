@@ -17,7 +17,7 @@ Route::get('/laravelwelcome', function () {
 
 
 Route::group(['prefix'=> Config::get('horizontcms.backend_prefix').'/install'],function(){
-	Route::any('/{step?}', 'InstallController@index')->where('args', '(.*)');
+	Route::any('/{step?}', 'InstallController@index')/*->where('args', '(.*)')*/;
 });
 
 

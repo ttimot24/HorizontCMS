@@ -15,13 +15,11 @@ class InstallController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($step = null){
-       
-        //\Artisan::call('migrate');
+    public function index($step = 'index'){
+
 
         $this->view->title("Install");
-
-        return $this->view->render("install/index",['enable_continue' => true]);
+        return $this->view->render("install/".$step,['enable_continue' => true]);
     }
 
     /**

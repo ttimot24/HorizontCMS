@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model{
 
 
+    public static function findBySlug($slug){
+        return self::where('slug','=',$slug)->get();
+    }
+
+
     public function parent(){
         return $this->belongsTo(Page::class,'parent_id','id');
     }
