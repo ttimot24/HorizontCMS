@@ -22,13 +22,12 @@ class BladeThemeEngine{
 	}
 
 
-	public function render(){
+	public function render(array $data){
 
 		\View::addNamespace('theme', 'themes'.DIRECTORY_SEPARATOR.$this->theme->root_dir);
 
-		return view('theme::page_templates.'.$this->page_template,[
-																	'_THEME_PATH' => 'themes'.DIRECTORY_SEPARATOR.$this->theme->root_dir.DIRECTORY_SEPARATOR,
-																	]);
+
+		return view('theme::'.$this->page_template,$data);
 
 	}
 

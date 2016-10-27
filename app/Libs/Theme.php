@@ -22,5 +22,9 @@ class Theme{
 	}
 
 
+	public function getPath(){
+		return 'themes'.DIRECTORY_SEPARATOR.$this->root_dir.DIRECTORY_SEPARATOR;
+	}
+
 
 }

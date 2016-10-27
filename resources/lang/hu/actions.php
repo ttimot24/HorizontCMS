@@ -13,7 +13,7 @@ return [
 	'yes' => 'Igen',
 	'no' => 'Nem', 
 	'close' => 'Bezár', 
-	'next' => 'következő',
+	'next' => 'Következő',
 	'previous' => 'Előző',
 	'are_you_sure' => 'Biztos vagy benne?',
 	'delete_this' => 'Törlöd ezt a(z) :content_type -t',

@@ -19,7 +19,7 @@
 	<h4>
 		<p style='padding:15px;'>
 
-			{{ $exception->getMessage() }} on line: {{$exception->getLine()}}
+			{{ $exception->getMessage() }} on line: {{$exception->getLine()}}<br>in: {{$exception->getFile()}}
 
 			<br><br>
 			<div class='well'>
@@ -31,8 +31,9 @@
 			
 
 					  echo '#'.$counter.' <b>Function: </b>' .$trace['function'] ." ";
-					  echo '<b>File: </b>' .$trace['file'] ." ";
-					  echo '<b>Line: </b>' .$trace['line'] ."<br><hr><br>";
+					  if(isset($trace['file'])){ echo '<b>File: </b>' .$trace['file'] ." ";}
+					  if(isset($trace['line'])){ echo '<b>Line: </b>' .$trace['line'] ."<br><hr><br>";}
+
 
 					$counter--;
 				}

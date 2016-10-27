@@ -17,10 +17,24 @@ class SettingsController extends Controller{
      */
     public function index($slug){
 
+                $panels = [
+                    ['name' => trans('settings.website'),'link' => 'admin/settings/website','icon' => 'fa fa-globe'],
+                    ['name' => trans('settings.admin_area'),'link' => 'admin/settings/adminarea','icon' => 'fa fa-desktop'],
+                    ['name' => trans('settings.update_center'),'link' => 'admin/settings/updatecenter','icon' => 'fa fa-arrow-circle-o-up'],
+                    ['name' => trans('settings.server'),'link' => 'admin/settings/server','icon' => 'fa fa-server'],
+                    ['name' => trans('settings.email'),'link' => 'admin/settings/email','icon' => 'fa fa-envelope'],
+                    ['name' => trans('settings.social_media'),'link' => 'admin/settings/socialmedia','icon' => 'fa fa-thumbs-o-up'],
+                    ['name' => trans('settings.backup_database'),'link' => 'admin/settings/backupdatabase','icon' => 'fa fa-database'],
+                    ['name' => trans('settings.spread'),'link' => 'admin/settings/spread','icon' => 'fa fa-paper-plane'],
+                    ['name' => trans('settings.uninstall'),'link' => 'admin/settings/uninstall','icon' => 'fa fa-exclamation-triangle'],
+
+                    ];
+
+
 
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/index',[
-  
+                                                        'panels' => $panels,
                                                     ]);
     }
 
