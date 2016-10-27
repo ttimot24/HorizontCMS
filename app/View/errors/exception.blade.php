@@ -19,7 +19,7 @@
 	<h4>
 		<p style='padding:15px;'>
 
-			{{ $exception->getMessage() }} on line: {{$exception->getLine()}}<br>in: {{$exception->getFile()}}
+			{!! $exception->getMessage() !!} on line: {{$exception->getLine()}}<br>in: {{$exception->getFile()}}
 
 			<br><br>
 			<div class='well'>
