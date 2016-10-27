@@ -41,6 +41,7 @@ class UserController extends Controller{
             $user->name = $this->request->input('name');
             $user->username = $this->request->input('username');
             $user->password = \Hash::make($this->request->input('password'));
+            $user->email = $this->request->input('email');
             $user->role_id = $this->request->input('role_id');
             $user->visits = 0;
             $user->active = 1;
@@ -53,8 +54,11 @@ class UserController extends Controller{
             }
 
             if($user->save()){
-                return $this->insideLink('user/edit/'.$user->id);
+                return $this->redirect("admin/user/edit/".$user->id)->withMessage(['success' => trans('message.successfully_created_user')]);
+            }else{
+                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
+
 
             
         }
@@ -114,8 +118,37 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
-        //
+    public function update($id){
+        if($this->request->isMethod('POST')){
+
+            $user = User::find($id);
+            $user->name = $this->request->input('name');
+            $user->username = $this->request->input('username');
+            $user->email = $this->request->input('email');
+
+            if($this->request->has('password')){
+                $user->password = \Hash::make($this->request->input('password'));
+            }
+
+            $user->role_id = $this->request->input('role_id');
+           // $user->active = 1;
+
+
+            if ($this->request->hasFile('up_file')){
+                 
+                 $user->image = str_replace('images/users/','',$this->request->up_file->store('images/users'));
+
+            }
+
+            if($user->save()){
+                return $this->redirect("admin/user/edit/".$user->id)->withMessage(['success' => trans('message.successfully_updated_user')]);
+            }else{
+                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            }
+
+
+            
+        }
     }
 
     /**
@@ -137,9 +170,12 @@ class UserController extends Controller{
      */
     public function delete($id){
         
-        User::find($id)->delete();
+        if(User::find($id)->delete()){
+            return $this->redirect('admin/user')->withMessage(['success' => trans('message.successfully_deleted_user')]);
+        }
 
-        return $this->redirectToSelf();
+
+        return $this->redirect('admin/user')->withMessage(['danger' => trans('message.something_went_wrong')]);
 
     }
 

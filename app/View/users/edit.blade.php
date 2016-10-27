@@ -8,7 +8,7 @@
   <img src='{{ $user->getThumb() }}' class='img img-thumbnail' width='320' >
 </button>
 
-<form role='form' action='admin/user/edit/{{ $user->id }}' method='POST' enctype='multipart/form-data'>
+<form role='form' action='admin/user/update/{{ $user->id }}' method='POST' enctype='multipart/form-data'>
         {{ csrf_field() }}
 
 <div class='form-group pull-left col-xs-12 col-md-8' >
@@ -42,7 +42,7 @@
 
 <div class='form-group pull-left col-xs-12 col-md-5' >
   <label for='sel1'>{{trans('user.create_select_rank')}}:</label>
-  <select class='form-control' name='rank' id='sel1'>
+  <select class='form-control' name='role_id' id='sel1'>
     
 <?php     
 
@@ -74,7 +74,7 @@
 
 <?php 
 
- //   Bootstrap::image_details($user->id,$user->get_image());
+    Bootstrap::image_details($user->id,$user->getImage());
 
 ?>
 

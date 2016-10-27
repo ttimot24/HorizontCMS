@@ -21,7 +21,6 @@ class WebsiteController extends Controller
 
         $theme = new \App\Libs\Theme(Settings::get('theme'));
 
-
         $theme_engine = new \App\Libs\BladeThemeEngine($this->request);
         $theme_engine->addTheme($theme);
 
@@ -45,6 +44,15 @@ class WebsiteController extends Controller
             }else{
                  $template = '404';
             }
+
+
+
+            if(Settings::get('website_down')==1){
+                $template = 'website_down'; 
+            }
+
+
+
 
             $theme_engine->pageTemplate($template);
 

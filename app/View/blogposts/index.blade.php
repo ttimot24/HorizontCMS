@@ -15,9 +15,9 @@
         <th>{{trans('blogpost.th_image')}}</th>
       	<th>{{trans('blogpost.th_title')}}</th>
       	<th>{{trans('blogpost.th_comments')}}</th>
-        <th>{{trans('blogpost.th_date')}}</th>
+        <th class='hidden-xs'>{{trans('blogpost.th_date')}}</th>
         <th>{{trans('blogpost.th_author')}}</th>
-        <th>{{trans('blogpost.th_category')}}</th>
+        <th class='hidden-xs'>{{trans('blogpost.th_category')}}</th>
         <th><center>{{trans('actions.th_action')}}</center></th>
       </tr>
     </thead><tbody>
@@ -33,14 +33,13 @@
   <td><img src='{{$blogpost->getThumb()}}'  class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> </td>
 
 
-  <td  class='col-md-5'><a href='admin/blogpost/show/{{ $blogpost->id }}' >{{ $blogpost->title }}</a></td>
+  <td  class='col-md-5 col-xs-3'><a href='admin/blogpost/show/{{ $blogpost->id }}' >{{ $blogpost->title }}</a></td>
   		 <td><center><span class="badge" style='font-size:14px'>{{ count($blogpost->comments) }}</span></center></td>
   
 
-  <td><?= $blogpost->created_at->format('Y-m-d'); ?></br><font size='2'><i>at</i> <?= $blogpost->created_at->format('H:i:s'); ?></font></td>
-         <td><a href='admin/user/show/{{ $blogpost->author->id }}' >
-         {{ $blogpost->author->username }}</a></td>
-         <td><span class="label label-success" style='font-size:14px; display:block'>{{ $blogpost->category->name }}</span></td>
+  <td class='hidden-xs'><?= $blogpost->created_at->format('Y-m-d'); ?></br><font size='2'><i>at</i> <?= $blogpost->created_at->format('H:i:s'); ?></font></td>
+  <td><a href='admin/user/show/{{ $blogpost->author->id }}' >{{ $blogpost->author->username }}</a></td>
+  <td class='hidden-xs'><span class="label label-success" style='font-size:14px; display:block'>{{ $blogpost->category->name }}</span></td>
 
 
 

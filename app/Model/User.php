@@ -39,7 +39,7 @@ class User extends Authenticatable{
     }
 
     public function comments(){
-    	return $this->hasMany(\App\Model\UserRole::class,'user_id','id');
+    	return $this->hasMany(\App\Model\BlogpostComment::class,'user_id','id');
     }
 
 

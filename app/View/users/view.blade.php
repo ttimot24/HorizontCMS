@@ -4,22 +4,22 @@
 <div class='container main-container'>
 
 <section class='row'>
-<h2 class='col-md-8'>{{trans('user.view_user')}}</h2>
+  <h2 class='col-md-8'>{{trans('user.view_user')}}</h2>
+ 
+  <nav class='col-md-4'>
+    <ul class='pager'>
 
-<nav class='col-md-4'>
-  <ul class='pager'>
 
+      @if($previous_user)
+          <li class='previous' id='prev'><a href='admin/user/show/{{$previous_user}}'> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+      @endif
 
-    @if($previous_user)
-        <li class='previous' id='prev'><a href='admin/blogpost/show/{{$previous_user}}'> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
-    @endif
+      @if($next_user)
+          <li class='next' id='prev'><a href='admin/user/show/{{$next_user}}'>{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
+      @endif
 
-    @if($next_user)
-        <li class='next' id='prev'><a href='admin/blogpost/show/{{$next_user}}'>{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
-    @endif
-
-  </ul>
-</nav>
+    </ul>
+  </nav>
 </section>
 
 
@@ -34,7 +34,7 @@
 
 </br><center>
   <div class='btn-group' role='group'>
-    <a href='admin/{{$user->id}} ' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('actions.deactivate')}}</a>
+    <a href='admin/{{$user->id}}' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('actions.deactivate')}}</a>
     <a href='admin/user/update/{{ $user->id }}' type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
   </div>    
     <button type='button' class='btn btn-danger' data-toggle='modal' data-target='.delete'>
@@ -42,8 +42,8 @@
     </button>
 
     
-    </br></br><b>{{trans('user.full_name')}} : <a>{{ $user->name }}</a></b>
-    </br></br><b>{{trans('user.user_name')}} : <a>{{ $user->username }}</a></b>
+    </br></br><b>{{trans('user.view_full_name')}} : <a>{{ $user->name }}</a></b>
+    </br></br><b>{{trans('user.view_user_name')}} : <a>{{ $user->username }}</a></b>
     </br></br><b>{{trans('user.view_rank')}} : <a>{{ $user->role->name }}</a></b>
      </br></br><b>{{trans('user.view_email')}} : <a>{{ $user->email }}</a></b>
     </br></br><b>{{trans('user.view_registered_on')}} : </br><a>{{ $user->created_at->format('Y.m.d - H:i:s') }}</a></b>
@@ -100,7 +100,7 @@
      
     echo "<td>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format("H:i:s")."</font></td>";
     echo "</tr>";
-    }
+
 
     echo "</tbody></table>";
 
@@ -108,19 +108,20 @@
 
     echo "</br></br>";
 
-
-
   }
+
+}
+
 
 
     Bootstrap::image_details($user->id,$user->getImage());
 
 
    Bootstrap::delete_confirmation(
-    "delete_".$each->id."",
+    "delete_".$user->id."",
     trans('actions.are_you_sure'),
-    "<b>".trans('actions.delete_this',['content_type' => 'user']).": </b>".$each->username." <b>?</b>",
-    "<a href='admin/user/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
+    "<b>".trans('actions.delete_this',['content_type' => 'user']).": </b>".$user->username." <b>?</b>",
+    "<a href='admin/user/delete/".$user->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
 
