@@ -177,10 +177,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-
+        
+        App\Providers\LoaderServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
-    //    Spatie\Permission\PermissionServiceProvider::class,
+
 
     ],
 
@@ -231,7 +231,7 @@ return [
 
 
 
-        'Menu'       => 'Lavary\Menu\Facade',
+        'Menu'       => Lavary\Menu\Facade::class,
 
     ],
 

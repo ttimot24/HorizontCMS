@@ -53,7 +53,7 @@
 	 @endforeach
 
 	   <a class="list-group-item list-group-item-success" style='border-radius:0px;cursor:pointer;'>
-	    <h4 class="list-group-item-heading">System Core: {{$installed_version']->version}} <small>build: {{$data['installed_version']->build}} </small></h4>
+	    <h4 class="list-group-item-heading">System Core: {{$installed_version']->version}} <small>build: {{$installed_version->build}} </small></h4>
 	    <p class="list-group-item-text">Installed: 2015.09.13</p>
 	  </a>
 	</div>
