@@ -15,7 +15,7 @@ class SettingsController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug){
+    public function index($slug = 'index'){
 
                 $panels = [
                     ['name' => trans('settings.website'),'link' => 'admin/settings/website','icon' => 'fa fa-globe'],
@@ -38,24 +38,19 @@ class SettingsController extends Controller{
                                                     ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(){
-
-
-    }
 
     /**
-     * Store a newly created resource in storage.
+     * Display the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-        //
+    public function website($slug){
+
+        $this->view->title(trans('settings.settings'));
+        return $this->view->render('settings/website',[
+                                                        'settings' => Settings::all();
+                                                    ]);
     }
 
     /**
@@ -64,54 +59,33 @@ class SettingsController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
+    public function adminarea($slug){
 
-        $this->view->title(trans('page.view_page'));
-        return $this->view->render('settings/view',[ ]);
+        $this->view->title(trans('settings.settings'));
+        return $this->view->render('settings/adminarea',[
+                                                        'settings' => Settings::all();
+                                                    ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
+    public function updatecenter($slug){
 
+        $this->view->title(trans('settings.settings'));
+        return $this->view->render('settings/updatecenter',[
+                                                        'current_version' => Update::orderBy('id','desc')->first(),
+                                                        'latest_version' => '',
+                                                        'available_list' => '',
+                                                        'upgrade_list' => '',
+                                                        'installed_version' => '',
 
+                                                    ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id){
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id){
-        //
-    }
-
-
-    /**
-     * Remove the specified resource from database.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id){
-
-    }
 
 
 }

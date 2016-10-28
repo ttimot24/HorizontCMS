@@ -60,7 +60,9 @@ class PageController extends Controller{
             }
 
             if($page->save()){
-                return $this->insideLink('page/edit/'.$page->id);
+                return $this->redirect('page/edit/'.$page->id)->withMessage(['success' => trans('message.successfully_created_page')]);
+            }else{
+                return $his->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
 
             
@@ -127,8 +129,35 @@ class PageController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
-        //
+    public function update($id){
+        
+        if($this->request->isMethod('POST')){
+
+            $page = Page::find($id);
+            $page->name = $this->request->input('name');
+            $page->slug = str_slug($this->request->input('name'), "-");
+            $page->url = $this->request->input('url');
+            $page->visibility = $this->request->input('visibility');
+            $page->parent_id = $this->request->input('parent_id');
+            $page->queue = $this->request->input('queue');
+            $page->page = $this->request->input('page');
+
+
+            if ($this->request->hasFile('up_file')){
+                 
+                 $page->image = str_replace('images/pages/','',$this->request->up_file->store('images/pages'));
+
+            }
+
+            if($page->save()){
+                return $this->redirect('page/edit/'.$page->id)->withMessage(['success' => trans('message.successfully_updated_page')]);
+            }else{
+                return $his->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            }
+
+            
+        }
+
     }
 
     /**
@@ -150,10 +179,12 @@ class PageController extends Controller{
      */
     public function delete($id){
         
+        if(Page::find($id)->delete()){
+            return $this->redirect('admin/page')->withMessage(['success' => trans('message.successfully_deleted_page')]);
+        }
 
-        Page::find($id)->delete();
 
-        return $this->redirectToSelf();
+        return $this->redirect('admin/page')->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
 
