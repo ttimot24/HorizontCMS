@@ -47,6 +47,15 @@ class SettingsController extends Controller{
      */
     public function website($slug){
 
+        if($this->request->isMethod('POST')){
+
+            foreach($this->request->all() as $key => $value){
+              Settings::where('setting', '=', $key)->update(['value' => $value]);
+            }
+
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
+        }
+
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/website',[
                                                         'settings' => \App\Model\Settings::getAll(),
@@ -78,11 +87,11 @@ class SettingsController extends Controller{
 
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/updatecenter',[
-                                                        'current_version' => \App\Model\Update::orderBy('id','desc')->first(),
-                                                        'latest_version' => '',
-                                                        'available_list' => '',
-                                                        'upgrade_list' => '',
-                                                        'installed_version' => '',
+                                                        'current_version' => \App\Model\Update::getCurrentVersion(),
+                                                        'latest_version' => \App\Model\Update::getLatestVersion(),
+                                                        'available_list' => \App\Model\Update::getAllAvailable(),
+                                                        'upgrade_list' => \App\Model\Update::getUpgrades(),
+                                                        'installed_version' => \App\Model\Update::getCore(),
 
                                                     ]);
     }

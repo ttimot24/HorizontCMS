@@ -16,4 +16,6 @@ return [
 	'successfully_updated_page' => 'Page successfully updated!',
 	'successfully_deleted_page' => 'Page deleted successfully!',
 
+	'successfully_saved_settings' => 'Settings saved successfully!',
+
 ];

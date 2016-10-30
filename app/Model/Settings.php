@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Settings extends Model{
   
   	protected $table = 'settings';
+  	public $timestamps = false;
   	public $settings;
 
 	public static function get($setting){

@@ -37,7 +37,7 @@
 	    <h4 class="list-group-item-heading">Available update: v{{$available}}</h4>
 	    <p class="list-group-item-text">Upgrade</p>
 	  </a>
-	@endforeach>
+	@endforeach
 
 
 	  <a class="list-group-item active">

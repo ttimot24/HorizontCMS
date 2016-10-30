@@ -7,6 +7,8 @@
 
 
 <form action='' role='form' method='POST'>
+
+    {{ csrf_field() }}
 <input type='hidden' name='is_actioned' value='1'>
 <table class='table-bordered' id='settings' style='width:100%;text-align:center;'>
 

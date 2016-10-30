@@ -100,15 +100,15 @@
      
     echo "<td>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format("H:i:s")."</font></td>";
     echo "</tr>";
-
-
+  }
+  
     echo "</tbody></table>";
 
     echo "</div></section>";
 
     echo "</br></br>";
 
-  }
+
 
 }
 

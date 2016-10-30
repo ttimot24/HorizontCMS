@@ -32,6 +32,7 @@
                         </a>
 
                          <ul class="dropdown-menu" role="menu">
+                            <li class='nav-item'><a href="{{admin_link('user-view',\Auth::user()->id)}}">View profile</a></li>
                          </ul>
                     </li>
 

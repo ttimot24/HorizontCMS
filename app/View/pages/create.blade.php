@@ -26,7 +26,7 @@
         <?php 
 
           foreach($page_templates as $template){
-            echo "<option value='".$template."'>".ucfirst(rtrim($template,".php"))."</option>";
+            echo "<option value='".$template."'>".ucfirst(rtrim(rtrim($template,".php"),".blade"))."</option>";
           }
 
         ?>

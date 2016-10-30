@@ -28,7 +28,7 @@
 
           foreach($page_templates as $template){
             echo "<option value='".$template."' "; if($template==$page->url){ echo "selected"; } echo ">"
-                    .ucfirst(rtrim($template,".php")).
+                    .ucfirst(rtrim(rtrim($template,".php"),".blade")).
                   "</option>";
           }
 

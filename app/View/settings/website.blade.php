@@ -7,6 +7,8 @@
 
 <form action='admin/settings/website' role='form' method='POST'>
 
+    {{ csrf_field() }}
+
 <table class='table-bordered' id='settings' style='width:100%;text-align:center;'>
 
 <tbody style='font-weight:bolder;'>
@@ -49,7 +51,7 @@
 </td></tr>
 
 <tr><td>Website type</td><td>
-						<select name='sitetype' class='form-control'>
+						<select name='website_type' class='form-control'>
 								<option value='website'>Website</option>
 								<option value='blog'>Blog</option>
 						</select>

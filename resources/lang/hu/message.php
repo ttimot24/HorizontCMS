@@ -16,6 +16,8 @@ return [
 	'successfully_updated_page' => 'Az oldal sikeresen frissítve!',
 	'successfully_deleted_page' => 'Oldal sikeresen törölve!',
 
+	'successfully_saved_settings' => 'A beálítások sikeresen elmentve!',
+
 
 
 ];
