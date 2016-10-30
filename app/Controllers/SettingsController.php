@@ -70,6 +70,16 @@ class SettingsController extends Controller{
      */
     public function adminarea($slug){
 
+
+        if($this->request->isMethod('POST')){
+
+            foreach($this->request->all() as $key => $value){
+              Settings::where('setting', '=', $key)->update(['value' => $value]);
+            }
+
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
+        }
+
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/adminarea',[
                                                         'settings' => Settings::getAll(),
@@ -95,6 +105,15 @@ class SettingsController extends Controller{
 
                                                     ]);
     }
+
+
+    public function server(){
+        $this->view->title("Server");
+        return $this->view->render('settings/server',[
+
+                                        ]);
+    }
+
 
 
 

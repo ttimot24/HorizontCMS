@@ -12,5 +12,9 @@ return [
     'registered_users_count' => 'Registered users',
     'visits_count' => 'Visits',
 
+    'update_available' => 'Update available!',
+    'update_message' => 'There\'s a new version available of HorizontCMS!',
+    'update_now' => 'Update now',
+
 
 ];

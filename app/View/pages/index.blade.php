@@ -89,10 +89,10 @@ echo "<br><span class='label label-default label-sm'>".$each->language."</span>"
         <td>";
 
         if($each->visibility==1){
-          echo "<font color='green'>".trans('pages.visible')."</font>";
+          echo "<font color='green'>".trans('page.visible')."</font>";
         }
         else{
-          echo "<font color='red'>".trans('pages.invisible')."</font>";
+          echo "<font color='red'>".trans('page.invisible')."</font>";
         } 
 
   echo "</td>

@@ -8,7 +8,8 @@
         "php": ">=5.6.4",
         "laravel/framework": "5.3.*",
         "lavary/laravel-menu": "dev-master",
-        "twbs/bootstrap" : "3.3.*"
+        "twbs/bootstrap" : "3.3.*",
+        "visualappeal/php-auto-update" : "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -13,4 +13,9 @@ return [
     'visits_count' => 'Látogatottság',
 
 
+    'update_available' => 'Frissítés elérhető!',
+    'update_message' => 'Egy frissebb rendszer verzió letölthető.',
+    'update_now' => 'Frissítés',
+
+
 ];

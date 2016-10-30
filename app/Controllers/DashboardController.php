@@ -24,12 +24,11 @@ class DashboardController extends Controller{
                                                     'client_ip' => $this->request->ip,
                                                     'blogposts'  => \App\Model\Blogpost::count(),
                                                     'users' => \App\User::count(),
-                                                    'visits' => 0,
                                                     'visits' => \App\Model\Visits::count(),
                                                     'admin_logo' => \Config::get('horizontcms.admin_logo'),
                                                     'disk_space' => @(disk_free_space("/")/disk_total_space("/"))*100,
-                                                    'latest_version' => 7.5,
-                                                    'current_version' => 7.8,
+                                                    'latest_version' => \App\Model\Update::getLatestVersion(),
+                                                    'current_version' => \App\Model\Update::getCurrentVersion()->version,
 
             ]);
     }

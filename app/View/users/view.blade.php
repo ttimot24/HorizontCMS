@@ -90,7 +90,7 @@
         <th>Date</th>
       </tr>
     </thead><tbody>";
-  foreach($user->blogposts as $each){
+  foreach($user->blogposts->reverse() as $each){
 
     echo "<tr>";
     echo "<td><a href='admin/blogpost/view/".$each->id."'>";
