@@ -49,7 +49,7 @@ class SettingsController extends Controller{
 
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/website',[
-                                                        'settings' => Settings::all();
+                                                        'settings' => \App\Model\Settings::getAll(),
                                                     ]);
     }
 
@@ -63,7 +63,8 @@ class SettingsController extends Controller{
 
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/adminarea',[
-                                                        'settings' => Settings::all();
+                                                        'settings' => Settings::getAll(),
+                                                        'languages' => ['English','Magyar'],
                                                     ]);
     }
 
@@ -77,7 +78,7 @@ class SettingsController extends Controller{
 
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/updatecenter',[
-                                                        'current_version' => Update::orderBy('id','desc')->first(),
+                                                        'current_version' => \App\Model\Update::orderBy('id','desc')->first(),
                                                         'latest_version' => '',
                                                         'available_list' => '',
                                                         'upgrade_list' => '',

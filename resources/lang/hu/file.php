@@ -2,4 +2,5 @@
 
 return [
 	'files' => 'Fájlok',
+	'filemanager' => 'Fájlkezelő',
 ];

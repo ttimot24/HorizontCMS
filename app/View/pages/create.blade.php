@@ -107,15 +107,19 @@ Add image
 
 <textarea name='page' id='editor' rows="15" cols="80"></textarea>
 
+
             <script>
 
                 CKEDITOR.replace( 'editor' );
                 CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
                 CKEDITOR.config.removeButtons = 'Save,Font';
                 CKEDITOR.config.height = 350;
-                CKEDITOR.config.filebrowserBrowseUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/browse') ?>';
+               /* CKEDITOR.config.filebrowserBrowseUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/browse') ?>';
                 CKEDITOR.config.filebrowserUploadUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/upload') ?>';
-
+            */
+                CKEDITOR.config.filebrowserBrowseUrl = 'resources/assets/filemanager/dialog.php?type=2&editor=ckeditor&fldr='; 
+                CKEDITOR.config.filebrowserUploadUrl = 'resources/assets/filemanager/dialog.php?type=2&editor=ckeditor&fldr=';
+                CKEDITOR.config.filebrowserImageBrowseUrl = 'resources/assets/filemanager/dialog.php?type=1&editor=ckeditor&fldr=';
 
             </script>
 

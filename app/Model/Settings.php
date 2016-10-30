@@ -15,6 +15,17 @@ class Settings extends Model{
 		return $result->value;
 	}
 
+	public static function getAll(){
+
+
+		foreach(self::All() as $each){
+			$array[$each->setting] = $each->value;
+		}
+
+
+		return $array;
+	}
+
 
 	public function assignAll(){
 		$settings = self::All();
