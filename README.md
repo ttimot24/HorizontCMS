@@ -15,8 +15,18 @@ Frontend: [https://horizontcms.herokuapp.com/](https://horizontcms.herokuapp.com
 
 Backend: [https://horizontcms.herokuapp.com/admin](https://horizontcms.herokuapp.com/admin)
 
+
+###Installation
+
+  1. Download the CMS
+  2. composer install
+  3. Navigate to the root folder run php artisan horizontcms:install
+  4. Enter the database and administrator informations.
+  5. You're finished.
+
+
 ##
 
-Project by Timot Tarjani
+Project by Timot Tarjani (@ttimot24)
 
 Any help is appreciated!

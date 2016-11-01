@@ -1,7 +1,7 @@
 <?php
 
 return[
-	'version' => 'v0.8.2',
+	'version' => '0.8.5',
 
 	'backend_prefix' => env('HCMS_ADMIN_PREFIX','admin'),
 

@@ -11,6 +11,7 @@ class Settings extends Model{
   	public $settings;
 
 	public static function get($setting){
+
 		$result = self::where('setting',$setting)->first();
 
 		return $result->value;
