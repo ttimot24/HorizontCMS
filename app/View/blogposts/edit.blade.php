@@ -3,7 +3,8 @@
 @section('content')
 <div class='container main-container'>
   <h2>{{trans('blogpost.edit_blogpost')}}</h2>
-  <form role='form' action='admin/blogpost/update/{{$blogpost->id}}' method='POST' enctype='multipart/form-data'>
+
+  <form role='form' action="{{admin_link('blogpost-update',$blogpost->id)}}" method='POST' enctype='multipart/form-data'>
 
   {{ csrf_field() }}
 
@@ -11,7 +12,7 @@
 
      <div class='form-group pull-left col-xs-12 col-md-8'>
       <label for='title'>{{trans('blogpost.title')}}:</label>
-      <input type='text' class='form-control' id='title' name='title' value='<?= htmlspecialchars($blogpost->title,ENT_QUOTES) ?>' required>
+      <input type='text' class='form-control' id='title' name='title' value='{{ $blogpost->title }}' required>
     </div>
 
 <button type='button' class='btn btn-link pull-right' data-toggle='modal' data-target='.<?= $blogpost->id ?>-modal-xl'>
@@ -88,7 +89,7 @@
 
      <div class='form-group pull-left col-xs-12 col-md-12'>
     <button id='submit-btn' name='submit_clicked' type='submit' class='btn btn-success btn-lg' onclick='window.onbeforeunload = null;'>{{trans('actions.update')}}</button> 
-    <a href='admin/blogpost/index' type='button' class='btn btn-default'>{{trans('actions.cancel')}}</a>
+    <a href="{{admin_link('blogpost-index')}}" type='button' class='btn btn-default'>{{trans('actions.cancel')}}</a>
     </div>
   </form>
 </div>

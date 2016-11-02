@@ -6,7 +6,7 @@
 <h2>{{trans('user.registered_users')}} <small class='pull-right' style='margin-top:1.5%;'>{{trans('user.all')}}: {{$number_of_users}} | {{trans('user.active')}}: {{$active_users}} | {{trans('user.inactive')}}: {{$number_of_users-$active_users}}</small></h2>
 
 <br>
-<div class='container col-md-12'><a href='admin/user/create' class='btn btn-warning' style='margin-bottom:20px;'>{{trans('user.new_user_button')}}</a></div>
+<div class='container col-md-12'><a href="{{admin_link('user-create')}}" class='btn btn-warning' style='margin-bottom:20px;'>{{trans('user.new_user_button')}}</a></div>
 
 <table class='table table-hover'>
     <thead>
@@ -39,7 +39,7 @@ echo "<td>";
 echo Html::img($each->getImage(),"class='img-rounded' style='object-fit:cover;' width='50' height='50'");
 echo	"</td>";
 
-echo "<td><a href='admin/user/show/".$each->id."'>".$each->name."</a></td>";
+echo "<td><a href='".admin_link('user-view',$each->id)."'>".$each->name."</a></td>";
 echo "<td>".$each->username."</td>";
 echo "<td>".$each->email."</td>";
 
@@ -72,7 +72,7 @@ $disabled = "";
 
 echo "
        <div class='btn-group' role='group'>
-           <a href='admin/user/edit/".$each->id."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;' ".$disabled.">".trans('actions.edit')."</a>";
+           <a href='".admin_link('user-edit',$each->id)."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;' ".$disabled.">".trans('actions.edit')."</a>";
          
            echo "<a type='button' data-toggle='modal' data-target='.delete_".$each->id."' class='btn btn-danger btn-sm' ".$disabled."><i class='fa fa-trash-o' aria-hidden='true'></i></a>";
 
@@ -88,7 +88,7 @@ echo "</div>";
     "delete_".$each->id."",
     trans('actions.are_you_sure'),
     "<b>".trans('actions.delete_this',['content_type' => 'user']).": </b>".$each->username." <b>?</b>",
-    "<a href='admin/user/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
+    "<a href='".admin_link('user-delete',$each->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
  }

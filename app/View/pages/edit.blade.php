@@ -3,7 +3,8 @@
 @section('content')
 <div class='container main-container'>
   <h2>Edit page</h2>
-  <form role='form' action='admin/page/update/<?= $page->id ?>' method='POST' enctype='multipart/form-data'>
+
+  <form role='form' action="{{admin_link('page-update',$page->id)}}" method='POST' enctype='multipart/form-data'>
           {{ csrf_field() }}
 
 <button type='button' class='btn btn-link pull-right' style='margin-top:-2%;' data-toggle='modal' data-target='.<?= $page->id ?>-modal-xl'>

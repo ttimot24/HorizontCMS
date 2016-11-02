@@ -26,7 +26,7 @@ tr #hidden-home a:hover{
 
 <br>
 <div class='col-md-6'>
-  <a href='admin/page/create' class='btn btn-info' style='margin-bottom:20px;'>{{trans('page.create_page_button')}}</a>
+  <a href="{{admin_link('page-create')}}" class='btn btn-info' style='margin-bottom:20px;'>{{trans('page.create_page_button')}}</a>
 </div>
 <div class='col-md-6' style='text-align:right;'>
   <a class='btn btn-default' id='orderer' onclick='$(this).toggle(dragndroporder());' style='margin-bottom:20px;'><i class='fa fa-arrows-v' style='font-size:15px;'  aria-hidden='true'></i> {{trans('page.order')}}</a>
@@ -115,7 +115,7 @@ echo "<br><span class='label label-default label-sm'>".$each->language."</span>"
 
       echo "
        <div class='btn-group' role='group'>
-           <a href='admin/page/edit/".$each->id."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;'>".trans('actions.edit')."</a>
+           <a href='".admin_link('page-edit',$each->id)."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;'>".trans('actions.edit')."</a>
            <a  type='button' data-toggle='modal' data-target='.delete_".$each->id."' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>
        </div>";
       
@@ -148,7 +148,7 @@ echo '
     "delete_".$each->id."",
     trans('actions.are_you_sure'),
     "<b>".trans('actions.delete_this',['content_type'=>'page']).": </b>".$each->name." <b>?</b>",
-    "<a href='admin/page/delete/".$each->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete') ."</a>
+    "<a href='".admin_link('page-delete',$each->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete') ."</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
 

@@ -93,8 +93,8 @@
 
      <div class='form-group pull-left col-xs-12 col-md-12'>
     <button id='submit-btn' type='submit' class='btn btn-primary btn-lg' onclick='window.onbeforeunload = null;'>{{trans('actions.publish')}}</button> 
-    <a href='admin/blogpost/index' type='button' class='btn btn-default'>{{trans('actions.cancel')}}</a>
+    <a href="{{admin_link('blogpost-index')}}" type='button' class='btn btn-default'>{{trans('actions.cancel')}}</a>
     </div>
   </form>
-</div>
+</div> 
 @endsection

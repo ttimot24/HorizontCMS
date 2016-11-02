@@ -7,7 +7,7 @@
   <h2>{{trans('user.create_user')}}</h2>
 
 
-  <form role='form' action='admin/user/create' method='POST' enctype='multipart/form-data'>
+  <form role='form' action="{{admin_link('user-create')}}" method='POST' enctype='multipart/form-data'>
           {{ csrf_field() }}
 
    <div class='form-group pull-left col-xs-12 col-md-8' >

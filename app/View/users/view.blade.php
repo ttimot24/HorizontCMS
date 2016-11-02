@@ -11,11 +11,11 @@
 
 
       @if($previous_user)
-          <li class='previous' id='prev'><a href='admin/user/show/{{$previous_user}}'> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+          <li class='previous' id='prev'><a href="{{admin_link('user-view',$previous_user)}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
       @endif
 
       @if($next_user)
-          <li class='next' id='prev'><a href='admin/user/show/{{$next_user}}'>{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
+          <li class='next' id='prev'><a href="{{admin_link('user-view',$next_user)}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
       @endif
 
     </ul>
@@ -35,7 +35,7 @@
 </br><center>
   <div class='btn-group' role='group'>
     <a href='admin/{{$user->id}}' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('actions.deactivate')}}</a>
-    <a href='admin/user/update/{{ $user->id }}' type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
+    <a href="{{admin_link('user-edit',$user->id)}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
   </div>    
     <button type='button' class='btn btn-danger' data-toggle='modal' data-target='.delete'>
     <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.remove')}}
@@ -93,10 +93,10 @@
   foreach($user->blogposts->reverse() as $each){
 
     echo "<tr>";
-    echo "<td><a href='admin/blogpost/view/".$each->id."'>";
+    echo "<td><a href='".admin_link('blogpost-view',$each->id)."'>";
       echo Html::img($each->getThumb(),"class='img img-thumbnail', width='280' style='object-fit:cover;height:170px;'");
     echo "</a></td>";
-    echo "<td><a href='admin/blogpost/view/".$each->id."'>" .$each->title ."</a></td>";
+    echo "<td><a href='".admin_link('blogpost-view',$each->id)."'>" .$each->title ."</a></td>";
      
     echo "<td>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format("H:i:s")."</font></td>";
     echo "</tr>";
@@ -121,7 +121,7 @@
     "delete_".$user->id."",
     trans('actions.are_you_sure'),
     "<b>".trans('actions.delete_this',['content_type' => 'user']).": </b>".$user->username." <b>?</b>",
-    "<a href='admin/user/delete/".$user->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
+    "<a href='".admin_link('user-delete',$user->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
 
@@ -151,7 +151,7 @@
       if($news!=NULL){
 
         echo "<tr>";
-        echo "<td class='col-md-3'><a href='admin/blogpost/view/".$news->id."'>".$news->title."</a></td>";
+        echo "<td class='col-md-3'><a href='".admin_link('blogpost-view',$news->id)."'>".$news->title."</a></td>";
         echo "<td class='col-md-8' style='text-align:justify;'>" .$each->comment ."</td>";
 
         echo "<td class='col-md-1'>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format('H:i:s')."</font></td>";
@@ -176,11 +176,11 @@
 $(document).keydown(function(e) {
     switch(e.which) {
         case 37: // left
-                 window.location.replace('admin/user/view/{{$previous_user}}');
+                 window.location.replace("{{admin_link('user-view',$previous_user)}}");
                  break;
 
         case 39: // right
-                  window.location.replace('admin/user/view/{{$next_user}}');
+                  window.location.replace("{{admin_link('user-view',$next_user)}}");
                   break;
 
         default: return; // exit this handler for other keys
