@@ -24,10 +24,13 @@ class BladeThemeEngine{
 
 	public function render(array $data){
 
-		\View::addNamespace('theme', 'themes'.DIRECTORY_SEPARATOR.$this->theme->root_dir);
+		if(strpos( $this->page_template, "default" ) === false ){
+			\View::addNamespace('theme', 'themes'.DIRECTORY_SEPARATOR.$this->theme->root_dir);
 
-
-		return view('theme::'.$this->page_template,$data);
+			return view('theme::'.$this->page_template,$data);
+		}else{
+			return view($this->page_template);
+		}
 
 	}
 

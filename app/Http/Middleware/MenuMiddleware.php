@@ -27,20 +27,20 @@ class MenuMiddleware{
 
             $menu->add(trans('navbar.news'), '#')->id('news');
             $menu->find('news')->add("<i class='fa fa-newspaper-o'></i> ".trans('navbar.posted_news'), $prefix."/blogpost");
-            $menu->find('news')->add("<i class='fa fa-pencil'></i> ".trans('navbar.create_post'), $prefix."/blogpost/create");
+            $menu->find('news')->add("<i class='fa fa-pencil'></i> ".trans('navbar.create_post'), admin_link('blogpost-create'));
             $menu->find('news')->add("<i class='fa fa-list-ul'></i> ".trans('navbar.categories'), $prefix.'/blogpostcategory');
 
 
             $menu->add(trans('navbar.users'), '#')->id('users');
             $menu->find('users')->add("<i class='fa fa-users'></i> ".trans('navbar.user_list'), $prefix.'/user');
-            $menu->find('users')->add("<i class='fa fa-user-plus'></i> ".trans('navbar.user_add'), $prefix.'/user/create');
+            $menu->find('users')->add("<i class='fa fa-user-plus'></i> ".trans('navbar.user_add'),admin_link('user-create'));
             $menu->find('users')->add("<i class='fa fa-gavel'></i> ".trans('navbar.user_groups'), $prefix.'/userrole');
 
 
 
             $menu->add(trans('navbar.pages'), '#')->id('pages');
             $menu->find('pages')->add("<i class='fa fa-files-o'></i> ".trans('navbar.page_list'), $prefix.'/page');
-            $menu->find('pages')->add("<i class='fa fa-pencil-square-o'></i> ".trans('navbar.page_add'), $prefix.'/page/create');
+            $menu->find('pages')->add("<i class='fa fa-pencil-square-o'></i> ".trans('navbar.page_add'), admin_link('page-create'));
             
             $menu->add(trans('navbar.media'), '#')->id('media');
             $menu->find('media')->add("<i class='fa fa-picture-o'></i> ".trans('navbar.header_images'), $prefix.'/headerimage');

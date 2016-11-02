@@ -44,9 +44,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-       // return parent::render($request, $exception);
+      
+    	if(get_class($exception)!=\Illuminate\Auth\AuthenticationException::class){
+    		return response()->view('errors.exception', ['exception' => $exception]);
+    	}
 
-        return response()->view('errors.exception', ['exception' => $exception], 500);
+
+        return parent::render($request, $exception);
+
     }
 
     /**

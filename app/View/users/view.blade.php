@@ -90,11 +90,13 @@
         <th>Date</th>
       </tr>
     </thead><tbody>";
+
+
   foreach($user->blogposts->reverse() as $each){
 
     echo "<tr>";
     echo "<td><a href='".admin_link('blogpost-view',$each->id)."'>";
-      echo Html::img($each->getThumb(),"class='img img-thumbnail', width='280' style='object-fit:cover;height:170px;'");
+      echo Html::img($each->getThumb(),"class='img img-thumbnail', width='250' style='object-fit:cover;height:150px;'");
     echo "</a></td>";
     echo "<td><a href='".admin_link('blogpost-view',$each->id)."'>" .$each->title ."</a></td>";
      

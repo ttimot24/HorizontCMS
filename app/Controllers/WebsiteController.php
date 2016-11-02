@@ -42,13 +42,13 @@ class WebsiteController extends Controller
                     }
                 }
             }else{
-                 $template = '404';
+                 $template = 'default.404';
             }
 
 
 
             if(Settings::get('website_down')==1){
-                $template = 'website_down'; 
+                $template = 'default.website_down'; 
             }
 
 

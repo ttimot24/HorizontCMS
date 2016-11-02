@@ -81,16 +81,7 @@
 
 
 
-
-
-
-
-<?php //@$this->renderPartial("blogposts/comments",['blogpost' => $data['instance'],'comments' => $data['comments']]);
-
- // require_once(VIEW_DIR."blogposts/comments.php");
-
-?>
-
+@include('blogposts.comments')
 
 
 </div>
