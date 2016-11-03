@@ -13,12 +13,12 @@ class Page extends Model{
 
 
     public function parent(){
-        return $this->belongsTo(Page::class,'parent_id','id');
+        return $this->belongsTo(self::class,'parent_id','id');
     }
 
 
     public function subpages(){
-        return $this->hasMany(Page::class,'parent_id','id');
+        return $this->hasMany(self::class,'parent_id','id');
     }
 
 

@@ -11,7 +11,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
+                	@foreach(\App\Model\Page::all() as $page)
+	                    <li>
+	                        <a class="page-scroll" href="#{{$page->slug}}">{{ $page->name }}</a>
+	                    </li>
+                	@endforeach
+
+        <!--            <li>
                         <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
@@ -22,7 +28,7 @@
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

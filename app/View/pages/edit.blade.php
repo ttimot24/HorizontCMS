@@ -16,7 +16,7 @@
   <div class='form-group pull-left col-xs-12 col-md-8' >
       <label for='title'>{trans('page.menu_name')}}</label>
       <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" value='<?= htmlspecialchars($page->name,ENT_QUOTES) ?>' required></input>
-      <small><b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp<?php echo $domain.rtrim(BASE_DIR,'/') ?><a class='text-muted' id='ajaxSlug'><?php //echo "/".UrlManager::seo_url($page->name) ?></a> </small>
+      <small><b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp<?php //echo $domain.rtrim(BASE_DIR,'/') ?><a class='text-muted' id='ajaxSlug'><?php //echo "/".UrlManager::seo_url($page->name) ?></a> </small>
     </div>
 
 <br>
@@ -44,21 +44,19 @@ echo "<div class='form-group pull-left col-xs-12 col-md-6' id='level' >
   <label for='level'>".trans('page.page_level')."</label>
   <select class='form-control' name='parent_select' >  
   <?php 
-          <option value='0' "; if($page->parent==0){echo "selected";} echo">Main menu</option>
-          <option value='1' "; if($page->parent!=0){echo "selected";} echo">Submenu</option>";
+          <option value='0' "; if(isset($page->parent)){echo "selected";} echo">Main menu</option>
+          <option value='1' "; if(!isset($page->parent)){echo "selected";} echo">Submenu</option>";
 echo "</select></div>";
 
 echo "<div class='form-group pull-left col-xs-12 col-md-6' id='submenus'>
   <label for='submenus'>Parent menu:</label>
-  <select class='form-control' name='parent' >";  
-      
-      echo "<option value='0'>None</option>"; 
+  <select class='form-control' name='parent_id' >";  
 
       foreach($all_page as $each){
 
       	if($page->id==$each->id){continue;}
 
-      	if($page->parent==$each->id){
+      	if($page->parent->is($each)){
       		echo "<option value='".$each->id."' selected >".$each->name."</option>"; 
   		}else{
    			echo "<option value='".$each->id ."'>".$each->name."</option>"; 

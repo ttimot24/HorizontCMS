@@ -46,10 +46,9 @@
 
 <div class='form-group pull-left col-xs-12 col-md-6' id='submenus'>
   <label for='submenus'>{{trans('page.parent_menu')}}</label>
-  <select class='form-control' name='parent' >";  
+  <select class='form-control' name='parent_id' >";  
       
 <?php     
-      echo "<option value='0'>".trans('page.none')."</option>"; 
 
       foreach($all_page as $each){
          echo "<option value='".$each->id."'>".$each->name."</option>"; 

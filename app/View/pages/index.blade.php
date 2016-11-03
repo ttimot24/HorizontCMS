@@ -53,9 +53,9 @@ foreach($all_pages as $each){
 if($each->visibility==0){
     $class = 'danger';
 }
-/*else if($each->parent->id!=0){
+else if(isset($each->parent)){
    $class = 'bg-info';
-}*/
+}
 else{
    $class = '';
 }
