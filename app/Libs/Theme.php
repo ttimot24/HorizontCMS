@@ -7,6 +7,7 @@ class Theme{
 
 	public function __construct($root_dir){
 		$this->root_dir = $root_dir;
+		$this->info = simplexml_load_file($this->getPath()."theme_info.xml");
 	}
 
 
@@ -25,6 +26,16 @@ class Theme{
 	public function getPath(){
 		return 'themes'.DIRECTORY_SEPARATOR.$this->root_dir.DIRECTORY_SEPARATOR;
 	}
+
+
+	public function getImage(){
+		return $this->getPath()."preview.jpg";
+	}
+
+	public function getInfo($info){
+		return isset($this->info->{$info})? $this->info->{$info}: NULL;
+	}
+
 
 
 }

@@ -18,6 +18,11 @@ class ThemeController extends Controller{
     public function index($slug){
 
 
+        $this->view->title("Themes");
+        return $this->view->render("theme/index",[
+                                                    'active_theme' => new \App\Libs\Theme(Settings::get("theme")),
+                                                    'all_themes' => collect(array_slice(scandir("themes"),2))->map(function ($theme) { return new \App\Libs\Theme($theme); })
+                                                ]);
     }
 
     /**
