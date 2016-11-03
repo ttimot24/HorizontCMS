@@ -15,7 +15,7 @@ class RouteResolver{
 
 		        $controllerClass = 'App\\Controllers\\'.$controller_name;
 
-		        $action = studly_case($action); // optional, converts foo-bar into FooBar for example
+		        $action = studly_case($action);
 
 		        if(method_exists($controllerClass, $action)){
 		            $controller = \App::make($controllerClass);
