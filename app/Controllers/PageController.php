@@ -60,9 +60,9 @@ class PageController extends Controller{
             }
 
             if($page->save()){
-                return $this->redirect('page/edit/'.$page->id)->withMessage(['success' => trans('message.successfully_created_page')]);
+                return $this->redirect(admin_link("page-edit",$page->id))->withMessage(['success' => trans('message.successfully_created_page')]);
             }else{
-                return $his->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
+                return $this->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
 
             
@@ -150,9 +150,9 @@ class PageController extends Controller{
             }
 
             if($page->save()){
-                return $this->redirect('page/edit/'.$page->id)->withMessage(['success' => trans('message.successfully_updated_page')]);
+                return $this->redirect(admin_link("page-edit",$page->id))->withMessage(['success' => trans('message.successfully_updated_page')]);
             }else{
-                return $his->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
+                return $this->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
 
             
@@ -180,11 +180,11 @@ class PageController extends Controller{
     public function delete($id){
         
         if(Page::find($id)->delete()){
-            return $this->redirect('admin/page')->withMessage(['success' => trans('message.successfully_deleted_page')]);
+            return $this->redirect(admin_link("page-index"))->withMessage(['success' => trans('message.successfully_deleted_page')]);
         }
 
 
-        return $this->redirect('admin/page')->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return $this->redirect(admin_link("page-index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
 

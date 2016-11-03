@@ -53,7 +53,7 @@ class BlogpostController extends Controller{
             }
 
             if($blogpost->save()){
-                return $this->redirect("admin/blogpost/edit/".$blogpost->id)->withMessage(['success' => trans('message.successfully_created_blogpost')]);
+                return $this->redirect(admin_link("blogpost-edit",$blogpost->id))->withMessage(['success' => trans('message.successfully_created_blogpost')]);
             }else{
             	return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
@@ -141,7 +141,7 @@ class BlogpostController extends Controller{
          }
 
          if($blogpost->save()){
-             return $this->redirect('admin/blogpost/edit/'.$blogpost->id)->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
+             return $this->redirect(admin_link("blogpost-edit",$blogpost->id))->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
          }else{
              return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
          }
@@ -170,11 +170,11 @@ class BlogpostController extends Controller{
         
 
         if(Blogpost::find($id)->delete()){
-			return $this->redirect('admin/blogpost')->withMessage(['success' => trans('message.successfully_deleted_blogpost')]);
+			return $this->redirect(admin_link("blogpost-index"))->withMessage(['success' => trans('message.successfully_deleted_blogpost')]);
         }
 
 
-        return $this->redirect('admin/blogpost')->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return $this->redirect(admin_link("blogpost-index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
 
     }
 

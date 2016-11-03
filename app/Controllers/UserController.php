@@ -54,7 +54,7 @@ class UserController extends Controller{
             }
 
             if($user->save()){
-                return $this->redirect("admin/user/edit/".$user->id)->withMessage(['success' => trans('message.successfully_created_user')]);
+                return $this->redirect(admin_link("user-edit",$user->id))->withMessage(['success' => trans('message.successfully_created_user')]);
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
@@ -141,7 +141,7 @@ class UserController extends Controller{
             }
 
             if($user->save()){
-                return $this->redirect("admin/user/edit/".$user->id)->withMessage(['success' => trans('message.successfully_updated_user')]);
+                return $this->redirect(admin_link("user-edit",$user->id))->withMessage(['success' => trans('message.successfully_updated_user')]);
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
@@ -171,11 +171,11 @@ class UserController extends Controller{
     public function delete($id){
         
         if(User::find($id)->delete()){
-            return $this->redirect('admin/user')->withMessage(['success' => trans('message.successfully_deleted_user')]);
+            return $this->redirect(admin_link("user-index"))->withMessage(['success' => trans('message.successfully_deleted_user')]);
         }
 
 
-        return $this->redirect('admin/user')->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return $this->redirect(admin_link("user-index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
 
     }
 
