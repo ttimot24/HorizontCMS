@@ -1,14 +1,11 @@
 <?php
 
-	  $document_root = str_replace("/",DIRECTORY_SEPARATOR,$_SERVER['DOCUMENT_ROOT']);
+      $document_root = str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT']);
 
-	  $root = DIRECTORY_SEPARATOR.ltrim(str_replace($document_root,"",getcwd()),DIRECTORY_SEPARATOR);
-
-
-	  $root==DIRECTORY_SEPARATOR? : $root .= DIRECTORY_SEPARATOR;
+      $root = DIRECTORY_SEPARATOR.ltrim(str_replace($document_root, '', getcwd()), DIRECTORY_SEPARATOR);
 
 
-	  DEFINE ('BASE_DIR',$root);
+      $root == DIRECTORY_SEPARATOR ?: $root .= DIRECTORY_SEPARATOR;
 
 
-  ?>
+      define('BASE_DIR', $root);

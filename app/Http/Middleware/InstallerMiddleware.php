@@ -9,21 +9,19 @@ class InstallerMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        
-        if(!file_exists(".env") && strpos(\Request::path(), \Config::get('horizontcms.backend_prefix').'/install') === false){
-          
+        if (!file_exists('.env') && strpos(\Request::path(), \Config::get('horizontcms.backend_prefix').'/install') === false) {
             \Auth::logout();
             \Session::flush();
-            return redirect(\Config::get('horizontcms.backend_prefix').'/install');
 
-        }else if(file_exists(".env") && strpos(\Request::path(), \Config::get('horizontcms.backend_prefix').'/install') !== false){
-           
+            return redirect(\Config::get('horizontcms.backend_prefix').'/install');
+        } elseif (file_exists('.env') && strpos(\Request::path(), \Config::get('horizontcms.backend_prefix').'/install') !== false) {
             return redirect(\Config::get('horizontcms.backend_prefix').'/login');
         }
 

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Nem található ilyen adat.',
+    'failed'   => 'Nem található ilyen adat.',
     'throttle' => 'Túl sok próbálkozás. Próbáld újra :seconds perc múlva.',
 
 ];

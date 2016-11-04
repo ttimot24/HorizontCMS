@@ -2,14 +2,12 @@
 
 namespace App\Controllers;
 
-use Illuminate\Http\Request;
 use App\Libs\Controller;
-
 use App\User;
+use Illuminate\Http\Request;
 
-class UserController extends Controller{
- 
-
+class UserController extends Controller
+{
     protected $itemPerPage = 100;
 
     /**
@@ -17,14 +15,14 @@ class UserController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug){
-
-
+    public function index($slug)
+    {
         $this->view->title(trans('user.users'));
-        return $this->view->render('users/index',[
+
+        return $this->view->render('users/index', [
                                                         'number_of_users' => User::count(),
-                                                        'all_users' => User::paginate($this->itemPerPage),
-                                                        'active_users' => User::where('active',1)->count(),
+                                                        'all_users'       => User::paginate($this->itemPerPage),
+                                                        'active_users'    => User::where('active', 1)->count(),
                                                     ]);
     }
 
@@ -33,10 +31,9 @@ class UserController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
-
-         if($this->request->isMethod('POST')){
-
+    public function create()
+    {
+        if ($this->request->isMethod('POST')) {
             $user = new User();
             $user->name = $this->request->input('name');
             $user->username = $this->request->input('username');
@@ -47,86 +44,89 @@ class UserController extends Controller{
             $user->active = 1;
 
 
-            if ($this->request->hasFile('up_file')){
-                 
-                 $user->image = str_replace('images/users/','',$this->request->up_file->store('images/users'));
-
+            if ($this->request->hasFile('up_file')) {
+                $user->image = str_replace('images/users/', '', $this->request->up_file->store('images/users'));
             }
 
-            if($user->save()){
-                return $this->redirect(admin_link("user-edit",$user->id))->withMessage(['success' => trans('message.successfully_created_user')]);
-            }else{
+            if ($user->save()) {
+                return $this->redirect(admin_link('user-edit', $user->id))->withMessage(['success' => trans('message.successfully_created_user')]);
+            } else {
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-
-
-            
         }
 
 
 
         $this->view->title(trans('user.create_user'));
-        return $this->view->render('users/create',['roles' => \App\Model\UserRole::all()]);
+
+        return $this->view->render('users/create', ['roles' => \App\Model\UserRole::all()]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
-
+    public function show($id)
+    {
         $this->view->title(trans('user.view_user'));
-        return $this->view->render('users/view',[
-                                                    'user' => User::find($id),
+
+        return $this->view->render('users/view', [
+                                                    'user'          => User::find($id),
                                                     'previous_user' => User::where('id', '<', $id)->max('id'),
-                                                    'next_user' =>  User::where('id', '>', $id)->min('id'),
+                                                    'next_user'     => User::where('id', '>', $id)->min('id'),
                                                 ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
-
+    public function edit($id)
+    {
         $this->view->title(trans('user.edit_user'));
-        return $this->view->render('users/edit',[
+
+        return $this->view->render('users/edit', [
                                                 'current_user' => \Auth::user(),
-                                                'user' => User::find($id),
-                                                'user_roles' => \App\Model\UserRole::all(),
+                                                'user'         => User::find($id),
+                                                'user_roles'   => \App\Model\UserRole::all(),
                                                 ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update($id){
-        if($this->request->isMethod('POST')){
-
+    public function update($id)
+    {
+        if ($this->request->isMethod('POST')) {
             $user = User::find($id);
             $user->name = $this->request->input('name');
             $user->username = $this->request->input('username');
             $user->email = $this->request->input('email');
 
-            if($this->request->has('password')){
+            if ($this->request->has('password')) {
                 $user->password = \Hash::make($this->request->input('password'));
             }
 
@@ -134,50 +134,44 @@ class UserController extends Controller{
            // $user->active = 1;
 
 
-            if ($this->request->hasFile('up_file')){
-                 
-                 $user->image = str_replace('images/users/','',$this->request->up_file->store('images/users'));
-
+            if ($this->request->hasFile('up_file')) {
+                $user->image = str_replace('images/users/', '', $this->request->up_file->store('images/users'));
             }
 
-            if($user->save()){
-                return $this->redirect(admin_link("user-edit",$user->id))->withMessage(['success' => trans('message.successfully_updated_user')]);
-            }else{
+            if ($user->save()) {
+                return $this->redirect(admin_link('user-edit', $user->id))->withMessage(['success' => trans('message.successfully_updated_user')]);
+            } else {
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-
-
-            
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy($id)
+    {
         //
     }
-
 
     /**
      * Remove the specified resource from database.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function delete($id){
-        
-        if(User::find($id)->delete()){
-            return $this->redirect(admin_link("user-index"))->withMessage(['success' => trans('message.successfully_deleted_user')]);
+    public function delete($id)
+    {
+        if (User::find($id)->delete()) {
+            return $this->redirect(admin_link('user-index'))->withMessage(['success' => trans('message.successfully_deleted_user')]);
         }
 
 
-        return $this->redirect(admin_link("user-index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
-
+        return $this->redirect(admin_link('user-index'))->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
-
-
 }

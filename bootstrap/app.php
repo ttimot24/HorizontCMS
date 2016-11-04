@@ -1,6 +1,6 @@
 <?php
 
-require_once('bootstrap/base.php');
+require_once 'bootstrap/base.php';
 
 /*
 |--------------------------------------------------------------------------

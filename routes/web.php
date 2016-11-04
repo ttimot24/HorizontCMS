@@ -16,8 +16,8 @@ Route::get('/laravelwelcome', function () {
 });
 
 
-Route::group(['prefix'=> Config::get('horizontcms.backend_prefix').'/install'],function(){
-	Route::any('/{step?}', 'InstallController@index')/*->where('args', '(.*)')*/;
+Route::group(['prefix' => Config::get('horizontcms.backend_prefix').'/install'], function () {
+    Route::any('/{step?}', 'InstallController@index')/*->where('args', '(.*)')*/;
 });
 
 
@@ -32,20 +32,14 @@ Route::post('admin/login', 'Auth\LoginController@login');
 Route::post('admin/logout', 'Auth\LoginController@logout');
 
 
-Route::group(['prefix'=> Config::get('horizontcms.backend_prefix'),'middleware' => 'admin'],function(){
+Route::group(['prefix' => Config::get('horizontcms.backend_prefix'), 'middleware' => 'admin'], function () {
+    Route::any('/{controller?}/{action?}/{args?}/',
+        function ($controller = 'dashboard', $action = 'index', $args = null) {
+            $route = new \App\Http\RouteResolver();
 
-	Route::any('/{controller?}/{action?}/{args?}/', 
-		function($controller = 'dashboard', $action = 'index', $args = null){
-
-		       $route = new \App\Http\RouteResolver();
-
-		        return $route->resolve($controller,$action,$args);
-
-  		 })->where('args', '(.*)');
-	
+            return $route->resolve($controller, $action, $args);
+        })->where('args', '(.*)');
 });
 
 
 Route::any('/{slug?}', 'WebsiteController@index')->where('slug', '(.*)');
-
-

@@ -2,15 +2,13 @@
 
 namespace App\Controllers;
 
-use Illuminate\Http\Request;
 use App\Libs\Controller;
-use App\Http\Requests;
+use Illuminate\Http\Request;
 
-class UserRoleController extends Controller{
-    
-    public function index($slug){
-
-
+class UserRoleController extends Controller
+{
+    public function index($slug)
+    {
     }
 
     /**
@@ -18,30 +16,34 @@ class UserRoleController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
-
-        }
+    public function create()
+    {
+    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
-
+    public function show($id)
+    {
         $this->view->title(trans('user.view_user'));
-        return $this->view->render('users/view',[
+
+        return $this->view->render('users/view', [
                                                     'user' => User::find($id),
                                                 ]);
     }
@@ -49,52 +51,57 @@ class UserRoleController extends Controller{
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
-
+    public function edit($id)
+    {
         $this->view->title(trans('user.edit_user'));
-        return $this->view->render('users/edit',[
+
+        return $this->view->render('users/edit', [
                                                 'current_user' => \Auth::user(),
-                                                'user' => User::find($id),
-                                                'user_roles' => \App\Model\UserRole::all(),
+                                                'user'         => User::find($id),
+                                                'user_roles'   => \App\Model\UserRole::all(),
                                                 ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy($id)
+    {
         //
     }
-
 
     /**
      * Remove the specified resource from database.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function delete($id){
-        
+    public function delete($id)
+    {
         User::find($id)->delete();
 
         return $this->redirectToSelf();
-
     }
 }

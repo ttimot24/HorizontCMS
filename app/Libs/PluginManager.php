@@ -1,17 +1,15 @@
-<?php 
+<?php
 
 namespace App\Libs;
 
 use App\Model\Plugin;
 
-class PluginManager{
+class PluginManager
+{
+    protected $container;
 
-	protected $container;
-
-	public function registerPlugin(Plugin $plugin){
-		$plugin->save();
-	}
-
-
-	
+    public function registerPlugin(Plugin $plugin)
+    {
+        $plugin->save();
+    }
 }

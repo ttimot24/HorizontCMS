@@ -2,33 +2,34 @@
 
 namespace App\Libs;
 
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Libs\View;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
 
-class Controller extends BaseController{
-	
+class Controller extends BaseController
+{
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function __construct(Request $request){
-    	$this->request = $request;
-    	$this->view = new View();
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+        $this->view = new View();
     }
 
-    public function redirect($location){
-    	return redirect($location);
+    public function redirect($location)
+    {
+        return redirect($location);
     }
 
-    public function redirectToSelf(){
+    public function redirectToSelf()
+    {
         return redirect()->back();
     }
 
-    public function insideLink($location){
-    	return redirect(\Config::get('horizontcms.backend_prefix')."/".$location);
+    public function insideLink($location)
+    {
+        return redirect(\Config::get('horizontcms.backend_prefix').'/'.$location);
     }
-
-
 }

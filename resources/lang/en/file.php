@@ -1,6 +1,7 @@
-<?php 
+<?php
+
 
 return [
-	'files' => 'Files',
-	'filemanager' => 'File manager',
+    'files'       => 'Files',
+    'filemanager' => 'File manager',
 ];

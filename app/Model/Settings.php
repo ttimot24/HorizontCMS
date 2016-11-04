@@ -4,47 +4,39 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Settings extends Model{
-  
-  	protected $table = 'settings';
-  	public $timestamps = false;
-  	public $settings;
+class Settings extends Model
+{
+    protected $table = 'settings';
+    public $timestamps = false;
+    public $settings;
 
-	public static function get($setting){
+    public static function get($setting)
+    {
+        $result = self::where('setting', $setting)->first();
 
-		$result = self::where('setting',$setting)->first();
+        return $result->value;
+    }
 
-		return $result->value;
-	}
-
-	public static function getAll(){
-
-
-		foreach(self::All() as $each){
-			$array[$each->setting] = $each->value;
-		}
-
-
-		return $array;
-	}
+    public static function getAll()
+    {
+        foreach (self::All() as $each) {
+            $array[$each->setting] = $each->value;
+        }
 
 
-	public function assignAll(){
-		$settings = self::All();
+        return $array;
+    }
 
-		$this->settings = new \stdClass();
+    public function assignAll()
+    {
+        $settings = self::All();
 
-		foreach($settings as $each){
+        $this->settings = new \stdClass();
 
-			if(!empty($each->setting)){
-				$this->settings->{$each->setting} = $each->value;
-			}
-		
-		}
-
-
-	}
-
-
-
+        foreach ($settings as $each) {
+            if (!empty($each->setting)) {
+                $this->settings->{$each->setting} = $each->value;
+            }
+        }
+    }
 }

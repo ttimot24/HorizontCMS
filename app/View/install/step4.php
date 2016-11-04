@@ -18,8 +18,8 @@
 						</br>
 
 			<?php 
-			//	require(VIEW_DIR."default/messages.php");
-		    ?>
+            //	require(VIEW_DIR."default/messages.php");
+            ?>
 
 			<br><br>
 			<a href='admin/login'><button type='button' class='btn btn-primary btn-md'>Finish & go to admin area <span class='glyphicon glyphicon-menu-right' aria-hidden='true'></span></button></a>
