@@ -18,12 +18,32 @@ class ThemeController extends Controller{
     public function index($slug){
 
 
-        $this->view->title("Themes");
+        $this->view->title(trans('theme.themes'));
         return $this->view->render("theme/index",[
                                                     'active_theme' => new \App\Libs\Theme(Settings::get("theme")),
                                                     'all_themes' => collect(array_slice(scandir("themes"),2))->map(function ($theme) { return new \App\Libs\Theme($theme); })
                                                 ]);
     }
+
+
+     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function set($theme){
+        $setting = Settings::where('setting','theme')->first();
+        $setting->value = $theme;
+       
+        if($setting->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_changed_theme')]);
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
+
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

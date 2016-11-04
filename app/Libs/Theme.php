@@ -36,6 +36,12 @@ class Theme{
 		return isset($this->info->{$info})? $this->info->{$info}: NULL;
 	}
 
+	public function has404Template(){
+		return (file_exists($this->getPath()."404.blade.php") || file_exists($this->getPath()."404.php"));
+	}
 
+	public function hasWebsiteDownTemplate(){
+		return (file_exists($this->getPath()."website_down.blade.php") || file_exists($this->getPath()."website_down.php"));
+	}
 
 }

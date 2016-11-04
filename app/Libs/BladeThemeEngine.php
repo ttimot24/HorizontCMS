@@ -24,7 +24,7 @@ class BladeThemeEngine{
 
 	public function render(array $data){
 
-		if(strpos( $this->page_template, "default" ) === false ){
+		if(strpos( $this->page_template, "default" ) === false ){ //Not default view
 			\View::addNamespace('theme', 'themes'.DIRECTORY_SEPARATOR.$this->theme->root_dir);
 
 			return view('theme::'.$this->page_template,$data);
@@ -32,6 +32,25 @@ class BladeThemeEngine{
 			return view($this->page_template);
 		}
 
+	}
+
+
+	public function render404(){
+		
+		if($this->theme->has404Template()){
+			$this->page_template = "404";
+		}else{
+			$this->page_template = "default.404";
+		}
+
+	}
+
+	public function renderWebsiteDown(){
+		if($this->theme->hasWebsiteDownTemplate()){
+			$this->page_template = "website_down";
+		}else{
+			$this->page_template = "default.website_down";
+		}
 	}
 
 

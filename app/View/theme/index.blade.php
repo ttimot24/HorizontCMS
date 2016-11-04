@@ -4,12 +4,12 @@
 <div class='container main-container'>
 
 <div class='col-md-10'>
-  <h1>Themes</h1>
+  <h1>{{trans('theme.themes')}}</h1>
 </div>
 
 <div class='col-md-2'>
   <br>
-  <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_theme'><i class='fa fa-upload'></i>&nbspUpload theme</a>
+  <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_theme'><i class='fa fa-upload'></i>&nbsp{{trans('theme.upload_theme_button')}}</a>
 </div>
 
 
@@ -27,17 +27,17 @@
   <div class='col-xs-12 col-md-7'>
     <h1>
         {{ $active_theme->getInfo('name') }}
-        <small>version: {{ $active_theme->getInfo('version') }}</small>
+        <small>{{trans('theme.version')}}: {{ $active_theme->getInfo('version') }}</small>
     </h1>
-    <h4>is the currently active theme</h4>
+    <h4>{{trans('theme.is_the_current_theme')}}</h4>
     <p>{{ $active_theme->getInfo('description') }}</p>
-    <p style='font-size:15px;'>author: {{ $active_theme->getInfo('author') }} | website: <a target='_blank' href='<?= UrlManager::http_protocol( $active_theme->getInfo('author_url') ); ?>'>{{ $active_theme->getInfo('author_url') }}</a></p>
+    <p style='font-size:15px;'>{{trans('theme.author')}}: {{ $active_theme->getInfo('author') }} | {{trans('theme.website')}}: <a target='_blank' href='<?= UrlManager::http_protocol( $active_theme->getInfo('author_url') ); ?>'>{{ $active_theme->getInfo('author_url') }}</a></p>
   </div>
 </div>
 </div>
 
 
-<h3 style='padding-left:15px;'>All: {{$all_themes->count()}}</h3>
+<h3 style='padding-left:15px;'>{{trans('theme.all')}}: {{$all_themes->count()}}</h3>
 
 
 

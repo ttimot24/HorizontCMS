@@ -42,13 +42,13 @@ class WebsiteController extends Controller
                     }
                 }
             }else{
-                 $template = 'default.404';
+                 $theme_engine->render404();
             }
 
 
 
             if(Settings::get('website_down')==1){
-                $template = 'default.website_down'; 
+                $theme_engine->renderWebsiteDown();
             }
 
 

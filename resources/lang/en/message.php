@@ -18,4 +18,6 @@ return [
 
 	'successfully_saved_settings' => 'Settings saved successfully!',
 
+	'successfully_changed_theme' => 'Theme changed successfully',
+
 ];
