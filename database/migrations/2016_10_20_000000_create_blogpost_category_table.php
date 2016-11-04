@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateBlogpostCategoryTable extends Migration
 {
@@ -15,7 +15,7 @@ class CreateBlogpostCategoryTable extends Migration
     {
         Schema::create('blogpost_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');;
+            $table->string('name');
             $table->integer('author_id');
             $table->string('image')->nullable();
             $table->timestamps();

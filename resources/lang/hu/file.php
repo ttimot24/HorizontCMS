@@ -1,6 +1,7 @@
-<?php 
+<?php
+
 
 return [
-	'files' => 'Fájlok',
-	'filemanager' => 'Fájlkezelő',
+    'files'       => 'Fájlok',
+    'filemanager' => 'Fájlkezelő',
 ];

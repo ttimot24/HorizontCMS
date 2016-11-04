@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
 use Illuminate\Support\Facades\DB;
 
 class UserRolesSeeder extends Seeder
@@ -14,42 +13,40 @@ class UserRolesSeeder extends Seeder
     public function run()
     {
         DB::table('user_roles')->insert([
-            'name' => 'Public',
+            'name'       => 'Public',
             'permission' => 0,
-            'rights' => NULL,
+            'rights'     => null,
         ]);
 
         DB::table('user_roles')->insert([
-            'name' => 'User',
+            'name'       => 'User',
             'permission' => 1,
-            'rights' => NULL,
+            'rights'     => null,
         ]);
 
 
         DB::table('user_roles')->insert([
-            'name' => 'Member',
+            'name'       => 'Member',
             'permission' => 2,
-            'rights' => NULL,
+            'rights'     => null,
         ]);
 
         DB::table('user_roles')->insert([
-            'name' => 'Editor',
+            'name'       => 'Editor',
             'permission' => 3,
-            'rights' => json_encode(['admin_area','blogpost','user','page','media']),
+            'rights'     => json_encode(['admin_area', 'blogpost', 'user', 'page', 'media']),
         ]);
 
         DB::table('user_roles')->insert([
-            'name' => 'Manager',
+            'name'       => 'Manager',
             'permission' => 4,
-            'rights' => json_encode(['admin_area','blogpost','user','page','media','themes&apps','settings']),
+            'rights'     => json_encode(['admin_area', 'blogpost', 'user', 'page', 'media', 'themes&apps', 'settings']),
         ]);
 
-         DB::table('user_roles')->insert([
-            'name' => 'Administrator',
+        DB::table('user_roles')->insert([
+            'name'       => 'Administrator',
             'permission' => 5,
-            'rights' => json_encode(['admin_area','blogpost','user','page','media','themes&apps','settings']),
+            'rights'     => json_encode(['admin_area', 'blogpost', 'user', 'page', 'media', 'themes&apps', 'settings']),
         ]);
-
-
     }
 }

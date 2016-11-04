@@ -9,10 +9,11 @@
  *
  * @copyright Nicolas Tallefourtane http://nicolab.net
  */
+
 namespace FtpClient;
 
 /**
- * Wrap the PHP FTP functions
+ * Wrap the PHP FTP functions.
  *
  * @method bool alloc() alloc(int $filesize, string &$result = null) Allocates space for a file to be uploaded
  * @method bool cdup() cdup() Changes to the parent directory
@@ -52,7 +53,7 @@ namespace FtpClient;
 class FtpWrapper
 {
     /**
-     * The connection with the server
+     * The connection with the server.
      *
      * @var resource
      */
@@ -69,19 +70,22 @@ class FtpWrapper
     }
 
     /**
-     * Forward the method call to FTP functions
+     * Forward the method call to FTP functions.
      *
-     * @param  string       $function
-     * @param  array        $arguments
-     * @return mixed
+     * @param string $function
+     * @param array  $arguments
+     *
      * @throws FtpException When the function is not valid
+     *
+     * @return mixed
      */
     public function __call($function, array $arguments)
     {
-        $function = 'ftp_' . $function;
+        $function = 'ftp_'.$function;
 
         if (function_exists($function)) {
             array_unshift($arguments, $this->conn);
+
             return call_user_func_array($function, $arguments);
         }
 
@@ -89,11 +93,12 @@ class FtpWrapper
     }
 
     /**
-     * Opens a FTP connection
+     * Opens a FTP connection.
      *
-     * @param  string   $host
-     * @param  int      $port
-     * @param  int      $timeout
+     * @param string $host
+     * @param int    $port
+     * @param int    $timeout
+     *
      * @return resource
      */
     public function connect($host, $port = 21, $timeout = 90)
@@ -102,10 +107,12 @@ class FtpWrapper
     }
 
     /**
-     * Opens a Secure SSL-FTP connection
-     * @param  string   $host
-     * @param  int      $port
-     * @param  int      $timeout
+     * Opens a Secure SSL-FTP connection.
+     *
+     * @param string $host
+     * @param int    $port
+     * @param int    $timeout
+     *
      * @return resource
      */
     public function ssl_connect($host, $port = 21, $timeout = 90)

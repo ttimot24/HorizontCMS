@@ -13,8 +13,6 @@ class LoaderServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-
     }
 
     /**
@@ -24,6 +22,6 @@ class LoaderServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       require_once base_path().'/app/Helpers/Functions/link.php';
+        require_once base_path().'/app/Helpers/Functions/link.php';
     }
 }

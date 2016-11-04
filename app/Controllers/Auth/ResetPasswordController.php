@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Auth;
 
-
 use App\Libs\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
