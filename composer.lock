@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c555245b71d2f6cf9a7c62d3ce74b977",
-    "content-hash": "1704561516c4dd1122e86d814b9fc501",
+    "hash": "cd5f3e585fe172a319dc3e5a9cf0bff1",
+    "content-hash": "0180e4453a518b4764c82ec66a10c5d4",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1915,27 +1915,37 @@
             "time": "2016-10-18 15:46:07"
         },
         {
-            "name": "twbs/bootstrap",
-            "version": "v3.3.7",
+            "name": "teepluss/theme",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "0b9c4a4007c44201dce9a6cc1a38407005c26c86"
+                "url": "https://github.com/teepluss/laravel-theme.git",
+                "reference": "7eba5032584bb15ef640950faf7360c738bcc380"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/0b9c4a4007c44201dce9a6cc1a38407005c26c86",
-                "reference": "0b9c4a4007c44201dce9a6cc1a38407005c26c86",
+                "url": "https://api.github.com/repos/teepluss/laravel-theme/zipball/7eba5032584bb15ef640950faf7360c738bcc380",
+                "reference": "7eba5032584bb15ef640950faf7360c738bcc380",
                 "shasum": ""
             },
-            "replace": {
-                "twitter/bootstrap": "self.version"
+            "require": {
+                "php": ">=5.4.0",
+                "twig/twig": "1.x"
+            },
+            "require-dev": {
+                "illuminate/support": ">=5.0.1"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3.x-dev"
-                }
+            "autoload": {
+                "psr-4": {
+                    "Teepluss\\Theme\\": "src/"
+                },
+                "classmap": [
+                    "src/Exceptions.php"
+                ],
+                "files": [
+                    "src/helpers.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1943,27 +1953,82 @@
             ],
             "authors": [
                 {
-                    "name": "Jacob Thornton",
-                    "email": "jacobthornton@gmail.com"
-                },
-                {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
+                    "name": "Teepluss",
+                    "email": "admin@laravel.in.th"
                 }
             ],
-            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
-            "homepage": "http://getbootstrap.com",
+            "description": "Theme will help you organize your themes inside Laravel projects easily and maintain its related assets, layouts and partials for the theme in single directory.",
+            "homepage": "https://github.com/teepluss/laravel-theme",
             "keywords": [
-                "JS",
-                "css",
-                "framework",
-                "front-end",
-                "less",
-                "mobile-first",
-                "responsive",
-                "web"
+                "asset",
+                "laravel",
+                "layout",
+                "theme",
+                "twig",
+                "widget"
             ],
-            "time": "2016-07-25 15:51:55"
+            "time": "2015-11-13 05:24:05"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.27.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "3c6c0033fd3b5679c6e1cb60f4f9766c2b424d97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3c6c0033fd3b5679c6e1cb60f4f9766c2b424d97",
+                "reference": "3c6c0033fd3b5679c6e1cb60f4f9766c2b424d97",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.7"
+            },
+            "require-dev": {
+                "symfony/debug": "~2.7",
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.27-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Twig Team",
+                    "homepage": "http://twig.sensiolabs.org/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "http://twig.sensiolabs.org",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2016-10-25 19:17:17"
         },
         {
             "name": "vierbergenlars/php-semver",

@@ -22,8 +22,9 @@ class WebsiteController extends Controller
         $theme = new \App\Libs\Theme(Settings::get('theme'));
 
         $theme_engine = new \App\Libs\BladeThemeEngine($this->request);
-        $theme_engine->addTheme($theme);
+        $theme_engine->setTheme($theme);
 
+        //$theme_engine->runScript('before');
         
             if(is_array($slug)){
                 $slug = $slug[0];
@@ -57,6 +58,8 @@ class WebsiteController extends Controller
             $theme_engine->pageTemplate($template);
 
  
+           // $theme_engine->runScript('before_render');
+
        return $theme_engine->render([
                                     '_THEME_PATH' => $theme->getPath(),
                                     '_CURRENT_USER' => \Auth::user(),

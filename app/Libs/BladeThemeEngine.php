@@ -12,8 +12,11 @@ class BladeThemeEngine{
 		$this->request = $request;
 	}
 
+	public function getTheme(){
+		return $this->theme;
+	}
 
-	public function addTheme(\App\Libs\Theme $theme){
+	public function setTheme(\App\Libs\Theme $theme){
 		$this->theme = $theme;
 	}
 
@@ -32,6 +35,13 @@ class BladeThemeEngine{
 			return view($this->page_template);
 		}
 
+	}
+
+
+	public function runScript($script_name){
+
+		dd($this->theme->config[$script_name]);
+		return call_user_func($this->theme->getConfig($script_name));
 	}
 
 

@@ -26,7 +26,7 @@
   </div>
   <div class='col-xs-12 col-md-7'>
     <h1>
-        {{ $active_theme->getInfo('name') }}
+        {{ $active_theme->getName() }}
         <small>{{trans('theme.version')}}: {{ $active_theme->getInfo('version') }}</small>
     </h1>
     <h4>{{trans('theme.is_the_current_theme')}}</h4>

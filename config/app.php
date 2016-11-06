@@ -180,7 +180,7 @@ return [
         
         App\Providers\LoaderServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
-
+      //  Teepluss\Theme\ThemeServiceProvider::class,
 
     ],
 
@@ -232,6 +232,7 @@ return [
 
 
         'Menu'       => Lavary\Menu\Facade::class,
+       // 'Theme' => Teepluss\Theme\Facades\Theme::class,
 
     ],
 
