@@ -27,8 +27,8 @@ class DashboardController extends Controller{
                                                     'visits' => \App\Model\Visits::count(),
                                                     'admin_logo' => \Config::get('horizontcms.admin_logo'),
                                                     'disk_space' => @(disk_free_space("/")/disk_total_space("/"))*100,
-                                                    'latest_version' => \App\Model\Update::getLatestVersion(),
-                                                    'current_version' => \App\Model\Update::getCurrentVersion()->version,
+                                                    'latest_version' => \App\Model\SystemUpgrade::getLatestVersion(),
+                                                    'current_version' => \App\Model\SystemUpgrade::getCurrentVersion()->version,
 
             ]);
     }

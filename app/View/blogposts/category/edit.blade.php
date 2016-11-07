@@ -2,7 +2,7 @@
 
 @section('content')
 <div class='container main-container'>
-<h2 class='col-md-12'>Edit categories:</h2>
+<h2 class='col-md-12'>{{ trans('category.edit_category') }}:</h2>
 
 
 
@@ -18,7 +18,7 @@
 </div>
 
 <div style='margin-top:15%;'>
-    <a href="{{ admin_link('blogpost_category-index') }}" class="btn btn-info">Back to categories</a>
+    <a href="{{ admin_link('blogpost_category-index') }}" class="btn btn-info">{{ trans('actions.back') }}</a>
 </div>
 </br>
 </br>

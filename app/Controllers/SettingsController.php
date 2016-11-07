@@ -97,11 +97,11 @@ class SettingsController extends Controller{
 
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/updatecenter',[
-                                                        'current_version' => \App\Model\Update::getCurrentVersion(),
-                                                        'latest_version' => \App\Model\Update::getLatestVersion(),
-                                                        'available_list' => \App\Model\Update::getAllAvailable(),
-                                                        'upgrade_list' => \App\Model\Update::getUpgrades(),
-                                                        'installed_version' => \App\Model\Update::getCore(),
+                                                        'current_version' => \App\Model\SystemUpgrade::getCurrentVersion(),
+                                                        'latest_version' => \App\Model\SystemUpgrade::getLatestVersion(),
+                                                        'available_list' => \App\Model\SystemUpgrade::getAllAvailable(),
+                                                        'upgrade_list' => \App\Model\SystemUpgrade::getUpgrades(),
+                                                        'installed_version' => \App\Model\SystemUpgrade::getCore(),
 
                                                     ]);
     }

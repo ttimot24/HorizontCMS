@@ -5,30 +5,30 @@
 <div class='row'>
 <div class='col-md-12'>
 
-<h2 class='pull-left'>Categories:</h2>
+<h2 class='pull-left'>{{ trans('category.category') }}:</h2>
 
 
 
 <form action="{{ admin_link('blogpost_category-create') }}" class='form-inline' role='form' method='POST'>
 <div style='text-align:right;'>
 </br>
-<label for='cat'>Add category:</label> 
+<label for='cat'>{{ trans('category.add_category') }}:</label> 
 	<div class='form-group'>
 		<div class='col-sm-6'>  
 			<input type='text' class='form-control' id='cat' name='name' placeholder='Enter new category' required>
 	</div></div> 
 <div class='form-group'>
- <button type='submit' class='btn btn-primary'>Add</button> 
+ <button type='submit' class='btn btn-primary'>{{ trans('actions.add') }}</button> 
  </div>
  </div></form>
  
 <table class='table table-hover' style='margin-top:5%;'>
     <thead>
       <tr>
-      	<th>Id</th>
-      	<th>Image</th>
-      	<th>Category name</th>
-        <th>Posts</th>
+      	<th>{{ trans('category.th_id') }}</th>
+      	<th>{{ trans('category.th_image') }}</th>
+      	<th>{{ trans('category.th_category') }}</th>
+        <th>{{ trans('category.th_posts') }}</th>
         <th><center>{{trans('actions.action')}}</center></th>
       </tr>
     </thead><tbody>

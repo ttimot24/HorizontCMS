@@ -21,7 +21,7 @@ class BlogpostCategoryController extends Controller{
 
 
 
-        $this->view->title(trans('blogpost.blogposts'));
+        $this->view->title(trans('category.category'));
         return $this->view->render('blogposts/category/index',[
                                                         'all_category' => BlogpostCategory::all(),
                                                     ]);
@@ -87,13 +87,10 @@ class BlogpostCategoryController extends Controller{
     public function edit($id){
 
 
-        $this->view->js('resources/assets/ckeditor/ckeditor.js');
-
         $this->view->title(trans('blogpost.edit_blogpost'));
 
-        return $this->view->render('blogposts/edit',[
-                                                        'blogpost' => Blogpost::find($id),
-                                                        'categories' => \App\Model\BlogpostCategory::all(),
+        return $this->view->render('blogposts/category/edit',[
+                                                        'category' => \App\Model\BlogpostCategory::find($id),
                                                     ]);
     }
 
@@ -152,11 +149,11 @@ class BlogpostCategoryController extends Controller{
         
 
         if(BlogpostCategory::find($id)->delete()){
-			return $this->redirect('admin/blogpostcategory')->withMessage(['success' => trans('message.successfully_deleted_blogpostcategory')]);
+			return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpostcategory')]);
         }
 
 
-        return $this->redirect('admin/blogpostcategory')->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
 
     }
 
