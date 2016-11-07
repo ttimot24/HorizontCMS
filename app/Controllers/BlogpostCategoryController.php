@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Illuminate\Http\Request;
 use App\Libs\Controller;
 
-use App\Model\Blogpost;
+use App\Model\BlogpostCategory;
 
 class BlogpostCategoryController extends Controller{
  
@@ -149,7 +149,7 @@ class BlogpostCategoryController extends Controller{
         
 
         if(BlogpostCategory::find($id)->delete()){
-			return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpostcategory')]);
+			return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpost_category')]);
         }
 
 

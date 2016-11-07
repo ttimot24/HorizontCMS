@@ -10,6 +10,9 @@
 
 
 <form action="{{ admin_link('blogpost_category-create') }}" class='form-inline' role='form' method='POST'>
+
+{{ csrf_field() }}
+
 <div style='text-align:right;'>
 </br>
 <label for='cat'>{{ trans('category.add_category') }}:</label> 
@@ -27,9 +30,9 @@
       <tr>
       	<th>{{ trans('category.th_id') }}</th>
       	<th>{{ trans('category.th_image') }}</th>
-      	<th>{{ trans('category.th_category') }}</th>
+      	<!--<th>{{ trans('category.th_category') }}</th>-->
         <th>{{ trans('category.th_posts') }}</th>
-        <th><center>{{trans('actions.action')}}</center></th>
+        <th><center>{{trans('actions.th_action')}}</center></th>
       </tr>
     </thead><tbody>
 
@@ -38,8 +41,8 @@
 	@foreach($all_category as $each)
 	<tr>
 			<td>{{ $each->id }}</td>
-			<td><img src='{{ $each->getThumb() }}'  class='img img-rounded' style='object-fit:cover;' width="70" height="50" /> </td>
-	        <td>{{ $each->name }}</td>     
+			<!--<td><img src='{{ $each->getThumb() }}'  class='img img-rounded' style='object-fit:cover;' width="70" height="50" /> </td>
+	        --><td class='col-md-4'>{{ $each->name }}</td>     
 
 	<td><span class='badge'>{{ $each->blogposts->count() }}</span></td>
 
@@ -48,7 +51,7 @@
 	        <div class='btn-group' role='group'>
          		<a href="{{ admin_link('blogpost_category-edit',$each->id) }}" type='button' class='btn btn-warning btn-sm' style='min-width:70px;'>{{trans('actions.edit')}}</a>
            		<a href="{{ admin_link('blogpost_category-delete',$each->id) }}" type='button' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>
-       		</div>";
+       		</div>
 
 	      </center></td></tr>
 	@endforeach
