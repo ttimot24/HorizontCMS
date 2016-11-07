@@ -7,7 +7,7 @@ use App\Libs\Controller;
 
 
 class InstallController extends Controller{
- 
+
 
 
     /**
@@ -19,7 +19,7 @@ class InstallController extends Controller{
 
 
         $this->view->title("Install");
-        return $this->view->render("install/".$step,['enable_continue' => true]);
+        return $this->view->render("install/index",['enable_continue' => true]);
     }
 
     /**
@@ -27,9 +27,12 @@ class InstallController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
+    public function step1(){
 
+        $languages = ['English','Magyar','Deutsch'];
 
+        $this->view->title("Install");
+        return $this->view->render("install/step1",['languages' => $languages]);
     }
 
     /**
@@ -38,8 +41,12 @@ class InstallController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-        //
+    public function step2(){
+        
+        $db_drivers = ['MySQL' => 'mysql','PostgreSQL' => 'pgsql','SQLite' => 'sqlite'];
+
+        $this->view->title("Install");
+        return $this->view->render("install/step2",['db_drivers' => $db_drivers]);
     }
 
     /**

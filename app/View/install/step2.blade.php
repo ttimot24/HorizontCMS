@@ -15,6 +15,7 @@
 					</div>
 					<hr/>
 
+		@include('messages')
 
   		<h2>Step 2: Database</h2>
 					</br>
@@ -28,18 +29,18 @@
 
 		<form action='admin/install/checkconnection' method='POST'>
 
-
+		{{ csrf_field() }}
 			<div class='container'>
 
 				 <div class='form-group'>
 			      <label class='control-label col-md-2' for='server'>Database Driver:</label>
 			      <div class='col-md-5'>
 			      	<select  class='form-control' name='db_driver'>
-			      <?php
-			      	foreach($data['db_drivers'] as $driver){
-			      		echo "<option value='".$driver."'>".ucfirst($driver)."</option>";
-			      	}
-			      ?>
+			     
+			      	@foreach($db_drivers as $driver => $alias){
+			      		<option value='{{$alias}}'>{{$driver}}</option>
+					@endforeach
+
 			      	</select>          
 			      
 			      </div>
@@ -49,14 +50,14 @@
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='server'>Server:</label>
 			      <div class='col-sm-5'>          
-			        <input type='text' class='form-control' id='server' name='server' value='<?= isset($data['session']['server'])? $data['session']['server'] : "localhost" ; ?>' required>
+			        <input type='text' class='form-control' id='server' name='server' value="localhost" required>
 			      </div>
 			    </div>
 			    </br></br>
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='username'>Username:</label>
 			      <div class='col-sm-5'>          
-			        <input type='text' class='form-control' id='username' name='username' placeholder='username' value='<?= @$data['session']['install_username'] ?>' required>
+			        <input type='text' class='form-control' id='username' name='username' placeholder='username' value='' required autofocus>
 			      </div>
 			    </div>
 
@@ -64,7 +65,7 @@
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='pwd'>Password:</label>
 			      <div class='col-sm-5'>          
-			        <input type='password' class='form-control' id='pwd' name='password' placeholder='password' value='<?= @$data['session']['install_password'] ?>' required>
+			        <input type='password' class='form-control' id='pwd' name='password' placeholder='password' value='' required>
 			      </div>
 			    </div>
 
@@ -72,7 +73,7 @@
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='data'>Create database:</label>
 			      <div class='col-sm-5'>          
-			        <input type='text' class='form-control' id='data' name='database' placeholder='database name' value='<?= @$data['session']['database'] ?>' required>
+			        <input type='text' class='form-control' id='data' name='database' placeholder='database name' value='' required>
 			      </div>
 			    </div>
 
@@ -80,7 +81,7 @@
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='prefix'>Table prefix:</label>
 			      <div class='col-sm-5'>          
-			        <input type='text' class='form-control' id='prefix' name='prefix' placeholder='prefix' value='<?= @$data['session']['prefix'] ?>'>
+			        <input type='text' class='form-control' id='prefix' name='prefix' placeholder='prefix' value=''>
 			      </div>
 			    </div>
 
