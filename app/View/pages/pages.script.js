@@ -111,7 +111,7 @@
 
 
 
-  function ajaxGetSlug(){
+  /*function ajaxGetSlug(){
 
     text = $('#menu-title').val();
 
@@ -124,4 +124,4 @@
     }
 
 
-  }
+  }*/

@@ -54,7 +54,7 @@
     <h3>{{ $blogpost->title }}</h3><hr/>
     <b>{{ $blogpost->summary }}</b>
     <p style='margin-top:40px;'>
-    {{ $blogpost->text }}
+    {!! $blogpost->text !!}
     </p>
   </div>  
     </td>
