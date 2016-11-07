@@ -5,9 +5,9 @@ namespace App\Controllers;
 use Illuminate\Http\Request;
 use App\Libs\Controller;
 
-use App\Model\Blogpost;
+use App\Model\BlogpostComment;
 
-class BlogpostCategoryController extends Controller{
+class BlogpostCommentController extends Controller{
  
 
     protected $itemPerPage = 25;
@@ -23,7 +23,8 @@ class BlogpostCategoryController extends Controller{
 
         $this->view->title(trans('blogpost.blogposts'));
         return $this->view->render('blogposts/category/index',[
-                                                        'all_category' => BlogpostCategory::all(),
+                                                        'number_of_blogposts' => Blogpost::count(),
+                                                        'all_blogposts' => Blogpost::orderBy('id','desc')->paginate($this->itemPerPage),
                                                     ]);
     }
 
@@ -38,17 +39,21 @@ class BlogpostCategoryController extends Controller{
 
         if($this->request->isMethod('POST')){
 
-            $blogpost_category = new BlogpostCategory();
-            $blogpost_category->name = $this->request->input('name');
+            $blogpost = new Blogpost();
+            $blogpost->title = $this->request->input('title');
+            $blogpost->category_id = $this->request->input('category_id');
+            $blogpost->summary = $this->request->input('summary');
+            $blogpost->text = $this->request->input('text');
+            $blogpost->author_id = \Auth::user()->id;
 
             if ($this->request->hasFile('up_file')){
                  
-                 $blogpost_category->image = str_replace('images/blogpostscategories/','',$this->request->up_file->store('images/blogpostscategories'));
+                 $blogpost->image = str_replace('images/blogposts/','',$this->request->up_file->store('images/blogposts'));
 
             }
 
-            if($blogpost_category->save()){
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost_category')]);
+            if($blogpost->save()){
+                return $this->redirect("admin/blogpost/edit/".$blogpost->id)->withMessage(['success' => trans('message.successfully_created_blogpost')]);
             }else{
             	return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
@@ -56,6 +61,14 @@ class BlogpostCategoryController extends Controller{
             
         }
 
+
+        
+        $this->view->js('resources/assets/ckeditor/ckeditor.js');
+
+        $this->view->title(trans('blogpost.new_blogpost'));
+        return $this->view->render('blogposts/create',[
+                                                        'categories' => \App\Model\BlogpostCategory::all(),
+                                                        ]);
     }
 
     /**
@@ -76,6 +89,12 @@ class BlogpostCategoryController extends Controller{
      */
     public function show($id){
 
+        $this->view->title(trans('blogpost.view_blogpost'));
+        return $this->view->render('blogposts/view',[
+                                                        'blogpost' => Blogpost::find($id),
+                                                        'previous_blogpost' => Blogpost::where('id', '<', $id)->max('id'),
+                                                        'next_blogpost' =>  Blogpost::where('id', '>', $id)->min('id'),
+                                                    ]);
     }
 
     /**
@@ -107,26 +126,25 @@ class BlogpostCategoryController extends Controller{
     public function update($id){
       	 
 
-        if($this->request->isMethod('POST')){
+         $blogpost = Blogpost::find($id);
 
-            $blogpost_category = BlogpostCategory::find($id);
-            $blogpost_category->name = $this->request->input('name');
+      	 $blogpost->title = $this->request->input('title');
+         $blogpost->category_id = $this->request->input('category_id');
+         $blogpost->summary = $this->request->input('summary');
+         $blogpost->text = $this->request->input('text');
+         $blogpost->author_id = \Auth::user()->id;
 
-            if ($this->request->hasFile('up_file')){
-                 
-                 $blogpost_category->image = str_replace('images/blogpostscategories/','',$this->request->up_file->store('images/blogpostscategories'));
+         if ($this->request->hasFile('up_file')){
+              
+              $blogpost->image = str_replace('images/blogposts/','',$this->request->up_file->store('images/blogposts'));
 
-            }
+         }
 
-            if($blogpost_category->save()){
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_updated_blogpost_category')]);
-            }else{
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-
-            
-        }
-
+         if($blogpost->save()){
+             return $this->redirect('admin/blogpost/edit/'.$blogpost->id)->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
+         }else{
+             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+         }
 
 
     }

@@ -8,6 +8,10 @@ return [
 	'successfully_updated_blogpost' => 'Blogpost successfully updated!',
 	'successfully_deleted_blogpost' => 'Blogpost deleted successfully!',
 
+	'successfully_created_blogpost_category' => 'Blogpost category created successfully!',
+	'successfully_updated_blogpost_category' => 'Blogpost category successfully updated!',
+	'successfully_deleted_blogpost_category' => 'Blogpost category deleted successfully!',
+
 	'successfully_created_user' => 'User created successfully!',
 	'successfully_updated_user' => 'User successfully updated!',
 	'successfully_deleted_user' => 'User deleted successfully!',

@@ -3,6 +3,7 @@
 
 return [
 	'th_action' => 'Műveletek',
+	'save' => 'Mentés',
 	'publish' => 'Közzététel',
 	'edit' => 'Szerkesztés',
 	'update' => 'Frissít',

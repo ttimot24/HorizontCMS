@@ -3,6 +3,7 @@
 
 return [
 	'th_action' => 'Action',
+	'save' => 'Save',
 	'publish' => 'Publish',
 	'edit' => 'Edit',
 	'update' => 'Update',
