@@ -17,8 +17,8 @@ class FileManagerController extends Controller{
      */
     public function index($slug){
 
-        $this->view->title(trans('file.filemanager'));
-        return $this->view->render('',[
+        $this->view->title(trans(''));
+        return $this->view->render('media/filemanager',[
 
             ]);
     }

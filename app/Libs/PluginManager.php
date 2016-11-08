@@ -8,9 +8,14 @@ class PluginManager{
 
 	protected $container;
 
-	public function registerPlugin(Plugin $plugin){
+	public function installPlugin(Plugin $plugin){
 		$plugin->save();
 	}
+
+	public function registerPlugin(Plugin $plugin){
+		$this->container[] = $plugin;
+	}
+
 
 
 	
