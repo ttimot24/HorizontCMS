@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Illuminate\Http\Request;
 use App\Libs\Controller;
 
+use App\Model\HeaderImage;
 
 class HeaderImageController extends Controller{
  
@@ -19,7 +20,7 @@ class HeaderImageController extends Controller{
 
         $this->view->title(trans(''));
         return $this->view->render('media/header_images',[
-
+            'slider_images' => HeaderImage::all(),
             ]);
     }
 
