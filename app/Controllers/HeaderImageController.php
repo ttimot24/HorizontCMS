@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Libs\Controller;
 
 use App\Model\HeaderImage;
+use Illuminate\Support\Facades\Storage;
 
 class HeaderImageController extends Controller{
  
@@ -18,9 +19,10 @@ class HeaderImageController extends Controller{
      */
     public function index($slug){
 
-        $this->view->title(trans(''));
+        $this->view->title(trans('Header Images'));
         return $this->view->render('media/header_images',[
-            'slider_images' => HeaderImage::all(),
+            'slider_images' => collect(HeaderImage::all()),
+            'dirs' => array_slice(scandir('storage/images/header_images'),2),
             ]);
     }
 
@@ -29,7 +31,19 @@ class HeaderImageController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
+    public function create($file){
+
+
+            $header_image = new HeaderImage();
+            $header_image->title = "def";
+            $header_image->image = $file;
+
+
+            if($header_image->save()){
+                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost')]);
+            }else{
+                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            }
 
 
     }
@@ -81,8 +95,14 @@ class HeaderImageController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
-        //
+    public function destroy($file){
+
+            if(Storage::delete('images'.DIRECTORY_SEPARATOR.'header_images'.DIRECTORY_SEPARATOR.$file)){
+                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost')]);
+            }else{
+                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            }
+
     }
 
 
@@ -94,17 +114,40 @@ class HeaderImageController extends Controller{
      */
     public function delete($id){
         
-    }
+        if(HeaderImage::find($id)->delete()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpost')]);
+        }
 
 
-    public function browse(){
-        return "asd";
+        return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
+
 
 
     public function upload(){
-        
+
+        if($this->request->isMethod('POST')){
+
+            foreach($this->request->up_file as $file){
+                  
+                     $errors[] = str_replace('images/header_images/','',$file->store('images/header_images'));
+
+            }
+
+            if(count($errors)>0){
+                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost')]);
+            }else{
+                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            }
+
+            
+        }
+
+
     }
+
+
+
 
 
 }
