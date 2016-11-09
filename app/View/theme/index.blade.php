@@ -58,8 +58,8 @@ foreach($all_themes as $theme): ?>
         <p>
             <a href='admin/theme/set/<?=  $theme->root_dir ?>' class="btn btn-primary" role="button">Set theme</a> 
             <a href="#" class="btn btn-default" role="button" data-toggle='modal' data-target='.<?=  $theme->root_dir ?>-modal-xl'>Preview</a>
-            <a href="#" class="btn btn-warning" role="button" disabled>Edit</a>
-            <button class='btn btn-danger' data-toggle='modal' data-target='.delete_<?= $theme->root_dir ?>' <?php if($all_themes->count()==1){echo "disabled";} ?> >Delete</button>
+            <a href="#" class="btn btn-warning" role="button" disabled>{{ trans('actions.edit') }}</a>
+            <button class='btn btn-danger' data-toggle='modal' data-target='.delete_<?= $theme->root_dir ?>' <?php if($all_themes->count()==1){echo "disabled";} ?> >{{ trans('actions.delete') }}</button>
         </p>
       </div>
     </div>
@@ -68,11 +68,11 @@ foreach($all_themes as $theme): ?>
 
 <?php   Bootstrap::delete_confirmation(
     "delete_".$theme->root_dir,
-    "Are you sure?",
+    trans('actions.are_you_sure'),
     "<b>Delete this theme: </b>". $theme->getInfo('name')." <b>?</b>",
     "<a href='admin/theme/delete/". $theme->root_dir."' type='button' class='btn btn-danger'>
-    <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
-    <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
+    <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
     );
 
 ?>
@@ -105,8 +105,8 @@ foreach($all_themes as $theme): ?>
 
       </div>
       <div class='modal-footer'>
-        <button type='submit' class='btn btn-primary'>Upload</button></form>
-        <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+        <button type='submit' class='btn btn-primary'>{{trans('actions.upload')}}</button></form>
+        <button type='button' class='btn btn-default' data-dismiss='modal'>{{trans('actions.cancel')}}</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

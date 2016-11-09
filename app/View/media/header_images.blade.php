@@ -20,7 +20,7 @@
 
 
 
-	@if($slider_images->count() > 0)
+	@if(!$slider_images->isEmpty())
 		@foreach($slider_images as $image)
 			<div class='img-thumbnail col-md-3' style='height:150px;'>
 			<img src='images/header_images/{{ $image->image }}' alt='' class='img-rounded' width='100%' height='85%;'>

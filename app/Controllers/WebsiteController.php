@@ -69,4 +69,13 @@ class WebsiteController extends Controller
     }
 
 
+
+    public function authenticate(){
+
+    }
+
+
+
+
+
 }
