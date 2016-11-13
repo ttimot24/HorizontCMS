@@ -2,12 +2,12 @@
 
 namespace App\Libs;
 
-class Model extends Illuminate\Database\Eloquent\Model{
+class Model extends \Illuminate\Database\Eloquent\Model{
     
     private $rules = array();
 
 
-    public function equals($other){
+    public function equals(Model $other){
         return $this->is($other);
     }
 
@@ -31,13 +31,5 @@ class Model extends Illuminate\Database\Eloquent\Model{
     }
 
 
-   /* public function save(array $options = array())
-    {
-        if($this->validate())
-            return parent::save($options);
-
-        return false;
-    }
-*/
 
 }

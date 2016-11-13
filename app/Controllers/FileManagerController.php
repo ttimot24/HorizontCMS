@@ -17,9 +17,18 @@ class FileManagerController extends Controller{
      */
     public function index($slug){
 
+
+        $current_dir = $this->request->get('path')==NULL? storage_path() : storage_path().DIRECTORY_SEPARATOR.$this->request->get('path');
+
+
         $this->view->title(trans('File Manager'));
         return $this->view->render('media/filemanager',[
-                
+                'old_path' => $this->request->get('path'),
+                'current_dir' => $current_dir,
+                'files' => array_slice(scandir($current_dir),2),
+                'allowed_extensions' => [
+                                          'image' => ['jpg','png','jpeg']
+                                        ],
             ]);
     }
 

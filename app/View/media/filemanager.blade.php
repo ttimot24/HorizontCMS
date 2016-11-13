@@ -18,7 +18,7 @@
 
 <div class='panel panel-default col-md-2' style='padding:0px;'>
  <ul class="list-group">
-  <li class="list-group-item">images</li>
+  <a href='admin/filemanager?path=images'><li class="list-group-item">images</li></a>
   <li class="list-group-item">uploads</li>
   <li class="list-group-item">themes</li>
   <li class="list-group-item">plugins</li>
@@ -32,25 +32,26 @@
 			  <li><a>root</a></li>
 			  <li><a><?= str_replace("/","</a></li><li><a>",$current_dir) ?></a></li>
 			</ol>
-            <?php 
-            	foreach($files as $file){
-            		echo "<div class='file col-md-2' style='overflow:hidden;height:140px;cursor:pointer;' ondblclick='window.location.href = \"admin/filemanager/dir/".$data['current_dir']."/".$file->name."\";'>";
 
-            		$file_parts = pathinfo($file->name);
+            <?php	foreach($files as $file): ?>
+            		<div class='file col-md-2' style='overflow:hidden;height:140px;cursor:pointer;' ondblclick=" window.location.href = 'admin/filemanager?path=<?= $old_path.'/'.$file ?>' ">
+            
+            <?php	$file_parts = pathinfo($file);
 
-            		if(is_dir($data['current_dir'].$file->name)){
-            			echo Html::img(Storage::$path.'/images/icons/dir.png',"style='width:100%;'  ");
+            		if(is_dir($current_dir.DIRECTORY_SEPARATOR.$file)){
+            			echo Html::img('resources/images/icons/dir.png',"style='width:100%;'  ");
             		}
-            		else if($file_parts['extension']=='jpg' || $file_parts['extension']=='png'){
-            			echo Html::img($data['current_dir'].$file->name,"style='object-fit:cover;width:100%;height:100px;' ondblclick='' ");
+            		else if(isset($file_parts['extension']) && in_array($file_parts['extension'],$allowed_extensions['image'])){
+            			echo Html::img($current_dir.$file,"style='object-fit:cover;width:100%;height:100px;' ondblclick='' ");
             		}else{
-                  echo Html::img(Storage::$path.'/images/icons/file.png',"style='object-fit:cover;width:100%;height:100px;margin-bottom:15px;' ondblclick='' ");
+                  echo Html::img('resources/images/icons/file.png',"style='object-fit:cover;width:100%;height:100px;margin-bottom:15px;' ondblclick='' ");
                 }
-            		echo "<center><b>".$file->name."</b></center><br>";
+            		echo "<center><b>".$file."</b></center><br>";
             		echo "</div>";
-            	}
-
+            	
             ?>
+
+            <?php endforeach; ?>
 
   </div>
 </div>

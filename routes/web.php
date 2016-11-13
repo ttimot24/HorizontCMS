@@ -55,6 +55,6 @@ Route::group(['prefix'=> Config::get('horizontcms.backend_prefix'),'middleware' 
 });
 
 
-Route::any('/{slug?}', 'WebsiteController@index')->where('slug', '(.*)');
+Route::any('/{slug?}','WebsiteController@index')->where('slug', '(.*)');
 
 

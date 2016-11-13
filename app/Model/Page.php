@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
+use \App\Libs\Model;
 
 class Page extends Model{
 

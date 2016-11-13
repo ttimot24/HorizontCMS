@@ -15,7 +15,6 @@ class DashboardController extends Controller{
      */
     public function index(){
 
-
         $this->view->title(trans('dashboard.title'));
         return $this->view->render("dashboard/index",[
 
