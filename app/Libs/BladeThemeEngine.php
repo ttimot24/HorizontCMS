@@ -24,6 +24,14 @@ class BladeThemeEngine{
 		$this->page_template = $page_template;
 	}
 
+	public function defaultTemplateExists($template){
+		return file_exists($this->theme->getPath().$template.'.blade.php'); 
+	}
+
+	public function templateExists($template){
+		return file_exists($this->theme->getPath()."page_templates".DIRECTORY_SEPARATOR.$template.'.blade.php'); 
+	}
+
 
 	public function render(array $data){
 

@@ -39,7 +39,6 @@
 @include('theme::sitelinks')
 
 
-
 @yield('content')
 
 

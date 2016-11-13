@@ -5,6 +5,7 @@ namespace App\Libs;
 class ThemeEngine{
 
 	protected $theme;
+	protected $page_template = 'index';
 	public $request;
 
 	public function __construct(\Illuminate\Http\Request $request){
@@ -12,8 +13,24 @@ class ThemeEngine{
 	}
 
 
-	public function addTheme(\App\Libs\Theme $theme){
+	public function getTheme(){
+		return $this->theme;
+	}
+
+	public function setTheme(\App\Libs\Theme $theme){
 		$this->theme = $theme;
+	}
+
+	public function pageTemplate($page_template){
+		$this->page_template = $page_template;
+	}
+
+	public function defaultTemplateExists($template){
+		return file_exists($this->theme->getPath().$template.'.php'); 
+	}
+
+	public function templateExists($template){
+		return file_exists($this->theme->getPath()."page_templates/".$template.'.php'); 
 	}
 
 
@@ -33,8 +50,6 @@ class ThemeEngine{
 			require_once(base_path().DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$this->theme->root_dir.DIRECTORY_SEPARATOR.$file);
 		}
 	}
-
-
 
 
 

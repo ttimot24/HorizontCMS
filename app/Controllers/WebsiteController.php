@@ -33,11 +33,12 @@ class WebsiteController extends Controller
             $requested_page = $slug=="/"? Page::find(Settings::get('home_page')) : Page::findBySlug($slug);
 
             if($requested_page){
-                if(isset($requested_page->url) && file_exists($theme->getPath()."page_templates/".$requested_page->url.".blade.php")){
+                if(isset($requested_page->url) && $theme_engine->templateExists($requested_page->url)){
                     $template = "page_templates.".$requested_page->url;
                 }else{
-                    if(file_exists($theme->getPath().'page.blade.php')){
+                    if($theme_engine->defaultTemplateExists('page')){
                         $template = 'page';
+
                     }else{
                         throw new \Exception('Can\'t find default page template!');
                     }
@@ -48,7 +49,7 @@ class WebsiteController extends Controller
 
 
 
-            if(Settings::get('website_down')==1){
+            if(Settings::get('website_down')==1 /*&& !\Auth::user()->isAdmin()*/){
                 $theme_engine->renderWebsiteDown();
             }
 

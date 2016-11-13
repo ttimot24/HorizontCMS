@@ -83,7 +83,7 @@ class SettingsController extends Controller{
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/adminarea',[
                                                         'settings' => Settings::getAll(),
-                                                        'languages' => ['English','Magyar'],
+                                                        'languages' => ['en'=>'English','hu'=>'Magyar'],
                                                     ]);
     }
 

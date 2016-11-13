@@ -35,15 +35,14 @@
 
               <?php 
 
-
-                foreach($languages as $language){
+                foreach($languages as $key => $language){
                   //$language = str_replace(".php","",$language);
 
                   if($language == $settings['language']){
-                    echo "<option value='".$language."' selected>".ucfirst($language)."</option>";
+                    echo "<option value='".$key."' selected>".ucfirst($language)."</option>";
                   }
                   else{
-                    echo "<option value='".$language."'>".ucfirst($language)."</option>";
+                    echo "<option value='".$key."'>".ucfirst($language)."</option>";
                   }
 
                 }
