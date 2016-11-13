@@ -52,7 +52,13 @@ class ThemeEngine{
 	}
 
 
+	public function runScript($script_name){
+		if($this->theme->getConfig($script_name)){
+			return call_user_func($this->theme->getConfig($script_name));
+		}
 
+		return NULL;
+	}
 
 
 

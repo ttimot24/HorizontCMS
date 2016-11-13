@@ -47,9 +47,11 @@ class BladeThemeEngine{
 
 
 	public function runScript($script_name){
+		if($this->theme->getConfig($script_name)){
+			return call_user_func($this->theme->getConfig($script_name));
+		}
 
-		dd($this->theme->config[$script_name]);
-		return call_user_func($this->theme->getConfig($script_name));
+		return NULL;
 	}
 
 

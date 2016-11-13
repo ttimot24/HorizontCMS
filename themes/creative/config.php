@@ -2,10 +2,10 @@
 
 return [
 
-	'asd'=>'asd',
+	'theme_engine' => 'blade',
 
 	'before_render' => function(){
-		echo "asd";
+	//	echo "Hello I'm in the theme config before_render script!";
 	},
 
 

@@ -11,6 +11,7 @@ class Theme{
 
 		$this->config = file_exists($this->getPath()."config.php")? require($this->getPath()."config.php") : NULL;
 
+
 	}
 
 
@@ -26,8 +27,7 @@ class Theme{
 	}
 
 	public function getConfig($config){
-
-		return isset($this->config->{$config})? $this->config->{$config}: NULL;
+		return isset($this->config[$config])? $this->config[$config]: NULL;
 	}
 
 	public function getName(){

@@ -12,6 +12,14 @@ use App\Model\Page;
 
 class WebsiteController extends Controller
 {
+
+    private $engines = [
+                'hcms' => \App\Libs\ThemeEngine::class,
+                'blade' => \App\Libs\BladeThemeEngine::class,
+                //'twig' => \App\Libs\TwigThemeEngine::class,
+                ];
+
+
     /**
      * Display a listing of the resource.
      *
@@ -21,10 +29,10 @@ class WebsiteController extends Controller
 
         $theme = new \App\Libs\Theme(Settings::get('theme'));
 
-        $theme_engine = new \App\Libs\BladeThemeEngine($this->request);
+        $theme_engine = new $this->engines[$theme->getConfig('theme_engine')]($this->request);
         $theme_engine->setTheme($theme);
 
-        //$theme_engine->runScript('before');
+        $theme_engine->runScript('before');
         
             if(is_array($slug)){
                 $slug = $slug[0];
@@ -59,7 +67,7 @@ class WebsiteController extends Controller
             $theme_engine->pageTemplate($template);
 
  
-           // $theme_engine->runScript('before_render');
+            $theme_engine->runScript('before_render');
 
        return $theme_engine->render([
                                     '_THEME_PATH' => $theme->getPath(),
