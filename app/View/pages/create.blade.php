@@ -44,7 +44,7 @@
 </select></div>
 
 
-<div class='form-group pull-left col-xs-12 col-md-6' id='submenus'>
+<div class='form-group col-xs-12 col-md-6' id='submenus'>
   <label for='submenus'>{{trans('page.parent_menu')}}</label>
   <select class='form-control' name='parent_id' >";  
       

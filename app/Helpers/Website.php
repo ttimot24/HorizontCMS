@@ -19,7 +19,7 @@ class Website{
 	public static $system,$pages;
 	
 
-	public static function initalize(){
+	public static function initalize($the){
 
 		$settings = new \App\Model\Settings();
 		$settings->assignAll();
@@ -30,9 +30,7 @@ class Website{
 
 		self::$_CURRENT_USER = \Auth::user();
 
-		$url = UrlManager::get_slugs();
-
-		self::$_REQUESTED_PAGE = \App\Model\Page::where('slug', '=' ,$url[0])->get()->first();
+		self::$_REQUESTED_PAGE = Request::is("/")? \App\Model\Page::find(\App\Model\Settings::get('home_page')) : \App\Model\Page::findBySlug(Request::path());
 
 
 		/*$system = new System();
@@ -96,7 +94,7 @@ class Website{
 
 
 	public static function logo(){
-		return Storage::get('images/logo',Website::$_SETTINGS->logo);
+		return 'storage/images/logo'.Website::$_SETTINGS->logo;
 	}
 
 

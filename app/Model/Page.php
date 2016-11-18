@@ -8,7 +8,22 @@ class Page extends Model{
 
 
     public static function findBySlug($slug){
-        return self::where('slug','=',$slug)->get()->first();
+
+        $page = self::where('slug',$slug)->get()->first();
+
+        if($page!=NULL){
+            return $page;
+        }else{
+
+            foreach (self::where('slug',NULL)->orWhere('slug',"")->get() as $page) {
+                if(str_slug($page->name)==$slug){
+                    return $page;
+                }
+            }
+
+        }
+
+        return NULL;
     }
 
 

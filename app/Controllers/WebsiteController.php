@@ -27,9 +27,11 @@ class WebsiteController extends Controller
      */
     public function index($slug){
 
+        //\App::setLocale('hu');
+
         $theme = new \App\Libs\Theme(Settings::get('theme'));
 
-        $theme_engine = new $this->engines[$theme->getConfig('theme_engine')]($this->request);
+        $theme_engine = new $this->engines[$theme->getConfig('theme_engine','hcms')]($this->request);
         $theme_engine->setTheme($theme);
 
         $theme_engine->runScript('before');
@@ -40,13 +42,13 @@ class WebsiteController extends Controller
 
             $requested_page = $slug=="/"? Page::find(Settings::get('home_page')) : Page::findBySlug($slug);
 
-            if($requested_page){
-                if(isset($requested_page->url) && $theme_engine->templateExists($requested_page->url)){
+            if($requested_page!=NULL){
+                if(isset($requested_page->url) && $requested_page->url!="" && $theme_engine->templateExists($requested_page->url)){
                     $template = "page_templates.".$requested_page->url;
                 }else{
+
                     if($theme_engine->defaultTemplateExists('page')){
                         $template = 'page';
-
                     }else{
                         throw new \Exception('Can\'t find default page template!');
                     }
@@ -55,13 +57,9 @@ class WebsiteController extends Controller
                  $theme_engine->render404();
             }
 
-
-
             if(Settings::get('website_down')==1 /*&& !\Auth::user()->isAdmin()*/){
                 $theme_engine->renderWebsiteDown();
             }
-
-
 
 
             $theme_engine->pageTemplate($template);

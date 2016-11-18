@@ -13,6 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+    	$this->loadTranslationsFrom(base_path("/themes/".\App\Model\Settings::get('theme')."/lang"), 'website');
         //DB::listen(function ($query) {
             //catch all sql that runs inside the app;
         //});

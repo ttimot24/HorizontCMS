@@ -26,8 +26,8 @@ class Theme{
 		return [];
 	}
 
-	public function getConfig($config){
-		return isset($this->config[$config])? $this->config[$config]: NULL;
+	public function getConfig($config, $default = NULL){
+		return isset($this->config[$config])? $this->config[$config]: $default;
 	}
 
 	public function getName(){
