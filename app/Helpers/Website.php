@@ -24,13 +24,17 @@ class Website{
 		$settings = new \App\Model\Settings();
 		$settings->assignAll();
 
+		self::$_SLUGS = explode("/",Request::path());
+
 		self::$_SETTINGS = $settings->settings;
 
 		self::$_THEME_PATH = 'themes/'.\App\Model\Settings::get('theme');
 
 		self::$_CURRENT_USER = \Auth::user();
 
-		self::$_REQUESTED_PAGE = Request::is("/")? \App\Model\Page::find(\App\Model\Settings::get('home_page')) : \App\Model\Page::findBySlug(Request::path());
+		self::$_REQUESTED_PAGE = Request::is("/")? \App\Model\Page::find(\App\Model\Settings::get('home_page')) : \App\Model\Page::findBySlug(self::$_SLUGS[0]);
+
+
 
 
 		/*$system = new System();
@@ -38,11 +42,8 @@ class Website{
 		$url = UrlManager::get_slugs();
 
 		self::$_PLUGINS = new Plugin();
-		self::$_REQUESTED_PAGE = self::$_PAGE->get_instance_by_name($url[0]);
 
 		self::$_SLUGS = $url;
-
-		Session::get('id')==NULL ? : self::$_CURRENT_USER = self::$_USER->get_instance(Session::get('id'));
 
 		self::$message = new Message();
 */
@@ -52,7 +53,7 @@ class Website{
 
 	public static function define_base(){
 
-		return "<base href=".BASE_DIR ." />";
+		return "<base href=".\Config::get('app.url') ." />";
 	}
 
 

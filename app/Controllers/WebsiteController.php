@@ -27,6 +27,8 @@ class WebsiteController extends Controller
      */
     public function index($slug){
 
+        $slug = explode("/",$slug);
+
         //\App::setLocale('hu');
 
         $theme = new \App\Libs\Theme(Settings::get('theme'));
@@ -40,7 +42,8 @@ class WebsiteController extends Controller
                 $slug = $slug[0];
             }
 
-            $requested_page = $slug=="/"? Page::find(Settings::get('home_page')) : Page::findBySlug($slug);
+
+            $requested_page = $slug==""? Page::find(Settings::get('home_page')) : Page::findBySlug($slug);
 
             if($requested_page!=NULL){
                 if(isset($requested_page->url) && $requested_page->url!="" && $theme_engine->templateExists($requested_page->url)){

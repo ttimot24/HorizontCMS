@@ -24,19 +24,21 @@ class UrlManager{
 
 	public static function seo_url($string){
 
-	 /*   $string = strtolower($string);
+		$string = explode("/",$string);
 
-	 //   $string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
+		if(count($string)>1){
 
-	    $string = preg_replace("/[\s-]+/", " ", $string);
+			$url = "";
 
-	    $string = preg_replace("/[\s_]/", "-", $string);
+			foreach ($string as $slug) {
+				$url .= "/".str_slug($slug, "-");	
+			}
 
-	    $string = str_replace(str_split(",'?!"), "-", $string);
+			return ltrim($url,"/");
+		}else{
+			return str_slug($string[0], "-");
+		}
 
-	    return $string;*/
-
-	    return str_slug($string, "-");
 	}
 
 	public static function prepare_slug($string){
