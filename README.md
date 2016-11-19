@@ -1,6 +1,6 @@
 # HorizontCMS
 
-Lightweight CMS built on Laravel 5.3.
+Lightweight CMS built on Laravel 5.3. Easy to use for developers, even easier for simple users.
 
 [![Laravel 5.3](https://img.shields.io/badge/Laravel-5.3-orange.svg)](http://laravel.com)
 [![Build Status](https://travis-ci.org/ttimot24/HorizontCMS.svg?branch=master)](https://travis-ci.org/ttimot24/HorizontCMS)

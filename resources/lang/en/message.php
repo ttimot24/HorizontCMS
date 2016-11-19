@@ -24,4 +24,7 @@ return [
 
 	'successfully_changed_theme' => 'Theme changed successfully',
 
+	'successfully_enabled_blogpost' => 'Comments enabled successfully',
+	'successfully_disabled_blogpost' => 'Comments disabled successfully',
+
 ];

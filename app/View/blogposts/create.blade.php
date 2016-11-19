@@ -40,12 +40,13 @@
 
 </select></div>
 
- <div class='form-group pull-left col-xs-12 col-md-8' style='margin-top:2%;'>
+
+ <div class='form-group col-xs-12 col-md-8' style='margin-top:2%;'>
  <label for='title'>{{trans('blogpost.summary')}}:</label>
       <input type='text' class='form-control' id='title' name='summary' value=></br>
 </div>
 
- <div class='form-group pull-left col-xs-12 col-md-12'>
+ <div class='form-group col-xs-12 col-md-12'>
       <label for='text'>{{trans('blogpost.post')}}:</label>
       
 

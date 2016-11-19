@@ -24,6 +24,8 @@ return [
 
 	'successfully_changed_theme' => 'Téma sikeresen beállítva!',
 
+	'successfully_enabled_blogpost' => 'Hozzászólások engedélyezve',
+	'successfully_disabled_blogpost' => 'Hozzászólások letiltva',
 
 
 ];

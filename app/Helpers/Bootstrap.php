@@ -87,19 +87,6 @@ class Bootstrap{
 
 
 
-    public function modal(){
-
-
-
-
-
-
-
-      
-    }
-
-
-
 
 
 

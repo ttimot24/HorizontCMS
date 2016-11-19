@@ -45,6 +45,7 @@ class BlogpostController extends Controller{
             $blogpost->summary = $this->request->input('summary');
             $blogpost->text = $this->request->input('text');
             $blogpost->author_id = \Auth::user()->id;
+            $blogpost->comments_enabled = 1;
 
             if ($this->request->hasFile('up_file')){
                  
@@ -175,6 +176,33 @@ class BlogpostController extends Controller{
 
 
         return $this->redirect(admin_link("blogpost-index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
+
+    }
+
+
+
+    public function enableComment($id){
+        $blogpost = Blogpost::find($id);
+        $blogpost->comments_enabled = 1;
+
+        if($blogpost->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_enabled_blogpost')]);
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
+
+    }
+
+
+    public function disableComment($id){
+        $blogpost = Blogpost::find($id);
+        $blogpost->comments_enabled = 0;
+
+        if($blogpost->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_disabled_blogpost')]);
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
 
     }
 

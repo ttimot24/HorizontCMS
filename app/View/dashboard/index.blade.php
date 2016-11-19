@@ -68,7 +68,7 @@
          </div>
     </div>
 
-    </br><center><h1>{{ trans('dashboard.welcome_message') }}</h1></center>
+    <center><h1>{{ trans('dashboard.welcome_message') }}</h1></center>
 
 	</br>
     <div class='container col-md-12'>

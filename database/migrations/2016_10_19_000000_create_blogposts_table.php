@@ -19,6 +19,7 @@ class CreateBlogpostsTable extends Migration
             $table->string('summary');
             $table->text('text');
             $table->integer('category_id');
+            $table->integer('comments_enabled');
             $table->integer('author_id');
             $table->string('image')->nullable();
             $table->timestamps();

@@ -1,6 +1,23 @@
-<h2>{{trans('comment.moderator')}}<small style='margin-left:30%;'>
-<button type='button' class='btn btn-warning' data-toggle='modal' data-target='#comment-modal-xl'>{{trans('comment.write_comment_button')}}</button></small>
+<h2>{{trans('comment.moderator')}}
+
+@if($blogpost->comments_enabled==1)
+<small style='margin-left:20%;'>
+  <a type='button' class='btn btn-warning' data-toggle='modal' data-target='#comment-modal-xl'>{{trans('comment.write_comment_button')}}</a>
+  <a class='btn btn-danger btn-sm' href="admin/blogpost/disable-comment/{{$blogpost->id}}">{{trans('comment.disable_comments_button')}}</a>
+</small>
+@endif
+
 <small class='pull-right' style='margin-top:1.5%;'>{{trans('comment.all_comments')}}: {{$blogpost->comments->count()}}</small></h2></br>
+
+
+@if($blogpost->comments_enabled!=1)
+  <div class="alert alert-warning" role="alert">
+  <div class="row">
+  <div class="col-md-10" >{!!trans('comment.comments_not_enabled')!!}</div>
+  <div class="col-md-2"><a class="btn btn-info btn-sm" href="admin/blogpost/enable-comment/{{$blogpost->id}}">{{ trans('comment.enable_comments_button') }}</a></div>
+  </div>
+  </div>
+@else
 
 <table class='table table-hover'>
     <thead>
@@ -87,7 +104,7 @@
   </div>
 </div>
 </div>
-
+@endif
 
 
 
