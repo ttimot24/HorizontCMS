@@ -14,11 +14,17 @@ class RouteResolver{
 				} 
 
 		        $controllerClass = 'App\\Controllers\\'.$controller_name;
+		        $controller = \App::make($controllerClass);
 
 		        $action = studly_case($action);
+		        
+
+		      	if(method_exists($controllerClass, 'before')){
+		            $controller->callAction('before', [$args]);
+		        }
 
 		        if(method_exists($controllerClass, $action)){
-		            $controller = \App::make($controllerClass);
+		          
 		            return $controller->callAction($action, [$args]);
 		        }
 		        else{
