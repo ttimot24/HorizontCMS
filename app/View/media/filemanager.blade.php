@@ -18,7 +18,7 @@
 
 <div class='panel panel-default col-md-2' style='padding:0px;'>
  <ul class="list-group">
-  <a href='admin/filemanager?path=images'><li class="list-group-item">images</li></a>
+  <a href='admin/filemanager?path=/images'><li class="list-group-item">images</li></a>
   <li class="list-group-item">uploads</li>
   <li class="list-group-item">themes</li>
   <li class="list-group-item">plugins</li>
@@ -29,7 +29,7 @@
 <div class="panel panel-default col-md-10" >
   <div class="panel-body">
       <ol class="breadcrumb">
-			  <li><a>root</a></li>
+			  <li><a href="admin/filemanager?path=">root</a></li>
 			  <li><a><?= str_replace("/","</a></li><li><a>",$current_dir) ?></a></li>
 			</ol>
 
@@ -42,7 +42,9 @@
             			echo Html::img('resources/images/icons/dir.png',"style='width:100%;'  ");
             		}
             		else if(isset($file_parts['extension']) && in_array($file_parts['extension'],$allowed_extensions['image'])){
-            			echo Html::img($current_dir.$file,"style='object-fit:cover;width:100%;height:100px;' ondblclick='' ");
+            			echo Html::img($current_dir."/".$file,"style='object-fit:cover;width:100%;height:100px;' data-toggle='modal' data-target='.".$file."-modal-xl' ");
+
+                 // Bootstrap::image_details($file,$current_dir."/".$file);
             		}else{
                   echo Html::img('resources/images/icons/file.png',"style='object-fit:cover;width:100%;height:100px;margin-bottom:15px;' ondblclick='' ");
                 }
@@ -90,6 +92,7 @@
       <div class='modal-body'>
 
       <form action='admin/filemanager/fileupload' method='POST' enctype='multipart/form-data'>
+      {{ csrf_field() }}
       <div class='form-group'>
         <label for='file'>Upload file:</label>
         <input type='hidden' name='dir_path' value="{{ $current_dir }}">
@@ -118,6 +121,7 @@
       <div class='modal-body'>
 
 <form action='admin/filemanager/newfolder' method='POST' enctype='multipart/form-data'>
+      {{ csrf_field() }}
 <div class='form-group'>
       <input type='hidden' name='dir_path' value="{{ $current_dir }}">
       <div class='form-group' >

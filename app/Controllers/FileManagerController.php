@@ -18,7 +18,7 @@ class FileManagerController extends Controller{
     public function index($slug){
 
 
-        $current_dir = $this->request->get('path')==NULL? storage_path() : storage_path().DIRECTORY_SEPARATOR.$this->request->get('path');
+        $current_dir = $this->request->get('path')==NULL? "storage" : "storage".$this->request->get('path');
 
 
         $this->view->title(trans('File Manager'));
@@ -37,8 +37,21 @@ class FileManagerController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
+    public function fileupload(){
+        
+        if($this->request->isMethod('POST')){
 
+            if ($this->request->hasFile('up_file')){
+
+            foreach($this->request->up_file as $file){
+               $asd = $file->store(ltrim($this->request->input('dir_path'),"storage/"));
+            }
+               
+            return $this->redirectToSelf()->withMessage(['success' => 'Files uploaded successfully']);
+
+            }
+
+        }
 
     }
 
@@ -48,8 +61,18 @@ class FileManagerController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-        //
+    public function newfolder(){
+        
+        if($this->request->isMethod('POST')){
+            
+            if(!file_exists($this->request->input('dir_path')."/".$this->request->input('new_folder_name'))){
+                \File::makeDirectory($this->request->input('dir_path')."/".$this->request->input('new_folder_name'), $mode = 0777, true, true);
+                return $this->redirectToSelf()->withMessage(['success' => 'Folder created successfully!']);
+            }else{
+                return $this->redirectToSelf()->withMessage(['danger' => 'Folder already exists!']);
+            }
+        }
+
     }
 
     /**
