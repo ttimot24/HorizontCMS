@@ -103,9 +103,7 @@ echo "</section>";
                 CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
                 CKEDITOR.config.removeButtons = 'Save,Font';
                 CKEDITOR.config.height = 350;
-               /* CKEDITOR.config.filebrowserBrowseUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/browse') ?>';
-                CKEDITOR.config.filebrowserUploadUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/upload') ?>';
-            */
+
                 CKEDITOR.config.filebrowserBrowseUrl = 'resources/assets/filemanager/dialog.php?type=2&editor=ckeditor&fldr='; 
                 CKEDITOR.config.filebrowserUploadUrl = 'resources/assets/filemanager/dialog.php?type=2&editor=ckeditor&fldr=';
                 CKEDITOR.config.filebrowserImageBrowseUrl = 'resources/assets/filemanager/dialog.php?type=1&editor=ckeditor&fldr=';
@@ -125,7 +123,7 @@ echo "</section>";
 
 
 <div class='form-group pull-left col-xs-12 col-md-8' >
-    <button id='submit-btn' type='submit' class='btn btn-primary btn-lg' onclick='window.onbeforeunload = null;'>Save updates</button>
+    <button id='submit-btn' type='submit' class='btn btn-primary btn-lg' onclick='/*window.onbeforeunload = null;*/'>Save updates</button>
     </div>
   </form>
 </div>
@@ -136,7 +134,7 @@ Bootstrap::image_details($page->id,$page->getImage());
 
 
 <script type='text/javascript'>
- /*$(document).ready(function() {
+ $(document).ready(function() {
 
    $('#level').change(function() {
       if($(this).find('option:selected').val() == '0') {
@@ -148,7 +146,7 @@ Bootstrap::image_details($page->id,$page->getImage());
         $('#submenus').show();
       }
    });
-});*/
+});
 </script>
 
 <script type='text/javascript'>
@@ -168,4 +166,4 @@ Bootstrap::image_details($page->id,$page->getImage());
   }
 </script>
 
-@endsection;
+@endsection

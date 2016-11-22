@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 	<base href="{{ Config::get('app.url') }}" />
 	<title>{{ $title }} - {{ Config::get('app.name') }}</title>
 	<link rel="shortcut icon" type="image/png" href="resources/images/icons/favicon16.png"/>
@@ -29,9 +28,6 @@
 
 <div id='whatsup' class='panel panel-primary' ></div>
 
-
-<?php //include(VIEW_DIR."default/scripts.php") ?>
-
 <footer id='footer' style='bottom:0;position:relative;'>
         <div class='container main-container'>
             <p class='text-muted credit' >
@@ -45,7 +41,7 @@
 
 <script>
 	$(document).ready(function() {  
-	    $("html").niceScroll({cursorwidth: "10px",zindex: "auto",autohidemode: false,});
+	    $("html").niceScroll({cursorwidth: "10px",zindex: "auto",autohidemode: false});
 	});
 </script>
 
