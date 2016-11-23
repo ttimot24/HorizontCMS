@@ -13,11 +13,11 @@
   <section class='col-xs-12 col-md-8'>
 
   <br><br>
-  <input type='hidden' name='id' value='<?= $page->id ?>'>
+  <input type='hidden' name='id' value='{{ $page->id }}'>
   <div class='form-group pull-left col-xs-12 col-md-12' >
       <label for='title'>{{trans('page.menu_name')}}</label>
-      <input type='text' class='form-control' id='menu-title' name='name' onkeyup="//ajaxGetSlug();" value='<?= htmlspecialchars($page->name,ENT_QUOTES) ?>' required></input>
-      <small><b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp<?php //echo $domain.rtrim(BASE_DIR,'/') ?><a class='text-muted' id='ajaxSlug'><?php //echo "/".UrlManager::seo_url($page->name) ?></a> </small>
+      <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" value='{{$page->name}}' required></input>
+      <small><b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp{{ Config::get('app.url') }}<a class='text-muted' id='ajaxSlug'><?= UrlManager::seo_url($page->name) ?></a> </small>
     </div>
 
 <br>
@@ -54,13 +54,14 @@ echo "<div class='form-group col-xs-12 col-md-6' id='submenus'>
 
       foreach($all_page as $each){
 
-      	if($page->id==$each->id){continue;}
+      	if($each->is($page)){continue;}
 
-      	if($page->parent->is($each)){
+      	if($page->parent!=NULL && $each->is($page->parent)){
       		echo "<option value='".$each->id."' selected >".$each->name."</option>"; 
-  		}else{
-   			echo "<option value='".$each->id ."'>".$each->name."</option>"; 
-  			}
+    		}else{
+     			echo "<option value='".$each->id ."'>".$each->name."</option>"; 
+    		}
+
       }
 
 echo "</select></div>";
@@ -103,10 +104,8 @@ echo "</section>";
                 CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
                 CKEDITOR.config.removeButtons = 'Save,Font';
                 CKEDITOR.config.height = 350;
-
-                CKEDITOR.config.filebrowserBrowseUrl = 'resources/assets/filemanager/dialog.php?type=2&editor=ckeditor&fldr='; 
-                CKEDITOR.config.filebrowserUploadUrl = 'resources/assets/filemanager/dialog.php?type=2&editor=ckeditor&fldr=';
-                CKEDITOR.config.filebrowserImageBrowseUrl = 'resources/assets/filemanager/dialog.php?type=1&editor=ckeditor&fldr=';
+                CKEDITOR.config.filebrowserBrowseUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/ckbrowse') ?>';
+                CKEDITOR.config.filebrowserUploadUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/upload') ?>';
 
             </script>
 

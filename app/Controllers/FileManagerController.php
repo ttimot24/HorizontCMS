@@ -81,8 +81,19 @@ class FileManagerController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
+    public function ckbrowse(){
+        $current_dir = $this->request->get('path')==NULL? "storage" : "storage".$this->request->get('path');
 
+
+        $this->view->title(trans('File Manager'));
+        return $this->view->render('media/foreditor/ckbrowser',[
+                'old_path' => $this->request->get('path'),
+                'current_dir' => $current_dir,
+                'files' => array_slice(scandir($current_dir),2),
+                'allowed_extensions' => [
+                                          'image' => ['jpg','png','jpeg']
+                                        ],
+            ]);
     }
 
     /**
