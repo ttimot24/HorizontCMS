@@ -27,8 +27,18 @@ Backend: [https://horizontcms.herokuapp.com/admin](https://horizontcms.herokuapp
 ####Browser:
   Still in development.
 
+###Contributing
+  - Create a Theme
+  - Create a Plugin
+  - Create translation
+  - Help in the docs.
+  - Write tests
+  - Report issues
+  - Send pull requests
+  - Tell what you think!
+  
+Any help is appreciated!
+
 ##
 
 Project by Timot Tarjani (@ttimot24)
-
-Any help is appreciated!
