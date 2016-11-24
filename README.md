@@ -2,10 +2,11 @@
 
 <h1 align="center">HorizontCMS</h1>
 
-
+<p align="center">
 [![Laravel 5.3](https://img.shields.io/badge/Laravel-5.3-orange.svg)](http://laravel.com)
 [![Build Status](https://travis-ci.org/ttimot24/HorizontCMS.svg?branch=master)](https://travis-ci.org/ttimot24/HorizontCMS)
 [![Github All Releases](https://img.shields.io/github/downloads/ttimot24/horizontcms/total.svg)]()
+</p>
 
 Lightweight CMS built on Laravel 5.3. Easy to use for developers, even easier for simple users.
 
@@ -30,8 +31,7 @@ Backend: [https://horizontcms.herokuapp.com/admin](https://horizontcms.herokuapp
   Still in development.
 
 ###Contributing
-  - Create a Theme
-  - Create a Plugin
+  - Create a Theme or Plugin
   - Create translation
   - Help in the docs.
   - Write tests

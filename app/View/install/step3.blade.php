@@ -1,13 +1,13 @@
 @extends('layout')
 
 @section('content')
-<div class='container'>
-			  <div class='jumbotron'>
+<div class='jumbotron'>
+			  <div class='container'>
 			  <h1><small>Installing HorizontCMS</small></h1>  
 
 
 <div class='progress'>
-			<div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='80' aria-valuemin='0' aria-valuemax='100' style='min-width: 75em;'>
+			<div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='80' aria-valuemin='0' aria-valuemax='100' style='min-width: 80em;'>
 						    80%
 						  </div>
 					</div>
@@ -17,10 +17,7 @@
   		<h2>Step 3: Administrator</h2>
 					</br>
 
-		<?php 
-		//	require(VIEW_DIR."default/messages.php");
-		?>
-
+		@include('messages')
 
 				</br>
 

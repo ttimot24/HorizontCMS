@@ -1,33 +1,29 @@
-@extends('layout');
+@extends('layout')
 
 @section('content')
-<div class='container'>
-			  <div class='jumbotron'>
+<div class='jumbotron'>
+			  <div class='container'>
 			  <h1><small>Installing HorizontCMS</small></h1>   
 
 
 
 
 <div class='progress'>
-			<div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='40' aria-valuemin='0' aria-valuemax='100' style='min-width: 35em;'>
+			<div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='40' aria-valuemin='0' aria-valuemax='100' style='min-width: 40em;'>
 						    40%
 						  </div>
 					</div>
 					<hr/>
 
-		@include('messages')
-
   		<h2>Step 2: Database</h2>
-					</br>
+		</br>
 					
 
-		<?php 
-			//require(VIEW_DIR."default/messages.php");
-		?>
+		@include('messages')
 
 		</br>
 
-		<form action='admin/install/checkconnection' method='POST'>
+		<form action='admin/install/check-connection' method='POST'>
 
 		{{ csrf_field() }}
 			<div class='container'>

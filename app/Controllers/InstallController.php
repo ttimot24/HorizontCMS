@@ -55,8 +55,13 @@ class InstallController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
+    public function checkConnection(){
 
+            if(TRUE){
+                return $this->redirect('admin/install/step3')->withMessage(['success' => trans('Connection with database established!')]);
+            }else{
+               return $this->redirectToSelf()->withMessage(['danger' => trans('Can not establish the connection!')]);
+            }
     }
 
     /**
@@ -65,8 +70,9 @@ class InstallController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
-
+    public function step3(){
+        $this->view->title("Install");
+        return $this->view->render("install/step3");
     }
 
     /**
@@ -76,8 +82,10 @@ class InstallController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
-        //
+    public function migrate(){
+        
+          
+        return $this->redirect('admin/install/step4')->withMessage(['success' => trans('Succesfully migrated!')]);
     }
 
     /**
@@ -86,20 +94,11 @@ class InstallController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
-        //
+    public function step4(){
+        $this->view->title("Install");
+        return $this->view->render("install/step4");
     }
 
-
-    /**
-     * Remove the specified resource from database.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id){
-        
-    }
 
 
 }

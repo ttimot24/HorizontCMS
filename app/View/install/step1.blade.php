@@ -1,8 +1,8 @@
 @extends('layout')
 
 @section('content')
-<div class='container'>
-			  <div class='jumbotron'>
+<div class='jumbotron'>
+			  <div class='container'>
 			  <h1><small>Installing HorizontCMS</small></h1>   
 
 
@@ -35,5 +35,5 @@
 					</br>
 
 	</div>
-</div>
+</div></div>
 @endsection
