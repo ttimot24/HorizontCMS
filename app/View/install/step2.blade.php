@@ -46,14 +46,14 @@
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='server'>Server:</label>
 			      <div class='col-sm-5'>          
-			        <input type='text' class='form-control' id='server' name='server' value="localhost" required>
+			        <input type='text' class='form-control' id='server' name='server' value="{{ old('server', 'localhost') }}" required>
 			      </div>
 			    </div>
 			    </br></br>
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='username'>Username:</label>
 			      <div class='col-sm-5'>          
-			        <input type='text' class='form-control' id='username' name='username' placeholder='username' value='' required autofocus>
+			        <input type='text' class='form-control' id='username' name='username' placeholder='username' value="{{ old('username') }}" required autofocus>
 			      </div>
 			    </div>
 
@@ -61,7 +61,7 @@
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='pwd'>Password:</label>
 			      <div class='col-sm-5'>          
-			        <input type='password' class='form-control' id='pwd' name='password' placeholder='password' value='' required>
+			        <input type='password' class='form-control' id='pwd' name='password' placeholder='password' value=''>
 			      </div>
 			    </div>
 
@@ -69,7 +69,7 @@
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='data'>Create database:</label>
 			      <div class='col-sm-5'>          
-			        <input type='text' class='form-control' id='data' name='database' placeholder='database name' value='' required>
+			        <input type='text' class='form-control' id='data' name='database' placeholder='database name' value="{{ old('database') }}" required>
 			      </div>
 			    </div>
 
@@ -77,7 +77,7 @@
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='prefix'>Table prefix:</label>
 			      <div class='col-sm-5'>          
-			        <input type='text' class='form-control' id='prefix' name='prefix' placeholder='prefix' value=''>
+			        <input type='text' class='form-control' id='prefix' name='prefix' placeholder='prefix' value="{{ old('prefix','hcms_') }}">
 			      </div>
 			    </div>
 

@@ -124,6 +124,8 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+    'log_path' => env('LOG_PATH','storage/framework/logs/laravel.log'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

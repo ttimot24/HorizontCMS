@@ -33,26 +33,24 @@
 
 <tr><td>Language</td><td><select name='language' class='form-control' style='width:100%;'>
 
-              <?php 
+              
 
-                foreach($languages as $key => $language){
-                  //$language = str_replace(".php","",$language);
+                @foreach($languages as $key => $language)
 
-                  if($language == $settings['language']){
-                    echo "<option value='".$key."' selected>".ucfirst($language)."</option>";
-                  }
-                  else{
-                    echo "<option value='".$key."'>".ucfirst($language)."</option>";
-                  }
+                  @if($language == $settings['language'])
+                    <option value='{{$key}}' selected>{{ucfirst($language)}}</option>
+                  @else
+                    <option value='{{$key}}'>{{ucfirst($language)}}</option>
+                  @endif
 
-                }
+                @endforeach
 
 
-
-              ?>
+  
 						</select>
 				</td></tr>
 
+<tr><td>Automatically check for updates</td><td><input class='form-control' type='checkbox' value="1"/></td>
 
 <tr><td></td><td></br><button type='submit' class='btn btn-primary'><span class='glyphicon glyphicon-floppy-save' aria-hidden='true'></span> Save settings</button> </td></tr>
 

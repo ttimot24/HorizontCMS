@@ -9,13 +9,12 @@ use App\Libs\Controller;
 class InstallController extends Controller{
 
 
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($step = 'index'){
+    public function index(){
 
 
         $this->view->title("Install");
@@ -57,11 +56,21 @@ class InstallController extends Controller{
      */
     public function checkConnection(){
 
-            if(TRUE){
+
+            try{
+
+                new \PDO($this->request->input('db_driver').':host='.$this->request->input('server').';', 
+                    $this->request->input('username'), 
+                    $this->request->input('password')
+                );
+
                 return $this->redirect('admin/install/step3')->withMessage(['success' => trans('Connection with database established!')]);
-            }else{
-               return $this->redirectToSelf()->withMessage(['danger' => trans('Can not establish the connection!')]);
+            }catch(\PDOException $except){
+               $this->request->flash();
+               return $this->redirectToSelf()->withMessage(['danger' => trans('Can not establish the connection: '.$except->getMessage())]);
             }
+
+
     }
 
     /**
