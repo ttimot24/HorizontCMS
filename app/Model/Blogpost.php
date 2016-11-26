@@ -10,6 +10,26 @@ class Blogpost extends Model{
                         'title' => 'required',
                         );
 
+
+    public static function findBySlug($slug){
+
+        $blogpost = self::where('slug',$slug)->get()->first();
+
+        if($blogpost!=NULL){
+            return $blogpost;
+        }else{
+
+            foreach (self::where('slug',NULL)->orWhere('slug',"")->get() as $blogpost) {
+                if(str_slug($blogpost->title)==$slug){
+                    return $blogpost;
+                }
+            }
+
+        }
+
+        return NULL;
+    }
+
     public function author(){
     	 return $this->belongsTo(\App\User::class,'author_id','id'); //In db it has to be author_id else it won't work because Laravel priority is attr -> function
     }   

@@ -16,6 +16,7 @@ class CreateBlogpostsTable extends Migration
         Schema::create('blogposts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('slug');
             $table->string('summary');
             $table->text('text');
             $table->integer('category_id');

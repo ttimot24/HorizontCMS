@@ -41,6 +41,7 @@ class BlogpostController extends Controller{
 
             $blogpost = new Blogpost();
             $blogpost->title = $this->request->input('title');
+            $blogpost->slug = str_slug($this->request->input('title'), "-");
             $blogpost->category_id = $this->request->input('category_id');
             $blogpost->summary = $this->request->input('summary');
             $blogpost->text = $this->request->input('text');
@@ -130,6 +131,7 @@ class BlogpostController extends Controller{
          $blogpost = Blogpost::find($id);
 
       	 $blogpost->title = $this->request->input('title');
+      	 $blogpost->slug = str_slug($this->request->input('title'), "-");
          $blogpost->category_id = $this->request->input('category_id');
          $blogpost->summary = $this->request->input('summary');
          $blogpost->text = $this->request->input('text');

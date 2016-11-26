@@ -40,6 +40,7 @@ class UserController extends Controller{
             $user = new User();
             $user->name = $this->request->input('name');
             $user->username = $this->request->input('username');
+            $blogpost->slug = str_slug($this->request->input('username'), "-");
             $user->password = \Hash::make($this->request->input('password'));
             $user->email = $this->request->input('email');
             $user->role_id = $this->request->input('role_id');
@@ -124,6 +125,7 @@ class UserController extends Controller{
             $user = User::find($id);
             $user->name = $this->request->input('name');
             $user->username = $this->request->input('username');
+            $blogpost->slug = str_slug($this->request->input('username'), "-");
             $user->email = $this->request->input('email');
 
             if($this->request->has('password')){

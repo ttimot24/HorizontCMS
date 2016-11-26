@@ -29,6 +29,25 @@ class User extends Authenticatable{
     ];
 
 
+    public static function findBySlug($slug){
+
+        $user = self::where('slug',$slug)->get()->first();
+
+        if($user!=NULL){
+            return $user;
+        }else{
+
+            foreach (self::where('slug',NULL)->orWhere('slug',"")->get() as $user) {
+                if(str_slug($user->username)==$slug){
+                    return $user;
+                }
+            }
+
+        }
+
+        return NULL;
+    }
+
 
     public function blogposts(){
         return $this->hasMany(\App\Model\Blogpost::class,'author_id','id');

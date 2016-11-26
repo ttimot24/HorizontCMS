@@ -94,6 +94,7 @@ $this->info("Ready");
 $administrator = new \App\User();
 $administrator->name = 'Administrator';
 $administrator->username = $admin['username'];
+$administrator->slug = str_slug($admin['username']);
 $administrator->password = \Hash::make($admin['password']);
 $administrator->email = $admin['email'];
 $administrator->role_id = 6;
