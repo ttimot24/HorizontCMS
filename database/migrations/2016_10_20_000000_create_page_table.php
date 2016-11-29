@@ -18,7 +18,7 @@ class CreatePageTable extends Migration{
             $table->string('slug');
             $table->string('url');
             $table->integer('visibility');
-            $table->integer('parent_id');
+            $table->integer('parent_id')->nullable();
             $table->integer('queue');
             $table->text('page');
             $table->integer('author_id');

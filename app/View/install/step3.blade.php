@@ -23,7 +23,7 @@
 
 				<form action='admin/install/migrate' method='POST'>
 
-
+				{{ csrf_field() }}
 
 				<div class='container'>
 

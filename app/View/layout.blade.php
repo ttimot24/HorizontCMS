@@ -2,6 +2,8 @@
 <html>
 <head>
 	<base href="{{ Config::get('app.url') }}" />
+	<meta name="csrf-token" content="{{ csrf_token() }}" />
+	
 	<title>{{ $title }} - {{ Config::get('app.name') }}</title>
 	<link rel="shortcut icon" type="image/png" href="resources/images/icons/favicon16.png"/>
 

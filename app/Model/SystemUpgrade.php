@@ -6,8 +6,6 @@ use \App\Libs\Model;
 
 class SystemUpgrade extends Model{
 
-	protected $table = 'system_upgrade';
-
 
 	public static function getCore(){
 		return self::first();

@@ -19,7 +19,6 @@ class InstallerMiddleware
         if(!file_exists(".env") && strpos(\Request::path(), \Config::get('horizontcms.backend_prefix').'/install') === false){
           
             \Auth::logout();
-            \Session::flush();
             return redirect(\Config::get('horizontcms.backend_prefix').'/install');
 
         }else if(file_exists(".env") && strpos(\Request::path(), \Config::get('horizontcms.backend_prefix').'/install') !== false){

@@ -45,13 +45,13 @@ class MenuMiddleware{
             $menu->add(trans('navbar.media'), '#')->id('media');
             $menu->find('media')->add("<i class='fa fa-picture-o'></i> ".trans('navbar.header_images'), $prefix.'/headerimage');
             $menu->find('media')->add("<i class='fa fa-folder-open-o'></i> ".trans('navbar.filemanager'), $prefix.'/filemanager');
-            $menu->find('media')->add("<i class='fa fa-camera-retro'></i> ".trans('navbar.gallery'), $prefix.'/gallery');
+           // $menu->find('media')->add("<i class='fa fa-camera-retro'></i> ".trans('navbar.gallery'), $prefix.'/gallery');
             
             
             $menu->add(trans('navbar.themes_apps'), '#')->id('themes_apps');
             $menu->find('themes_apps')->add("<i class='fa fa-desktop'></i> ".trans('navbar.theme'), $prefix.'/theme');
             $menu->find('themes_apps')->add("<i class='fa fa-cubes'></i> ".trans('navbar.plugin'), $prefix.'/plugin');
-            $menu->find('themes_apps')->add("<i class='fa fa-code'></i> ".trans('navbar.develop'), $prefix.'/develop');
+           // $menu->find('themes_apps')->add("<i class='fa fa-code'></i> ".trans('navbar.develop'), $prefix.'/develop');
 
         });
   

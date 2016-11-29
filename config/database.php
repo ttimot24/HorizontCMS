@@ -46,13 +46,9 @@ return [
 
     'connections' => [
 
-        'sqlite' => [
-            'driver' => 'sqlite',
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
-            'prefix' => env('DB_TABLE_PREFIX', ''),
-        ],
 
         'mysql' => [
+            'name' => 'MySql',
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
@@ -67,6 +63,7 @@ return [
         ],
 
         'pgsql' => [
+            'name' => 'PostgreSQL',
             'driver' => 'pgsql',
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '5432'),
@@ -77,6 +74,13 @@ return [
             'prefix' => env('DB_TABLE_PREFIX', ''),
             'schema' => 'public',
             'sslmode' => 'prefer',
+        ],
+
+        'sqlite' => [
+            'name' => 'SqLite',
+            'driver' => 'sqlite',
+            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'prefix' => env('DB_TABLE_PREFIX', ''),
         ],
 
     ],

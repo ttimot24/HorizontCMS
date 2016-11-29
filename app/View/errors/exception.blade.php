@@ -25,11 +25,11 @@
 			<div class='well'>
 			<h2>Backtrace:</h2> <br>
 			<?php
+
 				$counter = count($exception->getTrace())-1;
 
 				foreach($exception->getTrace() as $trace){
 			
-
 					  echo '#'.$counter.' <b>Function: </b>' .$trace['function'] ." ";
 					  if(isset($trace['file'])){ echo '<b>File: </b>' .$trace['file'] ." ";}
 					  if(isset($trace['line'])){ echo '<b>Line: </b>' .$trace['line'] ."<br><hr><br>";}

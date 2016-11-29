@@ -20,11 +20,11 @@
     "autoload": {
         "classmap": [
             "database",
-            "app/Model",
             "app/Helpers"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "App\\User\\":"app/Model/User.php"
         }
     },
     "autoload-dev": {
