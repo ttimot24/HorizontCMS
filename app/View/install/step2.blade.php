@@ -44,7 +44,7 @@
 			    </br></br>
 			  
 			    <div class='form-group'>
-			      <label class='control-label col-sm-2' for='server'>Server:</label>
+			      <label class='control-label col-sm-2' for='server'>Host:</label>
 			      <div class='col-sm-5'>          
 			        <input type='text' class='form-control' id='server' name='server' value="{{ old('server', 'localhost') }}" required>
 			      </div>
@@ -67,7 +67,7 @@
 
 			  	</br></br>
 			    <div class='form-group'>
-			      <label class='control-label col-sm-2' for='data'>Create database:</label>
+			      <label class='control-label col-sm-2' for='data'>Database:</label>
 			      <div class='col-sm-5'>          
 			        <input type='text' class='form-control' id='data' name='database' placeholder='database name' value="{{ old('database') }}" required>
 			      </div>

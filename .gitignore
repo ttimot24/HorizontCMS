@@ -8,3 +8,4 @@ Homestead.yaml
 /storage
 /composer.lock
 /themes/twentyt
+/resources/assets/ckeditor45

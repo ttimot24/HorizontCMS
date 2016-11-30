@@ -67,7 +67,7 @@ class InstallController extends Controller{
 
             try{
 
-                new \PDO($this->request->input('db_driver').':host='.$this->request->input('server').';', 
+                new \PDO($this->request->input('db_driver').':host='.$this->request->input('server').';database='.$this->request->input('database'), 
                     $this->request->input('username'), 
                     $this->request->input('password')
                 );
@@ -123,6 +123,7 @@ class InstallController extends Controller{
         $administrator->password = \Hash::make($this->request->input('ad_password'));
         $administrator->email = $this->request->input('ad_email');
         $administrator->role_id = 6;
+        $administrator->active = 1;
 
         if($administrator->save()){
 
@@ -142,6 +143,8 @@ class InstallController extends Controller{
             $systemupgrade->description = "welcome!";
 
             $systemupgrade->save();
+
+            \Artisan::call("key:generate");
 
         }else{
             return $this->redirect('admin/install/step4')->withMessage(['danger' => 'Something went wrong!']);

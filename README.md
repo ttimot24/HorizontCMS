@@ -18,12 +18,11 @@ Backend: [https://horizontcms.herokuapp.com/admin](https://horizontcms.herokuapp
 
 
 ###Installation
-##Browser
+####Browser
 
 After downloading and copying the files to the server, navigate to the app root folder and run ```composer install```. Then head to your domain. HorizontCMS can recognize if not installed yet, and redirects you to the installer. Follow the instructions, add the required credentials and you're done.
 
-##Console 
-####with artisan.
+####Console 
 
   1. Download the CMS
   2. Navigate to the app root folder and run ```composer install```
@@ -36,12 +35,11 @@ After downloading and copying the files to the server, navigate to the app root 
   - Create translation
   - Help in the docs.
   - Write tests
-  - Report issues
-  - Send pull requests
+  - Report issues, send pull requests
   - Tell what you think!
   
 Any help is appreciated!
 
 ##
 
-Project by Timot Tarjani (@ttimot24)
+Project by Timot Tarjani [(@ttimot24)](https://github.com/ttimot24)
