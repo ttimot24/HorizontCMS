@@ -48,24 +48,21 @@ echo "<div class='form-group col-xs-12 col-md-6' id='level' >
           <option value='1' "; if(!isset($page->parent)){echo "selected";} echo">Submenu</option>";
 echo "</select></div>";
 
-echo "<div class='form-group col-xs-12 col-md-6' id='submenus'>
+?>
+
+
+
+<div class='form-group col-xs-12 col-md-6' id='submenus'>
   <label for='submenus'>Parent menu:</label>
-  <select class='form-control' name='parent_id' >";  
+  <select class='form-control' name='parent_id' >  
 
-      foreach($all_page as $each){
+          @foreach($all_page as $each)
+                <option value="{{ $each->id }}" {{ ($page->parent!=NULL && $each->is($page->parent) ? "selected":"") }}>{{ $each->name }}</option>
+          @endforeach
 
-      	if($each->is($page)){continue;}
+</select></div>
 
-      	if($page->parent!=NULL && $each->is($page->parent)){
-      		echo "<option value='".$each->id."' selected >".$each->name."</option>"; 
-    		}else{
-     			echo "<option value='".$each->id ."'>".$each->name."</option>"; 
-    		}
-
-      }
-
-echo "</select></div>";
-
+<?php
 /*echo "<div class='form-group pull-left col-xs-12 col-md-8' >
           <label for='title'>Visibility:&nbsp&nbsp&nbsp&nbsp</label>
               <input type='radio' name='visibility' value='1' "; if($page->visibility==1){echo "checked";}echo">Visible&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -122,7 +119,7 @@ echo "</section>";
 
 
 <div class='form-group pull-left col-xs-12 col-md-8' >
-    <button id='submit-btn' type='submit' class='btn btn-primary btn-lg' onclick='/*window.onbeforeunload = null;*/'>Save updates</button>
+    <button id='submit-btn' type='submit' class='btn btn-primary btn-lg' >Save updates</button>
     </div>
   </form>
 </div>

@@ -22,7 +22,7 @@ class DashboardController extends Controller{
                                                     'server_ip' => $_SERVER['SERVER_ADDR'],
                                                     'client_ip' => $this->request->ip,
                                                     'blogposts'  => \App\Model\Blogpost::count(),
-                                                    'users' => \App\User::count(),
+                                                    'users' => \App\Model\User::count(),
                                                     'visits' => \App\Model\Visits::count(),
                                                     'admin_logo' => \Config::get('horizontcms.admin_logo'),
                                                     'disk_space' => @(disk_free_space("/")/disk_total_space("/"))*100,

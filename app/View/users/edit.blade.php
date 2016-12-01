@@ -15,12 +15,12 @@
 <div class='form-group pull-left col-xs-12 col-md-8' >
       <label for='title'>{{trans('user.create_name')}}:</label>
        <input type='hidden' class='form-control' id='title' name='id' value='{{ $user->id }}' >
-      <input type='text' class='form-control' id='title' name='name' value='<?= htmlspecialchars($user->name,ENT_QUOTES) ?>' required>
+      <input type='text' class='form-control' id='title' name='name' value='{{$user->name}}' required>
     </div>
 
     <div class='form-group pull-left col-xs-12 col-md-8' >
       <label for='title'>{{trans('user.create_username')}}:</label>
-      <input type='text' class='form-control' id='title' name='username' value='<?= htmlspecialchars($user->username,ENT_QUOTES) ?>' required>
+      <input type='text' class='form-control' id='title' name='username' value='{{$user->username}}' required>
     </div>
 
 
@@ -38,27 +38,19 @@
 
 <div class='form-group pull-left col-xs-12 col-md-8' >
       <label for='title'>{{trans('user.create_email')}}:</label>
-      <input type='email' class='form-control' id='title' name='email' value='<?= htmlspecialchars($user->email,ENT_QUOTES) ?>' required>
+      <input type='email' class='form-control' id='title' name='email' value='{{$user->email}}' required>
     </div>
 
 <div class='form-group pull-left col-xs-12 col-md-5' >
   <label for='sel1'>{{trans('user.create_select_rank')}}:</label>
   <select class='form-control' name='role_id' id='sel1'>
     
-<?php     
+    @foreach($user_roles as $each)
+      <option value="{{ $each->id }}" {{ ($each->is($user->role) ? "selected":"") }}>{{ $each->name }}</option>
+    @endforeach
 
-    foreach($user_roles as $each){
-      if($each->is($user->role)){
-         echo "<option value='" .$each->id ."' selected>".htmlspecialchars($each->name,ENT_QUOTES)."</option>";
-      }
-      else{
-        echo "<option value='" .$each->id ."'>".htmlspecialchars($each->name,ENT_QUOTES)."</option>";
-      }
-    }
-
-?>    
-
-</select></div>
+  </select>
+</div>
 
 
 

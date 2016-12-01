@@ -9,7 +9,7 @@ class UserRole extends Model{
 	//protected $table = 'user_ranks';
 
 	public function users(){
-		$this->hasMany(\App\User::class,'id','rank');
+		$this->hasMany(\App\Model\User::class,'id','rank');
 	}
 
 

@@ -20,27 +20,16 @@
 </button>
 
 
-   <div class='form-group pull-left col-xs-12 col-md-5'>
+<div class='form-group pull-left col-xs-12 col-md-5'>
   <label for='sel1'>{{trans('blogpost.select_category')}}:</label>
   <select class='form-control' name='category_id' id='sel1'>
 
+    @foreach($categories as $category)
+      <option value="{{ $category->id }}" {{ $blogpost->category->is($category) ? "selected":"" }} >{{ $category->name }}</option>
+    @endforeach
 
-
-<?php  
-
-    foreach($categories as $category){
-
-
-    	if($blogpost->category->is($category)){
-    		echo "<option value='".$category->id."' selected>".$category->name."</option>";
-    	}else{
-    		echo "<option value='".$category->id."' >".$category->name."</option>";
-    	}
-    	
-    }
-?>
-
-</select></div>
+  </select>
+</div>
 
  <div class='form-group pull-left col-xs-12 col-md-8'>
  <label for='title'>{{trans('blogpost.summary')}}:</label>

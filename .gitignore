@@ -9,3 +9,4 @@ Homestead.yaml
 /composer.lock
 /themes/twentyt
 /resources/assets/ckeditor45
+/resources/assets/ckeditor/samples

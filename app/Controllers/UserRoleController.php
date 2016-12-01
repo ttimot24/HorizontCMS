@@ -8,9 +8,12 @@ use App\Http\Requests;
 
 class UserRoleController extends Controller{
     
-    public function index($slug){
+    public function index(){
 
-
+        $this->view->title('User roles');
+        return $this->view->render('users/roles/index',[
+                                                        'all_user_roles' => \App\Model\UserRole::all(),
+                                                        ]);
     }
 
     /**
@@ -20,7 +23,12 @@ class UserRoleController extends Controller{
      */
     public function create(){
 
-        }
+
+        $this->view->title('Create role');
+        return $this->view->render('users/roles/create',[
+                                                 
+                                                        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -29,7 +37,9 @@ class UserRoleController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        //
+       if($this->request->isMethod('POST')){
+        
+       }
     }
 
     /**
@@ -40,10 +50,6 @@ class UserRoleController extends Controller{
      */
     public function show($id){
 
-        $this->view->title(trans('user.view_user'));
-        return $this->view->render('users/view',[
-                                                    'user' => User::find($id),
-                                                ]);
     }
 
     /**
@@ -54,12 +60,6 @@ class UserRoleController extends Controller{
      */
     public function edit($id){
 
-        $this->view->title(trans('user.edit_user'));
-        return $this->view->render('users/edit',[
-                                                'current_user' => \Auth::user(),
-                                                'user' => User::find($id),
-                                                'user_roles' => \App\Model\UserRole::all(),
-                                                ]);
     }
 
     /**
@@ -92,7 +92,7 @@ class UserRoleController extends Controller{
      */
     public function delete($id){
         
-        User::find($id)->delete();
+        UserRole::find($id)->delete();
 
         return $this->redirectToSelf();
 

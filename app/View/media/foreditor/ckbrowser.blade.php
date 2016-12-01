@@ -46,7 +46,7 @@
       </ol>
 
             <?php foreach($files as $file): ?>
-                <div class='file col-md-2' style='overflow:hidden;height:140px;cursor:pointer;' ondblclick=" window.location.href = 'admin/filemanager/ckbrowse?path=<?= $old_path.'/'.$file ?>' ">
+                <div class='file col-md-2' style='overflow:hidden;height:140px;cursor:pointer;' ondblclick=" window.location.href = 'admin/filemanager/ckbrowse?path=<?= $old_path.'/'.$file ?>&CKEditor=editor&CKEditorFuncNum=1&langCode=en' ">
             
             <?php $file_parts = pathinfo($file);
 
