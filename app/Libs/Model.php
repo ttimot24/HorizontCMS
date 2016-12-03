@@ -7,6 +7,10 @@ class Model extends \Illuminate\Database\Eloquent\Model{
     private $rules = array();
 
 
+    public function hasImage(){
+        return (isset($this->image) && $this->image!="");
+    }
+
     public function equals(Model $other){
         return $this->is($other);
     }

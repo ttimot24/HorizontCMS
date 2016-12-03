@@ -8,5 +8,6 @@ Homestead.yaml
 /storage
 /composer.lock
 /themes/twentyt
+/plugins
 /resources/assets/ckeditor45
 /resources/assets/ckeditor/samples

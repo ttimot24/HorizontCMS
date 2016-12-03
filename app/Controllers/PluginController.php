@@ -17,8 +17,13 @@ class PluginController extends Controller{
      */
     public function index($slug){
 
-        $this->view->title(trans(''));
+        $this->view->title(trans('Applications'));
         return $this->view->render('plugin/index',[
+                                                'all_plugin' => collect(\File::directories(base_path().DIRECTORY_SEPARATOR."plugins"))->map(function($dir){
+                                                    return new \App\Model\Plugin(str_replace(base_path().DIRECTORY_SEPARATOR."plugins".DIRECTORY_SEPARATOR,"",$dir));
+                                                }),
+
+                                                'zip_enabled' => class_exists('ZipArchive'),
 
             ]);
     }
@@ -28,9 +33,13 @@ class PluginController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
+    public function onlinestore(){
 
+        $this->view->title(trans('App center'));
+        return $this->view->render('plugin/store',[
+                                               'online_plugins' => json_decode(file_get_contents('http://www.eterfesztival.hu/hcms_online_store/get_plugins.php')),
 
+            ]);
     }
 
     /**
@@ -93,11 +102,6 @@ class PluginController extends Controller{
      */
     public function delete($id){
         
-    }
-
-
-    public function browse(){
-        return "asd";
     }
 
 

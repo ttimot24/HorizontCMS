@@ -7,7 +7,7 @@
 <h1>Plugin manager 
   <div class='pull-right'>
   <a href="admin/plugin/onlinestore" class='btn btn-info'><i class="fa fa-cloud-download" aria-hidden="true"></i> Download apps</a>
-  <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_plugin' <?php if(!$data['zip_enabled']){ echo "disabled"; } ?>><i class='fa fa-upload'></i>&nbspUpload new plugin</a>
+  <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_plugin' <?php if(!$zip_enabled){ echo "disabled"; } ?>><i class='fa fa-upload'></i>&nbspUpload new plugin</a>
   </div>
 </h1>
 
@@ -21,17 +21,16 @@
 
 foreach($all_plugin as $current_plugin){
 
-
   echo  "<div class='list-group-item ' style='height:120px;'>";
   	
       echo "<div class='col-md-10'>";
 
-       echo Html::img($current_plugin->icon,"class='img img-thumbnail pull-left' onerror='this.src=\"storage/images/icons/plugin.png\"' style='width:80px;height:80px;margin-right:10px;'");
+       echo Html::img($current_plugin->getIcon(),"class='img img-thumbnail pull-left' onerror='this.src=\"storage/images/icons/plugin.png\"' style='width:80px;height:80px;margin-right:10px;'");
 
         echo "<h4 class='list-group-item-heading'>
-              <a href='admin/plugin/".$current_plugin->dir_name."'>".$current_plugin->get_info('name')."</a> <small>version: ".$current_plugin->get_info('version')." | author: <a href='".$current_plugin->get_info('author_url')."'>".$current_plugin->get_info('author')."</a></small></h4>
+              <a href='admin/plugin/".$current_plugin->dir_name."'>".$current_plugin->getInfo('name')."</a> <small>version: ".$current_plugin->getInfo('version')." | author: <a href='".$current_plugin->getInfo('author_url')."'>".$current_plugin->getInfo('author')."</a></small></h4>
 
-            <p class='list-group-item-text' style='margin-bottom:8px;margin-right:70px;'>".$current_plugin->get_info('description')."</p>";
+            <p class='list-group-item-text' style='margin-bottom:8px;margin-right:70px;'>".$current_plugin->getInfo('description')."</p>";
 
         echo "</div>";
 
@@ -56,7 +55,7 @@ foreach($all_plugin as $current_plugin){
    Bootstrap::delete_confirmation(
     "delete_".$current_plugin->dir_name,
     "Are you sure?",
-    "<b>Delete this plugin: </b>".$current_plugin->get_info('name')." <b>?</b>",
+    "<b>Delete this plugin: </b>".$current_plugin->getInfo('name')." <b>?</b>",
     "<a href='admin/plugin/delete/".$current_plugin->dir_name."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
     );
