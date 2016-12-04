@@ -78,9 +78,9 @@ $dotenv->generate();
 
 \Artisan::call("cache:clear");
 
-\Config::set('database.connections.mysql.username', $database['username']);
-\Config::set('database.connections.mysql.password', $database['password']);
-\Config::set('database.connections.mysql.database', $database['database']);
+\Config::set('database.connections.'.$database['driver'].'.username', $database['username']);
+\Config::set('database.connections.'.$database['driver'].'.password', $database['password']);
+\Config::set('database.connections.'.$database['driver'].'.database', $database['database']);
 
 $this->info("Ready");
 
@@ -91,7 +91,7 @@ $this->info("3. Seeding the database. [press 'y']");
 	\Artisan::call("db:seed");
 $this->info("Ready");
 
-$administrator = new \App\User();
+$administrator = new \App\Model\User();
 $administrator->name = 'Administrator';
 $administrator->username = $admin['username'];
 $administrator->slug = str_slug($admin['username']);
@@ -112,6 +112,8 @@ $systemupgrade->importance = "most important";
 $systemupgrade->description = "welcome!";
 
 $systemupgrade->save();
+
+\Artisan::call("key:generate");
 
 $this->info("\r\nHorizontCMS successfully installed!\r\n");
 
