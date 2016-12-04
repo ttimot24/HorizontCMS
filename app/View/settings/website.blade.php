@@ -14,13 +14,13 @@
 <tbody style='font-weight:bolder;'>
 
 <tr><td class='col-md-4'>Title<br><small class='text-muted'>What you write here, will be the name of the browser page.</small></td>
-<td><input type='text' style='width:100%;' class='form-control' name='title' value="{{$settings['title']}}"></td></tr>
+<td><input type='text' class='form-control' name='title' value="{{$settings['title']}}"></td></tr>
 
-<tr><td>Site name</td><td><input type='text' class='form-control'  style='width:100%;' name='site_name' value="{{$settings['site_name']}}"></td></tr>
+<tr><td>Site name</td><td><input type='text' class='form-control' name='site_name' value="{{$settings['site_name']}}"></td></tr>
 
-<tr><td>Slogan</td><td><input type='text' class='form-control'  style='width:100%;' name='slogan' value="{{$settings['slogan']}}"></td></tr>
+<tr><td>Slogan</td><td><input type='text' class='form-control' name='slogan' value="{{$settings['slogan']}}"></td></tr>
 
-<tr><td>Warning text</td><td><input type='text' class='form-control'  style='width:100%;' name='scroll_text' value="{{$settings['scroll_text']}}"></td></tr>
+<tr><td>Warning text</td><td><input type='text' class='form-control' name='scroll_text' value="{{$settings['scroll_text']}}"></td></tr>
 
 <tr><td>Debug mode</td><td>
 <div class='form-group pull-left col-xs-12 col-md-8' style='margin-top:20px;margin-bottom:20px;'>
@@ -36,9 +36,9 @@
 </div>
 </td></tr>
 
-<tr><td>Contact info</td><td><textarea rows='7' class='form-control'  style='width:100%;' name='contact' cols='30'>{{ $settings['contact'] }}</textarea></td></tr>
+<tr><td>Contact info</td><td><textarea rows='7' class='form-control' name='contact' cols='30'>{{ $settings['contact'] }}</textarea></td></tr>
 
-<tr><td>Website down</td><td><input type='checkbox' class='form-control'  style='width:100%;' name='website_down' value='1' <?php if($settings['website_down']==1){ echo 'checked'; } ?> ></td></tr>
+<tr><td>Website down</td><td><input type='checkbox' class='form-control' name='website_down' value='1' <?php if($settings['website_down']==1){ echo 'checked'; } ?> ></td></tr>
 
 <tr><td>Logo</td><td>
 <img class='well well-sm' src="storage/images/logos/{{ $settings['logo'] }}" onerror='this.src=\"storage/images/icons/world.png\"' height='100'>

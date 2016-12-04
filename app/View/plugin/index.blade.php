@@ -28,7 +28,7 @@ foreach($all_plugin as $current_plugin){
        echo Html::img($current_plugin->getIcon(),"class='img img-thumbnail pull-left' onerror='this.src=\"storage/images/icons/plugin.png\"' style='width:80px;height:80px;margin-right:10px;'");
 
         echo "<h4 class='list-group-item-heading'>
-              <a href='admin/plugin/".$current_plugin->dir_name."'>".$current_plugin->getInfo('name')."</a> <small>version: ".$current_plugin->getInfo('version')." | author: <a href='".$current_plugin->getInfo('author_url')."'>".$current_plugin->getInfo('author')."</a></small></h4>
+              <a href='admin/plugin/run/".$current_plugin->dir_name."'>".$current_plugin->getInfo('name')."</a> <small>version: ".$current_plugin->getInfo('version')." | author: <a href='".$current_plugin->getInfo('author_url')."'>".$current_plugin->getInfo('author')."</a></small></h4>
 
             <p class='list-group-item-text' style='margin-bottom:8px;margin-right:70px;'>".$current_plugin->getInfo('description')."</p>";
 

@@ -1,6 +1,3 @@
-@extends('layout')
-
-@section('content')
 <section class='container'>
 
   <section class='row'>
@@ -18,7 +15,7 @@
 
 <div class='panel panel-default col-md-2' style='padding:0px;'>
  <ul class="list-group">
-  <a href='admin/filemanager?path=/images'><li class="list-group-item">images</li></a>
+  <a href='admin/filemanager?path=images'><li class="list-group-item">images</li></a>
   <li class="list-group-item">uploads</li>
   <li class="list-group-item">themes</li>
   <li class="list-group-item">plugins</li>
@@ -29,31 +26,31 @@
 <div class="panel panel-default col-md-10" >
   <div class="panel-body">
       <ol class="breadcrumb">
-			  <li><a href="admin/filemanager?path=">root</a></li>
-			  <li><a><?= str_replace("/","</a></li><li><a>",$current_dir) ?></a></li>
+			  <li><a href="admin/filemanager/{{$action}}?path=">root</a></li>
+        @foreach($tree as $dir)
+          <li><a href="admin/filemanager/{{$action}}?path={{$dir}}">{{$dir}}</a></li>
+        @endforeach
 			</ol>
 
-            <?php	foreach($files as $file): ?>
-            		<div class='file col-md-2' style='overflow:hidden;height:140px;cursor:pointer;' ondblclick=" window.location.href = 'admin/filemanager?path=<?= $old_path.'/'.$file ?>' ">
-            
-            <?php	$file_parts = pathinfo($file);
+            @foreach($dirs as $dir)
+                <div class='file col-md-2' style='overflow:hidden;height:140px;cursor:pointer;' ondblclick=" window.location.href = 'admin/filemanager/{{$action}}?path=<?= $old_path.$dir ?>' ">
+                  {!! Html::img('resources/images/icons/dir.png',"style='width:100%;'") !!}
+                  <center><b>{{$dir}}</b></center><br>
+                </div>
+            @endforeach
 
-            		if(is_dir($current_dir.DIRECTORY_SEPARATOR.$file)){
-            			echo Html::img('resources/images/icons/dir.png',"style='width:100%;'  ");
-            		}
-            		else if(isset($file_parts['extension']) && in_array($file_parts['extension'],$allowed_extensions['image'])){
-            			echo Html::img($current_dir."/".$file,"style='object-fit:cover;width:100%;height:100px;' data-toggle='modal' data-target='.".$file."-modal-xl' ");
+            @foreach($files as $file)
+                <?php $file_parts = pathinfo($file) ?>
+                <div class='file col-md-2' style='overflow:hidden;height:140px;cursor:pointer;' @if($action=='ckbrowse') onclick='returnFileUrl("<?= 'storage/'.$old_path.$file ?>");' @else data-toggle='modal' data-target='.{{$file}}-modal-xl' @endif >
+                @if(isset($file_parts['extension']) && in_array($file_parts['extension'],$allowed_extensions['image']))
+                  <img src="{{'storage/'.$old_path.$file}}" style='object-fit:cover;width:100%;height:100px;' />
+                @else
+                 <img src="resources/images/icons/file.png" style='object-fit:cover;width:100%;height:100px;margin-bottom:15px;' />
+                @endif
+                  <center><b>{{$file}}</b></center><br>
+                </div>
+            @endforeach
 
-                 // Bootstrap::image_details($file,$current_dir."/".$file);
-            		}else{
-                  echo Html::img('resources/images/icons/file.png',"style='object-fit:cover;width:100%;height:100px;margin-bottom:15px;' ondblclick='' ");
-                }
-            		echo "<center><b>".$file."</b></center><br>";
-            		echo "</div>";
-            	
-            ?>
-
-            <?php endforeach; ?>
 
   </div>
 </div>
@@ -123,7 +120,7 @@
 <form action='admin/filemanager/newfolder' method='POST' enctype='multipart/form-data'>
       {{ csrf_field() }}
 <div class='form-group'>
-      <input type='hidden' name='dir_path' value="{{ $current_dir }}">
+      <input type='hidden' name='dir_path' value="{{ $old_path }}">
       <div class='form-group' >
        <label for='title'>Name:</label>  
         <input type='text' class='form-control' name='new_folder_name' placeholder='Enter folder name' required>
@@ -139,4 +136,21 @@
     </div>
   </div>
 </div>
-@endsection
+
+<script>
+        // Helper function to get parameters from the query string.
+        function getUrlParam( paramName ) {
+            var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' );
+            var match = window.location.search.match( reParam );
+
+            return ( match && match.length > 1 ) ? match[1] : null;
+        }
+        // Simulate user action of selecting a file to be returned to CKEditor.
+        function returnFileUrl(filepath) {
+
+            var funcNum = 1;/*getUrlParam( 'CKEditorFuncNum' );*/
+            var fileUrl = filepath;
+            window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl );
+            window.close();
+        }
+</script>

@@ -18,14 +18,23 @@ class FileManagerController extends Controller{
     public function index($slug){
 
 
-        $current_dir = $this->request->get('path')==NULL? "storage" : "storage".$this->request->get('path');
+        $current_dir = $this->request->get('path')==NULL? "" : ltrim($this->request->get('path'),"/");
+
+        //dd($current_dir);
 
 
         $this->view->title(trans('File Manager'));
-        return $this->view->render('media/filemanager',[
-                'old_path' => $this->request->get('path'),
+        return $this->view->render('media/fmframe',[
+                'action' => 'index',
+                'old_path' => ($current_dir==""? "":$current_dir."/"),
                 'current_dir' => $current_dir,
-                'files' => array_slice(scandir($current_dir),2),
+                'tree' => explode("/",$current_dir),
+                'dirs' => collect(\File::directories(storage_path().DIRECTORY_SEPARATOR.$current_dir))->map(function($dir){
+                    return str_replace(storage_path().DIRECTORY_SEPARATOR.$this->request->get('path').DIRECTORY_SEPARATOR,"",$dir);
+                }),
+                'files' => collect(\File::files(storage_path().DIRECTORY_SEPARATOR.$current_dir))->map(function($file){
+                    return str_replace(storage_path().DIRECTORY_SEPARATOR.$this->request->get('path')."/","",$file);
+                }),
                 'allowed_extensions' => [
                                           'image' => ['jpg','png','jpeg']
                                         ],
@@ -66,7 +75,7 @@ class FileManagerController extends Controller{
         if($this->request->isMethod('POST')){
             
             if(!file_exists($this->request->input('dir_path')."/".$this->request->input('new_folder_name'))){
-                \File::makeDirectory($this->request->input('dir_path')."/".$this->request->input('new_folder_name'), $mode = 0777, true, true);
+                \File::makeDirectory("storage/".$this->request->input('dir_path')."/".$this->request->input('new_folder_name'), $mode = 0777, true, true);
                 return $this->redirectToSelf()->withMessage(['success' => 'Folder created successfully!']);
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => 'Folder already exists!']);
@@ -82,14 +91,21 @@ class FileManagerController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function ckbrowse(){
-        $current_dir = $this->request->get('path')==NULL? "storage" : "storage".$this->request->get('path');
+         $current_dir = $this->request->get('path')==NULL? "" : ltrim($this->request->get('path'),"/");
 
 
         $this->view->title(trans('File Manager'));
-        return $this->view->render('media/foreditor/ckbrowser',[
-                'old_path' => $this->request->get('path'),
+        return $this->view->render('media/fmframeckeditor',[
+                'action' => 'ckbrowse',
+                'old_path' => ($current_dir==""? "":$current_dir."/"),
                 'current_dir' => $current_dir,
-                'files' => array_slice(scandir($current_dir),2),
+                'tree' => explode("/",$current_dir),
+                'dirs' => collect(\File::directories(storage_path().DIRECTORY_SEPARATOR.$current_dir))->map(function($dir){
+                    return str_replace(storage_path().DIRECTORY_SEPARATOR.$this->request->get('path').DIRECTORY_SEPARATOR,"",$dir);
+                }),
+                'files' => collect(\File::files(storage_path().DIRECTORY_SEPARATOR.$current_dir))->map(function($file){
+                    return str_replace(storage_path().DIRECTORY_SEPARATOR.$this->request->get('path')."/","",$file);
+                }),
                 'allowed_extensions' => [
                                           'image' => ['jpg','png','jpeg']
                                         ],

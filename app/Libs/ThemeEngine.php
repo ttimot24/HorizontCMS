@@ -61,7 +61,16 @@ class ThemeEngine{
 	}
 
 
+	public function renderWebsiteDown(){
+		
+		if($this->theme->hasWebsiteDownTemplate()){
+			$this->require_file('website_down.php');
+		}else{
+			$this->require_file('../../resources/static/website_down.php');
+		}
 
+		exit;
+	}
 
 
 

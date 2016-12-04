@@ -47,7 +47,9 @@
 	<a href='admin/headerimage/destroy/{{ $each }}' class='pull-right'>
 	<span class='glyphicon glyphicon-remove' aria-hidden='true' style=' font-size: 1.4em;z-index:15;top:3px;right:3px;margin-bottom:-15px;'></span></a>
 
+	@if($each!="" && !is_dir('storage/images/header_images/{{ $each }}'))
 	<img src='storage/images/header_images/{{ $each }}' alt='' class='img-rounded' width='100%' height='80%;'>
+	@endif
 	</div>
 @endforeach
 
