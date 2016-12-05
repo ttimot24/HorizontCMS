@@ -8,7 +8,6 @@
   <img src='{{ $user->getThumb() }}' class='img img-thumbnail' width='320' >
 </button>
 
-{{admin_link('user-update')}}
 <form role='form' action="{{admin_link('user-update',$user->id)}}" method='POST' enctype='multipart/form-data'>
         {{ csrf_field() }}
 

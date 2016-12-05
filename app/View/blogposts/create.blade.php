@@ -30,13 +30,13 @@
 
 
 
-<?php  
-    foreach($categories as $category){
 
-    	echo "<option value='".$category->id."'>".$category->name."</option>";
+    @foreach($categories as $category)
+
+    	<option value='{{$category->id}}'>{{$category->name}}</option>
     	
-    }
-?>
+    @endforeach
+
 
 </select></div>
 
@@ -60,8 +60,8 @@
 
                 CKEDITOR.replace( 'editor' );
                 CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
-                CKEDITOR.config.removeButtons = 'Save,Font';
-                CKEDITOR.config.height = 350;
+                CKEDITOR.config.removeButtons = 'Save,Font,FontSize,Styles,Flash';
+                CKEDITOR.config.height = 400;
                 CKEDITOR.config.filebrowserBrowseUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/ckbrowse') ?>';
                 CKEDITOR.config.filebrowserUploadUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/filemanager/upload') ?>';
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once('bootstrap/base.php');
+require_once(__DIR__.'/base.php');
 
 /*
 |--------------------------------------------------------------------------
@@ -13,15 +13,8 @@ require_once('bootstrap/base.php');
 |
 */
 
-/*$app = new App\HorizontCMS(
-[
-        'base' => realpath(__DIR__.'/../'),
-        'public' => realpath(__DIR__.'/../'),
-    ]
-);*/
 
-
-$app = new Illuminate\Foundation\Application(
+$app = new App\HorizontCMS(
     realpath(__DIR__.'/../')
 );
 

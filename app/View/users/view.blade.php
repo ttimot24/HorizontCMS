@@ -45,9 +45,9 @@
     </br></br><b>{{trans('user.view_full_name')}} : <a>{{ $user->name }}</a></b>
     </br></br><b>{{trans('user.view_user_name')}} : <a>{{ $user->username }}</a></b>
     </br></br><b>{{trans('user.view_rank')}} : <a>{{ $user->role->name }}</a></b>
-     </br></br><b>{{trans('user.view_email')}} : <a>{{ $user->email }}</a></b>
+    </br></br><b>{{trans('user.view_email')}} : <a>{{ $user->email }}</a></b>
     </br></br><b>{{trans('user.view_registered_on')}} : </br><a>{{ $user->created_at->format('Y.m.d - H:i:s') }}</a></b>
-     </br></br><b>{{trans('user.view_logins')}} : <a>{{ $user->visits }}</a></b>
+    </br></br><b>{{trans('user.view_logins')}} : <a>{{ $user->visits }}</a></b>
      <hr/>
     </center>
 </div>

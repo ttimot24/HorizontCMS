@@ -38,6 +38,7 @@
 
 <tr><td>Contact info</td><td><textarea rows='7' class='form-control' name='contact' cols='30'>{{ $settings['contact'] }}</textarea></td></tr>
 
+<input type="hidden" name="website_down" value="0"> <!-- Checkbox hack -->
 <tr><td>Website down</td><td><input type='checkbox' class='form-control' name='website_down' value='1' <?php if($settings['website_down']==1){ echo 'checked'; } ?> ></td></tr>
 
 <tr><td>Logo</td><td>

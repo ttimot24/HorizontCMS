@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Illuminate\Http\Request;
 use App\Libs\Controller;
 
+use App\Model\Settings;
 
 class DashboardController extends Controller{
 
@@ -26,8 +27,8 @@ class DashboardController extends Controller{
                                                     'visits' => \App\Model\Visits::count(),
                                                     'admin_logo' => \Config::get('horizontcms.admin_logo'),
                                                     'disk_space' => @(disk_free_space("/")/disk_total_space("/"))*100,
-                                                    'latest_version' => \App\Model\SystemUpgrade::getLatestVersion(),
-                                                    'current_version' => \App\Model\SystemUpgrade::getCurrentVersion()->version,
+                                                    'latest_version' => Settings::get('auto_upgrade_check')==0? NULL : \App\Model\SystemUpgrade::getLatestVersion(),
+                                                    'current_version' => Settings::get('auto_upgrade_check')==0? NULL : \App\Model\SystemUpgrade::getCurrentVersion()->version,
 
             ]);
     }

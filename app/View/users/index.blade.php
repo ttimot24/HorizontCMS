@@ -26,13 +26,7 @@
 
 foreach($all_users as $each){
 
-if($each->active==0)  {
- echo "<tr class='danger'>";
-}
-else{
-  echo "<tr>";
-}
-
+echo $each->active==0? "<tr class='danger'>" : "<tr>" ;
 
 echo "<td>". $each->id ."</td>";
 echo "<td>";
@@ -83,7 +77,7 @@ echo "</div>";
 
 
 
-  if($each->id!=1){
+  if($disabled!='disabled'){
    Bootstrap::delete_confirmation(
     "delete_".$each->id."",
     trans('actions.are_you_sure'),

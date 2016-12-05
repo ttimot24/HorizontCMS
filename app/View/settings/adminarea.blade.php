@@ -50,7 +50,9 @@
 						</select>
 				</td></tr>
 
-<tr><td>Automatically check for updates</td><td><input class='form-control' type='checkbox' value="1"/></td>
+
+<input type="hidden" name="auto_upgrade_check" value="0"> <!-- Checkbox hack -->
+<tr><td>Automatically check for updates</td><td><input class='form-control' type='checkbox' name="auto_upgrade_check" value="1"  <?php if($settings['auto_upgrade_check']==1){ echo 'checked'; } ?> /></td>
 
 <tr><td></td><td></br><button type='submit' class='btn btn-primary'><span class='glyphicon glyphicon-floppy-save' aria-hidden='true'></span> Save settings</button> </td></tr>
 
