@@ -11,8 +11,9 @@ class Model extends \Illuminate\Database\Eloquent\Model{
         return (isset($this->image) && $this->image!="");
     }
 
-    public function equals(Model $other){
-        return $this->is($other);
+    public function equals($other){
+
+        return is_null($other)? false : $this->is($other);
     }
 
 /*

@@ -7,6 +7,15 @@ use \App\Libs\Model;
 class Page extends Model{
 
 
+    public static function home(){
+        return self::find(Settings::get('home_page'));
+    }
+
+    public static function getByFunction($function){
+        return self::where('url',$function)->get()->first();        
+    }
+
+
     public static function findBySlug($slug){
 
         $page = self::where('slug',$slug)->get()->first();
