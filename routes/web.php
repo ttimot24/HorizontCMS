@@ -43,6 +43,21 @@ Route::post('admin/logout', 'Auth\LoginController@logout');
 
 Route::group(['prefix'=> Config::get('horizontcms.backend_prefix'),'middleware' => 'admin'],function(){
 
+
+	Route::any('/plugin/run/{plugin}/{controller?}/{action?}/{args?}/', 
+		function($plugin,$controller = 'start', $action = 'index', $args = null){
+
+		       $route = new \App\Http\RouteResolver();
+
+		       $route->changeNamespace("Plugins\\".studly_case($plugin)."\\Controllers\\");
+
+		       return $route->resolve($controller,$action,$args);
+
+  		 })->where('args', '(.*)')->middleware();
+	
+
+
+
 	Route::any('/{controller?}/{action?}/{args?}/', 
 		function($controller = 'dashboard', $action = 'index', $args = null){
 

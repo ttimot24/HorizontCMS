@@ -23,7 +23,8 @@
             "app/Helpers"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Plugins\\": "plugins/"
         }
     },
     "autoload-dev": {

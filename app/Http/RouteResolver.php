@@ -4,24 +4,33 @@ namespace App\Http;
 
 class RouteResolver{
 
+	private $namespace = "App\\Controllers\\";
+
+	public function changeNamespace($namespace){
+		$this->namespace = $namespace;
+	}
+
 
 	public function resolve($controller = 'dashboard',$action = 'index', $args = null){
 
-				$controller_name = ucfirst($controller).'Controller';
+		
+				$controller_path = str_replace("\\",DIRECTORY_SEPARATOR,camel_case($this->namespace));
+				$controller_name = studly_case($controller).'Controller';
 
-				if(!file_exists('app'.DIRECTORY_SEPARATOR.'Controllers'.DIRECTORY_SEPARATOR.$controller_name.'.php')){
-					throw new \Exception('No such file <b>'.$controller_name.'.php'.'</b>');
+				if(!file_exists($controller_path.$controller_name.'.php')){
+					throw new \Exception('No such file <b>'.$this->namespace.$controller_name.'.php'.'</b>');
 				} 
 
-		        $controllerClass = 'App\\Controllers\\'.$controller_name;
+		        $controllerClass = $this->namespace.$controller_name;
 		        $controller = \App::make($controllerClass);
 
 		        $action = studly_case($action);
-		        
+
 
 		      	if(method_exists($controllerClass, 'before')){
 		            $controller->callAction('before', [$args]);
 		        }
+
 
 		        if(method_exists($controllerClass, $action)){
 		          

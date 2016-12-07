@@ -60,6 +60,14 @@ class ThemeEngine{
 		return NULL;
 	}
 
+	public function render404(){
+		if($this->theme->has404Template()){
+			$this->require_file('404.php');
+		}else{
+			$this->require_file('../../resources/static/404.php');
+		}
+	}
+
 
 	public function renderWebsiteDown(){
 		
