@@ -44,8 +44,8 @@
 echo "<div class='form-group col-xs-12 col-md-6' id='level' >
   <label for='level'>".trans('page.page_level')."</label>
   <select class='form-control' name='parent_select' >  
-          <option value='0' "; if(isset($page->parent)){echo "selected";} echo">Main menu</option>
-          <option value='1' "; if(!isset($page->parent)){echo "selected";} echo">Submenu</option>";
+          <option value='0' "; if(isset($page->parent_id) && $page->parent_id==NULL){echo "selected";} echo">Main menu</option>
+          <option value='1' "; if(isset($page->parent_id) && $page->parent_id!=NULL){echo "selected";} echo">Submenu</option>";
 echo "</select></div>";
 
 ?>

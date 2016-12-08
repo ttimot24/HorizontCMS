@@ -39,8 +39,8 @@
 <div class='form-group col-xs-12 col-md-6' >
   <label for='sel1'>{{trans('page.page_level')}}</label>
   <select class='form-control' name='parent_select' id='level'>  
-          <option value='1'>{{trans('page.main_menu')}}</option>
-          <option value='0'>{{trans('page.submenu')}}</option>";
+          <option value='0'>{{trans('page.main_menu')}}</option>
+          <option value='1'>{{trans('page.submenu')}}</option>";
 </select></div>
 
 

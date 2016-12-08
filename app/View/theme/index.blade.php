@@ -25,10 +25,9 @@
     </div>
   </div>
   <div class='col-xs-12 col-md-7'>
-    <h1>
-        {{ $active_theme->getName() }}
-        <small>{{trans('theme.version')}}: {{ $active_theme->getInfo('version') }}</small>
-    </h1>
+    <h1>{{ $active_theme->getName() }}</h1>
+        <h4 class="text-muted">{{trans('theme.version')}}: {{ $active_theme->getInfo('version') }}</h4>
+
     <h4>{{trans('theme.is_the_current_theme')}}</h4>
     <p>{{ $active_theme->getInfo('description') }}</p>
     <p style='font-size:15px;'>{{trans('theme.author')}}: {{ $active_theme->getInfo('author') }} | {{trans('theme.website')}}: <a target='_blank' href='<?= UrlManager::http_protocol( $active_theme->getInfo('author_url') ); ?>'>{{ $active_theme->getInfo('author_url') }}</a></p>

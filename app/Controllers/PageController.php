@@ -47,7 +47,7 @@ class PageController extends Controller{
             $page->slug = str_slug($this->request->input('name'), "-");
             $page->url = $this->request->input('url');
             $page->visibility = $this->request->input('visibility');
-            $page->parent_id = $this->request->input('parent_select')=="1"? NULL : $this->request->input('parent_id');
+            $page->parent_id = $this->request->input('parent_select')==0? NULL : $this->request->input('parent_id');
             $page->queue = 1;/*$this->request->input('queue');*/
             $page->page = $this->request->input('page');
             $page->author_id = \Auth::user()->id;
@@ -140,7 +140,7 @@ class PageController extends Controller{
             $page->slug = str_slug($this->request->input('name'), "-");
             $page->url = $this->request->input('url');
             $page->visibility = $this->request->input('visibility');
-            $page->parent_id = $this->request->input('parent_select')=="1"? NULL : $this->request->input('parent_id');
+            $page->parent_id = $this->request->input('parent_select')==0? NULL : $this->request->input('parent_id');
             $page->queue = 1;/*$this->request->input('queue');*/
             $page->page = $this->request->input('page');
 
@@ -162,14 +162,19 @@ class PageController extends Controller{
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id){
-        //
+
+    public function setHomePage($id){
+
+        $home_page = \App\Model\Settings::where("setting","home_page")->get()->first();
+
+        $home_page->value = $id;
+
+        if($home_page->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('Successfully changed the Homepage!')]);
+        }
+        else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }    
     }
 
 

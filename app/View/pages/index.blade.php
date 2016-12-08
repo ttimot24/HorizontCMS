@@ -135,7 +135,7 @@ echo '
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">'.trans('actions.close').'</button>
-        <a href="page/home/'.$each->id.'" type="button" class="btn btn-primary">'.trans('actions.set').'</a>
+        <a href="admin/page/set-home-page/'.$each->id.'" type="button" class="btn btn-primary">'.trans('actions.set').'</a>
       </div>
     </div>
   </div>

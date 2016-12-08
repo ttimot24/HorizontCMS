@@ -35,6 +35,21 @@ class Page extends Model{
         return NULL;
     }
 
+    public static function activeMain(){
+         return self::where('visibility',1)->where('parent_id',NULL)->get();
+    }
+
+    public static function active(){
+        return self::where('visibility',1)->get();
+    }
+
+    public function isParent(){
+        return $this->parent_id==NULL;
+    }
+
+    public function hasSubpages(){
+        return $this->subpages->count()>0;
+    }
 
     public function parent(){
         return $this->belongsTo(self::class,'parent_id','id');

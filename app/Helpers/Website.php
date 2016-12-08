@@ -34,7 +34,7 @@ class Website{
 
 		self::$_REQUESTED_PAGE = Request::is("/")? \App\Model\Page::find(\App\Model\Settings::get('home_page')) : \App\Model\Page::findBySlug(self::$_SLUGS[0]);
 
-
+		self::$_HEADER_IMAGES =  collect(\App\Model\HeaderImage::all());
 
 
 		/*$system = new System();
