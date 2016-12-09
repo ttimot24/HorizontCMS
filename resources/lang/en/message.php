@@ -27,4 +27,7 @@ return [
 	'successfully_enabled_blogpost' => 'Comments enabled successfully',
 	'successfully_disabled_blogpost' => 'Comments disabled successfully',
 
+	'successfully_set_homepage' => 'Homepage has been changed successfully!',
+	'successfully_added_headerimage' => 'Header image added successfully!',
+
 ];

@@ -170,7 +170,7 @@ class PageController extends Controller{
         $home_page->value = $id;
 
         if($home_page->save()){
-            return $this->redirectToSelf()->withMessage(['success' => trans('Successfully changed the Homepage!')]);
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_set_homepage')]);
         }
         else{
             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);

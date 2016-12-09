@@ -40,7 +40,7 @@ class HeaderImageController extends Controller{
 
 
             if($header_image->save()){
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost')]);
+                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }

@@ -1,7 +1,7 @@
 <?php 
 
 return [
-	'something_went_wrong' => 'Hiba történt!',
+	'something_went_wrong' => 'Hiba történt a művelet végrehajtása közben!',
 	'validation_failed' => 'Nem érvényes adatok!',
 
 	'successfully_created_blogpost' => 'Blogbejegyzés sikeresen létrehozva!',
@@ -27,5 +27,7 @@ return [
 	'successfully_enabled_blogpost' => 'Hozzászólások engedélyezve',
 	'successfully_disabled_blogpost' => 'Hozzászólások letiltva',
 
+	'successfully_set_homepage' => 'Kezdőoldal sikeresen beállítva!',
+	'successfully_added_headerimage' => 'Fejléckép sikeresen hozzáadva!',
 
 ];
