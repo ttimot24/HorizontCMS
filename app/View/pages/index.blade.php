@@ -128,7 +128,7 @@ echo '
     <div class="modal-content">
       <div class="modal-header modal-header-warning">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">'.trans("pages.change_homepage").'</h4>
+        <h4 class="modal-title" id="myModalLabel">'.trans("page.change_homepage").'</h4>
       </div>
       <div class="modal-body">
         '.trans("page.are_you_sure_to_set",["page_name" => $each->name]).'

@@ -234,8 +234,9 @@ return [
 
 
         'Menu'       => Lavary\Menu\Facade::class,
-       // 'Theme' => Teepluss\Theme\Facades\Theme::class,
 
+
+        'Settings' => \App\Model\Settings::class,
     ],
 
 ];

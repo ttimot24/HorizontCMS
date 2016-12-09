@@ -53,7 +53,7 @@ Route::group(['prefix'=> Config::get('horizontcms.backend_prefix'),'middleware' 
 
 		       return $route->resolve($controller,$action,$args);
 
-  		 })->where('args', '(.*)')->middleware();
+  		 })->where('args', '(.*)')->middleware('plugin');
 	
 
 

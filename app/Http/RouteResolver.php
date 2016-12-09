@@ -37,7 +37,7 @@ class RouteResolver{
 		            return $controller->callAction($action, [$args]);
 		        }
 		        else{
-		            throw new \Exception("Couldn't find action: <b>".$action."</b>");
+		            throw new \Exception("Couldn't find action: <b>".lcfirst($action)."</b>");
 		        }
 
 	}

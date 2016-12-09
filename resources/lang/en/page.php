@@ -11,7 +11,7 @@ return [
 	'visible' => 'Visible',
 	'invisible' => 'Invisible',
 	'order' => 'Order',
-	'change_homepage' => 'Change HomePage',
+	'change_homepage' => 'Change Homepage',
 	'are_you_sure_to_set' => 'Are you sure you want to set <b>:page_name</b> as HomePage?',
 	'menu_type1' => 'Main',
 	'menu_type2' => 'Submenu <i>of</i></br><b>:parent_menu</b>',
