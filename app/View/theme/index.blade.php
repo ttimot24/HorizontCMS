@@ -51,8 +51,7 @@ foreach($all_themes as $theme): ?>
     <div class="thumbnail">
       <img src='<?= $theme->getImage() ?>' alt="..." style='width:100%;height:180px;'>
       <div class="caption">
-        <h3><?= $theme->getInfo('name'); ?>
-        </h3>
+        <h3><?= $theme->getName(); ?></h3>
          <p>version: <?= $theme->getInfo('version'); ?> | author: <?= $theme->getInfo('author') ?></p>
         <p>
             <a href='admin/theme/set/<?=  $theme->root_dir ?>' class="btn btn-primary" role="button">Set theme</a> 
@@ -68,7 +67,7 @@ foreach($all_themes as $theme): ?>
 <?php   Bootstrap::delete_confirmation(
     "delete_".$theme->root_dir,
     trans('actions.are_you_sure'),
-    "<b>Delete this theme: </b>". $theme->getInfo('name')." <b>?</b>",
+    "<b>Delete this theme: </b>". $theme->getName()." <b>?</b>",
     "<a href='admin/theme/delete/". $theme->root_dir."' type='button' class='btn btn-danger'>
     <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"

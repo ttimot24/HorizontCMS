@@ -28,7 +28,7 @@
 
 
       <div class='col-xs-12 col-sm-12 col-md-4'><center>
-          <img src='{{ url($admin_logo) }}' class='img img-responsive img-rounded' style='margin-bottom:-30px;max-height:300px;'/>
+          <img src='{{ url($admin_logo) }}' class='img img-responsive img-rounded' style='margin-top:40px;margin-bottom:-30px;max-height:250px;'/>
           
           </center>
         </div>

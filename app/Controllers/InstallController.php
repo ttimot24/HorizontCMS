@@ -67,10 +67,20 @@ class InstallController extends Controller{
 
             try{
 
-                new \PDO($this->request->input('db_driver').':host='.$this->request->input('server').';database='.$this->request->input('database'), 
-                    $this->request->input('username'), 
-                    $this->request->input('password')
-                );
+            	if($this->request->input('db_driver')=="mysql"){
+	                new \PDO('mysql:host='.$this->request->input('server').';database='.$this->request->input('database'), 
+	                    $this->request->input('username'), 
+	                    $this->request->input('password')
+	                );
+            	}else if($this->request->input('db_driver')=="pgsql"){
+					new \PDO("pgsql:dbname=".$this->request->input('database').";host=".$this->request->input('server'), 
+        				$this->request->input('username'), 
+	                    $this->request->input('password')
+					); 
+            	}else if($this->request->input('db_driver')=="sqlite"){
+            		\File::put('storage/framework/database/sqlite.db',"");
+            		new \PDO('sqlite:/storage/framework/database/sqlite.db');
+            	}
 
                 Session::put('step2',$this->request->all());
 
