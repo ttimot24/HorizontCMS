@@ -4,7 +4,6 @@
 <div class='container main-container'>
 	<h1>Create User Group</h1><br><br>
 
-
 <form action='admin/userrole/store' method='POST'>
 
 {{csrf_field()}}

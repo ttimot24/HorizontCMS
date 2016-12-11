@@ -13,6 +13,7 @@ class UserRoleController extends Controller{
         $this->view->title('User roles');
         return $this->view->render('users/roles/index',[
                                                         'all_user_roles' => \App\Model\UserRole::all(),
+                                                        
                                                         ]);
     }
 

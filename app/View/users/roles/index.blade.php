@@ -8,7 +8,6 @@
 <br>
 <div class='container col-md-10'><a href='admin/userrole/create' class='btn btn-warning' style='margin-bottom:20px;'>New user group</a></div>
 
-
 <?php foreach($all_user_roles->reverse() as $role): ?>
   
 <form action='admin/userrole/update/{{$role->id}}' method='POST'>
