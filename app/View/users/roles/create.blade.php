@@ -32,18 +32,16 @@
                       "settings" => "Settings",
                       ];
 
-    
+   ?> 
 
-    foreach($permission_list as $key => $perm_name){
+    @foreach($permission_list as $key => $perm_name)
 
-        echo "<li class='list-group-item'>".$perm_name."<input type='checkbox' class='pull-right' name='".$key."' value='1'></li>";
+        <li class='list-group-item'>{!!$perm_name!!}<input type='checkbox' class='pull-right' name='{{$key}}' value='1'></li>
 
-    }
+    @endforeach
 
 
-     echo "<li class='list-group-item'><button type='submit' class='btn btn-warning btn-block'>Add user group</button></li>";
-
-  ?>
+    <li class='list-group-item'><button type='submit' class='btn btn-warning btn-block'>Add user group</button></li>
 
 
   </ul>

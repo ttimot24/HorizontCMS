@@ -7,7 +7,7 @@ use App\Libs\Controller;
 use App\Http\Requests;
 
 class UserRoleController extends Controller{
-    
+
     public function index(){
 
         $this->view->title('User roles');
@@ -36,9 +36,17 @@ class UserRoleController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
+    public function store(){
        if($this->request->isMethod('POST')){
-        
+            $role = new \App\Model\UserRole();
+            $role->name = $this->request->input('group_name');
+            $role->rights = json_encode(array_keys($this->request->except(['_token','group_name'])));
+
+            if($role->save()){
+                return $this->redirect('admin/userrole')->withMessage(['success' => trans('User role created succesfully!')]);
+            }else{
+                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            }
        }
     }
 
@@ -69,8 +77,19 @@ class UserRoleController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
-        //
+    public function update($id){
+       if($this->request->isMethod('POST')){
+            $role = \App\Model\UserRole::find($id); 
+
+            $role->rights = json_encode(array_keys($this->request->except('_token')));
+            
+
+            if($role->save()){
+                return $this->redirectToSelf()->withMessage(['success' => trans('Rights saved succesfully!')]);
+            }else{
+                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            }
+       }
     }
 
     /**

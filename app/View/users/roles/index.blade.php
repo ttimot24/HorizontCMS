@@ -11,7 +11,7 @@
 
 <?php foreach($all_user_roles->reverse() as $role): ?>
   
-<form action='admin/userrole/update' method='POST'>
+<form action='admin/userrole/update/{{$role->id}}' method='POST'>
 
 {{csrf_field()}}
 
@@ -67,9 +67,6 @@ foreach($permission_list as $key => $perm_name){
         echo "<li class='list-group-item'>".$perm_name."<input type='checkbox' class='pull-right' name='".$key."' value='1' ".$check." ".$disable."></li>";
 
     }
-
-
-    echo "<input type='hidden' name='group_id' value='".$role->id."'>";
 
      echo "<li class='list-group-item'><button type='submit' class='btn btn-success btn-block' ".$disable.">Save changes</button></li>";
 
