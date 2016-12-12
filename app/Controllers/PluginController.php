@@ -48,8 +48,10 @@ class PluginController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-        //
+    public function install($plugin_name){
+       // $plugin = new \App\Model\Plugin();
+
+
     }
 
     /**

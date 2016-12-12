@@ -17,9 +17,10 @@
 
 <div class='col-md-12'>
 </br><br>
-<div class='jumbotron' style='padding:2%;padding-left:3%;background-color:#31708F;color:white;'></br>
+<div class='jumbotron' style='padding:2%;padding-left:3%;background-color:#31708F;color:white;'>
 <div class='row'>
   <div class='col-xs-12 col-md-5'>
+  </br>
     <div class='thumbnail'>
       <img src="{{$active_theme->getImage()}}" />
     </div>
@@ -54,8 +55,8 @@ foreach($all_themes as $theme): ?>
         <h3><?= $theme->getName(); ?></h3>
          <p>version: <?= $theme->getInfo('version'); ?> | author: <?= $theme->getInfo('author') ?></p>
         <p>
-            <a href='admin/theme/set/<?=  $theme->root_dir ?>' class="btn btn-primary" role="button">Set theme</a> 
-            <a href="#" class="btn btn-default" role="button" data-toggle='modal' data-target='.<?=  $theme->root_dir ?>-modal-xl'>Preview</a>
+            <a href='admin/theme/set/<?=  $theme->root_dir ?>' class="btn btn-primary" role="button">Activate</a> 
+            <!--<a href="#" class="btn btn-default" role="button" data-toggle='modal' data-target='.<?=  $theme->root_dir ?>-modal-xl'>Preview</a>-->
             <a href="#" class="btn btn-warning" role="button" disabled>{{ trans('actions.edit') }}</a>
             <button class='btn btn-danger' data-toggle='modal' data-target='.delete_<?= $theme->root_dir ?>' <?php if($all_themes->count()==1){echo "disabled";} ?> >{{ trans('actions.delete') }}</button>
         </p>
@@ -94,10 +95,11 @@ foreach($all_themes as $theme): ?>
       </div>
       <div class='modal-body'>
 
-<form action='admin/theme/upload' method='POST' enctype='multipart/form-data'>
-<div class='form-group'>
+    <form action='admin/theme/upload' method='POST' enctype='multipart/form-data'>
+    {{csrf_field()}}
+    <div class='form-group'>
       <label for='file'>Upload file:</label>
-      <input name='up_file[]' id='input-2' type='file' class='file' accept='.zip' multiple='true' data-show-upload='false' data-show-caption='true'>
+      <input name='up_file[]' id='input-2' type='file' class='file' accept='.zip' multiple='true' data-show-upload='false' data-show-caption='true' required>
     </div>
 
 

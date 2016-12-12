@@ -50,71 +50,35 @@ class ThemeController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
+    public function upload(){
 
+        if ($this->request->hasFile('up_file')){
 
-    }
+            $file_name = $this->request->up_file[0]->store('framework/temp');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request){
-        //
-    }
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id){
+        $zip = new \ZipArchive;
+        if ($zip->open("storage/".$file_name) === TRUE) {
+            $zip->extractTo('themes/');
+            $zip->close();
+            
+            \Storage::delete("storage/".$file_name);
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id){
-
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id){
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id){
-        //
+            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully uploaded the theme!')]);
+        } else {
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
     }
 
 
-    /**
-     * Remove the specified resource from database.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id){
+    public function delete($theme){
+
+        if(\File::deleteDirectory("themes/".$theme)){
+            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully deleted the theme!')]);
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);         
+        }
 
     }
 
