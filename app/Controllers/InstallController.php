@@ -126,7 +126,7 @@ class InstallController extends Controller{
         \Artisan::call("migrate", ["--force"=> true ]);
         \Artisan::call("db:seed", ["--force"=> true ]);
 
-        $administrator = new \App\User();
+        $administrator = new \App\Model\User();
         $administrator->name = 'Administrator';
         $administrator->username = $this->request->input('ad_username');
         $administrator->slug = str_slug($this->request->input('ad_username'));
