@@ -28,13 +28,13 @@ class MenuMiddleware{
             $menu->add(trans('navbar.news'), '#')->id('news');
             $menu->find('news')->add("<i class='fa fa-newspaper-o'></i> ".trans('navbar.posted_news'), admin_link('blogpost-index'));
             $menu->find('news')->add("<i class='fa fa-pencil'></i> ".trans('navbar.create_post'), admin_link('blogpost-create'));
-            $menu->find('news')->add("<i class='fa fa-list-ul'></i> ".trans('navbar.categories'), $prefix.'/blogpostcategory');
+            $menu->find('news')->add("<i class='fa fa-list-ul'></i> ".trans('navbar.categories'), admin_link('blogpost_category-index'));
 
 
             $menu->add(trans('navbar.users'), '#')->id('users');
             $menu->find('users')->add("<i class='fa fa-users'></i> ".trans('navbar.user_list'), admin_link('user-index'));
             $menu->find('users')->add("<i class='fa fa-user-plus'></i> ".trans('navbar.user_add'),admin_link('user-create'));
-            $menu->find('users')->add("<i class='fa fa-gavel'></i> ".trans('navbar.user_groups'), $prefix.'/userrole');
+            $menu->find('users')->add("<i class='fa fa-gavel'></i> ".trans('navbar.user_groups'), admin_link('user_role-index'));
 
 
 
@@ -43,8 +43,8 @@ class MenuMiddleware{
             $menu->find('pages')->add("<i class='fa fa-pencil-square-o'></i> ".trans('navbar.page_add'), admin_link('page-create'));
             
             $menu->add(trans('navbar.media'), '#')->id('media');
-            $menu->find('media')->add("<i class='fa fa-picture-o'></i> ".trans('navbar.header_images'), $prefix.'/headerimage');
-            $menu->find('media')->add("<i class='fa fa-folder-open-o'></i> ".trans('navbar.filemanager'), $prefix.'/filemanager');
+            $menu->find('media')->add("<i class='fa fa-picture-o'></i> ".trans('navbar.header_images'), admin_link('headerimage-index'));
+            $menu->find('media')->add("<i class='fa fa-folder-open-o'></i> ".trans('navbar.filemanager'), $prefix.'/file-manager');
            // $menu->find('media')->add("<i class='fa fa-camera-retro'></i> ".trans('navbar.gallery'), $prefix.'/gallery');
             
             

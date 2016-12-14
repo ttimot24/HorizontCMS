@@ -20,7 +20,7 @@ class DashboardController extends Controller{
         return $this->view->render("dashboard/index",[
 
                                                     'domain' => $_SERVER['SERVER_NAME'],
-                                                    'server_ip' => $_SERVER['SERVER_ADDR'],
+                                                    'server_ip' => isset($_SERVER['SERVER_ADDR'])? $_SERVER['SERVER_ADDR']: "unknown",
                                                     'client_ip' => $this->request->ip,
                                                     'blogposts'  => \App\Model\Blogpost::count(),
                                                     'users' => \App\Model\User::count(),

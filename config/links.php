@@ -1,5 +1,10 @@
 <?php 
 
+/**
+* Link helpers.
+*
+**/
+
 
 return [
 	'blogpost-index' => 'blogpost/index',
@@ -9,19 +14,19 @@ return [
 	'blogpost-view' => 'blogpost/show',
 	'blogpost-delete' => 'blogpost/delete',
 
-	'blogpost_category-index' => 'blogpostcategory/index',
-	'blogpost_category-create' => 'blogpostcategory/create',
-	'blogpost_category-edit' => 'blogpostcategory/edit',
-	'blogpost_category-update' => 'blogpostcategory/update',
-	'blogpost_category-view' => 'blogpostcategory/show',
-	'blogpost_category-delete' => 'blogpostcategory/delete',
+	'blogpost_category-index' => 'blogpost-category/index',
+	'blogpost_category-create' => 'blogpost-category/create',
+	'blogpost_category-edit' => 'blogpost-category/edit',
+	'blogpost_category-update' => 'blogpost-category/update',
+	'blogpost_category-view' => 'blogpost-category/show',
+	'blogpost_category-delete' => 'blogpost-category/delete',
 
-	'blogpost_comment-index' => 'blogpostcomment/index',
-	'blogpost_comment-create' => 'blogpostcomment/create',
-	'blogpost_comment-edit' => 'blogpostcomment/edit',
-	'blogpost_comment-update' => 'blogpostcomment/update',
-	'blogpost_comment-view' => 'blogpostcomment/show',
-	'blogpost_comment-delete' => 'blogpostcomment/delete',
+	'blogpost_comment-index' => 'blogpost-comment/index',
+	'blogpost_comment-create' => 'blogpost-comment/create',
+	'blogpost_comment-edit' => 'blogpost-comment/edit',
+	'blogpost_comment-update' => 'blogpost-comment/update',
+	'blogpost_comment-view' => 'blogpost-comment/show',
+	'blogpost_comment-delete' => 'blogpost-comment/delete',
 
 
 	'user-index' => 'user/index',
@@ -31,6 +36,13 @@ return [
 	'user-view' => 'user/show',
 	'user-delete' => 'user/delete',
 
+	'user_role-index' => 'user-role/index',
+	'user_role-create' => 'user-role/create',
+	'user_role-edit' => 'user-role/edit',
+	'user_role-update' => 'user-role/update',
+	'user_role-view' => 'user-role/view',
+	'user_role-delete' => 'user-role/delete',
+
 	'page-index' => 'page/index',
 	'page-create' => 'page/create',
 	'page-edit' => 'page/edit',
@@ -38,5 +50,7 @@ return [
 	'page-view' => 'page/show',
 	'page-delete' => 'page/delete',
 
+
+	'headerimage-index' => 'header-image/index',
 
 ];

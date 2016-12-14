@@ -1,5 +1,5 @@
 <header>
-	<section class="jumbotron" style="background-image:url(<?= "storage/images/header_images/".Website::$_HEADER_IMAGES->first()->image; ?>);background-size:cover;text-align:center;padding:125px 0px 125px 0px;margin:0px;">
+	<section class="jumbotron" style="<?= Website::$_HEADER_IMAGES->count()>0 ? "background-image:url(storage/images/header_images/".Website::$_HEADER_IMAGES->first()->image.");" : ""; ?> background-size:cover;text-align:center;padding:125px 0px 125px 0px;margin:0px;">
 		<center>
 		<div style="padding:10px 20px 10px 20px;width:450px;background-color:rgba(0,0,0,0.8);color:white;">
 			<h2><?= Website::$_SETTINGS->site_name; ?></h2>

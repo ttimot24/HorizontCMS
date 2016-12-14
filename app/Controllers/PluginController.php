@@ -49,8 +49,29 @@ class PluginController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function install($plugin_name){
-       // $plugin = new \App\Model\Plugin();
 
+       $path_to_db = "plugins".DIRECTORY_SEPARATOR.$plugin_name.DIRECTORY_SEPARATOR."database";
+       
+       if(file_exists($path_to_db) && is_dir($path_to_db)){
+
+            \Artisan::call("migrate",['--path'=> $path_to_db.DIRECTORY_SEPARATOR."migrations"]);
+
+       }
+
+
+        $plugin = new \App\Model\Plugin($plugin_name);
+        unset($plugin->info,$plugin->config);
+        $plugin->area = 0;
+        $plugin->permission = 0;
+        $plugin->table_name = "";
+        $plugin->active = 1;
+
+
+        if($plugin->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully installed '.$plugin_name)]);
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
 
     }
 

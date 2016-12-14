@@ -6,7 +6,7 @@
 
 
 </br></br>
-<form action='admin/headerimage/upload' method='POST' enctype='multipart/form-data'>
+<form action='admin/header-image/upload' method='POST' enctype='multipart/form-data'>
 
 {{ csrf_field() }}
 
@@ -27,7 +27,7 @@
 		@foreach($slider_images as $image)
 			<div class='img-thumbnail col-md-3' style='height:150px;'>
 			<img src='storage/images/header_images/{{ $image->image }}' alt='' class='img-rounded' width='100%' height='85%;'>
-			<a class='btn btn-danger btn-xs btn-block' href='admin/headerimage/delete/{{ $image->id }}'>Remove from slider</a>
+			<a class='btn btn-danger btn-xs btn-block' href='admin/header-image/delete/{{ $image->id }}'>Remove from slider</a>
 			</div>
 		@endforeach
 	@else
@@ -43,8 +43,8 @@
 
 @foreach($dirs as $each)
 	<div class='col-md-3 img img-thumbnail'  style='margin-bottom:5%;height:200px;'>
-	<a class='btn-sm btn-success col-md-6' href='admin/headerimage/create/{{ $each }}'>Add to slider</a>
-	<a href='admin/headerimage/destroy/{{ $each }}' class='pull-right'>
+	<a class='btn-sm btn-success col-md-6' href='admin/header-image/create/{{ $each }}'>Add to slider</a>
+	<a href='admin/header-image/destroy/{{ $each }}' class='pull-right'>
 	<span class='glyphicon glyphicon-remove' aria-hidden='true' style=' font-size: 1.4em;z-index:15;top:3px;right:3px;margin-bottom:-15px;'></span></a>
 
 	@if($each!="" && !is_dir('storage/images/header_images/{{ $each }}'))

@@ -6,7 +6,7 @@ use \App\Libs\Model;
 
 class Plugin extends Model
 {
-    
+    public $timestamps = false;
 
 	public function __construct($root_dir){
 		$this->root_dir = $root_dir;		
