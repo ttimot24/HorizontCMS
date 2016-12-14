@@ -16,10 +16,10 @@ class CreatePluginsTable extends Migration
         Schema::create('plugins', function (Blueprint $table) {
             $table->increments('id');
             $table->string('dir_name');
-            $table->int('area');
-            $table->int('permission');
+            $table->integer('area');
+            $table->integer('permission');
             $table->string('tables');
-            $table->int('active');
+            $table->integer('active');
         });
     }
 
