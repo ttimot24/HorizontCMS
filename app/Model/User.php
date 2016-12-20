@@ -86,12 +86,16 @@ class User extends Authenticatable{
     }
 
 
+    public function isActive(){
+        return $this->active==1;
+    }
+
+
     /**
     *
     * https://erikbelusic.com/tracking-if-a-user-is-online-in-laravel/
     *
     */
-
     public function isOnline(){
 
     	return Cache::has('user-is-online-' . $this->id);

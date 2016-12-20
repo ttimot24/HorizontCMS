@@ -14,7 +14,7 @@ class AdminMiddleware{
      */
     public function handle($request, Closure $next){
         
-        if(!$request->user()->isAdmin()){
+        if(!$request->user()->isAdmin() || !$request->user()->isActive()){
 
             \Auth::logout();
             return redirect()->back();

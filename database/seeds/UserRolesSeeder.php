@@ -45,7 +45,7 @@ class UserRolesSeeder extends Seeder
         ]);
 
          DB::table('user_roles')->insert([
-            'name' => 'Administrator',
+            'name' => 'Admin',
             'permission' => 5,
             'rights' => json_encode(['admin_area','blogpost','user','page','media','themes&apps','settings']),
         ]);
