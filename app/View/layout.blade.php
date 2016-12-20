@@ -21,6 +21,7 @@
   @if (!Auth::guest())
 	@include('navbar')
 	@include('messages')
+	@include('lock_screen')
   @endif
 
   
