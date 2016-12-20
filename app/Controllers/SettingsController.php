@@ -116,5 +116,13 @@ class SettingsController extends Controller{
 
 
 
+    public function socialmedia(){
+        $this->view->title("SocialMedia");
+        return $this->view->render('settings/socialmedia',[
+                                        'all_socialmedia' => ['facebook','youtube','instagram','google'],
+                                        ]);
+    }
+
+
 
 }

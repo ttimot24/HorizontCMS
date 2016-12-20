@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Storage;
 class HeaderImageController extends Controller{
  
 
+    public function before(){
+        //header_images dir creation.
+    }
+
 
     /**
      * Display a listing of the resource.
