@@ -4,18 +4,24 @@ namespace App\Libs;
 
 use App\Model\Plugin;
 
-class PluginManager{
-
-	protected $container;
-
-	public function installPlugin(Plugin $plugin){
-		$plugin->save();
+class PluginManager extends Model{
+	
+	public static function render($shortcode){
+		eval("?>".\App\Libs\ShortCode::resolve($shortcode)."<?php");
 	}
 
-	public function registerPlugin(Plugin $plugin){
-		$this->container[] = $plugin;
-	}
 
+	public static function area($area_num){
+		
+		$plugins = array();
+
+		foreach(\App\Libs\ShortCode::getAll() as $widget){
+			if($widget->area==$area_num){
+
+			}
+		}
+
+	}
 
 
 	

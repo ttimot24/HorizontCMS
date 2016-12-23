@@ -8,6 +8,11 @@ class Plugin extends Model
 {
     public $timestamps = false;
 
+    public static function exists($plugin){
+    	return file_exists("plugins/".$plugin);
+    }
+
+
 	public function __construct($root_dir){
 		$this->root_dir = $root_dir;		
 		$this->info = file_exists($this->getPath()."plugin_info.xml")? simplexml_load_file($this->getPath()."plugin_info.xml") : NULL;
@@ -40,7 +45,13 @@ class Plugin extends Model
 		return isset($this->info->{$info})? $this->info->{$info}: NULL;
 	}
 
+	public function getShortCode(){
+		return str_slug($this->root_dir,"_");
+	}
 
+	public function getWidget(){
+		return file_get_contents($this->getPath()."index.php");
+	}
 
 
 }

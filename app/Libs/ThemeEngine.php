@@ -37,6 +37,7 @@ class ThemeEngine{
 	public function render(){
 
 		\Website::initalize($this);
+		\App\Libs\ShortCode::initalize();
 		
 		$this->require_file('header.php');
 		$this->require_file('index.php');
