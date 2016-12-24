@@ -2,6 +2,8 @@
 
 namespace App\Libs;
 
+use \App\Model\Plugin as Plugin;
+
 class ShortCode extends Model{
 
 	public $table = 'plugins';
@@ -12,8 +14,8 @@ class ShortCode extends Model{
 		$all_plugin = self::all();
 
 		foreach($all_plugin as $plugin){
-			if(\App\Model\Plugin::exists($plugin->root_dir) && $plugin->active==1){
-				self::$widgets[str_slug($plugin->root_dir,"_")] = new \App\Model\Plugin($plugin->root_dir);
+			if(Plugin::exists($plugin->root_dir) && $plugin->active==1){
+				self::$widgets["{[".str_slug($plugin->root_dir,"_")."]}"] = (new Plugin($plugin->root_dir))->getWidget();
 			}
 		}
 
@@ -25,14 +27,12 @@ class ShortCode extends Model{
 
 	public static function resolve($shortcode){
 
-		return isset(self::$widgets[$shortcode])? self::$widgets[$shortcode]->getWidget() : NULL;
+		return isset(self::$widgets["{[".$shortcode."]}"])? eval("?>".self::$widgets["{[".$shortcode."]}"]."<?php") : NULL;
 	}
 
 
-	public static function render($page){
-
-
-
+	public static function compile($page){
+		return eval("?>".str_replace(array_keys(self::$widgets), array_values(self::$widgets), $page)."<?php"); 
 	}
 
 

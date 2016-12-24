@@ -50,11 +50,11 @@ class WebsiteController extends Controller
                     $template = "page_templates.".$requested_page->url;
                 }else{
 
-                    if($theme_engine->defaultTemplateExists('page')){
+                   // if($theme_engine->defaultTemplateExists('page')){
                         $template = 'page';
-                    }else{
+                    /*}else{
                         throw new \Exception('Can\'t find default page template!');
-                    }
+                    }*/
                 }
             }else{
                  $theme_engine->render404();

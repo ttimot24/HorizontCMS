@@ -55,6 +55,7 @@ class PluginController extends Controller{
        if(file_exists($path_to_db) && is_dir($path_to_db)){
 
             \Artisan::call("migrate",['--path'=> $path_to_db.DIRECTORY_SEPARATOR."migrations"]);
+            \Artisan::call('db:seed', ['--class' => 'Plugins\\'.$plugin_name.'\\database\\seeds\\PluginSeeder']);
 
        }
 
