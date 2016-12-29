@@ -5,7 +5,7 @@
 <div class='row'>
 <div class='col-md-12'>
 
-<h2 class='pull-left'>{{ trans('category.category') }}:</h2>
+<h2 class='pull-left'>{{ trans('category.category') }}</h2>
 
 
 

@@ -31,8 +31,14 @@
                             <img style='height:30px;margin-top:-10px;margin-bottom:-10px;object-fit:cover;border-radius:3px;' src='{{Auth::user()->getThumb()}}' />  {{ Auth::user()->username }} <span class="caret"></span>
                         </a>
 
-                         <ul class="dropdown-menu" role="menu">
-                            <li class='nav-item'><a href="{{admin_link('user-view',\Auth::user()->id)}}">View profile</a></li>
+                         <ul class="dropdown-menu" role="menu" style='width:225px;'>
+                           <li class='nav-item' style="text-align:center;"><img style="border-radius:3px;width:94%;height:150px;margin:10px 3% 10px 3%;object-fit:cover;" class="img-rounded" src='{{Auth::user()->getThumb()}}' /><br>
+                            <p style='color:white;'>{{\Auth::user()->username}} ({{\Auth::user()->role->name}})</p>
+                           </li>
+
+                           <li role="separator" class="divider"></li>
+                           <li class='nav-item'><a href="{{admin_link('user-view',\Auth::user()->id)}}">View profile</a></li>
+                           <li class='nav-item'><a href="{{admin_link('user-edit',\Auth::user()->id)}}">Profile settings</a></li>
                          </ul>
                     </li>
 
