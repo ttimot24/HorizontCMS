@@ -24,7 +24,7 @@ class SettingsController extends Controller{
                     ['name' => trans('settings.server'),'link' => 'admin/settings/server','icon' => 'fa fa-server'],
                     ['name' => trans('settings.email'),'link' => 'admin/settings/email','icon' => 'fa fa-envelope'],
                     ['name' => trans('settings.social_media'),'link' => 'admin/settings/socialmedia','icon' => 'fa fa-thumbs-o-up'],
-                    ['name' => trans('settings.backup_database'),'link' => 'admin/settings/backupdatabase','icon' => 'fa fa-database'],
+                    ['name' => trans('settings.database'),'link' => 'admin/settings/database','icon' => 'fa fa-database'],
                     ['name' => trans('settings.spread'),'link' => 'admin/settings/spread','icon' => 'fa fa-paper-plane'],
                     ['name' => trans('settings.uninstall'),'link' => 'admin/settings/uninstall','icon' => 'fa fa-exclamation-triangle'],
 
@@ -59,6 +59,7 @@ class SettingsController extends Controller{
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/website',[
                                                         'settings' => \App\Model\Settings::getAll(),
+                                                        'available_logos' => array_slice(scandir("storage/images/logos"),2),
                                                     ]);
     }
 
@@ -84,6 +85,7 @@ class SettingsController extends Controller{
         return $this->view->render('settings/adminarea',[
                                                         'settings' => Settings::getAll(),
                                                         'languages' => ['en'=>'English','hu'=>'Magyar'],
+                                                        'available_logos' => array_slice(scandir("storage/images/logos"),2),
                                                     ]);
     }
 
@@ -115,12 +117,30 @@ class SettingsController extends Controller{
     }
 
 
+    public function database(){
+
+    	$this->view->title(trans('settings.database'));
+    	return $this->view->render('settings/database',[
+    												'tables' => \DB::select('SHOW TABLES'),
+
+    												]);
+    }
+
+
 
     public function socialmedia(){
         $this->view->title("SocialMedia");
         return $this->view->render('settings/socialmedia',[
                                         'all_socialmedia' => ['facebook','youtube','instagram','google'],
                                         ]);
+    }
+
+
+
+    public function setlogo($image){
+    	Settings::where('setting', '=', 'logo')->update(['value' => $image]);
+
+    	return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
     }
 
 

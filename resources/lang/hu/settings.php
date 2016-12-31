@@ -8,7 +8,7 @@ return [
 	'server' => 'Szerver',
 	'email' => 'E-mail',
 	'social_media' => 'Közösségi média',
-	'backup_database' => 'Biztonsági mentés',
+	'database' => 'Adatbázis',
 	'spread' => 'Spread',
 	'uninstall' => 'Eltávolítás',
 ];

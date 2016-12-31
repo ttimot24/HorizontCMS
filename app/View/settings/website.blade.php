@@ -3,11 +3,10 @@
 @section('content')
 <div class='container main-container'>
 
-<h1>Website settings</h1>
+<h1>Website settings</h1><br><br>
 
 <form action='admin/settings/website' role='form' method='POST'>
-
-    {{ csrf_field() }}
+{{ csrf_field() }}
 
 <table class='table-bordered' id='settings' style='width:100%;text-align:center;'>
 
@@ -42,7 +41,10 @@
 <tr><td>Website down</td><td><input type='checkbox' class='form-control' name='website_down' value='1' <?php if($settings['website_down']==1){ echo 'checked'; } ?> ></td></tr>
 
 <tr><td>Logo</td><td>
-<img class='well well-sm' src="storage/images/logos/{{ $settings['logo'] }}" onerror='this.src=\"storage/images/icons/world.png\"' height='100'>
+
+@if(isset($settings['logo']) && $settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))
+<img class='well well-sm' src="storage/images/logos/{{$settings['logo']}}" height='100'>
+@endif
 
 <div class="btn-group" role="group">
 <button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='.admin_logo_select-modal-lg'>Select</button>
@@ -80,6 +82,7 @@
          </div>
         <div class='modal-body'>
         <form action='admin/settings/uploadlogo' method='POST' enctype='multipart/form-data'>
+        {{ csrf_field() }}
           <div class='form-group'>
   		      <label for='file'>Upload file:</label>
   		      <input name='up_file[]' id='input-2' type='file' class='file' multiple='true' data-show-upload='true' data-show-caption='true'>
@@ -103,14 +106,12 @@
         <div class='modal-body'>
        
 <?php             
-       /* $logos = scandir(Storage::$path."/images/logos");
 
-	        foreach (array_slice($logos,2) as $each){
-	        	echo "<a href='admin/settings/setlogo/website/".$each."'>
-            <img class='img img-thumbnail settings-image' src='".Storage::get('images/logo',$each)."' width='150'></a>";
+	        foreach ($available_logos as $each){
+	        	echo "<a href='admin/settings/setlogo/".$each."'>
+            <img class='img img-thumbnail settings-image' src='storage/images/logos/".$each."' width='150'></a>";
 	        }
 
-*/
 ?>
 
         </div>

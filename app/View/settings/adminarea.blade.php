@@ -3,12 +3,12 @@
 @section('content')
 <div class='container main-container'>
 
-<h1>AdminArea settings</h1>
+<h1>AdminArea settings</h1><br><br>
 
 
 <form action='' role='form' method='POST'>
+{{ csrf_field() }}
 
-    {{ csrf_field() }}
 <input type='hidden' name='is_actioned' value='1'>
 <table class='table-bordered' id='settings' style='width:100%;text-align:center;'>
 
@@ -22,7 +22,7 @@
                                     </select></td></tr>
 
 <tr><td>Dashboard Logo</td><td>
-<img class='well well-sm' src="storage/images/logos/{{$settings['admin_logo']}}" onerror='this.src=\"storage/images/logos/world.png\"' height='100'>
+<img class='well well-sm' src="<?php if(!isset($settings['admin_logo']) || $settings['admin_logo']==''){ echo 'resources/logo.png'; }else{echo 'storage/images/logos/'.$settings['logo']; } ?>" onerror='this.src=\"resources/logo.png\"' height='100'>
 
 <div class="btn-group" role="group">
 <button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='.admin_logo_select-modal-lg'>Select</button>
@@ -73,6 +73,7 @@
          </div>
         <div class='modal-body'>
         <form action='admin/settings/uploadlogo' method='POST' enctype='multipart/form-data'>
+        {{csrf_field()}}
           <div class='form-group'>
   		      <label for='file'>Upload file:</label>
   		      <input name='up_file[]' id='input-2' type='file' class='file' multiple='true' data-show-upload='true' data-show-caption='true'>
@@ -96,12 +97,12 @@
         <div class='modal-body'>
 
 <?php             
-        /*$logos = scandir("storage/images/logos");
 
+          foreach ($available_logos as $each){
+            echo "<a href='admin/settings/setlogo/".$each."'>
+            <img class='img img-thumbnail settings-image' src='storage/images/logos/".$each."' width='150'></a>";
+          }
 
-	        foreach (array_slice($logos,2) as $each){
-	        	echo "<a href='admin/settings/setlogo/admin_logo/".$each."'><img src='storage/images/logos/".$each."' class='img img-thumbnail settings-image' width='150'></a>";
-	        }*/
 ?>
 
  </div>

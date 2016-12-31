@@ -8,7 +8,7 @@ return [
 	'server' => 'Server',
 	'email' => 'Email',
 	'social_media' => 'Social Media',
-	'backup_database' => 'Backup',
+	'database' => 'Database',
 	'spread' => 'Spread',
 	'uninstall' => 'Uninstall',
 ];
