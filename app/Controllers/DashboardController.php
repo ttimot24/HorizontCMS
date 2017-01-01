@@ -16,6 +16,8 @@ class DashboardController extends Controller{
      */
     public function index(){
 
+        $admin_logo = Settings::get('admin_logo');
+
         $this->view->title(trans('dashboard.title'));
         return $this->view->render("dashboard/index",[
 
@@ -25,7 +27,7 @@ class DashboardController extends Controller{
                                                     'blogposts'  => \App\Model\Blogpost::count(),
                                                     'users' => \App\Model\User::count(),
                                                     'visits' => \App\Model\Visits::count(),
-                                                    'admin_logo' => \Config::get('horizontcms.admin_logo'),
+                                                    'admin_logo' => ($admin_logo!="" && file_exists("storage/images/logos/".$admin_logo))? "storage/images/logos/".$admin_logo : \Config::get('horizontcms.admin_logo'),
                                                     'disk_space' => @(disk_free_space("/")/disk_total_space("/"))*100,
                                                     'latest_version' => Settings::get('auto_upgrade_check')==0? NULL : \App\Model\SystemUpgrade::getLatestVersion(),
                                                     'current_version' => Settings::get('auto_upgrade_check')==0? NULL : \App\Model\SystemUpgrade::getCurrentVersion()->version,

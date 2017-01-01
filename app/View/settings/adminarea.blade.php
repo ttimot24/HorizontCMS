@@ -99,7 +99,7 @@
 <?php             
 
           foreach ($available_logos as $each){
-            echo "<a href='admin/settings/setlogo/".$each."'>
+            echo "<a href='admin/settings/set-admin-logo/".$each."'>
             <img class='img img-thumbnail settings-image' src='storage/images/logos/".$each."' width='150'></a>";
           }
 
