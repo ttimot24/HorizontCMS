@@ -66,4 +66,15 @@ class Blogpost extends Model{
     }
 
 
+    public function getExcerpt($char_num = 255){
+
+        if(isset($this->summary) && $this->summary!=""){
+            return $this->summary;
+        }else{
+            return substr(strip_tags($this->text),0,$char_num);
+        }
+
+
+    }
+
 }

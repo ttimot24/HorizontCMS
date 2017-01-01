@@ -3,8 +3,15 @@
 @section('content')
 <div class='container'>
 <section class="row">
+<div class="col-md-8">
 <h1>{{trans('settings.database')}}</h1>
-<br><br>
+</div>
+<div class='col-md-4'>
+<br>
+	<a class='btn btn-primary pull-right'>Backup database</a>
+</div>
+<br><br><br><br>
+
 
 <table class='table table-bordered table-hover'>
 <thead>
