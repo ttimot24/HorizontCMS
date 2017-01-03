@@ -9,6 +9,12 @@ use App\Libs\Controller;
 class GalleryController extends Controller{
  
 
+    public function before(){
+        if(!file_exists("storage/images/gallery")){
+            \File::makeDirectory("storage/images/gallery", $mode = 0777, true, true);
+        }
+    }
+
 
     /**
      * Display a listing of the resource.

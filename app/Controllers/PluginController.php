@@ -9,6 +9,11 @@ use App\Libs\Controller;
 class PluginController extends Controller{
  
 
+    public function before(){
+        if(!file_exists("plugins")){
+            \File::makeDirectory("plugins", $mode = 0777, true, true);
+        }
+    }
 
     /**
      * Display a listing of the resource.

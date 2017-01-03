@@ -33,11 +33,8 @@ class ShortCode extends Model{
 
 	public static function compile($page){
 
-		if(count(self::$widgets>0)){
-			return eval("?>".str_replace(array_keys(self::$widgets), array_values(self::$widgets), $page)."<?php"); 
-		}else{
-			return $page;
-		}
+
+		return eval("?>".str_replace(array_keys(self::$widgets), array_values(self::$widgets), $page)."<?php"); 
 	}
 
 

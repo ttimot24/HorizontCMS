@@ -8,6 +8,12 @@ use App\Libs\Controller;
 use App\Model\Settings;
 
 class SettingsController extends Controller{
+
+    public function before(){
+        if(!file_exists("storage/images/logos")){
+          \File::makeDirectory("storage/images/logos", $mode = 0777, true, true);
+        }
+    }
  
 
     /**

@@ -4,6 +4,7 @@
 return [
 	'directories' => [
 			'plugins',
+			'storage/framework/cache',
 			'storage/framework/logs',
 			'storage/framework/temp',
 			'storage/images',

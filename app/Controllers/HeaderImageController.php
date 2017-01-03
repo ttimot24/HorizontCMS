@@ -12,8 +12,11 @@ class HeaderImageController extends Controller{
  
 
     public function before(){
-        //header_images dir creation.
+        if(!file_exists("storage/images/header_images")){
+            \File::makeDirectory("storage/images/header_images", $mode = 0777, true, true);
+        }
     }
+
 
 
     /**
