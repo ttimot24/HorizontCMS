@@ -7,7 +7,7 @@ use \App\Model\Plugin as Plugin;
 class ShortCode extends Model{
 
 	public $table = 'plugins';
-	private static $widgets;
+	private static $widgets = array();
 
 	public static function initalize(){
 
@@ -32,7 +32,12 @@ class ShortCode extends Model{
 
 
 	public static function compile($page){
-		return eval("?>".str_replace(array_keys(self::$widgets), array_values(self::$widgets), $page)."<?php"); 
+
+		if(count(self::$widgets>0)){
+			return eval("?>".str_replace(array_keys(self::$widgets), array_values(self::$widgets), $page)."<?php"); 
+		}else{
+			return $page;
+		}
 	}
 
 
