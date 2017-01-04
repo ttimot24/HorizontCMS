@@ -15,7 +15,7 @@
 
 <div class='panel panel-default col-md-2' style='padding:0px;'>
  <ul class="list-group">
-  <a href='admin/filemanager?path=images'><li class="list-group-item">images</li></a>
+  <a href='admin/file-manager?path=images'><li class="list-group-item">images</li></a>
   <li class="list-group-item">uploads</li>
   <li class="list-group-item">themes</li>
   <li class="list-group-item">plugins</li>
@@ -26,14 +26,14 @@
 <div class="panel panel-default col-md-10" >
   <div class="panel-body">
       <ol class="breadcrumb">
-			  <li><a href="admin/filemanager/{{$action}}?path=">root</a></li>
+			  <li><a href="admin/file-manager/{{$action}}?path=">root</a></li>
         @foreach($tree as $dir)
-          <li><a href="admin/filemanager/{{$action}}?path={{$dir}}">{{$dir}}</a></li>
+          <li><a href="admin/file-manager/{{$action}}?path={{$dir}}">{{$dir}}</a></li>
         @endforeach
 			</ol>
 
             @foreach($dirs as $dir)
-                <div class='file col-md-2' style='overflow:hidden;height:140px;cursor:pointer;' ondblclick=" window.location.href = 'admin/filemanager/{{$action}}?path=<?= $old_path.$dir ?>' ">
+                <div class='file col-md-2' style='overflow:hidden;height:140px;cursor:pointer;' ondblclick=" window.location.href = 'admin/file-manager/{{$action}}?path=<?= $old_path.$dir ?>' ">
                   {!! Html::img('resources/images/icons/dir.png',"style='width:100%;'") !!}
                   <center><b>{{$dir}}</b></center><br>
                 </div>
@@ -88,7 +88,7 @@
       </div>
       <div class='modal-body'>
 
-      <form action='admin/filemanager/fileupload' method='POST' enctype='multipart/form-data'>
+      <form action='admin/file-manager/fileupload' method='POST' enctype='multipart/form-data'>
       {{ csrf_field() }}
       <div class='form-group'>
         <label for='file'>Upload file:</label>
@@ -117,7 +117,7 @@
       </div>
       <div class='modal-body'>
 
-<form action='admin/filemanager/newfolder' method='POST' enctype='multipart/form-data'>
+<form action='admin/file-manager/newfolder' method='POST' enctype='multipart/form-data'>
       {{ csrf_field() }}
 <div class='form-group'>
       <input type='hidden' name='dir_path' value="{{ $old_path }}">

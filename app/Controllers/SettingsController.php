@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Libs\Controller;
 
 use App\Model\Settings;
+use \VisualAppeal\AutoUpdate;
 
 class SettingsController extends Controller{
 
@@ -113,6 +114,56 @@ class SettingsController extends Controller{
 
                                                     ]);
     }
+
+
+    public function sysUpgrade(){
+
+
+        $workspace = "storage/framework/upgrade";
+        $url = "http://www.eterfesztival.hu/hcms_online_store/updates/";
+
+        $update = new AutoUpdate($workspace. '/temp', $workspace , 60);
+        $update->setCurrentVersion('0.1.0');
+        $update->setUpdateUrl($url); //Replace with your server update directory
+        // Optional:
+        $update->addLogHandler(new \Monolog\Handler\StreamHandler($workspace . '/update.log'));
+        $update->setCache(new \Desarrolla2\Cache\Adapter\File($workspace . '/cache'), 3600);
+        //Check for a new update
+
+
+        if ($update->checkUpdate() === false)
+            die('Could not check for updates! See log file for details.');
+        if ($update->newVersionAvailable()) {
+            //Install new update
+            echo 'New Version: ' . $update->getLatestVersion() . '<br>';
+            echo 'Installing Updates: <br>';
+            echo '<pre>';
+            var_dump(array_map(function($version) {
+                return (string) $version;
+            }, $update->getVersionsToUpdate()));
+            echo '</pre>';
+            // This call will only simulate an update.
+            // Set the first argument (simulate) to "false" to install the update
+            // i.e. $update->update(false);
+            $result = $update->update();
+            if ($result === true) {
+                echo 'Update simulation successful<br>';
+            } else {
+                echo 'Update simulation failed: ' . $result . '!<br>';
+                if ($result = AutoUpdate::ERROR_SIMULATE) {
+                    echo '<pre>';
+                    var_dump($update->getSimulationResults());
+                    echo '</pre>';
+                }
+            }
+        } else {
+            echo 'Current Version is up to date<br>';
+        }
+        echo 'Log:<br>';
+        echo nl2br(file_get_contents($workspace. '/update.log'));
+
+    }
+
 
 
     public function server(){
