@@ -60,7 +60,7 @@ echo "<td>".$each->email."</td>";
 echo   "</b></td><td><center>";
 
 $disabled = "";
-      if($each->role_id>=\Auth::user()->role_id && !$each->is(Auth::user())){
+      if($each->role_id>=\Auth::user()->role_id || $each->is(Auth::user())){
         $disabled='disabled';
       }   
 

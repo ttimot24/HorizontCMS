@@ -37,9 +37,11 @@
     <a href='admin/{{$user->id}}' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('actions.deactivate')}}</a>
     <a href="{{admin_link('user-edit',$user->id)}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
   </div>    
-    <button type='button' class='btn btn-danger' data-toggle='modal' data-target='.delete'>
+  @if($user->role_id<\Auth::user()->role_id && !$user->is(Auth::user()))
+    <button type='button' class='btn btn-danger' data-toggle='modal' data-target='.delete_{{$user->id}}'>
     <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.remove')}}
     </button>
+  @endif
 
     
     </br></br><b>{{trans('user.view_full_name')}} : <a>{{ $user->name }}</a></b>
