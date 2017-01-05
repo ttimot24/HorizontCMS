@@ -43,9 +43,9 @@
 
 
 <script>
-	$(document).ready(function() {  
+	/*$(document).ready(function() {  
 	    $("html").niceScroll({cursorwidth: "10px",zindex: "auto",autohidemode: false});
-	});
+	});*/
 </script>
 
 </body>

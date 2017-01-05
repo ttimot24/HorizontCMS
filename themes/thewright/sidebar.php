@@ -2,7 +2,7 @@
 	<br>
 	<div class="well">
 		<h4>Widget 1</h4>
-		<p><?php \App\Libs\PluginManager::render('googlemaps') ?></p>
+		<p><?php //\App\Libs\PluginManager::render('googlemaps') ?></p>
 	</div>
 	<br>
 	<div class="well">
