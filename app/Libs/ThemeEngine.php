@@ -67,6 +67,7 @@ class ThemeEngine{
 		}else{
 			$this->require_file('../../resources/static/404.php');
 		}
+		exit;
 	}
 
 

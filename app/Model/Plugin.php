@@ -50,7 +50,7 @@ class Plugin extends Model
 	}
 
 	public function getWidget(){
-		return file_get_contents($this->getPath()."index.php");
+		return (file_exists($this->getPath()."index.php"))? file_get_contents($this->getPath()."index.php") : /*NULL*/ "";
 	}
 
 
