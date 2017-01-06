@@ -3,8 +3,30 @@
 namespace App\Model;
 
 use \App\Libs\Model;
+use \VisualAppeal\AutoUpdate;
 
 class SystemUpgrade extends Model{
+
+	public static $auto_upgrade;
+
+
+	public static function checkUpgrade(){
+            $workspace = "storage/framework/upgrade";
+            $url = "http://www.eterfesztival.hu/hcms_online_store/updates/";
+
+            $update = new AutoUpdate($workspace. '/temp', $workspace , 60);
+            $update->setCurrentVersion(self::getCurrentVersion()->version);
+            $update->setUpdateUrl($url);
+
+            $update->addLogHandler(new \Monolog\Handler\StreamHandler($workspace . '/update.log'));
+            $update->setCache(new \Desarrolla2\Cache\Adapter\File($workspace . '/cache'), 3600);
+            
+            $update->checkUpdate();
+
+            self::$auto_upgrade = $update;
+
+            return self::$auto_upgrade;
+	}
 
 
 	public static function getCore(){
@@ -19,32 +41,20 @@ class SystemUpgrade extends Model{
 
 	public static function getAllAvailable(){
 
-		$available_versions = json_decode(file_get_contents("http://www.eterfesztival.hu/hcms_online_store/hcms-versions.php"));
-
-		$available_list = array();
-
-				if(isset($available_versions)){
-						foreach(array_reverse($available_versions) as $available){
-							if($available > self::getCurrentVersion()->version){
-								$available_list[] = $available;
-							}
-						}
-				}
-
-		return $available_list;
+		return array_map(function($version) {
+                return (string) $version;
+            }, self::$auto_upgrade->getVersionsToUpdate());
 
 	}
 
 
 	public static function getUpgrades(){
-		return self::all();
+		return self::all()->reverse();
 	}
 
 
 	public static function getLatestVersion(){
-		$available_list = self::getAllAvailable();
-
-		return isset($available_list[0])? $available_list[0] : 0;
+		return self::$auto_upgrade->getLatestVersion();
 	}
 
 

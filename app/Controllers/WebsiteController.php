@@ -43,6 +43,11 @@ class WebsiteController extends Controller
             }
 
 
+            if(Settings::get('website_down')==1 && (\Auth::user()==null || !\Auth::user()->isAdmin())){
+                $theme_engine->renderWebsiteDown();
+            }
+
+
             $requested_page = $slug==""? Page::find(Settings::get('home_page')) : Page::findBySlug($slug);
 
             if($requested_page!=NULL){
@@ -58,10 +63,6 @@ class WebsiteController extends Controller
                 }
             }else{
                  $theme_engine->render404();
-            }
-
-            if(Settings::get('website_down')==1 /*&& !\Auth::user()->isAdmin()*/){
-                $theme_engine->renderWebsiteDown();
             }
 
 

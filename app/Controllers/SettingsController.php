@@ -104,6 +104,8 @@ class SettingsController extends Controller{
      */
     public function updatecenter($slug){
 
+        \App\Model\SystemUpgrade::checkUpgrade();
+
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/updatecenter',[
                                                         'current_version' => \App\Model\SystemUpgrade::getCurrentVersion(),

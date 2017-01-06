@@ -11,8 +11,8 @@
 <div class='col-md-4'>
 <br>
 	  <a class="list-group-item active">
-	    <h4 class="list-group-item-heading">Current version: v{{$current_version->version}} <small>build: {{$current_version->build}}</small></h4>
-	    <p class="list-group-item-text">Installed: 2016.02.15</p>
+	    <h4 class="list-group-item-heading">Current version: v{{$current_version->version}}</h4>
+	    <p class="list-group-item-text">Installed: {{$current_version->created_at}}</p>
 	  </a>
 
 </div>
@@ -40,22 +40,30 @@
 	@endforeach
 
 
-	  <a class="list-group-item active">
-	    <h4 class="list-group-item-heading">Current Version: v{{$current_version->version}} <small>build: {{$current_version->build}}</small></h4>
-	    <p class="list-group-item-text">Installed: 2016.02.15</p>
-	  </a>
-
 	  @foreach($upgrade_list as $upgrade)
+
+	   @if($loop->first)
+		  <a class="list-group-item active">
+		    <h4 class="list-group-item-heading">Current Version: v{{$upgrade->version}}</small></h4>
+		    <p class="list-group-item-text">Installed: {{$upgrade->created_at}}</p>
+		  </a>
+		  <?php continue; ?>
+	   @elseif($loop->last)
+		   <a class="list-group-item list-group-item-success" style='border-radius:0px;cursor:pointer;'>
+		    <h4 class="list-group-item-heading">System Core: {{$upgrade->version}}</h4>
+		    <p class="list-group-item-text">Installed: {{$upgrade->created_at}}</p>
+		  </a>
+		  <?php continue; ?>
+	   @endif
+
 	   <a class="list-group-item">
 	    <h4 class="list-group-item-heading">{{ $upgrade->importance }} Update: v{{ $upgrade->version }} <small>build: {{$upgrade->build }}</small></h4>
-	    <p class="list-group-item-text">Installed: 2015.11.24</p>
+	    <p class="list-group-item-text">Installed: {{$upgrade->created_at}}</p>
 	  </a>
-	 @endforeach
 
-	   <a class="list-group-item list-group-item-success" style='border-radius:0px;cursor:pointer;'>
-	    <h4 class="list-group-item-heading">System Core: {{$installed_version->version}} <small>build: {{$installed_version->build}} </small></h4>
-	    <p class="list-group-item-text">Installed: 2015.09.13</p>
-	  </a>
+
+
+	 @endforeach
 	</div>
 </div>
 

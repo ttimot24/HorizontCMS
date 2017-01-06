@@ -57,10 +57,10 @@
         </center>
 
      
-       @if($latest_version > $current_version)
+       @if($upgrade!=null && $upgrade->newVersionAvailable())
         <div class="alert alert-warning alert-dismissible col-md-10 col-md-offset-1" role="alert" style='margin-top:5%;'>
     		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    		  <strong>{{ trans('dashboard.update_available')." v".$latest_version }}</strong><br>{{ trans('dashboard.update_message') }}<br><br>
+    		  <strong>{{ trans('dashboard.update_available')." v".$upgrade->getLatestVersion()}}</strong><br>{{ trans('dashboard.update_message') }}<br><br>
     		  <a href='admin/settings/updatecenter' class='btn btn-primary btn-block'>{{ trans('dashboard.update_now') }}</a>
     		</div>
       @endif
