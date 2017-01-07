@@ -110,7 +110,7 @@ class SettingsController extends Controller{
         return $this->view->render('settings/updatecenter',[
                                                         'current_version' => \App\Model\SystemUpgrade::getCurrentVersion(),
                                                         'latest_version' => \App\Model\SystemUpgrade::getLatestVersion(),
-                                                        'available_list' => \App\Model\SystemUpgrade::getAllAvailable(),
+                                                        'available_list' => array_reverse(\App\Model\SystemUpgrade::getAllAvailable()),
                                                         'upgrade_list' => \App\Model\SystemUpgrade::getUpgrades(),
                                                         'installed_version' => \App\Model\SystemUpgrade::getCore(),
 
@@ -121,11 +121,11 @@ class SettingsController extends Controller{
     public function sysUpgrade(){
 
 
-        $workspace = "storage/framework/upgrade";
-        $url = "http://www.eterfesztival.hu/hcms_online_store/updates/";
+        $workspace = storage_path().DIRECTORY_SEPARATOR."framework".DIRECTORY_SEPARATOR."upgrade";
+        $url = "http://www.eterfesztival.hu/hcms_online_store/updates";
 
-        $update = new AutoUpdate($workspace. '/temp', $workspace , 60);
-        $update->setCurrentVersion('0.1.0');
+        $update = new AutoUpdate($workspace.DIRECTORY_SEPARATOR.'temp', getcwd() , 60);
+        $update->setCurrentVersion(\App\Model\SystemUpgrade::getCurrentVersion()->version);
         $update->setUpdateUrl($url); //Replace with your server update directory
         // Optional:
         $update->addLogHandler(new \Monolog\Handler\StreamHandler($workspace . '/update.log'));
@@ -147,7 +147,7 @@ class SettingsController extends Controller{
             // This call will only simulate an update.
             // Set the first argument (simulate) to "false" to install the update
             // i.e. $update->update(false);
-            $result = $update->update();
+            $result = $update->update(false);
             if ($result === true) {
                 echo 'Update simulation successful<br>';
             } else {

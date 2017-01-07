@@ -23,6 +23,8 @@
 <section class='row'>
 
 <div class='col-md-4' style='/*max-height:400px;overflow-y:scroll;padding:0px;border:1px solid #9d9d9d;border-radius:5px;*/'>
+	
+<a class="btn btn-info btn-block" href="admin/settings/sys-upgrade">Install all</a><br><br>
 	<div class="list-group">
 	  
 <!--	<?php //if($data['latest_version'] > $data['current_version']->version): ?>
