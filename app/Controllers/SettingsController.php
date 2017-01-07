@@ -119,7 +119,8 @@ class SettingsController extends Controller{
 
 
     public function sysUpgrade(){
-
+   
+        ob_start();
 
         $workspace = storage_path().DIRECTORY_SEPARATOR."framework".DIRECTORY_SEPARATOR."upgrade";
         $url = "http://www.eterfesztival.hu/hcms_online_store/updates";
@@ -149,9 +150,15 @@ class SettingsController extends Controller{
             // i.e. $update->update(false);
             $result = $update->update(false);
             if ($result === true) {
-                echo 'Update simulation successful<br>';
+                echo 'Update successful<br>';
+                $sys_upgrade = new \App\Model\SystemUpgrade();
+                $sys_upgrade->version = $update->getLatestVersion();
+                $sys_upgrade->nickname = "Upgrade";
+                $sys_upgrade->importance = "important";
+                $sys_upgrade->description = "It was a successful update!";
+                $sys_upgrade->save();
             } else {
-                echo 'Update simulation failed: ' . $result . '!<br>';
+                echo 'Update failed: ' . $result . '!<br>';
                 if ($result = AutoUpdate::ERROR_SIMULATE) {
                     echo '<pre>';
                     var_dump($update->getSimulationResults());
@@ -164,6 +171,10 @@ class SettingsController extends Controller{
         echo 'Log:<br>';
         echo nl2br(file_get_contents($workspace. '/update.log'));
 
+        $echo = ob_get_contents();
+        ob_end_clean();
+
+        return $this->redirectToSelf()->with(['upgrade_console' => $echo]);
     }
 
 

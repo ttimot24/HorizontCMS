@@ -24,7 +24,11 @@
 
 <div class='col-md-4' style='/*max-height:400px;overflow-y:scroll;padding:0px;border:1px solid #9d9d9d;border-radius:5px;*/'>
 	
-<a class="btn btn-info btn-block" href="admin/settings/sys-upgrade">Install all</a><br><br>
+	@if(count($available_list)>0)
+	<a class="btn btn-info btn-block" href="admin/settings/sys-upgrade">Install all</a><br><br>
+	@endif
+
+
 	<div class="list-group">
 	  
 <!--	<?php //if($data['latest_version'] > $data['current_version']->version): ?>
@@ -69,7 +73,13 @@
 	</div>
 </div>
 
-<div class='col-md-8' style='border: 1px solid #9d9d9d;height:400px;'>
+<div class='col-md-8' style='border: 1px solid #9d9d9d;min-height:400px;'>
+<br><br>
+
+@if(\Session::has('upgrade_console'))
+	{!! \Session::get('upgrade_console') !!}
+@endif
+
 </div>
 
 </section>
