@@ -1,5 +1,6 @@
 <html>
 <head>
+	<?php Website::define_base(); ?>
 	<title><?= Website::$_REQUESTED_PAGE->name ." | ". Website::$_SETTINGS->title ?></title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />

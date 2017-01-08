@@ -68,7 +68,7 @@ class WebsiteController extends Controller
 
             $theme_engine->pageTemplate($template);
 
- 
+
             $theme_engine->runScript('before_render');
 
        return $theme_engine->render([

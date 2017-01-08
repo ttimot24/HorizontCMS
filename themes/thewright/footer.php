@@ -6,7 +6,7 @@
 	<div class="col-md-4">
 	</div>
 	<div class="col-md-4" style='font-size:26px;text-align:right;'>
-	 	<a href="<?= SocialLink::getLinkTo('facebook') ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+	 	<a href="<?= SocialLink::getLinkTo('facebook') ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a>&nbsp&nbsp&nbsp
 	 	<a href="<?= SocialLink::getLinkTo('google') ?>"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
 	</div>
 

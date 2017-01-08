@@ -31,6 +31,22 @@ class ContentSeeder extends Seeder
             'active' => 1
         ]);
 
+        DB::table('pages')->insert([
+            'id' => 2,
+            'name' => 'Blog',
+            'slug' => 'blog',
+            'url' => 'blog.php',
+            'visibility' => 1,
+            'parent_id' => NULL,
+            'queue' => 1,
+            'page' => '',
+            'author_id' => 1,
+            'image' => '',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => NULL,
+            'active' => 1
+        ]);
+
         DB::table('blogposts')->insert([
             'id' => 1,
             'title' => 'First post',
@@ -53,6 +69,12 @@ class ContentSeeder extends Seeder
             'image' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => NULL,
+        ]);
+
+        DB::table('header_images')->insert([
+            'id' => 1,
+            'title' => 'default',
+            'image' => 'abovethecity.jpg',
         ]);
 
 

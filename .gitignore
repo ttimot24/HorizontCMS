@@ -6,6 +6,7 @@ Homestead.json
 Homestead.yaml
 .env
 /storage
+!/storage/images/header_images/abovethecity.jpg
 /composer.lock
 /themes/*
 !themes/thewright

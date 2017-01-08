@@ -13,14 +13,16 @@
 <?php Website::require_theme_file("sitelinks.php"); ?>
 
 <section class="container">
+<div class="row">
 
 <div class="col-md-8">
-<!--<h3>Page title</h3>-->
 
 <?php Website::handle_routing(); ?>
 
 </div>
 
+<div class="col-md-4">
 <?php Website::require_theme_file("sidebar.php"); ?>
-
+</div>
+</div>
 </section>

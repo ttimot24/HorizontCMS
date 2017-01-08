@@ -53,7 +53,7 @@ class Website{
 
 	public static function define_base(){
 
-		return "<base href=".\Config::get('app.url') ." />";
+		echo "<base href=".\Config::get('app.url') ." />";
 	}
 
 
