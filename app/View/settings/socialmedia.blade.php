@@ -18,8 +18,8 @@
 	foreach($all_socialmedia as $each){
 
 		echo "<tr><td>
-				<i class='fa fa-".$each."' aria-hidden='true' style='font-size:26px;'></i> ".ucfirst($each)."</td><td>
-				<input type='text' class='form-control' name='".$each."' value='".htmlspecialchars($each)."'>
+				<i class='fa fa-".$each->getName()."' aria-hidden='true' style='font-size:26px;'></i> ".ucfirst($each->getName())."</td><td>
+				<input type='text' class='form-control' name='".$each->getName()."' value='".htmlspecialchars($each->value)."'>
 			</td></tr>";
 
 

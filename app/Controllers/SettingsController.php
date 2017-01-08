@@ -199,9 +199,20 @@ class SettingsController extends Controller{
 
 
     public function socialmedia(){
+
+
+        if($this->request->isMethod('POST')){
+
+            foreach($this->request->all() as $key => $value){
+              Settings::where('setting', '=', "social_link_".$key)->update(['value' => $value]);
+            }
+
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
+        }
+
         $this->view->title("SocialMedia");
         return $this->view->render('settings/socialmedia',[
-                                        'all_socialmedia' => ['facebook','youtube','instagram','google'],
+                                        'all_socialmedia' => \SocialLink::all(),
                                         ]);
     }
 

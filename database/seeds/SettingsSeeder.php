@@ -106,6 +106,36 @@ class SettingsSeeder extends Seeder
             'more' => '1',
         ]);
 
+        DB::table('settings')->insert([
+            'setting' => 'social_link_facebook',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
+            'setting' => 'social_link_youtube',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
+            'setting' => 'social_link_google-plus',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
+            'setting' => 'social_link_instagram',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
+            'setting' => 'social_link_github',
+            'value' => "",
+            'more' => '1',
+        ]);
+
     }
 }
 

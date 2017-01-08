@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a78c6055bb923fe5cd52b3c5945c6a0c",
+    "content-hash": "85d65d480e154e9706747d1d77a4bfad",
     "packages": [
         {
             "name": "barryvdh/composer-cleanup-plugin",
