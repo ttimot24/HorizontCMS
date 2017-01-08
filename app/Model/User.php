@@ -62,7 +62,7 @@ class User extends Authenticatable{
     }
 
 
-    public function hasRole($role){
+    public function hasPermission($permission){
 
         $rights = json_decode($this->role->rights);
 
@@ -70,7 +70,7 @@ class User extends Authenticatable{
             return false;
         }
 
-        return in_array($role, $rights);
+        return in_array($permission, $rights);
     }
 
     /**
@@ -82,7 +82,7 @@ class User extends Authenticatable{
     *
     */
     public function isAdmin(){
-        return $this->hasRole('admin_area');
+        return $this->hasPermission('admin_area');
     }
 
 

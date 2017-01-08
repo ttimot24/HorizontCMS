@@ -45,7 +45,9 @@
   <select class='form-control' name='role_id' id='sel1'>
     
     @foreach($user_roles as $each)
+      @if($each->permission<=$current_user->role->permission)
       <option value="{{ $each->id }}" {{ ($each->is($user->role) ? "selected":"") }}>{{ $each->name }}</option>
+      @endif
     @endforeach
 
   </select>

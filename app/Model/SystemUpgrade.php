@@ -11,10 +11,10 @@ class SystemUpgrade extends Model{
 
 
 	public static function checkUpgrade(){
-            $workspace = "storage/framework/upgrade";
-            $url = "http://www.eterfesztival.hu/hcms_online_store/updates/";
+	        $workspace = storage_path().DIRECTORY_SEPARATOR."framework".DIRECTORY_SEPARATOR."upgrade";
+	        $url = "http://www.eterfesztival.hu/hcms_online_store/updates";
 
-            $update = new AutoUpdate($workspace. '/temp', $workspace , 60);
+	        $update = new AutoUpdate($workspace.DIRECTORY_SEPARATOR.'temp', getcwd() , 60);
             $update->setCurrentVersion(self::getCurrentVersion()->version);
             $update->setUpdateUrl($url);
 
