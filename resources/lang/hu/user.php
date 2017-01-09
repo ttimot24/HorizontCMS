@@ -31,6 +31,7 @@ return [
 	'create_password' => 'Jelszó',
 	'create_password_again' => 'Jelszó újra',
 	'create_email' => 'E-mail',
+	'create_emailnotify' => 'Értesítés küldése a reg-ről',
 	'create_select_rank' => 'Jogkör',
 	'create_add_user_button' => 'Létrehoz',
 

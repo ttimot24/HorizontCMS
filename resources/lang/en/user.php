@@ -32,6 +32,7 @@ return [
 	'create_password' => 'Password',
 	'create_password_again' => 'Password again',
 	'create_email' => 'Email',
+	'create_emailnotify' => 'Notify about registration',
 	'create_select_rank' => 'Select rank',
 	'create_add_user_button' => 'Add user',
 

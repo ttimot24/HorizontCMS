@@ -32,14 +32,24 @@
       <input type='password' class='form-control' id='password' name='password'  required>
     </div>
 
+
    <div class='form-group pull-left col-xs-12 col-md-8' >
       <label for='title'>{{trans('user.create_password_again')}}:</label>
       <input type='password' class='form-control' id='password2' name='password2' required>
     </div>
 
-    <div class='form-group pull-left col-xs-12 col-md-8' >
+    <div class='form-group pull-left col-xs-12 col-md-4' >
+    </div>
+
+    <div class='form-group pull-left col-xs-12 col-md-6' >
       <label for='title'>{{trans('user.create_email')}}:</label>
       <input type='email' class='form-control' id='title' name='email' required>
+    </div>
+
+    <div class='form-group pull-left col-xs-12 col-md-2' >
+      <label for='title'>{{trans('user.create_emailnotify')}}:</label>
+      <input type='hidden' class='form-control' id='title' name='emailnotify' value="0">
+      <input type='checkbox' class='form-control' id='title' name='emailnotify' value="1" >
     </div>
 
 <div class='form-group pull-left col-xs-12 col-md-5' >
