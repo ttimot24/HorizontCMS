@@ -33,7 +33,7 @@
 
                          <ul class="dropdown-menu" role="menu" style='width:225px;'>
                            <li class='nav-item' style="text-align:center;"><img style="border-radius:3px;width:94%;height:150px;margin:10px 3% 10px 3%;object-fit:cover;" class="img-rounded" src='{{Auth::user()->getThumb()}}' /><br>
-                            <p style='color:white;'>{{\Auth::user()->username}} ({{\Auth::user()->role->name}})</p>
+                            <p style='color:white;'>{{\Auth::user()->username}} ({{strtolower(\Auth::user()->role->name)}})</p>
                            </li>
 
                            <li role="separator" class="divider"></li>

@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ExampleTest extends TestCase
+class LoginTest extends TestCase
 {
     /**
      * A basic functional test example.
@@ -13,7 +13,11 @@ class ExampleTest extends TestCase
      */
     public function testBasicExample()
     {
-        $this->visit('/laravelwelcome')
-             ->see('Laravel');
+        $this->visit('/admin')
+             ->see('HorizontCMS');
+
+        $this->visit('/admin')
+             ->see('Closer to the web');
+
     }
 }

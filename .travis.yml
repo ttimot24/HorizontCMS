@@ -12,6 +12,7 @@ before_script:
   - sleep 15
   - mongo horizontlaravel --eval 'db.addUser("travis", "test");'
   - composer install
+  - phpunit
 
 script:
    - php artisan migrate --no-interaction
