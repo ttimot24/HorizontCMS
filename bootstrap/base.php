@@ -4,9 +4,10 @@
 
 	  $root = 'http://'.$_SERVER['HTTP_HOST'];
 
-	  //$_SERVER['DOCUMENT_ROOT'] = str_replace(DIRECTORY_SEPARATOR,"/",$_SERVER['DOCUMENT_ROOT']);
+	  $server_root = str_replace(DIRECTORY_SEPARATOR,"/",$_SERVER['DOCUMENT_ROOT']);
+	  $get_cwd = str_replace(DIRECTORY_SEPARATOR,"/",getcwd());
 
-	  $path = str_replace($_SERVER['DOCUMENT_ROOT'],"",str_replace(DIRECTORY_SEPARATOR,"/",getcwd()))."/";
+	  $path = str_replace($server_root,"",$get_cwd)."/";
 
 	  if($path[0] != "/"){
 	  	$root .= "/";
