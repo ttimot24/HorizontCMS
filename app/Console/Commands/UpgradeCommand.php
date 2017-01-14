@@ -35,7 +35,7 @@ class UpgradeCommand extends Command
     public function handle(){
  
         $workspace = storage_path().DIRECTORY_SEPARATOR."framework".DIRECTORY_SEPARATOR."upgrade";
-        $url = "http://www.eterfesztival.hu/hcms_online_store/updates";
+        $url = \Config::get('horizontcms.sattelite_url')."/updates";
 
         $update = new \VisualAppeal\AutoUpdate($workspace.DIRECTORY_SEPARATOR.'temp', getcwd() , 60);
         $update->setCurrentVersion(\App\Model\SystemUpgrade::getCurrentVersion()->version);

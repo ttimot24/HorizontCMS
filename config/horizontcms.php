@@ -12,7 +12,7 @@ return[
 
 	'admin_logo' => 'resources/logo.png',
 
-	'sattelite_url' => 'http://www.eterfesztival.hu',
+	'sattelite_url' => 'http://www.eterfesztival.hu/hcms_online_store',
 
 	'css' => [
 			'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
@@ -36,10 +36,10 @@ return[
 			],
 
 	'js' => [
-			'https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js',
+			'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js',
 			'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
 			'resources/assets/filemaster/js/fileinput.js',
-			'resources/assets/nicescroll/jquery.nicescroll.min.js',
+			//'resources/assets/nicescroll/jquery.nicescroll.min.js',
 			//'resources/assets/intelligence/AjaxFramework.js',
 			//'resources/scripts/main-script.js',
 			//'resources/assets/scrollbar/jquery.scrollbar.js',

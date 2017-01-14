@@ -13,7 +13,9 @@ class ExampleTest extends TestCase
      */
     public function testBasicExample()
     {
-        $this->visit('/laravelwelcome')
-             ->see('Laravel');
+        if(\App\HorizontCMS::isInstalled()){
+            $this->visit('/laravelwelcome')
+                 ->see('Laravel');
+         }
     }
 }
