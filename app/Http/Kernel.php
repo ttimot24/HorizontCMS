@@ -43,6 +43,7 @@ class Kernel extends HttpKernel
             \Illuminate\Auth\Middleware\Authenticate::class,
             \App\Http\Middleware\AdminMiddleware::class,
             \App\Http\Middleware\MenuMiddleware::class,
+            \App\Http\Middleware\NavbarPluginMiddleware::class,
         ],
 
     ];

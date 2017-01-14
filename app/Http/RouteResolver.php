@@ -17,7 +17,8 @@ class RouteResolver{
 				$controller_path = str_replace("\\",DIRECTORY_SEPARATOR,camel_case($this->namespace));
 				$controller_name = studly_case($controller).'Controller';
 
-				if(!file_exists($controller_path.$controller_name.'.php')){
+				//if(!file_exists($controller_path.$controller_name.'.php')){
+				if(!class_exists($this->namespace.$controller_name)){
 					throw new \Exception('No such file <b>'.$this->namespace.$controller_name.'.php'.'</b>');
 				} 
 

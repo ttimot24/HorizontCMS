@@ -86,7 +86,6 @@ class MenuMiddleware{
         });
 
 
-
         return $next($request);
     }
 }

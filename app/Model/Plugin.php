@@ -13,17 +13,18 @@ class Plugin extends Model
     }
 
 
-	public function __construct($root_dir){
-		$this->root_dir = $root_dir;		
-		$this->info = file_exists($this->getPath()."plugin_info.xml")? simplexml_load_file($this->getPath()."plugin_info.xml") : NULL;
+	public function __construct($root_dir = null,array $attributes = array()){
+		
+		parent::__construct($attributes); 
 
-		$this->config = file_exists($this->getPath()."config.php")? require($this->getPath()."config.php") : NULL;
-
-
+		isset($this->root_dir) ? : $this->root_dir = $root_dir;			
 	}
 
 
 	public function getConfig($config, $default = NULL){
+
+		isset($this->config)? : $this->config = file_exists($this->getPath()."config.php")? require($this->getPath()."config.php") : NULL;
+
 		return isset($this->config[$config])? $this->config[$config]: $default;
 	}
 
@@ -42,6 +43,9 @@ class Plugin extends Model
 	}
 
 	public function getInfo($info){
+
+		isset($this->info)? : $this->info = file_exists($this->getPath()."plugin_info.xml")? simplexml_load_file($this->getPath()."plugin_info.xml") : NULL;
+
 		return isset($this->info->{$info})? $this->info->{$info}: NULL;
 	}
 

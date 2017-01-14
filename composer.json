@@ -25,7 +25,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Plugins\\": "plugins/"
+            "Plugin\\": "plugins/"
         }
     },
     "autoload-dev": {
