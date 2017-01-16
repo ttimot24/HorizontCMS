@@ -49,7 +49,7 @@ Route::group(['prefix'=> Config::get('horizontcms.backend_prefix'),'middleware' 
 
 		       $route = new \App\Http\RouteResolver();
 
-		       $route->changeNamespace("Plugin\\".studly_case($plugin)."\\Controllers\\");
+		       $route->changeNamespace("Plugin\\".studly_case($plugin)."\\App\\Controllers\\");
 
 		       return $route->resolve($controller,$action,$args);
 

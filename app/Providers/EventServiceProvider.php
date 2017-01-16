@@ -29,6 +29,30 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+
+        $all_plugin = \App\Model\Plugin::where('active','1')->get();
+
+
+        if($all_plugin->count()>0){
+            
+             foreach($all_plugin as $plugin){
+
+                $plugin_namespace = "\Plugin\\".$plugin->root_dir."\Register";
+
+                if(!method_exists($plugin_namespace,'eventHooks')){
+                    continue;
+                }
+
+
+                $this->listen = array_merge_recursive($this->listen,$plugin_namespace::eventHooks());
+
+
+             }
+            
+        }
+
+
         parent::boot();
 
         //

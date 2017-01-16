@@ -43,6 +43,7 @@ return[
 			//'resources/assets/intelligence/AjaxFramework.js',
 			//'resources/scripts/main-script.js',
 			//'resources/assets/scrollbar/jquery.scrollbar.js',
+			//'https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js'
 		],
 
 	'meta' =>[
