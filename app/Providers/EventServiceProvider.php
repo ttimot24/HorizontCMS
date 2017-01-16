@@ -31,6 +31,7 @@ class EventServiceProvider extends ServiceProvider
     {
 
 
+    if(\App\HorizontCMS::isInstalled()){
         $all_plugin = \App\Model\Plugin::where('active','1')->get();
 
 
@@ -51,6 +52,7 @@ class EventServiceProvider extends ServiceProvider
              }
             
         }
+    }
 
 
         parent::boot();
