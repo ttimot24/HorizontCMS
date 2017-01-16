@@ -3,7 +3,7 @@
 
 
    $('#level').change(function() {
-      if($(this).find('option:selected').val() == '0') {
+      if($(this).find('option:selected').val() == '1') {
          $('#submenus').show();
 
       }
