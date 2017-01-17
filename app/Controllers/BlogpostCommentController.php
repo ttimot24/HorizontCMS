@@ -10,24 +10,6 @@ use App\Model\BlogpostComment;
 class BlogpostCommentController extends Controller{
  
 
-    protected $itemPerPage = 25;
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index($slug){
-
-
-
-        $this->view->title(trans('blogpost.blogposts'));
-        return $this->view->render('blogposts/category/index',[
-                                                        'number_of_blogposts' => Blogpost::count(),
-                                                        'all_blogposts' => Blogpost::orderBy('id','desc')->paginate($this->itemPerPage),
-                                                    ]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -39,21 +21,13 @@ class BlogpostCommentController extends Controller{
 
         if($this->request->isMethod('POST')){
 
-            $blogpost = new Blogpost();
-            $blogpost->title = $this->request->input('title');
-            $blogpost->category_id = $this->request->input('category_id');
-            $blogpost->summary = $this->request->input('summary');
-            $blogpost->text = $this->request->input('text');
-            $blogpost->author_id = \Auth::user()->id;
+            $blogpost_comment = new BlogpostComment();
+            $blogpost_comment->blogpost_id = $this->request->input('blogpost_id');
+            $blogpost_comment->comment = $this->request->input('comment');
+            $blogpost_comment->user_id = \Auth::user()->id;
 
-            if ($this->request->hasFile('up_file')){
-                 
-                 $blogpost->image = str_replace('images/blogposts/','',$this->request->up_file->store('images/blogposts'));
-
-            }
-
-            if($blogpost->save()){
-                return $this->redirect("admin/blogpost/edit/".$blogpost->id)->withMessage(['success' => trans('message.successfully_created_blogpost')]);
+            if($blogpost_comment->save()){               
+                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost_comment')]);
             }else{
             	return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
@@ -61,14 +35,6 @@ class BlogpostCommentController extends Controller{
             
         }
 
-
-        
-        $this->view->js('resources/assets/ckeditor/ckeditor.js');
-
-        $this->view->title(trans('blogpost.new_blogpost'));
-        return $this->view->render('blogposts/create',[
-                                                        'categories' => \App\Model\BlogpostCategory::all(),
-                                                        ]);
     }
 
     /**
@@ -89,31 +55,6 @@ class BlogpostCommentController extends Controller{
      */
     public function show($id){
 
-        $this->view->title(trans('blogpost.view_blogpost'));
-        return $this->view->render('blogposts/view',[
-                                                        'blogpost' => Blogpost::find($id),
-                                                        'previous_blogpost' => Blogpost::where('id', '<', $id)->max('id'),
-                                                        'next_blogpost' =>  Blogpost::where('id', '>', $id)->min('id'),
-                                                    ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id){
-
-
-        $this->view->js('resources/assets/ckeditor/ckeditor.js');
-
-        $this->view->title(trans('blogpost.edit_blogpost'));
-
-        return $this->view->render('blogposts/edit',[
-                                                        'blogpost' => Blogpost::find($id),
-                                                        'categories' => \App\Model\BlogpostCategory::all(),
-                                                    ]);
     }
 
     /**
@@ -126,25 +67,19 @@ class BlogpostCommentController extends Controller{
     public function update($id){
       	 
 
-         $blogpost = Blogpost::find($id);
+            $blogpost_comment = BlogpostComment::find($id);
 
-      	 $blogpost->title = $this->request->input('title');
-         $blogpost->category_id = $this->request->input('category_id');
-         $blogpost->summary = $this->request->input('summary');
-         $blogpost->text = $this->request->input('text');
-         $blogpost->author_id = \Auth::user()->id;
+            $blogpost_comment = new BlogpostComment();
+            $blogpost_comment->blogpost_id = $this->request->input('blogpost_id');
+            $blogpost_comment->comment = $this->request->input('comment');
+            $blogpost_comment->user_id = \Auth::user()->id;
 
-         if ($this->request->hasFile('up_file')){
-              
-              $blogpost->image = str_replace('images/blogposts/','',$this->request->up_file->store('images/blogposts'));
 
-         }
-
-         if($blogpost->save()){
-             return $this->redirect('admin/blogpost/edit/'.$blogpost->id)->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
-         }else{
-             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-         }
+            if($blogpost_comment->save()){               
+                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_updated_blogpost_comment')]);
+            }else{
+                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            }
 
 
     }
@@ -169,12 +104,12 @@ class BlogpostCommentController extends Controller{
     public function delete($id){
         
 
-        if(BlogpostCategory::find($id)->delete()){
-			return $this->redirect('admin/blogpostcategory')->withMessage(['success' => trans('message.successfully_deleted_blogpostcategory')]);
+        if(BlogpostComment::find($id)->delete()){
+			return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpost_comment')]);
         }
 
 
-        return $this->redirect('admin/blogpostcategory')->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
 
     }
 

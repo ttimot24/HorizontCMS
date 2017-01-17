@@ -12,6 +12,10 @@ return [
 	'successfully_updated_blogpost_category' => 'A kategória sikeresen frissítve!',
 	'successfully_deleted_blogpost_category' => 'Kategória sikeresen törölve!',
 
+	'successfully_created_blogpost_comment' => 'Sikeres hozzászólás!',
+	'successfully_updated_blogpost_comment' => 'Hozzászólás sikeresen frissítve!',
+	'successfully_deleted_blogpost_comment' => 'Hozzászólás sikeresen törölve!',
+
 	'successfully_created_user' => 'Felhasználó sikeresen létrehozva!',
 	'successfully_updated_user' => 'Felhasználó sikeresen módosítva!',
 	'successfully_deleted_user' => 'Felhasználó sikeresen törölve!',

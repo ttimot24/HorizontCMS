@@ -41,7 +41,7 @@
     echo "<td><a href='".admin_link('user-view',$comment->user->id)."'>" .$comment->user->username ."</a></td>";
     echo "<td class='col-md-8' style='text-align:justify;'>" .$comment->comment ."</td>";
 
-    echo "<td>" .date("Y.m.d",$comment->date) ."</br><font size='2'><i>at ".date("H:i:s",$comment->date)."</i></font></td>";
+    echo "<td>" .$comment->created_at->format('Y.m.d') ."</br><font size='2'><i>at ".$comment->created_at->format('H:i:s')."</i></font></td>";
     echo "<td>";
 
 
@@ -64,7 +64,7 @@
         "delete_".$comment->id."",
         "Are you sure?",
         "Do you really want to delete <b>".$comment->user->username."</b>'s comment: ".$comment->comment." ?",
-        "<a href='admin/blogpost/deletecomment/".$comment->id."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
+        "<a href='".admin_link('blogpost_comment-delete',$comment->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
         <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
         );
 
@@ -85,7 +85,8 @@
   <div class='modal-dialog modal-md'>
     <div class='modal-content'>
 
-    <form action='admin/blogpost/newcomment' method='POST'>
+    <form action="{{admin_link('blogpost_comment-create')}}" method='POST'>
+    {{ csrf_field() }}
         <div class='modal-header-warning' style='padding:15px;padding-bottom: 0px;'>
           <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
           <h3 class='modal-title'><span class='fa fa-comment-o float-left'></span>  Write comment</h3>
