@@ -28,11 +28,11 @@
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <img style='height:30px;margin-top:-10px;margin-bottom:-10px;object-fit:cover;border-radius:3px;' src='{{Auth::user()->getThumb()}}' />  {{ Auth::user()->username }} <span class="caret"></span>
+                            <img style='height:30px;margin-top:-10px;margin-bottom:-10px;object-fit:cover;border-radius:1.5px;' src='{{Auth::user()->getThumb()}}' />  {{ Auth::user()->username }} <span class="caret"></span>
                         </a>
 
-                         <ul class="dropdown-menu" role="menu" style='width:225px;'>
-                           <li class='nav-item' style="text-align:center;"><img style="border-radius:3px;width:94%;height:150px;margin:10px 3% 10px 3%;object-fit:cover;" class="img-rounded" src='{{Auth::user()->getThumb()}}' /><br>
+                         <ul class="dropdown-menu" role="menu" style='width:215px;'>
+                           <li class='nav-item' style="text-align:center;"><img style="border-radius:1.5px;width:90%;height:135px;margin:10px 3% 10px 3%;object-fit:cover;" class="img-rounded" src='{{Auth::user()->getThumb()}}' /><br>
                             <p style='color:white;'>{{\Auth::user()->username}} ({{strtolower(\Auth::user()->role->name)}})</p>
                            </li>
 

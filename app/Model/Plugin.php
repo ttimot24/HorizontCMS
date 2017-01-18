@@ -21,6 +21,13 @@ class Plugin extends Model
 	}
 
 
+    public function isInstalled(){
+    	$result = self::where('root_dir',$this->root_dir)->get();
+
+    	return $result->isEmpty();
+    }
+
+
 	public function getConfig($config, $default = NULL){
 
 		isset($this->config)? : $this->config = file_exists($this->getPath()."config.php")? require($this->getPath()."config.php") : NULL;

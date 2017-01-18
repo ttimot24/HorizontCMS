@@ -42,10 +42,18 @@ class PluginController extends Controller{
 
         $this->view->title(trans('App center'));
         return $this->view->render('plugin/store',[
-                                               'online_plugins' => json_decode(file_get_contents('http://www.eterfesztival.hu/hcms_online_store/get_plugins.php')),
+                                               'online_plugins' => json_decode(file_get_contents(\Config::get('horizontcms.sattelite_url').'/get_plugins.php')),
 
             ]);
     }
+
+
+    public function downloadPlugin($plugin_name){
+
+        dd($plugin_name);
+
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -135,7 +143,24 @@ class PluginController extends Controller{
 
 
     public function upload(){
-        
+
+        if ($this->request->hasFile('up_file')){
+
+            $file_name = $this->request->up_file[0]->store('framework/temp');
+
+        }
+
+        $zip = new \ZipArchive;
+        if ($zip->open("storage/".$file_name) === TRUE) {
+            $zip->extractTo('plugins/');
+            $zip->close();
+            
+            \Storage::delete("storage/".$file_name);
+
+            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully uploaded the plugin!')]);
+        } else {
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
     }
 
 

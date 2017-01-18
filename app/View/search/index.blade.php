@@ -25,29 +25,39 @@
 </br></br></br>
 </div>
 
+
+@if(\Auth::user()->hasPermission('blogpost'))
 <h3 style='clear:both;'>{{trans('blogpost.blogposts')}} ({{$blogposts->count()}})</h3>
 <div class='container'>
 @foreach($blogposts as $each)
   <a href='admin/blogpost/show/{{$each->id}}'>{{$each->title}}</a></br>
 @endforeach
 </div>
+@endif
 
 
+@if(\Auth::user()->hasPermission('user'))
 <h3>{{trans('user.users')}} ({{$users->count()}})</h3>
 <div class='container'>
 @foreach($users as $each)
   <a href='admin/user/show/{{$each->id}}'>{{$each->username}}</a></br>
 @endforeach
 </div>
+@endif
 
 
+@if(\Auth::user()->hasPermission('page'))
 <h3>{{trans('page.pages')}} ({{$pages->count()}})</h3>
 <div class='container'>
 @foreach($pages as $each)
   <a href='admin/page/show/{{$each->id}}'>{{$each->name}}</a></br>
 @endforeach
 </div>
+@endif
 
+
+
+@if(\Auth::user()->hasPermission('media'))
 <h3>{{trans('file.files')}} ({{count($files)}})</h3>
 <div class='container'>
 <?php 
@@ -56,6 +66,7 @@
     }*/
 ?>
 </div>
+@endif
 
 
 </br></br></br></br></br>

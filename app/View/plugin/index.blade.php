@@ -39,12 +39,16 @@ foreach($all_plugin as $current_plugin){
 
         echo "<div class='col-md-2'>";
          
-        // if(file_exists("plugins/" .$current_plugin->dir_name ."/install.sql") && !Plugin::is_installed($current_plugin->dir_name)){
-          echo "<a id='install' class='btn btn-primary btn-block' href='admin/plugin/install/".$current_plugin->root_dir."'>Install</a>";
-          /*}
+          if($current_plugin->isInstalled()){
+              echo "<a id='install' class='btn btn-primary btn-block' href='admin/plugin/install/".$current_plugin->root_dir."'>Install</a>";
+          }
           else{
-               echo "<a class='btn btn-success btn-block'>Installed</a>";
-          }*/
+              if($current_plugin->active=='0'){
+                echo "<a class='btn btn-success btn-block' href=''>Activate</a>";
+              }else{
+                echo "<a class='btn btn-info btn-block' href=''>Deactivate</a>";
+              }
+          }
           echo "<button class='btn btn-danger btn-block' data-toggle='modal' data-target='.delete_".$current_plugin->root_dir."' >Delete</button>";
 
          echo "</div>";
@@ -82,6 +86,7 @@ foreach($all_plugin as $current_plugin){
       <div class='modal-body'>
 
 <form action='admin/plugin/upload' method='POST' enctype='multipart/form-data'>
+{{ csrf_field() }}
 <div class='form-group'>
       <label for='file'>Upload file:</label>
       <input name='up_file[]' id='input-2' type='file' class='file' accept='.zip' multiple='true' data-show-upload='false' data-show-caption='true'>

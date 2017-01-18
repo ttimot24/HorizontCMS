@@ -19,7 +19,7 @@
 	      <div class="caption">
 	        <h3>{{ $o_plugin->info->name }}</h3>
 	        <p>version: {{ $o_plugin->info->version }} author: {{ $o_plugin->info->author }}</p>
-	        <p><a href="admin/plugin/download/<?php //$o_plugin->info->dir; ?>" class="btn btn-info btn-block" role="button">Download</a></p>
+	        <p><a href="admin/plugin/download-plugin/{{ $o_plugin->dir }}" class="btn btn-info btn-block" role="button">Download</a></p>
 	      </div>
 	    </div>
 	  </div>

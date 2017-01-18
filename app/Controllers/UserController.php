@@ -57,11 +57,7 @@ class UserController extends Controller{
 
             if($user->save()){
 
-            	if($this->request->input('emailnotify')=="1"){
-            		\Mail::to($user)->send(new \App\Mail\UserRegistered());
-            	}
-                return $this->redirect(admin_link("user-edit",$user->id))->withMessage(['success' => trans('message.successfully_created_user'),
-                																		/*'info' => 'Email notify sent!'*/]);
+            	return $this->redirect(admin_link("user-edit",$user->id))->withMessage(['success' => trans('message.successfully_created_user')]);
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }

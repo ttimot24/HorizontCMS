@@ -31,7 +31,7 @@ return[
 			//'resources/css/default/style.css',
 			//'resources/css/default/bootstrap_common.css',
 			'resources/assets/filemaster/css/fileinput.min.css',
-			'resources\assets\checkboxmaster\build.css',
+			'resources/assets/checkboxmaster/build.css',
 			//'resources/assets/scrollbar/jquery.scrollbar.css',
 			],
 

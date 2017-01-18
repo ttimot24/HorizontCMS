@@ -29,8 +29,6 @@
   @yield('content')
 
 
-<div id='whatsup' class='panel panel-primary' ></div>
-
 <footer id='footer' style='bottom:0;position:relative;'>
         <div class='container main-container'>
             <p class='text-muted credit' >
