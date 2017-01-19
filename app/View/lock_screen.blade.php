@@ -37,7 +37,7 @@ function lock_up_screen(){
 		      <div class='modal-body'>
 
 		    	<center>
-		    	 <img src='{{\Auth::user()->getThumb()}}' class='img-thumbnail' width='180'>
+		    	 <img src='{{\Auth::user()->getThumb()}}' class='img-thumbnail' width='180' style='max-height:200px;object-fit:cover;'>
 
 
 

@@ -39,6 +39,9 @@ return[
 			'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js',
 			'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
 			'resources/assets/filemaster/js/fileinput.js',
+			'https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js',
+			//'resources/assets/js/app.js',
+			//'resources/js/app.js' //compiled
 			//'resources/assets/nicescroll/jquery.nicescroll.min.js',
 			//'resources/assets/intelligence/AjaxFramework.js',
 			//'resources/scripts/main-script.js',

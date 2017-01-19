@@ -17,6 +17,7 @@
 
 </head>
 <body @if(Auth::user()) style='padding-top: 55px' @endif>
+<div id="vue">
 
   @if (!Auth::guest())
 	@include('navbar')
@@ -38,7 +39,9 @@
 			</p>
 		</div>	
 </footer>
+</div>
 
+<script type="text/javascript" src="resources/assets/js/app.js"></script>
 
 <script>
 	/*$(document).ready(function() {  
