@@ -41,7 +41,7 @@
 <tr><td>Website down</td><td><input type='checkbox' class='form-control' name='website_down' value='1' <?php if($settings['website_down']==1){ echo 'checked'; } ?> ></td></tr>
 
 <tr><td>Logo</td><td>
-
+<br>
 @if(isset($settings['logo']) && $settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))
 <img class='well well-sm' src="storage/images/logos/{{$settings['logo']}}" height='100'>
 @endif

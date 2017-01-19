@@ -6,16 +6,16 @@
 <section class='row'>
   <h2 class='col-md-8'>{{trans('user.view_user')}}</h2>
  
-  <nav class='col-md-4'>
+  <nav id="arrows" class='col-md-4'>
     <ul class='pager'>
 
 
       @if($previous_user)
-          <li class='previous' id='prev'><a href="{{admin_link('user-view',$previous_user)}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+          <li class='previous' v-on:keyup.left="previous"><a href="{{admin_link('user-view',$previous_user)}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
       @endif
 
       @if($next_user)
-          <li class='next' id='prev'><a href="{{admin_link('user-view',$next_user)}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
+          <li class='next' v-on:keyup.right="next"><a href="{{admin_link('user-view',$next_user)}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
       @endif
 
     </ul>
@@ -173,26 +173,26 @@
 </div>
 
 
-
-
 <script>
 
-$(document).keydown(function(e) {
-    switch(e.which) {
-        case 37: // left
-                 window.location.replace("{{admin_link('user-view',$previous_user)}}");
-                 break;
+var arrow = new Vue({
+  el: '#arrows',
+  data:{
 
-        case 39: // right
-                  window.location.replace("{{admin_link('user-view',$next_user)}}");
-                  break;
-
-        default: return; // exit this handler for other keys
-    
+  },
+  methods:{
+    previous: function(){
+       window.location.replace("{{admin_link('user-view',$previous_user)}}");
+    },
+    next: function(){
+      window.location.replace("{{admin_link('user-view',$next_user)}}");
     }
-    e.preventDefault();
+  },
+  beforeCreate: function(){
+    console.log("Vue started.");
+  }
 });
 
-
 </script>
+
 @endsection

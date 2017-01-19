@@ -7,15 +7,15 @@
 <section class='row'>
 <h1 class='col-md-9'>{{trans('blogpost.view_blogpost')}}</h1>
 
-<nav class='col-xs-12 col-md-3 '>
+<nav id="arrows" class='col-xs-12 col-md-3'>
   <ul class='pager'>
 
     @if($previous_blogpost)
-        <li class='previous' id='prev'><a href="{{admin_link('blogpost-view',$previous_blogpost)}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+        <li class='previous' v-on:keyup.left="previous"><a href="{{admin_link('blogpost-view',$previous_blogpost)}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
     @endif
 
     @if($next_blogpost)
-        <li class='next' id='prev'><a href="{{admin_link('blogpost-view',$next_blogpost)}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
+        <li class='next' v-on:keyup.right="next"><a href="{{admin_link('blogpost-view',$next_blogpost)}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
     @endif
 
 
@@ -29,7 +29,8 @@
 <button type='button' class='btn btn-link' data-toggle='modal' data-target='.{{ $blogpost->id }}-modal-xl'>
   <img src='{{ $blogpost->getImage() }}' width='350' class='img img-thumbnail' style='margin-top:20px;' />
 </button>
-</br><center>
+</br>
+<center>
   <div class='btn-group' role='group'>
     <a href='#' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('blogpost.primary')}}</a>
     <a href="{{admin_link('blogpost-edit',$blogpost->id)}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}} </a>
@@ -46,7 +47,7 @@
     </br></br><b>{{trans('blogpost.characters')}} : <br><a>{{ strlen($blogpost->text) }}</a></b>
     </br></br><b>{{trans('blogpost.words')}} : <br><a>{{ str_word_count($blogpost->text) }}</a></b>
     </br></br><b>{{trans('blogpost.comments')}} : <a>{{ count($blogpost->comments) }}</a></b>
-    </center>
+</center>
 </div>
 
 <div class="col-md-8" style='text-align:justify;padding-top:2.5%;'>
@@ -59,6 +60,7 @@
   </div>  
     </td>
 </div>
+
 </section>
 <div id='comments'></div>
 </br></br>
@@ -80,7 +82,6 @@
 ?>
 
 
-
 @include('blogposts.comments')
 
 
@@ -89,22 +90,26 @@
 
 <script>
 
-$(window).keydown(function(event) {
-    switch(event.which) {
-        case 37: // left
-                 window.location.replace("{{admin_link('blogpost-view',$previous_blogpost)}}");
-                 break;
+var arrow = new Vue({
+  el: '#arrows',
+  data:{
 
-        case 39: // right
-                  window.location.replace("{{admin_link('blogpost-view',$next_blogpost)}}");
-                  break;
-
-        default: return; // exit this handler for other keys
-    
+  },
+  methods:{
+    previous: function(){
+       window.location.replace("{{ admin_link('blogpost-view',$previous_blogpost) }}");
+    },
+    next: function(){
+      window.location.replace("{{admin_link('blogpost-view',$next_blogpost)}}");
     }
-    e.preventDefault();
+  },
+  beforeCreate: function(){
+    console.log("Vue started.");
+  }
 });
 
-
 </script>
+
+
+
 @endsection

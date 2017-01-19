@@ -22,7 +22,8 @@
                                     </select></td></tr>
 
 <tr><td>Dashboard Logo</td><td>
-<img class='well well-sm' src="<?php if(!isset($settings['admin_logo']) || $settings['admin_logo']==''){ echo 'resources/logo.png'; }else{echo 'storage/images/logos/'.$settings['logo']; } ?>" onerror='this.src=\"resources/logo.png\"' height='100'>
+<br>
+<img class='well well-sm' src="<?= ($settings['admin_logo']!='' && file_exists('storage/images/logos/'.$settings['admin_logo']))? 'storage/images/logos/'.$settings['admin_logo'] : \Config::get('horizontcms.admin_logo')  ?>" height='100'>
 
 <div class="btn-group" role="group">
 <button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='.admin_logo_select-modal-lg'>Select</button>

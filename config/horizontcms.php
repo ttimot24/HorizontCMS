@@ -43,8 +43,6 @@ return[
 			//'resources/assets/js/app.js',
 			//'resources/js/app.js' //compiled
 			//'resources/assets/nicescroll/jquery.nicescroll.min.js',
-			//'resources/assets/intelligence/AjaxFramework.js',
-			//'resources/scripts/main-script.js',
 			//'resources/assets/scrollbar/jquery.scrollbar.js',
 			//'https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js'
 		],
