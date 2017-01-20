@@ -76,7 +76,7 @@ class MenuMiddleware{
 
 
                 $menu->add("<i class='fa fa-power-off'></i> ", '#')->id('shutdown');
-                $menu->find('shutdown')->add("<i class='fa fa-lock'></i> ".trans('navbar.lock_screen'), ['url'=>'#', 'onclick'=>'event.preventDefault();','data-target'=>"#lock_screen",'data-toggle'=>"modal",'data-backdrop'=>'static','data-keyboard'=> 'false'])->id('lock_screen');
+                $menu->find('shutdown')->add("<i class='fa fa-lock'></i> ".trans('navbar.lock_screen'), ['url'=>'#', 'onclick'=>'event.preventDefault();localStorage.locksession=\'true\'','data-target'=>"#lock_screen",'data-toggle'=>"modal",'data-backdrop'=>'static','data-keyboard'=> 'false'])->id('lock_screen');
                 $menu->find('lock_screen')->divide();
                 $menu->find('shutdown')->add("<i class='fa fa-external-link'></i> ".trans('navbar.visit_site',['site_name' => \App\Model\Settings::get('site_name')]), '');
                 $menu->find('shutdown')->add("<i class='fa fa-sign-out'></i> ".trans('navbar.logout'), ['onclick' => 'event.preventDefault(); document.getElementById(\'logout-form\').submit();']);

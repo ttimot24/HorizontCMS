@@ -43,6 +43,22 @@ var lockScreen = new Vue({
 	data:{
 
 	},
+	created: function(){
+
+		if(typeof(Storage) !== "undefined") {
+		
+			if(localStorage.locksession!=null){
+	
+						if(localStorage.locksession=='true'){
+			                $('#lock_screen').modal('show');
+			            }
+			            else if(localStorage.locksession=='false'){
+			                $('#lock_screen').modal('hide');
+			            }
+			}
+		}
+
+	},
 	methods:{
 		lockUpScreen: function(){
 		    $.ajax({
@@ -56,7 +72,11 @@ var lockScreen = new Vue({
 		        success: function( data ){
 
 		        	if(data===true){
+
 		        		$('#lock_screen').modal('hide');
+		        		localStorage.locksession = 'false';
+		        		console.log(localStorage);
+
 		        	}
 
 		        	$('#lock_pwd').val('');
@@ -65,8 +85,10 @@ var lockScreen = new Vue({
 		  			alert(xhr.responseText);
 		        }
 		    });
-		},
+		}
 	}
 });
+
+
 
 </script>
