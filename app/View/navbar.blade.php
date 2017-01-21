@@ -37,30 +37,13 @@
                            </li>
 
                            <li role="separator" class="divider"></li>
-                           <li class='nav-item'><a href="{{admin_link('user-view',\Auth::user()->id)}}">View profile</a></li>
-                           <li class='nav-item'><a href="{{admin_link('user-edit',\Auth::user()->id)}}">Profile settings</a></li>
+                           <li class='nav-item'><a href="{{admin_link('user-view',\Auth::user()->id)}}">View account</a></li>
+                           <li class='nav-item'><a href="{{admin_link('user-edit',\Auth::user()->id)}}">Account settings</a></li>
                          </ul>
                     </li>
 
                     @include(config('laravel-menu.views.bootstrap-items'), array('items' => $RightMenu->roots()))
                     
-                       <!-- <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->username }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ url(Config::get('horizontcms.backend_prefix').'/logout') }}"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
-
-
-                                </li>
-                            </ul>
-                        </li>-->
 
                     <form id="logout-form" action="{{ url(Config::get('horizontcms.backend_prefix').'/logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}

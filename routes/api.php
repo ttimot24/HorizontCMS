@@ -13,6 +13,21 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
+
+/*Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:api');
+})->middleware('auth:api');*/
+
+
+
+Route::post('lock-up',function(Request $request){
+
+	$user = \App\Model\User::find($request->input('id'));
+
+    if (\Hash::check($request->input('password'), $user->password)) {
+        return response()->json(TRUE);
+    }
+
+    return response()->json(FALSE);
+
+});

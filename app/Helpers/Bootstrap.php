@@ -49,7 +49,7 @@ class Bootstrap{
                     <div class='col-md-6' valign='top'>
                     <h1>Properties</h1></br>";
                     echo "<h4>File name: </h4> " .basename($image);
-                    echo "<h4>Path: </h4> " .$image;
+                    echo "<h4>Path: </h4> <a href='".$image."' target='_blank'>" .$image."</a>";
 
                     $size = getimagesize($image);
                     $image_size = $size[3];
