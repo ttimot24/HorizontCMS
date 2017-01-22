@@ -16,60 +16,6 @@ Route::get('/laravelwelcome', function () {
 });
 
 
-Route::group(['prefix'=> Config::get('horizontcms.backend_prefix').'/install'],function(){
-
-	Route::any('/{action?}/{args?}/', 
-		function($action = 'index', $args = null){
-
-		       $route = new \App\Http\RouteResolver();
-
-		        return $route->resolve('install',$action,$args);
-
-  		 })->where('args', '(.*)');
-	
-});
-
-
-Route::get('admin/register', 'Auth\RegisterController@showRegistrationForm');
-
-Route::post('admin/register', 'Auth\RegisterController@register');
-
-Route::get('admin/login', 'Auth\LoginController@showLoginForm');
-
-Route::post('admin/login', 'Auth\LoginController@login');
-
-Route::post('admin/logout', 'Auth\LoginController@logout');
-
-
-Route::group(['prefix'=> Config::get('horizontcms.backend_prefix'),'middleware' => 'admin'],function(){
-
-
-	Route::any('/plugin/run/{plugin}/{controller?}/{action?}/{args?}/', 
-		function($plugin,$controller = 'start', $action = 'index', $args = null){
-
-		       $route = new \App\Http\RouteResolver();
-
-		       $route->changeNamespace("Plugin\\".studly_case($plugin)."\\App\\Controllers\\");
-
-		       return $route->resolve($controller,$action,$args);
-
-  		 })->where('args', '(.*)')->middleware('plugin');
-	
-
-
-
-	Route::any('/{controller?}/{action?}/{args?}/', 
-		function($controller = 'dashboard', $action = 'index', $args = null){
-
-		       $route = new \App\Http\RouteResolver();
-
-		        return $route->resolve($controller,$action,$args);
-
-  		 })->where('args', '(.*)');
-	
-});
-
-
-Route::any('/{slug?}','WebsiteController@index')->where('slug', '(.*)');
+Route::any('/{slug?}','\App\Controllers\WebsiteController@index')->where('slug', '(.*)');
 
 

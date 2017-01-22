@@ -24,7 +24,7 @@
 
     <div class='form-group pull-left col-xs-12 col-md-8' >
       <label for='username'>{{trans('user.create_username')}}:</label>
-      <input type='text' class='form-control' id='username' name='username' onblur=ajaxCall('GET','admin/ajax/checkUsername/'+document.getElementById('username').value,"if(data!=0){alert(data);document.getElementById('username').value='';}"); placeholder='Write title here' required>
+      <input type='text' class='form-control' id='username' name='username' placeholder='Write username here' required>
     </div>
 
    <div class='form-group pull-left col-xs-12 col-md-8' >
@@ -92,7 +92,7 @@ function validatePassword(){
 var pass2=document.getElementById("password2").value;
 var pass1=document.getElementById("password").value;
 if(pass1!=pass2)
-  document.getElementById("password2").setCustomValidity("{{trans('user.pws_not_equal')}");
+  document.getElementById("password2").setCustomValidity("<?= trans('user.pws_not_equal') ?>");
 else
   document.getElementById("password2").setCustomValidity('');  
 //empty string means no validation error

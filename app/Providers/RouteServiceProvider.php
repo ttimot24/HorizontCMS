@@ -38,6 +38,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
+        $this->mapBackendRoutes();
+
         $this->mapWebRoutes();
 
         //
@@ -54,7 +56,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::group([
             'middleware' => 'web',
-            'namespace' => $this->namespace,
+          // 'namespace' => 'Themes\\'.\Settings::get('theme').'\\Controllers',
         ], function ($router) {
             require base_path('routes/web.php');
         });
@@ -77,4 +79,18 @@ class RouteServiceProvider extends ServiceProvider
             require base_path('routes/api.php');
         });
     }
+
+
+    protected function mapBackendRoutes()
+    {
+        Route::group([
+            'middleware' => 'web',
+            'namespace' => $this->namespace,
+            'prefix' => \Config::get('horizontcms.backend_prefix'),
+        ], function ($router) {
+            require base_path('routes/backend.php');
+        });
+    }
+
+
 }

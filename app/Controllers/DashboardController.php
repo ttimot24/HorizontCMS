@@ -30,73 +30,10 @@ class DashboardController extends Controller{
                                                     'visits' => \App\Model\Visits::count(),
                                                     'admin_logo' => ($admin_logo!="" && file_exists("storage/images/logos/".$admin_logo))? "storage/images/logos/".$admin_logo : \Config::get('horizontcms.admin_logo'),
                                                     'disk_space' => @(disk_free_space("/")/disk_total_space("/"))*100,
-                                                    'upgrade' => Settings::get('auto_upgrade_check')==1? \App\Model\SystemUpgrade::checkUpgrade(): NULL,
+                                                    'upgrade' => Settings::get('auto_upgrade_check')==1 && \Auth::user()->hasPermission('settings')? \App\Model\SystemUpgrade::checkUpgrade(): NULL,
 
             ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(){
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
