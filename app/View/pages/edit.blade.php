@@ -17,7 +17,7 @@
   <div class='form-group pull-left col-xs-12 col-md-12' >
       <label for='title'>{{trans('page.menu_name')}}</label>
       <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" value='{{$page->name}}' required></input>
-      <small><b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp{{ Config::get('app.url') }}<a class='text-muted' id='ajaxSlug'><?= UrlManager::seo_url($page->name) ?></a> </small>
+      <small><b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp{{ rtrim(Config::get('app.url'),'/') }}<a class='text-muted' id='ajaxSlug'><?= UrlManager::seo_url($page->name) ?></a> </small>
     </div>
 
 <br>
@@ -145,21 +145,5 @@ Bootstrap::image_details($page->id,$page->getImage());
 });
 </script>
 
-<script type='text/javascript'>
-  function ajaxGetSlug(){
-
-    text = $('#menu-title').val();
-
-    if(text!=""){
-      $.get("admin/ajax/ajaxConvertSlug/"+text, function( data ) {
-        $("#ajaxSlug").html( "/"+data );
-      });
-    }else{
-      $("#ajaxSlug").html("");
-    }
-
-
-  }
-</script>
 
 @endsection

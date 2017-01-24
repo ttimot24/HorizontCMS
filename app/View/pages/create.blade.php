@@ -14,7 +14,7 @@
     <div class='form-group col-xs-12 col-md-12' >
       <label for='title'>{{trans('page.menu_name')}}</label>
       <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" placeholder='Write menu name here' required autofocus>
-      <small><b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp{{ Config::get('app.url') }}<a class='text-primary' id='ajaxSlug'></a> </small>
+      <small><b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp{{ rtrim(Config::get('app.url'),'/') }}<a class='text-primary' id='ajaxSlug'></a> </small>
     </div>
 <br><br>
     <div class='form-group col-xs-12 col-md-12' >

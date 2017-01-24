@@ -31,3 +31,8 @@ Route::post('lock-up',function(Request $request){
     return response()->json(FALSE);
 
 });
+
+
+Route::get('get-page-slug/{title}',function($title){
+	 return response()->json(str_slug($title));
+});

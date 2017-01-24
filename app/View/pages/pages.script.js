@@ -111,12 +111,13 @@
 
 
 
-  /*function ajaxGetSlug(){
+  function ajaxGetSlug(){
 
     text = $('#menu-title').val();
 
     if(text!=""){
-      $.get("admin/ajax/ajaxConvertSlug/"+text, function( data ) {
+      $.get("api/get-page-slug/"+text, function( data ) {
+
         $("#ajaxSlug").html( "/"+data );
       });
     }else{
@@ -124,4 +125,4 @@
     }
 
 
-  }*/
+  }
