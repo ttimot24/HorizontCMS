@@ -44,9 +44,9 @@ foreach($all_plugin as $current_plugin){
           }
           else{
               if($current_plugin->active=='0'){
-                echo "<a class='btn btn-success btn-block' href=''>Activate</a>";
+                echo "<a class='btn btn-success btn-block' href='admin/plugin/activate/".$current_plugin->root_dir."'>Activate</a>";
               }else{
-                echo "<a class='btn btn-info btn-block' href=''>Deactivate</a>";
+                echo "<a class='btn btn-info btn-block' href='admin/plugin/deactivate/".$current_plugin->root_dir."'>Deactivate</a>";
               }
           }
           echo "<button class='btn btn-danger btn-block' data-toggle='modal' data-target='.delete_".$current_plugin->root_dir."' >Delete</button>";

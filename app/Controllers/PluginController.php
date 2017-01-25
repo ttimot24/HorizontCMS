@@ -95,7 +95,16 @@ class PluginController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
+    public function activate($plugin_name){
+        
+        $plugin = \App\Model\Plugin::where('root_dir',$plugin_name)->first();
+        $plugin->active = 1;
+
+        if($plugin->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully activated '.$plugin_name)]);
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
 
     }
 
@@ -105,7 +114,17 @@ class PluginController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
+    public function deactivate($plugin_name){
+
+        $plugin = \App\Model\Plugin::where('root_dir',$plugin_name)->first();
+        $plugin->active = 0;
+
+
+        if($plugin->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully deactivated '.$plugin_name)]);
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
 
     }
 
