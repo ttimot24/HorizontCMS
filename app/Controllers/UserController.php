@@ -41,7 +41,7 @@ class UserController extends Controller{
             $user->name = $this->request->input('name');
             $user->username = $this->request->input('username');
             $user->slug = str_slug($this->request->input('username'), "-");
-            $user->password = \Hash::make($this->request->input('password'));
+            $user->password = $this->request->input('password');
             $user->email = $this->request->input('email');
             $user->role_id = $this->request->input('role_id');
             $user->visits = 0;
@@ -134,7 +134,7 @@ class UserController extends Controller{
             $user->email = $this->request->input('email');
 
             if($this->request->has('password')){
-                $user->password = \Hash::make($this->request->input('password'));
+                $user->password = $this->request->input('password');
             }
 
             $user->role_id = $this->request->input('role_id');

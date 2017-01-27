@@ -27,6 +27,10 @@ class Plugin extends Model
     	return $result->isEmpty();
     }
 
+    public function isActive(){
+    	return $this->active==1;
+    }
+
 
 	public function getConfig($config, $default = NULL){
 

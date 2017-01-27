@@ -23,7 +23,7 @@
 
 foreach($all_plugin as $current_plugin){
 
-  echo  "<div class='list-group-item ' style='height:120px;padding-top:17px;'>";
+  echo  "<div class='list-group-item' style='height:120px;padding-top:17px;'>";
   	
       echo "<div class='col-md-10'>";
 
@@ -43,7 +43,7 @@ foreach($all_plugin as $current_plugin){
               echo "<a id='install' class='btn btn-primary btn-block' href='admin/plugin/install/".$current_plugin->root_dir."'>Install</a>";
           }
           else{
-              if($current_plugin->active=='0'){
+              if(!$current_plugin->isActive()){
                 echo "<a class='btn btn-success btn-block' href='admin/plugin/activate/".$current_plugin->root_dir."'>Activate</a>";
               }else{
                 echo "<a class='btn btn-info btn-block' href='admin/plugin/deactivate/".$current_plugin->root_dir."'>Deactivate</a>";

@@ -124,6 +124,14 @@ class User extends Authenticatable{
 
 
 
+    /**
+    * Mutator for passwords
+    */
+    public function setPasswordAttribute($value){
+    	$this->attributes['password'] = \Hash::make($value);
+    }
+
+
 
 
 }
