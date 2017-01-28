@@ -43,7 +43,7 @@
                 <label><input type='checkbox'> {{trans('login.remember_me')}}</label>
               </div>
               <!--<div class='col-md-6'>
-                  <a class="btn btn-link btn-sm" href="{{ url('/password/reset') }}">
+                  <a class="btn btn-link btn-sm" href="admin/password/reset">
                     {{trans('login.forgot_password')}}
                   </a>
               </div><br>-->

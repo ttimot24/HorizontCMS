@@ -28,5 +28,13 @@ class ForgotPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->view = new \App\Libs\View();
     }
+
+    public function showLinkRequestForm()
+    {
+        $this->view->title("Forgot password");
+        return $this->view->render('auth/passwords/email');
+    }
+
 }

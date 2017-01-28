@@ -78,7 +78,7 @@ class PluginController extends Controller{
         $plugin->area = 0;
         $plugin->permission = 0;
         $plugin->table_name = "";
-        $plugin->active = 1;
+        $plugin->active = 0;
 
 
         if($plugin->save()){

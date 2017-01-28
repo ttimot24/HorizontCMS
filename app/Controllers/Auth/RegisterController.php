@@ -3,7 +3,7 @@
 namespace App\Controllers\Auth;
 
 use App\Libs\Controller;
-use App\User;
+use App\Model\User;
 use Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -36,8 +36,19 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+
+        $this->view = new \App\Libs\View();
+
         $this->middleware('guest');
+
+        $this->view->title("Register");
     }
+
+    public function showRegistrationForm()
+    {
+        return $this->view->render('auth/register');
+    }
+
 
     /**
      * Get a validator for an incoming registration request.

@@ -7,15 +7,29 @@ use \App\Libs\Model;
 class Plugin extends Model
 {
     public $timestamps = false;
+    protected $fillable = ['id','root_name','area','permission','table_name','active'];
 
     public static function exists($plugin){
     	return file_exists("plugins/".$plugin);
     }
 
 
-	public function __construct($root_dir = null,array $attributes = array()){
-		
-		parent::__construct($attributes); 
+	public function __construct($root_dir = null){	
+
+		if($root_dir!==null && !is_array($root_dir)){
+
+			$eloquent = self::where('root_dir',$root_dir)->get();
+
+			if($eloquent!=null){
+
+				$attributes = $eloquent->toArray();
+
+				!isset($attributes[0])? : $attributes = $attributes[0];
+
+				$this->fill($attributes);
+
+			}
+		}
 
 		isset($this->root_dir) ? : $this->root_dir = $root_dir;			
 	}
