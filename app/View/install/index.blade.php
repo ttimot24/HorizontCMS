@@ -4,7 +4,7 @@
 <div style='width:100%'>
   <div class='jumbotron'>
     <div class='container'>
-    <h1>HorizontCMS <small>by Timot Tarjani</small></h1>      
+    <h1>HorizontCMS <small style="font-size:22px;">by Timot Tarjani</small></h1>      
     <p>The CMS that fit exactly to your needs.</p></br> 
     <?php 
       //require(VIEW_DIR."default/messages.php");
