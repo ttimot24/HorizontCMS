@@ -12,7 +12,7 @@ class SystemUpgrade extends Model{
 
 	public static function checkUpgrade(){
 	        $workspace = storage_path().DIRECTORY_SEPARATOR."framework".DIRECTORY_SEPARATOR."upgrade";
-	        $url = "http://www.eterfesztival.hu/hcms_online_store/updates";
+	        $url = \Config::get('horizontcms.sattelite_url')."/updates";
 
 	        $update = new AutoUpdate($workspace.DIRECTORY_SEPARATOR.'temp', getcwd() , 60);
             $update->setCurrentVersion(self::getCurrentVersion()->version);

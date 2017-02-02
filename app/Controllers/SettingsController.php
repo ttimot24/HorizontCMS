@@ -125,6 +125,7 @@ class SettingsController extends Controller{
         $workspace = storage_path().DIRECTORY_SEPARATOR."framework".DIRECTORY_SEPARATOR."upgrade";
         $url = \Config::get('horizontcms.sattelite_url')."/updates";
 
+
         $update = new AutoUpdate($workspace.DIRECTORY_SEPARATOR.'temp', getcwd() , 60);
         $update->setCurrentVersion(\App\Model\SystemUpgrade::getCurrentVersion()->version);
         $update->setUpdateUrl($url); //Replace with your server update directory
