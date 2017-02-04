@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+
 <div class='container main-container'>
 
 <h1>AdminArea settings</h1><br><br>
@@ -34,11 +35,12 @@
 
 <tr><td>Language</td><td><select name='language' class='form-control' style='width:100%;'>
 
-              
+            
+
 
                 @foreach($languages as $key => $language)
 
-                  @if($language == $settings['language'])
+                  @if($key == $settings['language'])
                     <option value='{{$key}}' selected>{{ucfirst($language)}}</option>
                   @else
                     <option value='{{$key}}'>{{ucfirst($language)}}</option>

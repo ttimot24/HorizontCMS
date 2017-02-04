@@ -13,7 +13,7 @@ return [
 	'new_user_button' => 'New user',
 	'logins' => 'Logins',
 	'pws_not_equal' => 'Passwords doesn\'t match!',
-	'inactive_about' => 'This user is inactive about :day_count days!',
+	'inactive_about' => 'This user is inactive about :day_count!',
 
 	//Table headers
 	'th_id' => 'Id',

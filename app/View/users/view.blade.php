@@ -60,17 +60,12 @@
 
   if($user->active==0){
 
-     $datediff = $user->created_at->timestamp - time();
-     $days = floor($datediff/(60*60*24));
-
-     $days = ($days<=0)? 0 : $days;
-
      echo "<div class='panel panel-danger' style='margin-top:4%;'>
             <div class='panel-heading'>
               <h3 class='panel-title'><b>Inactive user</b></h3>
             </div>
               <div class='panel-body'><center><font size='4'>
-              ".trans('user.inactive_about',['day_count' => $days])."
+              ".trans('user.inactive_about',['day_count' => $user->created_at->diffForHumans()])."
               </font></center>
               </div>
             </div>";
