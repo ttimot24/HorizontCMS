@@ -20,15 +20,34 @@ Route::get('/laravelwelcome', function () {
 
 Route::any('/{slug?}/{args?}',function($slug="",$args = null){
 
-	$controller = \App::make('\App\Controllers\WebsiteController');
+	$route = new \App\Http\RouteResolver();
 
-	if(method_exists($controller, $slug)){
-		          
-		return $controller->callAction($slug, [$slug,$args]);
+	try{
+
+		$route->changeNamespace("Theme\\".Settings::get('theme')."\\App\\Controllers\\");
+
+		$action = explode("/",$args)[0];
+
+		return $route->resolve($slug,$action,ltrim($args,$action."/"));
+
+	}catch(Exception $e){
+
+
+		$controller = \App::make('\App\Controllers\WebsiteController');
+
+		$controller->before();
+
+		if(method_exists($controller, $slug)){
+			          
+			return $controller->callAction($slug, [$slug,$args]);
+		}
+
+
+		return $controller->callAction('index',[$slug,$args]);
+
 	}
 
 
-	return $controller->callAction('index',[$slug,$args]);
 })->where('args', '(.*)');
 
 

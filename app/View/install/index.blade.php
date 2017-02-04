@@ -35,26 +35,26 @@
 <div class='container'>
 
   <div class='col-sm-6 col-md-4'><center>
-      <span class='glyphicon glyphicon-pencil' aria-hidden='true' style='font-size:3em;'></span>
+      <i class="fa fa-cube" aria-hidden="true" style='font-size:3em;'></i>
       <div class='caption'>
-        <h3>Blogging</h3>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+        <h3>Modern tools</h3>
+        <p>HorizontCMS was created with the most modern webtools. Laravel 5.3 on it's backend, Bootstrap 3.3.7 and VueJs 2.1 makes the perfect user experience on frontend.</p>
       </div></center>
   </div>
 
   <div class='col-sm-6 col-md-4'><center>
-      <span class='glyphicon glyphicon-user' aria-hidden='true' style='font-size:3em;'></span>
+      <i class="fa fa-coffee" aria-hidden="true" style='font-size:3em;'></i>
       <div class='caption'>
-        <h3>User handling</h3>
-      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+        <h3>Content handling</h3>
+      <p>Contact your users, create new pages, handle your files or just run a blog. HorizontCMS will take care of the rest behind the scenes.</p>
       </div></center>
   </div>
 
   <div class='col-sm-6 col-md-4'><center>
-      <span class='glyphicon glyphicon-file' aria-hidden='true' style='font-size:3em;'></span>
+      <i class="fa fa-cloud-download" aria-hidden="true" style='font-size:3em;'></i>
       <div class='caption'>
-        <h3>File handling</h3>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+        <h3>Central repository</h3>
+        <p>Free plugins, themes  and language packs are downloadable with only one click. You don't have to be a developer to extend the system. System upgrades are also only one click away.</p>
       </div>
   </div></center>
 </div>

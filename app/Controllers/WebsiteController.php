@@ -19,6 +19,13 @@ class WebsiteController extends Controller
                 //'twig' => \App\Libs\TwigThemeEngine::class,
                 ];
 
+    public $theme;
+
+
+    public function before(){
+        $this->theme = new \App\Libs\Theme(Settings::get('theme'));
+    }
+
 
     /**
      * Display a listing of the resource.
@@ -31,10 +38,10 @@ class WebsiteController extends Controller
 
         //\App::setLocale('hu');
 
-        $theme = new \App\Libs\Theme(Settings::get('theme'));
+  
 
-        $theme_engine = new $this->engines[$theme->getConfig('theme_engine','hcms')]($this->request);
-        $theme_engine->setTheme($theme);
+        $theme_engine = new $this->engines[$this->theme->getConfig('theme_engine','hcms')]($this->request);
+        $theme_engine->setTheme($this->theme);
 
         $theme_engine->runScript('before');
         
@@ -72,7 +79,7 @@ class WebsiteController extends Controller
             $theme_engine->runScript('before_render');
 
        return $theme_engine->render([
-                                    '_THEME_PATH' => $theme->getPath(),
+                                    '_THEME_PATH' => $this->theme->getPath(),
                                     '_CURRENT_USER' => \Auth::user(),
                                     '_REQUESTED_PAGE' => $requested_page,
                                     ]);
