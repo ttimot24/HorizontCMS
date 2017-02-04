@@ -25,7 +25,7 @@ class WebsiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug){
+    public function index($page,$slug){
 
         $slug = explode("/",$slug);
 
@@ -38,9 +38,9 @@ class WebsiteController extends Controller
 
         $theme_engine->runScript('before');
         
-            if(is_array($slug)){
+            /*if(is_array($slug)){
                 $slug = $slug[0];
-            }
+            }*/
 
 
             if(Settings::get('website_down')==1 && (\Auth::user()==null || !\Auth::user()->isAdmin())){
@@ -48,7 +48,7 @@ class WebsiteController extends Controller
             }
 
 
-            $requested_page = $slug==""? Page::find(Settings::get('home_page')) : Page::findBySlug($slug);
+            $requested_page = $page==""? Page::find(Settings::get('home_page')) : Page::findBySlug($page);
 
             if($requested_page!=NULL){
                 if(isset($requested_page->url) && $requested_page->url!="" && $theme_engine->templateExists($requested_page->url)){
@@ -86,6 +86,11 @@ class WebsiteController extends Controller
     }
 
 
+
+    public function logout(){
+        \Auth::logout();
+        return redirect()->back();
+    }
 
 
 

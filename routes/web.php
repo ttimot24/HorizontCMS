@@ -16,6 +16,19 @@ Route::get('/laravelwelcome', function () {
 });
 
 
-Route::any('/{slug?}','\App\Controllers\WebsiteController@index')->where('slug', '(.*)');
+//Route::any('/{slug?}','\App\Controllers\WebsiteController@index')->where('slug', '(.*)');
+
+Route::any('/{slug?}/{args?}',function($slug="",$args = null){
+
+	$controller = \App::make('\App\Controllers\WebsiteController');
+
+	if(method_exists($controller, $slug)){
+		          
+		return $controller->callAction($slug, [$slug,$args]);
+	}
+
+
+	return $controller->callAction('index',[$slug,$args]);
+})->where('args', '(.*)');
 
 
