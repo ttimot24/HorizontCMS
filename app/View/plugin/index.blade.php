@@ -27,10 +27,18 @@ foreach($all_plugin as $current_plugin){
   	
       echo "<div class='col-md-10'>";
 
-       echo Html::img($current_plugin->getIcon(),"class='img img-thumbnail pull-left' onerror='this.src=\"storage/images/icons/plugin.png\"' style='width:80px;height:80px;margin-right:10px;'");
+       echo Html::img($current_plugin->getIcon(),"class='img img-thumbnail pull-left' style='width:80px;height:80px;margin-right:10px;'");
 
-        echo "<h4 class='list-group-item-heading'>
-              <a href='admin/plugin/run/".str_slug($current_plugin->root_dir)."'>".$current_plugin->getInfo('name')."</a> <small>version: ".$current_plugin->getInfo('version')." | author: <a href='".$current_plugin->getInfo('author_url')."'>".$current_plugin->getInfo('author')."</a></small></h4>
+        echo "<h4 class='list-group-item-heading'>";
+
+            if($current_plugin->isInstalled()){
+              echo "<a href='admin/plugin/run/".str_slug($current_plugin->root_dir)."'>".$current_plugin->getName()."</a>";
+            }else{
+              echo "<font color='white'>".$current_plugin->getName()."</font>";
+            }
+
+
+         echo  " <small>version: ".$current_plugin->getInfo('version')." | author: <a href='".$current_plugin->getInfo('author_url')."'>".$current_plugin->getInfo('author')."</a></small></h4>
 
             <p class='list-group-item-text' style='margin-bottom:8px;margin-right:70px;'>".$current_plugin->getInfo('description')."</p>";
 
@@ -39,7 +47,7 @@ foreach($all_plugin as $current_plugin){
 
         echo "<div class='col-md-2'>";
          
-          if($current_plugin->isInstalled()){
+          if(!$current_plugin->isInstalled()){
               echo "<a id='install' class='btn btn-primary btn-block' href='admin/plugin/install/".$current_plugin->root_dir."'>Install</a>";
           }
           else{

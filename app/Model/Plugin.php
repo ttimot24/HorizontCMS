@@ -38,7 +38,7 @@ class Plugin extends Model
     public function isInstalled(){
     	$result = self::where('root_dir',$this->root_dir)->get();
 
-    	return $result->isEmpty();
+    	return !$result->isEmpty();
     }
 
     public function isActive(){
@@ -64,7 +64,7 @@ class Plugin extends Model
 
 
 	public function getIcon(){
-		return $this->getPath()."icon.jpg";
+		return file_exists($this->getPath()."icon.jpg")? $this->getPath()."icon.jpg" : 'resources/images/icons/plugin.png';
 	}
 
 	public function getInfo($info){
@@ -78,9 +78,9 @@ class Plugin extends Model
 		return str_slug($this->root_dir,"_");
 	}
 
-	public function getWidget(){
-		return (file_exists($this->getPath()."index.php"))? file_get_contents($this->getPath()."index.php") : /*NULL*/ "";
-	}
+	/*public function getWidget(){
+		return (file_exists($this->getPath()."index.php"))? file_get_contents($this->getPath()."index.php") : /*NULL*/ /*"";
+	}*/
 
 
 }
