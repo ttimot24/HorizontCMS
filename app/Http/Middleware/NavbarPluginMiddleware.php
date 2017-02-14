@@ -16,14 +16,14 @@ class NavbarPluginMiddleware
     public function handle($request, Closure $next)
     {
 
-        $all_plugin = \App\Model\Plugin::where('active','1')->get();
+       // $all_plugin = \App\Model\Plugin::where('active','1')->get();
 
-        if($all_plugin->count()>0){
+        if(!app()->plugins->isEmpty()){
 
             $main_menu = \Menu::get('MainMenu');
             $right_menu = \Menu::get('RightMenu');
 
-            foreach($all_plugin as $plugin){
+            foreach(app()->plugins as $plugin){
 
                 $plugin_namespace = "\Plugin\\".$plugin->root_dir."\Register";
 

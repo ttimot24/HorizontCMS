@@ -32,12 +32,12 @@ class EventServiceProvider extends ServiceProvider
 
 
     if(\App\HorizontCMS::isInstalled()){
-        $all_plugin = \App\Model\Plugin::where('active','1')->get();
+        //$all_plugin = \App\Model\Plugin::where('active','1')->get();
 
 
-        if($all_plugin->count()>0){
+      //  if($this->app->plugins->count()>0){
             
-             foreach($all_plugin as $plugin){
+             foreach($this->app->plugins as $plugin){
 
                 $plugin_namespace = "\Plugin\\".$plugin->root_dir."\Register";
 
@@ -51,7 +51,7 @@ class EventServiceProvider extends ServiceProvider
 
              }
             
-        }
+      //  }
     }
 
 

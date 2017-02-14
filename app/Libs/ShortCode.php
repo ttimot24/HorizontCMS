@@ -11,13 +11,11 @@ class ShortCode extends Model{
 
 	public static function initalize(){
 
-		$all_plugin = self::all();
-
-		foreach($all_plugin as $plugin){
+		foreach(app()->plugins as $plugin){
 
 			$namespace = "\Plugin\\".$plugin->root_dir."\\Register";
 
-			if(Plugin::exists($plugin->root_dir) && $plugin->active==1 && method_exists($namespace, 'widget')){
+			if(Plugin::exists($plugin->root_dir) && method_exists($namespace, 'widget')){
 				\View::addNamespace('plugin', 'plugins'.DIRECTORY_SEPARATOR.$plugin->root_dir.DIRECTORY_SEPARATOR."App".DIRECTORY_SEPARATOR."View");
 
 				self::$widgets["{[".str_slug($plugin->root_dir,"_")."]}"] = $namespace::widget();
