@@ -90,6 +90,12 @@ class WebsiteController extends Controller
 
     public function authenticate(){
 
+
+		if (\Auth::attempt(['username' => $this->request->input('username'), 'password' => $this->request->input('password')])) {
+
+            return $this->redirectToSelf();
+        }
+        
     }
 
 
