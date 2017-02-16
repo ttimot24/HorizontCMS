@@ -94,7 +94,7 @@ class Website{
 
 
 	public static function logo(){
-		return 'storage/images/logo'.Website::$_SETTINGS->logo;
+		return 'storage/images/logos/'.Website::$_SETTINGS->logo;
 	}
 
 

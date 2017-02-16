@@ -93,9 +93,10 @@ class WebsiteController extends Controller
 
 		if (\Auth::attempt(['username' => $this->request->input('username'), 'password' => $this->request->input('password')])) {
 
-            return $this->redirectToSelf();
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_logged_in')]);
         }
-        
+
+        return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
 
