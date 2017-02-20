@@ -38,6 +38,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
+        $this->mapPluginRoutes();
+
         $this->mapBackendRoutes();
 
         $this->mapWebRoutes();
@@ -90,6 +92,28 @@ class RouteServiceProvider extends ServiceProvider
         ], function ($router) {
             require base_path('routes/backend.php');
         });
+    }
+
+
+    protected function mapPluginRoutes(){
+
+
+    	foreach($this->app->plugins as $plugin){
+
+    		if(file_exists('plugins/'.$plugin->root_dir.'/routes/plugin.php')){
+
+    			$namespace = "\\Plugin\\".$plugin->root_dir."\Register";
+
+	    		$options = method_exists($namespace, 'routeOptions')? $namespace::routeOptions() : [];
+
+		        Route::group($options, function ($router) use ($plugin) {
+		            require base_path('plugins/'.$plugin->root_dir.'/routes/plugin.php');
+		        });
+
+	    	}
+
+		}
+
     }
 
 
