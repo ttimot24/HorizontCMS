@@ -97,6 +97,9 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapPluginRoutes(){
 
+    	if(!isset($this->app->plugins)){ return false; }
+
+    	
 
     	foreach($this->app->plugins as $plugin){
 
