@@ -99,7 +99,7 @@ class RouteServiceProvider extends ServiceProvider
 
     	if(!isset($this->app->plugins)){ return false; }
 
-    	
+    
 
     	foreach($this->app->plugins as $plugin){
 
@@ -109,7 +109,11 @@ class RouteServiceProvider extends ServiceProvider
 
 	    		$options = method_exists($namespace, 'routeOptions')? $namespace::routeOptions() : [];
 
-		        Route::group($options, function ($router) use ($plugin) {
+		        Route::group([
+                    'middleware' => isset($options['middleware'])? $options['middleware'] : "",
+                    'namespace' => isset($options['namespace'])? $options['namespace'] : "",
+                    'prefix' => isset($options['prefix'])? $options['prefix'] : "",
+                    ], function($router) use ($plugin) {
 		            require base_path('plugins/'.$plugin->root_dir.'/routes/plugin.php');
 		        });
 
