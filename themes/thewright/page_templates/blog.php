@@ -25,8 +25,8 @@
 
 <?php foreach($all_blogposts as $blogpost): ?>
 	<img class="img-rounded" src="<?= $blogpost->getImage() ?>" style="width:100%;height:400px;object-fit:cover;">
-	<h2><a href="<?= Website::$_REQUESTED_PAGE->slug.'/'.$blogpost->slug ?>"><?= $blogpost->title ?></a></h2>
-	<p style="padding-left:5px;">Written by <a href="#"><?= $blogpost->author->username ?></a> on <a href="#"><?= $blogpost->created_at->diffForHumans() ?></a></p>
+	<h2><a href="<?= str_slug(Website::$_REQUESTED_PAGE->name).'/'.str_slug($blogpost->title) ?>"><?= $blogpost->title ?></a></h2>
+	<p style="padding-left:5px;">Written by <a href="#"><?= $blogpost->author->username ?></a> on <a href="#"><?= $blogpost->created_at->diffForHumans() ?></a> in <a href="#"><?= $blogpost->category->name ?></a></p>
 	<p><b><?= $blogpost->getExcerpt() ?></b></p>
 	<p></p>
 	<hr>
