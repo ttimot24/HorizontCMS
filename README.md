@@ -6,11 +6,11 @@
 [![Build Status](https://travis-ci.org/ttimot24/HorizontCMS.svg?branch=master)](https://travis-ci.org/ttimot24/HorizontCMS)
 [![Github All Releases](https://img.shields.io/github/downloads/ttimot24/horizontcms/total.svg)]()
 
-Lightweight CMS built on Laravel 5.3. The core system can be simply extended with themes and plugins. Easy to learn for simple users, simple to code for developers.
+Lightweight CMS built on Laravel 5.3. The core system can be simply extended with themes and plugins with one click. Easy to learn for users, simple to code for developers.
 
 There are a lot of work here still. USE YOUR OWN RISK ON PRODUCTION!
 
-###Latest version: [v1.0.0-alpha.2](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.0.0-alpha.2)
+###Latest version: [v1.0.0-alpha.3](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.0.0-alpha.3)
 
 ###Try out
 
