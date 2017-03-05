@@ -32,6 +32,10 @@ After downloading and copying the files to the server, navigate to the app root 
   4. Enter the required database and administrator informations.
   5. You're finished.
 
+###Sample plugin
+
+  [GoogleMaps](https://github.com/ttimot24/hcms-gmaps-plugin)
+
 ###Contributing
   - Create a Theme or Plugin
   - Create translation
