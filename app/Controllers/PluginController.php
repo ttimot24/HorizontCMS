@@ -50,7 +50,25 @@ class PluginController extends Controller{
 
     public function downloadPlugin($plugin_name){
 
-        dd($plugin_name);
+        $temp_zip = "framework".DIRECTORY_SEPARATOR."temp".DIRECTORY_SEPARATOR.$plugin_name.".zip";
+
+        $status = \Storage::disk('local')->put($temp_zip, file_get_contents(\Config::get('horizontcms.sattelite_url')."/download/plugin/".$plugin_name));
+        chmod(storage_path().DIRECTORY_SEPARATOR.$temp_zip,0777);
+
+        if($status){
+
+            \Zipper::make(storage_path().DIRECTORY_SEPARATOR.$temp_zip)->folder($plugin_name)->extractTo('plugins'.DIRECTORY_SEPARATOR.$plugin_name);
+
+            if(file_exists("plugins/".$plugin_name)){ 
+                @\Storage::delete("framework".DIRECTORY_SEPARATOR."temp".DIRECTORY_SEPARATOR.$plugin_name.".zip");
+                return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully downloaded '.$plugin_name)]);
+            }else{
+                return $this->redirectToSelf()->withMessage(['danger' => trans('Could not extract the plugin: '.$plugin_name."")]);
+            }
+        
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('Could not download the plugin: '.$plugin_name."")]);
+        }
 
     }
 
@@ -74,6 +92,7 @@ class PluginController extends Controller{
 
 
         $plugin = new \App\Model\Plugin($plugin_name);
+        //$plugin->version should be added
         unset($plugin->info,$plugin->config);
         $plugin->area = 0;
         $plugin->permission = 0;

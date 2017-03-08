@@ -184,6 +184,8 @@ return [
         Lavary\Menu\ServiceProvider::class,
       //  Teepluss\Theme\ThemeServiceProvider::class,
 
+        Chumper\Zipper\ZipperServiceProvider::class,
+
     ],
 
     /*
@@ -237,6 +239,7 @@ return [
 
 
         'Settings' => \App\Model\Settings::class,
+        'Zipper' => Chumper\Zipper\Zipper::class,
     ],
 
 ];

@@ -9,6 +9,7 @@
         "laravel/framework": "5.3.*",
         "lavary/laravel-menu": "dev-master",
         "visualappeal/php-auto-update" : "*",
+        "chumper/zipper" : "*",
         "wikimedia/composer-merge-plugin": "dev-master",
         "barryvdh/composer-cleanup-plugin": "0.1.x@dev"
     },
