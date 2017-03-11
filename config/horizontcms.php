@@ -2,7 +2,7 @@
 
 return[
 
-	'version' => '1.0.0-alpha',
+	'version' => '1.0.0-alpha.3',
 
 	'backend_prefix' => env('HCMS_ADMIN_PREFIX','admin'),
 
@@ -12,7 +12,7 @@ return[
 
 	'admin_logo' => 'resources/logo.png',
 
-	'sattelite_url' => env('HCMS_CENTRAL_REPO','http://www.eterfesztival.hu/hcms_online_store'),
+	'sattelite_url' => env('HCMS_CENTRAL_REPO','http://eterfesztival.hu/hcms_online_store/satellite/public/api'),
 
 	'css' => [
 			'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
