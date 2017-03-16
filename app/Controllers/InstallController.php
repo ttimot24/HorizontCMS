@@ -130,7 +130,7 @@ class InstallController extends Controller{
         $administrator->name = 'Administrator';
         $administrator->username = $this->request->input('ad_username');
         $administrator->slug = str_slug($this->request->input('ad_username'));
-        $administrator->password = \Hash::make($this->request->input('ad_password'));
+        $administrator->password = $this->request->input('ad_password');
         $administrator->email = $this->request->input('ad_email');
         $administrator->role_id = 6;
         $administrator->active = 1;
