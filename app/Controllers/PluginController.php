@@ -96,7 +96,7 @@ class PluginController extends Controller{
         unset($plugin->info,$plugin->config);
         $plugin->area = 0;
         $plugin->permission = 0;
-        $plugin->table_name = "";
+        $plugin->tables = "";
         $plugin->active = 0;
 
 
