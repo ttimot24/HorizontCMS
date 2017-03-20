@@ -10,21 +10,21 @@ Lightweight CMS built on Laravel 5.3. The core system can be simply extended wit
 
 There are a lot of work here still. USE YOUR OWN RISK ON PRODUCTION!
 
-###Latest version: [v1.0.0-alpha.3](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.0.0-alpha.3)
+### Latest version: [v1.0.0-alpha.3](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.0.0-alpha.3)
 
-###Try out
+### Try out
 
 Frontend: [https://horizontcms.herokuapp.com/](https://horizontcms.herokuapp.com/)
 
 Backend: [https://horizontcms.herokuapp.com/admin](https://horizontcms.herokuapp.com/admin)
 
 
-###Installation
-####Browser
+### Installation
+#### Browser
 
 After downloading and copying the files to the server, navigate to the app root folder and run ```composer install```. Then head to your domain. HorizontCMS can recognize if not installed yet, and redirects you to the installer. Follow the instructions, add the required credentials and you're done.
 
-####Console 
+#### Console 
 
   1. Download the CMS
   2. Navigate to the app root folder and run ```composer install```
@@ -32,11 +32,11 @@ After downloading and copying the files to the server, navigate to the app root 
   4. Enter the required database and administrator informations.
   5. You're finished.
 
-###Sample plugin
+### Sample plugin
 
   [GoogleMaps](https://github.com/ttimot24/hcms-gmaps-plugin)
 
-###Contributing
+### Contributing
   - Create a Theme or Plugin
   - Create translation
   - Help in the docs.
