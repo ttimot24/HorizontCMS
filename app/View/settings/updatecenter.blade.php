@@ -30,13 +30,7 @@
 
 
 	<div class="list-group">
-	  
-<!--	<?php //if($data['latest_version'] > $data['current_version']->version): ?>
-	  <a class="list-group-item list-group-item-warning" style='border-radius:0px;'>
-	    <h4 class="list-group-item-heading">Latest available: v<?php // $data['latest_version'] ?></h4>
-	    <p class="list-group-item-text">Upgrade</p>
-	  </a>
-	<?php// endif; ?>-->
+
 
 	@foreach($available_list as $available)
 	  <a class="list-group-item">
