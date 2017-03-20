@@ -175,8 +175,15 @@ class PluginController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id){
-        
+    public function delete($plugin){
+        if(file_exists("plugins/".$plugin)){
+            if(\Storage::disk('root')->deleteDirectory("plugins/".$plugin)){
+                 \App\Model\Plugin::where('root_dir',$plugin_name)->first()->delete();
+                 return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully deleted the plugin!')]);
+            }else{
+                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            }
+        }
     }
 
 

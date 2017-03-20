@@ -9,7 +9,7 @@
 
   <div class='col-sm-12 col-md-6' style="text-align:right;"><br>
   <a href="admin/plugin/onlinestore" class='btn btn-info'><i class="fa fa-cloud-download" aria-hidden="true"></i> Download apps</a>
-  <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_plugin' <?php if(!$zip_enabled){ echo "disabled"; } ?>><i class='fa fa-upload'></i>&nbspUpload new plugin</a>
+  <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_plugin' @if(!$zip_enabled) disabled @endif ><i class='fa fa-upload'></i>&nbspUpload new plugin</a>
   </div>
 </section>
 
@@ -70,7 +70,7 @@ foreach($all_plugin as $current_plugin){
     "delete_".$current_plugin->root_dir,
     "Are you sure?",
     "<b>Delete this plugin: </b>".$current_plugin->getInfo('name')." <b>?</b>",
-    "<a href='admin/plugin/delete/".$current_plugin->dir_name."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
+    "<a href='admin/plugin/delete/".$current_plugin->root_dir."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
     );
 
