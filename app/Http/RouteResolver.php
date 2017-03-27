@@ -13,6 +13,7 @@ class RouteResolver{
 
 	public function resolve($controller = 'dashboard',$action = 'index', $args = null){
 
+				$action!=""? : $action='index';
 		
 				$controller_path = str_replace("\\",DIRECTORY_SEPARATOR,camel_case($this->namespace));
 				$controller_name = studly_case($controller).'Controller';
