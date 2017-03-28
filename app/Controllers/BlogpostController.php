@@ -64,7 +64,7 @@ class BlogpostController extends Controller{
         }
 
 
-        
+        $this->view->js('resources/js/controls.js');
         $this->view->js('resources/assets/ckeditor/ckeditor.js');
 
         $this->view->title(trans('blogpost.new_blogpost'));
@@ -107,7 +107,7 @@ class BlogpostController extends Controller{
      */
     public function edit($id){
 
-
+        $this->view->js('resources/js/controls.js');
         $this->view->js('resources/assets/ckeditor/ckeditor.js');
 
         $this->view->title(trans('blogpost.edit_blogpost'));

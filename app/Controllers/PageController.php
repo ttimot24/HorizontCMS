@@ -72,6 +72,7 @@ class PageController extends Controller{
         
         $this->view->js('resources/assets/ckeditor/ckeditor.js');
         $this->view->js('app/View/pages/pages.script.js');
+        $this->view->js('resources/js/controls.js');
 
         $this->view->title(trans('page.new_page'));
         return $this->view->render('pages/create',[
@@ -114,6 +115,7 @@ class PageController extends Controller{
 
         $this->view->js('resources/assets/ckeditor/ckeditor.js');
         $this->view->js('app/View/pages/pages.script.js');
+        $this->view->js('resources/js/controls.js');
 
         $this->view->title(trans('page.edit_page'));
 

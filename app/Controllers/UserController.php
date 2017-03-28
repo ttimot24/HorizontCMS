@@ -67,6 +67,7 @@ class UserController extends Controller{
         }
 
 
+        $this->view->js('resources/js/controls.js');
 
         $this->view->title(trans('user.create_user'));
         return $this->view->render('users/create',[
@@ -108,6 +109,8 @@ class UserController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
+
+        $this->view->js('resources/js/controls.js');
 
         $this->view->title(trans('user.edit_user'));
         return $this->view->render('users/edit',[
