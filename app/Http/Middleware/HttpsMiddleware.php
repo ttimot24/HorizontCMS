@@ -16,7 +16,7 @@ class HttpsMiddleware
 	        }
 
 	        if(\Settings::get('use_https')==1){
-	        	URL::forceSchema('https');
+	        	\URL::forceSchema('https');
 	        }
 
    		}
