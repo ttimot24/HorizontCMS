@@ -12,7 +12,7 @@ return[
 
 	'admin_logo' => 'resources/logo.png',
 
-	'sattelite_url' => env('HCMS_CENTRAL_REPO','http://eterfesztival.hu/hcms_online_store/satellite/public/api'),
+	'sattelite_url' => env('HCMS_CENTRAL_REPO','https://eterfesztival.hu/hcms_online_store/satellite/public/api'),
 
 	'css' => [
 			'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',

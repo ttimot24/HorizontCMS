@@ -2,7 +2,9 @@
 
 	if(php_sapi_name()!="cli"){
 
-	  $root = 'http://'.$_SERVER['HTTP_HOST'];
+	  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+	  $root = $protocol.$_SERVER['HTTP_HOST'];
 
 	  $server_root = str_replace(DIRECTORY_SEPARATOR,"/",$_SERVER['DOCUMENT_ROOT']);
 	  $get_cwd = str_replace(DIRECTORY_SEPARATOR,"/",getcwd());

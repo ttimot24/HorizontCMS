@@ -40,6 +40,10 @@
 <input type="hidden" name="website_down" value="0"> <!-- Checkbox hack -->
 <tr><td>Website down</td><td><input type='checkbox' class='form-control' name='website_down' value='1' <?php if($settings['website_down']==1){ echo 'checked'; } ?> ></td></tr>
 
+<input type="hidden" name="use_https" value="0"> <!-- Checkbox hack -->
+<tr><td>Secure site with SSL (https)</td><td><input type='checkbox' class='form-control' name='use_https' value='1' <?php if($settings['use_https']==1){ echo 'checked'; } ?> ></td></tr>
+
+
 <tr><td>Logo</td><td>
 <br>
 @if(isset($settings['logo']) && $settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))

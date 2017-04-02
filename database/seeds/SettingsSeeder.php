@@ -107,6 +107,12 @@ class SettingsSeeder extends Seeder
         ]);
 
         DB::table('settings')->insert([
+            'setting' => 'use_https',
+            'value' => "0",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
             'setting' => 'social_link_facebook',
             'value' => "",
             'more' => '1',
