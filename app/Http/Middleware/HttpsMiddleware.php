@@ -9,13 +9,17 @@ class HttpsMiddleware
 
     public function handle($request, Closure $next){
 
-        if (\Settings::get('use_https')==1 && !$request->secure()) {
-            return redirect()->secure($request->getRequestUri());
-        }
+        if(\App\HorizontCMS::isInstalled()){
 
-        if(\Settings::get('use_https')==1){
-        	URL::forceSchema('https');
-        }
+	        if (\Settings::get('use_https')==1 && !$request->secure()) {
+	            return redirect()->secure($request->getRequestUri());
+	        }
+
+	        if(\Settings::get('use_https')==1){
+	        	URL::forceSchema('https');
+	        }
+
+   		}
 
         return $next($request); 
     }
