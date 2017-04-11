@@ -4,7 +4,7 @@ namespace App\Http;
 
 class RouteResolver{
 
-	private $namespace = "App\\Controllers\\";
+	private $namespace = "\App\\Controllers\\";
 
 	public function changeNamespace($namespace){
 		$this->namespace = $namespace;
