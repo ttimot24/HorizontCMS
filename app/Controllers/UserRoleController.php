@@ -41,7 +41,7 @@ class UserRoleController extends Controller{
        if($this->request->isMethod('POST')){
             $role = new \App\Model\UserRole();
             $role->name = $this->request->input('group_name');
-            $role->rights = json_encode(array_keys($this->request->except(['_token','group_name'])));
+            $role->rights = array_keys($this->request->except(['_token','group_name']));
 
             if($role->save()){
                 return $this->redirect('admin/userrole')->withMessage(['success' => trans('User role created succesfully!')]);
@@ -81,8 +81,8 @@ class UserRoleController extends Controller{
     public function update($id){
        if($this->request->isMethod('POST')){
             $role = \App\Model\UserRole::find($id); 
-
-            $role->rights = json_encode(array_keys($this->request->except('_token')));
+            
+            $role->rights = array_keys($this->request->except('_token'));
             
 
             if($role->save()){

@@ -22,4 +22,11 @@ class UserRole extends Model{
     	return json_decode($this->attributes['rights']);
     }
 
+	/**
+    * Mutator for rights
+    */
+    public function setRightsAttribute($value){
+    	$this->attributes['rights'] = json_encode($value);
+    }
+
 }
