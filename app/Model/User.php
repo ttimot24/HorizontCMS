@@ -64,13 +64,11 @@ class User extends Authenticatable{
 
     public function hasPermission($permission){
 
-        $rights = json_decode($this->role->rights);
-
-        if(!isset($rights) || $rights==NULL || $rights==""){
+        if(!isset($this->role->rights) || $this->role->rights==NULL || $this->role->rights==""){
             return false;
         }
 
-        return in_array($permission, $rights);
+        return in_array($permission, $this->role->rights);
     }
 
     /**

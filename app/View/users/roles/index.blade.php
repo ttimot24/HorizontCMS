@@ -43,13 +43,11 @@
                       "settings" => "Settings",
                       ];
 
-  $rights = json_decode($role->rights);
-
   
 
 foreach($permission_list as $key => $perm_name){
 
-      if(isset($rights) && in_array($key,$rights)){
+      if(isset($role->rights) && in_array($key,$role->rights)){
         $check = "checked";
       }
       else{
