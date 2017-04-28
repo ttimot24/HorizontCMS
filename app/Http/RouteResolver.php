@@ -15,15 +15,18 @@ class RouteResolver{
 
 				$action!=""? : $action='index';
 		
-				$controller_path = str_replace("\\",DIRECTORY_SEPARATOR,camel_case($this->namespace));
+				$controller_path = lcfirst(ltrim(str_replace("\\",DIRECTORY_SEPARATOR,camel_case($this->namespace)),DIRECTORY_SEPARATOR));
 				$controller_name = studly_case($controller).'Controller';
 
+		        $controllerClass = $this->namespace.$controller_name;
+
 				//if(!file_exists($controller_path.$controller_name.'.php')){
-				if(!class_exists($this->namespace.$controller_name)){
-					throw new \Exception('No such file <b>'.$this->namespace.$controller_name.'.php'.'</b>');
+				if(!class_exists($controllerClass)){
+
+					throw new \Exception('No such file <b>'.$controllerClass.'.php'.'</b>');
 				} 
 
-		        $controllerClass = $this->namespace.$controller_name;
+
 		        $controller = \App::make($controllerClass);
 
 		        $action = studly_case($action);
