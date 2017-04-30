@@ -69,7 +69,7 @@ foreach($all_plugin as $current_plugin){
    Bootstrap::delete_confirmation(
     "delete_".$current_plugin->root_dir,
     "Are you sure?",
-    "<b>Delete this plugin: </b>".$current_plugin->getInfo('name')." <b>?</b>",
+    "<b>Delete this plugin: </b>".$current_plugin->getName()." <b>?</b>",
     "<a href='admin/plugin/delete/".$current_plugin->root_dir."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
     );

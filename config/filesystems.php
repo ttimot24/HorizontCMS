@@ -59,6 +59,19 @@ return [
             'visibility' => 'public',
         ],
 
+
+        'plugins' => [
+            'driver' => 'local',
+            'root' => '/plugins',
+        ],
+
+
+        'themes' => [
+            'driver' => 'local',
+            'root' => '/themes',
+        ],
+
+
         's3' => [
             'driver' => 's3',
             'key' => 'your-key',

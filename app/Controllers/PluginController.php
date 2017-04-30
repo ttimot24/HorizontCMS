@@ -177,7 +177,7 @@ class PluginController extends Controller{
      */
     public function delete($plugin){
         if(file_exists("plugins/".$plugin)){
-            if(\Storage::disk('root')->deleteDirectory("plugins/".$plugin)){
+            if(\Storage::disk('plugins')->deleteDirectory($plugin)){
                  \App\Model\Plugin::where('root_dir',$plugin_name)->first()->delete();
                  return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully deleted the plugin!')]);
             }else{
