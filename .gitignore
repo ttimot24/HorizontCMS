@@ -10,6 +10,7 @@ Homestead.yaml
 /composer.lock
 /themes/*
 !themes/thewright
-/plugins
+/plugins/*
+!themes/.gitignore
 /resources/assets/ckeditor45
 /resources/assets/ckeditor/samples
