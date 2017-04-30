@@ -62,13 +62,13 @@ return [
 
         'plugins' => [
             'driver' => 'local',
-            'root' => '/plugins',
+            'root' => base_path('plugins'),
         ],
 
 
         'themes' => [
             'driver' => 'local',
-            'root' => '/themes',
+            'root' => base_path('themes'),
         ],
 
 
