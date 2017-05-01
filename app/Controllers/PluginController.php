@@ -85,8 +85,9 @@ class PluginController extends Controller{
        
        if(file_exists($path_to_db) && is_dir($path_to_db)){
 
-            \Artisan::call("migrate",['--path'=> $path_to_db.DIRECTORY_SEPARATOR."migrations"]);
-            \Artisan::call('db:seed', ['--class' => 'Plugins\\'.$plugin_name.'\\database\\seeds\\PluginSeeder']);
+
+            \Artisan::call("migrate",['--path' => $path_to_db.DIRECTORY_SEPARATOR."migrations",'--no-interaction' => '','--force' => '' ]);
+            \Artisan::call('db:seed', ['--class' => '\\Plugin\\'.$plugin_name.'\\database\\seeds\\PluginSeeder', '--no-interaction' => '', '--force' => '' ]);
 
        }
 
@@ -105,6 +106,7 @@ class PluginController extends Controller{
         }else{
             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
+
 
     }
 
