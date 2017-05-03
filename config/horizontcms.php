@@ -54,6 +54,11 @@ return[
 
 			],
 
+	'modules' => [ //namespaces and root dirs for modules
+				//'Theme' =>  'themes', //working on it
+				'Plugin' => 'plugins',
+			],
+
 
 
 ];
