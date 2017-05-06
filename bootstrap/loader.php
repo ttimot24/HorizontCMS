@@ -42,4 +42,3 @@ function module_autoloader($class){
 
 
 spl_autoload_register('module_autoloader');
-//spl_autoload_register('theme_autoloader');
