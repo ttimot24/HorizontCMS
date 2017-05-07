@@ -9,7 +9,7 @@ Homestead.yaml
 !/storage/images/header_images/abovethecity.jpg
 /composer.lock
 /themes/*
-!themes/thewright
+!themes/TheWright
 /plugins/*
 !themes/.gitignore
 /resources/assets/ckeditor45
