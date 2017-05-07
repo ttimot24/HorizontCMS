@@ -47,7 +47,7 @@ class SettingsSeeder extends Seeder
 
         DB::table('settings')->insert([
             'setting' => 'theme',
-            'value' => 'thewright',
+            'value' => 'TheWright',
             'more' => '1',
         ]);
 
