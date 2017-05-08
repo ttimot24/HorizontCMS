@@ -21,7 +21,7 @@ class ShortCode extends Model{
 												'plugins'.DIRECTORY_SEPARATOR.$plugin->root_dir.DIRECTORY_SEPARATOR."app".DIRECTORY_SEPARATOR."resources".DIRECTORY_SEPARATOR."views"
 												]);
 
-				self::$widgets["{[".str_slug($plugin->root_dir,"_")."]}"] = $namespace::widget();
+				self::$widgets["{[".$plugin->root_dir."]}"] = $namespace::widget();
 			}
 
 
