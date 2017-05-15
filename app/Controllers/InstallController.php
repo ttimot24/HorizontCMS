@@ -67,20 +67,46 @@ class InstallController extends Controller{
 
             try{
 
-            	if($this->request->input('db_driver')=="mysql"){
-	                new \PDO('mysql:host='.$this->request->input('server').';database='.$this->request->input('database'), 
-	                    $this->request->input('username'), 
-	                    $this->request->input('password')
-	                );
-            	}else if($this->request->input('db_driver')=="pgsql"){
-					new \PDO("pgsql:dbname=".$this->request->input('database').";host=".$this->request->input('server'), 
-        				$this->request->input('username'), 
-	                    $this->request->input('password')
-					); 
-            	}else if($this->request->input('db_driver')=="sqlite"){
-            		\File::put('storage/framework/database/sqlite.db',"");
-            		new \PDO('sqlite:/storage/framework/database/sqlite.db');
+
+            	switch($this->request->input('db_driver')){
+
+            		case 'mysql':
+
+            					new \PDO('mysql:host='.$this->request->input('server').';database='.$this->request->input('database'), 
+				                    $this->request->input('username'), 
+				                    $this->request->input('password')
+				                );
+
+            					break;
+
+            		case 'pgsql':
+
+            					new \PDO("pgsql:dbname=".$this->request->input('database').";host=".$this->request->input('server'), 
+				        				$this->request->input('username'), 
+				        				$this->request->input('password')
+									);
+
+            					break;
+
+            		case 'sqlite':
+
+            					$database = $this->request->input('database');
+
+            					(substr($database,-3)===".db")? : $database .= '.db';
+						
+
+            				    $sqlite = base_path('database'.DIRECTORY_SEPARATOR.$database);
+
+            					$this->request->merge(['database' => $sqlite]);
+            					
+            					new \PDO('sqlite:'.$sqlite);
+
+            					break;
+
             	}
+
+
+
 
                 Session::put('step2',$this->request->all());
 
@@ -114,7 +140,6 @@ class InstallController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function migrate(){
-
 
         Config::set('database.default',Session::get('step2.db_driver'));
         Config::set('database.connections.'.Session::get('step2.db_driver').'.host', Session::get('step2.server'));

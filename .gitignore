@@ -14,3 +14,4 @@ Homestead.yaml
 !themes/.gitignore
 /resources/assets/ckeditor45
 /resources/assets/ckeditor/samples
+/database/*.db
