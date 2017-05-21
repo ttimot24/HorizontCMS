@@ -25,18 +25,6 @@ class AppServiceProvider extends ServiceProvider
                     }
                 });
             }
-
-
-        if(\App\HorizontCMS::isInstalled()){
-    	  
-           if(\Request::is(\Config::get('horizontcms.backend_prefix')."/plugin/run/*")){
-                $plugin_name = studly_case(explode("/",str_replace(\Config::get('horizontcms.backend_prefix')."/plugin/run/","",\Request::path()))[0]);
-               
-                $this->loadTranslationsFrom(base_path("/plugins/".$plugin_name."/resources/lang"), 'plugin');
-            }else if(!\Request::is(\Config::get('horizontcms.backend_prefix')."/*")){
-                $this->loadTranslationsFrom(base_path("/themes/".\App\Model\Settings::get('theme')."/lang"), 'website');
-            }
-        }
         
     }
 

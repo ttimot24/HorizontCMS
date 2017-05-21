@@ -18,7 +18,7 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         'Illuminate\Auth\Events\Login' => [
-            'App\Listeners\UserEventListener@countLogin',
+            '\App\Listeners\UserEventListener@countLogin',
         ],
     ];
 
@@ -29,34 +29,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-
-    if(\App\HorizontCMS::isInstalled()){
-        //$all_plugin = \App\Model\Plugin::where('active','1')->get();
-
-
-      //  if($this->app->plugins->count()>0){
-            
-             foreach($this->app->plugins as $plugin){
-
-                $plugin_namespace = "\Plugin\\".$plugin->root_dir."\Register";
-
-                if(!method_exists($plugin_namespace,'eventHooks')){
-                    continue;
-                }
-
-
-                $this->listen = array_merge_recursive($this->listen,$plugin_namespace::eventHooks());
-
-
-             }
-            
-      //  }
-    }
-
-
+        
         parent::boot();
 
-        //
     }
 }

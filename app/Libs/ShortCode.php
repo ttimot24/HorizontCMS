@@ -13,7 +13,7 @@ class ShortCode extends Model{
 
 		foreach(app()->plugins as $plugin){
 
-			$namespace = "\Plugin\\".$plugin->root_dir."\\Register";
+			$namespace = $plugin->getRegisterClass();
 
 			if(Plugin::exists($plugin->root_dir) && method_exists($namespace, 'widget')){
 				\View::addNamespace('plugin', [

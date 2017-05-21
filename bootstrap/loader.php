@@ -42,3 +42,14 @@ function module_autoloader($class){
 
 
 spl_autoload_register('module_autoloader');
+
+
+
+
+
+$plugin_autoloaders = glob('plugins/*/vendor/autoload.php');
+
+
+foreach($plugin_autoloaders as $autoloader){
+	require_once($autoloader);
+}
