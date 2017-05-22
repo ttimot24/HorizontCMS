@@ -12,17 +12,14 @@ class PluginManager extends Model{
 
 
 	public static function area($area_num){
-		
-		$plugins = array();
 
-		foreach(\App\Libs\ShortCode::getAll() as $widget){
+		foreach(app()->plugins as $widget){
 			if($widget->area==$area_num){
-
+				self::render($widget->root_dir);
 			}
 		}
 
 	}
-
 
 	
 }

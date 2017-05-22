@@ -9,6 +9,11 @@
 	<link rel="stylesheet" id="hemingway-rewritten-fonts-css" href="https://fonts.googleapis.com/css?family=Raleway%3A400%2C300%2C700%7CLato%3A400%2C700%2C400italic%2C700italic&amp;subset=latin%2Clatin-ext" type="text/css" media="all">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<?php 
+		\App\Libs\PluginManager::render('OpenGraph');
+	?>
+
 </head>
 
 <body style="background-color:rgba(0,0,0,0.1);font-family:Lato;">

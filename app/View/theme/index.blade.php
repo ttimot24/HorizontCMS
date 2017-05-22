@@ -3,12 +3,13 @@
 @section('content')
 <div class='container main-container'>
 
-<div class='col-md-10'>
+<div class='col-md-8'>
   <h1>{{trans('theme.themes')}}</h1>
 </div>
 
-<div class='col-md-2'>
+<div class='col-md-4'>
   <br>
+  <a href="admin/theme/onlinestore" class='btn btn-info'><i class="fa fa-cloud-download" aria-hidden="true"></i> Download themes</a>
   <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_theme'><i class='fa fa-upload'></i>&nbsp{{trans('theme.upload_theme_button')}}</a>
 </div>
 

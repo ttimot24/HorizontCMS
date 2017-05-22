@@ -25,9 +25,6 @@ class ShortCode extends Model{
 			}
 
 
-			/*if(Plugin::exists($plugin->root_dir) && $plugin->active==1){
-				self::$widgets["{[".str_slug($plugin->root_dir,"_")."]}"] = (new Plugin($plugin->root_dir))->getWidget();
-			}*/
 		}
 
 	}
