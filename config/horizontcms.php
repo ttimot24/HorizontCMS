@@ -15,7 +15,7 @@ return[
 	'sattelite_url' => env('HCMS_CENTRAL_REPO','https://eterfesztival.hu/hcms_online_store/satellite/public/api'),
 
 	'css' => [
-			'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
+			'https://maxcdn.bootstrapcdn.com/font-awesome/4.7/css/font-awesome.min.css',
 			'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
 			//'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css',
 
