@@ -36,6 +36,8 @@ class Website{
 
 		self::$_HEADER_IMAGES =  collect(\App\Model\HeaderImage::all());
 
+		self::$message = new BootstrapMessage();
+
 
 		/*$system = new System();
 
