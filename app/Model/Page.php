@@ -80,4 +80,16 @@ class Page extends Model{
     	}
 
     }
+
+
+    public static function search($search_key){
+
+        return self::where('username', 'LIKE' ,$search_key)->orWhere('name', 'LIKE' ,$search_key)->orWhere('email', 'LIKE' ,$search_key)->get();
+
+    }
+
+    public function getSearchName(){
+        return $this->name;
+    }
+
 }

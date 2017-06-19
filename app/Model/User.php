@@ -130,6 +130,12 @@ class User extends Authenticatable{
     }
 
 
+    public static function search($search_key){
+
+        return self::where('name', 'LIKE' ,$search_key)->orWhere('page', 'LIKE' ,$search_key)->get();
+
+    }
+
 
 
 }

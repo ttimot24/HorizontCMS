@@ -19,9 +19,9 @@ class SearchController extends Controller{
         $this->view->title(trans('search.title'));
         return $this->view->render("search/index",[
                                                     'search_for' => $this->request->input('search'),   
-                                                    'blogposts' => \App\Model\Blogpost::where('title', 'LIKE' ,$search_key)->orWhere('summary', 'LIKE' ,$search_key)->orWhere('text', 'LIKE' ,$search_key)->get(),
-                                                    'users' => \App\Model\User::where('username', 'LIKE' ,$search_key)->orWhere('name', 'LIKE' ,$search_key)->orWhere('email', 'LIKE' ,$search_key)->get(),
-                                                    'pages' => \App\Model\Page::where('name', 'LIKE' ,$search_key)->orWhere('page', 'LIKE' ,$search_key)->get(),
+                                                    'blogposts' => \App\Model\Blogpost::search($search_key),
+                                                    'users' => \App\Model\User::search($search_key),
+                                                    'pages' => \App\Model\Page::search($search_key),
                                                     'files' => [],
                                                   ]);
     }

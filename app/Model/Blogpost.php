@@ -77,4 +77,14 @@ class Blogpost extends Model{
 
     }
 
+
+    public static function search($search_key){
+
+        return self::where('title', 'LIKE' ,$search_key)->orWhere('summary', 'LIKE' ,$search_key)->orWhere('text', 'LIKE' ,$search_key)->get();
+    }
+
+    public function getSearchName(){
+        return $this->title;
+    }
+
 }
