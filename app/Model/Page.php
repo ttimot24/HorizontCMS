@@ -88,8 +88,5 @@ class Page extends Model{
 
     }
 
-    public function getSearchName(){
-        return $this->name;
-    }
 
 }
