@@ -35,13 +35,13 @@ class ShortCode extends Model{
 
 	public static function resolve($shortcode){
 
-		return isset(self::$widgets["{[".$shortcode."]}"])? eval("?>".self::$widgets["{[".$shortcode."]}"]."<?php") : NULL;
+		echo isset(self::$widgets["{[".$shortcode."]}"])? self::$widgets["{[".$shortcode."]}"] : "";
 	}
 
 
 	public static function compile($page){
 
-		return count(self::$widgets) === 0? $page : eval("?>".str_replace(array_keys(self::$widgets), array_values(self::$widgets), $page)."<?php"); 
+		echo count(self::$widgets) === 0? $page : str_replace(array_keys(self::$widgets), array_values(self::$widgets), $page); 
 	}
 
 
