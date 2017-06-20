@@ -39,16 +39,6 @@ class Website{
 		self::$message = new BootstrapMessage();
 
 
-		/*$system = new System();
-
-		$url = UrlManager::get_slugs();
-
-		self::$_PLUGINS = new Plugin();
-
-		self::$_SLUGS = $url;
-
-		self::$message = new Message();
-*/
 	}
 
 
