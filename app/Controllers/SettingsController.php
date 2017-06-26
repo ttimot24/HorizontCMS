@@ -31,6 +31,7 @@ class SettingsController extends Controller{
                     ['name' => trans('settings.server'),'link' => 'admin/settings/server','icon' => 'fa fa-server'],
                     ['name' => trans('settings.email'),'link' => 'admin/settings/email','icon' => 'fa fa-envelope'],
                     ['name' => trans('settings.social_media'),'link' => 'admin/settings/socialmedia','icon' => 'fa fa-thumbs-o-up'],
+                    ['name' => trans('Log'),'link' => 'admin/settings/log', 'icon' => 'fa fa-bug'],
                     ['name' => trans('settings.database'),'link' => 'admin/settings/database','icon' => 'fa fa-database'],
                     ['name' => trans('settings.spread'),'link' => 'admin/settings/spread','icon' => 'fa fa-paper-plane'],
                     ['name' => trans('settings.uninstall'),'link' => 'admin/settings/uninstall','icon' => 'fa fa-exclamation-triangle'],
