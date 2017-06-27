@@ -220,6 +220,33 @@ class SettingsController extends Controller{
 
 
 
+    public function log($file){
+
+     //   dd($file);
+
+
+        $files = collect(\File::allFiles(storage_path('framework'.DIRECTORY_SEPARATOR.'logs')));
+
+        if($files->isNotEmpty()){
+
+            preg_match_all("/\[(?P<date>.*)\] (?P<logger>\w+).(?P<level>\w+): (?P<message>[^\[\{]+)/",file_get_contents($files->last()),$matches);
+
+        }
+
+        //dd(collect($matches));
+
+
+        $this->view->title("Log files");
+        return $this->view->render('settings/log',[
+                                        'all_files' => $files->reverse(),
+                                        'last_log' => isset($matches)? $matches : null,
+
+                                        ]);
+
+    }
+
+
+
     public function setlogo($image){
     	Settings::where('setting', '=', 'logo')->update(['value' => $image]);
 
