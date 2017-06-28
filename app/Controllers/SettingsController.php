@@ -222,14 +222,21 @@ class SettingsController extends Controller{
 
     public function log($file){
 
-     //   dd($file);
-
+        //dd($file);
 
         $files = collect(\File::allFiles(storage_path('framework'.DIRECTORY_SEPARATOR.'logs')));
 
         if($files->isNotEmpty()){
 
-            preg_match_all("/\[(?P<date>.*)\] (?P<logger>\w+).(?P<level>\w+): (?P<message>[^\[\{]+)/",file_get_contents($files->last()),$matches);
+            if(isset($file) && $file!="" && $file!=NULL){
+                $current_file = "storage".DIRECTORY_SEPARATOR."framework".DIRECTORY_SEPARATOR."logs".DIRECTORY_SEPARATOR.$file;
+            }else{
+                $current_file = $files->last();
+            }
+
+         //   dd($current_file);
+
+            preg_match_all("/\[(?P<date>.*)\] (?P<logger>\w+).(?P<level>\w+): (?P<message>[^\[\{]+)/",file_get_contents($current_file),$matches);
 
         }
 
@@ -240,7 +247,8 @@ class SettingsController extends Controller{
         return $this->view->render('settings/log',[
                                         'all_files' => $files->reverse(),
                                         'last_log' => isset($matches)? $matches : null,
-
+                                        'current_file' => $current_file,
+                                        'max_files' => 15
                                         ]);
 
     }

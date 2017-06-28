@@ -9,7 +9,11 @@
 <div class='col-md-4'>
  <div class="list-group">
  	@foreach($all_files as $file)
- 		  <a href="settings/log/{{basename($file)}}" class="list-group-item">{{basename($file)}}</a>
+ 		  <a href="admin/settings/log/{{basename($file)}}" class="list-group-item @if(basename($file)==basename($current_file)) active @endif ">{{basename($file)}}</a>
+ 
+    @if($loop->iteration==$max_files) 
+        @break
+    @endif 
  	@endforeach
 </div> 
 </div>
@@ -33,14 +37,14 @@
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" @if($i==0) aria-expanded="true" @else aria-expanded="false" @endif aria-controls="collapse{{$i}}">
              <div class='row'>
-             <div class='col-md-6'><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{$last_log['level'][$i]}} </div> <div class='col-md-6 text-right'>{{$last_log['date'][$i]}} </div>
+              <div class='col-md-6'>#{{$i}}  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{$last_log['level'][$i]}} </div> <div class='col-md-6 text-right'>{{$last_log['date'][$i]}} </div>
         	 </div>
         </a>
       </h4>
     </div>
     <div id="collapse{{$i}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{$i}}">
       <div class="panel-body">
-      {{$last_log['message'][$i]}} 
+      {!! $last_log['message'][$i] !!} 
       </div>
     </div>
   </div>
