@@ -10,7 +10,8 @@
         "lavary/laravel-menu": "dev-master",
         "visualappeal/php-auto-update" : "*",
         "chumper/zipper" : "*",
-        "wikimedia/composer-merge-plugin": "dev-master"
+        "wikimedia/composer-merge-plugin": "dev-master",
+        "jackiedo/log-reader": "2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

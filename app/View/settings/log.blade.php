@@ -3,7 +3,7 @@
 @section('content')
 <div class='container'>
 <section class="row">
-<h1>Logs</h1>
+<h1>Logs <small class='pull-right' style='margin-top:1.5%;'>Files: {{$all_files->count()}} Entries: {{$all_file_entries}}</small></h1>
 <br><br>
 
 <div class='col-md-4'>
@@ -11,7 +11,7 @@
  	@foreach($all_files as $file)
  		  <a href="admin/settings/log/{{basename($file)}}" class="list-group-item @if(basename($file)==basename($current_file)) active @endif ">{{basename($file)}}</a>
  
-    @if($loop->iteration==$max_files) 
+    @if($entry_number==$max_files) 
         @break
     @endif 
  	@endforeach
@@ -22,7 +22,10 @@
 <?php 
 
 	$colors = [
-			'ERROR' => 'danger',
+			'error' => 'danger',
+      'warning' => 'warning',
+      'notice' => 'info',
+      'debug' => 'success'
 			];
 
 ?>
@@ -30,26 +33,27 @@
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   
-@for($i=count($last_log['date'])-1;$i>0;$i--)
+@foreach($entries as $entry)
 
-  <div class="panel panel-{{$colors[$last_log['level'][$i]]}}">
-    <div class="panel-heading" role="tab" id="heading{{$i}}">
+  <div class="panel panel-{{$colors[$entry->level]}}">
+    <div class="panel-heading" role="tab" id="heading{{$entry_number}}">
       <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" @if($i==0) aria-expanded="true" @else aria-expanded="false" @endif aria-controls="collapse{{$i}}">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$entry_number}}" @if($loop->first) aria-expanded="true" @else aria-expanded="false" @endif aria-controls="collapse{{$entry_number}}">
              <div class='row'>
-              <div class='col-md-6'>#{{$i}}  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{$last_log['level'][$i]}} </div> <div class='col-md-6 text-right'>{{$last_log['date'][$i]}} </div>
+              <div class='col-md-6'>#{{$entry_number}}  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ucfirst($entry->level)}} </div> <div class='col-md-6 text-right'>{{$entry->date}} </div>
         	 </div>
         </a>
       </h4>
     </div>
-    <div id="collapse{{$i}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{$i}}">
+    <div id="collapse{{$entry_number}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{$entry_number}}">
       <div class="panel-body">
-      {!! $last_log['message'][$i] !!} 
+      {!! $entry->context !!} 
       </div>
     </div>
   </div>
 
-@endfor
+  <?php  $entry_number--; ?>
+@endforeach
 
 </div>
 
