@@ -11,13 +11,6 @@
 |
 */
 
-Route::get('/laravelwelcome', function () {
-    return view('auth.welcome');
-});
-
-
-//Route::any('/{slug?}','\App\Controllers\WebsiteController@index')->where('slug', '(.*)');
-
 Route::any('/{slug?}/{args?}',function($slug="",$args = null){
 
 	$route = new \App\Http\RouteResolver();
