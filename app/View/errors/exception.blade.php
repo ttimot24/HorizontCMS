@@ -19,6 +19,8 @@
 	<h4>
 		<p style='padding:15px;'>
 
+			<b>Type:</b> {{get_class($exception)}}
+			<br><br>
 			{!! $exception->getMessage() !!} on line: {{$exception->getLine()}}<br>in: {{$exception->getFile()}}
 
 			<br><br>
