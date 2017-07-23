@@ -33,12 +33,8 @@ class PluginServiceProvider extends ServiceProvider
 
             foreach($this->app->plugins as $plugin){
 
-                $register_namespace = $plugin->getRegisterClass();
-
-                if(method_exists($register_namespace,'addProviders')){
-                    foreach($register_namespace::addProviders() as $provider){
-                        $this->app->register($provider);
-                    }
+                foreach($plugin->getRegister('addProviders',[]) as $provider){
+                    $this->app->register($provider);
                 }
 
             }
@@ -51,13 +47,7 @@ class PluginServiceProvider extends ServiceProvider
 
              foreach($this->app->plugins as $plugin){
 
-                $plugin_namespace = $plugin->getRegisterClass();
-
-                if(!method_exists($plugin_namespace,'eventHooks')){
-                    continue;
-                }
-
-                foreach($plugin_namespace::eventHooks() as $key => $value){
+                foreach($plugin->getRegister('eventHooks',[]) as $key => $value){
                     foreach($value as $do){
                         \Event::listen($key,$do);
                     }

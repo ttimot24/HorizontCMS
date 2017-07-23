@@ -15,6 +15,10 @@
     		<script type="text/javascript" src="{{url($each_js)}}"></script>
 	@endforeach
 
+	@foreach ($jsplugins as $each_js)
+    		<script type="text/javascript" src="{{url($each_js)}}"></script>
+	@endforeach
+
 </head>
 <body @if(Auth::user()) style='padding-top: 55px' @endif>
 

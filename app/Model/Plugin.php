@@ -82,9 +82,16 @@ class Plugin extends Model
 		return "\Plugin\\".$this->root_dir."\Register";
 	}
 
-	/*public function getWidget(){
-		return (file_exists($this->getPath()."index.php"))? file_get_contents($this->getPath()."index.php") : /*NULL*/ /*"";
-	}*/
+	public function getRegister($register,$default = null){
+
+		$plugin_namespace = $this->getRegisterClass();
+
+		if(method_exists($plugin_namespace,$register)){
+            return $plugin_namespace::$register();
+        }
+
+        return $default;
+	}
 
 
 }

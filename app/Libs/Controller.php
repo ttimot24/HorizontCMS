@@ -14,8 +14,21 @@ class Controller extends BaseController{
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function __construct(Request $request){
-    	$this->request = $request;
-    	$this->view = new View();
+    	$this->request = $request;	
+
+        $this->view = new View();
+
+        
+
+        foreach(app()->plugins as $plugin){
+
+                foreach($plugin->getRegister('injectJs',[]) as $js){
+                       $this->view->data['jsplugins'][] = "plugins/".$plugin->root_dir.'/'.$js; 
+                }
+
+        }
+
+
     }
 
     public function redirect($location){
