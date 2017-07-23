@@ -102,9 +102,11 @@ class WebsiteController extends Controller
 
 
     public function logout(){
+
         \Auth::logout();
-        $this->request->session()->flush();
-        $this->request->session()->regenerate();
+        \Session::flush();
+        \Session::regenerate();
+
         return redirect()->back();
     }
 
