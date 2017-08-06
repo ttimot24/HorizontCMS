@@ -105,7 +105,7 @@ class WebsiteController extends Controller
 
         \Auth::logout();
         \Session::flush();
-        \Session::regenerate();
+        \Session::regenerate(true);
 
         return redirect()->back();
     }

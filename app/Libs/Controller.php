@@ -19,13 +19,14 @@ class Controller extends BaseController{
         $this->view = new View();
 
         
+       if(app()->isInstalled()){
+            foreach(app()->plugins as $plugin){
 
-        foreach(app()->plugins as $plugin){
+                    foreach($plugin->getRegister('injectJs',[]) as $js){
+                           $this->view->data['jsplugins'][] = "plugins/".$plugin->root_dir.'/'.$js; 
+                    }
 
-                foreach($plugin->getRegister('injectJs',[]) as $js){
-                       $this->view->data['jsplugins'][] = "plugins/".$plugin->root_dir.'/'.$js; 
-                }
-
+            }
         }
 
 

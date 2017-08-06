@@ -74,7 +74,7 @@ class LoginController extends Controller
 
         $this->guard()->logout();
         $request->session()->flush();
-        $request->session()->regenerate();
+        $request->session()->regenerate(true);
 
         return redirect($this->redirectAfterLogout);
     }
