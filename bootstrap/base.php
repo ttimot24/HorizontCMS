@@ -24,5 +24,3 @@
 	  DEFINE ('BASE_URL',"");	
 	}
 
-
-  ?>

@@ -25,13 +25,8 @@ class NavbarPluginMiddleware
 
             foreach(app()->plugins as $plugin){
 
-                $plugin_namespace = $plugin->getRegisterClass();
 
-                if(!method_exists($plugin_namespace,'navigation')){
-                    continue;
-                }
-
-                $plugin_nav = $plugin_namespace::navigation();
+                $plugin_nav = $plugin->getRegister('navigation',[]);
 
                 foreach($plugin_nav as $key => $item){
 

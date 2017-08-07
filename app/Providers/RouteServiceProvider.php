@@ -105,9 +105,7 @@ class RouteServiceProvider extends ServiceProvider
 
     		if(file_exists('plugins/'.$plugin->root_dir.'/routes/plugin.php')){
 
-    			$namespace = "\\Plugin\\".$plugin->root_dir."\Register";
-
-	    		$options = method_exists($namespace, 'routeOptions')? $namespace::routeOptions() : [];
+                $options = $plugin->getRegister('routeOptions',[]);
 
 		        Route::group([
                     'middleware' => isset($options['middleware'])? $options['middleware'] : "",

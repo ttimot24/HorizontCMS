@@ -104,8 +104,6 @@ class WebsiteController extends Controller
     public function logout(){
 
         \Auth::logout();
-        \Session::flush();
-        \Session::regenerate(true);
 
         return redirect()->back();
     }
