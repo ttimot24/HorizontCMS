@@ -67,7 +67,7 @@ class SettingsController extends Controller{
 
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/website',[
-                                                        'settings' => \App\Model\Settings::getAll(),
+                                                        'settings' => $this->request->settings,
                                                         'available_logos' => array_slice(scandir("storage/images/logos"),2),
                                                     ]);
     }
@@ -92,7 +92,7 @@ class SettingsController extends Controller{
 
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/adminarea',[
-                                                        'settings' => Settings::getAll(),
+                                                        'settings' => $this->request->settings,
                                                         'languages' => ['en'=>'English','hu'=>'Magyar'],
                                                         'available_logos' => array_slice(scandir("storage/images/logos"),2),
                                                     ]);

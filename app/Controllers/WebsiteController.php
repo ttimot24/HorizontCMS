@@ -23,7 +23,7 @@ class WebsiteController extends Controller
 
 
     public function before(){
-        $this->theme = new \App\Libs\Theme(Settings::get('theme'));
+        $this->theme = new \App\Libs\Theme($this->request->settings['theme']);
     }
 
 
@@ -50,12 +50,12 @@ class WebsiteController extends Controller
             }*/
 
 
-            if(Settings::get('website_down')==1 && (\Auth::user()==null || !\Auth::user()->isAdmin())){
+            if($this->request->settings['website_down']==1 && (\Auth::user()==null || !\Auth::user()->isAdmin())){
                 $theme_engine->renderWebsiteDown();
             }
 
 
-            $requested_page = $page==""? Page::find(Settings::get('home_page')) : Page::findBySlug($page);
+            $requested_page = $page==""? Page::find($this->request->settings['home_page']) : Page::findBySlug($page);
 
             if($requested_page!=NULL){
                 if(isset($requested_page->url) && $requested_page->url!="" && $theme_engine->templateExists($requested_page->url)){

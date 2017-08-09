@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Libs\Controller;
 
 use App\Model\Page;
-use App\Model\Settings;
 
 class PageController extends Controller{
  
@@ -26,7 +25,7 @@ class PageController extends Controller{
                                                         'number_of_pages' => Page::count(),
                                                         'all_pages' => Page::paginate($this->itemPerPage),
                                                         'visible_pages' => Page::where('visibility',1)->count(), 
-                                                        'home_page' => Page::find(Settings::get('home_page')),
+                                                        'home_page' => Page::find($this->request->settings['home_page']),
                                                     ]);
     }
 

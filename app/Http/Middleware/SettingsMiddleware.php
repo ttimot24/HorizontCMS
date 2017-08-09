@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class WebsiteMiddleware
+class SettingsMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,6 +15,12 @@ class WebsiteMiddleware
      */
     public function handle($request, Closure $next)
     {
+
+        if(\App\HorizontCMS::isInstalled()){
+            $settings = new \App\Model\Settings();
+            $settings->assignAll();
+            $request->settings = json_decode(json_encode($settings->settings), true);
+        }
 
 
         return $next($request);

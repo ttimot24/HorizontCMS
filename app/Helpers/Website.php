@@ -19,20 +19,18 @@ class Website{
 	public static $system,$pages;
 	
 
-	public static function initalize($the){
+	public static function initalize($wengine){
 
-		$settings = new \App\Model\Settings();
-		$settings->assignAll();
 
 		self::$_SLUGS = explode("/",Request::path());
 
-		self::$_SETTINGS = $settings->settings;
+		self::$_SETTINGS = json_decode(json_encode($wengine->request->settings));
 
-		self::$_THEME_PATH = 'themes/'.\App\Model\Settings::get('theme');
+		self::$_THEME_PATH = $wengine->getTheme()->getPath();
 
 		self::$_CURRENT_USER = \Auth::user();
 
-		self::$_REQUESTED_PAGE = Request::is("/")? \App\Model\Page::find(\App\Model\Settings::get('home_page')) : \App\Model\Page::findBySlug(self::$_SLUGS[0]);
+		self::$_REQUESTED_PAGE = Request::is("/")? \App\Model\Page::find($wengine->request->settings['home_page']) : \App\Model\Page::findBySlug(self::$_SLUGS[0]);
 
 		self::$_HEADER_IMAGES =  collect(\App\Model\HeaderImage::all());
 
