@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class WebsiteMiddleware
+class BaseUrlMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,6 +16,8 @@ class WebsiteMiddleware
     public function handle($request, Closure $next)
     {
 
+        $base_url = "//".$request->headers->get('host').$request->getBaseUrl()."/";
+        \Config::set('app.url',$base_url);
 
 
         return $next($request);

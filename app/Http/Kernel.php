@@ -24,6 +24,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
+            \App\Http\Middleware\BaseUrlMiddleware::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -42,6 +43,7 @@ class Kernel extends HttpKernel
         ],
 
         'admin' =>[
+            \App\Http\Middleware\BaseUrlMiddleware::class,
             \Illuminate\Auth\Middleware\Authenticate::class,
             \App\Http\Middleware\AdminMiddleware::class,
             \App\Http\Middleware\MenuMiddleware::class,
