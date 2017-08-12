@@ -21,7 +21,7 @@ class DashboardController extends Controller{
         $this->view->title(trans('dashboard.title'));
         return $this->view->render("dashboard/index",[
 
-                                                    'domain' => $_SERVER['SERVER_NAME'],
+                                                    'domain' => $this->request->getHost(),
                                                     'server_ip' => isset($_SERVER['SERVER_ADDR'])? $_SERVER['SERVER_ADDR']: "unknown",
                                                     'client_ip' => $this->request->ip,
                                                     'blogposts'  => \App\Model\Blogpost::count(),

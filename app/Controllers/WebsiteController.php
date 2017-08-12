@@ -33,6 +33,7 @@ class WebsiteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($page,$slug){
+        
 
         $slug = explode("/",$slug);
 
@@ -45,9 +46,6 @@ class WebsiteController extends Controller
 
         $theme_engine->runScript('before');
         
-            /*if(is_array($slug)){
-                $slug = $slug[0];
-            }*/
 
 
             if($this->request->settings['website_down']==1 && (\Auth::user()==null || !\Auth::user()->isAdmin())){
