@@ -124,7 +124,7 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
-    'log_path' => env('LOG_PATH','storage'.DIRECTORY_SEPARATOR.'framework'.DIRECTORY_SEPARATOR.'logs'.DIRECTORY_SEPARATOR.'laravel.log'),
+    'log_path' => env('LOG_PATH','storage/framework/logs/laravel.log'),
 
     /*
     |--------------------------------------------------------------------------
@@ -168,7 +168,7 @@ return [
         /*
          * Package Service Providers...
          */
-       // Barryvdh\Debugbar\ServiceProvider::class,
+        //Barryvdh\Debugbar\ServiceProvider::class,
 
 
         /*

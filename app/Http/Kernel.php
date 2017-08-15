@@ -43,7 +43,6 @@ class Kernel extends HttpKernel
         ],
 
         'admin' =>[
-            \App\Http\Middleware\BaseUrlMiddleware::class,
             \Illuminate\Auth\Middleware\Authenticate::class,
             \App\Http\Middleware\AdminMiddleware::class,
             \App\Http\Middleware\MenuMiddleware::class,
