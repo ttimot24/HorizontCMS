@@ -16,7 +16,8 @@ class MenuMiddleware{
     public function handle($request, Closure $next){
 
 
-        \App::setLocale(\App\Model\Settings::get('language'));
+      //  \App::setLocale(\App\Model\Settings::get('language'));
+        \App::setLocale($request->settings['language']);
 
 
         \Menu::make('MainMenu', function($menu) {

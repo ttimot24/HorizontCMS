@@ -11,7 +11,7 @@ class HttpsMiddleware
 
         if(\App\HorizontCMS::isInstalled()){
 
-	        if (\Settings::get('use_https')==1 && !$request->secure()) {
+	        if ($request->settings['use_https']==1 && !$request->secure()) {
 	            return redirect()->secure($request->getRequestUri());
 	        }
 

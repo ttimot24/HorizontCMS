@@ -31,10 +31,10 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\SettingsMiddleware::class,
             \App\Http\Middleware\InstallerMiddleware::class,
             \App\Http\Middleware\LogLastUserActivity::class,
             \App\Http\Middleware\HttpsMiddleware::class,
-            \App\Http\Middleware\SettingsMiddleware::class,
         ],
 
         'api' => [
