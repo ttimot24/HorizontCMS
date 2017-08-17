@@ -15,8 +15,21 @@ class InstallerMiddleware
      */
     public function handle($request, Closure $next)
     {
+
+        if(!\App\HorizontCMS::isInstalled() && !$request->is(\Config::get('horizontcms.backend_prefix').'/install*')){
+            
+            \Auth::logout();
+            return redirect(\Config::get('horizontcms.backend_prefix').'/install');
+
+        }else if(\App\HorizontCMS::isInstalled() && $request->is(\Config::get('horizontcms.backend_prefix').'/install*')){
+
+            return redirect(\Config::get('horizontcms.backend_prefix').'/login');
+        }
+
+
+
         
-        if(!\App\HorizontCMS::isInstalled() && strpos(\Request::path(), \Config::get('horizontcms.backend_prefix').'/install') === false){
+      /*  if(!\App\HorizontCMS::isInstalled() && strpos(\Request::path(), \Config::get('horizontcms.backend_prefix').'/install') === false){
           
             \Auth::logout();
             return redirect(\Config::get('horizontcms.backend_prefix').'/install');
@@ -25,7 +38,7 @@ class InstallerMiddleware
            
             return redirect(\Config::get('horizontcms.backend_prefix').'/login');
         }
-
+*/
         return $next($request);
     }
 }
