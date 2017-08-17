@@ -242,7 +242,7 @@ class SettingsController extends Controller{
         $this->view->title("Log files");
         return $this->view->render('settings/log',[
                                         'all_files' => $files->reverse(),
-                                        'entries' => $entries,
+                                        'entries' => $entries->reverse(),
                                         'entry_number' => $entries->count(),
                                         'all_file_entries' => LogReader::count(),
                                         'current_file' => $current_file,
