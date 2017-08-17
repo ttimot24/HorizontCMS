@@ -19,7 +19,7 @@ Route::auth();
 
 
 
-Route::group(['middleware' => 'admin'],function(){
+Route::group(['middleware' => ['admin','plugin']],function(){
 
 
 	Route::any('/plugin/run/{plugin}/{controller?}/{action?}/{args?}/', 
@@ -31,7 +31,7 @@ Route::group(['middleware' => 'admin'],function(){
 
 		       return $route->resolve($controller,$action,$args);
 
-  		 })->where('args', '(.*)')->middleware('plugin');
+  		 })->where('args', '(.*)');
 	
 
 

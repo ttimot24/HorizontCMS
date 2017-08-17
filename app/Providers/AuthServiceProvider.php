@@ -25,6 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('accessAdminArea',function($user) {
+            return $user->isAdmin() && $user->isActive();
+        });
+
     }
 }
