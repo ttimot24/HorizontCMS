@@ -26,18 +26,24 @@ Route::any('/{slug?}/{args?}',function($slug="",$args = null){
 	}catch(Exception $e){
 
 
-		$controller = \App::make('\App\Controllers\WebsiteController');
+		if($e instanceof \League\Flysystem\FileNotFoundException || $e instanceof BadMethodCallException){
 
-		$controller->before();
+			$controller = \App::make('\App\Controllers\WebsiteController');
 
-		if(method_exists($controller, $slug)){
-			          
-			return $controller->callAction($slug, [$slug,$args]);
+			$controller->before();
+
+			if(method_exists($controller, $slug)){
+				          
+				return $controller->callAction($slug, [$slug,$args]);
+			}
+
+
+			return $controller->callAction('index',[$slug,$args]);
+
 		}
 
 
-		return $controller->callAction('index',[$slug,$args]);
-
+		throw $e;
 	}
 
 

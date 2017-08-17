@@ -23,7 +23,7 @@ class RouteResolver{
 				//if(!file_exists($controller_path.$controller_name.'.php')){
 				if(!class_exists($controllerClass)){
 
-					throw new \Exception('No such file <b>'.$controllerClass.'.php'.'</b>');
+					throw new \League\Flysystem\FileNotFoundException('<b>'.$controllerClass.'.php'.'</b>');
 				} 
 
 
@@ -42,7 +42,7 @@ class RouteResolver{
 		            return $controller->callAction($action, [$args]);
 		        }
 		        else{
-		            throw new \Exception("Couldn't find action: <b>".lcfirst($action)."</b>");
+		            throw new \BadMethodCallException("Couldn't find action: <b>".lcfirst($action)."</b>");
 		        }
 
 	}
