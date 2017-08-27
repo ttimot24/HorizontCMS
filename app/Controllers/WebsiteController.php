@@ -32,14 +32,11 @@ class WebsiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($page,$slug){
+    public function index($page){
         
-
-        $slug = explode("/",$slug);
 
         //\App::setLocale('hu');
 
-  
 
         $theme_engine = new $this->engines[$this->theme->getConfig('theme_engine','hcms')]($this->request);
         $theme_engine->setTheme($this->theme);

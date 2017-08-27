@@ -15,8 +15,7 @@ class NavbarPluginMiddleware
      */
     public function handle($request, Closure $next)
     {
-
-       // $all_plugin = \App\Model\Plugin::where('active','1')->get();
+      
 
         if(!app()->plugins->isEmpty()){
 
