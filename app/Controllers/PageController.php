@@ -120,7 +120,7 @@ class PageController extends Controller{
         return $this->view->render('pages/edit',[
                                                         'page' => Page::find($id),
                                                         'all_page' => Page::all(),
-                                                        'page_templates' => (new \App\Libs\Theme(Settings::get('theme')))->templates(),
+                                                        'page_templates' => (new \App\Libs\Theme($this->request->settings['theme']))->templates(),
                                                     ]);
     }
 
