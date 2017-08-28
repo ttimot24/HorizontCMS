@@ -25,6 +25,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $this->router = new \App\Http\RouteResolver();
 
         parent::boot();
     }

@@ -13,15 +13,14 @@
 
 Route::any('/{slug?}/{args?}',function($slug="",$args = null){
 
-	$route = new \App\Http\RouteResolver();
 
 	try{
 
-		$route->changeNamespace("Theme\\".Settings::get('theme')."\\App\\Controllers\\");
+		$this->router->changeNamespace("Theme\\".Settings::get('theme')."\\App\\Controllers\\");
 
 		$action = explode("/",$args)[0];
 
-		return $route->resolve($slug,$action,ltrim($args,$action."/"));
+		return $this->router->resolve($slug,$action,ltrim($args,$action."/"));
 
 	}catch(Exception $e){
 
