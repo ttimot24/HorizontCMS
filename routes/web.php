@@ -26,7 +26,7 @@ Route::any('/{slug?}/{args?}',function($slug="",$args = null){
 	}catch(Exception $e){
 
 
-		if($e instanceof \League\Flysystem\FileNotFoundException || $e instanceof BadMethodCallException){
+		if($e instanceof \App\Exceptions\FileNotFoundException || $e instanceof BadMethodCallException){
 
 			$controller = \App::make('\App\Controllers\WebsiteController');
 

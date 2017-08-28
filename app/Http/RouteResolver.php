@@ -23,7 +23,7 @@ class RouteResolver{
 				//if(!file_exists($controller_path.$controller_name.'.php')){
 				if(!class_exists($controllerClass)){
 
-					throw new \League\Flysystem\FileNotFoundException('<b>'.$controllerClass.'.php'.'</b>');
+					throw new \App\Exceptions\FileNotFoundException('<b>'.$controllerClass.'.php'.'</b>');
 				} 
 
 
