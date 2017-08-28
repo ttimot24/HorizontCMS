@@ -20,6 +20,7 @@ class Website{
 	
 
 	public static function initalize($wengine){
+		
 
 		self::$_SLUGS = \Request::segments();
 
@@ -29,7 +30,7 @@ class Website{
 
 		self::$_CURRENT_USER = \Auth::user();
 
-		self::$_REQUESTED_PAGE = \Request::segment(0)===null ? \App\Model\Page::find($wengine->request->settings['home_page']) : \App\Model\Page::findBySlug($wengine->request->segment(0));
+		self::$_REQUESTED_PAGE = \Request::segment(1)===null ? \App\Model\Page::find($wengine->request->settings['home_page']) : \App\Model\Page::findBySlug($wengine->request->segment(1));
 
 		self::$_HEADER_IMAGES =  collect(\App\Model\HeaderImage::all());
 
