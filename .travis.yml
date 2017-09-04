@@ -10,13 +10,13 @@ services:
 
 before_script: 
   - sleep 15
-  - mongo horizontlaravel --eval 'db.addUser("travis", "test");'
+  - mongo horizontlaravel --eval 'db.createUser("travis", "test");'
   - composer install
   - vendor/bin/phpunit
 
 script:
-   - php artisan migrate --no-interaction
-   - php artisan db:seed --no-interaction
+   - php artisan migrate --no-interaction --force
+   - php artisan db:seed --no-interaction --force
 
 
 
