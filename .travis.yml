@@ -10,7 +10,7 @@ services:
 
 before_script: 
   - sleep 15
-  - mongo horizontlaravel --eval 'db.createUser("travis", "test");'
+  - mongo horizontlaravel --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
   - composer install
   - vendor/bin/phpunit
 
