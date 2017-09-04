@@ -63,9 +63,11 @@ class PluginServiceProvider extends ServiceProvider
     private function registerPluginLanguage(){
 
            if(\Request::is(\Config::get('horizontcms.backend_prefix')."/plugin/run/*")){
-                $plugin_name = studly_case(explode("/",str_replace(\Config::get('horizontcms.backend_prefix')."/plugin/run/","",\Request::path()))[0]);
-               
+      
+                $plugin_name = studly_case(\Request::segment(4));
+
                 $this->loadTranslationsFrom(base_path("/plugins/".$plugin_name."/resources/lang"), 'plugin');
+                
             }else if(!\Request::is(\Config::get('horizontcms.backend_prefix')."/*")){
                 $this->loadTranslationsFrom(base_path("/themes/".\App\Model\Settings::get('theme')."/lang"), 'website');
             }

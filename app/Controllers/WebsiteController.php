@@ -75,7 +75,6 @@ class WebsiteController extends Controller
 
        return $theme_engine->render([
                                     '_THEME_PATH' => $this->theme->getPath(),
-                                    '_CURRENT_USER' => \Auth::user(),
                                     '_REQUESTED_PAGE' => $requested_page,
                                     ]);
 
