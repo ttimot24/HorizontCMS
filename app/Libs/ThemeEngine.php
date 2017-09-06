@@ -39,10 +39,18 @@ class ThemeEngine{
 		\Website::initalize($this);
 		\App\Libs\ShortCode::initalize();
 		
+		ob_start();
+
 		$this->require_file('header.php');
 		$this->require_file('index.php');
 		$this->require_file('footer.php');
 	
+		$output = ob_get_contents();
+
+		ob_end_clean();
+
+		return $output;
+
 	}
 
 
