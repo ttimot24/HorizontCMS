@@ -79,7 +79,7 @@
         {{csrf_field()}}
           <div class='form-group'>
   		      <label for='file'>Upload file:</label>
-  		      <input name='up_file[]' id='input-2' type='file' class='file' multiple='true' data-show-upload='true' data-show-caption='true'>
+  		      <input name='up_file[]' accept='image/*' id='input-2' type='file' class='file' multiple='true' data-show-upload='true' data-show-caption='true'>
 		      </div>
         </form>
         </div>
