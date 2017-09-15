@@ -50,8 +50,12 @@ class BlogpostController extends Controller{
 
             if ($this->request->hasFile('up_file')){
                  
-                 $blogpost->image = str_replace('images/blogposts/','',$this->request->up_file->store('images/blogposts'));
+            	 $img = $this->request->up_file->store('images/blogposts');
 
+                 $blogpost->image = str_replace('images/blogposts/','',$img);
+
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path('images/blogposts/thumbs/'.$blogpost->image));
+                 
             }
 
             if($blogpost->save()){
@@ -137,11 +141,17 @@ class BlogpostController extends Controller{
          $blogpost->text = $this->request->input('text');
          $blogpost->author_id = \Auth::user()->id;
 
-         if ($this->request->hasFile('up_file')){
-              
-              $blogpost->image = str_replace('images/blogposts/','',$this->request->up_file->store('images/blogposts'));
+			
+			if ($this->request->hasFile('up_file')){
+                 
+            	 $img = $this->request->up_file->store('images/blogposts');
 
-         }
+                 $blogpost->image = str_replace('images/blogposts/','',$img);
+
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path('images/blogposts/thumbs/'.$blogpost->image));
+                 
+            }
+
 
          if($blogpost->save()){
              return $this->redirect(admin_link("blogpost-edit",$blogpost->id))->withMessage(['success' => trans('message.successfully_updated_blogpost')]);

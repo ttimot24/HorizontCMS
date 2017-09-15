@@ -46,12 +46,16 @@ class UserController extends Controller{
             $user->role_id = $this->request->input('role_id');
             $user->visits = 0;
             $user->active = 1;
-
+            
 
             if ($this->request->hasFile('up_file')){
                  
-                 $user->image = str_replace('images/users/','',$this->request->up_file->store('images/users'));
+                 $img = $this->request->up_file->store('images/users');
 
+                 $user->image = str_replace('images/users/','',$img);
+
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path('images/users/thumbs/'.$user->image));
+                 
             }
 
 
@@ -149,6 +153,21 @@ class UserController extends Controller{
                  $user->image = str_replace('images/users/','',$this->request->up_file->store('images/users'));
 
             }
+
+
+
+            if ($this->request->hasFile('up_file')){
+                 
+                 $img = $this->request->up_file->store('images/users');
+
+                 $user->image = str_replace('images/users/','',$img);
+
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path('images/users/thumbs/'.$user->image));
+                 
+            }
+
+
+
 
             if($user->save()){
                 return $this->redirect(admin_link("user-edit",$user->id))->withMessage(['success' => trans('message.successfully_updated_user')]);

@@ -54,8 +54,12 @@ class PageController extends Controller{
 
             if ($this->request->hasFile('up_file')){
                  
-                 $page->image = str_replace('images/pages/','',$this->request->up_file->store('images/pages'));
+                 $img = $this->request->up_file->store('images/pages');
 
+                 $page->image = str_replace('images/pages/','',$img);
+
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path('images/pages/thumbs/'.$page->image));
+                 
             }
 
             if($page->save()){
@@ -147,9 +151,14 @@ class PageController extends Controller{
 
             if ($this->request->hasFile('up_file')){
                  
-                 $page->image = str_replace('images/pages/','',$this->request->up_file->store('images/pages'));
+                 $img = $this->request->up_file->store('images/pages');
 
+                 $page->image = str_replace('images/pages/','',$img);
+
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path('images/pages/thumbs/'.$page->image));
+                 
             }
+            
 
             if($page->save()){
                 return $this->redirect(admin_link("page-edit",$page->id))->withMessage(['success' => trans('message.successfully_updated_page')]);
