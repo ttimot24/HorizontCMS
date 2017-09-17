@@ -9,9 +9,11 @@ function module_autoloader($class){
 
 	$modules = \Config::get('horizontcms.modules',[]);
 
+	if(!isset($split[0])){ return; }
+
 	if(!in_array($split[0],array_keys($modules))){ return; }
 
-	$module_base = /*base_path().DIRECTORY_SEPARATOR.*/$modules[$split[0]].DIRECTORY_SEPARATOR.$split[1];
+	$module_base = base_path($modules[$split[0]].DIRECTORY_SEPARATOR.$split[1]);
 
 	$in_app = false;
 
