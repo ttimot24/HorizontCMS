@@ -26,10 +26,11 @@
 <div class="panel panel-default col-md-10" >
   <div class="panel-body">
       <ol class="breadcrumb">
-			  <li><a href="admin/file-manager/{{$action}}?path=">root</a></li>
+			  <li><a href="admin/file-manager/{{$action}}?path="><?= basename(storage_path()); ?></a></li>
         @foreach($tree as $dir)
           <li><a href="admin/file-manager/{{$action}}?path={{$dir}}">{{$dir}}</a></li>
         @endforeach
+        <hr>
 			</ol>
 
             @foreach($dirs as $dir)
