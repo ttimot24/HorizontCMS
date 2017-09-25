@@ -176,14 +176,15 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
+
+        App\Providers\ModuleLoaderServiceProvider::class,
         App\Providers\PluginServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         
-        App\Providers\LoaderServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
-      //  Teepluss\Theme\ThemeServiceProvider::class,
+
 
         Chumper\Zipper\ZipperServiceProvider::class,
         Jackiedo\LogReader\LogReaderServiceProvider::class,

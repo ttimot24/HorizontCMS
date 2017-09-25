@@ -1,7 +1,16 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| HorizontCMS Module Auto Loader
+|--------------------------------------------------------------------------
+|
+| Defines the autoloader for the modules added in config/horizontcms.php
+| modules section.
+|
+*/
 
-function module_autoloader($class){
+return function($class){
 
 	$split = explode("\\",$class);
 
@@ -36,22 +45,4 @@ function module_autoloader($class){
 		require_once($file);
 	}
 
-}
-
-
-
-
-
-
-spl_autoload_register('module_autoloader');
-
-
-
-
-
-$plugin_autoloaders = glob('plugins/*/vendor/autoload.php');
-
-
-foreach($plugin_autoloaders as $autoloader){
-	require_once($autoloader);
-}
+};
