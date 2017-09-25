@@ -11,16 +11,16 @@ class LoginTest extends TestCase
      *
      * @return void
      */
-    public function testBasicExample()
+    public function testCheckLoginPage()
     {
 
 	    if(\App\HorizontCMS::isInstalled()){	
-	        $this->visit('/admin')
-	             ->see('HorizontCMS');
+	        $this->visit(\Config::get('horizontcms.backend_prefix'))
+	             ->see('HorizontCMS')
+                 ->see('Closer to the web');
 
-	        $this->visit('/admin')
-	             ->see('Closer to the web');
 	    }
 
     }
+
 }

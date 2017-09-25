@@ -17,7 +17,7 @@ class ModuleLoaderServiceProvider extends ServiceProvider
      */
     public function register(){
 
-        $this->moduleLoader = require_once(base_path('bootstrap'.DIRECTORY_SEPARATOR.'loader.php'));
+        $this->moduleLoader = require_once(base_path('bootstrap/loader.php'));
     
     }
 

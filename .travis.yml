@@ -12,11 +12,11 @@ before_script:
   - sleep 15
   - mongo horizontlaravel --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
   - composer install
-  - vendor/bin/phpunit
 
 script:
    - php artisan migrate --no-interaction --force
    - php artisan db:seed --no-interaction --force
+   - vendor/bin/phpunit
 
 
 
