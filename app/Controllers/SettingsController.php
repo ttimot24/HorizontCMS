@@ -185,7 +185,7 @@ class SettingsController extends Controller{
     public function server(){
         $this->view->title("Server");
         return $this->view->render('settings/server',[
-
+                                            'server' => $this->request->server(),
                                         ]);
     }
 

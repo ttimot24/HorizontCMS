@@ -13,10 +13,8 @@
 </thead>
 <tbody> 
 
-	@foreach(array_keys($_SERVER) as $key)
-		<tr>
-			<td class="col-md-4"><b>{{$key}} : </b></td><td class="col-md-8">{{ $_SERVER[$key] }}</td>
-		</tr>
+	@foreach($server as $key => $value)
+		<tr> <td><b>{{$key}} : </b></td><td style="word-break: break-all;">{{ $value }}</td> </tr>
 	@endforeach
 
 </tbody>
