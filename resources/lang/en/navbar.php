@@ -26,6 +26,9 @@ return [
 	'plugin' => 'Plugins',
 	'develop' => 'Develop',
 
+	'profile_view' => 'View profile',
+	'profile_settings' => 'Profile settings',
+
 	'lock_screen' => 'Lock Screen',
 	'visit_site' => 'Visit :site_name',
 	'logout' => 'Logout',

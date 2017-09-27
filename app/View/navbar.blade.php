@@ -26,23 +26,8 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right" style='padding-right:25px;'>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <img style='height:30px;margin-top:-10px;margin-bottom:-10px;object-fit:cover;border-radius:1.5px;' src='{{Auth::user()->getThumb()}}' />  {{ Auth::user()->username }} <span class="caret"></span>
-                        </a>
 
-                         <ul class="dropdown-menu" role="menu" style='width:215px;'>
-                           <li class='nav-item' style="text-align:center;"><img style="border-radius:1.5px;width:90%;height:135px;margin:10px 3% 10px 3%;object-fit:cover;" class="img-rounded" src='{{Auth::user()->getThumb()}}' /><br>
-                            <p style='color:white;'>{{\Auth::user()->username}} ({{strtolower(\Auth::user()->role->name)}})</p>
-                           </li>
-
-                           <li role="separator" class="divider"></li>
-                           <li class='nav-item'><a href="{{admin_link('user-view',\Auth::user()->id)}}">View account</a></li>
-                           <li class='nav-item'><a href="{{admin_link('user-edit',\Auth::user()->id)}}">Account settings</a></li>
-                         </ul>
-                    </li>
-
-                    @include(config('laravel-menu.views.bootstrap-items'), array('items' => $RightMenu->roots()))
+                  @include(config('laravel-menu.views.bootstrap-items'), array('items' => $RightMenu->roots()))
                     
 
                     <form id="logout-form" action="{{ url(Config::get('horizontcms.backend_prefix').'/logout') }}" method="POST" style="display: none;">

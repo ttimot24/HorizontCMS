@@ -1,4 +1,4 @@
-dist: precise
+#dist: precise
 
 language: php
 

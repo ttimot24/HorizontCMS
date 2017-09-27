@@ -69,7 +69,13 @@ class MenuMiddleware{
 
             $prefix = \Config::get('horizontcms.backend_prefix');
 
-           // $menu->add('current_user', $request->user()->username)->id('current_user');
+            
+                $menu->add("<img style='height:30px;margin-top:-10px;margin-bottom:-10px;object-fit:cover;border-radius:1.5px;' src='".Auth::user()->getThumb()."' />  ". \Auth::user()->username)->id('current_user');
+                $menu->find('current_user')->raw("<img style='border-radius:1.5px;width:90%;height:135px;margin:10px 3% 10px 3%;object-fit:cover;' class='img-rounded' src='".Auth::user()->getThumb()."' /><br> <p style='color:white;'>".\Auth::user()->username." (".strtolower(\Auth::user()->role->name).")</p>",[ 'url' => null, 'style'=>'width:215px;text-align:center;' ])->id('current_image');
+                $menu->find('current_image')->divide();
+                $menu->find('current_user')->add(trans('navbar.profile_view'), ['url'=> admin_link('user-view',\Auth::user()->id)])->id('view_account');
+                $menu->find('current_user')->add(trans('navbar.profile_settings'), ['url'=> admin_link('user-edit',\Auth::user()->id)])->id('account_settings');
+           
 
             if(\Auth::user()->hasPermission("settings")){
                 $menu->add("<i class='fa fa-cogs'></i> ", $prefix.'/settings')->id('settings');

@@ -24,6 +24,9 @@ return [
 	'plugin' => 'Kiegészítők',
 	'develop' => 'Fejlesztés',
 
+	'profile_view' => 'Profil megtekintése',
+	'profile_settings' => 'Profil beállítások',
+
 	'lock_screen' => 'Képernyő zárolása',
 	'visit_site' => 'Irány a(z) :site_name',
 	'logout' => 'Kijelentkezés',
