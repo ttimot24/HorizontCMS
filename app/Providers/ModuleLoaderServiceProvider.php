@@ -17,7 +17,7 @@ class ModuleLoaderServiceProvider extends ServiceProvider
      */
     public function register(){
 
-        $this->moduleLoader = require_once(base_path('bootstrap/loader.php'));
+        require_once(base_path('bootstrap/loader.php'));
     
     }
 
@@ -31,11 +31,12 @@ class ModuleLoaderServiceProvider extends ServiceProvider
     public function boot()
     {
 
-       spl_autoload_register($this->moduleLoader);
+
+       spl_autoload_register('module_loader');
 
 
        require_once app_path('Helpers/Functions/link.php');
-
+      
        
        foreach(glob('plugins/*/vendor/autoload.php') as $autoloader){
             require_once($autoloader);

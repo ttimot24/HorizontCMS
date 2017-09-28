@@ -9,8 +9,7 @@
 | modules section.
 |
 */
-
-return function($class){
+function module_loader($class){
 
 	$split = explode("\\",$class);
 
