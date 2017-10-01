@@ -18,11 +18,15 @@ class LoginTest extends TestCase
     }
 
 
+	/** @before */
     public function createTestUser(){
         
+        if(!isset($this->user)){
 	        $this->user = factory(\App\Model\User::class)->create([
-	        	 'role_id'=> '6'
+	        	 'role_id'=> '6',
+	        	 'password' => 'testpass123'
 	        ]);
+	    }
 
     }
 
@@ -40,8 +44,6 @@ class LoginTest extends TestCase
 
 
     public function testInvalidCredentials(){
-
-    	$this->createTestUser();
 	    	
 	    $this->visit(\Config::get('horizontcms.backend_prefix'))     
 	    	 ->type($this->user->username,'username')

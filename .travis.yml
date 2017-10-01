@@ -1,5 +1,3 @@
-#dist: precise
-
 language: php
 
 php:
@@ -10,7 +8,7 @@ php:
 
 services:
   #- mongodb
-  #- mysql
+  - mysql
 
 before_script: 
   - sleep 15
@@ -21,6 +19,7 @@ before_script:
 script:
    - php artisan migrate --no-interaction --force
    - php artisan db:seed --no-interaction --force
+   - export INSTALLED=YES
    - vendor/bin/phpunit
 
 
