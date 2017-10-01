@@ -9,11 +9,13 @@ php:
   - nightly
 
 services:
-  - mongodb
+  #- mongodb
+  #- mysql
 
 before_script: 
   - sleep 15
-  - mongo horizontlaravel --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+  #- mongo horizontlaravel --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS horizontlaravel;'
   - composer install
 
 script:

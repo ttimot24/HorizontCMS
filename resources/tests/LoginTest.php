@@ -7,12 +7,21 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class LoginTest extends TestCase
 {
 
+	/** @before */
+	public function checkIfCMSIsInstalled(){
+
+		if(!\App\HorizontCMS::isInstalled()){
+			echo "HorizontCMS is not installed! Tests are stopped!";
+			exit;
+		}
+
+    }
+
 
     public function createTestUser(){
         
 	        $this->user = factory(\App\Model\User::class)->create([
-	             'username' => 'jeremy', 
-	             'password' => bcrypt('testpass123')
+	        	 'role_id'=> '6'
 	        ]);
 
     }
@@ -21,29 +30,25 @@ class LoginTest extends TestCase
 
     public function testOpenLoginPage()
     {
-
-	    if(\App\HorizontCMS::isInstalled()){	
-	        $this->visit(\Config::get('horizontcms.backend_prefix'))
-	             ->see('HorizontCMS')
-                 ->see('Closer to the web');
-                 
-	    }
-
+	
+	    $this->visit(\Config::get('horizontcms.backend_prefix'))
+	         ->seePageIs(\Config::get('horizontcms.backend_prefix')."/login")
+	         ->see('HorizontCMS')
+             ->see('Closer to the web');
+                
     }
 
 
     public function testInvalidCredentials(){
 
     	$this->createTestUser();
-
-	    if(\App\HorizontCMS::isInstalled()){
 	    	
-	    	$this->visit(\Config::get('horizontcms.backend_prefix'))     
-	    	     ->type($this->user->username,'username')
-	             ->type('wrongpassword','password')
-	             ->press('submit_login')
-	             ->see('These credentials do not match our records.');
-	    }
+	    $this->visit(\Config::get('horizontcms.backend_prefix'))     
+	    	 ->type($this->user->username,'username')
+	         ->type('wrongpassword','password')
+	         ->press('submit_login')
+	         ->seePageIs(\Config::get('horizontcms.backend_prefix')."/login")
+	         ->see('These credentials do not match our records.');
 
 
     }
