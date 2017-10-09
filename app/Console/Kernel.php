@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\InstallCommand::class,
         \App\Console\Commands\UpgradeCommand::class,
         \App\Console\Commands\ThemeCommand::class,
+        \App\Console\Commands\PluginCommand::class,
     ];
 
     /**
