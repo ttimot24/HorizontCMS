@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\InstallCommand::class,
         \App\Console\Commands\UpgradeCommand::class,
+        \App\Console\Commands\ThemeCommand::class,
     ];
 
     /**
