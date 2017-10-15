@@ -89,7 +89,7 @@ class Website{
 
 
 	public static function require_theme_file($file){
-		require(Website::$_THEME_PATH."/".$file);
+		require(base_path(Website::$_THEME_PATH."/".$file));
 	}
 
 	public static function require_theme_stylesheet($file){
