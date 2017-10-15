@@ -32,10 +32,8 @@ class ThemeController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function set($theme){
-        $setting = Settings::where('setting','theme')->first();
-        $setting->value = $theme;
        
-        if($setting->save()){
+        if(Settings::where('setting','theme')->update(['value' => $theme])){
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_changed_theme')]);
         }else{
             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);

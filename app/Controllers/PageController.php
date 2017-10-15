@@ -174,11 +174,7 @@ class PageController extends Controller{
 
     public function setHomePage($id){
 
-        $home_page = \App\Model\Settings::where("setting","home_page")->get()->first();
-
-        $home_page->value = $id;
-
-        if($home_page->save()){
+        if(\App\Model\Settings::where("setting","home_page")->update(['value' => $id])){
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_set_homepage')]);
         }
         else{
