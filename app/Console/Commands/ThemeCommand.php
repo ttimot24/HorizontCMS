@@ -11,7 +11,7 @@ class ThemeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'horizontcms:theme {theme}';
+    protected $signature = 'horizontcms:theme {--set} {theme}';
 
     /**
      * The console command description.
@@ -34,17 +34,23 @@ class ThemeCommand extends Command
 
     public function handle(){
 
-        echo PHP_EOL;
- 
-        $theme = $this->argument('theme');
+        $selectedTheme = $this->argument('theme');
 
+        echo PHP_EOL."Selected theme: ".$selectedTheme.PHP_EOL.PHP_EOL;
+
+        if($this->option('set')){
+            $this->set($selectedTheme);
+        }
+
+
+
+    }
+
+
+    private function set($theme){
         if(file_exists(base_path('themes'.DIRECTORY_SEPARATOR.$theme))){
-            echo "Selected theme: ".$theme.PHP_EOL;
 
-            $setting = \App\Model\Settings::where('setting','theme')->first();
-            $setting->value = $theme;
-
-            if($setting->update()){
+            if(\App\Model\Settings::where('setting','theme')->update(['value' => $theme])){
                 echo $theme." successfully set as current theme!".PHP_EOL;
             }else{
                 echo "Could not set theme!";
@@ -54,8 +60,8 @@ class ThemeCommand extends Command
             echo "The selected theme doesn't exists.";
         }
 
-
     }
+
 
 
 }
