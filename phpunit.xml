@@ -9,8 +9,9 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Application Test Suite">
+        <testsuite name="HorizontCMS Test Suite">
             <directory suffix="Test.php">./resources/tests</directory>
+            <!--<exclude>./resources/tests/acceptance</exclude>-->
         </testsuite>
     </testsuites>
     <filter>
