@@ -15,10 +15,13 @@ class CreateVisitsTable extends Migration
     {
         Schema::create('visits', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('created_at');
+            $table->string('date');
+            $table->string('time');
             $table->string('ip');
             $table->string('host_name');
             $table->string('client_browser');
+
+            $table->unique(['date','ip']);
         });
     }
 
