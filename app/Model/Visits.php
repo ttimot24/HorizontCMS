@@ -19,7 +19,7 @@ class Visits extends Model{
     		$visit->date = date('Y-m-d');
     		$visit->time = date('H:i:s');
     		$visit->ip = $request->ip();
-    		$visit->host_name = $request->header('host');
+    		$visit->host_name = gethostbyaddr($request->ip());
     		$visit->client_browser = $request->header('user_agent');
 
     		$visit->save();
