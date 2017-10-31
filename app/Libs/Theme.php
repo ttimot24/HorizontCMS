@@ -7,7 +7,9 @@ class Theme{
 
 	public function __construct($root_dir){
 		$this->root_dir = $root_dir;		
-		$this->info = file_exists($this->getPath()."theme_info.xml")? simplexml_load_file($this->getPath()."theme_info.xml") : NULL;
+		//$this->info = file_exists($this->getPath()."theme_info.xml")? simplexml_load_file($this->getPath()."theme_info.xml") : NULL;
+
+		$this->parseThemeInfo();
 
 		$this->config = file_exists($this->getPath()."config.php")? require($this->getPath()."config.php") : NULL;
 
@@ -24,6 +26,25 @@ class Theme{
 		}
 	
 		return [];
+	}
+
+	public function parseThemeInfo(){
+
+		$file_without_extension = $this->getPath()."theme_info";
+		
+		if(file_exists($file_without_extension.".yml") && class_exists('\Symfony\Component\Yaml\Yaml')){
+			$this->info = \Symfony\Component\Yaml\Yaml::parse(
+																file_get_contents($file_without_extension.".yml"),
+																\Symfony\Component\Yaml\Yaml::PARSE_OBJECT
+															  );
+		}else if(file_exists($file_without_extension.".json")){
+			$this->info = json_decode(file_get_contents($file_without_extension.".json"));
+		}else if(file_exists($file_without_extension.".xml")){
+			$this->info = simplexml_load_file($file_without_extension.".xml");
+		}else{
+			$this->info = NULL;
+		}
+
 	}
 
 	public function getConfig($config, $default = NULL){

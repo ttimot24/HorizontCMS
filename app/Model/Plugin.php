@@ -69,7 +69,25 @@ class Plugin extends Model
 
 	public function getInfo($info){
 
-		isset($this->info)? : $this->info = file_exists($this->getPath()."plugin_info.xml")? simplexml_load_file($this->getPath()."plugin_info.xml") : NULL;
+		if(!isset($this->info)){
+
+			$file_without_extension = $this->getPath()."plugin_info";
+		
+			if(file_exists($file_without_extension.".yml") && class_exists('\Symfony\Component\Yaml\Yaml')){
+				$this->info = \Symfony\Component\Yaml\Yaml::parse(
+																	file_get_contents($file_without_extension.".yml"),
+																	\Symfony\Component\Yaml\Yaml::PARSE_OBJECT
+																  );
+			}else if(file_exists($file_without_extension.".json")){
+				$this->info = json_decode(file_get_contents($file_without_extension.".json"));
+			}else if(file_exists($file_without_extension.".xml")){
+				$this->info = simplexml_load_file($file_without_extension.".xml");
+			}else{
+				$this->info = NULL;
+			}
+
+
+		}
 
 		return isset($this->info->{$info})? $this->info->{$info}: NULL;
 	}
