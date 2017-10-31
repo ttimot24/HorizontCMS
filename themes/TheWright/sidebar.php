@@ -6,6 +6,10 @@
 			<center>
 			<h4>Welcome <b><?= \Auth::user()->name; ?></b>!</h4><br>
 			<p><img style="height:150px;width:150px;object-fit:cover;border:2px solid;" class="img-circle" src="<?= \Auth::user()->getThumb(); ?>"></p>
+			<?php if(\Auth::user()->isAdmin()): ?>
+				<br>
+				<a href="<?= \Config::get('horizontcms.backend_prefix') ?>" class='btn btn-block btn-lg btn-warning'>Admin Area</a>
+			<?php endif; ?>
 			<br>
 			<a href="logout" class='btn btn-block btn-lg btn-primary'>Logout</a>
 			</center>

@@ -26,7 +26,7 @@ class Website{
 
 		self::$_SETTINGS = json_decode(json_encode($wengine->request->settings));
 
-		self::$_THEME_PATH = $wengine->getTheme()->getPath();
+		self::$_THEME_PATH = rtrim($wengine->getTheme()->getPath(),'/');
 
 		self::$_CURRENT_USER = \Auth::user();
 
