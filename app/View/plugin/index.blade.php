@@ -7,7 +7,7 @@
 <section class="row">
 <h1 class="col-sm-12 col-md-6">Plugin manager</h1> 
 
-  <div class='col-sm-12 col-md-6' style="text-align:right;"><br>
+  <div class='col-sm-12 col-md-6 text-right'><br>
   <a href="admin/plugin/onlinestore" class='btn btn-info'><i class="fa fa-cloud-download" aria-hidden="true"></i> Download apps</a>
   <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_plugin' @if(!$zip_enabled) disabled @endif ><i class='fa fa-upload'></i>&nbspUpload new plugin</a>
   </div>
@@ -23,7 +23,7 @@
 
 foreach($all_plugin as $current_plugin){
 
-  echo  "<div class='list-group-item' style='height:120px;padding-top:17px;'>";
+  echo  "<div class='list-group-item' style='height:120px;padding-top:17px;border-bottom:3px solid black;'>";
   	
       echo "<div class='col-md-10'>";
 
