@@ -15,9 +15,9 @@ class CreateVisitsTable extends Migration
     {
         Schema::create('visits', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('date');
+            $table->string('date',25);
             $table->string('time');
-            $table->string('ip');
+            $table->string('ip',25);
             $table->string('host_name');
             $table->string('client_browser');
 
