@@ -16,8 +16,8 @@ class ShortCode extends Model{
 
 			if(Plugin::exists($plugin->root_dir) && $plugin->hasRegister('widget')){
 				\View::addNamespace('plugin', [
-												'plugins'.DIRECTORY_SEPARATOR.$plugin->root_dir.DIRECTORY_SEPARATOR."app".DIRECTORY_SEPARATOR."View",
-												'plugins'.DIRECTORY_SEPARATOR.$plugin->root_dir.DIRECTORY_SEPARATOR."app".DIRECTORY_SEPARATOR."resources".DIRECTORY_SEPARATOR."views"
+												$plugin->getPath()."/app".DIRECTORY_SEPARATOR."View",
+												$plugin->getPath()."/app".DIRECTORY_SEPARATOR."resources".DIRECTORY_SEPARATOR."views"
 												]);
 
 				self::$widgets["{[".$plugin->root_dir."]}"] = $plugin->getRegister('widget');

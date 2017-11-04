@@ -15,7 +15,7 @@ class CreatePluginsTable extends Migration
     {
         Schema::create('plugins', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('root_dir');
+            $table->string('root_dir')->unique();
             $table->integer('area')->nullable();
             $table->integer('permission')->nullable();
             $table->string('tables')->nullable();

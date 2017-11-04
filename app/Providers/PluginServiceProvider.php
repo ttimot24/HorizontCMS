@@ -15,7 +15,7 @@ class PluginServiceProvider extends ServiceProvider
     {
     
         if($this->app->isInstalled()){
-            $this->app->plugins = \App\Model\Plugin::where('active','1')->get();
+            $this->app->plugins = \App\Model\Plugin::where('active','1')->get()->keyBy('root_dir');
 
 
             $this->registerPluginProviders();
@@ -64,9 +64,9 @@ class PluginServiceProvider extends ServiceProvider
 
            if(\Request::is(\Config::get('horizontcms.backend_prefix')."/plugin/run/*")){
       
-                $plugin_name = studly_case(\Request::segment(4));
+                $plugin = $this->app->plugins->get(studly_case(\Request::segment(4)));
 
-                $this->loadTranslationsFrom(base_path("/plugins/".$plugin_name."/resources/lang"), 'plugin');
+                $this->loadTranslationsFrom(base_path($plugin->getPath()."/resources/lang"), 'plugin');
                 
             }else if(!\Request::is(\Config::get('horizontcms.backend_prefix')."/*")){
                 $this->loadTranslationsFrom(base_path("/themes/".\App\Model\Settings::get('theme')."/lang"), 'website');

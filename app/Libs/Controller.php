@@ -23,7 +23,7 @@ class Controller extends BaseController{
             foreach(app()->plugins as $plugin){
 
                     foreach($plugin->getRegister('injectJs',[]) as $js){
-                           $this->view->data['jsplugins'][] = "plugins/".$plugin->root_dir.'/'.$js; 
+                           $this->view->data['jsplugins'][] = $plugin->getPath().'/'.$js; 
                     }
 
             }

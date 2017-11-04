@@ -104,7 +104,7 @@ class RouteServiceProvider extends ServiceProvider
 
     	foreach($this->app->plugins as $plugin){
 
-    		if(file_exists('plugins/'.$plugin->root_dir.'/routes/plugin.php')){
+    		if(file_exists($plugin->getPath().'/routes/plugin.php')){
 
                 $options = $plugin->getRegister('routeOptions',[]);
 
@@ -113,7 +113,7 @@ class RouteServiceProvider extends ServiceProvider
                     'namespace' => isset($options['namespace'])? $options['namespace'] : "",
                     'prefix' => isset($options['prefix'])? $options['prefix'] : "",
                     ], function($router) use ($plugin) {
-		            require base_path('plugins/'.$plugin->root_dir.'/routes/plugin.php');
+		            require base_path($plugin->getPath().'/routes/plugin.php');
 		        });
 
 	    	}
