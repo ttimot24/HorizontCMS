@@ -17,6 +17,7 @@ class PluginServiceProvider extends ServiceProvider
         if($this->app->isInstalled()){
             $this->app->plugins = \App\Model\Plugin::where('active','1')->get()->keyBy('root_dir');
 
+            $this->registerPluginAutoloaders();
 
             $this->registerPluginProviders();
             $this->registerPluginEvents();
@@ -27,6 +28,20 @@ class PluginServiceProvider extends ServiceProvider
         
     }
 
+
+    private function registerPluginAutoLoaders(){
+        
+
+       foreach($this->app->plugins as $plugin){
+
+            $autoloader = $plugin->getPath()."vendor/autoload.php";
+            if(file_exists($autoloader)){
+                require_once($autoloader);
+            }
+       }
+
+
+    }
 
 
     private function registerPluginProviders(){

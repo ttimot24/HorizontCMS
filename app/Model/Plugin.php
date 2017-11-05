@@ -74,7 +74,7 @@ class Plugin extends Model
 			$file_without_extension = $this->getPath()."plugin_info";
 		
 			if(file_exists($file_without_extension.".yml") && class_exists('\Symfony\Component\Yaml\Yaml')){
-				$this->info = \Symfony\Component\Yaml\Yaml::parse(
+				$this->info = (object) \Symfony\Component\Yaml\Yaml::parse(
 																	file_get_contents($file_without_extension.".yml"),
 																	\Symfony\Component\Yaml\Yaml::PARSE_OBJECT
 																  );

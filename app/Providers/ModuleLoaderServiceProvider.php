@@ -37,10 +37,6 @@ class ModuleLoaderServiceProvider extends ServiceProvider
 
        require_once app_path('Helpers/Functions/link.php');
       
-       
-       foreach(glob('plugins/*/vendor/autoload.php') as $autoloader){
-            require_once($autoloader);
-       }
 
 
     }
