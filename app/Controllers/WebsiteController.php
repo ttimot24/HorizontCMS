@@ -65,12 +65,7 @@ class WebsiteController extends Controller
                 if(isset($requested_page->url) && $requested_page->url!="" && $theme_engine->templateExists($requested_page->url)){
                     $template = "page_templates.".$requested_page->url;
                 }else{
-
-                   // if($theme_engine->defaultTemplateExists('page')){
-                        $template = 'page';
-                    /*}else{
-                        throw new \Exception('Can\'t find default page template!');
-                    }*/
+                    $template = 'page';
                 }
             }else{
                  $theme_engine->render404();
@@ -82,11 +77,10 @@ class WebsiteController extends Controller
 
             $theme_engine->runScript('before_render');
 
+
        return $theme_engine->render([
-                                    '_THEME_PATH' => $this->theme->getPath(),
                                     '_REQUESTED_PAGE' => $requested_page,
                                     ]);
-
     }
 
 

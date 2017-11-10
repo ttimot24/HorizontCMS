@@ -29,19 +29,21 @@ class BladeThemeEngine{
 	}
 
 	public function templateExists($template){
-		return file_exists($this->theme->getPath()."page_templates".DIRECTORY_SEPARATOR.$template.'.blade.php'); 
+		return file_exists($this->theme->getPath()."page_templates".DIRECTORY_SEPARATOR.$template); 
 	}
 
 
 	public function render(array $data){
 
-		if(strpos( $this->page_template, "default" ) === false ){ //Not default view
-			\View::addNamespace('theme', 'themes'.DIRECTORY_SEPARATOR.$this->theme->root_dir);
+		$default_data = [
+						'_THEME_PATH' => str_replace(DIRECTORY_SEPARATOR,'/',$this->theme->getPath()),
+						];
 
-			return view('theme::'.$this->page_template,$data);
-		}else{
-			return view($this->page_template);
-		}
+
+			\View::addNamespace('theme', base_path($this->theme->getPath()));
+
+
+			return view('theme::'.str_replace('.blade.php','',$this->page_template),array_merge($default_data,$data));
 
 	}
 

@@ -49,14 +49,14 @@ class ThemeEngine{
 
 		ob_end_clean();
 
-		return $output;
+		return trim($output);
 
 	}
 
 
 	private function require_file($file){
-		if(file_exists(base_path().DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$this->theme->root_dir.DIRECTORY_SEPARATOR.$file)){
-			require_once(base_path().DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$this->theme->root_dir.DIRECTORY_SEPARATOR.$file);
+		if(file_exists(base_path($this->theme->getPath().$file))){
+			require_once(base_path($this->theme->getPath().$file));
 		}
 	}
 
