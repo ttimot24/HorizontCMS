@@ -6,6 +6,7 @@ use \App\Libs\Model;
 
 class Page extends Model{
 
+    protected $defaultImage = "resources/images/icons/page.png";
 
     public static function home(){
         return self::find(Settings::get('home_page'));
@@ -76,7 +77,7 @@ class Page extends Model{
     	if($this->hasImage() && file_exists("storage/images/pages/".$this->image)){
     		return url("storage/images/pages/".$this->image);
     	}else{
-    		return url("resources/images/icons/page.png");
+    		return url($this->defaultImage);
     	}
 
     }

@@ -2,13 +2,20 @@
 
 namespace App\Model;
 
+use App\Libs\Model;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+//use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Authenticatable{
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
 
-    use Notifiable;
+    use Notifiable, Authenticatable, Authorizable, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +34,9 @@ class User extends Authenticatable{
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    protected $defaultImage = "resources/images/icons/profile.png";
 
 
     public static function findBySlug($slug){
@@ -102,7 +112,7 @@ class User extends Authenticatable{
 
     public function getThumb(){
 
-        if(file_exists("storage/images/users/thumbs/".$this->image) && $this->image!=""){
+        if($this->hasImage() && file_exists("storage/images/users/thumbs/".$this->image)){
             return url("storage/images/users/thumbs/".$this->image);
         }else{
             return $this->getImage();
@@ -112,10 +122,10 @@ class User extends Authenticatable{
 
     public function getImage(){
 
-        if(file_exists("storage/images/users/".$this->image)  && $this->image!=""){
+        if($this->hasImage() && file_exists("storage/images/users/".$this->image)){
             return url("storage/images/users/".$this->image);
         }else{
-            return url("resources/images/icons/profile.png");
+            return url($this->defaultImage);
         }
 
     }

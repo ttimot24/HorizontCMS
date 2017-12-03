@@ -11,6 +11,9 @@ class Blogpost extends Model{
                         );
 
 
+    protected $defaultImage = "resources/images/icons/newspaper.png";
+
+
     public static function findBySlug($slug){
 
         $blogpost = self::where('slug',$slug)->get()->first();
@@ -60,7 +63,7 @@ class Blogpost extends Model{
     	if($this->hasImage() && file_exists("storage/images/blogposts/".$this->image)){
     		return url("storage/images/blogposts/".$this->image);
     	}else{
-    		return url("resources/images/icons/newspaper.png");
+    		return url($this->defaultImage);
     	}
 
     }
