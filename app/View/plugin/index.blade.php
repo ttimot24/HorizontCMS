@@ -27,7 +27,7 @@ foreach($all_plugin as $current_plugin){
   	
       echo "<div class='col-md-10'>";
 
-       echo Html::img($current_plugin->getIcon(),"class='img img-thumbnail pull-left' style='width:80px;height:80px;margin-right:10px;'");
+       echo Html::img($current_plugin->getIcon(),"class='img img-thumbnail pull-left' style='border-radius:5px;width:80px;height:80px;margin-right:10px;'");
 
         echo "<h4 class='list-group-item-heading'>";
 
