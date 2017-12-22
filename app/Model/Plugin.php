@@ -62,6 +62,17 @@ class Plugin extends Model
 		return 'plugins'.DIRECTORY_SEPARATOR.$this->root_dir.DIRECTORY_SEPARATOR;
 	}
 
+	public function getDatabaseFilesPath(){
+
+		$path_to_db = $this->getPath().'database';
+
+		if(file_exists($path_to_db) && is_dir($path_to_db)){
+			return $this->getPath().'database';
+		}
+	 
+		return NULL;
+	}
+
 
 	public function getIcon(){
 		return file_exists($this->getPath()."icon.jpg")? $this->getPath()."icon.jpg" : 'resources/images/icons/plugin.png';
@@ -114,6 +125,20 @@ class Plugin extends Model
         }
 
         return $default;
+	}
+
+
+	public function getRequirements(){
+		return $this->getInfo('requires');
+	}
+
+	public function getRequiredCoreVersion(){
+		return isset($this->getInfo('requires')->core)? $this->getInfo('requires')->core : NULL;
+	}
+
+	public function isCompatibleWithCore(){
+		
+		return \Composer\Semver\Comparator::greaterThanOrEqualTo(\Config::get('horizontcms.version'),$this->getRequiredCoreVersion());
 	}
 
 

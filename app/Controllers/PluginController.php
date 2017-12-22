@@ -81,12 +81,18 @@ class PluginController extends Controller{
      */
     public function install($plugin_name){
 
-       $path_to_db = "plugins".DIRECTORY_SEPARATOR.$plugin_name.DIRECTORY_SEPARATOR."database";
+
+       $plugin = new \App\Model\Plugin($plugin_name);
+
+       if(!$plugin->isCompatibleWithCore()){
+            return $this->redirectToSelf()->withMessage(['danger' => trans('plugin.not_compatible_with_core',['min_core_ver' => $plugin->getRequiredCoreVersion()])]);
+       }
+
        
-       if(file_exists($path_to_db) && is_dir($path_to_db)){
+       if($plugin->getDatabaseFilesPath()){
 
 
-            \Artisan::call("migrate",['--path' => $path_to_db.DIRECTORY_SEPARATOR."migrations",'--no-interaction' => '','--force' => true ]);
+            \Artisan::call("migrate",['--path' => $plugin->getDatabaseFilesPath().DIRECTORY_SEPARATOR."migrations",'--no-interaction' => '','--force' => true ]);
             
 
             $seed_class = '\\Plugin\\'.$plugin_name.'\\Database\\Seeds\\PluginSeeder';
@@ -97,7 +103,7 @@ class PluginController extends Controller{
        }
 
 
-        $plugin = new \App\Model\Plugin($plugin_name);
+     
         //$plugin->version should be added
         unset($plugin->info,$plugin->config);
         $plugin->area = 0;
