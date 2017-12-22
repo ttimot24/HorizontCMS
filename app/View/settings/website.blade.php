@@ -5,7 +5,7 @@
 
 <h1>Website settings</h1><br><br>
 
-<form action='admin/settings/website' role='form' method='POST'>
+<form action='admin/settings/save-settings' role='form' method='POST'>
 {{ csrf_field() }}
 
 <table class='table-bordered' id='settings' style='width:100%;text-align:center;'>

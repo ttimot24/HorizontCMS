@@ -7,7 +7,7 @@
 <h1>AdminArea settings</h1><br><br>
 
 
-<form action='' role='form' method='POST'>
+<form action='admin/settings/save-settings' role='form' method='POST'>
 {{ csrf_field() }}
 
 <input type='hidden' name='is_actioned' value='1'>

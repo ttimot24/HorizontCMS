@@ -16,6 +16,21 @@ class SettingsController extends Controller{
           \File::makeDirectory("storage/images/logos", $mode = 0777, true, true);
         }
     }
+
+
+    public function saveSettings(){
+
+        if($this->request->isMethod('POST')){
+
+            foreach($this->request->all() as $key => $value){
+              Settings::where('setting', '=', $key)->update(['value' => $value]);
+            }
+
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
+        }
+
+    }
+
  
 
     /**
@@ -56,14 +71,6 @@ class SettingsController extends Controller{
      */
     public function website($slug){
 
-        if($this->request->isMethod('POST')){
-
-            foreach($this->request->all() as $key => $value){
-              Settings::where('setting', '=', $key)->update(['value' => $value]);
-            }
-
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
-        }
 
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/website',[
@@ -80,15 +87,6 @@ class SettingsController extends Controller{
      */
     public function adminarea($slug){
 
-
-        if($this->request->isMethod('POST')){
-
-            foreach($this->request->all() as $key => $value){
-              Settings::where('setting', '=', $key)->update(['value' => $value]);
-            }
-
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
-        }
 
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/adminarea',[
