@@ -103,7 +103,9 @@ class PluginController extends Controller{
        }
 
 
+        $plugin->getRegister('onInstall',[]);
      
+
         //$plugin->version should be added
         unset($plugin->info,$plugin->config);
         $plugin->area = 0;
@@ -189,14 +191,12 @@ class PluginController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function delete($plugin){
+
+    	\App\Model\Plugin::where('root_dir',$plugin)->delete();
+
         if(file_exists("plugins/".$plugin)){
             if(\Storage::disk('plugins')->deleteDirectory($plugin)){
-                 $plugin_instance = \App\Model\Plugin::where('root_dir',$plugin)->first();
-
-                 if($plugin_instance!=null){
-                    $plugin_instance->delete();
-                 }
-
+                 
                  return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully deleted the plugin!')]);
             }else{
                  return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
