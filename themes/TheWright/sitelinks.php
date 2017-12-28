@@ -31,8 +31,10 @@
                   <ul class="dropdown-menu">';
               foreach($page->subpages as $subpage){  
 
-                $class = $subpage->equals(Website::$_REQUESTED_PAGE)? "active": "";       
-                echo "<li class='".$class."'><a href='".str_slug($subpage->name)."'>".$subpage->name."</a></li>";
+                $class = $subpage->equals(Website::$_REQUESTED_PAGE)? "active": "";   
+                if($subpage->isActive()){     
+                  echo "<li class='".$class."'><a href='".$subpage->slug."'>".$subpage->name."</a></li>";
+                }
               }
           
           echo '</ul>

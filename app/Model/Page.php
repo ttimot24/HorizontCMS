@@ -44,6 +44,10 @@ class Page extends Model{
         return self::where('visibility',1)->get();
     }
 
+    public function isActive(){
+        return $this->visibility==1;
+    }
+
     public function isParent(){
         return $this->parent_id==NULL;
     }

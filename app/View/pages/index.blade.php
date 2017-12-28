@@ -50,7 +50,7 @@ tr #hidden-home a:hover{
 
 foreach($all_pages as $each){
 
-if($each->visibility==0){
+if(!$each->isActive()){
     $class = 'danger';
 }
 else if(isset($each->parent)){
