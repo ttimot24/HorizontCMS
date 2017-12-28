@@ -248,5 +248,9 @@ echo '
 	</tbody>
   </table>
 
+    <center>
+        {{$all_pages->links()}}
+    </center>
+
 </div>
 @endsection
