@@ -48,6 +48,10 @@ class Blogpost extends Model{
 	}
 
 
+    public function getSlug(){
+        return ($this->slug!=NULL && $this->slug!="")? $this->slug : str_slug($this->title);
+    }
+
 	public function getThumb(){
 
         if($this->hasImage() && file_exists("storage/images/blogposts/thumbs/".$this->image)){

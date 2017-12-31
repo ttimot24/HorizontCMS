@@ -109,6 +109,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     	return Cache::has('user-is-online-' . $this->id);
 	}
 
+    public function getSlug(){
+        return ($this->slug!=NULL && $this->slug!="")? $this->slug : str_slug($this->username);
+    }
 
     public function getThumb(){
 

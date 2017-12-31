@@ -65,6 +65,9 @@ class Page extends Model{
         return $this->hasMany(self::class,'parent_id','id');
     }
 
+    public function getSlug(){
+        return ($this->slug!=NULL && $this->slug!="")? $this->slug : str_slug($this->name);
+    }
 
    	public function getThumb(){
 
