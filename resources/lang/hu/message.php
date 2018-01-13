@@ -34,4 +34,6 @@ return [
 	'successfully_set_homepage' => 'Kezdőoldal sikeresen beállítva!',
 	'successfully_added_headerimage' => 'Fejléckép sikeresen hozzáadva!',
 
+	'successfully_logged_in' => 'Sikeresen beléptél!',
+
 ];

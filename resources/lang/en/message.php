@@ -34,4 +34,6 @@ return [
 	'successfully_set_homepage' => 'Homepage has been changed successfully!',
 	'successfully_added_headerimage' => 'Header image added successfully!',
 
+	'successfully_logged_in' => 'Successfully logged in!',
+
 ];
