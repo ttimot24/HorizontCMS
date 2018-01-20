@@ -87,19 +87,19 @@
 
     <form action="{{admin_link('blogpost_comment-create')}}" method='POST'>
     {{ csrf_field() }}
-        <div class='modal-header-warning' style='padding:15px;padding-bottom: 0px;'>
+        <div class='modal-header-warning'>
           <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
-          <h3 class='modal-title'><span class='fa fa-comment-o float-left'></span>  Write comment</h3>
+          <h3 class='modal-title'><span class='fa fa-comment-o'></span>  {{trans('comment.write_comment_button')}}</h3>
         </div>
         <div class='modal-body'>
-        <h5 style='font-weight:bolder;'>Write as: <a href="{{ admin_link('user-view',$user->id) }}" >{{ $user->username }}</a>
+        <h5 style='font-weight:bolder;'>{{trans('comment.write_as')}}: <a href="{{ admin_link('user-view',$user->id) }}" >{{ $user->username }}</a>
         <img src='{{ $user->getThumb() }}' class='img img-rounded pull-right' width='30'></h5>
         <input type='hidden' name='blogpost_id' value='{{ $blogpost->id }}' >
           <textarea style='width:100%;' rows='5' name='comment' required></textarea>
         
          </div>
         <div class='modal-footer'>
-           <button type='submit' class='btn btn-warning'>Send</button>
+           <button type='submit' class='btn btn-warning'>{{trans('comment.send')}}</button>
         </div>
     </form>
   </div>

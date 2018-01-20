@@ -142,22 +142,19 @@
 
 <?php    
 
-  if($user->comments->count()>0){
     foreach($user->comments as $each){
 
-      $news = $each->blogpost;
-
-      if($news!=NULL){
+      if($each->blogpost!=NULL){
 
         echo "<tr>";
-        echo "<td class='col-md-3'><a href='".admin_link('blogpost-view',$news->id)."'>".$news->title."</a></td>";
+        echo "<td class='col-md-3'><a href='".admin_link('blogpost-view',$each->blogpost->id)."'>".$each->blogpost->title."</a></td>";
         echo "<td class='col-md-8' style='text-align:justify;'>" .$each->comment ."</td>";
 
         echo "<td class='col-md-1'>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format('H:i:s')."</font></td>";
         echo "</tr>";
       }
     }
-  }
+
 ?>
 
 </tbody></table>

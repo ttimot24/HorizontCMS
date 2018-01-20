@@ -8,6 +8,8 @@ return [
 	'disable_comments_button' => 'Disable comments',
 	'write_comment_button' => 'Write comment',
 	'all_comments' => 'All comments',
+	'send' => 'Send',
+	'write_as' => 'Write as',
 
 	'th_image' => 'Image',
 	'th_name' => 'Username',
