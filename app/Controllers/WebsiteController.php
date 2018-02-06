@@ -50,16 +50,11 @@ class WebsiteController extends Controller
             }
 
 
-            if($page!="" && $page!=NULL){
-                $requested_page = Page::findBySlug($page);
-            }else{
-                $requested_page = Page::find($this->request->settings['home_page']);
+            $requested_page = ($page=="" || $page==NULL)? Page::find($this->request->settings['home_page']) : Page::findBySlug($page);
+  
 
-                \App\Model\Visits::newVisitor($this->request);
-            }
-
+            \App\Model\Visits::newVisitor($this->request);
           
-           // $requested_page = $page==""? Page::find($this->request->settings['home_page']) : Page::findBySlug($page);
 
             if($requested_page!=NULL){
                 if(isset($requested_page->url) && $requested_page->url!="" && $theme_engine->templateExists($requested_page->url)){

@@ -25,7 +25,7 @@ class Visits extends Model{
     		$visit->save();
 
     	}catch(\Exception $exception){
-    		//throw $exception;
+          //  if($request->input('debug')=='true'){ throw $exception; }
     		//do nothing
     	}
 
