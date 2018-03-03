@@ -40,10 +40,17 @@
     </button>
   </div>
 
-
+  @if($blogpost->author)
     </br></br><b>{{trans('blogpost.author')}} : </br><a href="{{admin_link('user-view',$blogpost->author->id)}}">{{ $blogpost->author->username }}</a></b>
+     @else
+    </br></br><b>{{trans('blogpost.author')}} : </br>{{ trans('blogpost.removed_user') }}</b>
+  @endif 
     </br></br><b>{{trans('blogpost.published_on')}} : </br><a>{{ $blogpost->created_at->format('Y.m.d. H:i:s') }}</a></b>
+  
+  @if($blogpost->category)  
     </br></br><b>{{trans('blogpost.category')}} : </br><a>{{ $blogpost->category->name }}</a></b>
+  @endif
+  
     </br></br><b>{{trans('blogpost.characters')}} : <br><a>{{ strlen($blogpost->text) }}</a></b>
     </br></br><b>{{trans('blogpost.words')}} : <br><a>{{ str_word_count($blogpost->text) }}</a></b>
     </br></br><b>{{trans('blogpost.comments')}} : <a>{{ count($blogpost->comments) }}</a></b>

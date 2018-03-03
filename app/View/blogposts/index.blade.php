@@ -38,9 +38,17 @@
   
 
   <td class='hidden-xs'><?= $blogpost->created_at->format('Y-m-d'); ?></br><font size='2'><i>at</i> <?= $blogpost->created_at->format('H:i:s'); ?></font></td>
+  
+  @if($blogpost->author)
   <td><a href="{{admin_link('user-view',$blogpost->author->id)}}" >{{ $blogpost->author->username }}</a></td>
+  @else
+  <td>{{ trans('blogpost.removed_user') }}</td>
+  @endif
+  @if($blogpost->category)
   <td class='hidden-xs'><span class="label label-success" style='font-size:14px; display:block'>{{ $blogpost->category->name }}</span></td>
-
+  @else
+  <td class='hidden-xs'>none</td>
+  @endif
 
 
   <td>

@@ -36,5 +36,6 @@ return [
 	'words' => 'Words',
 	'comments' => 'Comments',
 
+	'removed_user' => 'Removed user',
 
 ];

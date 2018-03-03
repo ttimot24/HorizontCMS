@@ -36,5 +36,6 @@ return [
 	'words' => 'Szavak száma',
 	'comments' => 'Hozzászólások',
 
+	'removed_user' => 'Törölt felhasználó',
 
 ];
