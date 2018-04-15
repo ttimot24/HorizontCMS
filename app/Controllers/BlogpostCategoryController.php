@@ -40,6 +40,7 @@ class BlogpostCategoryController extends Controller{
 
             $blogpost_category = new BlogpostCategory();
             $blogpost_category->name = $this->request->input('name');
+            $blogpost_category->author_id = \Auth::user()->id;
 
             if ($this->request->hasFile('up_file')){
                  
