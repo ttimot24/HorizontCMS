@@ -37,11 +37,11 @@ class Page extends Model{
     }
 
     public static function activeMain(){
-         return self::where('visibility',1)->where('parent_id',NULL)->get();
+         return self::where('visibility',1)->where('parent_id',NULL)->orderBy('queue')->orderBy('id')->get();
     }
 
     public static function active(){
-        return self::where('visibility',1)->get();
+        return self::where('visibility',1)->orderBy('queue')->orderBy('id')->get();
     }
 
     public function isActive(){
