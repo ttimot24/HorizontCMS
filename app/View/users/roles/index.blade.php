@@ -6,11 +6,11 @@
 <h2>User groups <small class='pull-right' style='margin-top:1.5%;'> All: {{$all_user_roles->count()}} </small></h2>
 
 <br>
-<div class='container col-md-10'><a href='admin/userrole/create' class='btn btn-warning' style='margin-bottom:20px;'>New user group</a></div>
+<div class='container col-md-10'><a href="{{admin_link('user_role-create')}}" class='btn btn-warning' style='margin-bottom:20px;'>New user group</a></div>
 
 <?php foreach($all_user_roles->reverse() as $role): ?>
   
-<form action='admin/userrole/update/{{$role->id}}' method='POST'>
+<form action="{{admin_link('user_role-update',$role->id)}}" method='POST'>
 
 {{csrf_field()}}
 

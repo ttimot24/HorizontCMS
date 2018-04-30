@@ -38,6 +38,7 @@ return [
 
 	'user_role-index' => 'user-role/index',
 	'user_role-create' => 'user-role/create',
+	'user_role-store' => 'user-role/store',
 	'user_role-edit' => 'user-role/edit',
 	'user_role-update' => 'user-role/update',
 	'user_role-view' => 'user-role/view',

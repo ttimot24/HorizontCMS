@@ -42,9 +42,10 @@ class UserRoleController extends Controller{
             $role = new \App\Model\UserRole();
             $role->name = $this->request->input('group_name');
             $role->rights = array_keys($this->request->except(['_token','group_name']));
+            $role->permission = 0;
 
             if($role->save()){
-                return $this->redirect('admin/userrole')->withMessage(['success' => trans('User role created succesfully!')]);
+                return $this->redirect(admin_link('user_role-index'))->withMessage(['success' => trans('User role created succesfully!')]);
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }

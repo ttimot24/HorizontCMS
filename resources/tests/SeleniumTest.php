@@ -5,7 +5,7 @@ class SeleniumTest extends PHPUnit_Extensions_Selenium2TestCase{
    /* protected $captureScreenshotOnFailure = TRUE;
     protected $screenshotPath = '/var/www/localhost/htdocs/screenshots';
     protected $screenshotUrl = 'http://localhost/screenshots';*/
-    protected $browser = 'firefox';
+    protected $browser = 'chrome';
 
 
     protected function setUp()
