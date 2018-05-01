@@ -63,7 +63,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany(\App\Model\Blogpost::class,'author_id','id');
     }
 
+
+    /**
+    *
+    * If the binded UserRole is missing then ithe method
+    * return the default role. 
+    *
+    */
     public function role(){
+
+        if(\App\Model\UserRole::find($this->role_id)==NULL){
+            $this->role_id = 1;
+        }
+         
         return $this->belongsTo(\App\Model\UserRole::class,'role_id','id');
     }
 

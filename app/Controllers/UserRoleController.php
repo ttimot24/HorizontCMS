@@ -113,9 +113,11 @@ class UserRoleController extends Controller{
      */
     public function delete($id){
         
-        UserRole::find($id)->delete();
+        if(\App\Model\UserRole::find($id)->delete()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('User role deleted succesfully!')]);
+        }
 
-        return $this->redirectToSelf();
+        return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
 
     }
 }

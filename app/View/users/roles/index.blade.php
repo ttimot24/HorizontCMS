@@ -65,17 +65,29 @@ foreach($permission_list as $key => $perm_name){
 
     }
 
-     echo "<li class='list-group-item'><button type='submit' class='btn btn-success btn-block' ".$disable.">Save changes</button></li>";
+     echo "<li class='list-group-item'>
 
-  ?>
+	     	<div class='btn-group' role='group' style='width:100%;'>
 
-<!--
-    <li class="list-group-item">Admin area <input type='checkbox' class='pull-right' ></li>
-    <li class="list-group-item">Dapibus ac facilisis in <input type='checkbox' class='pull-right'></li>
-    <li class="list-group-item">Morbi leo risus <input type='checkbox' class='pull-right'></li>
-    <li class="list-group-item">Porta ac consectetur ac <input type='checkbox' class='pull-right'></li>
-    <li class="list-group-item">Vestibulum at eros <input type='checkbox' class='pull-right'></li>-->
+	           <button type='submit' class='btn btn-success btn-sm' ".$disable." style='width:80%;'>Save changes</button>
+	         
+	           <a data-toggle='modal' data-target='.delete_".$role->id."' class='btn btn-danger btn-sm pull-right' ".$disable."><i class='fa fa-trash-o' aria-hidden='true'></i></a>
 
+			</div>
+
+     	</li>";
+
+ 
+
+		 Bootstrap::delete_confirmation(
+		    "delete_".$role->id."",
+		    trans('actions.are_you_sure'),
+		    "<div style='color:black;'><b>".trans('actions.delete_this',['content_type' => 'role']).": </b>".$role->name." <b>?</b></div>",
+		    "<a href='".admin_link('user_role-delete',$role->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
+		    <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
+		    );
+
+ ?>
 
   </ul>
 </div>
