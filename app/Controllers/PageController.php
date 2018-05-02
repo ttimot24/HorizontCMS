@@ -11,6 +11,18 @@ class PageController extends Controller{
  
 
     protected $itemPerPage = 25;
+    protected $imagePath = 'images/pages';
+
+    /**
+     * Creates image directories if they not exists.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function before(){
+        if(!file_exists(storage_path($this->imagePath.'/thumbs'))){
+            \File::makeDirectory(storage_path($this->imagePath.'/thumbs'), $mode = 0777, true, true);
+        }
+    }
 
     /**
      * Display a listing of the resource.
@@ -54,11 +66,11 @@ class PageController extends Controller{
 
             if ($this->request->hasFile('up_file')){
                  
-                 $img = $this->request->up_file->store('images/pages');
+                 $img = $this->request->up_file->store($this->imagePath);
 
-                 $page->image = str_replace('images/pages/','',$img);
+                 $page->image = str_replace($this->imagePath.'/','',$img);
 
-                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path('images/pages/thumbs/'.$page->image));
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$page->image));
                  
             }
 
@@ -151,11 +163,11 @@ class PageController extends Controller{
 
             if ($this->request->hasFile('up_file')){
                  
-                 $img = $this->request->up_file->store('images/pages');
+                 $img = $this->request->up_file->store($this->imagePath);
 
-                 $page->image = str_replace('images/pages/','',$img);
+                 $page->image = str_replace($this->imagePath.'/','',$img);
 
-                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path('images/pages/thumbs/'.$page->image));
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$page->image));
                  
             }
             

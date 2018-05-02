@@ -11,6 +11,19 @@ class UserController extends Controller{
  
 
     protected $itemPerPage = 100;
+    protected $imagePath = 'images/users';
+
+    /**
+     * Creates image directories if they not exists.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function before(){
+        if(!file_exists(storage_path($this->imagePath.'/thumbs'))){
+            \File::makeDirectory(storage_path($this->imagePath.'/thumbs'), $mode = 0777, true, true);
+        }
+    }
+
 
     /**
      * Display a listing of the resource.
@@ -50,11 +63,11 @@ class UserController extends Controller{
 
             if ($this->request->hasFile('up_file')){
                  
-                 $img = $this->request->up_file->store('images/users');
+                 $img = $this->request->up_file->store($this->imagePath);
 
-                 $user->image = str_replace('images/users/','',$img);
+                 $user->image = str_replace($this->imagePath.'/','',$img);
 
-                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path('images/users/thumbs/'.$user->image));
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$user->image));
                  
             }
 
@@ -150,7 +163,7 @@ class UserController extends Controller{
 
             if ($this->request->hasFile('up_file')){
                  
-                 $user->image = str_replace('images/users/','',$this->request->up_file->store('images/users'));
+                 $user->image = str_replace($this->imagePath.'/','',$this->request->up_file->store($this->imagePath));
 
             }
 
@@ -158,11 +171,11 @@ class UserController extends Controller{
 
             if ($this->request->hasFile('up_file')){
                  
-                 $img = $this->request->up_file->store('images/users');
+                 $img = $this->request->up_file->store($this->imagePath);
 
-                 $user->image = str_replace('images/users/','',$img);
+                 $user->image = str_replace($this->imagePath.'/','',$img);
 
-                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path('images/users/thumbs/'.$user->image));
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$user->image));
                  
             }
 

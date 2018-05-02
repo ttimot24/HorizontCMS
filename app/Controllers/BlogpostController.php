@@ -11,6 +11,18 @@ class BlogpostController extends Controller{
  
 
     protected $itemPerPage = 25;
+    protected $imagePath = 'images/blogposts';
+
+    /**
+     * Creates image directories if they not exists.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function before(){
+        if(!file_exists(storage_path($this->imagePath.'/thumbs'))){
+            \File::makeDirectory(storage_path($this->imagePath.'/thumbs'), $mode = 0777, true, true);
+        }
+    }
 
     /**
      * Display a listing of the resource.
@@ -50,11 +62,11 @@ class BlogpostController extends Controller{
 
             if ($this->request->hasFile('up_file')){
                  
-            	 $img = $this->request->up_file->store('images/blogposts');
+            	 $img = $this->request->up_file->store($this->imagePath);
 
-                 $blogpost->image = str_replace('images/blogposts/','',$img);
+                 $blogpost->image = str_replace($this->imagePath.'/','',$img);
 
-                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path('images/blogposts/thumbs/'.$blogpost->image));
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
                  
             }
 
@@ -144,11 +156,11 @@ class BlogpostController extends Controller{
 			
 			if ($this->request->hasFile('up_file')){
                  
-            	 $img = $this->request->up_file->store('images/blogposts');
+            	 $img = $this->request->up_file->store($this->imagePath);
 
-                 $blogpost->image = str_replace('images/blogposts/','',$img);
+                 $blogpost->image = str_replace($this->imagePath.'/','',$img);
 
-                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path('images/blogposts/thumbs/'.$blogpost->image));
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
                  
             }
 

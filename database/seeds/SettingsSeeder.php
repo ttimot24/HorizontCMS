@@ -76,6 +76,12 @@ class SettingsSeeder extends Seeder
         ]);
 
         DB::table('settings')->insert([
+            'setting' => 'favicon',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
             'setting' => 'admin_logo',
             'value' => "",
             'more' => '1',
