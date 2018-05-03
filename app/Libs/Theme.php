@@ -47,6 +47,10 @@ class Theme{
 
 	}
 
+	public function isCurrentTheme(){
+		return $this->root_dir == \Settings::get('theme');
+	}
+
 	public function getConfig($config, $default = NULL){
 		return isset($this->config[$config])? $this->config[$config]: $default;
 	}
