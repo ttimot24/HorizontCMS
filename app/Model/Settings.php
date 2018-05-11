@@ -10,17 +10,16 @@ class Settings extends Model{
   	public $timestamps = false;
   	public $settings;
 
-	public static function get($setting){
+	public static function get($setting,$default = null){
 
 		$result = self::where('setting',$setting)->first();
 
-		return $result->value;
+		return $result==null? $default : $result->value;
 	}
 
 	public static function getAll(){
 
-
-		foreach(self::All() as $each){
+		foreach(self::all() as $each){
 			$array[$each->setting] = $each->value;
 		}
 
@@ -30,7 +29,7 @@ class Settings extends Model{
 
 
 	public function assignAll(){
-		$settings = self::All();
+		$settings = self::all();
 
 		$this->settings = new \stdClass();
 
