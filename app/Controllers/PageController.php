@@ -35,7 +35,7 @@ class PageController extends Controller{
         $this->view->title(trans('page.pages'));
         return $this->view->render('pages/index',[
                                                         'number_of_pages' => Page::count(),
-                                                        'all_pages' => Page::paginate($this->itemPerPage),
+                                                        'all_pages' => Page::orderBy('queue')->paginate($this->itemPerPage),
                                                         'visible_pages' => Page::where('visibility',1)->count(), 
                                                         'home_page' => Page::find($this->request->settings['home_page']),
                                                     ]);
@@ -209,6 +209,29 @@ class PageController extends Controller{
 
 
         return $this->redirect(admin_link("page-index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
+    }
+
+
+
+
+    public function reorder(){
+
+        try{
+            
+            $order = json_decode($this->request->input("order"),true);
+            
+            for($i=0; $i<count($order); $i++){
+                $page = \App\Model\Page::find($order[$i]);
+                $page->queue = $i;
+
+                $page->save();
+            }
+
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+
+
     }
 
 

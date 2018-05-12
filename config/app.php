@@ -126,6 +126,8 @@ return [
 
     'log_path' => env('LOG_PATH','storage/framework/logs/laravel.log'),
 
+    'log_max_files' => 10,
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

@@ -11,14 +11,35 @@ function dragndrop() {
 	};
 
 	function after_drop(){
-		//alert("szia");
+
+		var alist = {};
+
+		$("#page-list-table tbody tr").each(function(iter) {
+		  $this = $(this);
+		  pageId = $this.find('td').eq(1).html().split(" ")[0];
+		  
+		  alist[iter] = pageId;
+
+		});
+
+		$.post("admin/page/reorder",
+	    {
+	    	_token: $("#orderer").data("csrf"),
+	        order: JSON.stringify(alist)
+	    },
+	    function(data, status){
+	        console.log("Data: " + data + "\nStatus: " + status);
+	    });
+
+
+
 	}
 
 
 	//Make diagnosis table sortable
-	$("#diagnosis_list tbody").sortable({
+	$("#page-list-table tbody").sortable({
     	helper: fixHelperModified,
-		stop: function(event,ui) {renumber_table('#diagnosis_list'); after_drop();}
+		stop: function(event,ui) {renumber_table('#page-list-table'); after_drop();}
 	}).disableSelection();
 
 
@@ -51,12 +72,27 @@ function dragndroporder(){
 	$('#orderer').toggleClass('btn-default');
 	$('#orderer').toggleClass('btn-success');
 
-	$('table').attr('id', 'diagnosis_list');
+
+	if($('#page-list-table').hasClass('order-active')){
+
+		$('.torder').remove();
+
+		$('#page-list-table').removeClass('order-active');
+
+	}else{
+
 
 	$('table').find('tr').each(function(){
-		$(this).find('th').eq(0).before("<th class='col-md-1'>Reorder</th>");
-        $(this).find('td').eq(0).before("<td><i class='well well-sm fa fa-arrows-v' style='border-radius:3px;cursor:grab;font-size:20px;' aria-hidden='true'></i></td>");
+		$(this).find('th').eq(0).before("<th class='col-md-1 torder'>Reorder</th>");
+        $(this).find('td').eq(0).before("<td class='torder'><i class='well well-sm fa fa-arrows-v' style='border-radius:3px;cursor:grab;font-size:20px;' aria-hidden='true'></i></td>");
     });
 
+
+	$('#page-list-table').addClass('order-active');
+
+
 	dragndrop();
+
+	}
+	
 }
