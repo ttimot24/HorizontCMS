@@ -40,6 +40,12 @@ class SettingsSeeder extends Seeder
         ]);
 
         DB::table('settings')->insert([
+            'setting' => 'default_email',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
             'setting' => 'contact',
             'value' => "",
             'more' => '1',

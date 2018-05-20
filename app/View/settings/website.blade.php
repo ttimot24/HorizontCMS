@@ -35,6 +35,8 @@
 </div>
 </td></tr>
 
+<tr><td>Email</td><td><input type='email' class='form-control' name='default_email' value="{{$settings['default_email']}}"></td></tr>
+
 <tr><td>Contact info</td><td><textarea rows='7' class='form-control' name='contact' cols='30'>{{ $settings['contact'] }}</textarea></td></tr>
 
 <input type="hidden" name="website_down" value="0"> <!-- Checkbox hack -->
