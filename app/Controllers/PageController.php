@@ -59,7 +59,7 @@ class PageController extends Controller{
             $page->url = $this->request->input('url');
             $page->visibility = $this->request->input('visibility');
             $page->parent_id = $this->request->input('parent_select')==0? NULL : $this->request->input('parent_id');
-            $page->queue = 1;/*$this->request->input('queue');*/
+            $page->queue = 99;
             $page->page = $this->request->input('page');
             $page->author_id = \Auth::user()->id;
 
@@ -157,7 +157,6 @@ class PageController extends Controller{
             $page->url = $this->request->input('url');
             $page->visibility = $this->request->input('visibility');
             $page->parent_id = $this->request->input('parent_select')==0? NULL : $this->request->input('parent_id');
-            $page->queue = 1;/*$this->request->input('queue');*/
             $page->page = $this->request->input('page');
 
 
