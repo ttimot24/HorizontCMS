@@ -48,7 +48,7 @@ return [
 
 
         'mysql' => [
-            'name' => 'MySql',
+            'alias' => 'MySql',
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
@@ -63,7 +63,7 @@ return [
         ],
 
         'pgsql' => [
-            'name' => 'PostgreSQL',
+            'alias' => 'PostgreSQL',
             'driver' => 'pgsql',
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '5432'),
@@ -77,7 +77,7 @@ return [
         ],
 
         'sqlite' => [
-            'name' => 'SqLite',
+            'alias' => 'SqLite',
             'driver' => 'sqlite',
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => env('DB_TABLE_PREFIX', ''),

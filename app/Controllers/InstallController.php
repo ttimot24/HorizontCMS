@@ -47,7 +47,7 @@ class InstallController extends Controller{
 
 
         foreach (Config::get('database.connections') as $database) {
-            $db_drivers[$database['name']] = $database['driver'];
+            $db_drivers[$database['alias']] = $database['driver'];
         }
 
         $this->view->title("Install");
