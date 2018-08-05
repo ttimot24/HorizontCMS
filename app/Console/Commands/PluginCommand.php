@@ -18,7 +18,7 @@ class PluginCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install and ectivate plugin.';
+    protected $description = 'Install and activate plugin.';
 
     /**
      * Create a new command instance.

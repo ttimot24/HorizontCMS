@@ -11,7 +11,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'horizontcms:install';
+    protected $signature = 'horizontcms:install {--driver=} {--database=}';
 
     /**
      * The console command description.
@@ -50,13 +50,28 @@ echo "\r\n-------------------------------------------------------------------\r\
 $this->line("*****Database informations*****\r\n");
 $database['username'] = $this->ask('Username');
 $database['password'] = $this->ask('Password',false);
-$database['database'] = $this->ask('Database');
 
 if ($database['password'] === FALSE){ 
 	$database['password'] = "";
 }
 
-$database['driver'] = $this->choice('Database driver', ['sqlite', 'mysql','pgsql'], 1);
+ if($this->option('driver')!=""){
+    $database['driver'] = $this->option('driver');
+ }
+ else{
+    $database['driver'] = $this->choice('Database driver', array_keys(\Config::get('database.connections')), 0);
+ }
+
+if($this->option('database')!=""){
+    $database['database'] = $this->option('database');
+}else{
+    $database['database'] =  $this->ask('Database');
+}
+
+$this->line("Selected database driver: ".$database['driver']." \r\n");
+
+$this->line("Selected database: ".$database['database']." \r\n");
+
 
 $this->line("*****Administrator informations*****\r\n");
 $admin['username'] = $this->ask('Username');
