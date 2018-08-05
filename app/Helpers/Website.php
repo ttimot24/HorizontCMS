@@ -83,6 +83,14 @@ class Website{
 	}
 
 
+	public static function jsPlugins(){
+		foreach(app()->plugins as $plugin){
+			foreach($plugin->getRegister('injectJs',[]) as $js){
+				echo Html::jsFile($plugin->getPath().'/'.$js);
+			}
+		}
+	}
+
 	public static function logo(){
 		return 'storage/images/logos/'.Website::$_SETTINGS->logo;
 	}
