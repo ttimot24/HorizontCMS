@@ -35,7 +35,7 @@ After downloading and copying the files to the server, navigate to the app root 
 
 ### Sample plugin
 
-  [GoogleMaps](https://github.com/ttimot24/hcms-gmaps-plugin)
+  [GoogleMaps](https://github.com/ttimot24/GoogleMaps)
 
 ### Contributing
   - Create a Theme or Plugin
