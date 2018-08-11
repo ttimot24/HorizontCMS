@@ -68,7 +68,7 @@ class PageController extends Controller{
                  
                  $img = $this->request->up_file->store($this->imagePath);
 
-                 $page->image = str_replace($this->imagePath.'/','',$img);
+                 $page->image = basename($img);
 
                  \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$page->image));
                  
@@ -164,7 +164,7 @@ class PageController extends Controller{
                  
                  $img = $this->request->up_file->store($this->imagePath);
 
-                 $page->image = str_replace($this->imagePath.'/','',$img);
+                 $page->image = basename($img);
 
                  \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$page->image));
                  

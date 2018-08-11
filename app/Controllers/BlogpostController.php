@@ -64,7 +64,7 @@ class BlogpostController extends Controller{
                  
             	 $img = $this->request->up_file->store($this->imagePath);
 
-                 $blogpost->image = str_replace($this->imagePath.'/','',$img);
+                 $blogpost->image = basename($img);
 
                  \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
                  
@@ -158,7 +158,7 @@ class BlogpostController extends Controller{
                  
             	 $img = $this->request->up_file->store($this->imagePath);
 
-                 $blogpost->image = str_replace($this->imagePath.'/','',$img);
+                 $blogpost->image = basename($img);
 
                  \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
                  

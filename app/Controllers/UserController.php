@@ -65,7 +65,7 @@ class UserController extends Controller{
                  
                  $img = $this->request->up_file->store($this->imagePath);
 
-                 $user->image = str_replace($this->imagePath.'/','',$img);
+                 $user->image = basename($img);
 
                  \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$user->image));
                  
@@ -161,19 +161,12 @@ class UserController extends Controller{
            // $user->active = 1;
 
 
-            if ($this->request->hasFile('up_file')){
-                 
-                 $user->image = str_replace($this->imagePath.'/','',$this->request->up_file->store($this->imagePath));
-
-            }
-
-
 
             if ($this->request->hasFile('up_file')){
                  
                  $img = $this->request->up_file->store($this->imagePath);
 
-                 $user->image = str_replace($this->imagePath.'/','',$img);
+                 $user->image = basename($img);
 
                  \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$user->image));
                  
