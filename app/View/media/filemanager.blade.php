@@ -34,15 +34,17 @@
 			</ol>
 
             @foreach($dirs as $dir)
-                <div class='file col-md-2' style='overflow:hidden;height:140px;cursor:pointer;' ondblclick=" window.location.href = 'admin/file-manager/{{$action}}?path=<?= $old_path.$dir ?>' ">
-                  {!! Html::img('resources/images/icons/dir.png',"style='width:100%;'") !!}
+                <div class='file col-md-2' ondblclick=" window.location.href = 'admin/file-manager/{{$action}}?path=<?= $old_path.$dir ?>' ">
+                  <a href="admin/file-manager/delete?file={{'storage/'.$old_path.$dir}}"><i class="fa fa-trash pull-right"></i></a><br>
+                  {!! Html::img('resources/images/icons/dir.png',"style='width:70%;'") !!}
                   <center><b>{{$dir}}</b></center><br>
                 </div>
             @endforeach
 
             @foreach($files as $file)
                 <?php $file_parts = pathinfo($file) ?>
-                <div class='file col-md-2' style='overflow:hidden;height:140px;cursor:pointer;' @if($action=='ckbrowse') onclick='returnFileUrl("<?= 'storage/'.$old_path.$file ?>");' @else data-toggle='modal' data-target='.{{$file}}-modal-xl' @endif >
+                <div class='file col-md-2' @if($action=='ckbrowse') onclick='returnFileUrl("<?= 'storage/'.$old_path.$file ?>");' @else data-toggle='modal' data-target='.{{$file}}-modal-xl' @endif >
+                <a href="admin/file-manager/delete?file={{'storage/'.$old_path.$file}}"><i class="fa fa-trash pull-right"></i></a><br>
                 @if(isset($file_parts['extension']) && in_array($file_parts['extension'],$allowed_extensions['image']))
                   <img src="{{'storage/'.$old_path.$file}}" style='object-fit:cover;width:100%;height:100px;' />
                 @else
@@ -67,8 +69,24 @@
 		background-color: #337ab7;	
 	}
 
+  .file{
+    overflow:hidden;
+    height:160px;
+    cursor:pointer;
+    padding:5px;
+    text-align:center;
+  }
+
+  .file a i{
+    visibility:hidden;
+  }
+
+  .file:hover a i{
+    visibility:visible;
+  }
+
 	.file:hover{
-		border-radius:3px;
+		border-radius:1.5px;
 		color:white;
 		background-color: #337ab7;
 	}

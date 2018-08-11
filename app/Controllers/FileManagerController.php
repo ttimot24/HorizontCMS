@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Illuminate\Http\Request;
 use App\Libs\Controller;
+use Illuminate\Support\Facades\Storage;
 
 
 class FileManagerController extends Controller{
@@ -150,8 +151,18 @@ class FileManagerController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id){
-        
+    public function delete(){
+
+         $toDelete = ltrim($this->request->get('file'),'storage/');
+                
+         if(!is_dir('storage/'.$toDelete) && Storage::delete($toDelete)){
+             return $this->redirectToSelf()->withMessage(['success' => trans('File deleted successfully')]);
+         }else if(is_dir('storage/'.$toDelete) && Storage::deleteDirectory($toDelete)){
+             return $this->redirectToSelf()->withMessage(['success' => trans('Directory deleted successfully')]);
+         }else{
+             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+         }
+
     }
 
 
