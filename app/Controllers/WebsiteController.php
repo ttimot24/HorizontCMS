@@ -46,7 +46,7 @@ class WebsiteController extends Controller
 
 
             if($this->request->settings['website_down']==1 && (\Auth::user()==null || !\Auth::user()->isAdmin())){
-                $theme_engine->renderWebsiteDown();
+                return $theme_engine->renderWebsiteDown();
             }
 
 
@@ -63,7 +63,7 @@ class WebsiteController extends Controller
                     $template = 'page';
                 }
             }else{
-                 $theme_engine->render404();
+                 return $theme_engine->render404();
             }
 
 

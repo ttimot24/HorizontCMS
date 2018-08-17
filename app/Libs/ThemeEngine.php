@@ -70,24 +70,40 @@ class ThemeEngine{
 	}
 
 	public function render404(){
+
+		ob_start();
+		
 		if($this->theme->has404Template()){
 			$this->require_file('404.php');
 		}else{
 			$this->require_file('../../resources/static/404.php');
 		}
-		exit;
+		
+		$output = ob_get_contents();
+
+		ob_end_clean();
+
+		return response(trim($output),404);
+
 	}
 
 
 	public function renderWebsiteDown(){
 		
+		ob_start();
+
 		if($this->theme->hasWebsiteDownTemplate()){
 			$this->require_file('website_down.php');
 		}else{
 			$this->require_file('../../resources/static/website_down.php');
 		}
 
-		exit;
+		$output = ob_get_contents();
+
+		ob_end_clean();
+
+		return response(trim($output));
+
 	}
 
 
