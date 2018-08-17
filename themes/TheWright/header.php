@@ -13,8 +13,6 @@
 
 
 	<!-- \App\Libs\PluginManager::render('OpenGraph'); -->
-
-	<?php Website::jsPlugins(); ?>
 </head>
 
 <body style="background-color:rgba(0,0,0,0.1);font-family:Lato;">

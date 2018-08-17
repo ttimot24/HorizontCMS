@@ -21,5 +21,7 @@
  }
 </style>
 
+
+	<?php Website::jsPlugins(); ?>
 </body>
 </html>
