@@ -2,7 +2,7 @@
 
 namespace App\Libs;
 
-class Model extends \Illuminate\Database\Eloquent\Model{
+abstract class Model extends \Illuminate\Database\Eloquent\Model{
     
     private $rules = array();
 
