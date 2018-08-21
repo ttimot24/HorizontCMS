@@ -41,10 +41,19 @@ class PluginController extends Controller{
     public function onlinestore(){
 
         $this->view->title(trans('App center'));
-        return $this->view->render('plugin/store',[
-                                               'online_plugins' => json_decode(file_get_contents(\Config::get('horizontcms.sattelite_url').'/get_plugins.php')),
 
-            ]);
+        $repo_status = true;
+
+        try{
+            $plugins = json_decode(file_get_contents(\Config::get('horizontcms.sattelite_url').'/get_plugins.php'));
+        }catch(\ErrorException $e){
+            $plugins = [];
+            $repo_status = false;
+        }
+
+
+
+        return $this->view->render('plugin/store',[ 'online_plugins' => $plugins, 'repo_status' => $repo_status ]);
     }
 
 

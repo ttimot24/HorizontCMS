@@ -10,6 +10,14 @@
 
 <div class="row">
 
+<?php 
+if(!$repo_status){
+
+  echo (new BootstrapMessage())->warning("Plugin store unreachable!"); 
+}
+
+?>
+
 @foreach($online_plugins as $o_plugin)
 
 	  <?php $local_plugin = new \App\Model\Plugin($o_plugin->dir) ?>
