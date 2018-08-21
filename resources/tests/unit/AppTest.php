@@ -15,14 +15,14 @@ class AppTest extends TestCase
     {
 
 
-        $this->assertNotNull($this->app);
+        $this->assertInstanceOf(\App\HorizontCMS::class, $this->app);
 
         $this->assertEquals($this->app->publicPath(),getcwd().DIRECTORY_SEPARATOR);
 
         if(file_exists(base_path(".env")) || env("INSTALLED","")!=""){
 
             $this->assertTrue($this->app->isInstalled());
-            $this->assertNotNull($this->app->plugins);
+            $this->assertNotNull('array',$this->app->plugins);
 
         }else{
 
