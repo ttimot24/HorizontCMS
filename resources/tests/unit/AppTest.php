@@ -17,7 +17,18 @@ class AppTest extends TestCase
 
         $this->assertInstanceOf(\App\HorizontCMS::class, $this->app);
 
+
+    }
+
+
+    public function testAppRootDir(){
+
         $this->assertEquals($this->app->publicPath(),getcwd().DIRECTORY_SEPARATOR);
+
+    }
+
+
+    public function testIsInstalled(){
 
         if(file_exists(base_path(".env")) || env("INSTALLED","")!=""){
 
@@ -31,6 +42,6 @@ class AppTest extends TestCase
 
         }
 
-
     }
+
 }
