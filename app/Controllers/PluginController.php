@@ -92,42 +92,42 @@ class PluginController extends Controller{
 
         try{
 
-       $plugin = new \App\Model\Plugin($plugin_name);
+           $plugin = new \App\Model\Plugin($plugin_name);
 
-       if(!$plugin->isCompatibleWithCore()){
-            return $this->redirectToSelf()->withMessage(['danger' => trans('plugin.not_compatible_with_core',['min_core_ver' => $plugin->getRequiredCoreVersion()])]);
-       }
+           if(!$plugin->isCompatibleWithCore()){
+                return $this->redirectToSelf()->withMessage(['warning' => trans('plugin.not_compatible_with_core',['min_core_ver' => $plugin->getRequiredCoreVersion()])]);
+           }
 
-       
-       if($plugin->getDatabaseFilesPath()){
-
-
-            \Artisan::call("migrate",['--path' => $plugin->getDatabaseFilesPath().DIRECTORY_SEPARATOR."migrations",'--no-interaction' => '','--force' => true ]);
-            
-
-            $seed_class = '\\Plugin\\'.$plugin_name.'\\Database\\Seeds\\PluginSeeder';
-
-            if(class_exists($seed_class)){
-            	\Artisan::call('db:seed', ['--class' => $seed_class, '--no-interaction' => '', '--force' => true ]);
-        	}
-       }
+           
+           if($plugin->getDatabaseFilesPath()){
 
 
-        $plugin->getRegister('onInstall',[]);
-     
+                \Artisan::call("migrate",['--path' => $plugin->getDatabaseFilesPath().DIRECTORY_SEPARATOR."migrations",'--no-interaction' => '','--force' => true ]);
+                
 
-        //$plugin->version should be added
-        unset($plugin->info,$plugin->config);
-        $plugin->area = 0;
-        $plugin->permission = 0;
-        $plugin->tables = "";
-        $plugin->active = 0;
+                $seed_class = '\\Plugin\\'.$plugin_name.'\\Database\\Seeds\\PluginSeeder';
+
+                if(class_exists($seed_class)){
+                	\Artisan::call('db:seed', ['--class' => $seed_class, '--no-interaction' => '', '--force' => true ]);
+            	}
+           }
 
 
-        $plugin->save();
-            
+            $plugin->getRegister('onInstall',[]);
+         
 
-        return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully installed '.$plugin_name)]);
+            //$plugin->version should be added
+            unset($plugin->info,$plugin->config);
+            $plugin->area = 0;
+            $plugin->permission = 0;
+            $plugin->tables = "";
+            $plugin->active = 0;
+
+
+            $plugin->save();
+                
+
+            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully installed '.$plugin_name)]);
 
 
         }catch(\Exception $e){
