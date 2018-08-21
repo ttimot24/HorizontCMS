@@ -90,6 +90,7 @@ class PluginController extends Controller{
      */
     public function install($plugin_name){
 
+        try{
 
        $plugin = new \App\Model\Plugin($plugin_name);
 
@@ -123,12 +124,15 @@ class PluginController extends Controller{
         $plugin->active = 0;
 
 
-        if($plugin->save()){
-            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully installed '.$plugin_name)]);
-        }else{
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
+        $plugin->save();
+            
 
+        return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully installed '.$plugin_name)]);
+
+
+        }catch(\Exception $e){
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong') ." ".$e->getMessage()]);
+        }
 
     }
 
@@ -201,16 +205,21 @@ class PluginController extends Controller{
      */
     public function delete($plugin){
 
-    	\App\Model\Plugin::where('root_dir',$plugin)->delete();
+        try{
 
-        if(file_exists("plugins/".$plugin)){
-            if(\Storage::disk('plugins')->deleteDirectory($plugin)){
-                 
-                 return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully deleted the plugin!')]);
-            }else{
-                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
+            \App\Model\Plugin::where('root_dir',$plugin)->delete();
+
+             if(file_exists("plugins/".$plugin)){
+                \Storage::disk('plugins')->deleteDirectory($plugin);
+             }
+
+        }catch(\Exception $e){
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong') . " " .$e->getMessage()]);
         }
+
+
+        return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully deleted the plugin!')]);
+ 
     }
 
 
