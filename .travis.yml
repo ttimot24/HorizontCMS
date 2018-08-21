@@ -19,7 +19,7 @@ script:
    - php artisan migrate --no-interaction --force
    - php artisan db:seed --no-interaction --force
    - export INSTALLED=YES
-   - vendor/bin/phpunit resources/tests/unit/*
+   - vendor/bin/phpunit resources/tests/unit/
 
 
 
