@@ -34,7 +34,7 @@ foreach($all_plugin as $current_plugin){
             if($current_plugin->isInstalled()){
               echo "<a href='admin/plugin/run/".$current_plugin->getSlug()."'>".$current_plugin->getName()."</a>";
             }else{
-              echo "<font color='white'>".$current_plugin->getName()."</font>";
+              echo "<a style='color:white;'>".$current_plugin->getName()."</a>";
             }
 
 
