@@ -32,7 +32,7 @@ foreach($all_plugin as $current_plugin){
         echo "<h4 class='list-group-item-heading'>";
 
             if($current_plugin->isInstalled()){
-              echo "<a href='admin/plugin/run/".namespace_to_slug($current_plugin->root_dir)."'>".$current_plugin->getName()."</a>";
+              echo "<a href='admin/plugin/run/".$current_plugin->getSlug()."'>".$current_plugin->getName()."</a>";
             }else{
               echo "<font color='white'>".$current_plugin->getName()."</font>";
             }

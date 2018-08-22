@@ -1,6 +1,6 @@
 <?php
 
-require_once("../../resources/tests/SeleniumTest.php");
+require_once("resources/tests/SeleniumTest.php");
 
 class LoginBrowserTest extends SeleniumTest{
 

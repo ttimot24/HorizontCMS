@@ -57,6 +57,13 @@ class Plugin extends Model
 		return $this->getInfo('name')==NULL? $this->root_dir : $this->getInfo('name');
 	}
 
+	public function getNamespaceFor($for){
+		return "\Plugin\\".$this->root_dir."\\App\\".ucfirst($for)."\\";
+	}
+
+	public function getSlug(){
+		return namespace_to_slug($this->root_dir);
+	}
 
 	public function getPath(){
 		return 'plugins'.DIRECTORY_SEPARATOR.$this->root_dir.DIRECTORY_SEPARATOR;
