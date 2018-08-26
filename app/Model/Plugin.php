@@ -111,7 +111,7 @@ class Plugin extends Model
 	}
 
 	public function getShortCode(){
-		return str_slug($this->root_dir,"_");
+		return "{[".$this->root_dir."]}";
 	}
 
 	public function getRegisterClass(){

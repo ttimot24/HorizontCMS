@@ -20,7 +20,7 @@ class ShortCode extends Model{
 												$plugin->getPath()."/app".DIRECTORY_SEPARATOR."resources".DIRECTORY_SEPARATOR."views"
 												]);
 
-				self::$widgets["{[".$plugin->root_dir."]}"] = $plugin->getRegister('widget');
+				self::$widgets[$plugin->getShortCode()] = $plugin->getRegister('widget');
 			}
 
 
@@ -34,7 +34,7 @@ class ShortCode extends Model{
 
 	public static function resolve($shortcode){
 
-		echo isset(self::$widgets["{[".$shortcode."]}"])? self::$widgets["{[".$shortcode."]}"] : "";
+		echo isset(self::$widgets[$plugin->getShortCode()])? self::$widgets[$plugin->getShortCode()] : "";
 	}
 
 
