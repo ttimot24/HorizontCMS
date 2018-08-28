@@ -24,8 +24,30 @@ class RouteResolverTest extends TestCase
 
         $this->assertInstanceOf(\App\Http\RouteResolver::class,$this->router);
         
+        $this->assertObjectHasAttribute('defaultNamespace',$this->router);
+        $this->assertObjectHasAttribute('namespace',$this->router);
+
 
     }
+
+
+    public function testRoutingMethodExistance(){
+
+
+         $methods = [
+                    'resetNamespace',
+                    'changeNamespace',
+                    'resolveControllerClass',
+                    'resolve'
+                    ];
+
+         foreach($methods as $method){
+            $this->assertTrue(method_exists($this->router, $method),'Method ['.$method.'] does not exists in class ['.get_class($this->router).']');
+         }
+
+
+    }
+
 
     public function testRouteNamespacing(){
 
