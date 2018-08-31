@@ -33,11 +33,19 @@ class ThemeEngine{
 		return file_exists($this->theme->getPath()."page_templates/".$template.'.php'); 
 	}
 
+	public function boot(){
 
-	public function render(){
+		if($this->theme==NULL){
+			throw new \Exception("<b>Theme is not set!</b>");
+		}
 
 		\Website::initalize($this);
 		\App\Libs\ShortCode::initalize();
+	}
+
+
+	public function render(){
+
 		
 		ob_start();
 

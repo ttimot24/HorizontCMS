@@ -41,6 +41,8 @@ class WebsiteController extends Controller
         $theme_engine = new $this->engines[$this->theme->getConfig('theme_engine','hcms')]($this->request);
         $theme_engine->setTheme($this->theme);
 
+        $theme_engine->boot();
+
         $theme_engine->runScript('before');
         
 
