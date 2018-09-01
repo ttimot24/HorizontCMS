@@ -20,6 +20,4 @@ script:
    - php artisan db:seed --no-interaction --force
    - export INSTALLED=YES
    - vendor/bin/phpunit resources/tests/unit/
-
-
-
+   - php artisan horizontcms:version
