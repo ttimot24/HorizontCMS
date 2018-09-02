@@ -11,7 +11,7 @@
 
     <div class='container'>
 
-    <form action="{{ url('/admin/login') }}" role='form' method='POST' >
+    <form action="{{ admin_link('login-login') }}" role='form' method='POST' >
         
         {{ csrf_field() }}
 

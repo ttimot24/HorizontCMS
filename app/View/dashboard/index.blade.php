@@ -40,7 +40,7 @@
 
 
         </br></br></br><center>
-        <form class='form-inline' action='admin/search/index' method='POST'>
+        <form class='form-inline' action="{{admin_link('search-index')}}" method='POST'>
             {{ csrf_field() }}
           <div class='form-group'>
             <div class='input-group'>
@@ -61,7 +61,7 @@
         <div class="alert alert-warning alert-dismissible col-md-10 col-md-offset-1" role="alert" style='margin-top:5%;'>
     		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     		  <strong>{{ trans('dashboard.update_available')." v".$upgrade->getLatestVersion()}}</strong><br>{{ trans('dashboard.update_message') }}<br><br>
-    		  <a href='admin/settings/updatecenter' class='btn btn-primary btn-block'>{{ trans('dashboard.update_now') }}</a>
+    		  <a href='{{ admin_link("settings-update-center") }}' class='btn btn-primary btn-block'>{{ trans('dashboard.update_now') }}</a>
     		</div>
       @endif
 

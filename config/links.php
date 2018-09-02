@@ -8,6 +8,8 @@
 
 return [
 	'dashboard-index' => 'dashboard',
+	'login-login' => 'login',
+	'login-logout' => 'logout',
 
 	'blogpost-index' => 'blogpost/index',
 	'blogpost-create' => 'blogpost/create',
@@ -60,6 +62,9 @@ return [
 	'ext-theme-index' => 'theme/index',
 	'ext-plugin-index' => 'plugin/index',
 
+	'search-index' => 'search/index',
+
 	'settings-index' => 'settings/index',
+	'settings-update-center' => 'settings/updatecenter',
 
 ];
