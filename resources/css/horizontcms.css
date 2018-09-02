@@ -19,7 +19,7 @@
   }
 /*}*/
 
-/*MODEAL HEADEREKA LEFVÉGÉN!!!!!*/
+/*MODEAL HEADEREK A LEFGÉGÉN!!!!!*/
 
 #whatsup{
     margin-left:30px;
@@ -5474,4 +5474,12 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     padding:9px 15px;
     border-bottom:1px solid #eee;
     background-color: #428bca;
+}
+
+
+.current-image:hover a{
+    clear:both !important;
+    background-color: transparent !important;
+    cursor:initial !important;
+    pointer-events: none;
 }
