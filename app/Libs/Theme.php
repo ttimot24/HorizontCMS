@@ -81,4 +81,12 @@ class Theme{
 		return (file_exists($this->getPath()."website_down.blade.php") || file_exists($this->getPath()."website_down.php"));
 	}
 
+	public function getRequiredCoreVersion(){
+		return isset($this->getInfo('requires')->core)? $this->getInfo('requires')->core : NULL;
+	}
+	
+	public function isCompatibleWithCore(){
+		return \Composer\Semver\Comparator::greaterThanOrEqualTo(\App\Model\SystemUpgrade::getCurrentVersion()->version,$this->getRequiredCoreVersion());
+	}
+
 }

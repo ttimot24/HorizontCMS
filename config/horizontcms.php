@@ -25,7 +25,7 @@ return [
 			//'resources/css/simplex.css',
 			//'resources/css/culean.css',
 			//'resources/css/superhero.css',
-		   'resources/css/timot.css',
+		   'resources/css/horizontcms.css',
 
 
 			//'resources/css/default/style.css',
