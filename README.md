@@ -33,6 +33,9 @@ After downloading and copying the files to the server, navigate to the app root 
   4. Enter the required database and administrator informations.
   5. You're finished.
 
+##### Migration information
+  Incremented migrations will be in use after v1.0 is released. Until then migration files might be modified.
+
 ### Sample plugin
 
   [GoogleMaps](https://github.com/ttimot24/GoogleMaps)

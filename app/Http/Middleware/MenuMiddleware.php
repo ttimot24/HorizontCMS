@@ -16,15 +16,12 @@ class MenuMiddleware{
     public function handle($request, Closure $next){
 
 
-      //  \App::setLocale(\App\Model\Settings::get('language'));
         \App::setLocale($request->settings['language']);
 
 
-        \Menu::make('MainMenu', function($menu) {
+        \Menu::make('MainMenu', function($menu) use ($request) {
 
-            $prefix = \Config::get('horizontcms.backend_prefix');
-
-            $menu->add("<span class='glyphicon glyphicon-th-large' aria-hidden='true'></span> ".trans('navbar.dashboard'), $prefix."/dashboard");
+            $menu->add("<span class='glyphicon glyphicon-th-large' aria-hidden='true'></span> ".trans('navbar.dashboard'), admin_link("dashboard-index"));
 
             if(\Auth::user()->hasPermission("blogpost")){
             $menu->add(trans('navbar.news'), '#')->id('news');
@@ -50,24 +47,20 @@ class MenuMiddleware{
             if(\Auth::user()->hasPermission("media")){
             $menu->add(trans('navbar.media'), '#')->id('media');
             $menu->find('media')->add("<i class='fa fa-picture-o'></i> ".trans('navbar.header_images'), admin_link('headerimage-index'));
-            $menu->find('media')->add("<i class='fa fa-folder-open-o'></i> ".trans('navbar.filemanager'), $prefix.'/file-manager');
-           // $menu->find('media')->add("<i class='fa fa-camera-retro'></i> ".trans('navbar.gallery'), $prefix.'/gallery');
+            $menu->find('media')->add("<i class='fa fa-folder-open-o'></i> ".trans('navbar.filemanager'), admin_link('file-manager-index'));
             }
 
 
             if(\Auth::user()->hasPermission("themes&apps")){
             $menu->add(trans('navbar.themes_apps'), '#')->id('themes_apps');
-            $menu->find('themes_apps')->add("<i class='fa fa-desktop'></i> ".trans('navbar.theme'), $prefix.'/theme');
-            $menu->find('themes_apps')->add("<i class='fa fa-cubes'></i> ".trans('navbar.plugin'), $prefix.'/plugin');
-           // $menu->find('themes_apps')->add("<i class='fa fa-code'></i> ".trans('navbar.develop'), $prefix.'/develop');
+            $menu->find('themes_apps')->add("<i class='fa fa-desktop'></i> ".trans('navbar.theme'), admin_link('ext-theme-index'));
+            $menu->find('themes_apps')->add("<i class='fa fa-cubes'></i> ".trans('navbar.plugin'), admin_link('ext-plugin-index'));
             }
 
         });
   
 
-        \Menu::make('RightMenu', function($menu) {
-
-            $prefix = \Config::get('horizontcms.backend_prefix');
+        \Menu::make('RightMenu', function($menu) use ($request) {
 
             
                 $menu->add("<img style='height:30px;margin-top:-10px;margin-bottom:-10px;object-fit:cover;border-radius:1.5px;' src='".Auth::user()->getThumb()."' />  ". \Auth::user()->username)->id('current_user');
@@ -78,14 +71,14 @@ class MenuMiddleware{
            
 
             if(\Auth::user()->hasPermission("settings")){
-                $menu->add("<i class='fa fa-cogs'></i> ", $prefix.'/settings')->id('settings');
+                $menu->add("<i class='fa fa-cogs'></i> ", admin_link('settings-index'))->id('settings');
             }
 
 
                 $menu->add("<i class='fa fa-power-off'></i> ", '#')->id('shutdown');
                 $menu->find('shutdown')->add("<i class='fa fa-lock'></i> ".trans('navbar.lock_screen'), ['url'=>'#', 'onclick'=>'event.preventDefault();localStorage.locksession=\'true\'','data-target'=>"#lock_screen",'data-toggle'=>"modal",'data-backdrop'=>'static','data-keyboard'=> 'false'])->id('lock_screen');
                 $menu->find('lock_screen')->divide();
-                $menu->find('shutdown')->add("<i class='fa fa-external-link'></i> ".trans('navbar.visit_site',['site_name' => \App\Model\Settings::get('site_name')]), '');
+                $menu->find('shutdown')->add("<i class='fa fa-external-link'></i> ".trans('navbar.visit_site',['site_name' => $request->settings['site_name']]), '');
                 $menu->find('shutdown')->add("<i class='fa fa-sign-out'></i> ".trans('navbar.logout'), ['onclick' => 'event.preventDefault(); document.getElementById(\'logout-form\').submit();']);
 
         

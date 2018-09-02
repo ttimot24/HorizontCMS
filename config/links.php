@@ -7,6 +7,8 @@
 
 
 return [
+	'dashboard-index' => 'dashboard',
+
 	'blogpost-index' => 'blogpost/index',
 	'blogpost-create' => 'blogpost/create',
 	'blogpost-edit' => 'blogpost/edit',
@@ -53,5 +55,11 @@ return [
 
 
 	'headerimage-index' => 'header-image/index',
+	'file-manager-index' => 'file-manager/index',
+
+	'ext-theme-index' => 'theme/index',
+	'ext-plugin-index' => 'plugin/index',
+
+	'settings-index' => 'settings/index',
 
 ];
