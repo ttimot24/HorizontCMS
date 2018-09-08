@@ -25,10 +25,10 @@ class ForgotPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(\App\Libs\ViewResolver $viewResolver)
     {
         $this->middleware('guest');
-        $this->view = new \App\Libs\View();
+        $this->view = $viewResolver;
     }
 
     public function showLinkRequestForm()

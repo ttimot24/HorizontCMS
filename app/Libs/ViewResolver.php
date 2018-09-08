@@ -4,7 +4,7 @@ namespace App\Libs;
 
 use Config;
 
-class View{
+class ViewResolver{
 
 	public $data = [];
 

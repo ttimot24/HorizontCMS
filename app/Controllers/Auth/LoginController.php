@@ -35,8 +35,8 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct(Request $request){
-        parent::__construct($request);
+    public function __construct(Request $request, \App\Libs\ViewResolver $viewResolver){
+        parent::__construct($request,$viewResolver);
 
         $this->middleware('guest', ['except' => 'logout']);
     }

@@ -34,10 +34,10 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(\App\Libs\ViewResolver $viewResolver)
     {
 
-        $this->view = new \App\Libs\View();
+        $this->view = $viewResolver;
 
         $this->middleware('guest');
 
