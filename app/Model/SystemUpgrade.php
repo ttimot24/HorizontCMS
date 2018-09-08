@@ -11,10 +11,10 @@ class SystemUpgrade extends Model{
 
 
 	public static function checkUpgrade(){
-	        $workspace = storage_path().DIRECTORY_SEPARATOR."framework".DIRECTORY_SEPARATOR."upgrade";
+	        $workspace = storage_path("framework/upgrade");
 	        $url = \Config::get('horizontcms.sattelite_url')."/updates";
 
-	        $update = new AutoUpdate($workspace.DIRECTORY_SEPARATOR.'temp', getcwd() , 60);
+	        $update = new AutoUpdate($workspace.DIRECTORY_SEPARATOR.'temp', public_path() , 60);
             $update->setCurrentVersion(self::getCurrentVersion()->version);
             $update->setUpdateUrl($url);
 

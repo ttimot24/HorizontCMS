@@ -120,13 +120,13 @@ class SettingsController extends Controller{
 
     public function sysUpgrade(){
    
-        ob_start();
+        $echo = array();
 
-        $workspace = storage_path().DIRECTORY_SEPARATOR."framework".DIRECTORY_SEPARATOR."upgrade";
+        $workspace = storage_path("framework/upgrade");
         $url = \Config::get('horizontcms.sattelite_url')."/updates";
 
 
-        $update = new AutoUpdate($workspace.DIRECTORY_SEPARATOR.'temp', getcwd() , 60);
+        $update = new AutoUpdate($workspace.'/temp', public_path() , 60);
         $update->setCurrentVersion(\App\Model\SystemUpgrade::getCurrentVersion()->version);
         $update->setUpdateUrl($url); //Replace with your server update directory
         // Optional:
@@ -135,47 +135,49 @@ class SettingsController extends Controller{
         //Check for a new update
 
 
-        if ($update->checkUpdate() === false)
-            die('Could not check for updates! See log file for details.');
+        if ($update->checkUpdate() === false){
+            $echo[] = 'Could not check for updates! See log file for details.';
+        } else{ 
         if ($update->newVersionAvailable()) {
             //Install new update
-            echo 'New Version: ' . $update->getLatestVersion() . '<br>';
-            echo 'Installing Updates: <br>';
-            echo '<pre>';
-            var_dump(array_map(function($version) {
-                return (string) $version;
-            }, $update->getVersionsToUpdate()));
-            echo '</pre>';
+            $echo[] =  'New Version: ' . $update->getLatestVersion() . '<br>';
+            $echo[] =  'Installing Updates: <br>';
+            $echo[] =  '<pre>';
+            $echo[] = print_r(array_map(function($version) {
+              		   return (string) $version;
+            		}, $update->getVersionsToUpdate()),true);
+            $echo[] =  '</pre>';
             // This call will only simulate an update.
             // Set the first argument (simulate) to "false" to install the update
             // i.e. $update->update(false);
             $result = $update->update(false);
             if ($result === true) {
-                echo 'Update successful<br>';
+                $echo[] = 'Update successful<br>';
                 $sys_upgrade = new \App\Model\SystemUpgrade();
                 $sys_upgrade->version = $update->getLatestVersion();
                 $sys_upgrade->nickname = "Upgrade";
                 $sys_upgrade->importance = "important";
                 $sys_upgrade->description = "It was a successful update!";
                 $sys_upgrade->save();
+
+                \Artisan::call("migrate",['--no-interaction' => '','--force' => true ]);
             } else {
-                echo 'Update failed: ' . $result . '!<br>';
+                $echo[] = 'Update failed: ' . $result . '!<br>';
                 if ($result = AutoUpdate::ERROR_SIMULATE) {
-                    echo '<pre>';
-                    var_dump($update->getSimulationResults());
-                    echo '</pre>';
+                    $echo[] = '<pre>';
+                    $echo[] = print_r($update->getSimulationResults(),true);
+                    $echo[] = '</pre>';
                 }
             }
         } else {
-            echo 'Current Version is up to date<br>';
+            $echo[] = 'Current Version is up to date<br>';
         }
-        echo 'Log:<br>';
-        echo nl2br(file_get_contents($workspace. '/update.log'));
+    }
+        $echo[] = 'Log:<br>';
+        $echo[] = nl2br(file_get_contents($workspace. '/update.log'));
 
-        $echo = ob_get_contents();
-        ob_end_clean();
-
-        return $this->redirectToSelf()->with(['upgrade_console' => $echo]);
+               
+        return $this->redirectToSelf()->with(['upgrade_console' => implode("<br>",$echo)]);
     }
 
 
