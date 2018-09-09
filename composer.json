@@ -6,7 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*",
+        "laravel/framework": "5.4.*",
         "lavary/laravel-menu": "dev-master",
         "composer/semver": "*",
         "visualappeal/php-auto-update" : "*",
@@ -36,7 +36,10 @@
     "autoload-dev": {
         "classmap": [
             "resources/tests/TestCase.php"
-        ]
+        ],
+        "psr-4": {
+            "Tests\\": "resources/tests/"
+        }
     },
     "scripts": {
         "post-root-package-install": [
