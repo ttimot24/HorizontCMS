@@ -4,6 +4,7 @@ namespace App\Controllers\Auth;
 
 use App\Libs\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use \App\Libs\ViewResolver;
 
 class ForgotPasswordController extends Controller
 {
@@ -25,10 +26,12 @@ class ForgotPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct(\App\Libs\ViewResolver $viewResolver)
+    public function __construct(ViewResolver $viewResolver)
     {
-        $this->middleware('guest');
+
         $this->view = $viewResolver;
+        $this->middleware('guest');
+
     }
 
     public function showLinkRequestForm()

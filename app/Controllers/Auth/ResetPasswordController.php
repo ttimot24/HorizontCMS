@@ -5,6 +5,7 @@ namespace App\Controllers\Auth;
 
 use App\Libs\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use \App\Libs\ViewResolver;
 
 class ResetPasswordController extends Controller
 {
@@ -26,8 +27,9 @@ class ResetPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ViewResolver $viewResolver)
     {
+        $this->view = $viewResolver;
         $this->middleware('guest');
     }
 

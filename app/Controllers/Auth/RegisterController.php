@@ -6,6 +6,7 @@ use App\Libs\Controller;
 use App\Model\User;
 use Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use \App\Libs\ViewResolver;
 
 class RegisterController extends Controller
 {
@@ -34,7 +35,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct(\App\Libs\ViewResolver $viewResolver)
+    public function __construct(ViewResolver $viewResolver)
     {
 
         $this->view = $viewResolver;

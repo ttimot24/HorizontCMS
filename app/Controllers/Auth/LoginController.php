@@ -6,6 +6,7 @@ namespace App\Controllers\Auth;
 use App\Libs\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use \App\Libs\ViewResolver;
 
 class LoginController extends Controller
 {
@@ -35,7 +36,7 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct(Request $request, \App\Libs\ViewResolver $viewResolver){
+    public function __construct(Request $request, ViewResolver $viewResolver){
         parent::__construct($request,$viewResolver);
 
         $this->middleware('guest', ['except' => 'logout']);
