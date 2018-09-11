@@ -42,8 +42,7 @@ class Plugin extends Model
     }
 
     public function isActive(){
-    	$result = self::where('root_dir',$this->root_dir)->get();
-
+    	
     	return ($this->isInstalled() && $this->active==1);
     }
 
