@@ -13,11 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
-        if (env('APP_ENV') === 'local') {
+
+        if ($this->app->environment("local")) {
                 \DB::connection()->enableQueryLog();
             }
-            if (env('APP_ENV') === 'local') {
+            if ($this->app->environment("local")) {
                 \Event::listen('kernel.handled', function ($request, $response) {
                     if ( $request->has('sql-debug') ) {
                         $queries = \DB::getQueryLog();
