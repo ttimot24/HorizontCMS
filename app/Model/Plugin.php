@@ -42,9 +42,10 @@ class Plugin extends Model
     }
 
     public function isActive(){
-    	return $this->active==1;
-    }
+    	$result = self::where('root_dir',$this->root_dir)->get();
 
+    	return ($this->isInstalled() && $this->active==1);
+    }
 
 	public function getConfig($config, $default = NULL){
 
