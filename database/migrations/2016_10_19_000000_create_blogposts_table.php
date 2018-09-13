@@ -11,9 +11,13 @@ class CreateBlogpostsTable extends Migration
      *
      * @return void
      */
+    private $table_name = 'blogposts';
+
     public function up()
     {
-        Schema::create('blogposts', function (Blueprint $table) {
+        if (Schema::hasTable($this->table_name)) { return; }
+        
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->string('slug');
@@ -35,6 +39,6 @@ class CreateBlogpostsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('blogposts');
+        Schema::drop($this->table_name);
     }
 }

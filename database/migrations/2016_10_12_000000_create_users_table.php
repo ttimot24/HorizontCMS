@@ -11,9 +11,15 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
+
+    private $table_name = 'users';
+
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+
+        if (Schema::hasTable($this->table_name)) { return; }
+
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('username')->unique();
@@ -27,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->boolean('active')->default(false);
         });
+
     }
 
     /**
@@ -36,6 +43,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::drop($this->table_name);
     }
+
 }

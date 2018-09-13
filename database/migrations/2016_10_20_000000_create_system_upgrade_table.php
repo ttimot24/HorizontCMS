@@ -11,9 +11,13 @@ class CreateSystemUpgradeTable extends Migration
      *
      * @return void
      */
+    private $table_name = 'system_upgrades';
+        
     public function up()
     {
-        Schema::create('system_upgrades', function (Blueprint $table) {
+        if (Schema::hasTable($this->table_name)) { return; }
+
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
             $table->string('version');
             $table->string('nickname');
@@ -30,6 +34,6 @@ class CreateSystemUpgradeTable extends Migration
      */
     public function down()
     {
-        Schema::drop('system_upgrades');
+        Schema::drop($this->table_name);
     }
 }

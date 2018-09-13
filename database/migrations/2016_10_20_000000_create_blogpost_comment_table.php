@@ -11,9 +11,13 @@ class CreateBlogpostCommentTable extends Migration
      *
      * @return void
      */
+    private $table_name = 'blogpost_comments';
+
     public function up()
     {
-        Schema::create('blogpost_comments', function (Blueprint $table) {
+        if (Schema::hasTable($this->table_name)) { return; }
+
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
             $table->integer('blogpost_id');
             $table->integer('user_id');
@@ -30,6 +34,6 @@ class CreateBlogpostCommentTable extends Migration
      */
     public function down()
     {
-        Schema::drop('blogpost_comments');
+        Schema::drop($this->table_name);
     }
 }

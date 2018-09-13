@@ -11,9 +11,13 @@ class CreatePluginsTable extends Migration
      *
      * @return void
      */
+    private $table_name = 'plugins';
+
     public function up()
     {
-        Schema::create('plugins', function (Blueprint $table) {
+        if (Schema::hasTable($this->table_name)) { return; }
+        
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
             $table->string('root_dir')->unique()->comment('Plugin context');
             $table->integer('area')->nullable();
@@ -30,6 +34,6 @@ class CreatePluginsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('plugins');
+        Schema::drop($this->table_name);
     }
 }

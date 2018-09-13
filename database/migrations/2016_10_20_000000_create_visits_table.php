@@ -11,9 +11,13 @@ class CreateVisitsTable extends Migration
      *
      * @return void
      */
+    private $table_name = 'visits';
+    
     public function up()
     {
-        Schema::create('visits', function (Blueprint $table) {
+        if (Schema::hasTable($this->table_name)) { return; }
+
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
             $table->string('date',25);
             $table->string('time');
@@ -32,6 +36,6 @@ class CreateVisitsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('visits');
+        Schema::drop($this->table_name);
     }
 }

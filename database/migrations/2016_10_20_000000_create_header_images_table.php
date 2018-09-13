@@ -11,9 +11,13 @@ class CreateHeaderImagesTable extends Migration
      *
      * @return void
      */
+    private $table_name = 'header_images';
+    
     public function up()
     {
-        Schema::create('header_images', function (Blueprint $table) {
+        if (Schema::hasTable($this->table_name)) { return; }
+
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->string('image');
@@ -27,6 +31,6 @@ class CreateHeaderImagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('header_images');
+        Schema::drop($this->table_name);
     }
 }

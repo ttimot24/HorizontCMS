@@ -11,9 +11,13 @@ class CreateBlogpostCategoryTable extends Migration
      *
      * @return void
      */
+    private $table_name = 'blogpost_categories';
+    
     public function up()
     {
-        Schema::create('blogpost_categories', function (Blueprint $table) {
+        if (Schema::hasTable($this->table_name)) { return; }
+
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');;
             $table->integer('author_id');
@@ -29,6 +33,6 @@ class CreateBlogpostCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::drop('blogpost_categories');
+        Schema::drop($this->table_name);
     }
 }

@@ -11,9 +11,13 @@ class CreateSettingsTable extends Migration
      *
      * @return void
      */
+    private $table_name = 'settings';
+    
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        if (Schema::hasTable($this->table_name)) { return; }
+
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
             $table->string('setting')->comment("Key");
             $table->string('value',4000)->nullable()->comment("Value");
@@ -28,6 +32,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('settings');
+        Schema::drop($this->table_name);
     }
 }

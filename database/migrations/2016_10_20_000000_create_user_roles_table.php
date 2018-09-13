@@ -11,9 +11,13 @@ class CreateUserRolesTable extends Migration
      *
      * @return void
      */
+    private $table_name = 'user_roles';
+    
     public function up()
     {
-        Schema::create('user_roles', function (Blueprint $table) {
+        if (Schema::hasTable($this->table_name)) { return; }
+
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('permission')->nullable();
@@ -28,6 +32,6 @@ class CreateUserRolesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_roles');
+        Schema::drop($this->table_name);
     }
 }
