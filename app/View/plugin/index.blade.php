@@ -32,9 +32,9 @@ foreach($all_plugin as $current_plugin){
         echo "<h4 class='list-group-item-heading'>";
 
             if($current_plugin->isActive()){
-              echo "<a href='admin/plugin/run/".$current_plugin->getSlug()."'>".$current_plugin->getName()."</a>";
+              echo "<a id='".$current_plugin->root_dir."' href='admin/plugin/run/".$current_plugin->getSlug()."'>".$current_plugin->getName()."</a>";
             }else{
-              echo "<a style='color:white;'>".$current_plugin->getName()."</a>";
+              echo "<a id='".$current_plugin->root_dir."' style='color:white;'>".$current_plugin->getName()."</a>";
             }
 
 
