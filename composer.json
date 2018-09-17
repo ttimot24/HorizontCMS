@@ -22,7 +22,8 @@
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
         "codeception/codeception" : "*",
-        "modelizer/selenium" : "*"
+        "modelizer/selenium" : "*",
+        "laravel/dusk": "1.*"
     },
     "autoload": {
         "classmap": [

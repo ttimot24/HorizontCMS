@@ -14,17 +14,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        if ($this->app->environment("local")) {
+        if ($this->app->environment("local") || $this->app->environment("testing") ) {
                 \DB::connection()->enableQueryLog();
-            }
-            if ($this->app->environment("local")) {
+
                 \Event::listen('kernel.handled', function ($request, $response) {
                     if ( $request->has('sql-debug') ) {
                         $queries = \DB::getQueryLog();
                         dd($queries);
                     }
                 });
-            }
+
+
+                $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
+        }
         
     }
 
