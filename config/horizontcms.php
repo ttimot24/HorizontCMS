@@ -33,6 +33,7 @@ return [
 			'resources/assets/filemaster/css/fileinput.min.css',
 			'resources/assets/checkboxmaster/build.css',
 			//'resources/assets/scrollbar/jquery.scrollbar.css',
+			'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'
 			],
 
 	'js' => [

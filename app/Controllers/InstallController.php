@@ -141,50 +141,48 @@ class InstallController extends Controller{
      */
     public function migrate(){
 
-        Config::set('database.default',Session::get('step2.db_driver'));
-        Config::set('database.connections.'.Session::get('step2.db_driver').'.host', Session::get('step2.server'));
-        Config::set('database.connections.'.Session::get('step2.db_driver').'.username', Session::get('step2.username'));
-        Config::set('database.connections.'.Session::get('step2.db_driver').'.password', Session::get('step2.password'));
-        Config::set('database.connections.'.Session::get('step2.db_driver').'.database', Session::get('step2.database'));
-        Config::set('database.connections.'.Session::get('step2.db_driver').'.prefix',Session::get('step2.prefix'));
+    	$this->request->flash();
 
-        \Artisan::call("migrate", ["--force"=> true ]);
-        \Artisan::call("db:seed", ["--force"=> true ]);
+    	try{
+	        Config::set('database.default',Session::get('step2.db_driver'));
+	        Config::set('database.connections.'.Session::get('step2.db_driver').'.host', Session::get('step2.server'));
+	        Config::set('database.connections.'.Session::get('step2.db_driver').'.username', Session::get('step2.username'));
+	        Config::set('database.connections.'.Session::get('step2.db_driver').'.password', Session::get('step2.password'));
+	        Config::set('database.connections.'.Session::get('step2.db_driver').'.database', Session::get('step2.database'));
+	        Config::set('database.connections.'.Session::get('step2.db_driver').'.prefix',Session::get('step2.prefix'));
 
-        $administrator = new \App\Model\User();
-        $administrator->name = 'Administrator';
-        $administrator->username = $this->request->input('ad_username');
-        $administrator->slug = str_slug($this->request->input('ad_username'));
-        $administrator->password = $this->request->input('ad_password');
-        $administrator->email = $this->request->input('ad_email');
-        $administrator->role_id = 6;
-        $administrator->active = 1;
+	        \Artisan::call("migrate", ["--force"=> true ]);
+	        \Artisan::call("db:seed", ["--force"=> true ]);
 
-        if($administrator->save()){
+	        $administrator = new \App\Model\User();
+	        $administrator->name = 'Administrator';
+	        $administrator->username = $this->request->input('ad_username');
+	        $administrator->slug = str_slug($this->request->input('ad_username'));
+	        $administrator->password = $this->request->input('ad_password');
+	        $administrator->email = $this->request->input('ad_email');
+	        $administrator->role_id = 6;
+	        $administrator->active = 1;
 
-            $dotenv = new \App\Libs\DotEnvGenerator();
-            $dotenv->addEnvVar('DB_HOST', Session::get('step2.server'));
-            $dotenv->addEnvVar('DB_CONNECTION',  Session::get('step2.db_driver'));
-            $dotenv->addEnvVar('DB_USERNAME',  Session::get('step2.username'));
-            $dotenv->addEnvVar('DB_PASSWORD',  Session::get('step2.password'));
-            $dotenv->addEnvVar('DB_DATABASE',  Session::get('step2.database'));
-            $dotenv->addEnvVar('DB_TABLE_PREFIX',  Session::get('step2.prefix'));
-            $dotenv->generate();
+	        if($administrator->save()){
 
-            $systemupgrade = new \App\Model\SystemUpgrade();
-            $systemupgrade->version = \Config::get('horizontcms.version');
-            $systemupgrade->nickname = "Core";
-            $systemupgrade->importance = "most important";
-            $systemupgrade->description = "welcome!";
+	            $systemupgrade = new \App\Model\SystemUpgrade();
+	            $systemupgrade->version = \Config::get('horizontcms.version');
+	            $systemupgrade->nickname = "Core";
+	            $systemupgrade->importance = "Fresh install";
+	            $systemupgrade->description = "welcome!";
 
-            $systemupgrade->save();
+	            $systemupgrade->save();
 
-            \Artisan::call("key:generate");
+	           // \Artisan::call("key:generate");
 
-        }else{
-            return $this->redirect('admin/install/step4')->withMessage(['danger' => 'Something went wrong!']);
-        }
+	        }else{
 
+	            return $this->redirect('admin/install/step4')->withMessage(['danger' => 'Something went wrong!'])->withError(true);
+	        }
+    	}catch(\Exception $e){
+    		
+    		return $this->redirect('admin/install/step4')->withMessage(['danger' => $e->getMessage()])->withError(true);
+    	}
 
         return $this->redirect('admin/install/step4')->withMessage(['success' => 'Succesfully installed!']);
     }
@@ -197,7 +195,20 @@ class InstallController extends Controller{
      */
     public function step4(){
 
-        $this->view->title("Install");
+    	//$this->request->flash();
+
+    	if(!Session::has('error')){
+    			$dotenv = new \App\Libs\DotEnvGenerator();
+	            $dotenv->addEnvVar('DB_HOST', Session::get('step2.server'));
+	            $dotenv->addEnvVar('DB_CONNECTION',  Session::get('step2.db_driver'));
+	            $dotenv->addEnvVar('DB_USERNAME',  Session::get('step2.username'));
+	            $dotenv->addEnvVar('DB_PASSWORD',  Session::get('step2.password'));
+	            $dotenv->addEnvVar('DB_DATABASE',  Session::get('step2.database'));
+	            $dotenv->addEnvVar('DB_TABLE_PREFIX',  Session::get('step2.prefix'));
+	            $dotenv->generate();
+    	}
+
+        $this->view->title("Install finished!");
         return $this->view->render("install/step4");
     }
 
