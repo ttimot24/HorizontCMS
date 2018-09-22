@@ -37,7 +37,10 @@ class ForgotPasswordController extends Controller
     public function showLinkRequestForm()
     {
         $this->view->title("Forgot password");
-        return $this->view->render('auth/passwords/email');
+        return $this->view->render('auth/passwords/email',[
+                                                    'app_name' => \Config::get('app.name'),
+                                                    'admin_logo' => url(\Config::get('horizontcms.admin_logo')),
+                                                ]);
     }
 
 }

@@ -38,6 +38,12 @@
                         </span>
                     @endif
               </div>
+
+              @if ($errors->has('username') || $errors->has('password'))
+                    <div>
+                        <a href="admin/password/reset" style="font-size:10px;">Forgot password?</a>
+                    </div>
+              @endif
              
               <div class='checkbox col-md-12'>
                 <label><input type='checkbox'> {{trans('login.remember_me')}}</label>
