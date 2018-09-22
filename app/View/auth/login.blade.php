@@ -41,18 +41,14 @@
 
               @if ($errors->has('username') || $errors->has('password'))
                     <div>
-                        <a href="admin/password/reset" style="font-size:10px;">Forgot password?</a>
+                        <b><a href="admin/password/reset" style="font-size:10px;">{{trans('login.forgot_password')}}</a></b>
                     </div>
               @endif
              
               <div class='checkbox col-md-12'>
                 <label><input type='checkbox'> {{trans('login.remember_me')}}</label>
               </div>
-              <!--<div class='col-md-6'>
-                  <a class="btn btn-link btn-sm" href="admin/password/reset">
-                    {{trans('login.forgot_password')}}
-                  </a>
-              </div><br>-->
+      
               <input type='submit' name='submit_login' class='btn btn-default' value='{{trans("login.login")}}'>
 
             </div>
