@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\InstallerMiddleware::class,
             \App\Http\Middleware\LogLastUserActivity::class,
             \App\Http\Middleware\HttpsMiddleware::class,
+            \App\Http\Middleware\EmailConfigMiddleware::class,
         ],
 
         'api' => [
