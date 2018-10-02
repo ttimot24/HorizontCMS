@@ -207,7 +207,7 @@ class PluginController extends Controller{
 
         try{
 
-            \App\Model\Plugin::where('root_dir',$plugin)->delete();
+            \App\Model\Plugin::where('root_dir',$plugin)->first()->delete();
 
              if(file_exists("plugins/".$plugin)){
                 \Storage::disk('plugins')->deleteDirectory($plugin);
