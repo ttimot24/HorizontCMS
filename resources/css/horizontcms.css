@@ -5483,3 +5483,13 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     cursor:initial !important;
     pointer-events: none;
 }
+
+
+.cke_dialog_contents_body{
+    min-width:500px;
+}
+
+.cke_dialog_body:hover a{
+    color:black;
+    text-decoration:none;
+}

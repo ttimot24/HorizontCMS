@@ -102,10 +102,10 @@ class FileManagerController extends Controller{
                 'current_dir' => $current_dir,
                 'tree' => explode("/",$current_dir),
                 'dirs' => collect(\File::directories(storage_path().DIRECTORY_SEPARATOR.$current_dir))->map(function($dir){
-                    return str_replace(storage_path().DIRECTORY_SEPARATOR.$this->request->get('path').DIRECTORY_SEPARATOR,"",$dir);
+                    return basename($dir);
                 }),
                 'files' => collect(\File::files(storage_path().DIRECTORY_SEPARATOR.$current_dir))->map(function($file){
-                    return str_replace(storage_path().DIRECTORY_SEPARATOR.$this->request->get('path')."/","",$file);
+                    return basename($file);
                 }),
                 'allowed_extensions' => [
                                           'image' => ['jpg','png','jpeg']
@@ -167,12 +167,24 @@ class FileManagerController extends Controller{
 
 
     public function browse(){
-        return "asd";
+        return "browse";
     }
 
 
     public function upload(){
         
+        if($this->request->isMethod('POST')){
+
+            if ($this->request->hasFile('upload')){
+
+
+               $this->request->upload->store('images/'.$this->request->input('module'));
+
+
+            }
+
+        }
+
     }
 
 
