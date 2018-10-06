@@ -5484,9 +5484,17 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     pointer-events: none;
 }
 
+.cke_dialog_tabs a{
+    text-decoration:none;
+}
 
 .cke_dialog_contents_body{
     min-width:500px;
+}
+
+.cke_dialog_body a{
+    color:black;
+    text-decoration:none !important;
 }
 
 .cke_dialog_body:hover a{
