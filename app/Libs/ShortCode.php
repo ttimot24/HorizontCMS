@@ -7,9 +7,9 @@ use \App\Model\Plugin as Plugin;
 class ShortCode extends Model{
 
 	public $table = 'plugins';
-	private static $widgets = array();
+	private $widgets = array();
 
-	public static function initalize(){
+	public function initalize(){
 
 		foreach(app()->plugins as $plugin){
 
@@ -20,7 +20,7 @@ class ShortCode extends Model{
 												$plugin->getPath()."/app".DIRECTORY_SEPARATOR."resources".DIRECTORY_SEPARATOR."views"
 												]);
 
-				self::$widgets[$plugin->getShortCode()] = $plugin->getRegister('widget');
+				$this->widgets[$plugin->getShortCode()] = $plugin->getRegister('widget');
 			}
 
 
@@ -28,19 +28,19 @@ class ShortCode extends Model{
 
 	}
 
-	public static function getAll(){
-		return self::$widgets;
+	public function getAll(){
+		return $this->widgets;
 	}
 
-	public static function resolve($shortcode){
+	public function resolve($shortcode){
 
-		echo isset(self::$widgets[$plugin->getShortCode()])? self::$widgets[$plugin->getShortCode()] : "";
+		return isset($this->widgets[$plugin->getShortCode()])? $this->widgets[$plugin->getShortCode()] : "";
 	}
 
 
-	public static function compile($page){
+	public function compile($page){
 
-		echo count(self::$widgets) === 0? $page : str_replace(array_keys(self::$widgets), array_values(self::$widgets), $page); 
+		return count($this->widgets) === 0? $page : str_replace(array_keys($this->widgets), array_values($this->widgets), $page); 
 	}
 
 

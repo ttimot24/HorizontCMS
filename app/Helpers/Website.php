@@ -65,7 +65,7 @@ class Website{
             	}
             	else{
             		echo "<h1>".Website::$_REQUESTED_PAGE->name."</h1>";
-            		echo "<p>".\App\Libs\Shortcode::compile(Website::$_REQUESTED_PAGE->page)."</p>";
+            		echo "<p>".Website::$_REQUESTED_PAGE->page."</p>";
             	}
 
             }

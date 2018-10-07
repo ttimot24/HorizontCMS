@@ -40,7 +40,6 @@ class ThemeEngine{
 		}
 
 		\Website::initalize($this);
-		\App\Libs\ShortCode::initalize();
 	}
 
 

@@ -17,7 +17,13 @@ class WebsiteMiddleware
     {
 
 
+        $response = $next($request);
 
-        return $next($request);
+        $widgets = new \App\Libs\ShortCode();
+        $widgets->initalize();
+
+        $response->setContent($widgets->compile($response->getContent()));
+
+        return $response;
     }
 }
