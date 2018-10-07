@@ -4,14 +4,13 @@ namespace App\Libs;
 
 use \App\Model\Plugin as Plugin;
 
-class ShortCode extends Model{
+class ShortCode{
 
-	public $table = 'plugins';
 	private $widgets = array();
 
-	public function initalize(){
+	public function initalize($plugins){
 
-		foreach(app()->plugins as $plugin){
+		foreach($plugins as $plugin){
 
 
 			if(Plugin::exists($plugin->root_dir) && $plugin->hasRegister('widget')){
@@ -20,7 +19,7 @@ class ShortCode extends Model{
 												$plugin->getPath()."/app".DIRECTORY_SEPARATOR."resources".DIRECTORY_SEPARATOR."views"
 												]);
 
-				$this->widgets[$plugin->getShortCode()] = $plugin->getRegister('widget');
+				$this->addWidget($plugin->getShortCode(),$plugin->getRegister('widget'));
 			}
 
 
@@ -28,15 +27,17 @@ class ShortCode extends Model{
 
 	}
 
+	public function addWidget($key,$value){
+		$this->widgets[$key] = $value;
+	}
+
+	public function getWidget($key){
+		return $this->widgets[$key];
+	}
+
 	public function getAll(){
 		return $this->widgets;
 	}
-
-	public function resolve($shortcode){
-
-		return isset($this->widgets[$plugin->getShortCode()])? $this->widgets[$plugin->getShortCode()] : "";
-	}
-
 
 	public function compile($page){
 
