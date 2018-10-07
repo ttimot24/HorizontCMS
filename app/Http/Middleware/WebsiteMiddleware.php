@@ -20,7 +20,7 @@ class WebsiteMiddleware
         $response = $next($request);
 
         $widgets = new \App\Libs\ShortCode();
-        $widgets->initalize();
+        $widgets->initalize(app()->plugins);
 
         $response->setContent($widgets->compile($response->getContent()));
 
