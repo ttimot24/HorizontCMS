@@ -47,6 +47,15 @@ class InstallCommand extends Command
 
 echo "\r\n-------------------------------------------------------------------\r\n";
 
+if(\App\HorizontCMS::isInstalled()){
+    $this->info("\r\nAlready installed!");
+    $continue = $this->choice("Do you want to reinstall?",['yes','no'],1);
+    if($continue==="no"){
+        $this->info("Quit installer");
+        return;
+    }
+}
+
 $this->line("*****Database informations*****\r\n");
 $database['username'] = $this->ask('Username');
 $database['password'] = $this->ask('Password',false);
