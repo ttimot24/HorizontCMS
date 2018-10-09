@@ -73,7 +73,7 @@ class PluginModelTest extends TestCase
 
     public function testIsAndHas(){
 
-        $this->assertInternalType("boolean",$this->plugin->isCompatibleWithCore());
+        $this->assertInternalType("bool",$this->plugin->isCompatibleWithCore());
 
     }
 
