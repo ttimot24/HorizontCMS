@@ -8,6 +8,7 @@ class Plugin extends Model
 {
     public $timestamps = false;
     protected $fillable = ['id','root_name','area','permission','table_name','active'];
+    private $info = null;
 
     public static function exists($plugin){
     	return file_exists("plugins/".$plugin);
@@ -31,9 +32,12 @@ class Plugin extends Model
 			}
 		}
 
-		isset($this->root_dir) ? : $this->root_dir = $root_dir;			
+		isset($this->root_dir) ? : $this->setRootDir($root_dir);			
 	}
 
+	public function setRootDir($root_dir){
+		$this->root_dir = $root_dir;
+	}
 
     public function isInstalled(){
     	$result = self::where('root_dir',$this->root_dir)->get();
@@ -85,26 +89,35 @@ class Plugin extends Model
 		return file_exists($this->getPath()."icon.jpg")? $this->getPath()."icon.jpg" : 'resources/images/icons/plugin.png';
 	}
 
-	public function getInfo($info){
+	private function loadInfoFromFile(){
 
-		if(!isset($this->info)){
-
-			$file_without_extension = $this->getPath()."plugin_info";
+		$file_without_extension = $this->getPath()."plugin_info";
 		
-			if(file_exists($file_without_extension.".yml") && class_exists('\Symfony\Component\Yaml\Yaml')){
-				$this->info = (object) \Symfony\Component\Yaml\Yaml::parse(
+		if(file_exists($file_without_extension.".yml") && class_exists('\Symfony\Component\Yaml\Yaml')){
+			$this->setAllInfo( (object) \Symfony\Component\Yaml\Yaml::parse(
 																	file_get_contents($file_without_extension.".yml"),
 																	\Symfony\Component\Yaml\Yaml::PARSE_OBJECT
-																  );
-			}else if(file_exists($file_without_extension.".json")){
-				$this->info = json_decode(file_get_contents($file_without_extension.".json"));
-			}else if(file_exists($file_without_extension.".xml")){
-				$this->info = simplexml_load_file($file_without_extension.".xml");
-			}else{
-				$this->info = NULL;
-			}
+																  ));
+		}else if(file_exists($file_without_extension.".json")){
+				$this->setAllInfo( json_decode(file_get_contents($file_without_extension.".json")) );
+		}else if(file_exists($file_without_extension.".xml")){
+				$this->setAllInfo(simplexml_load_file($file_without_extension.".xml"));
+		}
 
+	}
 
+	public function hasInfo(){
+		return isset($this->info);
+	}
+
+	public function setAllInfo($all_info){
+		$this->info = $all_info;
+	}
+
+	public function getInfo($info){
+
+		if(!$this->hasInfo()){
+			$this->loadInfoFromFile();
 		}
 
 		return isset($this->info->{$info})? $this->info->{$info}: NULL;
