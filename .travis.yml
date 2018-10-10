@@ -4,6 +4,7 @@ php:
   - '5.6'
   - '7.0'
   - '7.1'
+  - '7.2'
 
 services:
   #- mongodb
@@ -21,7 +22,5 @@ script:
    - php artisan db:seed --no-interaction --force
    - export INSTALLED=YES
    - vendor/bin/phpunit resources/tests/unit/ --coverage-clover reports/coverage.xml
-   - php artisan horizontcms:version
-
-after-script:
    - if [ -e reports/coverage.xml ] then vendor/bin/codacycoverage clover reports/coverage.xml fi
+   - php artisan horizontcms:version
