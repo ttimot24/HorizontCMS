@@ -23,7 +23,8 @@
         "symfony/dom-crawler": "3.1.*",
         "codeception/codeception" : "*",
         "modelizer/selenium" : "*",
-        "laravel/dusk": "1.*"
+        "laravel/dusk": "1.*",
+        "codacy/coverage": "dev-master"
     },
     "autoload": {
         "classmap": [

@@ -5,7 +5,7 @@
 [![Laravel 5.4](https://img.shields.io/badge/Laravel-5.4-orange.svg)](http://laravel.com)
 [![Build Status](https://travis-ci.org/ttimot24/HorizontCMS.svg?branch=master)](https://travis-ci.org/ttimot24/HorizontCMS)
 [![Github All Releases](https://img.shields.io/github/downloads/ttimot24/horizontcms/total.svg)]()
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d645b6be9b6a42a8b6189cc32ea8f546)]()
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ttimot24/HorizontCMS&amp;utm_campaign=Badge_Grade)
 
 Lightweight CMS built on Laravel 5.4. The core system can be simply extended by themes and plugins with one click. Easy to learn for users, simple to code for developers.
 

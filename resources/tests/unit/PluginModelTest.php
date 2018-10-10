@@ -65,9 +65,29 @@ class PluginModelTest extends TestCase
         //$this->plugin->getIcon();
         $this->assertEquals($this->plugin->getShortCode(), "{[".$this->dummyName."]}");
         $this->assertEquals($this->plugin->getRegisterClass(),"\Plugin\\".$this->dummyName."\Register");
-       // $this->plugin->getRegister("register"); //Should be mocked
        // $this->plugin->getRequirements();
        // $this->assertEquals($this->plugin->getRequiredCoreVersion(),"1.0.0-alpha.6");
+
+    }
+
+    public function testMethodsDependingOnRegister(){
+
+    	$returnRouteOptions = [
+				'middleware' => ['web'],
+				'namespace' => "\Plugin\\".$this->dummyName."\\App\\",
+				'prefix' => $this->plugin->getSlug(),
+		];
+
+    	$externalMock = \Mockery::mock("overload:\Plugin\\".$this->dummyName."\\Register");
+        $externalMock->shouldReceive('routeOptions')
+            ->andReturn($returnRouteOptions);
+
+
+        $default = ['test'];
+        $this->assertNull($this->plugin->getRegister("dummy"));
+        $this->assertEquals($this->plugin->getRegister("dummy",$default),$default);
+       // $this->assertInternalType('array',$this->plugin->getRegister("routeOptions"));
+       // $this->assertEquals($this->plugin->getRegister("routeOptions"),$returnRouteOptions);
 
     }
 
