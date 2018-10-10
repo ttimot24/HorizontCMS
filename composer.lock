@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "223e89310ba5407705e6ff05d3fce583",
+    "content-hash": "88f9749451eb122a4f6c87074917b127",
     "packages": [
         {
             "name": "chriskonnertz/open-graph",
@@ -2432,16 +2432,16 @@
         },
         {
             "name": "codacy/coverage",
-            "version": "dev-master",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codacy/php-codacy-coverage.git",
-                "reference": "629d1fd597f91fb072bd822830059fd5145ce49a"
+                "reference": "4988cd098db4d578681bfd3176071931ad475150"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codacy/php-codacy-coverage/zipball/629d1fd597f91fb072bd822830059fd5145ce49a",
-                "reference": "629d1fd597f91fb072bd822830059fd5145ce49a",
+                "url": "https://api.github.com/repos/codacy/php-codacy-coverage/zipball/4988cd098db4d578681bfd3176071931ad475150",
+                "reference": "4988cd098db4d578681bfd3176071931ad475150",
                 "shasum": ""
             },
             "require": {
@@ -2473,7 +2473,7 @@
             ],
             "description": "Sends PHP test coverage information to Codacy.",
             "homepage": "https://github.com/codacy/php-codacy-coverage",
-            "time": "2018-04-30T16:23:12+00:00"
+            "time": "2018-03-22T16:43:39+00:00"
         },
         {
             "name": "codeception/codeception",
@@ -4646,8 +4646,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "lavary/laravel-menu": 20,
-        "wikimedia/composer-merge-plugin": 20,
-        "codacy/coverage": 20
+        "wikimedia/composer-merge-plugin": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

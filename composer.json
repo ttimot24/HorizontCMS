@@ -24,7 +24,7 @@
         "codeception/codeception" : "*",
         "modelizer/selenium" : "*",
         "laravel/dusk": "1.*",
-        "codacy/coverage": "dev-master"
+        "codacy/coverage": "1.4.*"
     },
     "autoload": {
         "classmap": [

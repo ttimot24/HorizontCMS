@@ -22,5 +22,5 @@ script:
    - php artisan db:seed --no-interaction --force
    - export INSTALLED=YES
    - vendor/bin/phpunit resources/tests/unit/ --coverage-clover reports/coverage.xml
-   - if [ -e reports/coverage.xml ] then vendor/bin/codacycoverage clover reports/coverage.xml fi
+   - if [ -f "reports/coverage.xml" ]; then vendor/bin/codacycoverage clover reports/coverage.xml; fi
    - php artisan horizontcms:version
