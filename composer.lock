@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc2ec059a33621b18f9955b8e7a7dd1b",
+    "content-hash": "223e89310ba5407705e6ff05d3fce583",
     "packages": [
         {
             "name": "chriskonnertz/open-graph",
@@ -2230,26 +2230,26 @@
         },
         {
             "name": "visualappeal/php-auto-update",
-            "version": "0.12.0",
+            "version": "0.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VisualAppeal/PHP-Auto-Update.git",
-                "reference": "dc178a871fa0c1d5d766a8fcb03dd34343c78444"
+                "reference": "e0d60c73b7d9e33abc6e9826bc96487feb962aae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VisualAppeal/PHP-Auto-Update/zipball/dc178a871fa0c1d5d766a8fcb03dd34343c78444",
-                "reference": "dc178a871fa0c1d5d766a8fcb03dd34343c78444",
+                "url": "https://api.github.com/repos/VisualAppeal/PHP-Auto-Update/zipball/e0d60c73b7d9e33abc6e9826bc96487feb962aae",
+                "reference": "e0d60c73b7d9e33abc6e9826bc96487feb962aae",
                 "shasum": ""
             },
             "require": {
                 "composer/semver": "1.4.*",
                 "desarrolla2/cache": "2.1.*",
                 "monolog/monolog": "1.23.*",
-                "php": ">= 7.1.0"
+                "php": ">= 5.6.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "7.4.*"
+                "phpunit/phpunit": "6.5.*"
             },
             "type": "library",
             "autoload": {
@@ -2259,7 +2259,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "Apache-2.0"
             ],
             "authors": [
                 {
@@ -2268,7 +2268,7 @@
                 }
             ],
             "description": "Autoupdater for PHP",
-            "time": "2018-10-05T11:55:21+00:00"
+            "time": "2017-12-29T10:22:31+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
