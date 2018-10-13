@@ -157,8 +157,11 @@ class Plugin extends Model
 	}
 
 	public function isCompatibleWithCore(){
-		
-		return \Composer\Semver\Comparator::greaterThanOrEqualTo(\App\Model\SystemUpgrade::getCurrentVersion()->version,$this->getRequiredCoreVersion());
+
+		$currentVersion = \App\Model\SystemUpgrade::getCurrentVersion()->version;
+		$currentVersion = isset($currentVersion)? $currentVersion : \Config::get('horizontcms.version');
+
+		return \Composer\Semver\Comparator::greaterThanOrEqualTo($currentVersion,$this->getRequiredCoreVersion());
 	}
 
 

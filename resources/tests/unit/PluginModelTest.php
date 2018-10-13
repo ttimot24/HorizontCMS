@@ -9,6 +9,20 @@ class PluginModelTest extends TestCase
 
     private $dummyName = "TestPlugin";
 
+    private function getDummyInfo(){
+        $info = new \stdClass();
+        $info->name = $this->dummyName;
+        $info->version = "1.0";
+
+        $requires = new \stdClass();
+        $requires->core = "1.0.0-alpha";
+
+        $info->requires = $requires;
+
+        return $info;
+    }
+
+
     /** @before */
     public function instantiatePlugin(){
          $this->plugin = new \App\Model\Plugin($this->dummyName);
@@ -24,27 +38,18 @@ class PluginModelTest extends TestCase
 
     public function testInfoUsage(){
 
-        $info = new \stdClass();
-        $info->name = $this->dummyName;
-        $info->version = "1.0";
-
-        $requires = new \stdClass();
-        $requires->core = "1.0.0-alpha.6";
-
-        $info->requires = $requires;
-
 
         $this->assertFalse($this->plugin->hasInfo());
 
-        $this->plugin->setAllInfo($info);
+        $this->plugin->setAllInfo($this->getDummyInfo());
 
         $this->assertTrue($this->plugin->hasInfo());
 
         $this->assertEquals($this->plugin->getInfo("name"),$this->dummyName);
 
-        $this->assertEquals($this->plugin->getInfo("version"),$info->version);
+        $this->assertEquals($this->plugin->getInfo("version"),$this->getDummyInfo()->version);
 
-        $this->assertEquals($this->plugin->getInfo("requires"),$requires);
+        $this->assertEquals($this->plugin->getInfo("requires"),$this->getDummyInfo()->requires);
 
     }
 
@@ -57,6 +62,9 @@ class PluginModelTest extends TestCase
 
     public function testAllGetter(){
 
+
+        $this->plugin->setAllInfo($this->getDummyInfo());
+
         $this->assertEquals($this->plugin->getName(), $this->dummyName);
         $this->assertEquals($this->plugin->getNamespaceFor("controller"),"\Plugin\\".$this->dummyName."\\App\\Controller\\");
         $this->assertEquals($this->plugin->getSlug(),namespace_to_slug($this->dummyName));
@@ -65,8 +73,9 @@ class PluginModelTest extends TestCase
         //$this->plugin->getIcon();
         $this->assertEquals($this->plugin->getShortCode(), "{[".$this->dummyName."]}");
         $this->assertEquals($this->plugin->getRegisterClass(),"\Plugin\\".$this->dummyName."\Register");
-       // $this->plugin->getRequirements();
-       // $this->assertEquals($this->plugin->getRequiredCoreVersion(),"1.0.0-alpha.6");
+
+        $this->assertEquals($this->plugin->getRequirements(),$this->getDummyInfo()->requires);
+        $this->assertEquals($this->plugin->getRequiredCoreVersion(),$this->getDummyInfo()->requires->core);
 
     }
 
@@ -93,7 +102,15 @@ class PluginModelTest extends TestCase
 
     public function testIsAndHas(){
 
-       // $this->assertInternalType("bool",$this->plugin->isCompatibleWithCore());
+        \Config::set('horizontcms.version',$this->getDummyInfo()->requires->core);
+
+        $this->assertTrue($this->plugin->isCompatibleWithCore());
+
+      //  \Config::set('horizontcms.version','1.0.0-alpha.2');
+
+                //        dd($this->plugin->isCompatibleWithCore());
+
+       // $this->assertFalse($this->plugin->isCompatibleWithCore());
 
     }
 
