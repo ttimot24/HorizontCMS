@@ -7,6 +7,7 @@ use App\Libs\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use \App\Libs\ViewResolver;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
@@ -30,10 +31,11 @@ class ResetPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct(ViewResolver $viewResolver)
+    public function __construct(Request $request,ViewResolver $viewResolver)
     {
         $this->view = $viewResolver;
         $this->middleware('guest');
+
     }
 
 
@@ -44,6 +46,28 @@ class ResetPasswordController extends Controller
                                                             'app_name' => \Config::get('app.name'),
                                                             'admin_logo' => url(\Config::get('horizontcms.admin_logo')),
                                                           ]);
+    }
+
+
+    /**
+     * Reset the given user's password.
+     *
+     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param  string  $password
+     * @return void
+     */
+    protected function resetPassword($user, $password)
+    {
+
+        $user->password = $password;
+        $user->save();
+
+        /*$user->forceFill([
+            'password' => \Hash::make($password),
+            'remember_token' => Str::random(60),
+        ])->save();*/
+
+        $this->guard()->login($user);
     }
 
 }
