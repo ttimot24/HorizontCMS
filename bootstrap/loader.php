@@ -15,7 +15,7 @@ function module_loader($class){
 
 	$class = array_pop($split);
 
-	$modules = \Config::get('horizontcms.modules',[]);
+	$modules = config('horizontcms.modules',[]);
 
 	if(!isset($split[0])){ return; }
 
