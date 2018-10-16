@@ -7,7 +7,7 @@ use \App\Libs\Model;
 class Plugin extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['id','root_name','area','permission','table_name','active'];
+    protected $fillable = ['id','root_dir','area','permission','table_name','active'];
     private $info = null;
 
     public static function exists($plugin){
@@ -30,12 +30,13 @@ class Plugin extends Model
 				$this->fill($attributes);
 
 			}
-		}
 
-		isset($this->root_dir) ? : $this->setRootDir($root_dir);			
+			isset($this->root_dir) ? : $this->setRootDir($root_dir);	
+		}
+		
 	}
 
-	public function setRootDir($root_dir){
+	public function setRootDir(String $root_dir){
 		$this->root_dir = $root_dir;
 	}
 
@@ -125,6 +126,11 @@ class Plugin extends Model
 
 	public function getShortCode(){
 		return "{[".$this->root_dir."]}";
+	}
+
+	
+	public function hasRegisterClass(){
+		return class_exists($this->getRegisterClass());
 	}
 
 	public function getRegisterClass(){
