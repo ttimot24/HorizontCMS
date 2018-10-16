@@ -17,6 +17,8 @@ class PluginServiceProvider extends ServiceProvider
         if($this->app->isInstalled()){
             $this->app->plugins = \App\Model\Plugin::where('active','1')->get()->keyBy('root_dir');
 
+           // dd($this->app->plugins["GoogleMaps"]->root_dir);
+
             $this->registerPluginAutoloaders();
 
             $this->registerPluginProviders();
