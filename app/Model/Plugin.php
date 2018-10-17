@@ -30,13 +30,15 @@ class Plugin extends Model
 				$this->fill($attributes);
 
 			}
-
-			isset($this->root_dir) ? : $this->setRootDir($root_dir);	
+		
 		}
+
+
+		isset($this->root_dir) ? : $this->setRootDir($root_dir);	
 		
 	}
 
-	public function setRootDir(String $root_dir){
+	public function setRootDir($root_dir){
 		$this->root_dir = $root_dir;
 	}
 

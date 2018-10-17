@@ -81,16 +81,20 @@ class PluginModelTest extends TestCase
 
     public function testMethodsDependingOnRegister(){
 
+
     	$returnRouteOptions = [
 				'middleware' => ['web'],
 				'namespace' => "\Plugin\\".$this->dummyName."\\App\\",
 				'prefix' => $this->plugin->getSlug(),
 		];
 
+		$this->assertFalse($this->plugin->hasRegisterClass());
+
     	$externalMock = \Mockery::mock("overload:\Plugin\\".$this->dummyName."\\Register");
         $externalMock->shouldReceive('routeOptions')
             ->andReturn($returnRouteOptions);
 
+        $this->assertTrue($this->plugin->hasRegisterClass());
 
         $default = ['test'];
         $this->assertNull($this->plugin->getRegister("dummy"));
@@ -101,6 +105,7 @@ class PluginModelTest extends TestCase
     }
 
     public function testIsAndHas(){
+
 
       //  \Config::set('horizontcms.version',$this->getDummyInfo()->requires->core);
 
