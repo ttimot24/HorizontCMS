@@ -100,8 +100,6 @@ class RouteServiceProvider extends ServiceProvider
 
     	if(!isset($this->app->plugins)){ return false; }
 
-    
-
     	foreach($this->app->plugins as $plugin){
 
     		if(file_exists($plugin->getPath().'/routes/plugin.php')){

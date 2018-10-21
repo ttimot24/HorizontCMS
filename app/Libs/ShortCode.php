@@ -13,10 +13,11 @@ class ShortCode{
 		foreach($plugins as $plugin){
 
 
-			if(Plugin::exists($plugin->root_dir) && $plugin->hasRegister('widget')){
+			if( $plugin->hasRegister('widget') ){
+
 				\View::addNamespace('plugin', [
-												$plugin->getPath()."/app".DIRECTORY_SEPARATOR."View",
-												$plugin->getPath()."/app".DIRECTORY_SEPARATOR."resources".DIRECTORY_SEPARATOR."views"
+												$plugin->getPath()."/app/View",
+												$plugin->getPath()."/app/resources/views"
 												]);
 
 				$this->addWidget($plugin->getShortCode(),$plugin->getRegister('widget'));

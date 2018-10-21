@@ -5,7 +5,7 @@ namespace App;
  
 class HorizontCMS extends \Illuminate\Foundation\Application{
  
- 	public $plugins = null;
+ 	public $plugins = [];
    
     public static function isInstalled(){
         return file_exists(base_path(".env")) || env("INSTALLED","")!="";

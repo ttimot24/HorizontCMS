@@ -10,11 +10,6 @@ class Plugin extends Model
     protected $fillable = ['id','root_dir','area','permission','table_name','active'];
     private $info = null;
 
-    public static function exists($plugin){
-    	return file_exists("plugins/".$plugin);
-    }
-
-
 	public function __construct($root_dir = null){	
 
 		if($root_dir!==null && !is_array($root_dir)){
@@ -40,6 +35,10 @@ class Plugin extends Model
 
 	public function setRootDir($root_dir){
 		$this->root_dir = $root_dir;
+	}
+
+	public function exists(){
+		return file_exists($this->getPath());
 	}
 
     public function isInstalled(){

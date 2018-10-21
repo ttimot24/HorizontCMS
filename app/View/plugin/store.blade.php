@@ -29,11 +29,11 @@ if(!$repo_status){
 	        <h3>{{ $o_plugin->info->name }}</h3>
 	        <p>version: {{ $o_plugin->info->version }} author: {{ $o_plugin->info->author }}</p>
 
-	        @if( \App\Model\Plugin::exists($o_plugin->dir) && $local_plugin->getInfo('version') < $o_plugin->info->version )
+	        @if( $local_plugin->exists() && $local_plugin->getInfo('version') < $o_plugin->info->version )
 	        <p><a href="admin/plugin/download-plugin/{{ $o_plugin->dir }}" class="btn btn-primary btn-block" role="button">Upgrade</a></p>
-	        @elseif(\App\Model\Plugin::exists($o_plugin->dir) && !$local_plugin->isInstalled())
+	        @elseif( $local_plugin->exists() && !$local_plugin->isInstalled())
 	        <p><a href="admin/plugin/install/{{ $o_plugin->dir }}" class="btn btn-success btn-block" role="button">Install</a></p>
-	       	@elseif(\App\Model\Plugin::exists($o_plugin->dir) && $local_plugin->isInstalled())
+	       	@elseif( $local_plugin->exists() && $local_plugin->isInstalled())
 	       	<p><b>Installed</b></p>
 	        @else
 	        <p><a href="admin/plugin/download-plugin/{{ $o_plugin->dir }}" class="btn btn-info btn-block" role="button">Download</a></p>
