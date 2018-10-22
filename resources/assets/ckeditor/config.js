@@ -4,7 +4,9 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	config.skin = 'bootstrapck';
+//	config.skin = 'bootstrapck';
+	config.skin = 'moono-lisa';
+	config.filebrowserUploadMethod = 'form';
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';

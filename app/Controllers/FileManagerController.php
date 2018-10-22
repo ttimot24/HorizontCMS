@@ -177,8 +177,21 @@ class FileManagerController extends Controller{
 
             if ($this->request->hasFile('upload')){
 
+                $image = $this->request->upload->store('images/'.$this->request->input('module'));
 
-               $this->request->upload->store('images/'.$this->request->input('module'));
+               if($image){
+                   // if($this->request->ajax()){
+                        return response()->json(["uploaded"=>1, "fileName"=> basename($image), "url" => "storage/".$image]);
+/*                    }else{
+                        return "Image uploaded successfully!";*/
+                    //}
+               }else{
+                   /* if($this->request->ajax()){*/
+                        return response()->json(["uploaded"=>0]);
+                   /* }else{
+                        return "Something went wrong!";
+                    }*/
+               }
 
 
             }
