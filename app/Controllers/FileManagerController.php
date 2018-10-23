@@ -49,19 +49,24 @@ class FileManagerController extends Controller{
      */
     public function fileupload(){
         
+        
         if($this->request->isMethod('POST')){
 
             if ($this->request->hasFile('up_file')){
 
-            foreach($this->request->up_file as $file){
-               $asd = $file->store(ltrim($this->request->input('dir_path'),"storage/"));
-            }
-               
-            return $this->redirectToSelf()->withMessage(['success' => 'Files uploaded successfully']);
+                foreach($this->request->up_file as $file){
+                   $image = $file->store(ltrim($this->request->input('dir_path'),"storage/"));
+                }
+                   
+                return $this->redirectToSelf()->withMessage(['success' => 'Files uploaded successfully!']);
 
+            }else{
+                return $this->redirectToSelf()->withMessage(['danger' => 'Could not upload files!']);
             }
 
         }
+
+        return $this->redirectToSelf()->withMessage(['warning' => 'Only POST method allowed!']);
 
     }
 

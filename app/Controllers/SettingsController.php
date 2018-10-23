@@ -265,14 +265,6 @@ class SettingsController extends Controller{
     	return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
     }
 
-    public function uploadlogo(){
-
-    	foreach($this->request->up_file as $file){
-    		$image = str_replace('images/logos/','',$file->store('images/logos'));
-    	}
-
-    	return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
-    }
 
 
 }

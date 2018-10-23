@@ -87,7 +87,7 @@
         <h2 class='modal-title'><center>Upload logo</center></h2>
          </div>
         <div class='modal-body'>
-        <form action='admin/settings/uploadlogo' method='POST' enctype='multipart/form-data'>
+        <form action='admin/file-manager/fileupload?dir_path=storage/images/logos' method='POST' enctype='multipart/form-data'>
         {{ csrf_field() }}
           <div class='form-group'>
   		      <label for='file'>Upload file:</label>
