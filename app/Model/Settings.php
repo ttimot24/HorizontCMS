@@ -9,12 +9,15 @@ class Settings extends Model{
   	protected $table = 'settings';
   	public $timestamps = false;
   	public $settings;
+  	private static $static_settings = null;
 
 	public static function get($setting,$default = null){
 
-		$result = self::where('setting',$setting)->first();
+		if(self::$static_settings==null){
+			self::$static_settings = self::getAll();	
+		}
 
-		return $result==null? $default : $result->value;
+		return array_key_exists($setting,self::$static_settings)? self::$static_settings[$setting] : $default;
 	}
 
 	public static function getAll(){

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Http\Events\RequestHandled;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,13 +18,12 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment("local") || $this->app->environment("testing") ) {
                 \DB::connection()->enableQueryLog();
 
-                \Event::listen('kernel.handled', function ($request, $response) {
-                    if ( $request->has('sql-debug') ) {
-                        $queries = \DB::getQueryLog();
-                        dd($queries);
-                    }
-                });
-
+                if ( $this->app->request->has('sql-debug') ) {
+                    \Event::listen(RequestHandled::class, function(RequestHandled $event) {
+                            $queries = \DB::getQueryLog();
+                            dd($queries);
+                    });
+                }
 
                 $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
         }
