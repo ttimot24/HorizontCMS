@@ -86,18 +86,22 @@
         <th>Title</th>
         <th>Date</th>
       </tr>
-    </thead><tbody>";
+    </thead>
+    <tbody>";
 
 
   foreach($user->blogposts->reverse() as $each){
 
     echo "<tr>";
-    echo "<td><a href='".admin_link('blogpost-view',$each->id)."'>";
+    echo "<td class='col-md-4'><a href='".admin_link('blogpost-view',$each->id)."'>";
       echo Html::img($each->getThumb(),"class='img img-thumbnail', width='250' style='object-fit:cover;height:150px;'");
     echo "</a></td>";
-    echo "<td><a href='".admin_link('blogpost-view',$each->id)."'>" .$each->title ."</a></td>";
+    echo "<td class='col-md-6'>
+            <a href='".admin_link('blogpost-view',$each->id)."'><h5>" .$each->title ."</h5></a>
+            <p>".$each->summary."</p>
+         </td>";
      
-    echo "<td>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format("H:i:s")."</font></td>";
+    echo "<td class='col-md-2 text-right'>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format("H:i:s")."</font></td>";
     echo "</tr>";
   }
   
