@@ -35,16 +35,29 @@
 
             @foreach($dirs as $dir)
                 <div class='file col-md-2' ondblclick=" window.location.href = 'admin/file-manager/{{$action}}?path=<?= $old_path.$dir ?>' ">
-                  <a href="admin/file-manager/delete?file={{'storage/'.$old_path.$dir}}"><i class="fa fa-trash pull-right"></i></a><br>
+                  <a data-toggle='modal' data-target=.delete_{{$dir}} ><i class="fa fa-trash pull-right"></i></a><br>
                   {!! Html::img('resources/images/icons/dir.png',"style='width:70%;'") !!}
                   <center><b>{{$dir}}</b></center><br>
                 </div>
+
+              <?php 
+
+                 Bootstrap::delete_confirmation(
+                  "delete_".$dir,
+                  trans('actions.are_you_sure'),
+                  "<div style='color:black;'><b>".trans('actions.delete_this',['content_type'=>'dir']).": </b>".$dir." <b>?</b></div>",
+                  "<a href='admin/file-manager/delete?file=storage/".$old_path.$dir."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
+                  <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
+                  );
+
+              ?>
+
             @endforeach
 
             @foreach($files as $file)
                 <?php $file_parts = pathinfo($file) ?>
                 <div class='file col-md-2' @if($action=='ckbrowse') onclick='returnFileUrl("<?= 'storage/'.$old_path.$file ?>");' @else data-toggle='modal' data-target='.{{$file}}-modal-xl' @endif >
-                <a href="admin/file-manager/delete?file={{'storage/'.$old_path.$file}}"><i class="fa fa-trash pull-right"></i></a><br>
+                <a data-toggle='modal' data-target=".delete_{{str_replace('.'.$file_parts['extension'],'',$file)}}" ><i class="fa fa-trash pull-right"></i></a><br>
                 @if(isset($file_parts['extension']) && in_array($file_parts['extension'],$allowed_extensions['image']))
                   <img src="{{'storage/'.$old_path.$file}}" style='object-fit:cover;width:100%;height:100px;' />
                 @else
@@ -52,6 +65,20 @@
                 @endif
                   <center><b>{{$file}}</b></center><br>
                 </div>
+
+              <?php 
+
+                 Bootstrap::delete_confirmation(
+                  "delete_".str_replace('.'.$file_parts['extension'],'',$file),
+                  trans('actions.are_you_sure'),
+                  "<div style='color:black;'><b>".trans('actions.delete_this',['content_type'=>'file']).": </b>".$file." <b>?</b></div>",
+                  "<a href='admin/file-manager/delete?file=storage/".$old_path.$file."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
+                  <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
+                  );
+
+              ?>
+
+
             @endforeach
 
 

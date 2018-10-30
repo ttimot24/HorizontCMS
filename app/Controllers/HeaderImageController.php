@@ -131,30 +131,4 @@ class HeaderImageController extends Controller{
 
 
 
-    public function upload(){
-
-        if($this->request->isMethod('POST')){
-
-            foreach($this->request->up_file as $file){
-                  
-                     $errors[] = str_replace('images/header_images/','',$file->store('images/header_images'));
-
-            }
-
-            if(count($errors)>0){
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost')]);
-            }else{
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-
-            
-        }
-
-
-    }
-
-
-
-
-
 }

@@ -6,7 +6,7 @@
 
 
 </br></br>
-<form action='admin/header-image/upload' method='POST' enctype='multipart/form-data'>
+<form action='admin/file-manager/fileupload?dir_path=storage/images/header_images' method='POST' enctype='multipart/form-data'>
 
 {{ csrf_field() }}
 
