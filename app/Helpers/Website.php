@@ -64,7 +64,7 @@ class Website{
                 	require_once(Website::$_THEME_PATH ."/page.php");
             	}
             	else{
-            		echo "<h1>".Website::$_REQUESTED_PAGE->name."</h1>";
+            		echo "<h1 class='page-header'>".Website::$_REQUESTED_PAGE->name."</h1>";
             		echo "<p>".Website::$_REQUESTED_PAGE->page."</p>";
             	}
 
