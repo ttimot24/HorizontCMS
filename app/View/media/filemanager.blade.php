@@ -62,12 +62,13 @@
                 <?php $file_parts = pathinfo($file) ?>
                 <div class='file col-md-2 text-center' @if($action=='ckbrowse') onclick='returnFileUrl("<?= 'storage/'.$old_path.$file ?>");' @else data-toggle='modal' data-target='.{{$file}}-modal-xl' @endif >
                 <div class="text-right" style="margin-bottom: 5px;">
+                  <a href="admin/file-manager/download?file=storage/{{$old_path.$file}}"><i class="fa fa-download"></i></a>&nbsp
                   <a data-toggle='modal' data-target=".delete_{{str_replace('.'.$file_parts['extension'],'',$file)}}" ><i class="fa fa-trash"></i></a>
                 </div>
                 @if(isset($file_parts['extension']) && in_array($file_parts['extension'],$allowed_extensions['image']))
                   <img src="{{'storage/'.$old_path.$file}}" style='object-fit:cover;width:100%;height:100px;' />
                 @else
-                 <img src="resources/images/icons/file.png" style='object-fit:cover;width:100%;height:100px;margin-bottom:15px;' />
+                 <img src="resources/images/icons/file.png" style='object-fit:cover;width:100%;height:100px;margin-bottom:10px;' />
                 @endif
                   <b>{{$file}}</b>
                 </div>

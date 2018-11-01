@@ -70,6 +70,26 @@ class FileManagerController extends Controller{
 
     }
 
+
+    public function download(){
+
+        if($this->request->has('file')){
+
+            $file = $this->request->input('file');
+
+            $headers = [
+                  'Content-Type' => 'application/*',
+            ];
+
+            return response()->download($file, basename($file), $headers);
+
+        }
+
+        return $this->redirectToSelf()->withMessage(['warning' => 'Bad request!']);
+
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
