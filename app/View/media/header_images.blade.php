@@ -44,7 +44,7 @@
 @foreach($dirs as $each)
 	<div class='col-md-3 img img-thumbnail'  style='margin-bottom:5%;height:200px;'>
 	<a class='btn-sm btn-success col-md-6' href='admin/header-image/create/{{ $each }}'>Add to slider</a>
-	<a href='admin/header-image/destroy/{{ $each }}' class='pull-right'>
+	<a href='admin/file-manager/delete?file=storage/images/header_images/{{$each}}' class='pull-right'>
 	<span class='glyphicon glyphicon-remove' aria-hidden='true' style=' font-size: 1.4em;z-index:15;top:3px;right:3px;margin-bottom:-15px;'></span></a>
 
 	@if($each!="" && !is_dir('storage/images/header_images/{{ $each }}'))

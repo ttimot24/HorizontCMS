@@ -96,22 +96,6 @@ class HeaderImageController extends Controller{
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($file){
-
-            if(Storage::delete('images'.DIRECTORY_SEPARATOR.'header_images'.DIRECTORY_SEPARATOR.$file)){
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost')]);
-            }else{
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-
-    }
-
 
     /**
      * Remove the specified resource from database.
