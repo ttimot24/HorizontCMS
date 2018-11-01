@@ -46,8 +46,8 @@ class MenuMiddleware{
 
             if(\Auth::user()->hasPermission("media")){
             $menu->add(trans('navbar.media'), '#')->id('media');
-            $menu->find('media')->add("<i class='fa fa-picture-o'></i> ".trans('navbar.header_images'), admin_link('headerimage-index'));
             $menu->find('media')->add("<i class='fa fa-folder-open-o'></i> ".trans('navbar.filemanager'), admin_link('file-manager-index'));
+            $menu->find('media')->add("<i class='fa fa-picture-o'></i> ".trans('navbar.header_images'), admin_link('headerimage-index'));
             }
 
 

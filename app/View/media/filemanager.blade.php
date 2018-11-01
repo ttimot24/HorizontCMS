@@ -34,10 +34,14 @@
 			</ol>
 
             @foreach($dirs as $dir)
-                <div class='file col-md-2' ondblclick=" window.location.href = 'admin/file-manager/{{$action}}?path=<?= $old_path.$dir ?>' ">
-                  <a data-toggle='modal' data-target=.delete_{{$dir}} ><i class="fa fa-trash pull-right"></i></a><br>
-                  {!! Html::img('resources/images/icons/dir.png',"style='width:70%;'") !!}
-                  <center><b>{{$dir}}</b></center><br>
+                <div class='file col-md-2 text-center' ondblclick=" window.location.href = 'admin/file-manager/{{$action}}?path=<?= $old_path.$dir ?>' ">
+                  
+                  <div class="text-right" style="margin-bottom: 5px;">
+                    <a data-toggle='modal' data-target=.delete_{{$dir}} ><i class="fa fa-trash pull-right"></i></a>
+                  </div>
+
+                  {!! Html::img('resources/images/icons/dir.png',"style='width:75%;margin-top:10px;'") !!}
+                  <b>{{$dir}}</b>
                 </div>
 
               <?php 
@@ -56,14 +60,16 @@
 
             @foreach($files as $file)
                 <?php $file_parts = pathinfo($file) ?>
-                <div class='file col-md-2' @if($action=='ckbrowse') onclick='returnFileUrl("<?= 'storage/'.$old_path.$file ?>");' @else data-toggle='modal' data-target='.{{$file}}-modal-xl' @endif >
-                <a data-toggle='modal' data-target=".delete_{{str_replace('.'.$file_parts['extension'],'',$file)}}" ><i class="fa fa-trash pull-right"></i></a><br>
+                <div class='file col-md-2 text-center' @if($action=='ckbrowse') onclick='returnFileUrl("<?= 'storage/'.$old_path.$file ?>");' @else data-toggle='modal' data-target='.{{$file}}-modal-xl' @endif >
+                <div class="text-right" style="margin-bottom: 5px;">
+                  <a data-toggle='modal' data-target=".delete_{{str_replace('.'.$file_parts['extension'],'',$file)}}" ><i class="fa fa-trash"></i></a>
+                </div>
                 @if(isset($file_parts['extension']) && in_array($file_parts['extension'],$allowed_extensions['image']))
                   <img src="{{'storage/'.$old_path.$file}}" style='object-fit:cover;width:100%;height:100px;' />
                 @else
                  <img src="resources/images/icons/file.png" style='object-fit:cover;width:100%;height:100px;margin-bottom:15px;' />
                 @endif
-                  <center><b>{{$file}}</b></center><br>
+                  <b>{{$file}}</b>
                 </div>
 
               <?php 
