@@ -6,7 +6,7 @@ class Bootstrap{
 
     public static function delete_confirmation($modal_id,$header=NULL,$message=NULL,$footer=NULL){
 
-      echo "<div class='modal ".$modal_id."' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>
+      echo "<div id=".$modal_id." class='modal ".$modal_id."' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>
               <div class='modal-dialog'>
                 <div class='modal-content'>
                   <div class='modal-header modal-header-danger'>
@@ -32,7 +32,7 @@ class Bootstrap{
     public static function image_details($modal_id,$image){
 
 
-      echo "<div class='modal ".$modal_id."-modal-xl' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>
+      echo "<div id=".$modal_id." class='modal ".$modal_id."-modal-xl' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>
             <div class='modal-dialog modal-xl'>
               <div class='modal-content'>
 

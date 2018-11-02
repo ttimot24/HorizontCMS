@@ -1,6 +1,7 @@
+<div id="filemanager">
 <section class='container'>
 
-  <section class='row'>
+  <section  class='row'>
 
   <div class='col-md-4'>
     <h2>File manager</h2>
@@ -25,7 +26,7 @@
 
 <div class="panel panel-default col-md-10" >
   <div class="panel-body">
-      <ol class="breadcrumb">
+      <ol class="breadcrumb text-left">
 			  <li><a href="admin/file-manager/{{$action}}?path="><?= basename(storage_path()); ?></a></li>
         @foreach($tree as $dir)
           <li><a href="admin/file-manager/{{$action}}?path={{$dir}}">{{$dir}}</a></li>
@@ -33,14 +34,15 @@
         <hr>
 			</ol>
 
+      <div class="workspace">
             @foreach($dirs as $dir)
-                <div class='file col-md-2 text-center' ondblclick=" window.location.href = 'admin/file-manager/{{$action}}?path=<?= $old_path.$dir ?>' ">
+                <div class='folder col-md-2' id="{{$dir}}" ondblclick="filemanager.dirOpen('admin/file-manager/{{$action}}?path=<?= $old_path.$dir ?>');">
                   
-                  <div class="text-right" style="margin-bottom: 5px;">
+                  <div class="file-nav text-right">
                     <a data-toggle='modal' data-target=.delete_{{$dir}} ><i class="fa fa-trash pull-right"></i></a>
                   </div>
 
-                  {!! Html::img('resources/images/icons/dir.png',"style='width:75%;margin-top:10px;'") !!}
+                  {!! Html::img('resources/images/icons/dir.png') !!}
                   <b>{{$dir}}</b>
                 </div>
 
@@ -50,7 +52,7 @@
                   "delete_".$dir,
                   trans('actions.are_you_sure'),
                   "<div style='color:black;'><b>".trans('actions.delete_this',['content_type'=>'dir']).": </b>".$dir." <b>?</b></div>",
-                  "<a href='admin/file-manager/delete?file=storage/".$old_path.$dir."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
+                  "<a href='admin/file-manager/delete?file=storage/".$old_path.$dir."' type='button' class='btn btn-danger' onclick=\"filemanager.delete(event,'storage/".$old_path.$dir."')\" ><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
                   <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
                   );
 
@@ -60,15 +62,15 @@
 
             @foreach($files as $file)
                 <?php $file_parts = pathinfo($file) ?>
-                <div class='file col-md-2 text-center' @if($action=='ckbrowse') onclick='returnFileUrl("<?= 'storage/'.$old_path.$file ?>");' @else data-toggle='modal' data-target='.{{$file}}-modal-xl' @endif >
-                <div class="text-right" style="margin-bottom: 5px;">
+                <div class='file col-md-2' id="{{str_replace('.'.$file_parts['extension'],'',$file)}}" @if($action=='ckbrowse') onclick='filemanager.returnFileUrl("<?= 'storage/'.$old_path.$file ?>");' @else data-toggle='modal' data-target='.{{$file}}-modal-xl' @endif >
+                <div class="file-nav text-right">
                   <a href="admin/file-manager/download?file=storage/{{$old_path.$file}}"><i class="fa fa-download"></i></a>&nbsp
                   <a data-toggle='modal' data-target=".delete_{{str_replace('.'.$file_parts['extension'],'',$file)}}" ><i class="fa fa-trash"></i></a>
                 </div>
                 @if(isset($file_parts['extension']) && in_array($file_parts['extension'],$allowed_extensions['image']))
                   <img src="{{'storage/'.$old_path.$file}}" style='object-fit:cover;width:100%;height:100px;' />
                 @else
-                 <img src="resources/images/icons/file.png" style='object-fit:cover;width:100%;height:100px;margin-bottom:10px;' />
+                 <img src="resources/images/icons/file.png" style='object-fit:cover;width:100%;height:100px;margin-bottom:5px;' />
                 @endif
                   <b>{{$file}}</b>
                 </div>
@@ -79,7 +81,7 @@
                   "delete_".str_replace('.'.$file_parts['extension'],'',$file),
                   trans('actions.are_you_sure'),
                   "<div style='color:black;'><b>".trans('actions.delete_this',['content_type'=>'file']).": </b>".$file." <b>?</b></div>",
-                  "<a href='admin/file-manager/delete?file=storage/".$old_path.$file."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
+                  "<a href='admin/file-manager/delete?file=storage/".$old_path.$file."' type='button' class='btn btn-danger' onclick=\"filemanager.delete(event,'storage/".$old_path.$file."')\" ><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
                   <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
                   );
 
@@ -87,7 +89,7 @@
 
 
             @endforeach
-
+        </div>
 
   </div>
 </div>
@@ -103,7 +105,7 @@
 		background-color: #337ab7;	
 	}
 
-  .file{
+  .file, .folder{
     overflow:hidden;
     height:160px;
     cursor:pointer;
@@ -111,22 +113,29 @@
     text-align:center;
   }
 
-  .file a i{
+  .file a i, .folder a i{
     visibility:hidden;
   }
 
-  .file:hover a i{
+  .file:hover a i, .folder:hover a i{
     visibility:visible;
   }
 
-	.file:hover{
+	.file:hover, .folder:hover{
 		border-radius:1.5px;
 		color:white;
 		background-color: #337ab7;
 	}
+
+  .folder img{
+    width:75%;
+    margin-top:10px;
+  }
+
+  .file-nav{
+    margin-bottom: 5px;
+  }
 </style>
-
-
 
 
 
@@ -152,7 +161,7 @@
 
       </div>
       <div class='modal-footer'>
-        <button type='submit' class='btn btn-primary'>Upload</button></form>
+        <button type='submit' class='btn btn-primary' onclick="filemanager.upload(event);">Upload</button></form>
         <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
       </div>
     </div><!-- /.modal-content -->
@@ -170,9 +179,9 @@
       </div>
       <div class='modal-body'>
 
-<form action='admin/file-manager/newfolder' method='POST' enctype='multipart/form-data'>
+  <form action='admin/file-manager/new-folder' method='POST' enctype='multipart/form-data'>
       {{ csrf_field() }}
-<div class='form-group'>
+    <div class='form-group'>
       <input type='hidden' name='dir_path' value="{{ $old_path }}">
       <div class='form-group' >
        <label for='title'>Name:</label>  
@@ -183,27 +192,13 @@
 
       </div>
       <div class='modal-footer'>
-        <button type='submit' class='btn btn-primary'>Create</button></form>
+        <button type='submit' class='btn btn-primary' onclick="filemanager.newFolder(event);">Create</button>
+        </form>
         <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
       </div>
     </div>
   </div>
 </div>
 
-<script>
-        // Helper function to get parameters from the query string.
-        function getUrlParam( paramName ) {
-            var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' );
-            var match = window.location.search.match( reParam );
 
-            return ( match && match.length > 1 ) ? match[1] : null;
-        }
-        // Simulate user action of selecting a file to be returned to CKEditor.
-        function returnFileUrl(filepath) {
-
-            var funcNum = 1;/*getUrlParam( 'CKEditorFuncNum' );*/
-            var fileUrl = filepath;
-            window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl );
-            window.close();
-        }
-</script>
+</div>

@@ -22,7 +22,7 @@ var app = new Vue({
 
     },
     created: function(){
-    	console.log("VueJS started");
+    	console.log("HorizontCMS: VueJS started");
     }
 
 });

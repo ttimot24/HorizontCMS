@@ -23,6 +23,7 @@ class FileManagerController extends Controller{
 
         //dd($current_dir);
 
+        $this->view->js('resources/assets/js/filemanager.js');
 
         $this->view->title(trans('File Manager'));
         return $this->view->render('media/fmframe',[
@@ -57,13 +58,26 @@ class FileManagerController extends Controller{
                 foreach($this->request->up_file as $file){
                    $image = $file->store(ltrim($this->request->input('dir_path'),"storage/"));
                 }
+
+                if($this->request->ajax()){
+                    return response()->json(['success' => 'Files uploaded successfully!']);
+                }
                    
                 return $this->redirectToSelf()->withMessage(['success' => 'Files uploaded successfully!']);
 
             }else{
+
+                if($this->request->ajax()){
+                    return response()->json(['danger' => 'Could not upload files!']);
+                }
+
                 return $this->redirectToSelf()->withMessage(['danger' => 'Could not upload files!']);
             }
 
+        }
+
+        if($this->request->ajax()){
+            return response()->json(['warning' => 'Only POST method allowed!']);
         }
 
         return $this->redirectToSelf()->withMessage(['warning' => 'Only POST method allowed!']);
@@ -96,14 +110,25 @@ class FileManagerController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function newfolder(){
+    public function newFolder(){
         
         if($this->request->isMethod('POST')){
             
             if(!file_exists($this->request->input('dir_path')."/".$this->request->input('new_folder_name'))){
                 \File::makeDirectory("storage/".$this->request->input('dir_path')."/".$this->request->input('new_folder_name'), $mode = 0777, true, true);
+               
+                if($this->request->ajax()){
+                    return response()->json(['success' => 'Folder created successfully!']);
+                }
+
                 return $this->redirectToSelf()->withMessage(['success' => 'Folder created successfully!']);
+          
             }else{
+
+                if($this->request->ajax()){
+                    return response()->json(['danger' => 'Folder already exists!']);
+                }
+              
                 return $this->redirectToSelf()->withMessage(['danger' => 'Folder already exists!']);
             }
         }
@@ -119,6 +144,8 @@ class FileManagerController extends Controller{
     public function ckbrowse(){
          $current_dir = $this->request->get('path')==NULL? "" : ltrim($this->request->get('path'),"/");
 
+         
+        $this->view->js('resources/assets/js/filemanager.js');
 
         $this->view->title(trans('File Manager'));
         return $this->view->render('media/fmframeckeditor',[
@@ -177,23 +204,44 @@ class FileManagerController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function delete(){
+        
 
-         $toDelete = ltrim($this->request->get('file'),'storage/');
+         $toDelete = str_replace("storage/","",$this->request->input('file'));
+
+         if(!file_exists('storage/'.$toDelete)){
+            if($this->request->ajax()){
+                return response()->json(['warning' => trans("File ".$toDelete." doesn't exists")]);
+            }
+
+             return $this->redirectToSelf()->withMessage(['warning' => trans("File ".$toDelete." doesn't exists")]);
+         }
+
                 
          if(!is_dir('storage/'.$toDelete) && Storage::delete($toDelete)){
+
+                if($this->request->ajax()){
+                    return response()->json(['success' => trans('File deleted successfully')]);
+                }
+
              return $this->redirectToSelf()->withMessage(['success' => trans('File deleted successfully')]);
          }else if(is_dir('storage/'.$toDelete) && Storage::deleteDirectory($toDelete)){
+
+                if($this->request->ajax()){
+                    return response()->json(['success' => trans('Directory deleted successfully')]);
+                }
+
              return $this->redirectToSelf()->withMessage(['success' => trans('Directory deleted successfully')]);
          }else{
+
+            if($this->request->ajax()){
+                return response()->json(['danger' => trans('message.something_went_wrong')]);
+            }
+
              return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
          }
 
     }
 
-
-    public function browse(){
-        return "browse";
-    }
 
 
     public function upload(){
