@@ -18,19 +18,13 @@ class FileManagerController extends Controller{
      */
     public function index($slug){
 
+        $mode = $this->request->get('mode');
 
         $current_dir = $this->request->get('path')==NULL? "" : ltrim($this->request->get('path'),"/");
 
-        //dd($current_dir);
-
-        $this->view->js('resources/assets/js/filemanager.js');
-
-        $this->view->title(trans('File Manager'));
-        return $this->view->render('media/fmframe',[
-                'action' => 'index',
+        $data = [
                 'old_path' => ($current_dir==""? "":$current_dir."/"),
                 'current_dir' => $current_dir,
-                'tree' => explode("/",$current_dir),
                 'dirs' => collect(\File::directories(storage_path().DIRECTORY_SEPARATOR.$current_dir))->map(function($dir){
                     return basename($dir);
                 }),
@@ -40,7 +34,18 @@ class FileManagerController extends Controller{
                 'allowed_extensions' => [
                                           'image' => ['jpg','png','jpeg']
                                         ],
-            ]);
+                'mode' => $mode,
+            ];
+
+
+        if($this->request->ajax()){
+            return response()->json($data);
+        }
+
+        $this->view->js('resources/assets/js/filemanager.js');
+
+        $this->view->title(trans('File Manager'));
+        return $this->view->render($mode=='embed'? 'media/embed' : 'media/fmframe',$data);
     }
 
     /**
@@ -60,7 +65,7 @@ class FileManagerController extends Controller{
                 }
 
                 if($this->request->ajax()){
-                    return response()->json(['success' => 'Files uploaded successfully!']);
+                    return response()->json(['success' => 'Files uploaded successfully!', 'uploadedFileName' => "storage/".$image ]);
                 }
                    
                 return $this->redirectToSelf()->withMessage(['success' => 'Files uploaded successfully!']);
@@ -135,67 +140,6 @@ class FileManagerController extends Controller{
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function ckbrowse(){
-         $current_dir = $this->request->get('path')==NULL? "" : ltrim($this->request->get('path'),"/");
-
-         
-        $this->view->js('resources/assets/js/filemanager.js');
-
-        $this->view->title(trans('File Manager'));
-        return $this->view->render('media/fmframeckeditor',[
-                'action' => 'ckbrowse',
-                'old_path' => ($current_dir==""? "":$current_dir."/"),
-                'current_dir' => $current_dir,
-                'tree' => explode("/",$current_dir),
-                'dirs' => collect(\File::directories(storage_path().DIRECTORY_SEPARATOR.$current_dir))->map(function($dir){
-                    return basename($dir);
-                }),
-                'files' => collect(\File::files(storage_path().DIRECTORY_SEPARATOR.$current_dir))->map(function($file){
-                    return basename($file);
-                }),
-                'allowed_extensions' => [
-                                          'image' => ['jpg','png','jpeg']
-                                        ],
-            ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id){
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id){
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id){
-        //
-    }
-
 
     /**
      * Remove the specified resource from database.
@@ -204,7 +148,7 @@ class FileManagerController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function delete(){
-        
+
 
          $toDelete = str_replace("storage/","",$this->request->input('file'));
 
