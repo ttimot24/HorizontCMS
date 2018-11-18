@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Illuminate\Http\Request;
 use App\Libs\Controller;
 use Illuminate\Support\Facades\Storage;
-
+use \Illuminate\Http\File;
 
 class FileManagerController extends Controller{
  
@@ -18,6 +18,7 @@ class FileManagerController extends Controller{
      */
     public function index($slug){
 
+
         $mode = $this->request->get('mode');
 
         $current_dir = $this->request->get('path')==NULL? "" : ltrim($this->request->get('path'),"/");
@@ -25,12 +26,12 @@ class FileManagerController extends Controller{
         $data = [
                 'old_path' => ($current_dir==""? "":$current_dir."/"),
                 'current_dir' => $current_dir,
-                'dirs' => collect(\File::directories(storage_path().DIRECTORY_SEPARATOR.$current_dir))->map(function($dir){
+                'dirs' => array_values(collect(\File::directories(storage_path($current_dir)))->map(function($dir){
                     return basename($dir);
-                }),
-                'files' => collect(\File::files(storage_path().DIRECTORY_SEPARATOR.$current_dir))->map(function($file){
+                })->toArray()),
+                'files' => array_values(collect(\File::files(storage_path($current_dir)))->map(function($file){
                     return basename($file);
-                }),
+                })->toArray()),
                 'allowed_extensions' => [
                                           'image' => ['jpg','png','jpeg']
                                         ],
@@ -61,7 +62,7 @@ class FileManagerController extends Controller{
             if ($this->request->hasFile('up_file')){
 
                 foreach($this->request->up_file as $file){
-                   $image = $file->store(ltrim($this->request->input('dir_path'),"storage/"));
+                   $image = $file->store(str_replace("storage/", "", $this->request->input('dir_path')));
                 }
 
                 if($this->request->ajax()){
