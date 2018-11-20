@@ -21,7 +21,7 @@ class FileManagerController extends Controller{
 
         $mode = $this->request->get('mode');
 
-        $current_dir = $this->request->get('path')==NULL? "" : ltrim($this->request->get('path'),"/");
+        $current_dir = str_replace_first("storage/","",$this->request->get('path')==NULL? "" : ltrim($this->request->get('path'),"/"));
 
         $data = [
                 'old_path' => ($current_dir==""? "":$current_dir."/"),
@@ -42,8 +42,6 @@ class FileManagerController extends Controller{
         if($this->request->ajax()){
             return response()->json($data);
         }
-
-        $this->view->js('resources/assets/js/filemanager.js');
 
         $this->view->title(trans('File Manager'));
         return $this->view->render($mode=='embed'? 'media/embed' : 'media/fmframe',$data);
@@ -121,7 +119,7 @@ class FileManagerController extends Controller{
         if($this->request->isMethod('POST')){
             
             if(!file_exists($this->request->input('dir_path')."/".$this->request->input('new_folder_name'))){
-                \File::makeDirectory("storage/".$this->request->input('dir_path')."/".$this->request->input('new_folder_name'), $mode = 0777, true, true);
+                \File::makeDirectory("storage/".str_replace("storage/","",$this->request->input('dir_path'))."/".$this->request->input('new_folder_name'), $mode = 0777, true, true);
                
                 if($this->request->ajax()){
                     return response()->json(['success' => 'Folder created successfully!']);
