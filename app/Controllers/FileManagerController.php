@@ -118,8 +118,10 @@ class FileManagerController extends Controller{
         
         if($this->request->isMethod('POST')){
             
-            if(!file_exists($this->request->input('dir_path')."/".$this->request->input('new_folder_name'))){
-                \File::makeDirectory("storage/".str_replace("storage/","",$this->request->input('dir_path'))."/".$this->request->input('new_folder_name'), $mode = 0777, true, true);
+            $directory = "storage/".str_replace("storage/","",$this->request->input('dir_path'))."/".$this->request->input('new_folder_name');
+
+            if(!file_exists($directory)){
+                \File::makeDirectory($directory , $mode = 0777, true, true);
                
                 if($this->request->ajax()){
                     return response()->json(['success' => 'Folder created successfully!']);
