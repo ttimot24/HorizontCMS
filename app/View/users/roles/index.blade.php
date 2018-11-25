@@ -32,20 +32,9 @@
   <ul class="list-group">
 
   <?php 
-
-  $permission_list = [
-                      "admin_area" => "<b style='color:red;'>Admin area</b>",
-                      "blogpost" => "Blogposts",
-                      "user" => "Users",
-                      "page" => "Pages",
-                      "media" => "Media",
-                      "themes&apps" => "Themes & apps",
-                      "settings" => "Settings",
-                      ];
-
   
 
-foreach($permission_list as $key => $perm_name){
+  foreach($permission_list as $key => $perm_name){
 
       if(isset($role->rights) && in_array($key,$role->rights)){
         $check = "checked";
@@ -54,12 +43,11 @@ foreach($permission_list as $key => $perm_name){
         $check = "";
       }
 
-      if($role->name =='Admin'){
-        $disable = " disabled";
-      }
-      else{
-        $disable = "";
-      }
+
+      $disable = $role->name =='Admin'? " disabled" : "";
+
+
+        $perm_name = str_replace("Admin area","<b style='color:red;'>Admin area</b>",$perm_name);
 
         echo "<li class='list-group-item'>".$perm_name."<input type='checkbox' class='pull-right' name='".$key."' value='1' ".$check." ".$disable."></li>";
 

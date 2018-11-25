@@ -17,7 +17,7 @@ Route::auth();
 
 
 
-Route::group(['middleware' => ['admin','plugin']],function(){
+Route::group(['middleware' => ['admin','plugin','can:global-authorization']],function(){
 
 
 	Route::any('/plugin/run/{plugin}/{controller?}/{action?}/{args?}/', 

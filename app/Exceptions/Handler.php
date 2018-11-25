@@ -45,10 +45,13 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
       
+        if(get_class($exception)==\Illuminate\Auth\Access\AuthorizationException::class){
+            return redirect(\Config::get('horizontcms.backend_prefix').'/dashboard/unauthorized');
+        }
+
     	if(get_class($exception)!=\Illuminate\Auth\AuthenticationException::class){
     		return response()->view('errors.exception', ['exception' => $exception]);
     	}
-
 
         return parent::render($request, $exception);
 

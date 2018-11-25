@@ -24,6 +24,7 @@ class NavbarPluginMiddleware
 
             foreach(app()->plugins as $plugin){
 
+              try{
 
                 $plugin_nav = $plugin->getRegister('navigation',[]);
 
@@ -47,6 +48,10 @@ class NavbarPluginMiddleware
                     }
                   }
                 }
+
+              }catch(\Error $e){
+                 // throw $e;
+              }
             }
         }
 

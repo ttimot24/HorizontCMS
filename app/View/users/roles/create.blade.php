@@ -19,21 +19,10 @@
   <!-- List group -->
   <ul class="list-group">
 
-  <?php 
-
-  $permission_list = [
-                      "admin_area" => "<b style='color:red;'>Admin area</b>",
-                      "blogpost" => "Blogposts",
-                      "user" => "Users",
-                      "page" => "Pages",
-                      "media" => "Media",
-                      "themes&apps" => "Themes & apps",
-                      "settings" => "Settings",
-                      ];
-
-   ?> 
 
     @foreach($permission_list as $key => $perm_name)
+
+        <?php $perm_name = str_replace("Admin area","<b style='color:red;'>Admin area</b>",$perm_name) dsfsdf?>
 
         <li class='list-group-item'>{!!$perm_name!!}<input type='checkbox' class='pull-right' name='{{$key}}' value='1'></li>
 

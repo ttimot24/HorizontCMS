@@ -44,17 +44,24 @@ class MenuMiddleware{
             }
 
 
-            if(\Auth::user()->hasPermission("media")){
+            if(\Auth::user()->hasPermission("filemanager") || \Auth::user()->hasPermission("headerimages")){
             $menu->add(trans('navbar.media'), '#')->id('media');
             $menu->find('media')->add("<i class='fa fa-folder-open-o'></i> ".trans('navbar.filemanager'), admin_link('file-manager-index'));
             $menu->find('media')->add("<i class='fa fa-picture-o'></i> ".trans('navbar.header_images'), admin_link('headerimage-index'));
             }
 
 
-            if(\Auth::user()->hasPermission("themes&apps")){
-            $menu->add(trans('navbar.themes_apps'), '#')->id('themes_apps');
-            $menu->find('themes_apps')->add("<i class='fa fa-desktop'></i> ".trans('navbar.theme'), admin_link('ext-theme-index'));
-            $menu->find('themes_apps')->add("<i class='fa fa-cubes'></i> ".trans('navbar.plugin'), admin_link('ext-plugin-index'));
+            if(\Auth::user()->hasPermission("theme") || \Auth::user()->hasPermission("plugin")){
+                $menu->add(trans('navbar.themes_apps'), '#')->id('themes_apps');
+
+                if(\Auth::user()->hasPermission("theme")){
+                     $menu->find('themes_apps')->add("<i class='fa fa-desktop'></i> ".trans('navbar.theme'), admin_link('ext-theme-index'));
+                }
+
+                if(\Auth::user()->hasPermission("plugin")){
+                     $menu->find('themes_apps')->add("<i class='fa fa-cubes'></i> ".trans('navbar.plugin'), admin_link('ext-plugin-index'));
+                }
+
             }
 
         });

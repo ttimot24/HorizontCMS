@@ -10,10 +10,14 @@ class UserRoleController extends Controller{
 
     public function index(){
 
+
+
+    //    dd($permission_list);
+
         $this->view->title('User roles');
         return $this->view->render('users/roles/index',[
                                                         'all_user_roles' => \App\Model\UserRole::all(),
-                                                        
+                                                        'permission_list' => $this->getPermissionList(),
                                                         ]);
     }
 
@@ -27,9 +31,27 @@ class UserRoleController extends Controller{
 
         $this->view->title('Create role');
         return $this->view->render('users/roles/create',[
-                                                 
+                                                        'permission_list' => $this->getPermissionList(),
                                                         ]);
     }
+
+
+    private function getPermissionList(){
+
+        $controllers = array_slice(scandir(app_path('Controllers')),3);
+
+        $permission_list['admin_area'] = 'Admin area';
+
+        foreach($controllers as $controller){
+            $name = str_replace("Controller.php","",$controller);
+            $permission_list[str_slug($name)] = $name;
+        }
+
+        unset($permission_list['website'], $permission_list['install'],$permission_list['dashboard']);
+
+        return $permission_list;
+    }
+
 
     /**
      * Store a newly created resource in storage.

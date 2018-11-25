@@ -35,4 +35,9 @@ class DashboardController extends Controller{
     }
 
 
+    public function unauthorized(){
+        $this->view->title('Access denied');
+        return $this->view->render('errors/unauthorized');
+    }
+
 }
