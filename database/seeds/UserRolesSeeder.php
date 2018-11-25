@@ -35,19 +35,19 @@ class UserRolesSeeder extends Seeder
         DB::table('user_roles')->insert([
             'name' => 'Editor',
             'permission' => 3,
-            'rights' => json_encode(['admin_area','blogpost','user','page','media']),
+            'rights' => json_encode(['admin_area','blogpost','blogpostcategory','blogpostcomment','user','page','filemanager','headerimage','search']),
         ]);
 
         DB::table('user_roles')->insert([
             'name' => 'Manager',
             'permission' => 4,
-            'rights' => json_encode(['admin_area','blogpost','user','page','media','themes&apps','settings']),
+            'rights' => json_encode(['admin_area','blogpost','blogpostcategory','blogpostcomment','user','userrole','page','plugin','filemanager','headerimage','search']),
         ]);
 
          DB::table('user_roles')->insert([
             'name' => 'Admin',
             'permission' => 5,
-            'rights' => json_encode(['admin_area','blogpost','user','page','media','themes&apps','settings']),
+            'rights' => json_encode(['admin_area','blogpost','blogpostcategory','blogpostcomment','user','userrole','page','theme','plugin','filemanager','headerimage','search','settings']),
         ]);
 
 

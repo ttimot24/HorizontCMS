@@ -39,7 +39,9 @@
 
 
 
-        </br></br></br><center>
+        </br></br></br><center
+
+        @if(\Auth::user()->hasPermission('search'))
         <form class='form-inline' action="{{admin_link('search-index')}}" method='POST'>
             {{ csrf_field() }}
           <div class='form-group'>
@@ -54,6 +56,8 @@
             </div>
           </div>
         </form>
+        @endif
+
         </center>
 
      
