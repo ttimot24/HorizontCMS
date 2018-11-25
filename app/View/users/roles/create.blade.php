@@ -22,7 +22,7 @@
 
     @foreach($permission_list as $key => $perm_name)
 
-        <?php $perm_name = str_replace("Admin area","<b style='color:red;'>Admin area</b>",$perm_name) dsfsdf?>
+        <?php $perm_name = str_replace("Admin area","<b style='color:red;'>Admin area</b>",$perm_name) ?>
 
         <li class='list-group-item'>{!!$perm_name!!}<input type='checkbox' class='pull-right' name='{{$key}}' value='1'></li>
 
