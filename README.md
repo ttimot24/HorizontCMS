@@ -20,6 +20,7 @@ Frontend: [https://horizontcms.herokuapp.com/](https://horizontcms.herokuapp.com
 
 Backend: [https://horizontcms.herokuapp.com/admin](https://horizontcms.herokuapp.com/admin)
 
+Username & password: admin/admin
 
 ### Installation
 #### Browser
