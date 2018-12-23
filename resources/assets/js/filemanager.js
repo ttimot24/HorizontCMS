@@ -19,64 +19,99 @@
 var filemanager = new Vue({
 	created: function(){
     	console.log("VueJS: FileManager started");
+        this.open('');
+        console.log('Directory: '+this.$data.currentDirectory);
     },
+    name: 'FileManager',
     el: '#filemanager',
     data:{
+        _csrfToken: $('[name="_token"]').val(),
+        previousDirectory: null,
+        currentDirectory: 'storage',
+        folders: [],
+        files: [],
+        knownFileExtensions: ['jpg','png','jpeg'],
+        messages: []
+    },
+    watch:{
 
     },
+    computed: {
+        breadcrumb: function(){
+            var here = this.$data.currentDirectory.split('/');
+
+            var parts = [];
+
+            for( var i = 0; i < here.length; i++ ) {
+                var part = here[i];
+                var text = part;
+                var link = '' + here.slice( 0, i + 1 ).join('/');
+                parts.push({ "text": text, "link": link });
+            }
+
+            return parts;
+        }
+    },
     methods:{
-      /*  open: function(path){
-            $.ajax({
+        open: function(folder, useCurrent = true){
+
+           if(useCurrent){
+              var folderToOpen = this.$data.currentDirectory+'/'+folder;
+           }else{
+              var folderToOpen = folder;
+           }
+
+           $.ajax({
                   url: 'admin/file-manager/index',
                   type: 'GET',
                   data:{
-                    path: path
+                    path: folderToOpen 
                   },
                   success: function (data) {
-                     console.log(data);
-                     $('#workspace').empty();
 
-                     filemanager.buildBreadcrumb(path);
+                    filemanager.$data.previousDirectory = filemanager.$data.currentDirectory;
+                    filemanager.$data.currentDirectory = data.current_dir;
+                    filemanager.$data.folders = [];
+                    filemanager.$data.files = [];
+
+                     console.log(data); 
 
                      if(typeof data.dirs !== 'undefined' && data.dirs.length > 0){
+
                          data.dirs.forEach(function(each){
-                            $('#workspace').append(filemanager.createFolder(data.old_path+each));
+                            filemanager.$data.folders.push(each);
                          });
                      }
 
-                    if(typeof data.dirs !== 'undefined' && data.dirs.length > 0){
+                    if(typeof data.files !== 'undefined' && data.files.length > 0){
+
+                      
                         data.files.forEach(function(each){
-                            $('#workspace').append(filemanager.createFile(data.old_path+each));
+                            filemanager.$data.files.push(each);
                          });
 
                         }
 
+                        $('.fa-refresh').removeClass('fa-spin');
                   },
-                  error: function () {
-                      console.log("Error in ajax form submission");
+                  error: function (data) {
+                      console.log(data);
+                    //  throw "Error in ajax form submission";
                   }
               });
-        },*/
-    	dirOpen: function(location){
-            console.log("Open: "+location);
-    		try{
-                filemanager.open(location);
-            }catch(error){
-               window.location.href = location; 
-            }
-    	},
-    	/*newFolder: function(event){
-    		event.preventDefault();
 
-            var token = $('[name="_token"]').val();
-    		var dirPath = $('[name="dir_path"]').val();
+        },
+    	newFolder: function(){
+
+    		var dirPath = this.$data.currentDirectory;
     		var folderName = $('[name="new_folder_name"]').val();
+
 
     		$.post('admin/file-manager/new-folder',
     		{ 
-    			_token: token, 
+    			_token: filemanager.$data._csrfToken, 
     			dir_path: dirPath,
-    			new_folder_name: folderName 
+    			new_folder_name: folderName
     		},
     		function( data ) {
                 if(typeof data.success !== 'undefined'){
@@ -86,31 +121,29 @@ var filemanager = new Vue({
                     $('#new_folder').modal('hide');
     			  	$('[name="new_folder_name"]').val("");
 
-                    folder = filemanager.createFolder(dirPath+'/'+folderName);
-                    console.log(folder);
-    			  	$('#workspace').append(folder);
+
+                    filemanager.$data.folders.push(folderName);
 
 
                 }else{
-                    console.log("Error" +data);
+                    console.log("Error:");
+                    console.log(data);
                 }
 			}
 			);
 
     	},
-		upload: function(event){
-			event.preventDefault();
+		upload: function(){
 
             console.log("Uploading ...");
 
-			var token = $('[name="_token"]').val();
-			var dirPath = $('[name="dir_path"]').val();
+			var dirPath = filemanager.$data.currentDirectory;
 
             var fileSelect = $('#input-2');
             var files = fileSelect[0].files;
 
             var formData = new FormData();
-            formData.append('_token',token);
+            formData.append('_token',filemanager.$data._csrfToken);
             formData.append('dir_path',dirPath);
 
             for (var i = 0; i < files.length; i++) {
@@ -133,10 +166,13 @@ var filemanager = new Vue({
     		              console.log(data);
                           $('#upload_file_to_storage').modal('hide');
                           fileSelect.val("");
+                          fileSelect.fileinput("clear");
 
-                          ufile = filemanager.createFile(data.uploadedFileName);
-                          console.log(ufile);
-                          $('#workspace').append(ufile);
+
+                          for (var i = 0; i < data.uploadedFileNames.length; i++) {
+                                console.log(filemanager.basename(data.uploadedFileNames[i]));
+                                filemanager.$data.files.push(filemanager.basename(data.uploadedFileNames[i])+'.'+filemanager.getFileExtension(data.uploadedFileNames[i]));
+                          }
                     }else{
                         console.log("Error" +data);
                     }
@@ -145,34 +181,61 @@ var filemanager = new Vue({
 		              console.log("Error in ajax form submission");
 		          }
 		      });
-		},*/
+		},
 		basename: function (url){
 		    return ((url=/(([^\/\\\.#\? ]+)(\.\w+)*)([?#].+)?$/.exec(url))!= null)? url[2]: '';
 		},
-    	/*delete: function(event,file){
-    		event.preventDefault();
+        modal: function(file){
+            var modal = $('#delete_sample');
+            var text = $($(modal.find('div.modal-body')).find('div')).html();
+            $($(modal.find('div.modal-body')).find('div')).html(function(event,html){ return html.replace('[dir_name_sample]',filemanager.basename(file)).replace('[dir_path_sample]',file); });
+            modal.find('a').data('file',file);
+            modal.modal('toggle');
+        },
+    	deleteFile: function(event){
 
 
-            token = $('[name="_token"]').val();
-    		file = file;
+    		file = filemanager.$data.currentDirectory+'/'+$(event.target).data('file');
 
 
     		$.get('admin/file-manager/delete',
     		{ 
-    			_token: token, 
+    			_token: filemanager.$data._csrfToken, 
     			file: file
     		},
     		function( data ) {
     			if(typeof data.success !== 'undefined'){
-    				$('#'+filemanager.basename(file)).remove();
-    				$('#delete_'+filemanager.basename(file)).modal('hide');
+
+                    var index = filemanager.$data.files.indexOf($(event.target).data('file'));
+                    if (index > -1) {
+                      filemanager.$data.files.splice(index, 1);
+                    }
+
+                    index = filemanager.$data.folders.indexOf($(event.target).data('file'));
+                    if (index > -1) {
+                      filemanager.$data.folders.splice(index, 1);
+                    }
+
+
+    				$('#delete_sample').modal('hide');
     			}else{
     				 console.log(data);
     			}
 			}
 			);
 
-    	},*/
+    	},
+        getUrlVar: function (location,vary){
+            var vars = [], hash;
+            var hashes = location.slice(location.indexOf('?') + 1).split('&');
+            for(var i = 0; i < hashes.length; i++)
+            {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars[vary];
+        },
     	getUrlParam: function ( paramName ) {
             var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' );
             var match = window.location.search.match( reParam );
@@ -186,77 +249,11 @@ var filemanager = new Vue({
             window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl );
             window.close();
         },
-        createFolder: function(fullPath){
-            var name = filemanager.basename(fullPath);
-
-            folder = $('<div/>',{
-                id: name,
-                class: 'folder col-md-2'
-            });
-
-            folder[0].ondblclick = function() { filemanager.dirOpen("admin/file-manager/index?path="+fullPath); };
-
-            var navbar = $('<div/>',{
-                class: 'file-nav text-right'
-            });
-
-            var image = $('<img/>',{
-                src: 'resources/images/icons/dir.png'
-            });
-
-            navbar.append("<a data-toggle='modal' data-target=.delete_"+name+" ><i class='fa fa-trash pull-right'></i></a>");
-
-            folder.append(navbar);
-            folder.append(image);
-            folder.append("<b>"+name+"</b>");
-
-
-            return folder[0];
-
-
-            //return $('<div/>').html("<div class='folder col-md-2' id='"+name+"' ><div class='file-nav text-right'><a data-toggle='modal' data-target=.delete_"+name+" ><i class='fa fa-trash pull-right'></i></a></div><img src='resources/images/icons/dir.png') ><b>"+name+"</b></div>").contents()[0];
+        getFileExtension: function(fileName){
+            return fileName.substr(fileName.lastIndexOf('.') + 1);
         },
-        createFile: function(fullPath){
-            
-            var name = filemanager.basename(fullPath);
-
-            file = $('<div/>',{
-                id: name,
-                class: 'file col-md-2'
-            });
-
-            var navbar = $('<div/>',{
-                class: 'file-nav text-right'
-            });
-
-            image = $('<img/>',{
-                src: fullPath,
-            });
-
-            navbar.append('<a href="admin/file-manager/download?file='+fullPath+'"><i class="fa fa-download"></i></a>&nbsp<a data-toggle="modal" data-target=".delete_'+name+'" ><i class="fa fa-trash"></i></a>');
-
-            file.append(navbar);
-            file.append(image);
-            file.append('<b>'+name+'</b>');
-
-            return file[0];
-
-            //return $('<div/>').html("<div class='file col-md-2' id="{{str_replace('.'.$file_parts['extension'],'',$file)}}" @if($action=='ckbrowse') onclick='filemanager.returnFileUrl("<?= 'storage/'.$old_path.$file ?>");' @else data-toggle='modal' data-target='.{{$file}}-modal-xl' @endif > <div class="file-nav text-right"><a href="admin/file-manager/download?file=storage/{{$old_path.$file}}"><i class="fa fa-download"></i></a>&nbsp<a data-toggle='modal' data-target=".delete_{{str_replace('.'.$file_parts['extension'],'',$file)}}" ><i class="fa fa-trash"></i></a> </div> @if(isset($file_parts['extension']) && in_array($file_parts['extension'],$allowed_extensions['image'])) <img src="{{'storage/'.$old_path.$file}}"/> @else <img src="resources/images/icons/file.png" style='margin-bottom:5px;' />@endif <b>{{$file}}</b></div>");
-        },
-        buildBreadcrumb: function(path){
-            var breadcrumb = $('.breadcrumb');
-            breadcrumb.empty();
-
-            path.split("/").forEach(function(each){
-                
-                breadcrumb.append(
-                    $('<li/>').append(
-                        $('<a>').attr('href','/user/messages').innerHTML=each
-                    )
-                );
-
-            });
-
+        isKnownExtension: function(fileName){
+            return $.inArray( this.getFileExtension(fileName) , this.$data.knownFileExtensions ) > 0;
         }
     }
 

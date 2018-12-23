@@ -60,11 +60,11 @@ class FileManagerController extends Controller{
             if ($this->request->hasFile('up_file')){
 
                 foreach($this->request->up_file as $file){
-                   $image = $file->store(str_replace("storage/", "", $this->request->input('dir_path')));
+                   $images[] = $file->store(str_replace("storage/", "", $this->request->input('dir_path')));
                 }
 
                 if($this->request->ajax()){
-                    return response()->json(['success' => 'Files uploaded successfully!', 'uploadedFileName' => "storage/".$image ]);
+                    return response()->json(['success' => 'Files uploaded successfully!', 'uploadedFileNames' => $images ]);
                 }
                    
                 return $this->redirectToSelf()->withMessage(['success' => 'Files uploaded successfully!']);
