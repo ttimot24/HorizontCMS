@@ -187,8 +187,7 @@ var filemanager = new Vue({
 		},
         modal: function(file){
             var modal = $('#delete_sample');
-            var text = $($(modal.find('div.modal-body')).find('div')).html();
-            $($(modal.find('div.modal-body')).find('div')).html(function(event,html){ return html.replace('[dir_name_sample]',filemanager.basename(file)).replace('[dir_path_sample]',file); });
+            $($($(modal.find('div.modal-body')).find('div')).find('b')).html(function(event,html){ return filemanager.basename(file); });
             modal.find('a').data('file',file);
             modal.modal('toggle');
         },
