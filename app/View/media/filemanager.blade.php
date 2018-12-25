@@ -77,7 +77,7 @@
                  Bootstrap::delete_confirmation(
                   "delete_sample",
                   trans('actions.are_you_sure'),
-                  "<div style='color:black;'><b>".trans('actions.delete_this',['content_type'=>'dir']).": </b> [dir_name_sample] <b>?</b></div>",
+                  "<div style='color:black;'>".trans('actions.delete_this',['content_type'=>'dir']).": <b>[dir_name_sample]</b> ?</div>",
                   "<a type='button' class='btn btn-danger' v-on:click.prevent='deleteFile' data-file='[dir_path_sample]' ><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
                   <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
                   );
