@@ -48,13 +48,12 @@
 
 <tr><td>Logo</td><td>
 <br>
-@if(isset($settings['logo']) && $settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))
-<img class='well well-sm' src="storage/images/logos/{{$settings['logo']}}" height='100'>
-@endif
+
+<input type="hidden" name="logo" value="<?= ($settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))? 'storage/images/logos/'.$settings['logo'] : ''  ?>" >
+<img id="logo" class='<?= ($settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))? "well well-sm" : "" ?>' src="<?= ($settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))? 'storage/images/logos/'.$settings['logo'] : ''  ?>" height='100' alt="">
 
 <div class="btn-group" role="group">
 <button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='.admin_logo_select-modal-lg'>Select</button>
-<button type='button' class='btn btn-primary btn-sm' data-toggle='modal' data-target='.admin_logo_upload-modal-lg'>Upload</button>
 </div>
 
 </td></tr>
@@ -73,32 +72,8 @@
 <br>
 </td></tr>
 
-
-
 </tbody></table>
 </form>
-
-<div class='modal admin_logo_upload-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabelx' aria-hidden='true'>
-  <div class='modal-dialog modal-lg'>
-    <div class='modal-content'>
-
-        <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
-        <h2 class='modal-title'><center>Upload logo</center></h2>
-         </div>
-        <div class='modal-body'>
-        <form action='admin/file-manager/fileupload?dir_path=storage/images/logos' method='POST' enctype='multipart/form-data'>
-        {{ csrf_field() }}
-          <div class='form-group'>
-  		      <label for='file'>Upload file:</label>
-  		      <input name='up_file[]' accept='image/*' id='input-2' type='file' class='file' multiple='true' data-show-upload='true' data-show-caption='true'>
-		      </div>
-        </form>
-        </div>
-    </div>
-  </div>
-</div>
-
 
 
 <div class='modal admin_logo_select-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabelx' aria-hidden='true'>
@@ -107,21 +82,26 @@
 
         <div class='modal-header'>
         <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
-        <h2 class='modal-title'><center>Select Logo</center></h2>
-         </div>
-        <div class='modal-body'>
+        <h3 class='modal-title'><center>Select Logo</center></h3>
+        </div>
+        <div class='modal-body' style="padding:0px;">
        
-<?php             
-
-	        foreach ($available_logos as $each){
-	        	echo "<a href='admin/settings/setlogo/".$each."'>
-            <img class='img img-thumbnail settings-image' src='storage/images/logos/".$each."' width='150'></a>";
-	        }
-
-?>
+            @include('media.filemanager', ['mode' => '', 'current_dir' => 'storage/images/logos'])
 
         </div>
       </div>
     </div>
   </div>
+
+<script>
+  $("#workspace").on('click',".file",function(event) {
+      var src = $(event.target).attr('src');
+      var bname = filemanager.basename(src)+"."+filemanager.getFileExtension(src);
+      $('[name="logo"]').val(bname);
+      $('#logo').attr('src', 'storage/images/logos/'+bname);
+      $('#logo').addClass('well well-sm');
+      $('.admin_logo_select-modal-lg').modal("hide");
+  });
+</script>
+
 @endsection

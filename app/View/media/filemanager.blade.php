@@ -1,4 +1,4 @@
-<div id="filemanager">
+<div id="filemanager" data-start="{{$current_dir}}" >
   {{ csrf_field() }}
 <section class='container'>
 

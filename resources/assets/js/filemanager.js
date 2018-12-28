@@ -17,9 +17,9 @@
 
 
 var filemanager = new Vue({
-	created: function(){
+	mounted: function(){
     	console.log("VueJS: FileManager started");
-        this.open('');
+        this.open($(this.$el).data('start'),false);
         console.log('Directory: '+this.$data.currentDirectory);
     },
     name: 'FileManager',
