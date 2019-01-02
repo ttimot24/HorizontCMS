@@ -10,9 +10,8 @@
 
 Lightweight CMS built on Laravel 5.4. The core system can be simply extended by themes and plugins with one click. Easy to learn for users, simple to code for developers.
 
-There are a lot of work here still.
 
-### Latest version: [v1.0.0-alpha.6](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.0.0-alpha.6)
+### Latest version: [v1.0.0-alpha.7](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.0.0-alpha.7)
 
 ### Try out
 
