@@ -39,7 +39,7 @@
 
 
 
-        </br></br></br><center
+        </br></br></br><center>
 
         @if(\Auth::user()->hasPermission('search'))
         <form class='form-inline' action="{{admin_link('search-index')}}" method='POST'>

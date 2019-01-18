@@ -3,7 +3,7 @@
 @section('content')
 <div class='container'>
 <section class="row">
-<h1>Logs <small class='pull-right' style='margin-top:1.5%;'>Files: {{$all_files->count()}} Entries: {{$all_file_entries}}</small></h1>
+<h1>System log <small class='pull-right' style='margin-top:1.5%;'>Files: {{$all_files->count()}} Entries: {{$all_file_entries}}</small></h1>
 <br><br>
 
 <div class='col-md-4'>
