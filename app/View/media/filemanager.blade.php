@@ -15,12 +15,12 @@
 
   </section>
 
-<div class='panel panel-default col-md-2' style='padding:0px;'>
+<div class='panel panel-default col-md-2' style='padding:0px;padding-top: 10px;'>
+ <h4 class="container">Drivers</h4>
  <ul class="list-group">
-  <a href='admin/file-manager?path=images'><li class="list-group-item">images</li></a>
-  <li class="list-group-item">uploads</li>
-  <li class="list-group-item">themes</li>
-  <li class="list-group-item">plugins</li>
+   @foreach(config('filesystems.disks') as $key => $value)
+        <a href="#" v-on:click.prevent="open('{{ isset($value['root'])? basename($value['root']) : ''}}',false);"><li class="list-group-item">{{$key}}</li></a>
+   @endforeach
 </ul>
 </div>
 
