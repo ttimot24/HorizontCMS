@@ -252,7 +252,7 @@ var filemanager = new Vue({
             return fileName.substr(fileName.lastIndexOf('.') + 1);
         },
         isKnownExtension: function(fileName){
-            return $.inArray( this.getFileExtension(fileName) , this.$data.knownFileExtensions ) >= 0;
+            return $.inArray( this.getFileExtension(fileName).toLowerCase() , this.$data.knownFileExtensions ) >= 0;
         }
     }
 
