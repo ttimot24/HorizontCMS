@@ -22,9 +22,13 @@
 <?php 
 
 	$colors = [
+      'emergency' => 'emergency',
+      'alert' => 'alert',
+      'critical' => 'danger',
 			'error' => 'danger',
       'warning' => 'warning',
       'notice' => 'info',
+      'info' => 'info',
       'debug' => 'success'
 			];
 
