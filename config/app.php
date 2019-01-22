@@ -126,7 +126,7 @@ return [
 
     'log_path' => env('LOG_PATH','storage/framework/logs/laravel.log'),
 
-    'log_max_files' => 10,
+    'log_max_files' => 15,
 
     /*
     |--------------------------------------------------------------------------

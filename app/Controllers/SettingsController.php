@@ -253,18 +253,4 @@ class SettingsController extends Controller{
 
 
 
-    public function setlogo($image){
-    	Settings::where('setting', '=', 'logo')->update(['value' => $image]);
-
-    	return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
-    }
-
-    public function setAdminLogo($image){
-    	Settings::where('setting', '=', 'admin_logo')->update(['value' => $image]);
-
-    	return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
-    }
-
-
-
 }

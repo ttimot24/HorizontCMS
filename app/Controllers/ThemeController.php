@@ -27,6 +27,21 @@ class ThemeController extends Controller{
 
 
      /**
+     * Display config page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function config($slug){
+
+
+        $this->view->title(trans('theme.config'));
+        return $this->view->render("theme/config",[
+                                                    
+                                                ]);
+    }
+
+
+     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
