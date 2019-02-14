@@ -49,7 +49,7 @@
 <tr><td>Logo</td><td>
 <br>
 
-<input type="hidden" name="logo" value="<?= ($settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))? 'storage/images/logos/'.$settings['logo'] : ''  ?>" >
+<input type="hidden" name="logo" value="<?= ($settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))? $settings['logo'] : ''  ?>" >
 <img id="logo" class='<?= ($settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))? "well well-sm" : "" ?>' src="<?= ($settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))? 'storage/images/logos/'.$settings['logo'] : ''  ?>" height='100' alt="">
 
 <div class="btn-group" role="group">

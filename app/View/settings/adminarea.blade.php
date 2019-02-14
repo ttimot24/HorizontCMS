@@ -25,7 +25,7 @@
 <tr><td>Dashboard Logo</td><td>
 <br>
 
-<input type="hidden" name="admin_logo" value="<?= ($settings['admin_logo']!='' && file_exists('storage/images/logos/'.$settings['admin_logo']))? 'storage/images/logos/'.$settings['admin_logo'] : \Config::get('horizontcms.admin_logo')  ?>" >
+<input type="hidden" name="admin_logo" value="<?= ($settings['admin_logo']!='' && file_exists('storage/images/logos/'.$settings['admin_logo']))? $settings['admin_logo'] : \Config::get('horizontcms.admin_logo')  ?>" >
 <img id="admin_logo" class='well well-sm' src="<?= ($settings['admin_logo']!='' && file_exists('storage/images/logos/'.$settings['admin_logo']))? 'storage/images/logos/'.$settings['admin_logo'] : \Config::get('horizontcms.admin_logo')  ?>" height='100'>
 
 <div class="btn-group" role="group">
