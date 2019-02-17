@@ -157,6 +157,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public static function search($search_key){
 
+        $search_key = '%'.$search_key.'%';
+
         return self::where('name', 'LIKE' ,$search_key)->orWhere('username', 'LIKE' ,$search_key)->orWhere('email', 'LIKE' ,$search_key)->get();
 
     }

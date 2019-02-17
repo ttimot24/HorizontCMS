@@ -12,7 +12,7 @@
 <br>
           <div class='form-group'>
             <div class='input-group'>
-            <input type='text' class='form-control' name='search' id='exampleInputAmount' placeholder="{{ trans('dashboard.search_bar') }}" required>
+            <input type='text' pattern=".{3,}" title="Minimum 3 characters" class='form-control' name='search' id='exampleInputAmount' placeholder="{{ trans('dashboard.search_bar') }}" required>
                <div class='input-group-addon'>
                 <button type='submit' class='btn btn-link btn-sm'  style='margin:0px;padding:0px;'>
                <span class='glyphicon glyphicon-search' aria-hidden='true' size=1></span></div>
