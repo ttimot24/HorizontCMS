@@ -109,5 +109,13 @@ class Website{
 		return Website::$_THEME_PATH."/".$file;
 	}
 
+	public static function isActivePlugin($plugin_name){
+
+		foreach(app()->plugins as $plugin){
+			if($plugin->root_dir==$plugin_name){ return true; }
+		}
+
+		return false;
+	}
 
 }
