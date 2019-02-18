@@ -137,7 +137,7 @@ class SettingsSeeder extends Seeder
         ]);
 
         DB::table('settings')->insert([
-            'setting' => 'social_link_google-plus',
+            'setting' => 'social_link_twitter',
             'value' => "",
             'more' => '1',
         ]);
@@ -149,7 +149,49 @@ class SettingsSeeder extends Seeder
         ]);
 
         DB::table('settings')->insert([
+            'setting' => 'social_link_google',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
+            'setting' => 'social_link_linkedin',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
             'setting' => 'social_link_github',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
+            'setting' => 'social_link_gitlab',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
+            'setting' => 'social_link_spotify',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
+            'setting' => 'social_link_soundcloud',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
+            'setting' => 'social_link_steam',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
+            'setting' => 'social_link_reddit',
             'value' => "",
             'more' => '1',
         ]);
