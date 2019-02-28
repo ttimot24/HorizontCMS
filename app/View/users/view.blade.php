@@ -32,7 +32,8 @@
   <img src='{{$user->getImage()}}' class='img img-thumbnail' style='margin-top:20px;' >
 </a>
 
-</br><center>
+</br>
+<center>
   <div class='btn-group' role='group'>
     <a href='admin/{{$user->id}}' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('actions.deactivate')}}</a>
     <a href="{{admin_link('user-edit',$user->id)}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
@@ -117,7 +118,7 @@
 
 
 
-    Bootstrap::image_details($user->id,$user->getImage());
+   Bootstrap::image_details($user->id,$user->getImage());
 
 
    Bootstrap::delete_confirmation(
@@ -161,13 +162,12 @@
 
 ?>
 
-</tbody></table>
-
-</td></tr></table>
-
+</tbody>
+</table>
 
 </div>
 
+</div></section>
 
 <script>
 
