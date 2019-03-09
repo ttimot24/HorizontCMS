@@ -5,6 +5,8 @@ return [
 	'th_action' => 'Action',
 	'save' => 'Save',
 	'publish' => 'Publish',
+	'draft' => 'Draft',
+	'save_draft' => 'Save as draft',
 	'add' => 'Add',
 	'edit' => 'Edit',
 	'update' => 'Update',

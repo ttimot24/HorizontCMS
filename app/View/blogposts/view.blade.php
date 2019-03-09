@@ -40,6 +40,11 @@
     </button>
   </div>
 
+  @if($blogpost->isDraft())
+  <br><br>
+    <span class="label label-info" style='font-size:14px; display:block'>{{trans('actions.draft')}}</span>
+  @endif
+
   @if($blogpost->author)
     </br></br><b>{{trans('blogpost.author')}} : </br><a href="{{admin_link('user-view',$blogpost->author->id)}}">{{ $blogpost->author->username }}</a></b>
      @else

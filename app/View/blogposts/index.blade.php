@@ -33,7 +33,11 @@
   <td><img src='{{$blogpost->getThumb()}}'  class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> </td>
 
 
-  <td  class='col-md-5 col-xs-3'><a href="{{admin_link('blogpost-view',$blogpost->id)}}" >{{ $blogpost->title }}</a></td>
+  <td  class='col-md-5 col-xs-3'><a href="{{admin_link('blogpost-view',$blogpost->id)}}" >{{ $blogpost->title }}</a><br>
+  @if($blogpost->isDraft())
+  <span class="label label-info">{{trans('actions.draft')}}</span>
+  @endif
+  </td>
   		 <td><center><span class="badge" style='font-size:14px'>{{ count($blogpost->comments) }}</span></center></td>
   
 

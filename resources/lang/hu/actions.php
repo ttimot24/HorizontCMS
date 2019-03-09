@@ -5,6 +5,8 @@ return [
 	'th_action' => 'Műveletek',
 	'save' => 'Mentés',
 	'publish' => 'Közzététel',
+	'draft' => 'Piszkozat',
+	'save_draft' => 'Mentés piszkozatként',
 	'add' => 'Hozzáadás',
 	'edit' => 'Szerkesztés',
 	'update' => 'Frissít',

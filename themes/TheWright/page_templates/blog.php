@@ -24,6 +24,7 @@
 <?php $all_blogposts = \App\Model\Blogpost::orderBy('id','desc')->paginate(5) ?>
 
 <?php foreach($all_blogposts as $blogpost): ?>
+	<?php if($blogpost->isDraft()){continue;} ?>
 	<img class="img-rounded" src="<?= $blogpost->getImage() ?>" style="width:100%;height:400px;object-fit:cover;">
 	<h2><a href="<?= str_slug(Website::$_REQUESTED_PAGE->name).'/'.str_slug($blogpost->title) ?>"><?= $blogpost->title ?></a></h2>
 	<p style="padding-left:5px;">Written by <a href="#"><?= $blogpost->author->username ?></a> on <a href="#"><?= $blogpost->created_at->diffForHumans() ?></a> in <a href="#"><?= $blogpost->category->name ?></a></p>
