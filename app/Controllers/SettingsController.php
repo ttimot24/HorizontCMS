@@ -15,6 +15,11 @@ class SettingsController extends Controller{
         if(!file_exists("storage/images/logos")){
           \File::makeDirectory("storage/images/logos", $mode = 0777, true, true);
         }
+
+        if(!file_exists("storage/images/favicons")){
+            \File::makeDirectory("storage/images/favicons", $mode = 0777, true, true);
+        }
+
     }
 
 

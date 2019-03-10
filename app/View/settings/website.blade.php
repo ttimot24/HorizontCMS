@@ -21,6 +21,16 @@
 
 <tr><td>Warning text</td><td><input type='text' class='form-control' name='scroll_text' value="{{$settings['scroll_text']}}"></td></tr>
 
+<tr><td>Favicon</td><td>
+<br>
+<input type="hidden" name="favicon" value="<?= ($settings['favicon']!='' && file_exists('storage/images/favicons/'.$settings['favicon']))? $settings['favicon'] : ''  ?>" >
+<img id="favicon" class='<?= ($settings['favicon']!='' && file_exists('storage/images/favicons/'.$settings['favicon']))? "well well-sm" : "" ?>' src="<?= ($settings['favicon']!='' && file_exists('storage/images/favicons/'.$settings['favicon']))? 'storage/images/favicons/'.$settings['favicon'] : ''  ?>" height='50' alt="">
+<div class="btn-group" role="group">
+<button type='button' id="button-favicon" class='btn btn-success btn-sm' data-toggle='modal' data-target='.admin_logo_select-modal-lg'>Select</button>
+</div>
+<br>
+</td></tr>
+
 <tr><td>Debug mode</td><td>
 <div class='form-group pull-left col-xs-12 col-md-8' style='margin-top:20px;margin-bottom:20px;'>
         <div class="radio radio-primary radio-inline">
@@ -53,7 +63,7 @@
 <img id="logo" class='<?= ($settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))? "well well-sm" : "" ?>' src="<?= ($settings['logo']!='' && file_exists('storage/images/logos/'.$settings['logo']))? 'storage/images/logos/'.$settings['logo'] : ''  ?>" height='100' alt="">
 
 <div class="btn-group" role="group">
-<button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='.admin_logo_select-modal-lg'>Select</button>
+<button type='button' id="button-logo" class='btn btn-success btn-sm' data-toggle='modal' data-target='.admin_logo_select-modal-lg'>Select</button>
 </div>
 
 </td></tr>
@@ -69,7 +79,7 @@
 <td>
 <br>
   <button type='submit' class='btn btn-primary btn-lg'><span class='glyphicon glyphicon-floppy-save' aria-hidden='true'></span> Save settings</button> 
-<br>
+<br><br>
 </td></tr>
 
 </tbody></table>
@@ -84,7 +94,7 @@
         <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
         <h3 class='modal-title'><center>Select Logo</center></h3>
         </div>
-        <div class='modal-body' style="padding:0px;">
+        <div class='modal-body' style="padding:0px;height:500px;">
        
             @include('media.filemanager', ['mode' => '', 'current_dir' => 'storage/images/logos'])
 
@@ -94,13 +104,40 @@
   </div>
 
 <script>
+
+  var context = "";
+
+  $("#button-favicon").on('click',function(event){
+    context = "favicon";
+  });
+
+  $("#button-logo").on('click',function(event){
+    context = "logo";
+  });
+
+
   $("#workspace").on('click',".file",function(event) {
-      var src = $(event.target).attr('src');
-      var bname = filemanager.basename(src)+"."+filemanager.getFileExtension(src);
-      $('[name="logo"]').val(bname);
-      $('#logo').attr('src', 'storage/images/logos/'+bname);
-      $('#logo').addClass('well well-sm');
+      
+      if(context=="logo"){
+      
+        var src = $(event.target).attr('src');
+        var bname = filemanager.basename(src)+"."+filemanager.getFileExtension(src);
+        $('[name="logo"]').val(bname);
+        $('#logo').attr('src', 'storage/images/logos/'+bname);
+        $('#logo').addClass('well well-sm');
+                              
+      }else if(context=="favicon"){
+
+          var src = $(event.target).attr('src');
+          var bname = filemanager.basename(src)+"."+filemanager.getFileExtension(src);
+          $('[name="favicon"]').val(bname);
+          $('#favicon').attr('src', 'storage/images/favicons/'+bname);
+          $('#favicon').addClass('well well-sm');
+
+      }
+
       $('.admin_logo_select-modal-lg').modal("hide");
+
   });
 </script>
 
