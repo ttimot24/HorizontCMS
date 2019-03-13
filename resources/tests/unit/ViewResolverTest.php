@@ -64,7 +64,11 @@ class ViewResolverTest extends TestCase
 
 
     public function testRender(){
-    	//dd($this->viewResolver->render("test",["some" => "test1","data" => "test2"]));
+
+		$this->assertTrue($this->viewResolver->render("dashboard.index",["testkey1" => "test1","testkey2" => "test2"])->offsetExists('testkey1'));
+
+		$this->assertEquals('test1',$this->viewResolver->render("dashboard.index",["testkey1" => "test1","testkey2" => "test2"])->offsetGet('testkey1'));
+
     }
 
 }
