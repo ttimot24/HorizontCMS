@@ -153,7 +153,7 @@ class BlogpostController extends Controller{
          $blogpost->summary = $this->request->input('summary');
          $blogpost->text = $this->request->input('text');
          $blogpost->author_id = \Auth::user()->id;
-         if($blogpost->active = $this->request->has("active")){
+         if($this->request->has("active")){
             $blogpost->active = $this->request->input("active");
          }
 			
