@@ -23,14 +23,14 @@ class PluginModelTest extends TestCase
     }
 
 
-    /** @before */
-    public function instantiatePlugin(){
-         $this->plugin = new \App\Model\Plugin($this->dummyName);
+    public function setUp(){
+        parent::setUp();
+        $this->plugin = new \App\Model\Plugin($this->dummyName);
     }
 
 
     public function testPluginInitiation(){
-
+        
         $this->assertInstanceOf(\App\Model\Plugin::class,$this->plugin);
 
     }
