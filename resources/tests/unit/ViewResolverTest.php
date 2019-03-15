@@ -19,9 +19,9 @@ class ViewResolverTest extends TestCase
 		return false;
 	}
 
-    /** @before */
-    public function instantiateViewResolver(){
 
+    public function setUp(){
+		parent::setUp();
         $this->viewResolver = new \App\Libs\ViewResolver();
 
     }

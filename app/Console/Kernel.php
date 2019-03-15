@@ -8,19 +8,6 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-     * The Artisan commands provided by your application.
-     *
-     * @var array
-     */
-    protected $commands = [
-        \App\Console\Commands\InstallCommand::class,
-        \App\Console\Commands\UpgradeCommand::class,
-        \App\Console\Commands\ThemeCommand::class,
-        \App\Console\Commands\PluginCommand::class,
-        \App\Console\Commands\VersionCommand::class,
-    ];
-
-    /**
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
@@ -39,6 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
+
+        $this->load(__DIR__.'/Commands');
 
         if(php_sapi_name() === 'cli'){
             foreach(app()->plugins as $plugin){

@@ -1,18 +1,18 @@
 language: php
 
 php:
-  - '5.6'
+# - '5.6'
   - '7.0'
   - '7.1'
   - '7.2'
 
 services:
-  #- mongodb
+# - mongodb
   - mysql
 
 before_script: 
   - sleep 15
-  #- mongo horizontlaravel --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+# - mongo horizontlaravel --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS horizontlaravel;'
   - composer install
   - php artisan serve > /dev/null 2>&1 &
@@ -23,4 +23,5 @@ script:
    - export INSTALLED=YES
    - vendor/bin/phpunit resources/tests/unit/ --coverage-clover reports/coverage.xml
    - if [ -f "reports/coverage.xml" ]; then vendor/bin/codacycoverage clover reports/coverage.xml; fi
+   - php artisan --version
    - php artisan horizontcms:version

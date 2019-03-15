@@ -29,7 +29,7 @@
       'warning' => 'warning',
       'notice' => 'info',
       'info' => 'info',
-      'debug' => 'success'
+      'debug' => 'debug'
 			];
 
 ?>

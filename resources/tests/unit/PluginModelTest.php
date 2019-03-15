@@ -104,7 +104,7 @@ class PluginModelTest extends TestCase
 
     }
 
-    public function testIsAndHas(){
+    /*public function testIsAndHas(){
 
 
       //  \Config::set('horizontcms.version',$this->getDummyInfo()->requires->core);
@@ -117,6 +117,6 @@ class PluginModelTest extends TestCase
 
        // $this->assertFalse($this->plugin->isCompatibleWithCore());
 
-    }
+    }*/
 
 }
