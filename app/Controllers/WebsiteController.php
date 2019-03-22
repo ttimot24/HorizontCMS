@@ -34,9 +34,9 @@ class WebsiteController extends Controller
      */
     public function index($page){
         
-
-        //\App::setLocale('hu');
-
+        if($this->request->has("lang")){
+            \App::setLocale($this->request->input("lang"));
+        }
 
         $theme_engine = new $this->engines[$this->theme->getConfig('theme_engine','hcms')]($this->request);
         $theme_engine->setTheme($this->theme);
