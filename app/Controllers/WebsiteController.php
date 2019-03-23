@@ -34,6 +34,9 @@ class WebsiteController extends Controller
      */
     public function index($page){
         
+        if(\Session::has("lang")){
+            \App::setLocale(\Session::get("lang"));
+        }
         if($this->request->has("lang")){
             \App::setLocale($this->request->input("lang"));
         }
@@ -93,7 +96,14 @@ class WebsiteController extends Controller
         return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
+    public function language(){
 
+        if($this->request->has("lang")){
+            \Session::put('lang',$this->request->input("lang"));
+        }
+        
+        return $this->redirectToSelf();
+    }
 
     public function logout(){
 
