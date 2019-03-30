@@ -3,7 +3,7 @@
 @section('content')
 <div class='jumbotron'>
 			  <div class='container'>
-			  <h1><small>Installing HorizontCMS</small></h1>   
+			  <h1><small>Installing {{ config('app.name') }}</small></h1>   
 
 
 

@@ -3,7 +3,7 @@
 @section('content')
 <div class='jumbotron'>
 	<div class='container'>
-		<h1><small>Installing HorizontCMS</small></h1>
+		<h1><small>Installing {{ config('app.name') }}</small></h1>
 
 <div class='progress'>
 	<div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='min-width: 2em;'> 0% </div>
