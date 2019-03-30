@@ -24,6 +24,7 @@ class SearchEngineTest extends TestCase
         $this->assertInstanceOf(\App\Libs\SearchEngine::class,$this->engine);
         
         $this->assertObjectHasAttribute('searchModels',$this->engine);
+        $this->assertObjectHasAttribute('searchKey',$this->engine);
     }
 
 
@@ -71,6 +72,13 @@ class SearchEngineTest extends TestCase
         $this->engine->clearResults();
         $this->assertEquals(0,count($this->engine->getResultsFor(\App\Model\Page::class)));
 
+    }
+
+    public function testSearchKey(){
+        $this->engine->executeSearch('home'); 
+        $this->assertEquals('home',$this->engine->getSearchKey());
+        $this->engine->clearResults();
+        $this->assertEquals(null,$this->engine->getSearchKey());
     }
 
 }

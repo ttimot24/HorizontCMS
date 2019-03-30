@@ -5,6 +5,7 @@ namespace App\Libs;
 class SearchEngine{
 
     private $searchModels = [];
+    private $searchKey = null;
 
     public function registerModel($model){
         $this->searchModels[] = $model;
@@ -14,13 +15,18 @@ class SearchEngine{
         return $this->searchModels;
     }
 
+    public function getSearchKey(){
+        return $this->searchKey;
+    }
+
     public function executeSearch($search_key){
 
         $this->clearResults();
+        $this->searchKey = $search_key;
 
         foreach($this->searchModels as $model){
             if(method_exists($model,'search')){
-                $this->searchModels[$model] = $model::search($search_key);
+                $this->searchModels[$model] = $model::search($this->getSearchKey());
             }
         }
     }
@@ -33,6 +39,7 @@ class SearchEngine{
     }
 
     public function clearResults(){
+        $this->searchKey = null;
         foreach($this->searchModels as $key){
             if(array_key_exists((string) $key,$this->searchModels)){
                 $this->searchModels[$key] = [];
