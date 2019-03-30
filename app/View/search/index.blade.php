@@ -3,8 +3,11 @@
 @section('content')
 <div class='container main-container'>
 
-<h2 class='col-md-8'>{!!trans('search.found_matches',['quantity' => ($blogposts->count()+$users->count()+$pages->count()+count($files)),
-                                                                       'search_word' => $search_for ])!!}</h2> 
+<h2 class='col-md-8'>{!!trans('search.found_matches',['quantity' => ($search_engine->getResultsFor(\App\Model\Blogpost::class)->count()+
+                                                                     $search_engine->getResultsFor(\App\Model\User::class)->count()+
+                                                                     $search_engine->getResultsFor(\App\Model\Page::class)->count()+
+                                                                     count($files)),
+                                                                     'search_word' => $search_for ])!!}</h2> 
 
 <div class='col-md-4 col-sm-12'>
 <form class='form-inline' action='admin/search' method='POST'>
@@ -27,9 +30,9 @@
 
 
 @if(\Auth::user()->hasPermission('blogpost'))
-<h3 style='clear:both;'>{{trans('blogpost.blogposts')}} ({{$blogposts->count()}})</h3>
+<h3 style='clear:both;'>{{trans('blogpost.blogposts')}} ({{$search_engine->getResultsFor(\App\Model\Blogpost::class)->count()}})</h3>
 <div class='container'>
-@foreach($blogposts as $each)
+@foreach($search_engine->getResultsFor(\App\Model\Blogpost::class) as $each)
   <a href='admin/blogpost/show/{{$each->id}}'>{{$each->title}}</a></br>
 @endforeach
 </div>
@@ -37,9 +40,9 @@
 
 
 @if(\Auth::user()->hasPermission('user'))
-<h3>{{trans('user.users')}} ({{$users->count()}})</h3>
+<h3>{{trans('user.users')}} ({{$search_engine->getResultsFor(\App\Model\User::class)->count()}})</h3>
 <div class='container'>
-@foreach($users as $each)
+@foreach($search_engine->getResultsFor(\App\Model\User::class) as $each)
   <a href='admin/user/show/{{$each->id}}'>{{$each->username}}</a></br>
 @endforeach
 </div>
@@ -47,9 +50,9 @@
 
 
 @if(\Auth::user()->hasPermission('page'))
-<h3>{{trans('page.pages')}} ({{$pages->count()}})</h3>
+<h3>{{trans('page.pages')}} ({{$search_engine->getResultsFor(\App\Model\Page::class)->count()}})</h3>
 <div class='container'>
-@foreach($pages as $each)
+@foreach($search_engine->getResultsFor(\App\Model\Page::class) as $each)
   <a href='admin/page/show/{{$each->id}}'>{{$each->name}}</a></br>
 @endforeach
 </div>
