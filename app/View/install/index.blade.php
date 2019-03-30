@@ -38,7 +38,7 @@
       <i class="fa fa-cube" aria-hidden="true" style='font-size:3em;'></i>
       <div class='caption'>
         <h3>Modern tools</h3>
-        <p>HorizontCMS was created with the most modern webtools. Laravel {{\App::VERSION()}} on it's backend, Bootstrap 3.3.7 and VueJs 2.5.17 makes the perfect user experience on frontend.</p>
+        <p>HorizontCMS was created with the most modern webtools. Laravel {{\App::VERSION()}} on it's backend, Bootstrap 3.4.1 and VueJs 2.6.10 makes the perfect user experience on frontend.</p>
       </div></center>
   </div>
 

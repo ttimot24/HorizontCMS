@@ -16,7 +16,7 @@ return [
 
 	'css' => [
 			'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
-			'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+			'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css',
 			//'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css',
 
 			//'resources/css/darktheme.css',
@@ -38,9 +38,9 @@ return [
 
 	'js' => [
 			'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js',
-			'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
+			'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js',
 			'resources/assets/filemaster/js/fileinput.min.js',
-			'https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js',
+			'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
 			'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js',
 			//'resources/assets/js/app.js',
 			//'resources/js/app.js' //compiled
