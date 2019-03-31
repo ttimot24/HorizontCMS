@@ -17,6 +17,13 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        foreach(\App\Model\ScheduledTask::where('active',1)->get() as $task){
+            $schedule->command($task->command)->cron($task->frequency)->before(function() use ($task) {
+                \Log::info("Scheduled run : ".$task->name." [".$task->command."]");
+            })->withoutOverlapping();
+        }
+
     }
 
     /**
