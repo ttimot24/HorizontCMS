@@ -22,8 +22,8 @@ class CreatePluginsTable extends Migration
             $table->string('name');
             $table->string('command');
             $table->string('frequency');
-            $table->string('ping_before');
-            $table->string('ping_after');
+            $table->string('ping_before')->nullable();
+            $table->string('ping_after')->nullable();
             $table->integer('active');
         });
     }
