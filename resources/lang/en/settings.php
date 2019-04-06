@@ -9,6 +9,7 @@ return [
 	'email' => 'Email',
 	'social_media' => 'Social Media',
 	'database' => 'Database',
+	'scheduler' => 'Scheduler',
 	'spread' => 'Spread',
 	'uninstall' => 'Uninstall',
 ];

@@ -54,10 +54,12 @@ class SettingsController extends Controller{
                     ['name' => trans('settings.social_media'),'link' => 'admin/settings/socialmedia','icon' => 'fa fa-thumbs-o-up'],
                     ['name' => trans('Log'),'link' => 'admin/settings/log', 'icon' => 'fa fa-bug'],
                     ['name' => trans('settings.database'),'link' => 'admin/settings/database','icon' => 'fa fa-database'],
+                    ['name' => trans('settings.scheduler'),'link' => 'admin/settings/schedules','icon' => 'fa fa-clock-o'],
                     ['name' => trans('settings.spread'),'link' => 'admin/settings/spread','icon' => 'fa fa-paper-plane'],
                     ['name' => trans('settings.uninstall'),'link' => 'admin/settings/uninstall','icon' => 'fa fa-exclamation-triangle'],
 
                     ];
+
 
 
 
@@ -257,5 +259,15 @@ class SettingsController extends Controller{
     }
 
 
+    public function schedules(){
+
+
+        $this->view->title("Schedules");
+        return $this->view->render('settings/schedules',[
+                                            'commands' => \Artisan::all(),
+                                            'scheduled_tasks' => \App\Model\ScheduledTask::all(),
+                                        ]);
+
+    }
 
 }

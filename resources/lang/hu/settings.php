@@ -9,6 +9,7 @@ return [
 	'email' => 'E-mail',
 	'social_media' => 'Közösségi média',
 	'database' => 'Adatbázis',
+	'scheduler' => 'Ütemező',
 	'spread' => 'Spread',
 	'uninstall' => 'Eltávolítás',
 ];
