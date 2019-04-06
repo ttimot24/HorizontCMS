@@ -7,5 +7,5 @@ return [
     'th_frequency' => 'Ütemezés',
     'th_ping_before' => 'Pingelés előtte',
     'th_ping_after' => 'Pingelés utána',
-    'th_action' => 'Múveletek',
+    'th_action' => 'Műveletek',
 ];
