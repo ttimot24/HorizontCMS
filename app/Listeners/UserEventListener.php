@@ -22,8 +22,7 @@ class UserEventListener
 
 
     public function countLogin(Login $event){
-        $event->user->visits++;
-        $event->user->save();
+        $event->user->increment('visits');
     }
 
 

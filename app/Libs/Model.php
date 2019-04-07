@@ -8,25 +8,6 @@ abstract class Model extends \Illuminate\Database\Eloquent\Model{
 
     protected $defaultImage = null;
 
-    /**
-     * Override the original Eloquent method to extend with retrieved event, 
-     * introduced in Laravel 5.5
-     */
-    public function newFromBuilder($attributes = [], $connection = null)
-    {
-        $model = $this->newInstance([], true);
-
-        $model->setRawAttributes((array) $attributes, true);
-
-        $model->setConnection($connection ?: $this->getConnectionName());
-
-        $model->fireModelEvent('retrieved', false);
-
-        return $model;
-    }
-
-
-
 
     public function hasImage(){
         return (isset($this->image) && $this->image!="");
