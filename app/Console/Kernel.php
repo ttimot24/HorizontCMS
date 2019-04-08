@@ -34,15 +34,6 @@ class Kernel extends ConsoleKernel
 
         $this->load(__DIR__.'/Commands');
 
-        if(php_sapi_name() === 'cli'){
-            foreach(app()->plugins as $plugin){
-                if(!$plugin->isActive()){continue;}
-                foreach($plugin->getRegister('cliCommands',[]) as $command){
-                    $this->commands[] = $command;
-                }
-            }
-        }
-
         require base_path('routes/console.php');
     }
 }

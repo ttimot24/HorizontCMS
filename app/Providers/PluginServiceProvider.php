@@ -22,7 +22,7 @@ class PluginServiceProvider extends ServiceProvider
             $this->registerPluginProviders();
             $this->registerPluginEvents();
             $this->registerPluginLanguage();
-
+            $this->registerPluginConsoleCommands();
 
         }
         
@@ -90,6 +90,14 @@ class PluginServiceProvider extends ServiceProvider
     }
 
 
+    private function registerPluginConsoleCommands(){
+        foreach($this->app->plugins as $plugin){
+            if(!$plugin->isActive()){continue;}
+            foreach($plugin->getRegister('cliCommands',[]) as $command){
+                $this->commands([$command]);
+            }
+        }
+    }
 
 
     /**
