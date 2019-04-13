@@ -37,7 +37,7 @@
 <div class="well" style="padding:25px;">
     <div class="row">
       <h4 class="col-md-4" >Entries: {{$all_file_entries}}</h4>
-      <a href="{{$file}}" class="btn btn-primary pull-right"><i class="fa fa-download" aria-hidden="true"></i> Download file</a>
+      <a href="{{'storage/framework/logs/'.$current_file}}" class="btn btn-primary pull-right"><i class="fa fa-download" aria-hidden="true"></i> Download file</a>
     </div>
 </div>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
