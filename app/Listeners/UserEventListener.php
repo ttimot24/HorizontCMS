@@ -15,14 +15,16 @@ class UserEventListener
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(\Illuminate\Http\Request $request)
     {
-        //
+        $this->request = $request;
     }
 
 
     public function countLogin(Login $event){
-        $event->user->increment('visits');
+        if(!$this->request->expectsJson()){
+            $event->user->increment('visits');
+        }
     }
 
 
