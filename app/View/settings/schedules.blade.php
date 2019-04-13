@@ -21,8 +21,35 @@
     </thead>
     <tbody>
         @foreach($scheduled_tasks as $task)
-        <tr><td>{{$task->id}}</td><td>{{$task->name}}</td><td>{{$task->command}}</td><td>{{$task->frequency}}</td><td>{{$task->ping_before}}</td><td>{{$task->ping_after}}</td><td>
-        </td></tr>
+        <tr>
+            <td>{{$task->id}}</td>
+            <td>{{$task->name}}</td>
+            <td>{{$task->command}}</td>
+            <td>{{$task->frequency}}</td>
+            <td>{{$task->ping_before}}</td>
+            <td>{{$task->ping_after}}</td>
+            <td>
+              <center>
+                <div class="btn-group" role="group">
+                    <a href="{{admin_link('schedules-edit',$task->id)}}" type="button" class="btn btn-warning btn-sm" style='min-width:70px;'>{{trans('actions.edit')}}</a>
+                    <a type="button" data-toggle='modal' data-target=.delete_<?= $task->id ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </div>
+              </center>
+            </td>
+        </tr>
+
+        <?php 
+
+            Bootstrap::delete_confirmation(
+            "delete_".$task->id."",
+            trans('actions.are_you_sure'),
+            "<b>".trans('actions.delete_this',['content_type'=>'task']).": </b>".$task->name." <b>?</b>",
+            "<a href='".admin_link('task-delete',$task->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
+            <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
+            );
+
+        ?>
+
         @endforeach
     </tbody>
 </table>

@@ -67,4 +67,8 @@ return [
 	'settings-index' => 'settings/index',
 	'settings-update-center' => 'settings/updatecenter',
 
+	'task-index' => 'schedule/index',
+	'task-create' => 'schedule/create',
+	'task-edit' => 'schedule/edit',
+	'task-delete' => 'schedule/delete',
 ];

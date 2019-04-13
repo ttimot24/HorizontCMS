@@ -39,5 +39,16 @@ class ScheduleController extends Controller{
 
     }
 
+    public function delete($id){
+        
+
+        if(ScheduledTask::find($id)->delete()){
+			return $this->redirectToSelf()->withMessage(['success' => trans('Successfully deleted the task!')]);
+        }
+
+
+        return $this->redirect(admin_link("blogpost-index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
+
+    }
 
 }
