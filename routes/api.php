@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 
 Route::get('/me', function (Request $request) {
+    $request->user()->image = $request->user()->getImage();
     return $request->user();
 })->middleware(['auth.basic']);
 
