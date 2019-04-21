@@ -30,6 +30,7 @@ return [
 
 	//View
 	'author' => 'Author',
+	'slug' => 'Slug',
 	'published_on' => 'Published on',
 	'category' => 'Category',
 	'characters' => 'Characters',

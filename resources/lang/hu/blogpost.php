@@ -30,6 +30,7 @@ return [
 
 	//View
 	'author' => 'Szerző',
+	'slug' => 'Slug',
 	'published_on' => 'Közzétéve',
 	'category' => 'Kategória',
 	'characters' => 'Karakterek száma',

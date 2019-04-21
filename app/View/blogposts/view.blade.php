@@ -50,6 +50,8 @@
      @else
     </br></br><b>{{trans('blogpost.author')}} : </br>{{ trans('blogpost.removed_user') }}</b>
   @endif 
+
+    </br></br><b>{{trans('blogpost.slug')}} : </br><a>{{ $blogpost->getSlug() }}</a></b>
     </br></br><b>{{trans('blogpost.published_on')}} : </br><a>{{ $blogpost->created_at->format('Y.m.d. H:i:s') }}</a></b>
   
   @if($blogpost->category)  
