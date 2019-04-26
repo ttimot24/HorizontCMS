@@ -13,6 +13,7 @@
       	<th>{{trans('schedules.th_id')}}</th>
       	<th>{{trans('schedules.th_name')}}</th>
         <th>{{trans('schedules.th_command')}}</th>
+        <th>{{trans('schedules.th_arguments')}}</th>
         <th>{{trans('schedules.th_frequency')}}</th>
         <th>{{trans('schedules.th_ping_before')}}</th>
         <th>{{trans('schedules.th_ping_after')}}</th>
@@ -25,6 +26,7 @@
             <td>{{$task->id}}</td>
             <td>{{$task->name}}</td>
             <td>{{$task->command}}</td>
+            <td>{{$task->arguments}}</td>
             <td>{{$task->frequency}}</td>
             <td>{{$task->ping_before}}</td>
             <td>{{$task->ping_after}}</td>
@@ -85,6 +87,11 @@
               <option value='{{$key}}'>{{$key}}</option>
             @endforeach
       </select>
+      </div>
+
+      <div class='form-group'>
+      <label for='ping_before'>Arguments:</label>
+            <input type='text' class='form-control' id='arguments' name='arguments'>
       </div>
 
       <div class='form-group'>

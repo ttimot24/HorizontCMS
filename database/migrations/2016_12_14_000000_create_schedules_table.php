@@ -21,6 +21,7 @@ class CreateSchedulesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('command');
+            $table->string('arguments')->nullable();
             $table->string('frequency');
             $table->string('ping_before')->nullable();
             $table->string('ping_after')->nullable();

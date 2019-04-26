@@ -24,6 +24,7 @@ class ScheduleController extends Controller{
             $task = new ScheduledTask();
             $task->name = $this->request->input("name");
             $task->command = $this->request->input("command");
+            $task->arguments = $this->request->input("arguments");
             $task->frequency = $this->request->input("frequency");
             $task->ping_before = $this->request->input("ping_before");
             $task->ping_after = $this->request->input("ping_after");
