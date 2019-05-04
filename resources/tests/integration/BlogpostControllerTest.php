@@ -53,5 +53,44 @@ class BlogpostControllerTest extends TestCase{
     }
 
 
+    public function testCreateAction(){
+        
+        \Event::fake();
+
+        $requestGet = Request::create('/admin/blogpost/show', 'GET',[]);
+
+        $controller = new \App\Controllers\BlogpostController($requestGet, new \App\Libs\ViewResolver());
+
+        $response = $controller->create();
+
+        $this->assertEquals('blogposts.create', $response->name());
+        $this->assertTrue(isset($response->getData()['categories']));
+        $this->assertInstanceOf(\App\Model\BlogpostCategory::class,$response->getData()['categories'][0]);
+
+        $requestPost = Request::create('/admin/blogpost/show', 'POST',[
+            'title' => 'AutomatedTest',
+            'category_id' => 1,
+            'summary' => 'This is the summary of the test blogpost',
+            'text' => 'A very long blogpost text',
+            'active' => 1
+        ]);
+        
+        $user = \App\Model\User::find(1);
+        
+        $requestPost->setUserResolver(function () use ($user) {
+            return $user;
+        });
+
+        $controller = new \App\Controllers\BlogpostController($requestPost, new \App\Libs\ViewResolver());
+
+        $response = $controller->create();
+
+        $this->assertInstanceOf(\Illuminate\Http\RedirectResponse::class,$response);    
+
+        $this->assertEquals(['success' => trans('message.successfully_created_blogpost')],$response->getSession()->get('message'));
+        
+    }
+
+
 
 }

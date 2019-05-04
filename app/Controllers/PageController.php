@@ -61,7 +61,7 @@ class PageController extends Controller{
             $page->parent_id = $this->request->input('parent_select')==0? NULL : $this->request->input('parent_id');
             $page->queue = 99;
             $page->page = $this->request->input('page');
-            $page->author_id = \Auth::user()->id;
+            $page->author_id = $this->request->user()->id;
 
 
             if ($this->request->hasFile('up_file')){

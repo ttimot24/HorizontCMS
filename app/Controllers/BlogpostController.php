@@ -57,7 +57,7 @@ class BlogpostController extends Controller{
             $blogpost->category_id = $this->request->input('category_id');
             $blogpost->summary = $this->request->input('summary');
             $blogpost->text = $this->request->input('text');
-            $blogpost->author_id = \Auth::user()->id;
+            $blogpost->author_id = $this->request->user()->id;
             $blogpost->comments_enabled = 1;
             $blogpost->active = $this->request->input("active");
 
@@ -152,7 +152,7 @@ class BlogpostController extends Controller{
          $blogpost->category_id = $this->request->input('category_id');
          $blogpost->summary = $this->request->input('summary');
          $blogpost->text = $this->request->input('text');
-         $blogpost->author_id = \Auth::user()->id;
+         $blogpost->author_id = $this->request->user()->id;
          if($this->request->has("active")){
             $blogpost->active = $this->request->input("active");
          }

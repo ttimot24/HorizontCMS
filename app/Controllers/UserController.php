@@ -88,7 +88,7 @@ class UserController extends Controller{
 
         $this->view->title(trans('user.create_user'));
         return $this->view->render('users/create',[
-                                                    'current_user' => \Auth::user(),
+                                                    'current_user' => $this->request->user(),
                                                     'roles' => \App\Model\UserRole::all()
                                                 ]);
     }
@@ -131,7 +131,7 @@ class UserController extends Controller{
 
         $this->view->title(trans('user.edit_user'));
         return $this->view->render('users/edit',[
-                                                'current_user' => \Auth::user(),
+                                                'current_user' => $this->request->user(),
                                                 'user' => User::find($id),
                                                 'user_roles' => \App\Model\UserRole::all(),
                                                 ]);
