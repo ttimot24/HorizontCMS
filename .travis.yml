@@ -22,7 +22,7 @@ script:
    - php artisan migrate --no-interaction --force
    - php artisan db:seed --no-interaction --force
    - export INSTALLED=YES
-   - vendor/bin/phpunit resources/tests/unit/ --coverage-clover reports/coverage.xml
+   - vendor/bin/phpunit --testsuite Unit,Integration --coverage-clover reports/coverage.xml
    - if [ -f "reports/coverage.xml" ]; then vendor/bin/codacycoverage clover reports/coverage.xml; fi
    - php artisan --version
    - php artisan horizontcms:version

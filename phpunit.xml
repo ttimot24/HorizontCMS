@@ -9,9 +9,20 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="HorizontCMS Test Suite">
-            <directory suffix="Test.php">./resources/tests</directory>
-            <!--<exclude>./resources/tests/acceptance</exclude>-->
+        <testsuite name="Unit">
+            <directory suffix="Test.php">resources/tests/unit</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory suffix="Test.php">resources/tests/integration</directory>
+        </testsuite>
+        <testsuite name="Functional">
+            <directory suffix="Test.php">resources/tests/functional</directory>
+        </testsuite>
+        <testsuite name="Acceptance">
+            <directory suffix="Test.php">resources/tests/acceptance</directory>
+        </testsuite>
+        <testsuite name="Full">
+            <directory suffix="Test.php">resources/tests</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -22,9 +33,9 @@
             </exclude>
         </whitelist>
     </filter>
-<!--    <logging>
-        <log type="coverage-clover" target="reports/clover.xml"/>
-    </logging> -->
+    <logging>
+        <log type="coverage-clover" target="reports/coverage.xml"/>
+    </logging>
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="CACHE_DRIVER" value="array"/>
