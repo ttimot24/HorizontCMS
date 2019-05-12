@@ -187,13 +187,22 @@ class UserController extends Controller{
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Activates a user
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
-        //
+    public function activate($id){
+        $user = \App\Model\User::find($id);
+
+        $user->active = 1;
+
+        if($user->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('User successfully activated!')]);
+        } else {
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
+
     }
 
 
