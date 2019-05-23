@@ -1,4 +1,12 @@
 <div class='container'>
+
+	@if(\Settings::get('admin_broadcast') != '')
+	<div class="alert alert-info alert-dismissible" role="alert">
+		  <span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>
+		  <strong>Broadcast message: </strong> {{ \Settings::get('admin_broadcast') }}
+	</div>
+	@endif
+
 	@if(session()->has('message'))
 		@foreach(session()->get('message') as $key => $value)
 		<div class="alert alert-{{ $key }} alert-dismissible" role="alert">

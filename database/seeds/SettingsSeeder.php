@@ -112,6 +112,12 @@ class SettingsSeeder extends Seeder
         ]);
 
         DB::table('settings')->insert([
+            'setting' => 'admin_broadcast',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
             'setting' => 'website_type',
             'value' => "website",
             'more' => '1',
