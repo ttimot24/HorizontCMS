@@ -1,6 +1,6 @@
 <div class='container'>
 
-	@if(\App\HorizontCMS::isInstalled() && \Settings::get('admin_broadcast') != '')
+	@if(\App\HorizontCMS::isInstalled() && \Auth::check() && \Settings::get('admin_broadcast') != '')
 	<div class="alert alert-info alert-dismissible" role="alert">
 		  <span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>
 		  <strong>Broadcast message: </strong> {{ \Settings::get('admin_broadcast') }}
