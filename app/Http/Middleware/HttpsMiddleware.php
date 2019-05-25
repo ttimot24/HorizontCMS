@@ -15,8 +15,8 @@ class HttpsMiddleware
 	            return redirect()->secure($request->getRequestUri());
 	        }
 
-	        if(\Settings::get('use_https')==1){
-	        	\URL::forceSchema('https');
+	        if($request->settings['use_https']==1){
+	        	\URL::forceScheme('https');
 	        }
 
    		}
