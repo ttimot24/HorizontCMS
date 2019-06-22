@@ -23,7 +23,7 @@ class PluginServiceProvider extends ServiceProvider
             $this->registerPluginEvents();
             $this->registerPluginLanguage();
             $this->registerPluginConsoleCommands();
-
+            $this->registerPluginViewPaths();
         }
         
     }
@@ -99,6 +99,19 @@ class PluginServiceProvider extends ServiceProvider
         }
     }
 
+    public function registerPluginViewPaths(){
+
+
+        foreach($this->app->plugins as $plugin){
+            if(!$plugin->isActive()){continue;}
+
+            \View::addNamespace(str_slug($plugin->root_dir), [
+                                            $plugin->getPath().DIRECTORY_SEPARATOR."app".DIRECTORY_SEPARATOR."View",
+                                            $plugin->getPath().DIRECTORY_SEPARATOR."resources".DIRECTORY_SEPARATOR."views",
+                                        ]);
+        }
+
+    }
 
     /**
      * Register any application services.
