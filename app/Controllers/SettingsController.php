@@ -50,17 +50,15 @@ class SettingsController extends Controller{
                     ['name' => trans('settings.admin_area'),'link' => 'admin/settings/adminarea','icon' => 'fa fa-desktop'],
                     ['name' => trans('settings.update_center'),'link' => 'admin/settings/updatecenter','icon' => 'fa fa-arrow-circle-o-up'],
                     ['name' => trans('settings.server'),'link' => 'admin/settings/server','icon' => 'fa fa-server'],
-                    ['name' => trans('settings.email'),'link' => 'admin/settings/email','icon' => 'fa fa-envelope'],
+    //                ['name' => trans('settings.email'),'link' => 'admin/settings/email','icon' => 'fa fa-envelope'],
                     ['name' => trans('settings.social_media'),'link' => 'admin/settings/socialmedia','icon' => 'fa fa-thumbs-o-up'],
                     ['name' => trans('Log'),'link' => 'admin/settings/log', 'icon' => 'fa fa-bug'],
                     ['name' => trans('settings.database'),'link' => 'admin/settings/database','icon' => 'fa fa-database'],
                     ['name' => trans('settings.scheduler'),'link' => 'admin/settings/schedules','icon' => 'fa fa-clock-o'],
-                    ['name' => trans('settings.spread'),'link' => 'admin/settings/spread','icon' => 'fa fa-paper-plane'],
-                    ['name' => trans('settings.uninstall'),'link' => 'admin/settings/uninstall','icon' => 'fa fa-exclamation-triangle'],
+  //                  ['name' => trans('settings.spread'),'link' => 'admin/settings/spread','icon' => 'fa fa-paper-plane'],
+//                    ['name' => trans('settings.uninstall'),'link' => 'admin/settings/uninstall','icon' => 'fa fa-exclamation-triangle'],
 
                     ];
-
-
 
 
         $this->view->title(trans('settings.settings'));
