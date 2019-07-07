@@ -95,5 +95,28 @@ class ThemeController extends Controller{
 
     }
 
+    public function onlinestore(){
+
+        $this->view->title(trans('Theme center'));
+
+        $repo_status = true;
+
+        try{
+
+            $themes = json_decode(file_get_contents(\Config::get('horizontcms.sattelite_url').'/get_themes.php'));
+
+            if($themes==null){
+                throw ErrorException('Could not fetch Themes');
+            }
+
+        }catch(\ErrorException $e){
+            $themes = [];
+            $repo_status = false;
+        }
+
+        return $this->view->render('theme/store',[ 'online_themes' => $themes, 'repo_status' => $repo_status ]);
+
+
+    }
 
 }
