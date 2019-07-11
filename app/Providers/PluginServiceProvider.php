@@ -81,8 +81,10 @@ class PluginServiceProvider extends ServiceProvider
       
                 $plugin = $this->app->plugins->get(studly_case(\Request::segment(4)));
 
-                $this->loadTranslationsFrom(base_path($plugin->getPath()."/resources/lang"), 'plugin');
-                
+                if($plugin!=null){
+                    $this->loadTranslationsFrom(base_path($plugin->getPath()."/resources/lang"), 'plugin');
+                }
+
             }else if(!\Request::is(\Config::get('horizontcms.backend_prefix')."/*")){
                 $this->loadTranslationsFrom(base_path("/themes/".\App\Model\Settings::get('theme')."/lang"), 'website');
             }

@@ -21,10 +21,13 @@ class PluginMiddleware
 
             $plugin = app()->plugins->get(studly_case($request->segment(4)));
 
-            \View::addNamespace('plugin', [
+            if($plugin!=null){
+
+                \View::addNamespace('plugin', [
                                             $plugin->getPath().DIRECTORY_SEPARATOR."app".DIRECTORY_SEPARATOR."View",
                                             $plugin->getPath().DIRECTORY_SEPARATOR."resources".DIRECTORY_SEPARATOR."views",
                                         ]);
+            }
 
         }
 
