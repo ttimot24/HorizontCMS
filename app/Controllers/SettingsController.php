@@ -197,9 +197,22 @@ class SettingsController extends Controller{
 
     public function database(){
 
+        switch(\Config::get('database.default')){
+
+            case 'mysql'  : $tables = \DB::select('SHOW TABLES');
+                            break;
+            case 'pgsql'  : $tables = \DB::select('SELECT table_name FROM pg_catalog.pg_tables ORDER BY table_name');
+                            break;
+            case 'sqlite' : $tables = \DB::select("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name"); 
+                            break;
+
+            default : $tables = [['name' => 'Could not get table informations']];
+
+        }
+
     	$this->view->title(trans('settings.database'));
     	return $this->view->render('settings/database',[
-    												'tables' => \DB::select('SHOW TABLES'),
+    												'tables' =>  $tables,
 
     												]);
     }
