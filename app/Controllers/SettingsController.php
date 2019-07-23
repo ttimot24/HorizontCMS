@@ -201,7 +201,7 @@ class SettingsController extends Controller{
 
             case 'mysql'  : $tables = \DB::select('SHOW TABLES');
                             break;
-            case 'pgsql'  : $tables = \DB::select('SELECT table_name FROM pg_catalog.pg_tables ORDER BY table_name');
+            case 'pgsql'  : $tables = \DB::select('SELECT table_name FROM information_schema.tables ORDER BY table_name');
                             break;
             case 'sqlite' : $tables = \DB::select("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name"); 
                             break;
