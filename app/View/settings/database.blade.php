@@ -8,7 +8,7 @@
 </div>
 <div class='col-md-4'>
 <br>
-	<a class='btn btn-primary pull-right'>Backup database</a>
+	<a class='btn btn-primary pull-right' disabled>Backup database</a>
 </div>
 <br><br><br><br>
 
