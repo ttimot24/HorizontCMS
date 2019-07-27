@@ -13,17 +13,21 @@ class PluginServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-    
-        if($this->app->isInstalled()){
-            $this->app->plugins = \App\Model\Plugin::where('active','1')->get()->keyBy('root_dir');
 
-            $this->registerPluginAutoloaders();
+        try{
+            if($this->app->isInstalled()){
+                $this->app->plugins = \App\Model\Plugin::where('active','1')->get()->keyBy('root_dir');
 
-            $this->registerPluginProviders();
-            $this->registerPluginEvents();
-            $this->registerPluginLanguage();
-            $this->registerPluginConsoleCommands();
-            $this->registerPluginViewPaths();
+                $this->registerPluginAutoloaders();
+
+                $this->registerPluginProviders();
+                $this->registerPluginEvents();
+                $this->registerPluginLanguage();
+                $this->registerPluginConsoleCommands();
+                $this->registerPluginViewPaths();
+            }
+        }catch(\Exception $e){
+  
         }
         
     }

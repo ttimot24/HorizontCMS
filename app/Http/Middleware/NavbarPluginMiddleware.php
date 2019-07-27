@@ -17,7 +17,7 @@ class NavbarPluginMiddleware
     {
       
 
-        if(!app()->plugins->isEmpty()){
+        if(app()->plugins!=null && !app()->plugins->isEmpty()){
 
             $main_menu = \Menu::get('MainMenu');
             $right_menu = \Menu::get('RightMenu');
