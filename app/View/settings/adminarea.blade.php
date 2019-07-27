@@ -54,6 +54,27 @@
 						</select>
 				</td></tr>
 
+<tr><td>Date format</td><td><select name='date_format' class='form-control' style='width:100%;'>
+
+            
+
+
+@foreach($dateFormats as $format)
+
+  @if($format == $settings['date_format'])
+    <option value='{{$format}}' selected>{{date($format)}}</option>
+  @else
+    <option value='{{$format}}'>{{date($format)}}</option>
+  @endif
+
+@endforeach
+
+
+
+</select>
+</td></tr>
+
+
 
 <input type="hidden" name="auto_upgrade_check" value="0"> <!-- Checkbox hack -->
 <tr><td>Automatically check for updates</td><td><input class='form-control' type='checkbox' name="auto_upgrade_check" value="1"  <?php if($settings['auto_upgrade_check']==1){ echo 'checked'; } ?> /></td>

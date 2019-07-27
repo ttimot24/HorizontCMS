@@ -70,6 +70,12 @@ class SettingsSeeder extends Seeder
         ]);
 
         DB::table('settings')->insert([
+            'setting' => 'date_format',
+            'value' => "Y.m.d H:i:s",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
             'setting' => 'home_page',
             'value' => 1,
             'more' => '1',

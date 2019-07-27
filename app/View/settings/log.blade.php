@@ -50,7 +50,7 @@
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$entry_number}}" @if($loop->first) aria-expanded="true" @else aria-expanded="false" @endif aria-controls="collapse{{$entry_number}}">
              <div class='row'>
-              <div class='col-md-8'>#{{$entry_number}}  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ucfirst($entry->level)}} - {{$entry->id}}</div> <div class='col-md-4 text-right'>{{$entry->date}} </div>
+              <div class='col-md-8'>#{{$entry_number}}  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ucfirst($entry->level)}} - {{$entry->id}}</div> <div class='col-md-4 text-right'>{{$entry->date->format(\Settings::get('date_format',\Config::get('horizontcms.default_date_format'),true))}} </div>
         	 </div>
         </a>
       </h4>

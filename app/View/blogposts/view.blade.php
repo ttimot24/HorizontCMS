@@ -52,7 +52,7 @@
   @endif 
 
     </br></br><b>{{trans('blogpost.slug')}} : </br><a>{{ $blogpost->getSlug() }}</a></b>
-    </br></br><b>{{trans('blogpost.published_on')}} : </br><a>{{ $blogpost->created_at->format('Y.m.d. H:i:s') }}</a></b>
+    </br></br><b>{{trans('blogpost.published_on')}} : </br><a>{{ $blogpost->created_at->format(\Settings::get('date_format',\Config::get('horizontcms.default_date_format'),true)) }}</a></b>
   
   @if($blogpost->category)  
     </br></br><b>{{trans('blogpost.category')}} : </br><a>{{ $blogpost->category->name }}</a></b>
