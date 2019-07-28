@@ -129,6 +129,11 @@ class SettingsSeeder extends Seeder
             'more' => '1',
         ]);
         
+        DB::table('settings')->insert([
+            'setting' => 'blogposts_on_page',
+            'value' => "5",
+            'more' => '1',
+        ]);
 
         DB::table('settings')->insert([
             'setting' => 'auto_upgrade_check',

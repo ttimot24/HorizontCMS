@@ -21,7 +21,7 @@
 
 <div style="width:100%;">
 <h1 class="page-header"><?= Website::$_REQUESTED_PAGE->name ?></h1><br>
-<?php $all_blogposts = \App\Model\Blogpost::orderBy('id','desc')->paginate(5) ?>
+<?php $all_blogposts = \App\Model\Blogpost::orderBy('id','desc')->paginate(\Settings::get('blogposts_on_page')) ?>
 
 <?php foreach($all_blogposts as $blogpost): ?>
 	<?php if($blogpost->isDraft()){continue;} ?>

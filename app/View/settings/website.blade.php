@@ -75,6 +75,9 @@
 						</select>
 					</td></tr>
 
+<tr><td>Blogposts on page<br><small class='text-muted'>Number of blogposts per page</small></td><td><input type='number' min='1' max='100' class='form-control' name='blogposts_on_page' value="{{$settings['blogposts_on_page']}}"></td></tr>
+
+
 <tr><td></td>
 <td>
 <br>
