@@ -23,12 +23,11 @@ abstract class Controller extends BaseController{
             foreach(app()->plugins as $plugin){
 
                     foreach($plugin->getRegister('injectJs',[]) as $js){
-                           $this->view->data['jsplugins'][] = str_contains($js,"http")? $js : $plugin->getPath().'/'.$js; 
+                           $this->view->data['jsplugins'][] = $plugin->getPath().'/'.$js; 
                     }
 
             }
         }
-
     }
 
     public function redirect($location){
