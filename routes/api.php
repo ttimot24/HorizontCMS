@@ -19,6 +19,23 @@ Route::get('/me', function (Request $request) {
     return $request->user();
 })->middleware(['auth.basic']);
 
+Route::get('/blogposts',function(){
+
+    $blogposts = \App\Model\Blogpost::getPublished();
+   // $blogposts->load('author');
+    $blogposts->load('category');
+
+    return $blogposts;
+});
+
+Route::get('/pages',function(){
+
+    $pages = \App\Model\Page::active();
+   // $pages->load('author');
+    $pages->load('parent');
+
+    return $pages;
+});
 
 
 Route::post('lock-up',function(Request $request){
