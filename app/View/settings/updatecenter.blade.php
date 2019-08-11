@@ -25,7 +25,7 @@
 <div class='col-md-4' style='/*max-height:400px;overflow-y:scroll;padding:0px;border:1px solid #9d9d9d;border-radius:5px;*/'>
 	
 	@if(count($available_list)>0)
-	<a class="btn btn-info btn-block" href="admin/settings/sys-upgrade">Install all</a><br><br>
+	<a class="btn btn-info btn-block" href="{{config('horizontcms.backend_prefix')}}/settings/sys-upgrade">Install all</a><br><br>
 	@endif
 
 
