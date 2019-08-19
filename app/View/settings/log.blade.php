@@ -9,7 +9,7 @@
 <div class='col-md-4'>
  <div class="list-group">
  	@foreach($all_files as $file)
- 		  <a href="admin/settings/log/{{basename($file)}}" class="list-group-item @if(basename($file)==basename($current_file)) active @endif ">{{basename($file)}}</a>
+ 		  <a href="{{config('horizontcms.backend_prefix')}}/settings/log/{{basename($file)}}" class="list-group-item @if(basename($file)==basename($current_file)) active @endif ">{{basename($file)}}</a>
  
     @if($entry_number==$max_files) 
         @break

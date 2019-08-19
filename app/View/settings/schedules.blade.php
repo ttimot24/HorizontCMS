@@ -66,7 +66,7 @@
         <h4 class='modal-title'>Schedule task</h4>
       </div>
 
-      <form action='admin/schedule/create' method='POST'>
+      <form action="{{config('horizontcms.backend_prefix')}}/schedule/create" method='POST'>
       <div class='modal-body'>
       {{ csrf_field() }}
 
