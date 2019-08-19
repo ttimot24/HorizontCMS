@@ -8,7 +8,7 @@
 <h1 class="col-sm-12 col-md-6">Plugin manager</h1> 
 
   <div class='col-sm-12 col-md-6 text-right'><br>
-  <a href="admin/plugin/onlinestore" class='btn btn-info'><i class="fa fa-cloud-download" aria-hidden="true"></i> Download apps</a>
+  <a href="{{config('horizontcms.backend_prefix')}}/plugin/onlinestore" class='btn btn-info'><i class="fa fa-cloud-download" aria-hidden="true"></i> Download apps</a>
   <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_plugin' @if(!$zip_enabled) disabled @endif ><i class='fa fa-upload'></i>&nbspUpload new plugin</a>
   </div>
 </section>
@@ -32,7 +32,7 @@ foreach($all_plugin as $current_plugin){
         echo "<h4 class='list-group-item-heading'>";
 
             if($current_plugin->isActive()){
-              echo "<a id='".$current_plugin->root_dir."' href='admin/plugin/run/".$current_plugin->getSlug()."'>".$current_plugin->getName()."</a>";
+              echo "<a id='".$current_plugin->root_dir."' href='".config('horizontcms.backend_prefix')."/plugin/run/".$current_plugin->getSlug()."'>".$current_plugin->getName()."</a>";
             }else{
               echo "<a id='".$current_plugin->root_dir."' style='color:white;'>".$current_plugin->getName()."</a>";
             }
@@ -48,13 +48,13 @@ foreach($all_plugin as $current_plugin){
         echo "<div class='col-md-2'>";
          
           if(!$current_plugin->isInstalled()){
-              echo "<a id='install' class='btn btn-primary btn-block' href='admin/plugin/install/".$current_plugin->root_dir."'>Install</a>";
+              echo "<a id='install' class='btn btn-primary btn-block' href='".config('horizontcms.backend_prefix')."/plugin/install/".$current_plugin->root_dir."'>Install</a>";
           }
           else{
               if(!$current_plugin->isActive()){
-                echo "<a class='btn btn-success btn-block' href='admin/plugin/activate/".$current_plugin->root_dir."'>Activate</a>";
+                echo "<a class='btn btn-success btn-block' href='".config('horizontcms.backend_prefix')."/plugin/activate/".$current_plugin->root_dir."'>Activate</a>";
               }else{
-                echo "<a class='btn btn-info btn-block' href='admin/plugin/deactivate/".$current_plugin->root_dir."'>Deactivate</a>";
+                echo "<a class='btn btn-info btn-block' href='".config('horizontcms.backend_prefix')."/plugin/deactivate/".$current_plugin->root_dir."'>Deactivate</a>";
               }
           }
           echo "<button class='btn btn-danger btn-block' data-toggle='modal' data-target='.delete_".$current_plugin->root_dir."' >Delete</button>";
@@ -70,7 +70,7 @@ foreach($all_plugin as $current_plugin){
     "delete_".$current_plugin->root_dir,
     "Are you sure?",
     "<b>Delete this plugin: </b>".$current_plugin->getName()." <b>?</b>",
-    "<a href='admin/plugin/delete/".$current_plugin->root_dir."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
+    "<a href='".config('horizontcms.backend_prefix')."/plugin/delete/".$current_plugin->root_dir."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
     <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
     );
 
@@ -93,7 +93,7 @@ foreach($all_plugin as $current_plugin){
       </div>
       <div class='modal-body'>
 
-<form action='admin/plugin/upload' method='POST' enctype='multipart/form-data'>
+<form action="{{config('horizontcms.backend_prefix')}}/plugin/upload" method='POST' enctype='multipart/form-data'>
 {{ csrf_field() }}
 <div class='form-group'>
       <label for='file'>Upload file:</label>
