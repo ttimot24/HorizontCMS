@@ -19,18 +19,18 @@ Route::get('/me', function (Request $request) {
     return $request->user();
 })->middleware(['auth.basic']);
 
-Route::get('/blogposts',function(){
+Route::get('/blogposts',function(Request $request){
 
-    $blogposts = \App\Model\Blogpost::getPublished();
+    $blogposts = \App\Model\Blogpost::getPublished()->forPage($request->input('page'),$request->input('num'));
    // $blogposts->load('author');
     $blogposts->load('category');
 
     return $blogposts;
 });
 
-Route::get('/pages',function(){
+Route::get('/pages',function(Request $request){
 
-    $pages = \App\Model\Page::active();
+    $pages = \App\Model\Page::active()->forPage($request->input('page'),$request->input('num'));
    // $pages->load('author');
     $pages->load('parent');
 
