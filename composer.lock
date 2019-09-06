@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60360aa33cd914642ac7535649945c5e",
+    "content-hash": "2379b086f3edb4685ab3b14d69090e4c",
     "packages": [
         {
             "name": "chumper/zipper",
@@ -1084,16 +1084,16 @@
         },
         {
             "name": "lavary/laravel-menu",
-            "version": "v1.7.3",
+            "version": "v1.7.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lavary/laravel-menu.git",
-                "reference": "a301b61093aca4f7de67a966b6ddfd8cf2296695"
+                "reference": "5592778b3193ae561614ecb107467469b694ab11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lavary/laravel-menu/zipball/a301b61093aca4f7de67a966b6ddfd8cf2296695",
-                "reference": "a301b61093aca4f7de67a966b6ddfd8cf2296695",
+                "url": "https://api.github.com/repos/lavary/laravel-menu/zipball/5592778b3193ae561614ecb107467469b694ab11",
+                "reference": "5592778b3193ae561614ecb107467469b694ab11",
                 "shasum": ""
             },
             "require": {
@@ -1132,7 +1132,7 @@
             "keywords": [
                 "laravel"
             ],
-            "time": "2018-12-07T17:24:41+00:00"
+            "time": "2019-09-06T16:28:16+00:00"
         },
         {
             "name": "lcobucci/jwt",
