@@ -2,13 +2,13 @@
 
 <h1 align="center">HorizontCMS</h1>
 
-[![Laravel 5.6](https://img.shields.io/badge/Laravel-5.6-orange.svg)](http://laravel.com)
+[![Laravel 5.7](https://img.shields.io/badge/Laravel-5.7-orange.svg)](http://laravel.com)
 [![Build Status](https://travis-ci.org/ttimot24/HorizontCMS.svg?branch=master)](https://travis-ci.org/ttimot24/HorizontCMS)
 [![Github All Releases](https://img.shields.io/github/downloads/ttimot24/horizontcms/total.svg)]()
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ttimot24/HorizontCMS&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&utm_medium=referral&utm_content=ttimot24/HorizontCMS&utm_campaign=Badge_Coverage)
 
-Lightweight CMS built on Laravel 5.6. The core system can be simply extended by themes and plugins with one click. Easy to learn for users, simple to code for developers.
+Lightweight CMS built on Laravel 5.7. The core system can be simply extended by themes and plugins with one click. Easy to learn for users, simple to code for developers.
 
 
 ### Latest version: [v1.0.0-alpha.8](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.0.0-alpha.8)
