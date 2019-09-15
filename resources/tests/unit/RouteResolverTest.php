@@ -86,7 +86,21 @@ class RouteResolverTest extends TestCase
 
     }
 
+    public function testControllerNotExsistException(){
+        
+        $controllerString = 'notexistingcontrollername';
+
+        $this->expectException(\App\Exceptions\FileNotFoundException::class);
+
+        $this->router->resolveControllerClass($controllerString);
+    }
 
 
+    public function testRouteNotExsistsExceptionIsThrown(){
+
+        $this->expectException(\BadMethodCallException::class);
+
+        $this->router->resolve('dashboard','missing-method'); //53
+    }
 
 }

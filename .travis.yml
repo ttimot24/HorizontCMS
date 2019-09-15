@@ -12,7 +12,7 @@ services:
   - mysql
 
 before_script: 
-  - sleep 15
+  - sleep 10
 # - mongo horizontlaravel --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS horizontlaravel;'
   - composer install
