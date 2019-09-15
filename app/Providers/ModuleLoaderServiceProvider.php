@@ -32,7 +32,7 @@ class ModuleLoaderServiceProvider extends ServiceProvider
     {
 
 
-       spl_autoload_register('module_loader');
+    //   spl_autoload_register('module_loader');
 
 
        require_once app_path('Helpers/Functions/link.php');
