@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
             foreach(\App\Model\ScheduledTask::where('active',1)->get() as $task){
                 $schedule->command($task->command.' '.$task->arguments)->cron($task->frequency)->before(function() use ($task) {
                     \Log::info("Scheduled run : ".$task->name." [".$task->command."]");
-                })->pingBefore($task->ping_before)->thenPing($task->ping_after)->withoutOverlapping();
+                })->pingBefore(empty($task->ping_before)? 'google.com' : $task->ping_before)->thenPing(empty($task->ping_after)? 'google.com' : $task->ping_after)->withoutOverlapping();
             }
         }
     }
