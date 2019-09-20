@@ -11,7 +11,7 @@ class ThemeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'horizontcms:theme {--set} {theme}';
+    protected $signature = 'hcms:theme {--set} {theme}';
 
     /**
      * The console command description.

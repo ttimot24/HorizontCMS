@@ -11,7 +11,7 @@ class VersionCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'horizontcms:version';
+    protected $signature = 'hcms:version';
 
     /**
      * The console command description.

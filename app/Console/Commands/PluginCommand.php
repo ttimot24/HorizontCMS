@@ -11,7 +11,7 @@ class PluginCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'horizontcms:plugin {--install} {--uninstall} {--activate} {--deactivate} {--download} {--remove} {plugin} ';
+    protected $signature = 'hcms:plugin {--install} {--uninstall} {--activate} {--deactivate} {--download} {--remove} {plugin} ';
 
     /**
      * The console command description.

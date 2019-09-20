@@ -25,4 +25,4 @@ script:
    - vendor/bin/phpunit --testsuite Unit,Integration --coverage-clover reports/coverage.xml
    - if [ -f "reports/coverage.xml" ]; then vendor/bin/codacycoverage clover reports/coverage.xml; fi
    - php artisan --version
-   - php artisan horizontcms:version
+   - php artisan hcms:version

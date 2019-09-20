@@ -11,7 +11,7 @@ class UpgradeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'horizontcms:upgrade';
+    protected $signature = 'hcms:upgrade';
 
     /**
      * The console command description.

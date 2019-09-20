@@ -11,7 +11,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'horizontcms:install {--driver=} {--database=}';
+    protected $signature = 'hcms:install {--driver=} {--database=}';
 
     /**
      * The console command description.
