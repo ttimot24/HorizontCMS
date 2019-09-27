@@ -31,10 +31,18 @@ var filemanager = new Vue({
         folders: [],
         files: [],
         knownFileExtensions: ['jpg','png','jpeg'],
-        messages: []
+        messages: [],
+        filter: null,
     },
     watch:{
-
+        filter: function(filter){
+            if(filter != null && filter != ""){
+                this.$data.folders = this.$data.folders.filter(folder => folder.includes(filter));
+                this.$data.files = this.$data.files.filter(folder => folder.includes(filter));
+            }else{
+                this.open(this.$data.currentDirectory,false);
+            }
+        }
     },
     computed: {
         breadcrumb: function(){

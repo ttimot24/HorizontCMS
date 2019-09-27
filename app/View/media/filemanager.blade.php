@@ -5,10 +5,14 @@
   <section  class='row'>
 
   <div class='col-md-4'>
-    <h2>File manager</h2>
+    <h1>File manager</h1>
   </div>
 
-  <div class='col-md-8 text-right' style='padding-top:15px;'>
+
+  <div class='col-md-8 text-right' style='padding-top:25px;'>
+    <div class="col-md-4 col-md-offset-3">
+        <input type="text" v-model="filter" class="form-control" id="filter" placeholder="Filter">
+    </div>
     <a class='btn btn-primary' data-toggle='modal' data-backdrop='static' data-target='.upload_file_to_storage'><i class="fa fa-upload" aria-hidden="true"></i> Upload</a>
     <a class='btn btn-primary' data-toggle='modal' data-backdrop='static' data-target='.new_folder'><i class="fa fa-folder" aria-hidden="true"></i> Create Folder</a>
   </div>
