@@ -44,7 +44,7 @@ return [
 			'resources/assets/filemaster/js/fileinput.min.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
 			'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js',
-			//'resources/assets/js/app.js',
+			'resources/assets/js/app.js',
 			//'resources/js/app.js' //compiled
 			//'resources/assets/nicescroll/jquery.nicescroll.min.js',
 			//'resources/assets/scrollbar/jquery.scrollbar.js',

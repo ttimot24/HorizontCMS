@@ -17,8 +17,6 @@ tr #hidden-home a:hover{
 
 </style>
 
-<script type="text/javascript" src='app/View/pages/dragndrop.js'></script>
-
 <div class='container main-container'>
 
 

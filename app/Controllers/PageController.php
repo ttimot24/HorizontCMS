@@ -31,6 +31,8 @@ class PageController extends Controller{
      */
     public function index($slug){
 
+        $this->view->js('resources/js/dragndrop.js');
+      //  $this->view->js('resources/assets/js/page.js');
 
         $this->view->title(trans('page.pages'));
         return $this->view->render('pages/index',[
@@ -86,7 +88,7 @@ class PageController extends Controller{
 
         
         $this->view->js('resources/assets/ckeditor/ckeditor.js');
-        $this->view->js('app/View/pages/pages.script.js');
+        $this->view->js('resources/js/pages.script.js');
         $this->view->js('resources/js/controls.js');
 
         $this->view->title(trans('page.new_page'));
@@ -128,7 +130,7 @@ class PageController extends Controller{
 
 
         $this->view->js('resources/assets/ckeditor/ckeditor.js');
-        $this->view->js('app/View/pages/pages.script.js');
+        $this->view->js('resources/js/pages.script.js');
         $this->view->js('resources/js/controls.js');
 
         $this->view->title(trans('page.edit_page'));

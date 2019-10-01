@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * include Vue and Vue Resource. This gives a great starting point for
@@ -15,27 +14,17 @@
 
 //Vue.component('example', require('./components/Example.vue'));
 
-var app = new Vue({
-    el: '#hcms',
+var pages = new Vue({
+    name: "Pages",
+    el: '#pages',
     data:{
-    	
+    	pages: [],
 
     },
-    created: function(){
-        console.log("HorizontCMS: VueJS started");
+    mounted: function(){
+       
+        console.log("VueJS: Page started");
         
-   
-        window.addEventListener('keypress', (event) => {
-            
-            if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) return true;
-            
-            $("#submit-btn").click();
-            event.preventDefault();
-            return false;
-            
-        });
-
-
 
     }
 
