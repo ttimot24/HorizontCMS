@@ -1,3 +1,6 @@
+os:
+  - linux
+  
 language: php
 
 php:
@@ -13,9 +16,10 @@ services:
 
 before_script: 
   - sleep 10
-# - mongo horizontlaravel --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+# - mongo horizontlaravel --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]})
   - mysql -e 'CREATE DATABASE IF NOT EXISTS horizontlaravel;'
-  - composer install
+  - composer self-update
+  - composer install --no-interaction
   - php artisan serve > /dev/null 2>&1 &
 
 script:
