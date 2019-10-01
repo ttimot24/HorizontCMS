@@ -1,6 +1,6 @@
 os:
   - linux
-  
+
 language: php
 
 php:
@@ -20,6 +20,8 @@ before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS horizontlaravel;'
   - composer self-update
   - composer install --no-interaction
+  - nvm install node
+  - npm install
   - php artisan serve > /dev/null 2>&1 &
 
 script:
