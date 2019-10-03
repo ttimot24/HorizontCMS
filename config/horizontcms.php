@@ -27,7 +27,7 @@ return [
 			//'resources/css/simplex.css',
 			//'resources/css/culean.css',
 			//'resources/css/superhero.css',
-		   'resources/css/horizontcms.css',
+		 	  'resources/css/horizontcms.css',
 
 
 			//'resources/css/default/style.css',
@@ -45,7 +45,7 @@ return [
 			'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
 			'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js',
 			//'resources/assets/js/app.js',
-			'resources/js/app.js' //compiled
+			// 'resources/js/app.js' //compiled
 			//'resources/assets/nicescroll/jquery.nicescroll.min.js',
 			//'resources/assets/scrollbar/jquery.scrollbar.js',
 			//'https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js'
