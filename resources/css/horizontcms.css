@@ -5515,8 +5515,6 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     cursor:pointer;
     padding:5px;
     text-align:center;
-    max-width: 150px;
-    float:left;
   }
 
   #filemanager .file a i, #filemanager .folder a i{
