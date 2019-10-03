@@ -122,6 +122,7 @@ $administrator->slug = str_slug($admin['username']);
 $administrator->password = $admin['password'];
 $administrator->email = $admin['email'];
 $administrator->role_id = 6;
+$administrator->active = 1;	    
 
 if(!$administrator->save()){
 	$this->error("Could not create admin user!");
