@@ -45,7 +45,7 @@
 
       <div id="workspace" class="col-md-12">
 
-                <div class='folder col-md-2' v-for="folder in folders" :id="folder" v-on:dblclick="open(folder);" >
+                <div class='folder col-md-2 col-sm-4 col-xs-4' v-for="folder in folders" :id="folder" v-on:dblclick="open(folder);" >
                   
                   <div class="file-nav text-right">
                     <a v-on:click="modal(folder)" ><i class="fa fa-trash pull-right"></i></a>
@@ -57,7 +57,7 @@
 
 
 
-                <div v-for="file in files" class='file col-md-2' :id="file"   @if($mode=='embed') v-on:click="returnFileUrl('storage/'+currentDirectory+'/'+file);" @endif >
+                <div v-for="file in files" class='file col-md-2 col-sm-4 col-xs-4' :id="file"   @if($mode=='embed') v-on:click="returnFileUrl('storage/'+currentDirectory+'/'+file);" @endif >
                 <div class="file-nav text-right">
                   <a :href="'storage/'+currentDirectory+'/'+file"><i class="fa fa-download"></i></a>&nbsp
                   <a v-on:click="modal(file)" ><i class="fa fa-trash"></i></a>
