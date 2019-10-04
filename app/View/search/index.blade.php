@@ -3,11 +3,7 @@
 @section('content')
 <div class='container main-container'>
 
-<h2 class='col-md-8'>{!!trans('search.found_matches',['quantity' => ($search_engine->getResultsFor(\App\Model\Blogpost::class)->count()+
-                                                                     $search_engine->getResultsFor(\App\Model\User::class)->count()+
-                                                                     $search_engine->getResultsFor(\App\Model\Page::class)->count()+
-                                                                     count($files)),
-                                                                     'search_word' => $search_for ])!!}</h2> 
+<h2 class='col-md-8'>{!!trans('search.found_matches',['quantity' => ($search_engine->getTotalCount() ), 'search_word' => $search_for ])!!}</h2> 
 
 <div class='col-md-4 col-sm-12'>
 <form class='form-inline' action='admin/search' method='POST'>
@@ -25,7 +21,7 @@
          <!-- <button type='submit' class='btn btn-primary'>Search</button>-->
         </form>
 
-</br></br></br>
+<br/><br/><br/>
 </div>
 
 
@@ -33,7 +29,7 @@
 <h3 style='clear:both;'>{{trans('blogpost.blogposts')}} ({{$search_engine->getResultsFor(\App\Model\Blogpost::class)->count()}})</h3>
 <div class='container'>
 @foreach($search_engine->getResultsFor(\App\Model\Blogpost::class) as $each)
-  <a href='admin/blogpost/show/{{$each->id}}'>{{$each->title}}</a></br>
+  <a href="{{config('horizontcms.backend_prefix')}}/blogpost/show/{{$each->id}}">{{$each->title}}</a><br/>
 @endforeach
 </div>
 @endif
@@ -43,7 +39,7 @@
 <h3>{{trans('user.users')}} ({{$search_engine->getResultsFor(\App\Model\User::class)->count()}})</h3>
 <div class='container'>
 @foreach($search_engine->getResultsFor(\App\Model\User::class) as $each)
-  <a href='admin/user/show/{{$each->id}}'>{{$each->username}}</a></br>
+  <a href="{{config('horizontcms.backend_prefix')}}/user/show/{{$each->id}}">{{$each->username}}</a><br/>
 @endforeach
 </div>
 @endif
@@ -53,7 +49,7 @@
 <h3>{{trans('page.pages')}} ({{$search_engine->getResultsFor(\App\Model\Page::class)->count()}})</h3>
 <div class='container'>
 @foreach($search_engine->getResultsFor(\App\Model\Page::class) as $each)
-  <a href='admin/page/show/{{$each->id}}'>{{$each->name}}</a></br>
+  <a href="{{config('horizontcms.backend_prefix')}}/page/show/{{$each->id}}">{{$each->name}}</a><br/>
 @endforeach
 </div>
 @endif
@@ -72,5 +68,5 @@
 @endif
 
 
-</br></br></br></br></br>
+<br/><br/><br/><br/><br/>
 @endsection

@@ -8,7 +8,7 @@ class SearchEngine{
     private $searchKey = null;
 
     public function registerModel($model){
-        $this->searchModels[] = $model;
+        $this->searchModels[$model] = [];
     }
 
     public function getRegisteredModels(){
@@ -24,7 +24,7 @@ class SearchEngine{
         $this->clearResults();
         $this->searchKey = $search_key;
 
-        foreach($this->searchModels as $model){
+        foreach($this->searchModels as $model => $values){
             if(method_exists($model,'search')){
                 $this->searchModels[$model] = $model::search($this->getSearchKey());
             }
@@ -40,11 +40,26 @@ class SearchEngine{
 
     public function clearResults(){
         $this->searchKey = null;
-        foreach($this->searchModels as $key){
+        foreach($this->searchModels as $key => $values){
             if(array_key_exists((string) $key,$this->searchModels)){
                 $this->searchModels[$key] = [];
             }
         }
+    }
+    
+    public function getAllResults(){
+        return $this->searchModels;
+    }
+
+    public function getTotalCount(){
+
+        $total_count = 0;
+
+        foreach($this->getAllResults() as $key => $values){
+            $total_count += $values->count(); 
+        }
+
+        return $total_count;
     }
 
 }
