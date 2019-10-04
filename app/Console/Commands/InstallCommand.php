@@ -57,12 +57,6 @@ if(\App\HorizontCMS::isInstalled()){
 }
 
 $this->line("*****Database informations*****\r\n");
-$database['username'] = $this->ask('Username');
-$database['password'] = $this->ask('Password',false);
-
-if ($database['password'] === FALSE){ 
-	$database['password'] = "";
-}
 
  if($this->option('driver')!=""){
     $database['driver'] = $this->option('driver');
@@ -70,6 +64,14 @@ if ($database['password'] === FALSE){
  else{
     $database['driver'] = $this->choice('Database driver', array_keys(\Config::get('database.connections')), 0);
  }
+
+$database['username'] = $this->ask('Username');
+$database['password'] = $this->secret('Password',false);
+
+if ($database['password'] === FALSE){ 
+	$database['password'] = "";
+}
+
 
 if($this->option('database')!=""){
     $database['database'] = $this->option('database');
@@ -87,32 +89,18 @@ $admin['username'] = $this->ask('Username');
 $admin['password'] = $this->secret('Password');
 $admin['email'] = $this->ask('Email');
 
-$this->info("1. Generating .env file");
-
-$dotenv = new \App\Libs\DotEnvGenerator();
-$dotenv->addEnvVar('DB_HOST','127.0.0.1');
-$dotenv->addEnvVar('DB_PORT','3306');
-$dotenv->addEnvVar('DB_CONNECTION',$database['driver']);
-$dotenv->addEnvVar('DB_USERNAME',$database['username']);
-$dotenv->addEnvVar('DB_PASSWORD',$database['password']);
-$dotenv->addEnvVar('DB_DATABASE',$database['database']);
-
-$dotenv->addEnvVar('HCMS_ADMIN_PREFIX','admin');
-$dotenv->generate();
-
 \Artisan::call("cache:clear");
 
+\Config::set('app.env', null);
 \Config::set('database.connections.'.$database['driver'].'.username', $database['username']);
 \Config::set('database.connections.'.$database['driver'].'.password', $database['password']);
 \Config::set('database.connections.'.$database['driver'].'.database', $database['database']);
 
+$this->info("1. Migrating the database...");
+    $this->call("migrate", ['--no-interaction' => true,'--force' => true]);
 $this->info("Ready");
-
-$this->info("2. Migrating the database. [press 'y']");
-	\Artisan::call("migrate");
-$this->info("Ready");
-$this->info("3. Seeding the database. [press 'y']");
-	\Artisan::call("db:seed");
+$this->info("2. Seeding the database....");
+    $this->call("db:seed", ['--no-interaction' => true, '--force' => true]);
 $this->info("Ready");
 
 $administrator = new \App\Model\User();
@@ -122,24 +110,38 @@ $administrator->slug = str_slug($admin['username']);
 $administrator->password = $admin['password'];
 $administrator->email = $admin['email'];
 $administrator->role_id = 6;
+$administrator->active = 1;	    
 
 if(!$administrator->save()){
 	$this->error("Could not create admin user!");
 }
 
-
-
 $systemupgrade = new \App\Model\SystemUpgrade();
 $systemupgrade->version = \Config::get('horizontcms.version');
 $systemupgrade->nickname = "Core";
-$systemupgrade->importance = "most important";
+$systemupgrade->importance = "initial install";
 $systemupgrade->description = "welcome!";
 
 $systemupgrade->save();
 
-\Artisan::call("key:generate");
+$this->info("3. Generating .env file...");
 
-$this->info("\r\nHorizontCMS successfully installed!\r\n");
+$dotenv = new \App\Libs\DotEnvGenerator();
+$dotenv->addEnvVar('DB_HOST','127.0.0.1');
+$dotenv->addEnvVar('DB_CONNECTION',$database['driver']);
+$dotenv->addEnvVar('DB_USERNAME',$database['username']);
+$dotenv->addEnvVar('DB_PASSWORD',$database['password']);
+$dotenv->addEnvVar('DB_DATABASE',$database['database']);
+
+$dotenv->addEnvVar('HCMS_ADMIN_PREFIX','admin');
+$dotenv->generate();
+$this->info("Ready");
+
+
+$this->call("key:generate", ['--no-interaction' => true, '--force' => true]);
+
+
+$this->info("\r\n".\Config::get('app.name')." successfully installed!\r\n");
 
     }
 }

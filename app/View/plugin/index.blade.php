@@ -25,7 +25,7 @@ foreach($all_plugin as $current_plugin){
 
   echo  "<div class='list-group-item' style='height:120px;padding-top:17px;border-bottom:3px solid black;'>";
   	
-      echo "<div class='col-md-10'>";
+      echo "<div class='col-md-10 col-sm-8 col-xs-8'>";
 
        echo Html::img($current_plugin->getIcon(),"class='img img-thumbnail pull-left' style='border-radius:5px;width:80px;height:80px;margin-right:10px;'");
 
@@ -45,7 +45,7 @@ foreach($all_plugin as $current_plugin){
         echo "</div>";
 
 
-        echo "<div class='col-md-2'>";
+        echo "<div class='col-md-2 col-sm-4 col-xs-4'>";
          
           if(!$current_plugin->isInstalled()){
               echo "<a id='install' class='btn btn-primary btn-block' href='".config('horizontcms.backend_prefix')."/plugin/install/".$current_plugin->root_dir."'>Install</a>";
