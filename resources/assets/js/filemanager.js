@@ -33,6 +33,7 @@ var filemanager = new Vue({
         knownFileExtensions: ['jpg','png','jpeg'],
         messages: [],
         filter: null,
+        selected: null,
     },
     watch:{
         filter: function(filter){
@@ -61,6 +62,13 @@ var filemanager = new Vue({
         }
     },
     methods:{
+        select: function(file) {
+            this.$data.selected = event.currentTarget.id;
+            $(".file").removeClass('selected');
+            $(".folder").removeClass('selected');
+            $(event.currentTarget).addClass('selected');
+            console.log('Selected file: '+filemanager.$data.selected);
+        },
         open: function(folder, useCurrent = true){
 
            if(useCurrent){
@@ -193,10 +201,16 @@ var filemanager = new Vue({
 		basename: function (url){
 		    return ((url=/(([^\/\\\.#\? ]+)(\.\w+)*)([?#].+)?$/.exec(url))!= null)? url[2]: '';
 		},
-        modal: function(file){
+        deleteModal: function(file){
             var modal = $('#delete_sample');
             $($($(modal.find('div.modal-body')).find('div')).find('b')).html(function(event,html){ return filemanager.basename(file); });
             modal.find('a').data('file',file);
+            modal.modal('toggle');
+        },
+        renameModal: function(file){
+            this.select(file);
+            var modal = $('#rename_sample');
+            $("#selected").val(file);
             modal.modal('toggle');
         },
     	deleteFile: function(event){

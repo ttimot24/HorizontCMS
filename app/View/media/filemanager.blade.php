@@ -8,9 +8,8 @@
     <h1>File manager</h1>
   </div>
 
-
   <div class='col-md-8 text-right' style='padding-top:25px;'>
-    <div class="col-md-4 col-md-offset-3">
+    <div class="col-md-4 col-md-offset-3 col-sm-7 col-xs-7">
         <input type="text" v-model="filter" class="form-control" id="filter" placeholder="Filter">
     </div>
     <a class='btn btn-primary' data-toggle='modal' data-backdrop='static' data-target='.upload_file_to_storage'><i class="fa fa-upload" aria-hidden="true"></i> Upload</a>
@@ -45,10 +44,11 @@
 
       <div id="workspace" class="col-md-12">
 
-                <div class='folder col-md-2 col-sm-4 col-xs-4' v-for="folder in folders" :id="folder" v-on:dblclick="open(folder);" >
+                <div class='folder col-md-2 col-sm-4 col-xs-4' v-for="folder in folders" :id="folder" v-on:click="select(folder)" v-on:dblclick="open(folder);" >
                   
                   <div class="file-nav text-right">
-                    <a v-on:click="modal(folder)" ><i class="fa fa-trash pull-right"></i></a>
+                  <!--  <a v-on:click="renameModal(folder)"><i class="fa fa-pencil pull-right"></i></a> -->
+                    <a v-on:click="deleteModal(folder)" ><i class="fa fa-trash pull-right"></i></a>
                   </div>
 
                   <img src='resources/images/icons/dir.png' >
@@ -57,8 +57,9 @@
 
 
 
-                <div v-for="file in files" class='file col-md-2 col-sm-4 col-xs-4' :id="file"   @if($mode=='embed') v-on:click="returnFileUrl('storage/'+currentDirectory+'/'+file);" @endif >
+                <div v-for="file in files" class='file col-md-2 col-sm-4 col-xs-4' :id="file"   @if($mode=='embed') v-on:click="returnFileUrl('storage/'+currentDirectory+'/'+file);" @else v-on:click="select(file)" @endif >
                 <div class="file-nav text-right">
+                  <a v-on:click="renameModal(file)"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp
                   <a :href="'storage/'+currentDirectory+'/'+file"><i class="fa fa-download"></i></a>&nbsp
                   <a v-on:click="modal(file)" ><i class="fa fa-trash"></i></a>
                 </div>
@@ -147,6 +148,45 @@
     </div>
   </div>
 </div>
+
+
+
+<div class='modal rename_modal' id='rename_sample' tabindex='-1' role='dialog' aria-labelledby='rename_file' aria-hidden='true'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header modal-header-primary'>
+        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <h4 class='modal-title'>Rename</h4>
+      </div>
+
+      <form action='admin/file-manager/rename' method='POST'>
+      <div class='modal-body'>
+
+      <div class='form-group'>
+        <div class='form-group' >
+         <label for='title'>Selected:</label>  
+          <input type='text' class='form-control' name='old_name' id="selected" disabled>
+        </div>    
+      </div>
+
+      <div class='form-group'>
+        <div class='form-group' >
+         <label for='title'>New name:</label>  
+          <input type='text' class='form-control' name='new_name' id="selected" required>
+        </div>    
+      </div>
+
+
+      </div>
+      <div class='modal-footer'>
+        <button type='submit' class='btn btn-primary'>Rename</button>
+        <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 
 </div>

@@ -5503,7 +5503,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 
 /*------------FileManager Styles------------------*/
 
-    #filemanager .list-group-item:hover{
+    #filemanager .list-group-item:hover, #filemanager .selected{
         border-radius: 0px;
         color:white;
         background-color: #337ab7;  
@@ -5521,11 +5521,11 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     visibility:hidden;
   }
 
-  #filemanager .file:hover a i, #filemanager .folder:hover a i{
+  #filemanager .file:hover a i, #filemanager .folder:hover a i, #filemanager .selected a i{
     visibility:visible;
   }
 
-    #filemanager .file:hover, #filemanager .folder:hover{
+    #filemanager .file:hover, #filemanager .folder:hover, #filemanager .selected{
         border-radius:1.5px;
         color:white;
         background-color: #337ab7;
