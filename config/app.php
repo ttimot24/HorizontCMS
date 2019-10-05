@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'HorizontCMS',
+    'name' => env('APP_NAME', 'HorizontCMS'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,6 +52,8 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    
+    'asset_url' => env('ASSET_URL', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -106,27 +108,6 @@ return [
     'key' => env('APP_KEY','base64:cXatUDE+rFWEqFUVsp8mksGPWWnSLlb9FNHHWZ3sPe0='),
 
     'cipher' => 'AES-256-CBC',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Logging Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the log settings for your application. Out of
-    | the box, Laravel uses the Monolog PHP logging library. This gives
-    | you a variety of powerful log handlers / formatters to utilize.
-    |
-    | Available Settings: "single", "daily", "syslog", "errorlog"
-    |
-    */
-
-    'log' => env('APP_LOG', 'daily'),
-
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
-
-    'log_path' => env('LOG_PATH','storage/framework/logs/laravel.log'),
-
-    'log_max_files' => 15,
 
     /*
     |--------------------------------------------------------------------------

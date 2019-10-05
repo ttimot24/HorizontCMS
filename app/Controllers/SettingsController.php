@@ -244,9 +244,9 @@ class SettingsController extends Controller{
 
     public function log($file){
 
-        LogReader::setLogPath(dirname(\Config::get('app.log_path')));
+        LogReader::setLogPath(dirname(\Config::get('logging.channels.'.\Config::get('logging.default').'.path')));
 
-
+        $entries = collect();
         $files = collect(LogReader::getLogFilenameList());
 
 
