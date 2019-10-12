@@ -37,13 +37,10 @@ echo "<td><a href='".admin_link('user-view',$each->id)."'>".$each->name."</a></t
 echo "<td>".$each->username."</td>";
 echo "<td>".$each->email."</td>";
 
-        echo "<td>";
-        if($each->role_id<4){
-          echo  "<span class='label label-default' style='font-size:13px; display:block;'>".$each->role->name ."</span>";
-        }else{
-          echo "<span class='label label-danger' style='font-size:13px; display:block;'>".$each->role->name."</span>";
-        }
-        echo "</td><td style='text-align:center;'><b>"; 
+        echo "<td> 
+                <span class='label ".( ($each->isAdmin())? "label-danger" : "label-default" ) ."' style='font-size:13px; display:block;'>".$each->role->name ."</span>
+             </td>";
+        echo "<td style='text-align:center;'><b>"; 
 
 
 
