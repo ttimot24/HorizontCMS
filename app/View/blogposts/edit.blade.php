@@ -25,7 +25,7 @@
   <select class='form-control' name='category_id' id='sel1'>
 
     @foreach($categories as $category)
-      <option value="{{ $category->id }}" {{ ($blogpost->category != null && $blogpost->category->is($category)) ? "selected":"" }} >{{ $category->name }}</option>
+      <option value="{{ $category->id }}" {{ ($category->is($blogpost->category)) ? "selected":"" }} >{{ $category->name }}</option>
     @endforeach
 
   </select>
