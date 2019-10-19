@@ -242,7 +242,7 @@ h2, h3 {
     background-color: #fff !important;
 }
 .table-bordered th, .table-bordered td {
-    border: 1px solid #ddd !important;
+    border: 1px solid rgba(221, 221, 221, 0.096) !important;
 }
 }@font-face {
     font-family: 'Glyphicons Halflings';
@@ -4470,8 +4470,7 @@ a.list-group-item-danger.active, button.list-group-item-danger.active, a.list-gr
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .well blockquote {
-    border-color: #ddd;
-    border-color: rgba(0, 0, 0, 0.15);
+    border-left: 10px solid #e84d08;
 }
 .well-lg {
     padding: 24px;
