@@ -219,4 +219,22 @@ class FileManagerController extends Controller{
     }
 
 
+    public function rename(){
+
+        if($this->request->isMethod('POST')){
+
+            if(\Storage::move($this->request->input('old_file'), $this->request->input('new_file'))){
+                if($this->request->ajax()){
+                    return response()->json(['success' => trans('File successfully renamed!')]);
+                }
+            }else{
+                if($this->request->ajax()){
+                    return response()->json(['danger' => trans('message.something_went_wrong')]);
+                }
+            }
+
+        }
+
+    }
+
 }

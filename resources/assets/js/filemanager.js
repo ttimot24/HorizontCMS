@@ -117,13 +117,13 @@ var filemanager = new Vue({
               });
 
         },
-    	newFolder: function(){
+    	newFolder: function(event){
 
     		var dirPath = this.$data.currentDirectory;
     		var folderName = $('[name="new_folder_name"]').val();
 
 
-    		$.post('admin/file-manager/new-folder',
+    		$.post(event.target.action,
     		{ 
     			_token: filemanager.$data._csrfToken, 
     			dir_path: dirPath,
@@ -149,7 +149,7 @@ var filemanager = new Vue({
 			);
 
     	},
-		upload: function(){
+		upload: function(event){
 
             console.log("Uploading ...");
 
@@ -169,7 +169,7 @@ var filemanager = new Vue({
 
 
 		      $.ajax({
-		          url: 'admin/file-manager/fileupload',
+		          url: event.target.action,
 		          type: 'POST',
 		          enctype: 'multipart/form-data',
 		          data: formData,
@@ -212,6 +212,29 @@ var filemanager = new Vue({
             var modal = $('#rename_sample');
             $("#selected").val(file);
             modal.modal('toggle');
+        },
+        renameFile: function(event){
+
+            file = filemanager.$data.currentDirectory+'/'+$(event.target).data('old_name');
+            console.log(file);
+
+    		$.post(event.target.action,
+                { 
+                    _token: filemanager.$data._csrfToken, 
+                    old_file: filemanager.$data.currentDirectory+'/'+ $('[name="old_name"]').val(),
+                    new_file: filemanager.$data.currentDirectory+'/'+$('[name="new_name"]').val()
+                },
+                function( data ) {
+                    if(typeof data.success !== 'undefined'){
+                        filemanager.open(filemanager.$data.currentDirectory);
+    				    $('#rename_sample').modal('hide');
+                    }else{
+                        console.log(data);
+                    }
+              
+                }
+            );
+
         },
     	deleteFile: function(event){
 

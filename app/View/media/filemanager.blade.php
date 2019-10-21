@@ -61,7 +61,7 @@
                 <div class="file-nav text-right">
                   <a v-on:click="renameModal(file)"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp
                   <a :href="'storage/'+currentDirectory+'/'+file"><i class="fa fa-download"></i></a>&nbsp
-                  <a v-on:click="modal(file)" ><i class="fa fa-trash"></i></a>
+                  <a v-on:click="deleteModal(file)" ><i class="fa fa-trash"></i></a>
                 </div>
                  <img v-if="isKnownExtension(file)" :src="'storage/'+currentDirectory+'/'+file" />
                  <img v-else src="resources/images/icons/file.png" style='margin-bottom:5px;' />
@@ -159,7 +159,7 @@
         <h4 class='modal-title'>Rename</h4>
       </div>
 
-      <form action='admin/file-manager/rename' method='POST'>
+      <form action='admin/file-manager/rename' method='POST' v-on:submit.prevent="renameFile">
       <div class='modal-body'>
 
       <div class='form-group'>
@@ -186,7 +186,6 @@
     </div>
   </div>
 </div>
-
 
 
 </div>
