@@ -33,10 +33,20 @@ class ThemeController extends Controller{
      */
     public function config($slug){
 
+        $websiteController = new \App\Controllers\WebsiteController($this->request,new \App\Libs\ViewResolver());
+        $websiteController->before();
+
+        $theme_engine = new \App\Libs\ThemeEngine($this->request);
+        $theme_engine->setTheme(new \App\Libs\Theme(Settings::get("theme")));
+
+        $theme_engine->boot();
+
+		\Website::initalize($theme_engine);
 
         $this->view->title(trans('theme.config'));
         return $this->view->render("theme/config",[
-                                                    
+                                                    'active_theme' => new \App\Libs\Theme(Settings::get("theme")),
+                                                    'website_content' => $websiteController->index($this->request->input('page')),
                                                 ]);
     }
 

@@ -67,8 +67,9 @@ class BlogpostController extends Controller{
 
                  $blogpost->image = basename($img);
 
-                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
-                 
+                 if(extension_loaded('gd')){
+                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
+                 }
             }
 
             if($blogpost->save()){
@@ -163,8 +164,9 @@ class BlogpostController extends Controller{
 
                  $blogpost->image = basename($img);
 
-                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
-                 
+                 if(extension_loaded('gd')){
+                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
+                 }
             }
 
 

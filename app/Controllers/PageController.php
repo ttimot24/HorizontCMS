@@ -32,7 +32,7 @@ class PageController extends Controller{
     public function index($slug){
 
         $this->view->js('resources/js/dragndrop.js');
-      //  $this->view->js('resources/assets/js/page.js');
+        $this->view->js('resources/assets/js/page.js');
 
         $this->view->title(trans('page.pages'));
         return $this->view->render('pages/index',[
@@ -72,8 +72,10 @@ class PageController extends Controller{
 
                  $page->image = basename($img);
 
-                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$page->image));
                  
+                 if(extension_loaded('gd')){
+                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$page->image));
+                 }
             }
 
             if($page->save()){
@@ -168,8 +170,9 @@ class PageController extends Controller{
 
                  $page->image = basename($img);
 
-                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$page->image));
-                 
+                 if(extension_loaded('gd')){
+                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$page->image));
+                 }
             }
             
 
