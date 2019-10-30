@@ -26,17 +26,17 @@ if(!$repo_status){
 	    <div class="thumbnail">
 	      <img src="{{ $o_plugin->icon }}" style='width:100%;height:150px;object-fit:cover;' alt="...">
 	      <div class="caption">
-	        <h3>{{ $o_plugin->info->name }}</h3>
+	        <h3 style='height:50px;'>{{ $o_plugin->info->name }}</h3>
 	        <p>version: {{ $o_plugin->info->version }} author: {{ $o_plugin->info->author }}</p>
 
 	        @if( $local_plugin->exists() && $local_plugin->getInfo('version') < $o_plugin->info->version )
-	        <p><a href="admin/plugin/download-plugin/{{ $o_plugin->dir }}" class="btn btn-primary btn-block" role="button">Upgrade</a></p>
+	        <p><a href="admin/plugin/download-plugin/{{ $o_plugin->dir }}" class="btn btn-primary btn-block btn-sm" role="button">Upgrade</a></p>
 	        @elseif( $local_plugin->exists() && !$local_plugin->isInstalled())
-	        <p><a href="admin/plugin/install/{{ $o_plugin->dir }}" class="btn btn-success btn-block" role="button">Install</a></p>
+	        <p><a href="admin/plugin/install/{{ $o_plugin->dir }}" class="btn btn-success btn-block btn-sm" role="button">Install</a></p>
 	       	@elseif( $local_plugin->exists() && $local_plugin->isInstalled())
-	       	<p><b>Installed</b></p>
+	       	<p style='height: 30px;'><b>Installed</b></p>
 	        @else
-	        <p><a href="admin/plugin/download-plugin/{{ $o_plugin->dir }}" class="btn btn-info btn-block" role="button">Download</a></p>
+	        <p><a href="admin/plugin/download-plugin/{{ $o_plugin->dir }}" class="btn btn-info btn-block btn-sm" role="button">Download</a></p>
 	        @endif
 	      </div>
 	    </div>
