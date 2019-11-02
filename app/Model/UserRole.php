@@ -29,4 +29,10 @@ class UserRole extends Model{
     	$this->attributes['rights'] = json_encode($value);
     }
 
+    public function isAdminRole(){
+        $roles = $this->getRightsAttribute();
+
+        return $roles? in_array('admin_area',$roles) : false;
+    }
+
 }

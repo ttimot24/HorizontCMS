@@ -83,7 +83,7 @@
     <td>Default Role<br><small class='text-muted'>The role that is assigned to a newly registered user.</small></td><td>
 				<select name='default_user_role' class='form-control'>
             @foreach($user_roles as $role)
-              <option value='{{$role->id}}' @if($role->id==$settings['default_user_role']) selected @endif >{{$role->name}}</option>
+              <option value='{{$role->id}}' @if(isset($settings['default_user_role']) && $role->id==$settings['default_user_role']) selected @endif @if($role->isAdminRole()) style='color:red;' @endif > {{$role->name}} </option>
             @endforeach
 				</select>
 		</td>
