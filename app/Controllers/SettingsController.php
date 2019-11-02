@@ -83,6 +83,7 @@ class SettingsController extends Controller{
         return $this->view->render('settings/website',[
                                                         'settings' => $this->request->settings,
                                                         'available_logos' => array_slice(scandir("storage/images/logos"),2),
+                                                        'user_roles' => \App\Model\UserRole::all(),
                                                     ]);
     }
 

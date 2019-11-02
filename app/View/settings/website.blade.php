@@ -78,6 +78,18 @@
 <tr><td>Blogposts on page<br><small class='text-muted'>Number of blogposts per page</small></td><td><input type='number' min='1' max='100' class='form-control' name='blogposts_on_page' value="{{$settings['blogposts_on_page']}}"></td></tr>
 
 
+
+<tr>
+    <td>Default Role<br><small class='text-muted'>The role that is assigned to a newly registered user.</small></td><td>
+				<select name='default_user_role' class='form-control'>
+            @foreach($user_roles as $role)
+              <option value='{{$role->id}}' @if($role->id==$settings['default_user_role']) selected @endif >{{$role->name}}</option>
+            @endforeach
+				</select>
+		</td>
+</tr>
+
+
 <tr><td></td>
 <td>
 <br>

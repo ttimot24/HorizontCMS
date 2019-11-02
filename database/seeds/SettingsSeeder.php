@@ -136,6 +136,12 @@ class SettingsSeeder extends Seeder
         ]);
 
         DB::table('settings')->insert([
+            'setting' => 'default_user_role',
+            'value' => "2",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
             'setting' => 'auto_upgrade_check',
             'value' => "1",
             'more' => '1',
