@@ -8,7 +8,7 @@
 
 
   <form role='form' action="{{admin_link('user-create')}}" method='POST' enctype='multipart/form-data'>
-          {{ csrf_field() }}
+    {{ csrf_field() }}
 
    <div class='form-group pull-left col-xs-12 col-md-8' >
       <label for='title'>{{trans('user.create_name')}}:</label>
@@ -55,28 +55,17 @@
    
     @foreach($roles as $each)
       @if($each->permission<=$current_user->role->permission)
-        <option value='{{$each->id}}'>{{$each->name}}</option>
+        <option value='{{$each->id}}' @if(isset($settings['default_user_role']) && $each->id==$settings['default_user_role']) selected @endif >{{$each->name}}</option>
       @endif
     @endforeach   
 
 </select></div>
 
 
-<!--    <div class='form-group col-xs-12 col-md-12' >
-      <label for='file'>Upload file:</label>
-      <input name='up_file' id='input-2' type='file' class='file' multiple='true' data-show-upload='false' data-show-caption='true'>
-    </div>
--->
-
     <div class='form-group pull-left col-xs-12 col-md-8' >
     <button id='submit-btn' type='submit' class='btn btn-primary btn-lg'>{{trans('user.create_add_user_button')}}</button>
     </div>
   </form>
-
-
-
-
-
 
 </div>
 

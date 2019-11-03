@@ -67,8 +67,9 @@ class UserController extends Controller{
 
                  $user->image = basename($img);
 
-                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$user->image));
-                 
+                 if(extension_loaded('gd')){
+                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$user->image));
+                 }
             }
 
 
@@ -89,7 +90,8 @@ class UserController extends Controller{
         $this->view->title(trans('user.create_user'));
         return $this->view->render('users/create',[
                                                     'current_user' => $this->request->user(),
-                                                    'roles' => \App\Model\UserRole::all()
+                                                    'roles' => \App\Model\UserRole::all(),
+                                                    'settings' => $this->request->settings,
                                                 ]);
     }
 
@@ -168,8 +170,9 @@ class UserController extends Controller{
 
                  $user->image = basename($img);
 
-                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$user->image));
-                 
+                 if(extension_loaded('gd')){
+                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$user->image));
+                 }
             }
 
 
