@@ -250,7 +250,6 @@ class SettingsController extends Controller{
         $entries = collect();
         $files = collect(LogReader::getLogFilenameList());
 
-
         if($files->isNotEmpty()){
 
             $current_file = (isset($file) && $file!="" && $file!=NULL)? $file : basename($files->last());
@@ -267,7 +266,7 @@ class SettingsController extends Controller{
                                         'entries' => $entries->reverse(),
                                         'entry_number' => $entries->count(),
                                         'all_file_entries' => LogReader::count(),
-                                        'current_file' => $current_file,
+                                        'current_file' => isset($current_file)? $current_file : null,
                                         'max_files' => 15
                                         ]);
 

@@ -37,7 +37,9 @@
 <div class="well" style="padding:25px;">
     <div class="row">
       <h4 class="col-md-4" >Entries: {{$all_file_entries}}</h4>
+      @if(isset($current_file))
       <a href="{{'storage/framework/logs/'.$current_file}}" class="btn btn-primary pull-right"><i class="fa fa-download" aria-hidden="true"></i> Download file</a>
+      @endif
     </div>
     {{'storage/framework/logs/'.$current_file}}
 </div>
