@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
             return redirect(\Config::get('horizontcms.backend_prefix').'/dashboard/unauthorized');
         }
 
-    	if(get_class($exception)!=\Illuminate\Auth\AuthenticationException::class){
+    	if(get_class($exception)!=\Illuminate\Auth\AuthenticationException::class && get_class($exception)!= \Illuminate\Validation\ValidationException::class){
     		return response()->view('errors.exception', ['exception' => $exception]);
     	}
 
