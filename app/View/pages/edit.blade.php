@@ -99,7 +99,7 @@ echo "</section>";
 
                 CKEDITOR.replace( 'editor' );
                 CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
-                CKEDITOR.config.removeButtons = 'Save,Font,FontSize,Styles,Flash';
+                CKEDITOR.config.removeButtons = 'Save,Font,FontSize,Styles,Flash,Print,Language,Templates';
                 CKEDITOR.config.height = 400;
                 CKEDITOR.config.filebrowserBrowseUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/file-manager/index?path=images/pages&mode=embed') ?>';
                 CKEDITOR.config.filebrowserUploadUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/file-manager/upload?module=pages') ?>';
