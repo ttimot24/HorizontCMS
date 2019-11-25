@@ -28,7 +28,7 @@ class HeaderImageController extends Controller{
 
         $this->view->title(trans('Header Images'));
         return $this->view->render('media/header_images',[
-            'slider_images' => collect(HeaderImage::all()),
+            'slider_images' => collect(HeaderImage::orderBy('order')->get()),
             'dirs' => array_slice(scandir('storage/images/header_images'),2),
             ]);
     }
