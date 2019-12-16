@@ -105,6 +105,34 @@ class WebsiteController extends Controller
         return $this->redirectToSelf();
     }
 
+    public function search(){
+    
+        if($this->request->isMethod('POST')){	
+            
+			if($this->request->input('search')=="" || $this->request->input('search')==null){
+				return $this->redirectToSelf();
+			}
+
+            
+			$search_engine = new \App\Libs\SearchEngine();
+
+			$search_engine->registerModel(\App\Model\Blogpost::class);
+            $search_engine->registerModel(\App\Model\Page::class);
+            $search_engine->registerModel(\App\Model\User::class);        
+            
+            /* TODO - Plugin support */
+            
+			$search_engine->executeSearch($this->request->input('search'));
+         
+			return $this->redirect(\App\Model\Page::getByFunction('search.php')->slug)->withSearchResult(
+																							       $search_engine
+																							     );
+		}
+
+        return $this->redirectToSelf();
+           
+    }
+
     public function logout(){
 
         \Auth::logout();
