@@ -3,7 +3,8 @@
 	if(isset(Website::$_SLUGS[1])){
 		$blogpost = \App\Model\Blogpost::findBySlug(Website::$_SLUGS[1]);
 		echo "<div class='well'>";
-		echo "<h1>".$blogpost->title."</h1><br>";
+		echo "<h1>".$blogpost->title."</h1>";
+		echo "<h5 class='pull-right'><a>".$blogpost->author->username."</a> | ".$blogpost->created_at."</h5><br>";
 
 		if($blogpost->hasImage() && file_exists('storage/images/blogposts/'.$blogpost->image)){
 			echo "<center><img style='max-width:100%;' src='storage/images/blogposts/".$blogpost->image ."'></center>";
