@@ -118,9 +118,11 @@ class WebsiteController extends Controller
 
 			$search_engine->registerModel(\App\Model\Blogpost::class);
             $search_engine->registerModel(\App\Model\Page::class);
-            $search_engine->registerModel(\App\Model\User::class);        
+            $search_engine->registerModel(\App\Model\User::class);    
             
-            /* TODO - Plugin support */
+            foreach($this->theme->getConfig('search_models',[]) as $model){
+                $search_engine->registerModel($model);  
+            }
             
 			$search_engine->executeSearch($this->request->input('search'));
          
