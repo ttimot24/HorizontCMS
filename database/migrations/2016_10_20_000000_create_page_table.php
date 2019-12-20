@@ -24,6 +24,7 @@ class CreatePageTable extends Migration{
             $table->integer('visibility');
             $table->integer('parent_id')->nullable();
             $table->integer('queue');
+            $table->string('language')->default('en');
             $table->text('page')->nullable();
             $table->integer('author_id');
             $table->string('image')->nullable();

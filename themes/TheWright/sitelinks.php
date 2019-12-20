@@ -20,11 +20,13 @@
       $all_pages = \App\Model\Page::activeMain(); 
 
       foreach($all_pages as $page){
+    
+        if($page->language != \Config::get('app.locale')){continue;}
 
         $class = $page->equals(Website::$_REQUESTED_PAGE)? "active": "";
         
         if(!$page->hasSubpages()){
-         echo "<li class='".$class."'><a href='".str_slug($page->name)."'>".$page->name."</a></li>";
+         echo "<li class='".$class."'><a href='".$page->getSlug()."'>".$page->name."</a></li>";
         }else{
           echo '<li class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'.$page->name.'</a>
@@ -33,7 +35,7 @@
 
                 $class = $subpage->equals(Website::$_REQUESTED_PAGE)? "active": "";   
                 if($subpage->isActive()){     
-                  echo "<li class='".$class."'><a href='".$subpage->slug."'>".$subpage->name."</a></li>";
+                  echo "<li class='".$class."'><a href='".$subpage->getSlug()."'>".$subpage->name."</a></li>";
                 }
               }
           

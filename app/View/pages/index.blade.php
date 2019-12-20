@@ -42,7 +42,7 @@ tr #hidden-home a:hover{
         <th>{{trans('page.th_child_links')}}</th>
         <th><center>{{trans('actions.th_action')}}</center></th>
       </tr>
-    </thead><tbody>
+    </thead><tbody id="pages">
 
 <?php 
 
@@ -71,13 +71,7 @@ echo  "<td>" .$each->id;
     echo " <a href='admin/#' data-toggle='modal' data-target='.mo-".$each->id."'><i class='fa fa-home' id='hidden-home' style='font-size:20px;'></i></a>";  
   }
 
-    $each->language = 'EN';
-
-    //$language = $each->getLanguage();
-
-   // $language->setValue('lang_code','GB');
-
-echo "<br><span class='label label-default label-sm'>".$each->language."</span>";
+echo "<br><span class='label label-default label-sm'>".strtoupper($each->language)."</span>";
 
   echo "
         </td>
