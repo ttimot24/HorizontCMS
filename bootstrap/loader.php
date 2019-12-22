@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | HorizontCMS Module Auto Loader
@@ -15,13 +14,15 @@ function module_loader($class){
 
 	$class = array_pop($split);
 
-	$modules = config('horizontcms.modules',[]);
+	//$modules = config('horizontcms.modules',[]);
+
+	$config = require('config'.DIRECTORY_SEPARATOR.'horizontcms.php');
 
 	if(!isset($split[0])){ return; }
 
-	if(!in_array($split[0],array_keys($modules))){ return; }
+	if(!in_array($split[0],array_keys($config['modules']))){ return; }
 
-	$module_base = base_path($modules[$split[0]].DIRECTORY_SEPARATOR.$split[1]);
+	$module_base = base_path($config['modules'][$split[0]].DIRECTORY_SEPARATOR.$split[1]);
 
 	$in_app = false;
 
