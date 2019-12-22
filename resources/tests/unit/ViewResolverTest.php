@@ -20,10 +20,9 @@ class ViewResolverTest extends TestCase
 	}
 
 
-    public function setUp(){
-				parent::setUp();
-        $this->viewResolver = new \App\Libs\ViewResolver();
-
+    protected function setUp() : void{
+		parent::setUp();
+		$this->viewResolver = new \App\Libs\ViewResolver();
     }
 
 
