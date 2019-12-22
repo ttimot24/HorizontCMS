@@ -88,8 +88,18 @@ class Blogpost extends Model{
         }else{
             return substr(strip_tags($this->text),0,$char_num);
         }
+    }
 
+    public function getTotalCharacterCount(){
+        return strlen(strip_tags($this->text));
+    }
 
+    public function getTotalWordCount(){
+        return str_word_count(strip_tags($this->text));
+    }
+
+    public function getReadingTime(){
+        return ($this->getTotalWordCount()/200)*60;
     }
 
     public function isPublished(){

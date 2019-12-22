@@ -35,6 +35,7 @@ return [
 	'category' => 'Category',
 	'characters' => 'Characters',
 	'words' => 'Words',
+	'reading_time' => 'Reading Time',
 	'comments' => 'Comments',
 
 	'removed_user' => 'Removed user',

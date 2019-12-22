@@ -57,10 +57,10 @@
   @if($blogpost->category)  
     </br></br><b>{{trans('blogpost.category')}} : </br><a>{{ $blogpost->category->name }}</a></b>
   @endif
-  
-    </br></br><b>{{trans('blogpost.characters')}} : <br><a>{{ strlen($blogpost->text) }}</a></b>
-    </br></br><b>{{trans('blogpost.words')}} : <br><a>{{ str_word_count($blogpost->text) }}</a></b>
-    </br></br><b>{{trans('blogpost.comments')}} : <a>{{ count($blogpost->comments) }}</a></b>
+    </br></br><b>{{trans('blogpost.reading_time')}} : <br><a>{{ ceil($blogpost->getReadingTime()/60) }} mins</a></b>
+    </br></br><b>{{trans('blogpost.characters')}} : <br><a>{{ $blogpost->getTotalCharacterCount() }}</a></b>
+    </br></br><b>{{trans('blogpost.words')}} : <br><a>{{ $blogpost->getTotalWordCount() }}</a></b>
+    </br></br><b>{{trans('blogpost.comments')}} : <a>{{ $blogpost->comments->count() }}</a></b>
 </center>
 </div>
 

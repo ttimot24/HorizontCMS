@@ -35,6 +35,7 @@ return [
 	'category' => 'Kategória',
 	'characters' => 'Karakterek száma',
 	'words' => 'Szavak száma',
+	'reading_time' => 'Olvasási idő',
 	'comments' => 'Hozzászólások',
 
 	'removed_user' => 'Törölt felhasználó',
