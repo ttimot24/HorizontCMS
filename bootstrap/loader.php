@@ -18,6 +18,7 @@ function module_loader($class){
 
 	$config = require('config'.DIRECTORY_SEPARATOR.'horizontcms.php');
 
+	
 	if(!isset($split[0])){ return; }
 
 	if(!in_array($split[0],array_keys($config['modules']))){ return; }
