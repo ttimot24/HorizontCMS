@@ -9,5 +9,6 @@ return [
 	'th_image' => 'Kép',
 	'th_category' => 'Kategória',
 	'th_posts' => 'Bejegyzések száma',
-	
+
+	'view_category_blogposts' => 'Bejegyzések a kategóriában',
 ];

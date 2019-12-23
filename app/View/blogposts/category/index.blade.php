@@ -29,8 +29,8 @@
     <thead>
       <tr>
       	<th>{{ trans('category.th_id') }}</th>
-      	<th>{{ trans('category.th_image') }}</th>
-      	<!--<th>{{ trans('category.th_category') }}</th>-->
+      	<!--<th>{{ trans('category.th_image') }}</th>-->
+      	<th>{{ trans('category.th_category') }}</th>
         <th>{{ trans('category.th_posts') }}</th>
         <th><center>{{trans('actions.th_action')}}</center></th>
       </tr>
@@ -42,7 +42,7 @@
 	<tr>
 			<td>{{ $each->id }}</td>
 			<!--<td><img src='{{ $each->getThumb() }}'  class='img img-rounded' style='object-fit:cover;' width="70" height="50" /> </td>
-	        --><td class='col-md-4'>{{ $each->name }}</td>     
+	        --><td class='col-md-4'><a href="{{ admin_link('blogpost_category-view',$each->id) }}">{{ $each->name }}</a></td>     
 
 	<td><span class='badge'>{{ $each->blogposts->count() }}</span></td>
 

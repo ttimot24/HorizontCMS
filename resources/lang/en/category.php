@@ -9,4 +9,6 @@ return [
 	'th_image' => 'Image',
 	'th_category' => 'Category',
 	'th_posts' => 'Posts',
+
+	'view_category_blogposts' => 'Blogposts in the category',
 ];

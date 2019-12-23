@@ -76,7 +76,8 @@ class BlogpostCategoryController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function show($id){
-
+        $this->view->title(trans('category.category'));
+        return $this->view->render('blogposts.category.view',['category' => \App\Model\BlogpostCategory::find($id)]);
     }
 
     /**
