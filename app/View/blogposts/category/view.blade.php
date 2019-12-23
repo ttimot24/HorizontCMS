@@ -9,8 +9,13 @@
 <h3>{{trans('category.view_category_blogposts')}} ({{$category->blogposts->count()}})</h3>
 <br>
 <div>
-@foreach($category->blogposts as $blogpost)
-    <a href="{{admin_link('blogpost-view',$blogpost->id)}}" class="col-md-4" style="margin-bottom:15px;">{{$blogpost->title}}</a>
+@foreach($category->blogposts->reverse() as $blogpost)
+<div class="col-md-4" style="margin-bottom:15px;">
+    <a href="{{admin_link('blogpost-view',$blogpost->id)}}">{{$blogpost->title}}</a>
+    @if($blogpost->isDraft())
+    <span class="label label-info">{{trans('actions.draft')}}</span>
+    @endif
+</div>
 @endforeach
 </div>
 </div>
