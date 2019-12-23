@@ -10,7 +10,7 @@
 <br>
 <div>
 @foreach($category->blogposts as $blogpost)
-    <a href="{{admin_link('blogpost-view',$blogpost->id)}}" class="col-md-4">{{$blogpost->title}}</a>
+    <a href="{{admin_link('blogpost-view',$blogpost->id)}}" class="col-md-4" style="margin-bottom:15px;">{{$blogpost->title}}</a>
 @endforeach
 </div>
 </div>

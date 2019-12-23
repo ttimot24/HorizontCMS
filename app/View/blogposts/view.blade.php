@@ -55,7 +55,7 @@
     </br></br><b>{{trans('blogpost.published_on')}} : </br><a>{{ $blogpost->created_at->format(\Settings::get('date_format',\Config::get('horizontcms.default_date_format'),true)) }}</a></b>
   
   @if($blogpost->category)  
-    </br></br><b>{{trans('blogpost.category')}} : </br><a>{{ $blogpost->category->name }}</a></b>
+    </br></br><b>{{trans('blogpost.category')}} : </br><a href="{{ admin_link('blogpost_category-view',$blogpost->category->id) }}">{{ $blogpost->category->name }}</a></b>
   @endif
     </br></br><b>{{trans('blogpost.reading_time')}} : <br><a>{{ ceil($blogpost->getReadingTime()/60) }} mins</a></b>
     </br></br><b>{{trans('blogpost.characters')}} : <br><a>{{ $blogpost->getTotalCharacterCount() }}</a></b>
