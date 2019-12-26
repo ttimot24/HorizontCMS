@@ -33,7 +33,7 @@
   <td><img src='{{$blogpost->getThumb()}}'  class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> </td>
 
 
-  <td  class='col-md-5 col-xs-3'><a href="{{admin_link('blogpost-view',$blogpost->id)}}" >{{ $blogpost->title }}</a><br>
+  <td  class='col-md-4 col-xs-3'><a href="{{admin_link('blogpost-view',$blogpost->id)}}" >{{ $blogpost->title }}</a><br>
   @if($blogpost->isDraft())
   <span class="label label-info">{{trans('actions.draft')}}</span>
   @endif
