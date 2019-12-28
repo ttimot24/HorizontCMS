@@ -69,7 +69,7 @@ class Theme{
 		
 		if(!file_exists($lang_dir)){return collect(); }
 
-		return collect(array_slice(scandir($lang_dir),2))->map(function($lang){return str_replace('.json','',$lang);});
+		return collect(array_slice(scandir($lang_dir),2))->filter(function($lang){ return substr_compare($lang, ".json", -strlen(".json")) === 0; })->map(function($lang){return str_replace('.json','',$lang);});
 	}
 
 	public function getImage(){
