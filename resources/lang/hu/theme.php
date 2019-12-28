@@ -9,5 +9,5 @@ return [
 	'author' => 'készítő',
 	'website' => 'weboldala',
 	'all' => 'Összes',
-	
+	'supported_lang' => "Támogatott nyelvek",
 ];

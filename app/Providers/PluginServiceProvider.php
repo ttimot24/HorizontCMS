@@ -97,7 +97,7 @@ class PluginServiceProvider extends ServiceProvider
             }else if(!\Request::is(\Config::get('horizontcms.backend_prefix')."/*")){
                 $theme = \App\Model\Settings::get('theme');
 
-                $this->loadTranslationsFrom(base_path("/themes/".$theme."/lang"), 'website');
+              //  $this->loadTranslationsFrom(base_path("/themes/".$theme."/lang"), 'website');
                 $this->loadJsonTranslationsFrom(base_path("/themes/".$theme."/lang"));
             }
 

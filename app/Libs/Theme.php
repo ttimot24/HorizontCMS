@@ -61,9 +61,16 @@ class Theme{
 
 
 	public function getPath(){
-		return 'themes'.DIRECTORY_SEPARATOR.$this->root_dir.DIRECTORY_SEPARATOR;
+		return 'themes/'.$this->root_dir.'/';
 	}
 
+	public function getSupportedLanguages(){
+		$lang_dir = $this->getPath().'lang';
+		
+		if(!file_exists($lang_dir)){return collect(); }
+
+		return collect(array_slice(scandir($lang_dir),2))->map(function($lang){return str_replace('.json','',$lang);});
+	}
 
 	public function getImage(){
 		return $this->getPath()."preview.jpg";

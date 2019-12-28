@@ -32,6 +32,9 @@
 
     <h4>{{trans('theme.is_the_current_theme')}}</h4>
     <p>{{ $active_theme->getInfo('description') }}</p>
+    @if($active_theme->getSupportedLanguages()->count() > 0)
+      <p style='font-size:15px;'>{{trans('theme.supported_lang') }}: {{implode(', ',$active_theme->getSupportedLanguages()->toArray())}}</p>
+    @endif
     <p style='font-size:15px;'>{{trans('theme.author')}}: {{ $active_theme->getInfo('author') }} | {{trans('theme.website')}}: <a target='_blank' href='<?= UrlManager::http_protocol( $active_theme->getInfo('author_url') ); ?>'>{{ $active_theme->getInfo('author_url') }}</a></p>
   </div>
 </div>

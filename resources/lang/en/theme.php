@@ -9,4 +9,5 @@ return [
 	'author' => 'author',
 	'website' => 'website',
 	'all' => 'All',
+	'supported_lang' => "Supported languages",
 ];
