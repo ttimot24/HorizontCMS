@@ -15,6 +15,7 @@ class PluginServiceProvider extends ServiceProvider
     {
 
         try{
+
             if($this->app->isInstalled()){
                 $this->app->plugins = \App\Model\Plugin::where('active','1')->get()->keyBy('root_dir');
 
@@ -27,7 +28,11 @@ class PluginServiceProvider extends ServiceProvider
                 $this->registerPluginViewPaths();
             }
         }catch(\Exception $e){
-  
+            if(\Settings::get('website_debug')==1 && !\Request::is(\Config::get('horizontcms.backend_prefix')."*")){
+                throw $e;
+            }else if(\Settings::get('admin_debug')==1 && \Request::is(\Config::get('horizontcms.backend_prefix')."*")){
+                throw $e;
+            }
         }
         
     }
@@ -90,7 +95,10 @@ class PluginServiceProvider extends ServiceProvider
                 }
 
             }else if(!\Request::is(\Config::get('horizontcms.backend_prefix')."/*")){
-                $this->loadTranslationsFrom(base_path("/themes/".\App\Model\Settings::get('theme')."/lang"), 'website');
+                $theme = \App\Model\Settings::get('theme');
+
+                $this->loadTranslationsFrom(base_path("/themes/".$theme."/lang"), 'website');
+                $this->loadJsonTranslationsFrom(base_path("/themes/".$theme."/lang"));
             }
 
     }
