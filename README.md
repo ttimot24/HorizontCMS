@@ -8,7 +8,9 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ttimot24/HorizontCMS&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&utm_medium=referral&utm_content=ttimot24/HorizontCMS&utm_campaign=Badge_Coverage)
 
-Lightweight CMS built on Laravel 5.8. The core system can be simply extended by themes and plugins with one click. Easy to learn for users, simple to code for developers.
+HorizontCMS is an open-source, responsive Content Management System (CMS) built on Laravel 5.8, VueJs 2.6 and Bootstrap 3.4 which you can use to build you next generation websites and blogs.
+
+This lightweight CMS platform provides end-users with the tools to extend and build sustainable web presence with one click which makes it easy to learn for users, simple to code for developers
 
 
 ### Latest version: [v1.0.0-alpha.8](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.0.0-alpha.8)
@@ -36,6 +38,10 @@ After downloading and copying the files to the server, navigate to the app root 
 
 ##### Migration information
   Incremented migrations will be in use after v1.0 is released. Until then migration files might be modified.
+
+#### Install manually from scratch
+
+  [Website For Students Tutorial](https://websiteforstudents.com/how-to-install-horizontcms-on-ubuntu-18-04-16-04-with-apache2/)
 
 ### Sample plugin
 
