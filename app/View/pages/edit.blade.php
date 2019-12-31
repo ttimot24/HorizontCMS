@@ -39,17 +39,13 @@
     </div>
 <br>
 
-<?php
 
-echo "<div class='form-group col-xs-12 col-md-6' id='level' >
-  <label for='level'>".trans('page.page_level')."</label>
+<div class='form-group col-xs-12 col-md-6' id='level' >
+  <label for='level'>{{trans('page.page_level')}}</label>
   <select class='form-control' name='parent_select' >  
-          <option value='0' "; if(isset($page->parent_id) && $page->parent_id==NULL){echo "selected";} echo">Main menu</option>
-          <option value='1' "; if(isset($page->parent_id) && $page->parent_id!=NULL){echo "selected";} echo">Submenu</option>";
-echo "</select></div>";
-
-?>
-
+          <option value='0' @if(isset($page->parent_id) && $page->parent_id==NULL) selected @endif>Main menu</option>
+          <option value='1' @if(isset($page->parent_id) && $page->parent_id!=NULL) selected @endif>Submenu</option>";
+</select></div>
 
 
 <div class='form-group col-xs-12 col-md-6' id='submenus'>
@@ -60,31 +56,23 @@ echo "</select></div>";
                 <option value="{{ $each->id }}" {{ ($page->parent!=NULL && $each->is($page->parent) ? "selected":"") }}>{{ $each->name }}</option>
           @endforeach
 
-</select></div>
-
-<?php
-/*echo "<div class='form-group pull-left col-xs-12 col-md-8' >
-          <label for='title'>Visibility:&nbsp&nbsp&nbsp&nbsp</label>
-              <input type='radio' name='visibility' value='1' "; if($page->visibility==1){echo "checked";}echo">Visible&nbsp&nbsp&nbsp&nbsp&nbsp
-              <input type='radio' name='visibility' value='0' "; if($page->visibility==0){echo "checked";}echo">Invisible&nbsp&nbsp&nbsp&nbsp&nbsp
-      </div></br>";*/
-
-echo "  
-<div class='form-group pull-left col-xs-12 col-md-12' style='margin-top:20px;margin-bottom:20px;'>
-  <label style='margin-right:10px;'>Visibility:</label> 
-        <div class='radio radio-info radio-inline'>
-                        <input type='radio' id='inlineRadio1' value='1' name='visibility' "; if($page->visibility==1){echo "checked";}echo">
-                        <label for='inlineRadio1'> Visible </label>
-                    </div>
-                    <div class='radio radio-inline'>
-                        <input type='radio' id='inlineRadio2' value='0' name='visibility' "; if($page->visibility==0){echo "checked";}echo">
-                        <label for='inlineRadio2'> Invisible </label>
-                    </div>
+</select>
 </div>
-";
 
-echo "</section>";
-?>
+<div class='form-group pull-left col-xs-12 col-md-12' style='margin-top:20px;margin-bottom:20px;'>
+        <label style='margin-right:10px;'>Visibility:</label> 
+        <div class='radio radio-info radio-inline'>
+            <input type='radio' id='inlineRadio1' value='1' name='visibility' @if($page->visibility==1) checked @endif>
+            <label for='inlineRadio1'> Visible </label>
+        </div>
+        <div class='radio radio-inline'>
+            <input type='radio' id='inlineRadio2' value='0' name='visibility' @if($page->visibility==0) checked @endif>
+            <label for='inlineRadio2'> Invisible </label>
+        </div>
+</div>
+
+
+</section>
 
 <div class='form-group pull-left col-xs-12 col-md-12' >
       <label for='text'>{{trans('page.page_content')}}</label>
@@ -124,10 +112,7 @@ echo "</section>";
   </form>
 </div>
 
-<?php
-Bootstrap::image_details($page->id,$page->getImage());
-?>
-
+<?php Bootstrap::image_details($page->id,$page->getImage()); ?>
 
 <script type='text/javascript'>
  $(document).ready(function() {

@@ -47,28 +47,23 @@
 <div class='form-group col-xs-12 col-md-6' id='submenus'>
   <label for='submenus'>{{trans('page.parent_menu')}}</label>
   <select class='form-control' name='parent_id' >";  
-      
-<?php     
-
-      foreach($all_page as $each){
-         echo "<option value='".$each->id."'>".$each->name."</option>"; 
-      }
-
-?>
-
-</select></div>
+      @foreach($all_page as $each)
+         <option value='{{$each->id}}'>{{$each->name}}</option> 
+      @endforeach
+  </select>
+</div>
 
 
 <div class='form-group pull-left col-xs-12 col-md-8' style='margin-top:20px;margin-bottom:20px;'>
   <label style='margin-right:10px;'>{{trans('page.visibility')}}</label> 
         <div class="radio radio-primary radio-inline">
-                        <input type="radio" id="inlineRadio1" value="1" name='visibility' checked>
-                        <label for="inlineRadio1"> {{trans('page.visible')}} </label>
-                    </div>
-                    <div class="radio radio-inline">
-                        <input type="radio" id="inlineRadio2" value="0" name='visibility'>
-                        <label for="inlineRadio2"> {{trans('page.invisible')}} </label>
-                    </div>
+            <input type="radio" id="inlineRadio1" value="1" name='visibility' checked>
+            <label for="inlineRadio1"> {{trans('page.visible')}} </label>
+        </div>
+        <div class="radio radio-inline">
+            <input type="radio" id="inlineRadio2" value="0" name='visibility'>
+            <label for="inlineRadio2"> {{trans('page.invisible')}} </label>
+        </div>
 </div>
 
 </section>  
@@ -111,7 +106,7 @@ Add image
 
                 CKEDITOR.replace( 'editor' );
                 CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
-                CKEDITOR.config.removeButtons = 'Save,Font,FontSize,Styles,Flash,Print,Language,Templates';
+                CKEDITOR.config.removeButtons = 'Save,Font,FontSize,Styles,Flash,Print,Language,Templates,PageBreak';
                 CKEDITOR.config.height = 400;
                 CKEDITOR.config.filebrowserBrowseUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/file-manager/index?path=images/pages&mode=embed') ?>';
                 CKEDITOR.config.filebrowserUploadUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/file-manager/upload?module=pages') ?>';
