@@ -2,13 +2,13 @@
 
 <h1 align="center">HorizontCMS</h1>
 
-[![Laravel 5.8](https://img.shields.io/badge/Laravel-5.8-orange.svg)](http://laravel.com)
+[![Laravel 6](https://img.shields.io/badge/Laravel-6-orange.svg)](http://laravel.com)
 [![Build Status](https://travis-ci.org/ttimot24/HorizontCMS.svg?branch=master)](https://travis-ci.org/ttimot24/HorizontCMS)
 [![Github All Releases](https://img.shields.io/github/downloads/ttimot24/horizontcms/total.svg)]()
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ttimot24/HorizontCMS&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&utm_medium=referral&utm_content=ttimot24/HorizontCMS&utm_campaign=Badge_Coverage)
 
-HorizontCMS is an open-source, responsive Content Management System (CMS) built on Laravel 5.8, VueJs 2.6 and Bootstrap 3.4 which you can use to build you next generation websites and blogs.
+HorizontCMS is an open-source, responsive Content Management System (CMS) built on Laravel 6, VueJs 2.6 and Bootstrap 3.4 which you can use to build you next generation websites and blogs.
 
 This lightweight CMS platform provides end-users with the tools to extend and build sustainable web presence with one click which makes it easy to learn for users, simple to code for developers
 
