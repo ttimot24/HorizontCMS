@@ -19,7 +19,7 @@ class SystemUpgrade extends Model{
             $update->setUpdateUrl($url);
 
             $update->addLogHandler(new \Monolog\Handler\StreamHandler($workspace . '/update.log'));
-            $update->setCache(new \Desarrolla2\Cache\Adapter\File($workspace . '/cache'), 3600);
+            $update->setCache(new \Desarrolla2\Cache\File($workspace . '/cache'), 3600);
             
             $update->checkUpdate();
 

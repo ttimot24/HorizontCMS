@@ -9,7 +9,7 @@
         "laravel/framework": "6.*",
         "lavary/laravel-menu": "1.7.*",
         "composer/semver": "*",
-        "visualappeal/php-auto-update" : "0.10.0",
+        "visualappeal/php-auto-update" : "0.13.1",
         "damiencriado/zipper-l6"  : "*",
         "wikimedia/composer-merge-plugin": "dev-master",
         "jackiedo/log-reader": "*",
