@@ -21,7 +21,7 @@
 
 	<?php 
 		if(method_exists('Website','customStyle')){
-			Website::customStyle(); 
+			echo Website::customStyle(); 
 		}
 	?>
 
