@@ -20,7 +20,7 @@ class ThemeController extends Controller{
 
         $this->view->title(trans('theme.themes'));
         return $this->view->render("theme/index",[
-                                                    'active_theme' => new \App\Libs\Theme(Settings::get("theme")),
+                                                    'active_theme' => new \App\Libs\Theme($this->request->settings['theme']),
                                                     'all_themes' => collect(array_slice(scandir("themes"),2))->map(function ($theme) { return new \App\Libs\Theme($theme); })
                                                 ]);
     }
@@ -37,7 +37,7 @@ class ThemeController extends Controller{
         $websiteController->before();
 
         $theme_engine = new \App\Libs\ThemeEngine($this->request);
-        $theme_engine->setTheme(new \App\Libs\Theme(Settings::get("theme")));
+        $theme_engine->setTheme(new \App\Libs\Theme($this->request->settings['theme']));
 
         $theme_engine->boot();
 
@@ -45,9 +45,33 @@ class ThemeController extends Controller{
 
         $this->view->title(trans('theme.config'));
         return $this->view->render("theme/config",[
-                                                    'active_theme' => new \App\Libs\Theme(Settings::get("theme")),
+                                                    'active_theme' => new \App\Libs\Theme($this->request->settings['theme']),
                                                     'website_content' => $websiteController->index($this->request->input('page')),
                                                 ]);
+    }
+
+
+    public function options($theme){
+
+        if(!Settings::has('custom_css_'.snake_case($theme))){
+            $theme_css = new Settings();
+            $theme_css->setting = 'custom_css_'.snake_case($theme);
+            $theme_css->value = "";
+            $theme_css->more = 1;
+            $theme_css->save();
+        }
+
+        $theme = new \App\Libs\Theme($theme == null? $this->request->settings['theme'] : $theme);
+
+        $translations = [];
+
+        foreach($theme->getSupportedLanguages() as $lang){
+            $translations[$lang] = json_decode(file_get_contents($theme->getPath()."lang/".$lang.".json"));
+        }
+
+        
+        $this->view->title(trans('Theme options'));
+        return $this->view->render('theme.options',['option' => empty($this->request->input('option'))? 'style' : $this->request->input('option') , 'translations' => $translations, 'theme' => $theme->root_dir,'settings'=> $this->request->settings]);
     }
 
 

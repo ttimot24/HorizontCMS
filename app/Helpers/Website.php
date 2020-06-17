@@ -109,6 +109,13 @@ class Website{
 		return Website::$_THEME_PATH."/".$file;
 	}
 
+	public static function customStyle(){
+		
+		if(!empty(Website::$_SETTINGS->{'custom_css_'.snake_case(Website::$_SETTINGS->theme)})){
+			echo "<style>".Website::$_SETTINGS->{'custom_css_'.snake_case(Website::$_SETTINGS->theme)}."</style>";
+		}
+	}
+
 	public static function isActivePlugin($plugin_name){
 
 		foreach(app()->plugins as $plugin){

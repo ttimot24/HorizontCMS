@@ -61,7 +61,7 @@ foreach($all_themes as $theme): ?>
         <p>
             <a href='admin/theme/set/<?=  $theme->root_dir ?>' class="btn btn-primary <?php if($theme->isCurrentTheme()){ echo 'disabled'; } ?> " role="button">Activate</a> 
             <!--<a href="#" class="btn btn-default" role="button" data-toggle='modal' data-target='.<?=  $theme->root_dir ?>-modal-xl'>Preview</a>-->
-            <a href='admin/theme/config/<?=  $theme->root_dir ?>'  class="btn btn-warning disabled" role="button">{{ trans('actions.edit') }}</a>
+            <a href='admin/theme/options/<?=  $theme->root_dir ?>'  class="btn btn-warning" role="button">{{ trans('actions.options') }}</a>
             <button class='btn btn-danger' data-toggle='modal' data-target='.delete_<?= $theme->root_dir ?>' <?php if($all_themes->count()==1){echo "disabled";} ?> >{{ trans('actions.delete') }}</button>
         </p>
       </div>
