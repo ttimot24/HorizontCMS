@@ -39,7 +39,7 @@
         <div>
         <form action="{{admin_link('settings-save')}}" method="POST">
             {{csrf_field()}}
-            <textarea rows="20" style="width:100%;" name="custom_css_{{snake_case($theme)}}" placeholder="Write your css here...">{{ isset($settings['custom_css_'.snake_case($theme)]) ? $settings['custom_css_'.snake_case($theme)] : ""  }}</textarea>
+            <textarea rows="20" style="width:100%;" class='form-control' name="custom_css_{{snake_case($theme)}}" placeholder="Write your css here...">{{ isset($settings['custom_css_'.snake_case($theme)]) ? $settings['custom_css_'.snake_case($theme)] : ""  }}</textarea>
             <input type="submit" class="btn btn-primary" value="Save">
         </form>
         </div>
