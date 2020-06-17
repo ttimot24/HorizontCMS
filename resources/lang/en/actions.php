@@ -9,6 +9,7 @@ return [
 	'save_draft' => 'Save as draft',
 	'add' => 'Add',
 	'edit' => 'Edit',
+	'options' => 'Options',
 	'update' => 'Update',
 	'delete' => 'Delete',
 	'remove' => 'Remove',

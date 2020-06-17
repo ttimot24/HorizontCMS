@@ -9,6 +9,7 @@ return [
 	'save_draft' => 'Mentés piszkozatként',
 	'add' => 'Hozzáadás',
 	'edit' => 'Szerkesztés',
+	'options' => 'Beállítások',
 	'update' => 'Frissít',
 	'delete' => 'Törlés',
 	'remove' => 'Eltávolítás',
