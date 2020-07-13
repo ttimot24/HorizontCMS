@@ -19,6 +19,11 @@ class InstallController extends Controller{
      */
     public function index(){
 
+        $cachePath = storage_path('framework/upgrade/cache');
+
+        if(!file_exists($cachePath)){
+            \File::makeDirectory($cachePath, $mode = 0777, true, true);
+        }
 
         $this->view->title("Install");
         return $this->view->render("install/index",['enable_continue' => true]);
