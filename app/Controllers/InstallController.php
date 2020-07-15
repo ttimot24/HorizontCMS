@@ -115,7 +115,7 @@ class InstallController extends Controller{
 
                 Session::put('step2',$this->request->all());
 
-                return $this->redirect('admin/install/step3')->withMessage(['success' => trans('Connection with database established!')]);
+                return $this->redirect('admin/install/step3')->withMessage(['success' => trans('Connection to database established!')]);
             }catch(\PDOException $except){
                return $this->redirectToSelf()->withMessage(['danger' => trans('Can not establish the connection: '.$except->getMessage())]);
             }
