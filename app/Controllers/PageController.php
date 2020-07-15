@@ -89,7 +89,7 @@ class PageController extends Controller{
 
 
         
-        $this->view->js('resources/assets/ckeditor/ckeditor.js');
+        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
         $this->view->js('resources/js/pages.script.js');
         $this->view->js('resources/js/controls.js');
 
@@ -131,7 +131,7 @@ class PageController extends Controller{
     public function edit($id){
 
 
-        $this->view->js('resources/assets/ckeditor/ckeditor.js');
+        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
         $this->view->js('resources/js/pages.script.js');
         $this->view->js('resources/js/controls.js');
 

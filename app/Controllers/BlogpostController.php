@@ -83,8 +83,8 @@ class BlogpostController extends Controller{
 
 
         $this->view->js('resources/js/controls.js');
-        $this->view->js('resources/assets/ckeditor/ckeditor.js');
-
+        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
+       
         $this->view->title(trans('blogpost.new_blogpost'));
         return $this->view->render('blogposts/create',[
                                                         'categories' => \App\Model\BlogpostCategory::all(),
@@ -126,7 +126,7 @@ class BlogpostController extends Controller{
     public function edit($id){
 
         $this->view->js('resources/js/controls.js');
-        $this->view->js('resources/assets/ckeditor/ckeditor.js');
+        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
 
         $this->view->title(trans('blogpost.edit_blogpost'));
 
