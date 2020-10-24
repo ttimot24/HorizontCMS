@@ -74,6 +74,33 @@ class ThemeController extends Controller{
         return $this->view->render('theme.options',['option' => empty($this->request->input('option'))? 'style' : $this->request->input('option') , 'translations' => $translations, 'theme' => $theme->root_dir,'settings'=> $this->request->settings]);
     }
 
+    public function updateTranslations($theme){
+
+        if($this->request->isMethod('POST')){
+
+            try{
+                $theme = new \App\Libs\Theme($theme == null? $this->request->settings['theme'] : $theme);
+
+                $translations = [];
+
+                foreach($theme->getSupportedLanguages() as $lang){
+    
+                    file_put_contents($theme->getPath()."lang/".$lang.".json",json_encode($this->request->input($lang,new \stdClass())));
+
+                }
+
+                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
+            
+            }catch(\Exception $e){
+                \Log::error($e);
+                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            }
+
+
+        }
+
+    }
+
 
      /**
      * Show the form for creating a new resource.

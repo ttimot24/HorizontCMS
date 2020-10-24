@@ -15,6 +15,8 @@
     <div class="col-md-10 well">
 
     @if($option==='translate')
+    <form action="{{admin_link('').'theme/update-translations/'.$theme}}" method="POST">
+    {{ csrf_field() }}
     @foreach($translations as $lang => $value)
     <h3>{{$lang}}</h3>
     <table class="table">
@@ -28,12 +30,15 @@
             <tr>
                 <td class="col-md-4"><i>{{$a}}</i></td>
                 <td class="col-md-2">{{$lang}}</td>
-                <td class="col-md-6"><input type='text' class='form-control' name='{{$a}}' value="{{$b}}"></td></td>
+                <td class="col-md-6"><input type='text' class='form-control' name='{{$lang}}[{{$a}}]' value="{{$b}}"></td></td>
             </tr>
         @endforeach
         </tbody>
     </table>
     @endforeach
+    <input type="submit" class="btn btn-primary" value="Save">
+    </form>
+
     @elseif($option==='style')
         <h3>Custom Style</h3>
         <div>
