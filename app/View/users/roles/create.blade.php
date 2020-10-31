@@ -12,8 +12,9 @@
 <div class="panel panel-primary">
   <!-- Default panel contents -->
   <div class="panel-heading">
-      <h4><input type='text' name='group_name' style='color:black;width:100%;' required></h4> 
-
+      <h4>
+        <input type='text' class='form-control' name='group_name' required />
+      </h4> 
   </div>
 
   <!-- List group -->
