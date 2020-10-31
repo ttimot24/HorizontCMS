@@ -11,8 +11,9 @@ class PluginServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(\Illuminate\Contracts\Http\Kernel $kernel)
     {
+        $this->kernel = $kernel;
 
         try{
 
@@ -22,6 +23,7 @@ class PluginServiceProvider extends ServiceProvider
                 $this->registerPluginAutoloaders();
 
                 $this->registerPluginProviders();
+                $this->registerPluginMiddlewares();
                 $this->registerPluginEvents();
                 $this->registerPluginLanguage();
                 $this->registerPluginConsoleCommands();
@@ -65,7 +67,23 @@ class PluginServiceProvider extends ServiceProvider
 
     }
 
+    private function registerPluginMiddlewares(){
 
+        foreach($this->app->plugins as $plugin){
+
+            foreach($plugin->getRegister('addMiddlewares',[]) as $alias => $middleware){
+
+               $this->kernel->prependMiddleware($middleware);
+
+                $this->kernel->pushMiddleware($middleware);
+
+                $this->app->router->middleware($alias, $middleware);
+
+            }
+
+        }
+
+    }
 
     public function registerPluginEvents(){
 
