@@ -9,9 +9,12 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 
+    RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[/\s?] [NC]
+    RewriteRule !^index\.php$ index.php [L,NC]
+
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-f 
     RewriteRule ^ index.php [L]
 
     # Handle Authorization Header
