@@ -13,7 +13,7 @@ HorizontCMS is an open-source, responsive Content Management System (CMS) built 
 This lightweight CMS platform provides end-users with the tools to extend and build sustainable web presence with one click which makes it easy to learn for users, simple to code for developers
 
 
-### Latest version: [v1.0.0-beta](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.0.0-beta)
+### Latest version: [v1.0.0-beta.2](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.0.0-beta.2)
 
 ### Try out
 
