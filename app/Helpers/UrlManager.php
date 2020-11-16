@@ -1,5 +1,7 @@
 <?php 
 
+/* This helper is for legacy theme compability purposes */
+
 class UrlManager{
 
 

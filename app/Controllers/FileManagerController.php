@@ -9,12 +9,6 @@ use \Illuminate\Http\File;
 
 class FileManagerController extends Controller{
  
-
-    private function validationRegex(){
-        return '/^.*\.('.implode('|',["php","php5","php7"]).')$/i';
-    }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -65,7 +59,7 @@ class FileManagerController extends Controller{
 
                 foreach($this->request->up_file as $file){
                     
-                    if(!preg_match($this->validationRegex(), strtolower($file))){
+                    if(!\Security::isExecutable($file)){
                         $images[] = $file->store(str_replace("storage/", "", $this->request->input('dir_path')));
                     }
                 }
@@ -232,7 +226,7 @@ class FileManagerController extends Controller{
 
             $new_file = $this->request->input('new_file');
 
-            if(!preg_match($this->validationRegex(), strtolower($new_file)) && \Storage::move($this->request->input('old_file'), $new_file)){
+            if(!\Security::isExecutable($new_file) && \Storage::move($this->request->input('old_file'), $new_file)){
                 if($this->request->ajax()){
                     return response()->json(['success' => trans('File successfully renamed!')]);
                 }
