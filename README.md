@@ -57,6 +57,11 @@ After downloading and copying the files to the server, navigate to the app root 
   
 Any help is appreciated!
 
+### Donation
+If this project makes your website development easier, you can buy me a coffe. :)
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?hosted_button_id=73CV4FU4TNM3U)
+
 ##
 
 Project by Timot Tarjani [(@ttimot24)](https://github.com/ttimot24)
