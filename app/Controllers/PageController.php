@@ -62,7 +62,7 @@ class PageController extends Controller{
             $page->visibility = $this->request->input('visibility');
             $page->parent_id = $this->request->input('parent_select')==0? NULL : $this->request->input('parent_id');
             $page->queue = 99;
-            $page->page = $this->request->input('page');
+            $page->page = clean($this->request->input('page'));
             $page->author_id = $this->request->user()->id;
 
 
@@ -161,7 +161,7 @@ class PageController extends Controller{
             $page->url = $this->request->input('url');
             $page->visibility = $this->request->input('visibility');
             $page->parent_id = $this->request->input('parent_select')==0? NULL : $this->request->input('parent_id');
-            $page->page = $this->request->input('page');
+            $page->page = clean($this->request->input('page'));
 
 
             if ($this->request->hasFile('up_file')){
