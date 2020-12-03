@@ -12,7 +12,7 @@
 
                 <!-- Branding Image -->
                  <a class='navbar-brand' href="{{url(admin_link(null))}}">
-                    <img src="{{ url(config('horizontcms.admin_logo')) }}" style='max-height:170%;margin-top:-7px;float:left;'> <!--HorizontCMS <!-- SatelliteCMS -->
+                    <img src="{{ url(config('horizontcms.admin_logo')) }}" style='max-height:170%;margin-top:-7px;'> <!--HorizontCMS <!-- SatelliteCMS -->
                   </a>
                   <div class='visible-xs navbar-brand' style='color:white;text-align:center;'>{{ config('app.name') }}</div>
             </div>
@@ -24,7 +24,7 @@
                 </ul>
 
                 <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right" style='padding-right:25px;'>
+                <ul class="nav navbar-nav navbar-right pr-5">
 
 
                   @include(config('laravel-menu.views.bootstrap-items'), array('items' => $RightMenu->roots()))
