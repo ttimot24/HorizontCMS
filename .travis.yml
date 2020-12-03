@@ -20,7 +20,7 @@ before_script:
   - sleep 10
 # - mongo horizontlaravel --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]})
   - mysql -e 'CREATE DATABASE IF NOT EXISTS horizontlaravel;'
-  - composer self-update
+  - composer self-update --1
   - composer install --no-interaction
   - nvm install node
   - npm install
