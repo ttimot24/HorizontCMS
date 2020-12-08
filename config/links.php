@@ -17,6 +17,8 @@ return [
 	'blogpost-update' => 'blogpost/update',
 	'blogpost-view' => 'blogpost/show',
 	'blogpost-delete' => 'blogpost/delete',
+	'blogpost-featured' => 'blogpost/feature',
+	'blogpost-revoke-featured' => 'blogpost/revoke-feature',
 
 	'blogpost_category-index' => 'blogpost-category/index',
 	'blogpost_category-create' => 'blogpost-category/create',

@@ -41,6 +41,10 @@ class Blogpost extends Model{
         return self::where('active',0)->get();
     }
 
+    public static function getFeatured(){
+        return self::where('active',2)->get();
+    }
+
     public function author(){
     	 return $this->belongsTo(\App\Model\User::class,'author_id','id'); //In db it has to be author_id else it won't work because Laravel priority is attr -> function
     }   
@@ -109,6 +113,11 @@ class Blogpost extends Model{
     public function isDraft(){
         return $this->active == 0;
     }
+
+    public function isFeatured(){
+        return $this->active == 2;
+    }
+
     public static function search($search_key){
 
         $search_key = '%'.$search_key.'%';

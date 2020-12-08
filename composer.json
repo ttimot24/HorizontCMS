@@ -11,7 +11,7 @@
         "composer/semver": "*",
         "visualappeal/php-auto-update" : "0.13.1",
         "damiencriado/zipper-l6"  : "*",
-        "wikimedia/composer-merge-plugin": "dev-master",
+        "wikimedia/composer-merge-plugin": "dev-composer20",
         "jackiedo/log-reader": "*",
         "intervention/image": "*",
         "laravel/helpers": "*",

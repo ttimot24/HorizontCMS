@@ -35,7 +35,9 @@
 
   <td  class='col-md-4 col-xs-3'><a href="{{admin_link('blogpost-view',$blogpost->id)}}" >{{ $blogpost->title }}</a><br>
   @if($blogpost->isDraft())
-  <span class="label label-info">{{trans('actions.draft')}}</span>
+    <span class="label label-info">{{trans('actions.draft')}}</span>
+  @elseif($blogpost->isFeatured())
+    <span class="label label-success">{{trans('Featured')}}</span>
   @endif
   </td>
   		 <td><center><span class="badge" style='font-size:14px'>{{ count($blogpost->comments) }}</span></center></td>

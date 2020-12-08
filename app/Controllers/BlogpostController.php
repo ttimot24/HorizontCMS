@@ -208,7 +208,29 @@ class BlogpostController extends Controller{
 
     }
 
+    public function feature($id){
+        $blogpost = Blogpost::find($id);
+        $blogpost->active = 2;
 
+        if($blogpost->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('Action completed!')]);
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
+
+    }
+
+    public function revokeFeature($id){
+        $blogpost = Blogpost::find($id);
+        $blogpost->active = 1;
+
+        if($blogpost->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('Action completed!')]);
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
+
+    }
 
     public function enableComment($id){
         $blogpost = Blogpost::find($id);
