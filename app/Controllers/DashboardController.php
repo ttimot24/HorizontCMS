@@ -23,7 +23,7 @@ class DashboardController extends Controller{
 
                                                     'domain' => $this->request->getHost(),
                                                     'server_ip' => isset($_SERVER['SERVER_ADDR'])? $_SERVER['SERVER_ADDR']: "unknown",
-                                                    'client_ip' => $this->request->ip,
+                                                    'client_ip' => $this->request->ip(),
                                                     'blogposts'  => \App\Model\Blogpost::count(),
                                                     'users' => \App\Model\User::count(),
                                                     'visits' => \App\Model\Visits::count(),
