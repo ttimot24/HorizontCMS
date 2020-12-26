@@ -42,6 +42,13 @@ After downloading and copying the files to the server, navigate to the app root 
 #### Install manually from scratch
 
   [Website For Students Tutorial](https://websiteforstudents.com/how-to-install-horizontcms-on-ubuntu-18-04-16-04-with-apache2/)
+  
+#### Enable Views V2
+By default the CMS using the V1 version of the views on frontend, which is based on Bootstrap 3.4.3. However the experimental V2 frontend is available, which was migrated to Bootstrap 4.5.3.
+
+  1. Remove Bootstrap 3.4.3 related css and js from ```config/horizontcms.php```
+  2. Uncomment Bootstrap 4.5.3 related css and js in the same file
+  3. Replace the trailing v1 to v2 in ```config/views.php```
 
 ### Sample plugin
 
