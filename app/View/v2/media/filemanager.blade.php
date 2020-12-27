@@ -8,9 +8,9 @@
         <h1>File manager</h1>
       </div>
 
-      <div class='col-md-8 text-right' style='padding-top:25px;'>
+      <div class='col-md-8 text-right mt-4'>
         <div class="row">
-          <div class="col-md-4 offset-md-3 col-sm-7 col-xs-7">
+          <div class="col-md-4 offset-md-4 col-sm-7 col-xs-7">
                 <input type="text" v-model="filter" class="form-control" id="filter" placeholder="Filter">
             </div>
             <a class='btn btn-primary mr-2' data-toggle='modal' data-backdrop='static' data-target='.upload_file_to_storage'><i class="fa fa-upload" aria-hidden="true"></i> Upload</a>
@@ -23,7 +23,7 @@
 
   <div class="row">
 
-    <div class='panel panel-default col-md-2 bg-dark' style='padding:0px;padding-top: 10px;'>
+    <div class='panel panel-default col-md-2 bg-dark p-3'>
         <h4 class="container bg-dark text-white">Drivers</h4>
         <ul class="list-group">
           @foreach(config('filesystems.disks') as $key => $value)
@@ -34,21 +34,20 @@
 
     <div class="panel panel-default col-md-10 bg-dark" >
       <div class="panel-body">
-          <div class="row">
-            <div class="col-md-10">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb bg-dark">
+          <div class="row p-0 m-0">
+            <div class="col-md-10 m-0 p-0">
+            <nav aria-label="breadcrumb p-0 m-0">
+              <ol class="breadcrumb bg-dark p-0 pt-3 m-0">
                 <li class="breadcrumb-item"><a href="storage"  v-on:click.prevent="open('',false);">storage</a></li>
                 <li class="breadcrumb-item" v-for="(bcrumb) in breadcrumb"><a :href="bcrumb.link" v-on:click.prevent="open(bcrumb.link,false);" >@{{bcrumb.text}}</a></li>
               </ol>
             </nav>
             </div>
-            <div class="col-md-2 text-right">
-              <a href="a" v-on:click.prevent="open(currentDirectory,false);"><i class="fa fa-refresh" onclick="$(this).addClass('fa-spin');" aria-hidden="true" style="font-size: 22px;margin:7px;margin-bottom: 0px;"></i></a>
+            <div class="col-md-2 text-right pt-3 pr-3">
+              <a href="a" v-on:click.prevent="open(currentDirectory,false);"><i class="fa fa-refresh" onclick="$(this).addClass('fa-spin');" aria-hidden="true" style="font-size: 22px;"></i></a>
             </div>
           </div>
           <hr>
-
           <div id="workspace" class="col-md-12">
 
             <div class="row text-white">
@@ -59,7 +58,7 @@
                   <a v-on:click="deleteModal(folder)" ><i class="fa fa-trash pull-right"></i></a>
                 </div>
 
-                <img class="w-100" src='resources/images/icons/dir.png' >
+                <img class="w-75" src='resources/images/icons/dir.png' >
                 <b>@{{folder}}</b>
               </div>
 

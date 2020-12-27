@@ -20,14 +20,14 @@ tr #hidden-home a:hover{
 <div class='container main-container'>
 
 
-<h2>{{trans('page.pages')}} <small class='pull-right' style='margin-top:1.5%;'>{{trans('page.all')}}: {{$number_of_pages}} | {{trans('page.visible')}}: {{$visible_pages}} | {{trans('page.invisible')}}: {{$number_of_pages - $visible_pages}}</small></h2>
+<h2>{{trans('page.pages')}} <small class='pull-right pt-3'>{{trans('page.all')}}: {{$number_of_pages}} | {{trans('page.visible')}}: {{$visible_pages}} | {{trans('page.invisible')}}: {{$number_of_pages - $visible_pages}}</small></h2>
 
 <div class="row py-3">
     <div class='col-md-6'>
-      <a href="{{admin_link('page-create')}}" class='btn btn-info my-auto' style='margin-bottom:20px;'>{{trans('page.create_page_button')}}</a>
+      <a href="{{admin_link('page-create')}}" class='btn btn-info my-auto'>{{trans('page.create_page_button')}}</a>
     </div>
-    <div class='col-md-6' style='text-align:right;'>
-      <a class='btn btn-default my-auto' id='orderer' onclick='$(this).toggle(dragndroporder());' data-csrf="{{csrf_token()}}" style='margin-bottom:20px;'><i class='fa fa-arrows-v' style='font-size:15px;'  aria-hidden='true'></i> {{trans('page.order')}}</a>
+    <div class='col-md-6 text-right'>
+      <a class='btn btn-default my-auto' id='orderer' onclick='$(this).toggle(dragndroporder());' data-csrf="{{csrf_token()}}"><i class='fa fa-arrows-v' style='font-size:15px;'  aria-hidden='true'></i> {{trans('page.order')}}</a>
     </div>
 </div>
 
@@ -41,7 +41,7 @@ tr #hidden-home a:hover{
         <th>{{trans('page.th_visibility')}}</th>
         <th>{{trans('page.th_type')}}</th>
         <th>{{trans('page.th_child_links')}}</th>
-        <th><center>{{trans('actions.th_action')}}</center></th>
+        <th class="text-center">{{trans('actions.th_action')}}</th>
       </tr>
     </thead><tbody id="pages">
 
@@ -72,7 +72,7 @@ echo  "<td>" .$each->id;
     echo " <a href='admin/#' data-toggle='modal' data-target='.mo-".$each->id."'><i class='fa fa-home' id='hidden-home' style='font-size:20px;'></i></a>";  
   }
 
-echo "<br><span class='label label-default label-sm'>".strtoupper($each->language)."</span>";
+echo "<br><span class='badge badge-secondary'>".strtoupper($each->language)."</span>";
 
   echo "
         </td>
@@ -156,9 +156,9 @@ echo '
 	</tbody>
   </table>
 
-    <center>
+    <section class="col-md-12 text-center">
         {{$all_pages->links()}}
-    </center>
+    </section>
 
 </div>
 @endsection

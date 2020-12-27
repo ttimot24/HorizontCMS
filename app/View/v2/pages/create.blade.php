@@ -36,6 +36,7 @@
 
           </div>
 
+          <div class="row p-3">
           <div class='form-group col-xs-12 col-md-6' >
             <label for='sel1'>{{trans('page.page_level')}}</label>
             <select class='form-control' name='parent_select' id='level'>  
@@ -52,16 +53,17 @@
                 @endforeach
             </select>
           </div>
+          </div>
 
-          <div class='form-group pull-left col-xs-12 col-md-8 d-flex' style='margin-top:20px;margin-bottom:20px;'>
-              <label style='margin-right:10px;'>{{trans('page.visibility')}}</label> 
-              <div class="radio radio-primary radio-inline">
-                  <input type="radio" id="inlineRadio1" value="1" name='visibility' checked>
-                  <label for="inlineRadio1"> {{trans('page.visible')}} </label>
+          <div class='form-group pull-left col-xs-12 col-md-8 d-flex mt-3 mb-3'>
+              <label class="m-2 mr-4">{{trans('page.visibility')}}</label> 
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="inlineRadio1" value="1" name='visibility' checked>
+                  <label class="form-check-label" for="inlineRadio1"> {{trans('page.visible')}} </label>
               </div>
-              <div class="radio radio-inline">
-                  <input type="radio" id="inlineRadio2" value="0" name='visibility'>
-                  <label for="inlineRadio2"> {{trans('page.invisible')}} </label>
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="inlineRadio2" value="0" name='visibility'>
+                  <label class="form-check-label" for="inlineRadio2"> {{trans('page.invisible')}} </label>
               </div>
           </div>
 

@@ -3,7 +3,7 @@
             <a class='navbar-brand m-0 p-0 pr-3 pl-2' href="{{url(admin_link(null))}}">
                 <img src="{{ url(config('horizontcms.admin_logo')) }}" class="m-0 p-0 h-100"> <!--HorizontCMS <!-- SatelliteCMS -->
             </a>
-            <div class='d-block d-sm-none navbar-brand' style='color:white;text-align:center;'>{{ config('app.name') }}</div>
+            <div class='d-block d-sm-none navbar-brand'>{{ config('app.name') }}</div>
     
             <!-- Collapsed Hamburger -->
             <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
@@ -20,7 +20,7 @@
                 </ul>
 
                 <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto" style='padding-right:25px;'>
+                <ul class="navbar-nav ml-auto mr-3">
 
 
                   @include(config('laravel-menu.views.bootstrap-items'), array('items' => $RightMenu->roots()))

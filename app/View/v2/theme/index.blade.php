@@ -44,7 +44,7 @@
   <?php foreach($all_themes as $theme): ?>
 
   <div class="card col-sm-6 col-md-4 mb-2 float-left p-2 bg-dark">
-    <img class="card-img-top" src="<?= $theme->getImage() ?>" style="height:180px;" alt="Card image cap">
+    <img class="card-img-top" src="<?= $theme->getImage() ?>" style="height:180px;" alt="Could not load image">
     <div class="card-body text-white">
     <h3><?= $theme->getName(); ?></h3>
           <p>version: <?= $theme->getInfo('version'); ?> | author: <?= $theme->getInfo('author') ?></p>

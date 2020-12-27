@@ -3,9 +3,9 @@
 @section('content')
 <div class='container main-container'>
 
-<h2>{{trans('blogpost.blogposts')}} <small class='pull-right' style='margin-top:1.5%;'>{{trans('blogpost.all')}}: {{$number_of_blogposts}}</small></h2></br>
+<h2>{{trans('blogpost.blogposts')}} <small class='pull-right m-2'>{{trans('blogpost.all')}}: {{$number_of_blogposts}}</small></h2>
 <div class='container'>
-  <a href="{{admin_link('blogpost-create')}}" class='btn btn-primary' style='margin-bottom:20px;'>{{trans('blogpost.new_post_button')}}</a>
+  <a href="{{admin_link('blogpost-create')}}" class='btn btn-primary mt-3 mb-4'>{{trans('blogpost.new_post_button')}}</a>
 </div>
 
 <table class='table table-hover'>
@@ -16,9 +16,9 @@
       	<th class="col-3">{{trans('blogpost.th_title')}}</th>
       	<th class="col-1">{{trans('blogpost.th_comments')}}</th>
         <th class='hidden-xs col-2 text-center'>{{trans('blogpost.th_date')}}</th>
-        <th  class="col-1">{{trans('blogpost.th_author')}}</th>
+        <th class="col-1">{{trans('blogpost.th_author')}}</th>
         <th class='hidden-xs col-1'>{{trans('blogpost.th_category')}}</th>
-        <th  class="col-2 text-center">{{trans('actions.th_action')}}</th>
+        <th class="col-2 text-center">{{trans('actions.th_action')}}</th>
       </tr>
     </thead>
     <tbody>
@@ -34,7 +34,7 @@
               <span class="badge badge-info">{{trans('actions.draft')}}</span>
               @endif
           </td>
-          <td class="col-1  text-center"><span class="badge badge-dark" style='font-size:14px'>{{ count($blogpost->comments) }}</span></td>
+          <td class="col-1 text-center"><span class="badge badge-dark">{{ count($blogpost->comments) }}</span></td>
           <td class='hidden-xs col-2  text-center'><?= $blogpost->created_at->format('Y-m-d'); ?></br><font size='2'><i>at</i> <?= $blogpost->created_at->format('H:i:s'); ?></font></td>
           @if($blogpost->author)
           <td class="col-1"><a href="{{admin_link('user-view',$blogpost->author->id)}}" >{{ $blogpost->author->username }}</a></td>
@@ -42,7 +42,7 @@
           <td>{{ trans('blogpost.removed_user') }}</td>
           @endif
           @if($blogpost->category)
-          <td class='hidden-xs col-1'><span class="badge badge-success" style='font-size:14px; display:block'>{{ $blogpost->category->name }}</span></td>
+          <td class='hidden-xs col-1'><span class="badge badge-success">{{ $blogpost->category->name }}</span></td>
           @else
           <td class='hidden-xs col-1'>none</td>
           @endif

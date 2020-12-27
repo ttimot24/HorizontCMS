@@ -31,7 +31,7 @@
 
 	
  
-<table class='table table-hover' style='margin-top:5%;'>
+<table class='table table-hover mt-5'>
     <thead>
       <tr class="d-flex bg-dark text-white">
       	<th class="col-1">{{ trans('category.th_id') }}</th>
@@ -57,7 +57,7 @@
 				<td class="col-5  text-center">
 	
 				<div class='btn-group col-3' role='group'>
-					<a href="{{ admin_link('blogpost_category-edit',$each->id) }}" type='button' class='btn btn-warning btn-sm' style='min-width:70px;'>{{trans('actions.edit')}}</a>
+					<a href="{{ admin_link('blogpost_category-edit',$each->id) }}" type='button' class='btn btn-warning btn-sm'>{{trans('actions.edit')}}</a>
 					<a href="{{ admin_link('blogpost_category-delete',$each->id) }}" type='button' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>
 				</div>
 
