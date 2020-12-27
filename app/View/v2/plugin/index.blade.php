@@ -21,13 +21,13 @@
 
 foreach($all_plugin as $current_plugin){
 
-  echo  "<div class='list-group-item bg-dark' style='height:120px;padding-top:17px;border-bottom:3px solid black;'>";
-  	echo "<div class='row'>";
-      echo "<div class='col-md-10 col-sm-8 col-xs-8'>";
+  echo  "<div class='list-group-item bg-dark p-3'>";
+  	echo "<div class='row p-0'>";
+      echo "<div class='col-md-10 col-sm-8 col-xs-8 p-0'>";
 
-       echo Html::img($current_plugin->getIcon(),"class='img img-thumbnail pull-left' style='border-radius:5px;width:80px;height:80px;margin-right:10px;'");
+       echo Html::img($current_plugin->getIcon(),"class='img img-thumbnail pull-left mr-4 ml-4' style='width:80px;height:80px;' ");
 
-        echo "<h4 class='list-group-item-heading'>";
+        echo "<h4 class='list-group-item-heading p-0'>";
 
             if($current_plugin->isActive()){
               echo "<a class='color-primary' id='".$current_plugin->root_dir."' href='".config('horizontcms.backend_prefix')."/plugin/run/".$current_plugin->getSlug()."'>".$current_plugin->getName()."</a>";
@@ -38,7 +38,7 @@ foreach($all_plugin as $current_plugin){
 
          echo  " <small class='text-muted'>version: ".$current_plugin->getInfo('version')." | author: <a href='".$current_plugin->getInfo('author_url')."'>".$current_plugin->getInfo('author')."</a></small></h4>
 
-            <p class='list-group-item-text text-white' style='margin-bottom:8px;margin-right:70px;'>".$current_plugin->getInfo('description')."</p>";
+            <p class='list-group-item-text text-white'>".$current_plugin->getInfo('description')."</p>";
 
         echo "</div>";
 
