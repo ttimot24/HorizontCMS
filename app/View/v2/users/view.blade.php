@@ -4,18 +4,18 @@
 <div class='container main-container'>
 
 <section class='row'>
-  <h2 class='col-md-8'>{{trans('user.view_user')}}</h2>
+  <h2 class='col-md-9'>{{trans('user.view_user')}}</h2>
  
-  <nav id="arrows" class='col-md-4'>
-    <ul class='pager'>
+  <nav id="arrows" class='col-md-3 pt-4'>
+    <ul class='pager list-unstyled'>
 
 
       @if($previous_user)
-          <li class='previous' v-on:keyup.left="previous"><a href="{{admin_link('user-view',$previous_user)}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+          <li class='previous float-left' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('user-view',$previous_user)}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
       @endif
 
       @if($next_user)
-          <li class='next' v-on:keyup.right="next"><a href="{{admin_link('user-view',$next_user)}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
+          <li class='next float-right' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('user-view',$next_user)}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
       @endif
 
     </ul>

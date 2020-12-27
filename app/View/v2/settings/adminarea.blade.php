@@ -87,7 +87,7 @@
 </td>
 </tr>
 
-<tr><td></td><td></br><button type='submit' class='btn btn-primary'><span class='fa fa-floppy-o' aria-hidden='true'></span> Save settings</button> </td></tr>
+<tr><td></td><td class="p-2"><button type='submit' class='btn btn-primary'><span class='fa fa-floppy-o' aria-hidden='true'></span> Save settings</button> </td></tr>
 
 </tbody></table>
 </form>

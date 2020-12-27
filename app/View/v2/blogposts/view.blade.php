@@ -7,15 +7,15 @@
 <section class='row'>
 <h1 class='col-md-9'>{{trans('blogpost.view_blogpost')}}</h1>
 
-<nav id="arrows" class='col-xs-12 col-md-3'>
+<nav id="arrows" class='col-xs-12 col-md-3 pt-4'>
   <ul class='pager list-unstyled'>
 
     @if($previous_blogpost)
-        <li class='previous' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('blogpost-view',$previous_blogpost)}}"> <span class='fa fa-angle-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+        <li class='btn previous float-left' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('blogpost-view',$previous_blogpost)}}"> <span class='fa fa-angle-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
     @endif
 
     @if($next_blogpost)
-        <li class='next' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('blogpost-view',$next_blogpost)}}">{{trans('actions.next')}} <span class='fa fa-angle-right' aria-hidden='true'></span> </a></li>
+        <li class='btn next float-right' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('blogpost-view',$next_blogpost)}}">{{trans('actions.next')}} <span class='fa fa-angle-right' aria-hidden='true'></span> </a></li>
     @endif
 
 
@@ -64,10 +64,10 @@
 </div>
 
 <div class="col-md-8" style='text-align:justify;padding-top:2.5%;'>
-  <div class='well bg-dark text-white p-2'>
+  <div class='well bg-dark text-white p-4'>
     <h3>{{ $blogpost->title }}</h3><hr/>
     <b>{{ $blogpost->summary }}</b>
-    <p style='margin-top:40px;'>
+    <p class="pt-4">
     {!! $blogpost->text !!}
     </p>
   </div>  

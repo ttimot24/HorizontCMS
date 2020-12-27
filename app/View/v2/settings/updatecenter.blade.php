@@ -4,11 +4,11 @@
 <div class='container main-container'>
 
 <div class='row'>
-<div class='col-md-8'>
+<div class='col-md-7'>
 <h1>System Update Center</h1>
 </div>
 
-<div class='col-md-4'>
+<div class='col-md-5'>
 <br>
 	  <a class="list-group-item active bg-primary border-0">
 	    <h4 class="list-group-item-heading">Current version: v{{$current_version->version}}</h4>
@@ -34,7 +34,7 @@
 
 	@foreach($available_list as $available)
 	  <a class="list-group-item">
-	    <h4 class="list-group-item-heading">Available update: v{{$available}}</h4>
+	    <h5 class="list-group-item-heading">Available update: v{{$available}}</h5>
 	    <p class="list-group-item-text">Upgrade</p>
 	  </a>
 	@endforeach
@@ -44,20 +44,20 @@
 
 	   @if($loop->first)
 		  <a class="list-group-item active bg-primary border-0">
-		    <h4 class="list-group-item-heading">Current Version: v{{$upgrade->version}}</small></h4>
+		    <h5 class="list-group-item-heading">Current Version: v{{$upgrade->version}}</small></h5>
 		    <p class="list-group-item-text">Installed: {{$upgrade->created_at->format(\Settings::get('date_format',\Config::get('horizontcms.default_date_format'),true))}}</p>
 		  </a>
 		  <?php continue; ?>
 	   @elseif($loop->last)
-		   <a class="list-group-item bg-success" style='border-radius:0px;cursor:pointer;'>
-		    <h4 class="list-group-item-heading">System Core: {{$upgrade->version}}</h4>
+		   <a class="list-group-item bg-success text-white" style='border-radius:0px;cursor:pointer;'>
+		    <h5 class="list-group-item-heading">System Core: {{$upgrade->version}}</h5>
 		    <p class="list-group-item-text">Installed: {{$upgrade->created_at->format(\Settings::get('date_format',\Config::get('horizontcms.default_date_format'),true))}}</p>
 		  </a>
 		  <?php continue; ?>
 	   @endif
 
 	   <a class="list-group-item">
-	    <h4 class="list-group-item-heading">{{ $upgrade->importance }} Update: v{{ $upgrade->version }} <small>build: {{$upgrade->build }}</small></h4>
+	    <h5 class="list-group-item-heading">{{ $upgrade->importance }} Update: v{{ $upgrade->version }} <small>build: {{$upgrade->build }}</small></h5>
 	    <p class="list-group-item-text">Installed: {{$upgrade->created_at->format(\Settings::get('date_format',\Config::get('horizontcms.default_date_format'),true))}}</p>
 	  </a>
 
