@@ -32,7 +32,11 @@
 
   <div class="text-center">
     <div class='btn-group my-3' role='group'>
-      <a href='#' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('blogpost.primary')}}</a>
+      @if(!$blogpost->isFeatured())
+        <a href="{{admin_link('blogpost-featured',$blogpost->id)}}" type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('blogpost.primary')}}</a>
+      @else
+        <a href="{{admin_link('blogpost-revoke-featured',$blogpost->id)}}" type='button' class='btn btn-success'><span class='glyphicon glyphicon-minus' aria-hidden='true'></span> {{trans('Revoke')}}</a>
+      @endif
       <a href="{{admin_link('blogpost-edit',$blogpost->id)}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}} </a>
       
       <button type='button' class='btn btn-danger' data-toggle='modal' data-target='.delete'>

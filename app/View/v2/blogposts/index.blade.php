@@ -31,7 +31,9 @@
           <td class="col-1"><img src='{{$blogpost->getThumb()}}'  class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> </td>
           <td  class='col-3 col-xs-3'><a href="{{admin_link('blogpost-view',$blogpost->id)}}" >{{ $blogpost->title }}</a><br>
               @if($blogpost->isDraft())
-              <span class="badge badge-info">{{trans('actions.draft')}}</span>
+                <span class="badge badge-info">{{trans('actions.draft')}}</span>
+              @elseif($blogpost->isFeatured())
+                <span class="badge badge-success">{{trans('Featured')}}</span>
               @endif
           </td>
           <td class="col-1 text-center"><span class="badge badge-dark">{{ count($blogpost->comments) }}</span></td>
