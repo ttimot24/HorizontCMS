@@ -5,7 +5,7 @@
   <section  class='row'>
 
       <div class='col-md-4'>
-        <h1>File manager</h1>
+        <h2>File manager</h2>
       </div>
 
       <div class='col-md-8 text-right mt-4'>

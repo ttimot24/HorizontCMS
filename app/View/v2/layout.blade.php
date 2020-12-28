@@ -21,7 +21,7 @@
 	@endforeach
 
 </head>
-<body id="hcms" @if(Auth::user()) style='padding-top: 55px' @endif>
+<body id="hcms" @if(Auth::user()) style='padding-top: 75px' @endif>
 
   @if (!Auth::guest())
 	@include('navbar')

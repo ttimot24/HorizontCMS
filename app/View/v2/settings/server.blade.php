@@ -3,8 +3,7 @@
 @section('content')
 <div class='container'>
 <section class="row">
-<h1>Server Information</h1>
-<br><br>
+<h2 class="mb-5">Server Information</h2>
 
 <table class='table table-bordered'>
 <thead>

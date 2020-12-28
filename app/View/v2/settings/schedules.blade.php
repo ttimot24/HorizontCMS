@@ -2,10 +2,10 @@
 
 @section('content')
 <div class='container'>
-<h1>{{trans('settings.scheduler')}} <small class='pull-right' style='margin-top:1.5%;'>All: {{$scheduled_tasks->count()}} | Available: {{count($commands)}}</small></h1>
+<h2>{{trans('settings.scheduler')}} <small class='pull-right'>All: {{$scheduled_tasks->count()}} | Available: {{count($commands)}}</small></h2>
 <br>
 <br>
-<div class='container col-md-12'><a class='btn btn-warning' data-toggle='modal' data-target='.new_task' style='margin-bottom:20px;'>{{trans('Schedule task')}}</a></div>
+<div class='container col-md-12 mb-3'><a class='btn btn-warning' data-toggle='modal' data-target='.new_task'>{{trans('Schedule task')}}</a></div>
 
 <table class='table table-hover'>
     <thead>
@@ -33,7 +33,7 @@
             <td>
               <center>
                 <div class="btn-group" role="group">
-                    <a href="{{admin_link('schedules-edit',$task->id)}}" type="button" class="btn btn-warning btn-sm" style='min-width:70px;'>{{trans('actions.edit')}}</a>
+                    <a href="{{admin_link('schedules-edit',$task->id)}}" type="button" class="btn btn-warning btn-sm">{{trans('actions.edit')}}</a>
                     <a type="button" data-toggle='modal' data-target=.delete_<?= $task->id ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </div>
               </center>
@@ -82,7 +82,7 @@
 
       <div class='form-group'>
       <label for='command'>Command:</label>
-      <select name='command' class='form-control' style='width:100%;'>
+      <select name='command' class='form-control'>
             @foreach($commands as $key => $command)
               <option value='{{$key}}'>{{$key}}</option>
             @endforeach

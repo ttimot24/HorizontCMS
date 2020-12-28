@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 <div class='container main-container'>
-<h1>Website settings</h1>
+<h2>Website settings</h2>
 <br><br>
 <form action='{{admin_link("settings-save")}}' role='form' method='POST'>
    {{ csrf_field() }}

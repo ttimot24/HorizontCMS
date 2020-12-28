@@ -27,7 +27,7 @@
 <section class='row'>
 <div class='col-md-4'>
   <button type='button' class='btn btn-link' data-toggle='modal' data-target='.{{ $blogpost->id }}-modal-xl'>
-    <img src='{{ $blogpost->getImage() }}' width='350' class='img img-thumbnail' style='margin-top:20px;' />
+    <img src='{{ $blogpost->getImage() }}' width='350' class='img img-thumbnail mt-3'  />
   </button>
 
   <div class="text-center">
@@ -41,7 +41,7 @@
     </div>
 
     @if($blogpost->isDraft())
-      <span class="label label-info d-block" style='font-size:14px; display:block mb-3'>{{trans('actions.draft')}}</span>
+      <span class="badge badge-info d-block mb-3" style='font-size:14px;'>{{trans('actions.draft')}}</span>
     @endif
 
       @if($blogpost->author)
@@ -63,8 +63,8 @@
   </div>
 </div>
 
-<div class="col-md-8" style='text-align:justify;padding-top:2.5%;'>
-  <div class='well bg-dark text-white p-4'>
+<div class="col-md-8 mt-4">
+  <div class='well bg-dark text-white p-4 overflow-auto'>
     <h3>{{ $blogpost->title }}</h3><hr/>
     <b>{{ $blogpost->summary }}</b>
     <p class="pt-4">

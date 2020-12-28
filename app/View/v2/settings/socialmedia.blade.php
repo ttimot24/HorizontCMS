@@ -3,8 +3,7 @@
 @section('content')
 <div class='container main-container'>
 
-<h1>Social media</h1>
-<br><br>
+<h2 class="mb-5">Social media</h2>
 
 <form action='' role='form' method='POST'>
 {{csrf_field()}}

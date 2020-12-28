@@ -2,7 +2,7 @@
 
 @section('content')
 <div class='container'>
-<h1>System log <small class='pull-right' style='margin-top:1.5%;'>Files: {{$all_files->count()}}</small></h1>
+<h2 class="mb-5">System log <small class='pull-right'>Files: {{$all_files->count()}}</small></h2>
 
 <section class="row">
 

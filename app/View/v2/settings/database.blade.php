@@ -4,7 +4,7 @@
 <div class='container'>
 <section class="row">
 <div class="col-md-8">
-<h1>{{trans('settings.database')}}</h1>
+<h2 class="mb-5">{{trans('settings.database')}}</h2>
 </div>
 <div class='col-md-4'>
 <br>

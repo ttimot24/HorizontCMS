@@ -5,7 +5,7 @@
 
 <div class='row'>
 <div class='col-md-7'>
-<h1>System Update Center</h1>
+<h2>System Update Center</h2>
 </div>
 
 <div class='col-md-5'>

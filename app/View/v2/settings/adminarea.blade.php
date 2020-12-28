@@ -4,7 +4,7 @@
 
 <div class='container main-container'>
 
-<h1>AdminArea settings</h1><br><br>
+<h2 class="mb-5">AdminArea settings</h2>
 
 
 <form action='{{admin_link("settings-save")}}' role='form' method='POST'>
