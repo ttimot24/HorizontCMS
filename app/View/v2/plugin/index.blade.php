@@ -23,11 +23,14 @@ foreach($all_plugin as $current_plugin){
 
   echo  "<div class='list-group-item bg-dark p-3'>";
   	echo "<div class='row p-0'>";
-      echo "<div class='col-md-10 col-sm-8 col-xs-8 p-0'>";
+      echo "<div class='col-md-1 col-sm-12 col-xs-12 p-0 pl-3'>";
 
-       echo Html::img($current_plugin->getIcon(),"class='img img-thumbnail pull-left mr-4 ml-4' style='width:80px;height:80px;' ");
+       echo Html::img($current_plugin->getIcon(),"class='img img-thumbnail mt-1' style='width: 70px; height: 70px;' ");
 
-        echo "<h4 class='list-group-item-heading p-0'>";
+      echo "</div>";
+
+        echo "<div class='col-md-9 m-0'>
+            <h4 class='p-0'>";
 
             if($current_plugin->isActive()){
               echo "<a class='color-primary' id='".$current_plugin->root_dir."' href='".config('horizontcms.backend_prefix')."/plugin/run/".$current_plugin->getSlug()."'>".$current_plugin->getName()."</a>";
@@ -38,7 +41,7 @@ foreach($all_plugin as $current_plugin){
 
          echo  " <small class='text-muted'>version: ".$current_plugin->getInfo('version')." | author: <a href='".$current_plugin->getInfo('author_url')."'>".$current_plugin->getInfo('author')."</a></small></h4>
 
-            <p class='list-group-item-text text-white'>".$current_plugin->getInfo('description')."</p>";
+            <p class='text-white'>".$current_plugin->getInfo('description')."</p>";
 
         echo "</div>";
 

@@ -3,7 +3,7 @@
 @section('content')
 <div class='container'>
 
- <div class="row py-4">
+ <div class="row">
       <div class='col-md-8'>
         <h1>{{trans('theme.themes')}}</h1>
       </div>
@@ -16,11 +16,11 @@
 
 
 <div class='col-md-12'>
-  <div class='jumbotron' style='padding:2%;padding-left:3%;background-color:#31708F;color:white;'>
+  <div class='jumbotron' style='background-color:#31708F;'>
     <div class='row'>
       <div class='col-xs-12 col-md-5'>
-        <div class='thumbnail'>
-          <img class="w-100" src="{{$active_theme->getImage()}}" />
+        <div class='thumbnail pt-4'>
+          <img class="img img-thumbnail w-100" src="{{$active_theme->getImage()}}" />
         </div>
       </div>
       <div class='col-xs-12 col-md-7'>
