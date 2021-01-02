@@ -7,11 +7,28 @@ body {
 }
 
 .bg-dark{
-    background-color: black;
+    background-color: #1f1f1f !important;
 }
 
 .bg-primary{
     background-color: #e84d08 !important;
+}
+
+.nav-link{
+    margin-left: 10px !important; 
+}
+
+/*.active .nav-link{
+    color: #e84d08 !important;
+}*/
+
+.navbar-dark .nav-link{
+    color: white !important;
+}
+
+.navbar-dark .nav-link:hover{
+    color: #e84d08 !important;
+    background-color: black !important;
 }
 
 .navbar-brand{
