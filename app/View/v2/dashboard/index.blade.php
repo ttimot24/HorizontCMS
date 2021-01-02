@@ -52,15 +52,6 @@
                 </button>
             </div>
           </div>
-            <!-- <div class='input-group'>
-                <input type='text' pattern=".{3,}" title="Minimum 3 characters" class='form-control' name='search' id='exampleInputAmount' style='min-width:250px;'  placeholder="{{ trans('dashboard.search_bar') }}" required>
-               <div class='input-group-addon'>
-                  <button type='submit' class='btn btn-link btn-sm' style='padding:0px;'>
-                  <span class='glyphicon glyphicon-search' aria-hidden='true' ></span>
-                  </button>
-                </div>
-       
-            </div> -->
           </div>
         </form>
         @endif
@@ -87,8 +78,11 @@
         
         <div class='col-sm-4'>
           <div class='panel panel-primary'>
-            <div class='panel-heading  bg-primary text-white'>
-              <h5 class='panel-title mb-0 px-3 py-2'><b>{{ trans('dashboard.posted_news_count') }}</b><div class='pull-right'><i class='fa fa-newspaper-o'></i></div></h5>
+            <div class='panel-heading  bg-primary text-white p-2'>
+              <h6 class='panel-title mb-0 p-1'>
+                <b>{{ trans('dashboard.posted_news_count') }}</b>
+                <div class='pull-right'><i class='fa fa-newspaper-o'></i></div>
+              </h6>
             </div>
             <div class='panel-body bg-dark text-center text-white p-3'><font size='4'>
             {{ $blogposts }}
@@ -99,8 +93,11 @@
 
         <div class='col-sm-4'>
           <div class='panel panel-primary'>
-            <div class='panel-heading bg-primary text-white'>
-              <h5 class='panel-title mb-0  px-3 py-2'><b>{{ trans('dashboard.registered_users_count') }}</b><div class='pull-right'><i class='fa fa-users'></i></div></h5>
+            <div class='panel-heading bg-primary text-white p-2'>
+              <h6 class='panel-title mb-0 p-1'>
+                <b>{{ trans('dashboard.registered_users_count') }}</b>
+                <div class='pull-right'><i class='fa fa-users'></i></div>
+              </h6>
             </div>
               <div class='panel-body bg-dark text-white p-3'><center><font size='4'>
                {{ $users }}
@@ -110,11 +107,11 @@
 
         <div class='col-sm-4'>
           <div class='panel panel-primary'>
-            <div class='panel-heading  bg-primary text-white'>
-              <h5 class='panel-title mb-0 px-3 py-2'>
+            <div class='panel-heading  bg-primary text-white p-2'>
+              <h6 class='panel-title mb-0 p-1'>
                 <b>{{ trans('dashboard.visits_count') }}</b>
                 <div class='pull-right'><i class='fa fa-binoculars'></i></div>
-              </h5>
+              </h6>
             </div>
             <div class='panel-body bg-dark text-center text-white p-3'><font size='4'>
              {{ $visits }}

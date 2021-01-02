@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-1">
             <!-- Branding Image -->
             <a class='navbar-brand m-0 p-0 pr-3 pl-2' href="{{url(admin_link(null))}}">
                 <img src="{{ url(config('horizontcms.admin_logo')) }}" class="m-0 p-0 h-100"> <!--HorizontCMS <!-- SatelliteCMS -->

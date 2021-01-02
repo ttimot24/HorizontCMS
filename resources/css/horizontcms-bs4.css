@@ -1,9 +1,13 @@
 body {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 12px;
     line-height: 1.42857143;
     color: #1f1f1f;
     background-color: #F5F5F5;
+}
+
+.bg-dark{
+    background-color: black;
 }
 
 .bg-primary{
