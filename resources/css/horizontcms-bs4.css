@@ -50,11 +50,11 @@ body {
     z-index: 1000;
     display: none;
     float: left;
-    min-width: 200px;
+    min-width: 180px;
     padding: 7px;
     margin: 2px 0 0;
     list-style: none;
-    font-size: 14px;
+    font-size: 12px;
     text-align: left;
     background-color: #1f1f1f;
     border: 1px solid transparent;
@@ -244,10 +244,31 @@ tr:hover td a {
       margin-top: 5px !important;
   }
 
-.text-muted{
-    color: #42494f !important;
-}
+  .text-muted{
+      color: #42494f !important;
+  }
 
   table tr{
-      font-size: 12px !important;
+      font-size: 13px !important;
+  }
+
+  .badge{
+      padding: 5px !important;
+      margin-top: 5px !important;
+  }
+
+  .page-item.active .page-link{
+    background-color:#e84d08 !important;
+    border-color:#e84d08 !important;
+  }
+
+  .page-item a{
+      background-color: #2e343b;
+      border-color: #2e343b;
+      color: white;
+  }
+
+  .pagination .disabled .page-link{
+      background-color: #485563;
+      cursor: not-allowed !important;
   }
