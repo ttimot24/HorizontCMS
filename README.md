@@ -3,7 +3,7 @@
 <h1 align="center">HorizontCMS</h1>
 
 [![Laravel 6](https://img.shields.io/badge/Laravel-6-orange.svg)](http://laravel.com)
-[![Build Status](https://travis-ci.org/ttimot24/HorizontCMS.svg?branch=master)](https://travis-ci.org/ttimot24/HorizontCMS)
+[![Build Status](https://travis-ci.com/ttimot24/HorizontCMS.svg?branch=master)](https://travis-ci.com/ttimot24/HorizontCMS)
 [![Github All Releases](https://img.shields.io/github/downloads/ttimot24/horizontcms/total.svg)]()
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ttimot24/HorizontCMS&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&utm_medium=referral&utm_content=ttimot24/HorizontCMS&utm_campaign=Badge_Coverage)
