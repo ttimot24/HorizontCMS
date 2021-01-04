@@ -21,7 +21,7 @@ class MenuMiddleware{
 
         \Menu::make('MainMenu', function($menu) use ($request) {
 
-            $menu->add("<span class='glyphicon glyphicon-th-large' aria-hidden='true'></span> ".trans('navbar.dashboard'), admin_link("dashboard-index"));
+            $menu->add("<i class='fa fa-circle-o-notch'></i>".trans('navbar.dashboard'), admin_link("dashboard-index"));
 
             if(\Auth::user()->hasPermission("blogpost")){
             $menu->add(trans('navbar.news'), '#')->id('news');

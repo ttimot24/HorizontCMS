@@ -4,7 +4,7 @@
        
         <img src='{{$admin_logo}}' width='100' class='pull-left' alt="">
 
-            <h1>{{$app_name}}</h1>
+            <h1 class="pt-3">{{$app_name}}</h1>
             <p style='margin-left:15%;'><q><i>Closer to the web </i></q></p>
         </div>
     </div>

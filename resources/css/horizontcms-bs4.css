@@ -22,6 +22,20 @@ body {
     color: #e84d08 !important;
 }*/
 
+.nav-link{
+    padding: 10px !important;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.dropdown-menu .nav-link{
+    padding: 7px !important;
+}
+
+.nav-link .fa{
+    margin-right: 5px;   
+}
+
 .navbar-dark .nav-link{
     color: white !important;
 }
@@ -66,8 +80,8 @@ body {
 
 .dropdown-menu {
     position: absolute;
-    top: 100%;
-    left: 0;
+    top: 90%;
+    left: 10;
     z-index: 1000;
     display: none;
     float: left;
@@ -127,14 +141,20 @@ body {
     font-size: .875rem;
 }
 
-.btn-primary {
+.btn-primary, .btn-primary.focus, .btn-primary:focus, .btn-primary:active {
     color: #ffffff;
     background-color: #e84d08;
     border-color: transparent;
 }
+
+.btn-primary.focus, .btn-primary:focus{
+    box-shadow: 0 0 0 .2rem #e84d08;
+}
+
 .color-primary{
     color:  #e84d08 !important;
 }
+
 .btn-primary:hover {
     color: #ffffff;
     background-color: #b15315;
