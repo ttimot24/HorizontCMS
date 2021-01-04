@@ -38,7 +38,7 @@ echo "<td>".$each->username."</td>";
 echo "<td>".$each->email."</td>";
 
         echo "<td> 
-                <span class='badge ".( ($each->isAdmin())? "badge-danger" : "badge-dark" ) ."' style='font-size:13px; display:block;'>".$each->role->name ."</span>
+                <span class='d-block badge ".( ($each->isAdmin())? "badge-danger" : "badge-dark" ) ."' style='font-size:13px;'>".$each->role->name ."</span>
              </td>";
         echo "<td style='text-align:center;'><b>"; 
 
@@ -96,9 +96,9 @@ echo "</tbody>
 ?>
 
 
-    <center>
+    <div class="d-flex justify-content-center">
         {{$all_users->links()}}
-    </center>
+    </div>
 
 </div>
 @endsection

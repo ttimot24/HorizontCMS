@@ -156,9 +156,9 @@ echo '
 	</tbody>
   </table>
 
-    <section class="col-md-12 text-center">
+    <div class="d-flex justify-content-center">
         {{$all_pages->links()}}
-    </section>
+    </div>
 
 </div>
 @endsection

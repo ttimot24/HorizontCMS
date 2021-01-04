@@ -307,7 +307,15 @@ tr:hover td a {
       color: white;
   }
 
+  .page-item a:hover{
+    background-color: #42484f;
+    border-color: #42484f;
+    color: white;
+}
+
   .pagination .disabled .page-link{
-      background-color: #485563;
-      cursor: not-allowed !important;
+      background-color: #42484f;
+      border-color: #42484f;
+      cursor: not-allowed;
+      color:white;
   }
