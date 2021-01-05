@@ -49,8 +49,8 @@ class ContentSeeder extends Seeder
 
         DB::table('blogposts')->insert([
             'id' => 1,
-            'title' => 'First post',
-            'slug' => 'first-post',
+            'title' => 'Welcome to HorizontCMS!',
+            'slug' => 'welcome-to-horizontcms',
             'summary' => 'Your very first post.',
             'text' => 'If you see this, the install was successfull!',
             'category_id' => 1,
