@@ -75,7 +75,7 @@ class BlogpostControllerTest extends TestCase{
             'active' => 1
         ]);
         
-        $user =  factory(\App\Model\User::class)->create();
+        $user =  ModelFactory::createUser(true);
 
         $requestPost->setUserResolver(function () use ($user) {
             return $user;
