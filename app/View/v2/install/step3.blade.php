@@ -34,7 +34,6 @@
 			      </div>
 			    </div>
 
-			    </br></br>
 			    <div class='form-group'>
 			      <label class='control-label col-sm-3' for='pwd'>Create password:</label>
 			      <div class='col-sm-5'>          
@@ -42,8 +41,6 @@
 			      </div>
 			    </div>
 			    
-
-			    </br></br>
 			    <div class='form-group'>
 			      <label class='control-label col-sm-3' for='em'>Email:</label>
 			      <div class='col-sm-5'>          
@@ -52,13 +49,12 @@
 			    </div>
 			    </div>
 
-			   	 </br>
-					</br>
-					<a href='admin/install/step2'><button type='button' class='btn btn-default btn-md'><span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span> Previous</button></a>
-					<button type='submit' class='btn btn-primary btn-md'>&nbsp&nbspNext&nbsp&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-menu-right' aria-hidden='true'></span>&nbsp&nbsp</button>
-					
+					<div class="pt-5">
+						<a href='admin/install/step2'><button type='button' class='btn btn-secondary btn-sm'><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i> Previous</button></a>
+						<button type='submit' class='btn btn-primary btn-md px-3'>Next <i class="fa fa-arrow-circle-o-right ml-2" aria-hidden="true"></i></button>
+					</div>
 			    </div>
-			    </form>
+			</form>
 
 </div>
 </div>

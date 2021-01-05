@@ -41,7 +41,6 @@
 			      
 			      </div>
 			    </div>
-			    </br></br>
 			  
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='server'>Host:</label>
@@ -49,7 +48,7 @@
 			        <input type='text' class='form-control' id='server' name='server' value="{{ old('server', 'localhost') }}" required>
 			      </div>
 			    </div>
-			    </br></br>
+
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='username'>Username:</label>
 			      <div class='col-sm-5'>          
@@ -57,7 +56,7 @@
 			      </div>
 			    </div>
 
-			    </br></br>
+
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='pwd'>Password:</label>
 			      <div class='col-sm-5'>          
@@ -65,7 +64,6 @@
 			      </div>
 			    </div>
 
-			  	</br></br>
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='data'>Database:</label>
 			      <div class='col-sm-5'>          
@@ -73,7 +71,6 @@
 			      </div>
 			    </div>
 
-			    </br></br>
 			    <div class='form-group'>
 			      <label class='control-label col-sm-2' for='prefix'>Table prefix:</label>
 			      <div class='col-sm-5'>          
@@ -82,12 +79,10 @@
 			    </div>
 
 			</div>
-			</br>
-			</br>
-					<a href='admin/install/step1'><button type='button' class='btn btn-default btn-md'><span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span> Previous</button></a>
-					<button type='submit' class='btn btn-primary btn-md'>&nbsp&nbspNext&nbsp&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-menu-right' aria-hidden='true'></span>&nbsp&nbsp</button>
-					
-						
+			<div class="pt-5">
+				<a href='admin/install/step1'><button type='button' class='btn btn-secondary btn-sm'><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i> Previous</button></a>
+				<button type='submit' class='btn btn-primary btn-md px-3'>Next <i class="fa fa-arrow-circle-o-right ml-2" aria-hidden="true"></i></button>	
+			</div>		
 		</form>
 
 </div>

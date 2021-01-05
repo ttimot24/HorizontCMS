@@ -25,8 +25,8 @@
 			      </select>
 			    </div>
 			</br></br>
-			<a href='admin/install' class='btn btn-default btn-md'><span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span> Previous</a>
-			<button type='submit' class='btn btn-primary btn-md'>&nbsp&nbspNext&nbsp&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-menu-right' aria-hidden='true'></span>&nbsp&nbsp</button>
+			<a href='admin/install' class='btn btn-secondary btn-sm'><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i> Previous</a>
+			<button type='submit' class='btn btn-primary btn-md px-3'>Next <i class="fa fa-arrow-circle-o-right ml-2" aria-hidden="true"></i></button>
 		</form>
 		
 

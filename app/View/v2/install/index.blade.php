@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div style='width:100%'>
+<div>
   <div class='jumbotron'>
     <div class='container'>
     <h1>{{ config('app.name') }} <small style="font-size:22px;">by Timot Tarjani</small></h1>      
@@ -13,11 +13,9 @@
 
  @if($enable_continue)
    
-   <a class='btn btn-primary btn-lg' href='admin/install/step1' >
-
-      &nbsp&nbsp&nbspInstall {{ config('app.name') }}&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-menu-right' aria-hidden='true'></span>
-
-    </a>
+  <a class='btn btn-primary btn-lg' href='admin/install/step1' >
+     Install {{ config('app.name') }} <i class="fa fa-download" aria-hidden="true"></i>
+  </a>
 
 
  @else{
@@ -34,7 +32,7 @@
 
   <div class='container'>
 
-      <div class="row">
+      <div class="row py-4">
 
           <div class='col-sm-6 col-md-4 text-center'>
               <i class="fa fa-cube" aria-hidden="true" style='font-size:3em;'></i>

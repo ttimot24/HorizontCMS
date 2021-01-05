@@ -24,15 +24,15 @@
 				<br>
 				<p>
 					<h4>Don't forget to set up cron for sheduled jobs:</h4>
-					<pre style='padding:20px;text-align:center;font-weight:bolder;'>* * * * * php {{base_path('artisan')}} schedule:run >> /dev/null 2>&1</pre>
+					<pre class="bg-white text-center font-weight-bold p-2" ><code>* * * * * php {{base_path('artisan')}} schedule:run >> /dev/null 2>&1</code></pre>
 				</p>
 				@endif
 
 			@if(!session()->has('error'))
 			<br><br>
-				<a href="{{admin_link('login-login')}}"><button type='button' class='btn btn-primary btn-md animated pulse delay-3s'>Finish & go to admin area <span class='glyphicon glyphicon-menu-right' aria-hidden='true'></span></button></a>
+				<a href="{{admin_link('login-login')}}"><button type='button' class='btn btn-primary btn-md animated pulse delay-3s'>Finish & go to admin area</button></a>
 			@else
-				<a href="admin/install/step3"><button type='button' class='btn btn-primary btn-md'>Retry <span class='glyphicon glyphicon glyphicon-repeat' aria-hidden='true'></span></button></a>
+				<a href="admin/install/step3"><button type='button' class='btn btn-primary btn-md'><i class="fa fa-repeat" aria-hidden="true"></i> Retry</button></a>
 			@endif
 </div>
 </div>
