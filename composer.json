@@ -21,7 +21,6 @@
     },
     "require-dev": {
         "phpunit/phpunit" : "^8.0",
-        "fzaninotto/faker": "~1.4",
         "mockery/mockery": "1.2.*",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
@@ -41,7 +40,8 @@
     },
     "autoload-dev": {
         "classmap": [
-            "resources/tests/TestCase.php"
+            "resources/tests/TestCase.php",
+            "resources/tests/ModelFactory.php"
         ],
         "psr-4": {
             "Tests\\": "resources/tests/"

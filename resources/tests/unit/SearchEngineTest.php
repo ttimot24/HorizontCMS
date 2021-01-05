@@ -47,12 +47,11 @@ class SearchEngineTest extends TestCase
 
     public function testGetterAndSetterModel(){
 
-       $this->assertInternalType('array',$this->engine->getRegisteredModels());
+       $this->assertIsArray($this->engine->getRegisteredModels());
        $this->assertEquals(0,count($this->engine->getRegisteredModels()));
        $this->engine->registerModel(\App\Model\Page::class);
        $this->assertEquals(1,count($this->engine->getRegisteredModels()));
 
-      // $this->assertInternalType(\Illuminate\Database\Eloquent\Collection::class ,$this->engine->getResultsFor(\App\Libs\Page::class));
        $this->assertEquals(0,count($this->engine->getResultsFor(\App\Libs\Page::class)));
 
     }
