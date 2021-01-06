@@ -4,7 +4,7 @@
 <div class='container main-container'>
 
 
-<h1>Online Store</h1>
+<h2>Online Store</h2>
 <hr>
 
 <div class="row">

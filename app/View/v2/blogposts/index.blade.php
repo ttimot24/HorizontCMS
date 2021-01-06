@@ -3,7 +3,7 @@
 @section('content')
 <div class='container main-container'>
 
-<h2>{{trans('blogpost.blogposts')}} <small class='pull-right m-2'>{{trans('blogpost.all')}}: {{$number_of_blogposts}}</small></h2>
+<h2>{{trans('blogpost.blogposts')}} <small class='text-muted pull-right pt-3'>{{trans('blogpost.all')}}: {{$number_of_blogposts}}</small></h2>
 <div class='container'>
   <a href="{{admin_link('blogpost-create')}}" class='btn btn-primary mt-3 mb-4'>{{trans('blogpost.new_post_button')}}</a>
 </div>

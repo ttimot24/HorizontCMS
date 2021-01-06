@@ -6,7 +6,7 @@
 	<div class="row">
 
 		<div class='col-md-10'>
-			<h1>Header images</h1>
+			<h2>Header images</h2>
 		</div>
 
 		<div class='col-md-2 my-auto'>

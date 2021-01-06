@@ -7,7 +7,7 @@
 </small>
 @endif
 
-<small class='pull-right' style='margin-top:1.5%;'>{{trans('comment.all_comments')}}: {{$blogpost->comments->count()}}</small></h2></br>
+<small class='pull-right text-muted pt-2'>{{trans('comment.all_comments')}}: {{$blogpost->comments->count()}}</small></h2></br>
 
 
 @if($blogpost->comments_enabled!=1)

@@ -8,7 +8,7 @@
 
 <h2 class='col-md-8'>{!!trans('search.found_matches',['quantity' => ($search_engine->getTotalCount() ), 'search_word' => $search_for ])!!}</h2> 
 
-<div class='col-md-4 col-sm-12 my-auto'>
+<div class='col-md-4 col-sm-12 my-auto pt-3'>
   <form class='form-inline' action='admin/search' method='POST'>
     {{ csrf_field() }}
       <div class='form-group'>

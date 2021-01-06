@@ -2,7 +2,7 @@
 
 @section('content')
 <div class='container'>
-<h2 class="mb-5">System log <small class='pull-right'>Files: {{$all_files->count()}}</small></h2>
+<h2 class="mb-5">System log <small class='pull-right text-muted'>Files: {{$all_files->count()}}</small></h2>
 
 <section class="row">
 
@@ -52,8 +52,8 @@
 <div class="card">
     <div class="card-header bg-{{$colors[$entry->level]}}" id="heading{{$entry_number}}">
         <h6 class="text-white" data-toggle="collapse" data-target="#collapse{{$entry_number}}" aria-expanded="true" aria-controls="collapse{{$entry_number}}">
-          <div class='col-md-8 text-left float-left'>
-            #{{$entry_number}}  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ucfirst($entry->level)}} - {{$entry->id}}
+          <div class='col-md-8 text-left float-left pl-1'>
+            #{{$entry_number}}  <i class="fa fa-exclamation-triangle pl-2" aria-hidden="true"></i> {{ucfirst($entry->level)}} - {{$entry->id}}
             </div> 
             <div class='col-md-4 text-right float-right'>
               {{$entry->date->format(\Settings::get('date_format',\Config::get('horizontcms.default_date_format'),true))}}

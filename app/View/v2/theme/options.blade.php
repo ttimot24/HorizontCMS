@@ -2,7 +2,7 @@
 
 @section('content')
 <div class='container'>
-    <h1>Theme options</h1>
+    <h2>Theme options</h2>
     
     <div class="row pt-4">
         <div class="col-2">

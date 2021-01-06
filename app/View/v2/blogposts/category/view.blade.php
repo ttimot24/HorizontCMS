@@ -4,7 +4,7 @@
 <div class='container main-container'>
 <div class='row'>
 <div class='col-md-12'>
-<h1>{{trans('category.th_category')}} <small>{{$category->name}}</small></h1>
+<h2>{{trans('category.th_category')}} <small>{{$category->name}}</small></h2>
 <br>
 <h3>{{trans('category.view_category_blogposts')}} ({{$category->blogposts->count()}})</h3>
 <br>

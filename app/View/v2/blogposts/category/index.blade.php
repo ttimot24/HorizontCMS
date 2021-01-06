@@ -1,13 +1,12 @@
 @extends('layout')
 
 @section('content')
-<div class='container'>
+<div class='container main-container'>
 <div class='row'>
-
 <div class="col-md-12">
-<h2 class='float-left mt-5'>{{ trans('category.category') }}</h2>
+<h2 class='float-left mt-2'>{{ trans('category.category') }}</h2>
 
-<form action="{{ admin_link('blogpost_category-create') }}" class='form-inline float-right  mt-5' role='form' method='POST'>
+<form action="{{ admin_link('blogpost_category-create') }}" class='form-inline float-right mt-2' role='form' method='POST'>
 
 	{{ csrf_field() }}
 

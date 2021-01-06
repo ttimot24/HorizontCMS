@@ -5,7 +5,7 @@
 
 
 <section class='row'>
-<h1 class='col-md-9'>{{trans('blogpost.view_blogpost')}}</h1>
+<h2 class='col-md-9'>{{trans('blogpost.view_blogpost')}}</h2>
 
 <nav id="arrows" class='col-xs-12 col-md-3 pt-4'>
   <ul class='pager list-unstyled'>

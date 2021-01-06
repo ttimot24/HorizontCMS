@@ -5,9 +5,9 @@
 
 
 <section class="row">
-  <h1 class="col-sm-12 col-md-6">Plugin manager</h1> 
+  <h2 class="col-sm-12 col-md-6">Plugin manager</h2> 
 
-  <div class='col-sm-12 col-md-6 text-right'><br>
+  <div class='col-sm-12 col-md-6 text-right pt-4'>
     <a href="{{config('horizontcms.backend_prefix')}}/plugin/onlinestore" class='btn btn-info'><i class="fa fa-cloud-download" aria-hidden="true"></i> Download apps</a>
     <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_plugin' @if(!$zip_enabled) disabled @endif ><i class='fa fa-upload'></i>&nbspUpload new plugin</a>
   </div>
@@ -15,7 +15,7 @@
 
 
 
-<div class='list-group'>
+<div class='list-group mt-4'>
 
 <?php
 

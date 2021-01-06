@@ -2,7 +2,7 @@
 
 @section('content')
 <div class='container'>
-<h2>{{trans('settings.scheduler')}} <small class='pull-right'>All: {{$scheduled_tasks->count()}} | Available: {{count($commands)}}</small></h2>
+<h2>{{trans('settings.scheduler')}} <small class='pull-right text-muted'>All: {{$scheduled_tasks->count()}} | Available: {{count($commands)}}</small></h2>
 <br>
 <br>
 <div class='container col-md-12 mb-3'><a class='btn btn-warning' data-toggle='modal' data-target='.new_task'>{{trans('Schedule task')}}</a></div>

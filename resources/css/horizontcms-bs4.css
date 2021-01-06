@@ -323,3 +323,7 @@ tr:hover td a {
   .table .bg-danger a{
       color: white;
   }
+
+  .small, small {
+    font-size: 70%;
+  }

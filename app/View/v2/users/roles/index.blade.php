@@ -3,7 +3,7 @@
 @section('content')
 <div class='container main-container'>
 
-<h2>User groups <small class='pull-right' style='margin-top:1.5%;'> All: {{$all_user_roles->count()}} </small></h2>
+<h2>User groups <small class='pull-right text-muted pt-3'> All: {{$all_user_roles->count()}} </small></h2>
 
 <br>
 <div ><a href="{{admin_link('user_role-create')}}" class='btn btn-warning' style='margin-bottom:20px;'>New user group</a></div>

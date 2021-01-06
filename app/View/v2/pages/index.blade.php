@@ -20,7 +20,7 @@ tr #hidden-home a:hover{
 <div class='container main-container'>
 
 
-<h2>{{trans('page.pages')}} <small class='pull-right pt-3'>{{trans('page.all')}}: {{$number_of_pages}} | {{trans('page.visible')}}: {{$visible_pages}} | {{trans('page.invisible')}}: {{$number_of_pages - $visible_pages}}</small></h2>
+<h2>{{trans('page.pages')}} <small class='pull-right text-muted pt-3'>{{trans('page.all')}}: {{$number_of_pages}} | {{trans('page.visible')}}: {{$visible_pages}} | {{trans('page.invisible')}}: {{$number_of_pages - $visible_pages}}</small></h2>
 
 <div class="row py-3">
     <div class='col-md-6'>

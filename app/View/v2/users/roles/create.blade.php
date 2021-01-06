@@ -2,7 +2,7 @@
 
 @section('content')
 <div class='container main-container'>
-	<h1>Create User Group</h1><br><br>
+	<h2>Create User Group</h2><br><br>
 
 <form action="{{admin_link('user_role-store')}}" method='POST'>
 
