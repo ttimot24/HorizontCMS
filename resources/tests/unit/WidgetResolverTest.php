@@ -31,9 +31,9 @@ class WidgetResolverTest extends TestCase
 
     	$resolvedContent = $widgetResolver->compile($content);
 
-    	$this->assertRegexp('/WidgetResolved1/', $resolvedContent);
+    	$this->assertMatchesRegularExpression('/WidgetResolved1/', $resolvedContent);
 
-    	$this->assertRegexp('/WidgetResolved2/', $resolvedContent);
+    	$this->assertMatchesRegularExpression('/WidgetResolved2/', $resolvedContent);
     }
 
 
