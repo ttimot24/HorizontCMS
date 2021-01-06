@@ -168,8 +168,8 @@ return [
         
         Lavary\Menu\ServiceProvider::class,
 
-
-        Chumper\Zipper\ZipperServiceProvider::class,
+        Madnest\Madzipper\MadzipperServiceProvider::class,
+//        Chumper\Zipper\ZipperServiceProvider::class,
         Jackiedo\LogReader\LogReaderServiceProvider::class,
 
     ],
@@ -225,7 +225,7 @@ return [
 
 
         'Settings' => \App\Model\Settings::class,
-        'Zipper' => Chumper\Zipper\Zipper::class,
+        'Zipper' => Madnest\Madzipper\Madzipper::class,
     ],
 
 ];

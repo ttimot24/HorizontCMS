@@ -319,3 +319,7 @@ tr:hover td a {
       cursor: not-allowed;
       color:white;
   }
+
+  .table .bg-danger a{
+      color: white;
+  }

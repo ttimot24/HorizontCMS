@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        \Illuminate\Pagination\Paginator::useBootstrapThree();
+        \Illuminate\Pagination\Paginator::useBootstrap();
 
         if ($this->app->environment("local") || $this->app->environment("testing") ) {
                 \DB::connection()->enableQueryLog();

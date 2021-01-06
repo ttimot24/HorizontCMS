@@ -26,7 +26,7 @@
 
 foreach($all_users as $each){
 
-echo $each->active==0? "<tr class='danger'>" : "<tr>" ;
+echo $each->active==0? "<tr class='bg-danger'>" : "<tr>" ;
 
 echo "<td>". $each->id ."</td>";
 echo "<td>";
@@ -47,10 +47,10 @@ echo "<td>".$each->email."</td>";
 
 
         if($each->isOnline()){
-          echo "<font color='green'>Online</font>";	
+          echo "<font class='text-success'>Online</font>";	
         }
         else{
-          echo "<font color='red'>Offline</font>";	
+          echo "<font color='text-danger'>Offline</font>";	
         }
 
 
