@@ -5,11 +5,11 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.3",
         "laravel/framework": "8.*",
         "lavary/laravel-menu": "1.7.*",
         "composer/semver": "*",
-        "visualappeal/php-auto-update" : "0.13.1",
+        "visualappeal/php-auto-update" : "0.14.0",
         "madnest/madzipper"  : "*",
         "wikimedia/composer-merge-plugin": "dev-composer20",
         "jackiedo/log-reader": "*",
@@ -27,6 +27,7 @@
         "symfony/dom-crawler": "3.1.*",
         "codeception/codeception" : "*",
         "codacy/coverage": "1.4.*",
+        "laravel/dusk": "6.*",
         "filp/whoops" : "~2.0"
     },
     "autoload": {
