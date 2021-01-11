@@ -6,6 +6,8 @@
 		echo "<h1>".$blogpost->title."</h1>";
 		echo "<h5 class='pull-right'><a>".$blogpost->author->username."</a> | ".$blogpost->created_at."</h5><br>";
 
+		echo Website::$message->note("This is a draft post.");  
+
 		if($blogpost->hasImage() && file_exists('storage/images/blogposts/'.$blogpost->image)){
 			echo "<center><img style='max-width:100%;' src='storage/images/blogposts/".$blogpost->image ."'></center>";
 		}
@@ -26,7 +28,7 @@
 <?php $all_blogposts = \App\Model\Blogpost::orderBy('id','desc')->paginate(\Settings::get('blogposts_on_page')) ?>
 
 <?php foreach($all_blogposts as $blogpost): ?>
-<div class="well">
+<div class="well card card-body">
 	<?php if($blogpost->isDraft()){continue;} ?>
 	<img class="img-rounded" src="<?= $blogpost->getImage() ?>" style="width:100%;height:400px;object-fit:cover;">
 	<h2><a href="<?= str_slug(Website::$_REQUESTED_PAGE->name).'/'.str_slug($blogpost->title) ?>"><?= $blogpost->title ?></a></h2>

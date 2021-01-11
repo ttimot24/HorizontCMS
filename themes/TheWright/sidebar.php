@@ -1,11 +1,11 @@
 
 
-<div class="col-md-12 well">
+<div class="col-md-12 well card card-body">
 
 		<?php if(\Auth::check()): ?>
 			<center>
 			<h4>Welcome <b><?= \Auth::user()->name; ?></b>!</h4><br>
-			<p><img style="height:150px;width:150px;object-fit:cover;border:2px solid;" class="img-circle" src="<?= \Auth::user()->getThumb(); ?>"></p>
+			<p><img style="height:150px;width:150px;object-fit:cover;border:2px solid;" class="img img-circle rounded-circle" src="<?= \Auth::user()->getThumb(); ?>"></p>
 			<?php if(\Auth::user()->isAdmin()): ?>
 				<br>
 				<a href="<?= \Config::get('horizontcms.backend_prefix') ?>" class='btn btn-block btn-lg btn-warning'>Admin Area</a>
@@ -30,7 +30,7 @@
 
 
 
-<div class="col-md-12 well">
+<div class="col-md-12 well card card-body mt-3 mb-3">
 	<h4>Widget 2</h4>
 	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
 </div>
