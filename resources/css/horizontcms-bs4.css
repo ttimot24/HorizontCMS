@@ -362,6 +362,10 @@ tr:hover td a {
     color: #ebebeb;
   }
 
+  .form-control{
+      font-size: 15px;
+  }
+
 /*------CKEDITOR-----*/
 .cke_dialog_tabs a{
   text-decoration:none;
