@@ -139,6 +139,7 @@ body {
 
 .btn{
     font-size: .875rem;
+    border-radius: 2px;
 }
 
 .btn-primary, .btn-primary.focus, .btn-primary:focus, .btn-primary:active {
@@ -294,6 +295,7 @@ tr:hover td a {
   .badge{
       padding: 5px !important;
       margin-top: 5px !important;
+      border-radius: 2px;
   }
 
   .page-item.active .page-link{
@@ -327,3 +329,54 @@ tr:hover td a {
   .small, small {
     font-size: 70%;
   }
+
+  .alert{
+      border-radius: 2px;
+  }
+
+  .alert-dismissible .close {
+    padding: .65rem 1rem;
+  }
+
+  .alert-success, .badge-success{
+    background-color: #01721f;
+    border-color: transparent;
+    color: #ebebeb;
+  }
+
+  .alert-danger, .badge-danger{
+    background-color: #d70c0c;
+    border-color: transparent;
+    color: #ebebeb;
+  }
+
+  .alert-warning, .badge-warning{
+    background-color: #f0ad4e;
+    border-color: transparent;
+    color: #ebebeb;
+  }
+
+  .alert-info, .badge-info{
+    background-color: #0574a0;
+    border-color: transparent;
+    color: #ebebeb;
+  }
+
+/*------CKEDITOR-----*/
+.cke_dialog_tabs a{
+  text-decoration:none;
+}
+
+.cke_dialog_contents_body{
+    min-width:500px;
+}
+
+.cke_dialog_body a{
+    color:black;
+    text-decoration:none !important;
+}
+
+.cke_dialog_body:hover a{
+    color:black;
+    text-decoration:none;
+}
