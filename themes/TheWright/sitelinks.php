@@ -26,7 +26,7 @@
         $class = $page->equals(Website::$_REQUESTED_PAGE)? "active": "";
         
         if(!$page->hasSubpages()){
-         echo "<li class='nav-item ".$class."'><a href='nav-link ".$page->getSlug()."'>".$page->name."</a></li>";
+         echo "<li class='nav-item ".$class."'><a class='nav-link' href='".$page->getSlug()."'>".$page->name."</a></li>";
         }else{
           echo '<li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'.$page->name.'</a>
@@ -35,7 +35,7 @@
 
                 $class = $subpage->equals(Website::$_REQUESTED_PAGE)? "active": "";   
                 if($subpage->isActive()){     
-                  echo "<li class='".$class."'><a href='".$subpage->getSlug()."'>".$subpage->name."</a></li>";
+                  echo "<li class='".$class."'><a class='dropdown-item' href='".$subpage->getSlug()."'>".$subpage->name."</a></li>";
                 }
               }
           
