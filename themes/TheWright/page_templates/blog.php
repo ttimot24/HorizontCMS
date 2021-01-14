@@ -23,22 +23,45 @@
 
 ?>
 
-<div style="width:100%;">
+<div class="col-md-12"> 
+
 <h1 class="page-header"><?= Website::$_REQUESTED_PAGE->name ?></h1><br>
+
+
 <?php $all_blogposts = \App\Model\Blogpost::orderBy('id','desc')->paginate(\Settings::get('blogposts_on_page')) ?>
 
+<section>
 <?php foreach($all_blogposts as $blogpost): ?>
-<div class="well card card-body">
 	<?php if($blogpost->isDraft()){continue;} ?>
-	<img class="img-rounded" src="<?= $blogpost->getImage() ?>" style="width:100%;height:400px;object-fit:cover;">
-	<h2><a href="<?= str_slug(Website::$_REQUESTED_PAGE->name).'/'.str_slug($blogpost->title) ?>"><?= $blogpost->title ?></a></h2>
-	<p style="padding-left:5px;">Written by <a href="#"><?= $blogpost->author->username ?></a> on <a href="#"><?= $blogpost->created_at->diffForHumans() ?></a> in <a href="#"><?= $blogpost->category->name ?></a></p>
-	<p><b><?= $blogpost->getExcerpt() ?></b></p>
-	<p></p>
-</div>
-	<hr>
-<?php endforeach; ?>
 
+	<?php if($blogpost->isFeatured()): ?>
+		<div class="well card card-body col-md-12">
+		<div class="col">
+			<img class="img img-rounded col-md-12" src="<?= $blogpost->getImage() ?>" style="object-fit:cover;margin-bottom:15px;">
+			<h2><a href="<?= str_slug(Website::$_REQUESTED_PAGE->name).'/'.str_slug($blogpost->title) ?>"><?= $blogpost->title ?></a></h2>
+			<p style="padding-left:5px;">Written by <a href="#"><?= $blogpost->author->username ?></a> on <a href="#"><?= $blogpost->created_at->diffForHumans() ?></a> in <a href="#"><?= $blogpost->category->name ?></a></p>
+			<p><b><?= $blogpost->getExcerpt() ?></b></p>
+		</div>
+		</div>
+	<?php else: ?>
+		<div class="well card card-body col-md-12">
+		
+			<div class="col">
+				<div class="col-md-5">
+					<img class="img img-rounded" src="<?= $blogpost->getImage() ?>" >
+				</div>
+				<div class="col-md-7">
+					<h2><a href="<?= str_slug(Website::$_REQUESTED_PAGE->name).'/'.str_slug($blogpost->title) ?>"><?= $blogpost->title ?></a></h2>
+					<p class="pl-1" style="padding-left:5px;">Written by <a href="#"><?= $blogpost->author->username ?></a> on <a href="#"><?= $blogpost->created_at->diffForHumans() ?></a> in <a href="#"><?= $blogpost->category->name ?></a></p>
+					<p><b><?= $blogpost->getExcerpt() ?></b></p>
+				</div>
+			</div>
+		
+		</div>
+	<?php endif; ?>
+
+<?php endforeach; ?>
+</section>
 
 <center>
 <?= $all_blogposts->links() ?>
