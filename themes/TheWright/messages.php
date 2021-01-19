@@ -1,4 +1,4 @@
-<div class='col-md-12'>
+<div class='w-50'>
 <?php
 
   if(session()->has('message')){

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-expand-lg navbar-dark bg-dark" style="padding-top:0px;border-radius:0px;">
+<nav class="navbar navbar-inverse navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -12,7 +12,7 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="font-size: 14px;">
       <ul class="nav navbar-nav mr-auto">
 
       <?php 
