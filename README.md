@@ -17,9 +17,9 @@ This lightweight CMS platform provides end-users with the tools to extend and bu
 
 ### Try out
 
-Frontend: [https://horizontcms.herokuapp.com/](https://horizontcms.herokuapp.com/)
+Frontend: [http://horizontcms.herokuapp.com/](https://horizontcms.herokuapp.com/)
 
-Backend: [https://horizontcms.herokuapp.com/admin](https://horizontcms.herokuapp.com/admin)
+Backend: [http://horizontcms.herokuapp.com/admin](https://horizontcms.herokuapp.com/admin)
 
 > Username & password: admin/admin
 
