@@ -384,3 +384,7 @@ tr:hover td a {
     color:black;
     text-decoration:none;
 }
+
+pre {
+    color: black;
+}

@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-0">
+<div class="container-fluid">
             <!-- Branding Image -->
             <a class='navbar-brand m-0 p-0 pr-2 pl-3' href="{{url(admin_link(null))}}">
                 <img src="{{ url(config('horizontcms.admin_logo')) }}" class="m-0 p-0 h-100"> <!--HorizontCMS <!-- SatelliteCMS -->
@@ -6,21 +7,18 @@
             <div class='d-block d-sm-none navbar-brand'>{{ config('app.name') }}</div>
     
             <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   @include(config('laravel-menu.views.bootstrap-items'), array('items' => $MainMenu->roots()))
                 </ul>
 
                 <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto mr-3">
+                <ul class="navbar-nav mr-3 justify-content-end">
 
 
                   @include(config('laravel-menu.views.bootstrap-items'), array('items' => $RightMenu->roots()))
@@ -32,4 +30,5 @@
 
                 </ul>
             </div>
+        </div>
     </nav>

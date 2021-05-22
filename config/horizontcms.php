@@ -19,8 +19,9 @@ return [
 	'css' => [
 			'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
 			//'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css',
-			'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css',
-			
+		//	'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css',
+			'https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css',
+		
 			//'resources/css/darktheme.css',
 			//'resources/css/united.css',
 			//'resources/css/flaty.css',
@@ -30,7 +31,7 @@ return [
 			//   'resources/css/horizontcms.css',
 			
 			 // 'resources/css/now-ui-kit.css',
-			  'resources/css/horizontcms-bs4.css',
+			  'resources/css/horizontcms-bs5.css',
 
 			//'resources/css/default/style.css',
 			//'resources/css/default/bootstrap_common.css',
@@ -43,7 +44,8 @@ return [
 	'js' => [
 			'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
 			//'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js',
-			'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',
+			//'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',
+			'https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js',
 			'resources/assets/filemaster/js/fileinput.min.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js',
 			'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js',
