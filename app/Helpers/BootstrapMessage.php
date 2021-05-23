@@ -3,43 +3,33 @@
 
 class BootstrapMessage{
 
+    private function alertTemplate($args){
+       return "<div class='alert alert-dismissible alert-".$args['class']."'>
+              <i class='bi ".$args['icon']."'></i>
+              <strong>" .$args['title'] ."</strong>&nbsp" .$args['message']."
+              <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+              </div>";
+    }
+
 
     public function success($message){
 
-    	$title = "Success!";
-
-      return "<div class='alert alert-success <!--fade in-->'>
-             <a href='#' class='close' data-dismiss='alert'>&times;</a>
-             <span class='glyphicon glyphicon-ok' aria-hidden='true'></span>
-             <strong>" .$title ."</strong>&nbsp" .$message ."
-             </div>";
-      }
+      return $this->alertTemplate(['class'=> 'success','icon' => '', 'title'=> 'Success', $message]);
+    }
 
 
     public function error($message){
-
-    	$title = "Error!";
-
-    return "<div class='alert alert-danger alert-error <!--fade in-->'>
-           <a href='#' class='close' data-dismiss='alert'>&times;</a>
-           <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-           <strong>".$title ."</strong> ".$message."
-           </div>";
-
+     
+       return $this->alertTemplate(['class'=> 'error','icon' => '', 'title'=> 'Error', $message]);
         
     }
 
 
 
     public function warning($message){
+       
+      return $this->alertTemplate(['class'=> 'warning','icon' => '', 'title'=> 'Warning', $message]);
 
-    	$title = "Warning!";
-
-    	return "<div class='alert alert-warning <!--fade in-->'>
-               <a href='#' class='close' data-dismiss='alert'>&times;</a>
-               <span class='glyphicon glyphicon-warning-sign' aria-hidden='true'></span>
-               <strong>" .$title ."</strong>&nbsp" .$message ."
-               </div>";
     }
 
 
@@ -47,19 +37,9 @@ class BootstrapMessage{
 
     public function note($message){
 
-    	$title = "Note!";
-
-      return "<div class='alert alert-info <!--fade in-->'>
-              <a href='#' class='close' data-dismiss='alert'>&times;</a>
-              <span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>
-              <strong>" .$title ."</strong>&nbsp" .$message ."
-              </div>";
+      return $this->alertTemplate(['class'=> 'info','icon' => '', 'title'=> 'Note', $message]);
 
     }
-
-
-
-
 
 
 }

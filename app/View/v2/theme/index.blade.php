@@ -19,7 +19,7 @@
   <div class='jumbotron' style='background-color:#31708F;'>
     <div class='row'>
       <div class='col-xs-12 col-md-5'>
-        <div class='thumbnail pt-4'>
+        <div class='thumbnail pt-3'>
           <img class="img img-thumbnail w-100" src="{{$active_theme->getImage()}}" />
         </div>
       </div>
@@ -29,9 +29,9 @@
         <h4>{{trans('theme.is_the_current_theme')}}</h4>
         <p>{{ $active_theme->getInfo('description') }}</p>
         @if($active_theme->getSupportedLanguages()->count() > 0)
-          <p style='font-size:15px;'>{{trans('theme.supported_lang') }}: {{implode(', ',$active_theme->getSupportedLanguages()->toArray())}}</p>
+          <p style='font-size:1em'>{{trans('theme.supported_lang') }}: {{implode(', ',$active_theme->getSupportedLanguages()->toArray())}}</p>
         @endif
-        <p style='font-size:15px;'>{{trans('theme.author')}}: {{ $active_theme->getInfo('author') }} | {{trans('theme.website')}}: <a target='_blank' href='<?= UrlManager::http_protocol( $active_theme->getInfo('author_url') ); ?>'>{{ $active_theme->getInfo('author_url') }}</a></p>
+        <p style='font-size:1em'>{{trans('theme.author')}}: {{ $active_theme->getInfo('author') }} | {{trans('theme.website')}}: <a target='_blank' href='<?= UrlManager::http_protocol( $active_theme->getInfo('author_url') ); ?>'>{{ $active_theme->getInfo('author_url') }}</a></p>
       </div>
     </div>
   </div>
@@ -42,11 +42,12 @@
 </div>
 
 
-
+<div class="container row">
   <?php foreach($all_themes as $theme): ?>
 
-  <div class="card col-sm-6 col-md-4 mb-2 float-left float-start p-2 bg-dark">
-    <img class="card-img-top" src="<?= $theme->getImage() ?>" style="height:180px;" alt="Theme screenshot">
+  <div class='col-sm-6 col-md-4 g-2 float-left'>
+  <div class="card p-2 bg-dark">
+    <img class="card-img-top" src="<?= $theme->getImage() ?>" style="height:200px;" alt="Theme screenshot">
     <div class="card-body text-white">
     <h3><?= $theme->getName(); ?></h3>
           <p>version: <?= $theme->getInfo('version'); ?> | author: <?= $theme->getInfo('author') ?></p>
@@ -54,9 +55,10 @@
               <a href='admin/theme/set/<?=  $theme->root_dir ?>' class="btn btn-primary <?php if($theme->isCurrentTheme()){ echo 'disabled'; } ?> " role="button">Activate</a> 
               <!--<a href="#" class="btn btn-default" role="button" data-toggle='modal' data-target='.<?=  $theme->root_dir ?>-modal-xl'>Preview</a>-->
               <a href='admin/theme/options/<?=  $theme->root_dir ?>'  class="btn btn-warning" role="button">{{ trans('actions.options') }}</a>
-              <button class='btn btn-danger' data-toggle='modal' data-target='.delete_<?= $theme->root_dir ?>' <?php if($all_themes->count()==1){echo "disabled";} ?> >{{ trans('actions.delete') }}</button>
+              <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#delete_<?= $theme->root_dir ?>' <?php if($all_themes->count()==1){echo "disabled";} ?> >{{ trans('actions.delete') }}</button>
           </p>
     </div>
+  </div>
   </div>
 
   <!--  <div class="col-sm-6 col-md-4 bg-dark">
@@ -88,7 +90,7 @@
   ?>
 
   <?php endforeach; ?>
-
+</div>
 
 </div>
 </div>

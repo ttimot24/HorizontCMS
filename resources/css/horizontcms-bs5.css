@@ -195,7 +195,7 @@ a {
 }
 
 .table-hover>tbody>tr:hover {
-    background-color: #e84d08;
+    background-color: #e84d08cc;
 }
 tr:hover td a {
     color: white;
