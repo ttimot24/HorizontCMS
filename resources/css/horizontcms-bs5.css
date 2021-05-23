@@ -388,3 +388,7 @@ tr:hover td a {
 pre {
     color: black;
 }
+
+i.bi{
+    font-size: 1.5em;
+}
