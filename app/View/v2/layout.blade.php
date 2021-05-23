@@ -43,18 +43,12 @@
 				&nbsp&nbsp<a href='https://github.com/ttimot24/HorizontCMS'><i style='font-size: 18px;' class="fa fa-github" aria-hidden="true"></i></a>
 				</p>
 			</div>
-			<div class='col-md-6 text-right'>
+			<div class='col-md-6 text-right text-end'>
 				Version: {{Config::get('horizontcms.version')}}
 			</div>
 		</div>
 	</div>	
 </footer>
-
-<script>
-	/*$(document).ready(function() {  
-	    $("html").niceScroll({cursorwidth: "10px",zindex: "auto",autohidemode: false});
-	});*/
-</script>
 
 </body>
 </html>

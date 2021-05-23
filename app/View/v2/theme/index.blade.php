@@ -8,7 +8,7 @@
         <h1>{{trans('theme.themes')}}</h1>
       </div>
 
-      <div class='col-md-4 my-auto text-right'>
+      <div class='col-md-4 my-auto text-right text-end'>
         <a href="admin/theme/onlinestore" class='btn btn-info'><i class="fa fa-cloud-download" aria-hidden="true"></i> Download themes</a>
         <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_theme'><i class='fa fa-upload'></i>&nbsp{{trans('theme.upload_theme_button')}}</a>
       </div>
@@ -37,14 +37,16 @@
   </div>
 
 
-  <h3 style='padding-left:15px;'>{{trans('theme.all')}}: {{$all_themes->count()}}</h3>
+<div class='row'>
+  <h3>{{trans('theme.all')}}: {{$all_themes->count()}}</h3>
+</div>
 
 
 
   <?php foreach($all_themes as $theme): ?>
 
-  <div class="card col-sm-6 col-md-4 mb-2 float-left p-2 bg-dark">
-    <img class="card-img-top" src="<?= $theme->getImage() ?>" style="height:180px;" alt="Could not load image">
+  <div class="card col-sm-6 col-md-4 mb-2 float-left float-start p-2 bg-dark">
+    <img class="card-img-top" src="<?= $theme->getImage() ?>" style="height:180px;" alt="Theme screenshot">
     <div class="card-body text-white">
     <h3><?= $theme->getName(); ?></h3>
           <p>version: <?= $theme->getInfo('version'); ?> | author: <?= $theme->getInfo('author') ?></p>

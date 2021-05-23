@@ -14,14 +14,14 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  @include(config('laravel-menu.views.bootstrap-items'), array('items' => $MainMenu->roots()))
+                  @include(config('laravel-menu.views.bootstrap-items'), ['items' => $MainMenu->roots()])
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav mr-3 justify-content-end">
 
 
-                  @include(config('laravel-menu.views.bootstrap-items'), array('items' => $RightMenu->roots()))
+                  @include(config('laravel-menu.views.bootstrap-items'), ['items' => $RightMenu->roots()])
                     
 
                     <form id="logout-form" action="{{ url(admin_link('login-logout')) }}" method="POST" style="display: none;">

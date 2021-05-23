@@ -26,7 +26,7 @@ tr #hidden-home a:hover{
     <div class='col-md-6'>
       <a href="{{admin_link('page-create')}}" class='btn btn-info my-auto'>{{trans('page.create_page_button')}}</a>
     </div>
-    <div class='col-md-6 text-right'>
+    <div class='col-md-6 text-right text-end'>
       <a class='btn btn-default my-auto' id='orderer' onclick='$(this).toggle(dragndroporder());' data-csrf="{{csrf_token()}}"><i class='fa fa-arrows-v' style='font-size:15px;'  aria-hidden='true'></i> {{trans('page.order')}}</a>
     </div>
 </div>
