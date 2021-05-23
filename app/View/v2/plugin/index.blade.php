@@ -7,7 +7,7 @@
 <section class="row">
   <h2 class="col-sm-12 col-md-6">Plugin manager</h2> 
 
-  <div class='col-sm-12 col-md-6 text-right pt-4'>
+  <div class='col-sm-12 col-md-6 text-right text-end pt-4'>
     <a href="{{config('horizontcms.backend_prefix')}}/plugin/onlinestore" class='btn btn-info'><i class="fa fa-cloud-download" aria-hidden="true"></i> Download apps</a>
     <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_plugin' @if(!$zip_enabled) disabled @endif ><i class='fa fa-upload'></i>&nbspUpload new plugin</a>
   </div>
@@ -23,7 +23,7 @@ foreach($all_plugin as $current_plugin){
 
   echo  "<div class='list-group-item bg-dark p-3'>";
   	echo "<div class='row p-0'>";
-      echo "<div class='col-md-1 col-sm-12 col-xs-12 p-0 pl-3'>";
+      echo "<div class='col-md-1 col-sm-12 col-xs-12 p-0 pl-3 text-center'>";
 
        echo Html::img($current_plugin->getIcon(),"class='img img-thumbnail mt-1' style='width: 70px; height: 70px;' ");
 
@@ -46,7 +46,7 @@ foreach($all_plugin as $current_plugin){
         echo "</div>";
 
 
-        echo "<div class='col-md-2 col-sm-4 col-xs-4'>";
+        echo "<div class='col-md-2 col-sm-4 col-xs-4 text-end'>";
          
           if(!$current_plugin->isInstalled()){
               echo "<a id='install' class='btn btn-primary btn-block' href='".config('horizontcms.backend_prefix')."/plugin/install/".$current_plugin->root_dir."'>Install</a>";
