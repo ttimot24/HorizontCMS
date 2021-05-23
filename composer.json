@@ -11,7 +11,7 @@
         "composer/semver": "*",
         "visualappeal/php-auto-update" : "0.14.0",
         "madnest/madzipper"  : "*",
-        "wikimedia/composer-merge-plugin": "dev-composer20",
+        "wikimedia/composer-merge-plugin": "2.x-dev",
         "jackiedo/log-reader": "*",
         "intervention/image": "*",
         "laravel/helpers": "*",
