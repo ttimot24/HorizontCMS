@@ -21,7 +21,7 @@
                 <ul class="navbar-nav mr-3 justify-content-end">
 
 
-                  @include(config('laravel-menu.views.bootstrap-items'), ['items' => $RightMenu->roots()])
+                  @include(config('laravel-menu.views.bootstrap-items-right'), ['items' => $RightMenu->roots()])
                     
 
                     <form id="logout-form" action="{{ url(admin_link('login-logout')) }}" method="POST" style="display: none;">
