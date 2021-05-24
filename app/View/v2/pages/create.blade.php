@@ -16,7 +16,9 @@
           <div class='form-group col-xs-12 col-md-12' >
             <label for='title'>{{trans('page.menu_name')}}</label>
             <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" placeholder='Write menu name here' required autofocus>
-            <small><b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp{{ rtrim(Config::get('app.url'),'/') }}<a class='text-primary' id='ajaxSlug'></a> </small>
+            <div class="form-text">
+              <b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp{{ rtrim(Config::get('app.url'),'/') }}<a class='text-primary' id='ajaxSlug'></a>
+            </div>
           </div>
 
           <div class='form-group col-xs-12 col-md-12' >
@@ -25,13 +27,11 @@
 
             <select class='form-select' name='url'>
               <option value='' selected>{{trans('page.default_template')}}</option>
-              <?php 
-
-                foreach($page_templates as $template){
-                  echo "<option value='".$template."'>".ucfirst(rtrim(rtrim($template,".php"),".blade"))."</option>";
-                }
-
-              ?>
+  
+                @foreach($page_templates as $template)
+                  <option value='{{$template}}'>{{ucfirst(rtrim(rtrim($template,".php"),".blade"))}}</option>
+                @endforeach
+        
             </select>
 
           </div>

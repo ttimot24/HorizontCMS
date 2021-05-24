@@ -13,22 +13,22 @@
             <div class='form-group pull-left col-xs-12 col-md-12' >
               <label for='title'>{{trans('page.menu_name')}}</label>
               <input type='text' class='form-control' id='menu-title' name='name' onkeyup="ajaxGetSlug();" value='{{$page->name}}' required></input>
-              <small><b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp{{ rtrim(Config::get('app.url'),'/') }}<a class='text-muted' id='ajaxSlug'><?= UrlManager::seo_url($page->name) ?></a> </small>
+              <div class="form-text">
+                <b>{{trans('page.semantic_url')}}:</b>&nbsp&nbsp&nbsp{{ rtrim(Config::get('app.url'),'/') }}<a class='text-muted' id='ajaxSlug'>{{ UrlManager::seo_url($page->name) }}</a> 
+              </div>
             </div>
 
             <div class='form-group pull-left col-xs-12 col-md-12' >
                 <label for='title'>{{trans('page.page_template')}}</label>
                 <select class='form-select' name='url'>
                   <option value=''>{{trans('page.default_template')}}</option>
-                  <?php 
 
-                    foreach($page_templates as $template){
-                      echo "<option value='".$template."' "; if($template==$page->url){ echo "selected"; } echo ">"
-                              .ucfirst(rtrim(rtrim($template,".php"),".blade")).
-                            "</option>";
-                    }
+                    @foreach($page_templates as $template)
+                      <option value='{{$template}}' @if($template==$page->url) selected @endif >
+                              {{ ucfirst(rtrim(rtrim($template,".php"),".blade")) }}
+                      </option>
+                    @endforeach
 
-                  ?>
                 </select>
             </div>
 
