@@ -6,12 +6,12 @@ class Bootstrap{
 
     public static function delete_confirmation($modal_id,$header=NULL,$message=NULL,$footer=NULL){
 
-      echo "<div id='".$modal_id."' class='modal ".$modal_id."' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>
+      echo "<div id='".$modal_id."' class='modal ".$modal_id."' tabindex='-1'>
               <div class='modal-dialog'>
                 <div class='modal-content'>
                   <div class='modal-header modal-header-danger bg-danger'>
                     <h4 class='modal-title text-white'>".$header."</h4>
-                    <button type='button' class='close' data-bs-dismiss='modal' aria-hidden='true'>×</button>
+                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                   </div>
                   <div class='modal-body'>
                     <p>".$message."</p>
@@ -44,7 +44,7 @@ class Bootstrap{
               <div class='modal-content'>
 
                   <div class='modal-header'>
-                  <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+                  <button type='button' class='close' data-bs-dismiss='modal' aria-hidden='true'>×</button>
                   </br>
                   <h2 class='modal-title'><center></center></h2>
                    </div>

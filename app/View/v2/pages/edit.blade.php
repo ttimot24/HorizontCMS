@@ -18,7 +18,7 @@
 
             <div class='form-group pull-left col-xs-12 col-md-12' >
                 <label for='title'>{{trans('page.page_template')}}</label>
-                <select class='form-control' name='url'>
+                <select class='form-select' name='url'>
                   <option value=''>{{trans('page.default_template')}}</option>
                   <?php 
 
@@ -35,7 +35,7 @@
             <div class="row p-3">
             <div class='form-group col-xs-12 col-md-6' id='level' >
               <label for='level'>{{trans('page.page_level')}}</label>
-              <select class='form-control' name='parent_select' >  
+              <select class='form-select' name='parent_select' >  
                   <option value='0' @if(isset($page->parent_id) && $page->parent_id==NULL) selected @endif>Main menu</option>
                   <option value='1' @if(isset($page->parent_id) && $page->parent_id!=NULL) selected @endif>Submenu</option>";
               </select>
@@ -43,7 +43,7 @@
 
             <div class='form-group col-xs-12 col-md-6' id='submenus'>
               <label for='submenus'>Parent menu:</label>
-              <select class='form-control' name='parent_id' >  
+              <select class='form-select' name='parent_id' >  
                   @foreach($all_page as $each)
                         <option value="{{ $each->id }}" {{ ($page->parent!=NULL && $each->is($page->parent) ? "selected":"") }}>{{ $each->name }}</option>
                   @endforeach

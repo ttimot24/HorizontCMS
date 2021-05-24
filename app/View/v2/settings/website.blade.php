@@ -80,7 +80,7 @@
          <tr>
             <td class='col-4 p-2'>Website type</td>
             <td class="col-8 p-0">
-               <select name='website_type' class='form-control'>
+               <select name='website_type' class='form-select'>
                   <option value='website'>Website</option>
                   <option value='blog'>Blog</option>
                </select>
@@ -93,7 +93,7 @@
          <tr>
             <td class='col-4 p-2'>Default Role</td>
             <td class="col-8 p-0">
-               <select name='default_user_role' class='form-control'>
+               <select name='default_user_role' class='form-select'>
                @foreach($user_roles as $role)
                <option value='{{$role->id}}' @if(isset($settings['default_user_role']) && $role->id==$settings['default_user_role']) selected @endif @if($role->isAdminRole()) style='color:red;' @endif > {{$role->name}} </option>
                @endforeach

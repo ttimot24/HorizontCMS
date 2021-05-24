@@ -23,7 +23,7 @@
 
             <label for='title'>{{trans('page.page_template')}}</label>
 
-            <select class='form-control' name='url'>
+            <select class='form-select' name='url'>
               <option value='' selected>{{trans('page.default_template')}}</option>
               <?php 
 
@@ -39,7 +39,7 @@
           <div class="row p-3">
           <div class='form-group col-xs-12 col-md-6' >
             <label for='sel1'>{{trans('page.page_level')}}</label>
-            <select class='form-control' name='parent_select' id='level'>  
+            <select class='form-select' name='parent_select' id='level'>  
                     <option value='0'>{{trans('page.main_menu')}}</option>
                     <option value='1'>{{trans('page.submenu')}}</option>";
             </select>
@@ -47,7 +47,7 @@
 
           <div class='form-group col-xs-12 col-md-6' id='submenus'>
             <label for='submenus'>{{trans('page.parent_menu')}}</label>
-            <select class='form-control' name='parent_id' >";  
+            <select class='form-select' name='parent_id' >";  
                 @foreach($all_page as $each)
                   <option value='{{$each->id}}'>{{$each->name}}</option> 
                 @endforeach

@@ -29,7 +29,7 @@
 
     <div class='form-group float-left col-xs-12 col-md-5' style='margin-top:2%;'>
       <label for='sel1'>{{trans('blogpost.select_category')}}:</label>
-      <select class='form-control' name='category_id' id='sel1'>
+      <select class='form-select' name='category_id' id='sel1'>
 
           @foreach($categories as $category)
             <option value='{{$category->id}}'>{{$category->name}}</option>

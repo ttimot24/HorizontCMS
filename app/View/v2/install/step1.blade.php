@@ -18,7 +18,7 @@
 			
 			    <div class='form-group'>
 			      <label for='sel1'>Select language:</label>
-			      <select class='form-control' id='sel1' name='lang'>
+			      <select class='form-select' id='sel1' name='lang'>
 			      @foreach($languages as $language)
 			        <option value='{{ strtolower($language) }}'>{{$language}}</option>
 			      @endforeach

@@ -82,7 +82,7 @@
 
       <div class='form-group'>
       <label for='command'>Command:</label>
-      <select name='command' class='form-control'>
+      <select name='command' class='form-select'>
             @foreach($commands as $key => $command)
               <option value='{{$key}}'>{{$key}}</option>
             @endforeach

@@ -58,6 +58,8 @@ class FileManagerController extends Controller{
             if ($this->request->hasFile('up_file')){
 
                 foreach($this->request->up_file as $file){
+
+                    $file = trim($file,"/");
                     
                     if(!\Security::isExecutable($file)){
                         $images[] = $file->store(str_replace("storage/", "", $this->request->input('dir_path')));
@@ -224,7 +226,7 @@ class FileManagerController extends Controller{
 
         if($this->request->isMethod('POST')){
 
-            $new_file = $this->request->input('new_file');
+            $new_file = trim($this->request->input('new_file'),"/");
 
             if(!\Security::isExecutable($new_file) && \Storage::move($this->request->input('old_file'), $new_file)){
                 if($this->request->ajax()){

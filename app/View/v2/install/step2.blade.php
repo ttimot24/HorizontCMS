@@ -31,7 +31,7 @@
 				 <div class='form-group'>
 			      <label class='control-label col-md-2' for='server'>Database Driver:</label>
 			      <div class='col-md-5'>
-			      	<select  class='form-control' name='db_driver'>
+			      	<select  class='form-select' name='db_driver'>
 			     
 			      	@foreach($db_drivers as $driver => $alias)
 			      		<option value="{{ $alias }}" {{ (old("db_driver") == $alias ? "selected":"") }}>{{ $driver }}</option>

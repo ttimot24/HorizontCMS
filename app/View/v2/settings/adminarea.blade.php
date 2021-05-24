@@ -16,7 +16,7 @@
 <tbody style='text-align:center;font-weight:bolder;'>
 
 
-<tr><td>Admin theme</td><td><select name='admin_theme' class='form-control' style='width:100%;'>
+<tr><td>Admin theme</td><td><select name='admin_theme' class='form-select'>
                                         <option value=''>default</option>
                                         <!--<option value='lightthm'>Light</option>-->
                                         <option value='darktheme'>Dark</option>
@@ -34,7 +34,7 @@
 
 </td></tr>
 
-<tr><td>Language</td><td><select name='language' class='form-control' style='width:100%;'>
+<tr><td>Language</td><td><select name='language' class='form-select'>
 
             
 
@@ -54,7 +54,7 @@
 						</select>
 				</td></tr>
 
-<tr><td>Date format</td><td><select name='date_format' class='form-control' style='width:100%;'>
+<tr><td>Date format</td><td><select name='date_format' class='form-select'>
 
             
 
@@ -77,7 +77,12 @@
 
 
 <input type="hidden" name="auto_upgrade_check" value="0"> <!-- Checkbox hack -->
-<tr><td>Automatically check for updates</td><td><input class='form-control' type='checkbox' name="auto_upgrade_check" value="1"  <?php if($settings['auto_upgrade_check']==1){ echo 'checked'; } ?> /></td>
+<tr><td>Automatically check for updates</td>
+<td>
+<div class="form-check">
+  <input class='form-check-input text-center' type='checkbox' name="auto_upgrade_check" value="1"  @if( $settings['auto_upgrade_check']==1 ) checked @endif />
+</div>
+</td>
 
 
 <tr>

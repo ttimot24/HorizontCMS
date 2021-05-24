@@ -7,7 +7,7 @@
 <section class="row">
 
 
-<div class='col-md-4'>
+<div class='col-md-3'>
     <div class="list-group">
       @foreach($all_files as $file)
           <a href="{{config('horizontcms.backend_prefix')}}/settings/log/{{basename($file)}}" class="list-group-item @if(basename($file)==basename($current_file))  bg-primary border-0 text-white @endif">{{basename($file)}}</a>
@@ -18,7 +18,7 @@
       @endforeach
     </div> 
 </div>
-<div class='col-md-8'>
+<div class='col-md-9'>
 
 <?php 
 
@@ -38,8 +38,9 @@
 <div class="card bg-dark text-white mb-4 p-4">
     <div class="row">
       <h4 class="col-md-4" >Entries: {{$all_file_entries}}</h4>
+      <div class='col-md-4'></div>
       @if(isset($current_file))
-      <a href="{{'storage/framework/logs/'.$current_file}}" class="btn btn-primary ml-auto"><i class="fa fa-download" aria-hidden="true"></i> Download file</a>
+      <a href="{{'storage/framework/logs/'.$current_file}}" class="btn btn-primary ml-auto col-md-4"><i class="fa fa-download" aria-hidden="true"></i> Download file</a>
       @endif
     </div>
     {{'storage/framework/logs/'.$current_file}}

@@ -13,8 +13,8 @@
           <div class="col-md-4 offset-md-4 col-sm-7 col-xs-7">
                 <input type="text" v-model="filter" class="form-control" id="filter" placeholder="Filter">
             </div>
-            <a class='btn btn-primary mr-2' data-toggle='modal' data-backdrop='static' data-target='.upload_file_to_storage'><i class="fa fa-upload" aria-hidden="true"></i> Upload</a>
-            <a class='btn btn-primary' data-toggle='modal' data-backdrop='static' data-target='.new_folder'><i class="fa fa-folder" aria-hidden="true"></i> Create Folder</a>
+            <a class='btn btn-primary mr-2' data-bs-toggle='modal' data-bs-backdrop='static' data-bs-target='.upload_file_to_storage'><i class="fa fa-upload" aria-hidden="true"></i> Upload</a>
+            <a class='btn btn-primary' data-bs-toggle='modal' data-bs-backdrop='static' data-bs-target='.new_folder'><i class="fa fa-folder" aria-hidden="true"></i> Create Folder</a>
         </div>
         
       </div>
@@ -58,7 +58,9 @@
                   <a v-on:click="deleteModal(folder)" ><i class="fa fa-trash pull-right"></i></a>
                 </div>
 
-                <img class="w-75" src='resources/images/icons/dir.png' >
+                <div clas='row'>
+                  <img class="w-75" src='resources/images/icons/dir.png' >
+                </div>
                 <b>@{{folder}}</b>
               </div>
 
@@ -90,7 +92,7 @@
                   trans('actions.are_you_sure'),
                   "<div style='color:black;'>".trans('actions.delete_this',['content_type'=>'dir']).": <b>[dir_name_sample]</b> ?</div>",
                   "<a type='button' class='btn btn-danger' v-on:click.prevent='deleteFile' data-file='[dir_path_sample]' ><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
-                  <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
+                  <button type='button' class='btn btn-default' data-bs-dismiss='modal'>".trans('actions.cancel')."</button>"
                   );
 
 ?>
@@ -102,7 +104,7 @@
     <div class='modal-content'>
       <div class='modal-header modal-header-primary bg-primary'>
         <h4 class='modal-title text-white'>Upload file</h4>
-        <button type='button' class='close text-white' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <button type='button' class='close text-white' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
 
    <form action='admin/file-manager/fileupload' method='POST' enctype='multipart/form-data' v-on:submit.prevent="upload">
@@ -117,7 +119,7 @@
       </div>
       <div class='modal-footer'>
         <button type='submit' class='btn btn-primary'>Upload</button>
-        <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+        <button type='button' class='btn btn-default' data-bs-dismiss='modal'>Cancel</button>
       </div>
       </form>
     </div><!-- /.modal-content -->
@@ -131,7 +133,7 @@
     <div class='modal-content'>
       <div class='modal-header modal-header-primary bg-primary'>
         <h4 class='modal-title text-white'>Create new folder</h4>
-        <button type='button' class='close text-white' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <button type='button' class='close text-white' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
 
       <form action='admin/file-manager/new-folder' method='POST' enctype='multipart/form-data' v-on:submit.prevent="newFolder">
@@ -145,7 +147,7 @@
         </div>
         <div class='modal-footer'>
           <button type='submit' class='btn btn-primary'>Create</button>
-          <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+          <button type='button' class='btn btn-default' data-bs-dismiss='modal'>Cancel</button>
         </div>
       </form>
     </div>
@@ -159,7 +161,7 @@
     <div class='modal-content'>
       <div class='modal-header modal-header-primary'>
         <h4 class='modal-title'>Rename</h4>
-        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
 
       <form action='admin/file-manager/rename' method='POST' v-on:submit.prevent="renameFile">
@@ -183,7 +185,7 @@
       </div>
       <div class='modal-footer'>
         <button type='submit' class='btn btn-primary'>Rename</button>
-        <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+        <button type='button' class='btn btn-default' data-bs-dismiss='modal'>Cancel</button>
       </div>
       </form>
     </div>
