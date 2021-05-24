@@ -11,11 +11,11 @@
 
 
       @if($previous_user)
-          <li class='previous float-left' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('user-view',$previous_user)}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+          <li class='previous float-start' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('user-view',$previous_user)}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
       @endif
 
       @if($next_user)
-          <li class='next float-right' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('user-view',$next_user)}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
+          <li class='next float-end' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('user-view',$next_user)}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
       @endif
 
     </ul>
@@ -28,8 +28,8 @@
 
 <section class='row'>
 <div class='col-md-3 text-center' valign='top'>
-<a class='btn btn-link' data-toggle='modal' data-target='.{{$user->id}}-modal-xl'>
-  <img src='{{$user->getImage()}}' class='img img-thumbnail' style='margin-top:20px;' >
+<a class='btn btn-link' data-bs-toggle='modal' data-bs-target='.{{$user->id}}-modal-xl'>
+  <img src='{{$user->getImage()}}' class='img img-thumbnail mt-3' >
 </a>
 
   <div class='btn-group my-3' role='group'>
@@ -37,7 +37,7 @@
     <a href="{{admin_link('user-edit',$user->id)}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
   </div>    
   @if($user->role_id<\Auth::user()->role_id && !$user->is(Auth::user()))
-    <button type='button' class='btn btn-danger my-3' data-toggle='modal' data-target='.delete_{{$user->id}}'>
+    <button type='button' class='btn btn-danger my-3' data-bs-toggle='modal' data-bs-target='#delete_{{$user->id}}'>
       <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.remove')}}
     </button>
   @endif
@@ -117,13 +117,13 @@
    Bootstrap::image_details($user->id,$user->getImage());
 
 
-   Bootstrap::delete_confirmation(
-    "delete_".$user->id."",
-    trans('actions.are_you_sure'),
-    "<b>".trans('actions.delete_this',['content_type' => 'user']).": </b>".$user->username." <b>?</b>",
-    "<a href='".admin_link('user-delete',$user->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
-    <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
-    );
+   Bootstrap::delete_confirmation([
+    "id" => "delete_".$user->id."",
+    "header" => trans('actions.are_you_sure'),
+    "body" => "<b>".trans('actions.delete_this',['content_type' => 'user']).": </b>".$user->username." <b>?</b>",
+    "footer" => "<a href='".admin_link('user-delete',$user->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
+    "cancel" => trans('actions.cancel')
+   ]);
 
 
 ?>

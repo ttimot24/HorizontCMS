@@ -2,7 +2,7 @@
 
 @if($blogpost->comments_enabled==1)
 <small style='margin-left:20%;'>
-  <a type='button' class='btn btn-warning' data-toggle='modal' data-target='#comment-modal-xl'>{{trans('comment.write_comment_button')}}</a>
+  <a type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#comment-modal-xl'>{{trans('comment.write_comment_button')}}</a>
   <a class='btn btn-danger btn-sm' href="admin/blogpost/disable-comment/{{$blogpost->id}}">{{trans('comment.disable_comments_button')}}</a>
 </small>
 @endif
@@ -80,13 +80,13 @@
 <div class='modal' id='comment-modal-xl' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>
   <div class='modal-dialog modal-md'>
     <div class='modal-content'>
-
-    <form action="{{admin_link('blogpost_comment-create')}}" method='POST'>
-    {{ csrf_field() }}
         <div class='modal-header-warning bg-warning text-white p-2'>
-          <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
-          <h3 class='modal-title m-0'><span class='fa fa-comment-o'></span>  {{trans('comment.write_comment_button')}}</h3>
+          <button type='button' class='btn-close col-md-6 float-end' data-bs-dismiss='modal' aria-label='Close'></button>
+          <h4 class='modal-title col-md-6'><span class='fa fa-comment-o'></span>  {{trans('comment.write_comment_button')}}</h4>
         </div>
+        
+        <form action="{{admin_link('blogpost_comment-create')}}" method='POST'>
+        {{ csrf_field() }}
         <div class='modal-body'>
         <h5 style='font-weight:bolder;'>{{trans('comment.write_as')}}: <a href="{{ admin_link('user-view',$user->id) }}" >{{ $user->username }}</a>
         <img src='{{ $user->getThumb() }}' class='img img-rounded pull-right' width='30'></h5>
@@ -96,7 +96,7 @@
         <div class='modal-footer'>
            <button type='submit' class='btn btn-warning'>{{trans('comment.send')}}</button>
         </div>
-    </form>
+         </form>
   </div>
 </div>
 </div>

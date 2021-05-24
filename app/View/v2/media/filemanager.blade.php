@@ -87,13 +87,13 @@
 <?php 
 
 
-                 Bootstrap::delete_confirmation(
-                  "delete_sample",
-                  trans('actions.are_you_sure'),
-                  "<div style='color:black;'>".trans('actions.delete_this',['content_type'=>'dir']).": <b>[dir_name_sample]</b> ?</div>",
-                  "<a type='button' class='btn btn-danger' v-on:click.prevent='deleteFile' data-file='[dir_path_sample]' ><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
-                  <button type='button' class='btn btn-default' data-bs-dismiss='modal'>".trans('actions.cancel')."</button>"
-                  );
+                 Bootstrap::delete_confirmation([
+                  "id" => "delete_sample",
+                  "header" => trans('actions.are_you_sure'),
+                  "body" => "<div style='color:black;'>".trans('actions.delete_this',['content_type'=>'dir']).": <b>[dir_name_sample]</b> ?</div>",
+                  "footer" => "<a type='button' class='btn btn-danger' v-on:click.prevent='deleteFile' data-file='[dir_path_sample]' ><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
+                  "cancel" => trans('actions.cancel')
+                 ]);
 
 ?>
 
@@ -104,7 +104,7 @@
     <div class='modal-content'>
       <div class='modal-header modal-header-primary bg-primary'>
         <h4 class='modal-title text-white'>Upload file</h4>
-        <button type='button' class='close text-white' data-bs-dismiss='modal' aria-label='Close'></button>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
 
    <form action='admin/file-manager/fileupload' method='POST' enctype='multipart/form-data' v-on:submit.prevent="upload">
@@ -133,7 +133,7 @@
     <div class='modal-content'>
       <div class='modal-header modal-header-primary bg-primary'>
         <h4 class='modal-title text-white'>Create new folder</h4>
-        <button type='button' class='close text-white' data-bs-dismiss='modal' aria-label='Close'></button>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
 
       <form action='admin/file-manager/new-folder' method='POST' enctype='multipart/form-data' v-on:submit.prevent="newFolder">
@@ -161,7 +161,7 @@
     <div class='modal-content'>
       <div class='modal-header modal-header-primary'>
         <h4 class='modal-title'>Rename</h4>
-        <button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'></button>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
 
       <form action='admin/file-manager/rename' method='POST' v-on:submit.prevent="renameFile">

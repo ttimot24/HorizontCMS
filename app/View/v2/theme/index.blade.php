@@ -10,7 +10,7 @@
 
       <div class='col-md-4 my-auto text-right text-end'>
         <a href="admin/theme/onlinestore" class='btn btn-info'><i class="fa fa-cloud-download" aria-hidden="true"></i> Download themes</a>
-        <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_theme'><i class='fa fa-upload'></i>&nbsp{{trans('theme.upload_theme_button')}}</a>
+        <a id='upl' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='.upload_theme'><i class='fa fa-upload'></i>&nbsp{{trans('theme.upload_theme_button')}}</a>
       </div>
  
 
@@ -55,21 +55,20 @@
               <a href='admin/theme/set/<?=  $theme->root_dir ?>' class="btn btn-primary <?php if($theme->isCurrentTheme()){ echo 'disabled'; } ?> " role="button">Activate</a> 
               <!--<a href="#" class="btn btn-default" role="button" data-toggle='modal' data-target='.<?=  $theme->root_dir ?>-modal-xl'>Preview</a>-->
               <a href='admin/theme/options/<?=  $theme->root_dir ?>'  class="btn btn-warning" role="button">{{ trans('actions.options') }}</a>
-              <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='.delete_<?= $theme->root_dir ?>' <?php if($all_themes->count()==1){echo "disabled";} ?> >{{ trans('actions.delete') }}</button>
+              <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#delete_<?= $theme->root_dir ?>' <?php if($all_themes->count()==1){echo "disabled";} ?> >{{ trans('actions.delete') }}</button>
           </p>
     </div>
   </div>
   </div>
 
 
-  <?php   Bootstrap::delete_confirmation(
-      "delete_".$theme->root_dir,
-      trans('actions.are_you_sure'),
-      "<b>Delete this theme: </b>". $theme->getName()." <b>?</b>",
-      "<a href='admin/theme/delete/". $theme->root_dir."' type='button' class='btn btn-danger'>
-      <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
-      <button type='button' class='btn btn-default' data-bs-dismiss='modal'>".trans('actions.cancel')."</button>"
-      );
+  <?php   Bootstrap::delete_confirmation([
+      "id" =>"delete_".$theme->root_dir,
+      "header" => trans('actions.are_you_sure'),
+      "body" => "<b>Delete this theme: </b>". $theme->getName()." <b>?</b>",
+      "footer" => "<a href='admin/theme/delete/". $theme->root_dir."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
+      "cancel" => trans('actions.cancel')
+      ]);
 
   ?>
 
@@ -89,7 +88,7 @@
     <div class='modal-content'>
       <div class='modal-header modal-header-primary bg-primary'>
         <h4 class='modal-title text-white'>New file</h4>
-        <button type='button' class='close text-white' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
       <div class='modal-body'>
 
@@ -104,7 +103,7 @@
       </div>
       <div class='modal-footer'>
         <button type='submit' class='btn btn-primary'>{{trans('actions.upload')}}</button></form>
-        <button type='button' class='btn btn-default' data-dismiss='modal'>{{trans('actions.cancel')}}</button>
+        <button type='button' class='btn btn-default' data-bs-dismiss='modal'>{{trans('actions.cancel')}}</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -14,10 +14,6 @@ body {
     background-color: #e84d08 !important;
 }
 
-.nav-link{
-    margin-left: 10px !important; 
-}
-
 /*.active .nav-link{
     color: #e84d08 !important;
 }*/
@@ -29,7 +25,7 @@ body {
 }
 
 .dropdown-menu .nav-link{
-    padding: 7px !important;
+    padding: 7px 14px !important;
 }
 
 .nav-link .fa{

@@ -29,7 +29,7 @@
                <input type="hidden" name="favicon" value="<?=($settings['favicon'] != '' && file_exists('storage/images/favicons/' . $settings['favicon'])) ? $settings['favicon'] : ''?>" >
                <img id="favicon" class='<?=($settings['favicon'] != '' && file_exists('storage/images/favicons/' . $settings['favicon'])) ? "well well-sm" : ""?>' src="<?=($settings['favicon'] != '' && file_exists('storage/images/favicons/' . $settings['favicon'])) ? 'storage/images/favicons/' . $settings['favicon'] : ''?>" height='50' alt="">
                <div class="btn-group" role="group">
-                  <button type='button' id="button-favicon" class='btn btn-success btn-sm' data-toggle='modal' data-target='.admin_logo_select-modal-lg'>Select</button>
+                  <button type='button' id="button-favicon" class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='.admin_logo_select-modal-lg'>Select</button>
                </div>
             </td>
          </tr>
@@ -73,7 +73,7 @@
                <input type="hidden" name="logo" value="<?=($settings['logo'] != '' && file_exists('storage/images/logos/' . $settings['logo'])) ? $settings['logo'] : ''?>" >
                <img id="logo" class='<?=($settings['logo'] != '' && file_exists('storage/images/logos/' . $settings['logo'])) ? "well well-sm" : ""?>' src="<?=($settings['logo'] != '' && file_exists('storage/images/logos/' . $settings['logo'])) ? 'storage/images/logos/' . $settings['logo'] : ''?>" height='100' alt="">
                <div class="btn-group" role="group">
-                  <button type='button' id="button-logo" class='btn btn-success btn-sm' data-toggle='modal' data-target='.admin_logo_select-modal-lg'>Select</button>
+                  <button type='button' id="button-logo" class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='.admin_logo_select-modal-lg'>Select</button>
                </div>
             </td>
          </tr>
@@ -114,7 +114,7 @@
       <div class='modal-content'>
          <div class='modal-header'>
             <h3 class='modal-title text-center'>Select Logo</h3>
-            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
          </div>
          <div class='modal-body p-3' style="height:500px;">
             @include('media.filemanager', ['mode' => '', 'current_dir' => 'storage/images/logos'])

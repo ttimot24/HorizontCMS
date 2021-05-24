@@ -5,7 +5,7 @@
 <h2>{{trans('settings.scheduler')}} <small class='pull-right text-muted'>All: {{$scheduled_tasks->count()}} | Available: {{count($commands)}}</small></h2>
 <br>
 <br>
-<div class='container col-md-12 mb-3'><a class='btn btn-warning' data-toggle='modal' data-target='.new_task'>{{trans('Schedule task')}}</a></div>
+<div class='container col-md-12 mb-3'><a class='btn btn-warning' data-bs-toggle='modal' data-bs-target='.new_task'>{{trans('Schedule task')}}</a></div>
 
 <table class='table table-hover'>
     <thead>
@@ -17,7 +17,7 @@
         <th>{{trans('schedules.th_frequency')}}</th>
         <th>{{trans('schedules.th_ping_before')}}</th>
         <th>{{trans('schedules.th_ping_after')}}</th>
-        <th><center>{{trans('schedules.th_action')}}</center></th>
+        <th class='text-center'>{{trans('schedules.th_action')}}</th>
       </tr>
     </thead>
     <tbody>
@@ -30,25 +30,23 @@
             <td>{{$task->frequency}}</td>
             <td>{{$task->ping_before}}</td>
             <td>{{$task->ping_after}}</td>
-            <td>
-              <center>
+            <td class='text-center'>
                 <div class="btn-group" role="group">
                     <a href="{{admin_link('schedules-edit',$task->id)}}" type="button" class="btn btn-warning btn-sm">{{trans('actions.edit')}}</a>
                     <a type="button" data-toggle='modal' data-target=.delete_<?= $task->id ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </div>
-              </center>
             </td>
         </tr>
 
         <?php 
 
-            Bootstrap::delete_confirmation(
-            "delete_".$task->id."",
-            trans('actions.are_you_sure'),
-            "<b>".trans('actions.delete_this',['content_type'=>'task']).": </b>".$task->name." <b>?</b>",
-            "<a href='".admin_link('task-delete',$task->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
-            <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
-            );
+            Bootstrap::delete_confirmation([
+            "id" => "delete_".$task->id."",
+            "haeder" => trans('actions.are_you_sure'),
+            "body" => "<b>".trans('actions.delete_this',['content_type'=>'task']).": </b>".$task->name." <b>?</b>",
+            "footer" => "<a href='".admin_link('task-delete',$task->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
+            "cancel" => trans('actions.cancel')
+            ]);
 
         ?>
 
@@ -63,7 +61,7 @@
     <div class='modal-content'>
       <div class='modal-header modal-header-primary bg-primary'>
         <h4 class='modal-title text-white'>Schedule task</h4>
-        <button type='button' class='close text-white' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
 
       <form action="{{config('horizontcms.backend_prefix')}}/schedule/create" method='POST'>
@@ -108,7 +106,7 @@
       </div>
       <div class='modal-footer'>
         <button type='submit' class='btn btn-primary'>Schedule</button>
-        <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+        <button type='button' class='btn btn-default' data-bs-dismiss='modal'>Cancel</button>
       </div>
       </form>
     </div><!-- /.modal-content -->

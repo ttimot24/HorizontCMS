@@ -51,18 +51,18 @@
           <td class="text-center">
               <div class="btn-group" role="group">
                   <a href="{{admin_link('blogpost-edit',$blogpost->id)}}" type="button" class="btn btn-warning btn-sm" style='min-width:70px;'>{{trans('actions.edit')}}</a>
-                  <a type="button" data-toggle='modal' data-target=.delete_<?= $blogpost->id ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                  <a type="button" data-bs-toggle='modal' data-bs-target=#delete_<?= $blogpost->id ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
               </div>
           </td>
         </tr>
     <?php 
-      Bootstrap::delete_confirmation(
-        "delete_".$blogpost->id."",
-        trans('actions.are_you_sure'),
-        "<b>".trans('actions.delete_this',['content_type'=>'post']).": </b>".$blogpost->title." <b>?</b>",
-        "<a href='".admin_link('blogpost-delete',$blogpost->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
-        <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
-        );
+      Bootstrap::delete_confirmation([
+        "id" => "delete_".$blogpost->id,
+        "header" => trans('actions.are_you_sure'),
+        "body" => "<b>".trans('actions.delete_this',['content_type'=>'post']).": </b>".$blogpost->title." <b>?</b>",
+        "footer" => "<a href='".admin_link('blogpost-delete',$blogpost->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
+        "cancel" => trans('actions.cancel')
+        ]);
     ?>
 
     <?php endforeach; ?>

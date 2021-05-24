@@ -10,7 +10,7 @@
 		</div>
 
 		<div class='col-md-2 my-auto'>
-			<a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_images'><i class='fa fa-upload'></i>&nbspUpload images</a>
+			<a id='upl' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='.upload_images'><i class='fa fa-upload'></i>&nbspUpload images</a>
 		</div>
 	</div>
 	<div class="clearfix"></div>
@@ -31,7 +31,7 @@
 					</div>
 				@endforeach
 			@else
-				<h4 style="text-align:center;"><br>No images on the slider!<br></h4>
+				<h4 class='text-center'><br>No images on the slider!<br></h4>
 			@endif
 		</div>
 
@@ -65,7 +65,7 @@
     <div class='modal-content'>
       <div class='modal-header modal-header-primary bg-primary'>
 	 	<h4 class='modal-title text-white'>Upload images</h4>
-        <button type='button' class='close text-white' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+		<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
 	  </div>
 	  <form action='admin/file-manager/fileupload?dir_path=storage/images/header_images' method='POST' enctype='multipart/form-data'>
       <div class='modal-body'>
@@ -79,7 +79,7 @@
       </div>
       <div class='modal-footer'>
 		<button type='submit' class='btn btn-primary'>{{trans('actions.upload')}}</button>
-        <button type='button' class='btn btn-default' data-dismiss='modal'>{{trans('actions.cancel')}}</button>
+        <button type='button' class='btn btn-default' data-bs-dismiss='modal'>{{trans('actions.cancel')}}</button>
 	  </div>
 	  </form>
     </div><!-- /.modal-content -->

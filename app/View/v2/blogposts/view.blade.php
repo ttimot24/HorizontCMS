@@ -11,11 +11,11 @@
   <ul class='pager list-unstyled'>
 
     @if($previous_blogpost)
-        <li class='btn previous float-left' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('blogpost-view',$previous_blogpost)}}"> <span class='fa fa-angle-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+        <li class='btn previous float-start' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('blogpost-view',$previous_blogpost)}}"> <span class='fa fa-angle-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
     @endif
 
     @if($next_blogpost)
-        <li class='btn next float-right' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('blogpost-view',$next_blogpost)}}">{{trans('actions.next')}} <span class='fa fa-angle-right' aria-hidden='true'></span> </a></li>
+        <li class='btn next float-end' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('blogpost-view',$next_blogpost)}}">{{trans('actions.next')}} <span class='fa fa-angle-right' aria-hidden='true'></span> </a></li>
     @endif
 
 
@@ -26,7 +26,7 @@
 
 <section class='row'>
 <div class='col-md-4'>
-  <button type='button' class='btn btn-link' data-toggle='modal' data-target='.{{ $blogpost->id }}-modal-xl'>
+  <button type='button' class='btn btn-link w-100' data-bs-toggle='modal' data-bs-target='.{{ $blogpost->id }}-modal-xl'>
     <img src='{{ $blogpost->getImage() }}' width='350' class='img img-thumbnail mt-3'  />
   </button>
 
@@ -39,7 +39,7 @@
       @endif
       <a href="{{admin_link('blogpost-edit',$blogpost->id)}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}} </a>
       
-      <button type='button' class='btn btn-danger' data-toggle='modal' data-target='.delete'>
+      <button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#delete'>
       <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.remove')}}
       </button>
     </div>
@@ -86,13 +86,13 @@
 
   Bootstrap::image_details($blogpost->id,$blogpost->getImage());
 
-  Bootstrap::delete_confirmation(
-    "delete",
-    trans('actions.are_you_sure'),
-    "<b>".trans('actions.delete_this',['content_type'=>'post']).": </b>". $blogpost->title." <b>?</b>",
-    "<a href='".admin_link('blogpost-delete',$blogpost->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
-    <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
-    );
+  Bootstrap::delete_confirmation([
+    "id" => "delete",
+    "header" => trans('actions.are_you_sure'),
+    "body" => "<b>".trans('actions.delete_this',['content_type'=>'post']).": </b>". $blogpost->title." <b>?</b>",
+    "footer" => "<a href='".admin_link('blogpost-delete',$blogpost->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
+    "cancel" => trans('actions.cancel')
+    ]);
 
 ?>
 

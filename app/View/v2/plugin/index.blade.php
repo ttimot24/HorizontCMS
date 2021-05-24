@@ -9,7 +9,7 @@
 
   <div class='col-sm-12 col-md-6 text-right text-end pt-4'>
     <a href="{{config('horizontcms.backend_prefix')}}/plugin/onlinestore" class='btn btn-info'><i class="fa fa-cloud-download" aria-hidden="true"></i> Download apps</a>
-    <a id='upl' class='btn btn-primary' data-toggle='modal' data-target='.upload_plugin' @if(!$zip_enabled) disabled @endif ><i class='fa fa-upload'></i>&nbspUpload new plugin</a>
+    <a id='upl' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='.upload_plugin' @if(!$zip_enabled) disabled @endif ><i class='fa fa-upload'></i>&nbspUpload new plugin</a>
   </div>
 </section>
 
@@ -58,7 +58,7 @@ foreach($all_plugin as $current_plugin){
                 echo "<a class='btn btn-info btn-block' href='".config('horizontcms.backend_prefix')."/plugin/deactivate/".$current_plugin->root_dir."'>Deactivate</a>";
               }
           }
-          echo "<button class='btn btn-danger btn-block' data-toggle='modal' data-target='.delete_".$current_plugin->root_dir."' >Delete</button>";
+          echo "<button class='btn btn-danger btn-block' data-bs-toggle='modal' data-bs-target='#delete_".$current_plugin->root_dir."' >Delete</button>";
 
          echo "</div>";
 
@@ -67,13 +67,13 @@ foreach($all_plugin as $current_plugin){
       echo "</div>";
 
 
-   Bootstrap::delete_confirmation(
-    "delete_".$current_plugin->root_dir,
-    "Are you sure?",
-    "<b>Delete this plugin: </b>".$current_plugin->getName()." <b>?</b>",
-    "<a href='".config('horizontcms.backend_prefix')."/plugin/delete/".$current_plugin->root_dir."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>
-    <button type='button' class='btn btn-default' data-dismiss='modal'>Cencel</button>"
-    );
+   Bootstrap::delete_confirmation([
+    "id" => "delete_".$current_plugin->root_dir,
+    "header" => "Are you sure?",
+    "body" => "<b>Delete this plugin: </b>".$current_plugin->getName()." <b>?</b>",
+    "footer" => "<a href='".config('horizontcms.backend_prefix')."/plugin/delete/".$current_plugin->root_dir."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>",
+    "cancel" => trans('actions.cancel')
+    ]);
 
 
        
@@ -90,7 +90,7 @@ foreach($all_plugin as $current_plugin){
     <div class='modal-content'>
       <div class='modal-header modal-header-primary bg-primary'>
         <h4 class='modal-title text-white'>New file</h4>
-        <button type='button' class='close  text-white' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
       <div class='modal-body'>
 
@@ -105,7 +105,7 @@ foreach($all_plugin as $current_plugin){
       </div>
       <div class='modal-footer'>
         <button type='submit' class='btn btn-primary'>Upload</button></form>
-        <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+        <button type='button' class='btn btn-default' data-bs-dismiss='modal'>Cancel</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

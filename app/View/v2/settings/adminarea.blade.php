@@ -11,9 +11,9 @@
 {{ csrf_field() }}
 
 <input type='hidden' name='is_actioned' value='1'>
-<table class='table-bordered' id='settings' style='width:100%;text-align:center;'>
+<table class='table-bordered w-100' id='settings'>
 
-<tbody style='text-align:center;font-weight:bolder;'>
+<tbody class="text-center fw-bold">
 
 
 <tr><td>Admin theme</td><td><select name='admin_theme' class='form-select'>
@@ -29,7 +29,7 @@
 <img id="admin_logo" class='well well-sm' src="<?= ($settings['admin_logo']!='' && file_exists('storage/images/logos/'.$settings['admin_logo']))? 'storage/images/logos/'.$settings['admin_logo'] : \Config::get('horizontcms.admin_logo')  ?>" height='100'>
 
 <div class="btn-group" role="group">
-<button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='.admin_logo_select-modal-lg'>Select</button>
+<button type='button' class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='.admin_logo_select-modal-lg'>Select</button>
 </div>
 
 </td></tr>
@@ -104,9 +104,9 @@
     <div class='modal-content'>
 
         <div class='modal-header'>
-          <h3 class='modal-title'><center>Select Logo</center></h3>
+          <h3 class='modal-title'>Select Logo</h3>
 
-          <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+          <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
          </div>
         <div class='modal-body'>
          

@@ -4,19 +4,25 @@ class Bootstrap{
 
 
 
-    public static function delete_confirmation($modal_id,$header=NULL,$message=NULL,$footer=NULL){
+    public static function delete_confirmation($args){
 
-      echo "<div id='".$modal_id."' class='modal ".$modal_id."' tabindex='-1'>
+      echo "<div id='".$args['id']."' class='modal' tabindex='-1'>
               <div class='modal-dialog'>
                 <div class='modal-content'>
                   <div class='modal-header modal-header-danger bg-danger'>
-                    <h4 class='modal-title text-white'>".$header."</h4>
+                    <h4 class='modal-title text-white'>".$args['header']."</h4>
                     <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                   </div>
                   <div class='modal-body'>
-                    <p>".$message."</p>
+                    <p>".$args['body']."</p>
                   </div>
-                  <div class='modal-footer'>".$footer."</div>
+                  <div class='modal-footer'>".$args['footer'];
+                
+                  if(isset($args['cancel'])){
+                    echo "<button type='button' class='btn btn-default' data-bs-dismiss='modal'>".$args['cancel']."</button>";
+                  }
+                
+                  echo "</div>
                 </div><!-- /.modal-content -->
               </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
@@ -24,16 +30,6 @@ class Bootstrap{
 
 
     }
-
-
-
-
-
-
-    
-
-
-
 
 
     public static function image_details($modal_id,$image){

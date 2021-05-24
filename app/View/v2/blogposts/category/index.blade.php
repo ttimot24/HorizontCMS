@@ -54,13 +54,11 @@
 				</td>
 
 				<td class="col-5  text-center">
-	
-				<div class='btn-group col-3' role='group'>
-					<a href="{{ admin_link('blogpost_category-edit',$each->id) }}" type='button' class='btn btn-warning btn-sm'>{{trans('actions.edit')}}</a>
-					<a href="{{ admin_link('blogpost_category-delete',$each->id) }}" type='button' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>
-				</div>
-
-			</td>
+					<div class='btn-group col-3' role='group'>
+						<a href="{{ admin_link('blogpost_category-edit',$each->id) }}" type='button' class='btn btn-warning btn-sm'>{{trans('actions.edit')}}</a>
+						<a href="{{ admin_link('blogpost_category-delete',$each->id) }}" type='button' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>
+					</div>
+				</td>
 		</tr>
 		@endforeach
 

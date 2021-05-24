@@ -69,7 +69,7 @@ echo  "<td>" .$each->id;
     echo " <i class='fa fa-home' style='font-size:20px;'></i>";
   }
   else{
-    echo " <a href='admin/#' data-toggle='modal' data-target='.mo-".$each->id."'><i class='fa fa-home' id='hidden-home' style='font-size:20px;'></i></a>";  
+    echo " <a href='admin/#' data-bs-toggle='modal' data-bs-target='.mo-".$each->id."'><i class='fa fa-home' id='hidden-home' style='font-size:20px;'></i></a>";  
   }
 
 echo "<br><span class='badge badge-secondary'>".strtoupper($each->language)."</span>";
@@ -104,15 +104,14 @@ echo "<br><span class='badge badge-secondary'>".strtoupper($each->language)."</s
     echo "<td style='padding-left:45px;'><span class='badge badge-dark'>" .$each->subpages->count()."</span></td>";
 
 
-      echo   "<td><center>";
-
-      echo "
+      echo   "<td class='text-center'>
        <div class='btn-group' role='group'>
            <a href='".admin_link('page-edit',$each->id)."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;'>".trans('actions.edit')."</a>
-           <a  type='button' data-toggle='modal' data-target='.delete_".$each->id."' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>
-       </div>";
+           <a  type='button' data-bs-toggle='modal' data-bs-target='#delete_".$each->id."' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>
+       </div>
       
-      echo "</center></td></tr>";
+      </td>
+      </tr>";
 
 
 echo '  
@@ -121,13 +120,13 @@ echo '
     <div class="modal-content">
       <div class="modal-header modal-header-warning bg-warning text-white">
         <h4 class="modal-title" id="myModalLabel">'.trans("page.change_homepage").'</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         '.trans("page.are_you_sure_to_set",["page_name" => $each->name]).'
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">'.trans('actions.close').'</button>
+        <button type="button" class="btn btn-default" data-bs-dismiss="modal">'.trans('actions.close').'</button>
         <a href="admin/page/set-home-page/'.$each->id.'" type="button" class="btn btn-primary">'.trans('actions.set').'</a>
       </div>
     </div>
@@ -137,16 +136,16 @@ echo '
 
 
 
-   Bootstrap::delete_confirmation(
-    "delete_".$each->id."",
-    trans('actions.are_you_sure'),
-    "<b>".trans('actions.delete_this',['content_type'=>'page']).": </b>".$each->name." <b>?</b>",
-    "<a href='".admin_link('page-delete',$each->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete') ."</a>
-    <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
-    );
+   Bootstrap::delete_confirmation([
+    "id" => "delete_".$each->id."",
+    "header" => trans('actions.are_you_sure'),
+    "body" => "<b>".trans('actions.delete_this',['content_type'=>'page']).": </b>".$each->name." <b>?</b>",
+    "footer" => "<a href='".admin_link('page-delete',$each->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete') ."</a>",
+    "cancel" => trans('actions.cancel')
+   ]);
 
 
-    echo "</center></td></tr>";
+    echo "</td></tr>";
 
 }
 

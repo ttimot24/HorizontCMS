@@ -6,9 +6,8 @@
 		      <div class='modal-header '>
 		      <h2 class='text-primary color-primary'><i class="fa fa-lock"></i> Screen is locked</h2>
 		      </div>
-		      <div class='modal-body'>
+		      <div class='modal-body text-center'>
 
-		    	<center>
 		    	 <img src='{{\Auth::user()->getThumb()}}' class='img-thumbnail' width='180' style='max-height:200px;object-fit:cover;'>
 
 
@@ -23,9 +22,7 @@
 						  		<input type='password' class='form-control' id='lock_pwd' name='lock_pwd' style='width:300px;' required/>
 							</div>
 						</div>
-	
 
-		    	</center>
 
 		    </div>
 		    	      <div class='modal-footer'>

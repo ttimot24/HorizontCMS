@@ -22,23 +22,10 @@ return [
 		//	'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css',
 			'https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css',
 			'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css',
-		
-			//'resources/css/darktheme.css',
-			//'resources/css/united.css',
-			//'resources/css/flaty.css',
-			//'resources/css/simplex.css',
-			//'resources/css/culean.css',
-			//'resources/css/superhero.css',
-			//   'resources/css/horizontcms.css',
-			
-			 // 'resources/css/now-ui-kit.css',
-			  'resources/css/horizontcms-bs5.css',
 
-			//'resources/css/default/style.css',
-			//'resources/css/default/bootstrap_common.css',
+			'resources/css/horizontcms-bs5.css',
+
 			'resources/assets/filemaster/css/fileinput.min.css',
-			//'resources/assets/checkboxmaster/build.css',
-			//'resources/assets/scrollbar/jquery.scrollbar.css',
 			'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'
 			],
 
