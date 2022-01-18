@@ -43,79 +43,8 @@ After downloading and copying the files to the server, navigate to the app root 
 
   [Website For Students Tutorial](https://websiteforstudents.com/how-to-install-horizontcms-on-ubuntu-18-04-16-04-with-apache2/)
   
-#### Docker
-```docker build -t hcms . ```
-
-```
-version: '3'
-
-services:
-  hcms_db:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'hcms_database'
-      MYSQL_USER: 'hcms_website'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'website789'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'password'
-    ports:
-      - '3306:3306'
-
-  hcms_migration:
-    image: hcms:latest
-    depends_on: 
-        - hcms_db
-    command: sh -c 'php artisan migrate --no-interaction --force && php artisan db:seed --no-interaction --force && php artisan --version && php artisan hcms:user --create-admin --name=Administrator --email=admin@admin.com --username=admin --password=admin1'
-    environment:
-        DB_HOST: 'hcms_db'
-        DB_CONNECTION: 'mysql'
-        DB_USERNAME: 'hcms_website'
-        DB_PASSWORD: 'website789'
-        DB_DATABASE: 'hcms_database'
-        DB_TABLE_PREFIX: 'hcms_'
-        
-  hcms_admin_user:
-    image: hcms:latest
-    depends_on: 
-        - hcms_migration
-    command: sh -c 'php artisan hcms:user --create-admin --name=Administrator --email=admin@admin.com --username=admin --password=admin1'
-    environment:
-        INSTALLED: 'true'
-        DB_HOST: 'hcms_db'
-        DB_CONNECTION: 'mysql'
-        DB_USERNAME: 'hcms_website'
-        DB_PASSWORD: 'website789'
-        DB_DATABASE: 'hcms_database'
-        DB_TABLE_PREFIX: 'hcms_'
-
-  hcms_web:
-    image: hcms:latest
-    depends_on: 
-        - hcms_migration
-    environment:
-        INSTALLED: 'true'
-        DB_HOST: 'hcms_db'
-        DB_CONNECTION: 'mysql'
-        DB_USERNAME: 'hcms_website'
-        DB_PASSWORD: 'website789'
-        DB_DATABASE: 'hcms_database'
-        DB_TABLE_PREFIX: 'hcms_'
-    ports:
-      - '8099:80'
-
-volumes:
-      - hcms-db:/var/lib/mysql
-
-volumes:
-  hcms-db:
-
-networks:
-    default:
-        name: hcms-network
-```
-  
+#### Docker Image
+https://hub.docker.com/repository/docker/ttimot24/horizont-cms  
   
 #### Revert to Views V1
 By default the CMS using the V2 version of the views on frontend, which is based on Bootstrap 4.5.3. However the previous V1 frontend is available, which was built on Bootstrap 3.4.3.
