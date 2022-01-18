@@ -9,7 +9,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions zip pdo_mysql
 
 RUN apt-get update && \
-    apt-get install -y git zip	
+    apt-get install -y git zip cron	
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php -r "if (hash_file('sha384', 'composer-setup.php') === '${INSTALLER_HASH}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
@@ -20,5 +20,6 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     
 RUN php composer.phar install
 
+RUN (crontab -l ; echo "* * * * * php /var/www/html/artisan schedule:run >> /dev/null 2>&1")| crontab -
 
 EXPOSE 80
