@@ -7,6 +7,8 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 
 RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions zip pdo_mysql
+    
+RUN cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/    
 
 RUN apt-get update && \
     apt-get install -y git zip cron	
