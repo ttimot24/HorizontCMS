@@ -66,7 +66,9 @@ class PluginController extends Controller{
 
         if($status){
 
-            \Zipper::make(storage_path().DIRECTORY_SEPARATOR.$temp_zip)->folder($plugin_name)->extractTo('plugins'.DIRECTORY_SEPARATOR.$plugin_name);
+            $zipper = new \Zipper();
+         
+            $zipper->make(storage_path().DIRECTORY_SEPARATOR.$temp_zip)->folder($plugin_name)->extractTo('plugins'.DIRECTORY_SEPARATOR.$plugin_name);
 
             if(file_exists("plugins/".$plugin_name)){ 
                 @\Storage::delete("framework".DIRECTORY_SEPARATOR."temp".DIRECTORY_SEPARATOR.$plugin_name.".zip");

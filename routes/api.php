@@ -19,6 +19,7 @@ Route::get('/me', function (Request $request) {
     return $request->user();
 })->middleware(['auth.basic']);
 
+
 Route::get('/blogposts',function(Request $request){
 
     $blogposts = \App\Model\Blogpost::getPublished()->forPage($request->input('page'),$request->input('num'));
@@ -37,6 +38,12 @@ Route::get('/pages',function(Request $request){
     return $pages;
 });
 
+Route::get('/categories',function(Request $request){
+
+    $categories = \App\Model\BlogpostCategory::all()->forPage($request->input('page'),$request->input('num'));
+
+    return $categories;
+});
 
 Route::post('lock-up',function(Request $request){
 

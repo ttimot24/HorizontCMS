@@ -43,6 +43,9 @@ After downloading and copying the files to the server, navigate to the app root 
 
   [Website For Students Tutorial](https://websiteforstudents.com/how-to-install-horizontcms-on-ubuntu-18-04-16-04-with-apache2/)
   
+#### Docker Image
+https://hub.docker.com/repository/docker/ttimot24/horizont-cms  
+  
 #### Revert to Views V1
 By default the CMS using the V2 version of the views on frontend, which is based on Bootstrap 4.5.3. However the previous V1 frontend is available, which was built on Bootstrap 3.4.3.
 
