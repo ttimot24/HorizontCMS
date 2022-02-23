@@ -7,7 +7,7 @@
 <section class="row">
 
 
-<div class='col-md-3'>
+<div class='col-3'>
     <div class="list-group">
       @foreach($all_files as $file)
           <a href="{{config('horizontcms.backend_prefix')}}/settings/log/{{basename($file)}}" class="list-group-item @if(basename($file)==basename($current_file))  bg-primary border-0 text-white @endif">{{basename($file)}}</a>
@@ -18,7 +18,7 @@
       @endforeach
     </div> 
 </div>
-<div class='col-md-9'>
+<div class='col-9'>
 
 <?php 
 
@@ -37,60 +37,43 @@
 
 <div class="card bg-dark text-white mb-4 p-4">
     <div class="row">
-      <h4 class="col-md-4" >Entries: {{$all_file_entries}}</h4>
-      <div class='col-md-4'></div>
-      @if(isset($current_file))
-      <a href="{{'storage/framework/logs/'.$current_file}}" class="btn btn-primary ml-auto col-md-4"><i class="fa fa-download" aria-hidden="true"></i> Download file</a>
-      @endif
+        <div class="col-6">
+          <h4>Entries: {{$all_file_entries}}</h4>
+        </div>
+        <div class='col-6 text-end'>
+        @if(isset($current_file))
+          <a href="{{'storage/framework/logs/'.$current_file}}" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i> Download file</a>
+        @endif
+      </div>
     </div>
-    {{'storage/framework/logs/'.$current_file}}
+    <div class="row p-2">
+      {{'storage/framework/logs/'.$current_file}}
+    </div>
 </div>
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+
+<div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
   
 @foreach($entries as $entry)
 
-
-<div class="card">
-    <div class="card-header bg-{{$colors[$entry->level]}}" id="heading{{$entry_number}}">
-        <h6 class="text-white" data-toggle="collapse" data-target="#collapse{{$entry_number}}" aria-expanded="true" aria-controls="collapse{{$entry_number}}">
-          <div class='col-md-8 text-left float-left pl-1'>
-            #{{$entry_number}}  <i class="fa fa-exclamation-triangle pl-2" aria-hidden="true"></i> {{ucfirst($entry->level)}} - {{$entry->id}}
-            </div> 
-            <div class='col-md-4 text-right float-right'>
-              {{$entry->date->format(\Settings::get('date_format',\Config::get('horizontcms.default_date_format'),true))}}
-            </div>
-        </h6>
+    <div class="accordion-item">
+        <h2 class="accordion-header mt-0" id="heading{{$entry_number}}">
+          <button class="accordion-button bg-{{$colors[$entry->level]}} text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$entry_number}}" aria-expanded="true" aria-controls="collapse{{$entry_number}}">
+              <div class='col-8'>
+                #{{$entry_number}}  <i class="fa fa-exclamation-triangle pl-2" aria-hidden="true"></i> {{ucfirst($entry->level)}} - {{$entry->id}}
+                </div> 
+                <div class='col-4 text-end'>
+                  {{$entry->date->format(\Settings::get('date_format',\Config::get('horizontcms.default_date_format'),true))}}
+                </div>
+          </button>
+        </h2>
+        <div id="collapse{{$entry_number}}" class="accordion-collapse collapse show" aria-labelledby="heading{{$entry_number}}" data-bs-parent="#accordion">
+          <div class="accordion-body bg-dark text-white">
+            {!! $entry->context !!} 
+          </div>
+        </div>
     </div>
 
-    <div id="collapse{{$entry_number}}" class="collapse @if($loop->first) show @else nshow @endif" aria-labelledby="heading{{$entry_number}}" data-parent="#accordion">
-      <div class="card-body bg-dark text-white">
-      {!! $entry->context !!} 
-      </div>
-    </div>
-  </div>
-
-<!--
-  <div class="panel panel-{{$colors[$entry->level]}}">
-    <div class="panel-heading" role="tab" id="heading{{$entry_number}}">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$entry_number}}" @if($loop->first) aria-expanded="true" @else aria-expanded="false" @endif aria-controls="collapse{{$entry_number}}">
-             <div class='row'>
-                <div class='col-md-8'>
-                    <h6>#{{$entry_number}}  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ucfirst($entry->level)}} - {{$entry->id}} </h6>
-                  </div> 
-                  <div class='col-md-4 text-right'>
-                    <h6>{{$entry->date->format(\Settings::get('date_format',\Config::get('horizontcms.default_date_format'),true))}} </h6>
-                  </div>
-        	 </div>
-        </a>
-      </h4>
-    </div>
-    <div id="collapse{{$entry_number}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{$entry_number}}">
-      <div class="panel-body">
-      {!! $entry->context !!} 
-      </div>
-    </div>
-  </div>-->
 
   <?php  $entry_number--; ?>
 @endforeach
