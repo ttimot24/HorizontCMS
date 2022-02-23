@@ -388,3 +388,7 @@ pre {
 i.bi{
     font-size: 1.5em;
 }
+
+.accordion-button::after, .accordion-button:not(.collapsed)::after{
+    background-image: unset;
+}
