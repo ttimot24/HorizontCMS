@@ -8,13 +8,15 @@
         <h2>File manager</h2>
       </div>
 
-      <div class='col-md-8 text-right mt-4'>
+      <div class='col-md-8 text-end mt-4'>
         <div class="row">
-          <div class="col-md-4 offset-md-4 col-sm-7 col-xs-7">
+            <div class="col-md-4 offset-md-4 col-sm-7 col-xs-7 text-end">
                 <input type="text" v-model="filter" class="form-control" id="filter" placeholder="Filter">
             </div>
-            <a class='btn btn-primary mr-2' data-bs-toggle='modal' data-bs-backdrop='static' data-bs-target='.upload_file_to_storage'><i class="fa fa-upload" aria-hidden="true"></i> Upload</a>
-            <a class='btn btn-primary' data-bs-toggle='modal' data-bs-backdrop='static' data-bs-target='.new_folder'><i class="fa fa-folder" aria-hidden="true"></i> Create Folder</a>
+            <div class="col text-end">
+              <a class='btn btn-primary mr-2' data-bs-toggle='modal' data-bs-backdrop='static' data-bs-target='.upload_file_to_storage'><i class="fa fa-upload" aria-hidden="true"></i> Upload</a>
+              <a class='btn btn-primary' data-bs-toggle='modal' data-bs-backdrop='static' data-bs-target='.new_folder'><i class="fa fa-folder" aria-hidden="true"></i> Create Folder</a>
+              </div>
         </div>
         
       </div>
@@ -23,16 +25,16 @@
 
   <div class="row">
 
-    <div class='panel panel-default col-md-2 bg-dark p-3'>
+    <div class='panel panel-default col-2 bg-dark p-3'>
         <h4 class="container bg-dark text-white">Drivers</h4>
         <ul class="list-group">
           @foreach(config('filesystems.disks') as $key => $value)
-                <a href="#" v-on:click.prevent="open('{{ isset($value['root'])? basename($value['root']) : ''}}',false);"><li class="list-group-item bg-dark">{{$key}}</li></a>
+                <a href="#" v-on:click.prevent="open('{{ isset($value['root'])? basename($value['root']) : ''}}',false);"><li class="list-group-item bg-dark text-white">{{$key}}</li></a>
           @endforeach
         </ul>
     </div>
 
-    <div class="panel panel-default col-md-10 bg-dark" >
+    <div class="panel panel-default col-10 bg-dark" >
       <div class="panel-body">
           <div class="row p-0 m-0">
             <div class="col-md-10 m-0 p-0">
@@ -53,19 +55,19 @@
             <div class="row text-white">
               <div class='folder col-md-2 col-sm-4 col-xs-4 text-center text-white' v-for="folder in folders" :id="folder" v-on:click="select(folder)" v-on:dblclick="open(folder);" >
                 
-                <div class="file-nav text-right">
+                <div class="file-nav text-end">
                 <!--  <a v-on:click="renameModal(folder)"><i class="fa fa-pencil pull-right"></i></a> -->
                   <a v-on:click="deleteModal(folder)" ><i class="fa fa-trash pull-right"></i></a>
                 </div>
 
                 <div clas='row'>
-                  <img class="w-75" src='resources/images/icons/dir.png' >
+                  <img style="width:7rem;" src='resources/images/icons/dir.png' >
                 </div>
                 <b>@{{folder}}</b>
               </div>
 
               <div v-for="file in files" class='file col-md-2 col-sm-4 col-xs-4 text-center' :id="file"   @if($mode=='embed') v-on:click="returnFileUrl('storage/'+currentDirectory+'/'+file);" @else v-on:click="select(file)" @endif >
-                <div class="file-nav text-right">
+                <div class="file-nav text-end">
                   <a v-on:click="renameModal(file)"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp
                   <a :href="'storage/'+currentDirectory+'/'+file"><i class="fa fa-download"></i></a>&nbsp
                   <a v-on:click="deleteModal(file)" ><i class="fa fa-trash"></i></a>
