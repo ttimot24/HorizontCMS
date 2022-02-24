@@ -4,23 +4,26 @@
 <div class='container main-container'>
 <div class='row'>
 <div class="col-md-12">
-<h2 class='float-left mt-2'>{{ trans('category.category') }}</h2>
+<h2 class='mt-2'>{{ trans('category.category') }}</h2>
 
-<form action="{{ admin_link('blogpost_category-create') }}" class='form-inline float-right mt-2' role='form' method='POST'>
+<form action="{{ admin_link('blogpost_category-create') }}" class='form-inline float-right mt-4' role='form' method='POST'>
 
 	{{ csrf_field() }}
 
-	<div class="d-flex">
-		<label for='cat'>{{ trans('category.add_category') }}:</label> 
-		<div class='form-group'>
-			<div class='col-sm-6'>  
-				<input type='text' class='form-control' id='cat' name='name' placeholder='Enter new category' required>
-			</div>
-		</div> 
-		<div class='form-group'>
-			<button type='submit' class='btn btn-primary'>{{ trans('actions.add') }}</button> 
-		</div>
+	<div class="row g-3 align-items-center">
+	<div class="col-auto">
+		<label for="inputPassword6" class="col-form-label">{{ trans('category.add_category') }}:</label>
 	</div>
+	<div class="col-auto">
+		<input type='text' class='form-control' id='cat' name='name' placeholder='Enter new category' required>
+	</div>
+	<div class="col-auto">
+		<span class="form-text">
+			<button type='submit' class='btn btn-primary'>{{ trans('actions.add') }}</button> 
+		</span>
+	</div>
+	</div>
+
 </form>
 </div>
   
@@ -50,7 +53,7 @@
 				<td class='col'><a href="{{ admin_link('blogpost_category-view',$each->id) }}">{{ $each->name }}</a></td>     
 
 				<td class="col">
-					<span class='badge'>{{ $each->blogposts->count() }}</span>
+					<span class='badge badge-dark'>{{ $each->blogposts->count() }}</span>
 				</td>
 
 				<td class="col-5  text-center">

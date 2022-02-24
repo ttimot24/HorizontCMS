@@ -6,25 +6,31 @@
 
 
 
-<div class='col-md-12' style='margin-top:3%;'>
-  <form action="{{ admin_link('blogpost_category-update',$category->id) }}" class='form-inline' role='form' method='POST'>
-  
+<div class='col-md-12'>
+
+<form action="{{ admin_link('blogpost_category-update', $category->id) }}" class='form-inline float-right mt-4' role='form' method='POST'>
 
 	{{ csrf_field() }}
 
-      ID: {{ $category->id }} &nbsp
-      <input type='text' class='form-control' name='name' value="{{ $category->name }}" required autofocus>
+	<div class="row g-3 align-items-center">
+	<div class="col-auto">
+		<label for="inputPassword6" class="col-form-label">Rename:</label>
+	</div>
+	<div class="col-auto">
+		<input type='text' class='form-control' id='cat' name='name' value="{{ $category->name }}" required autofocus>
+	</div>
+	<div class="col-auto">
+		<span class="form-text">
+			<button type='submit' class='btn btn-primary'>{{ trans('actions.save') }}</button> 
+		</span>
+	</div>
+	</div>
 
-    <button type='submit' class='btn btn-default'>{{ trans('actions.save') }}</button>
-  </form>
+</form>
 
-</div>
-
-<div style='margin-top:15%;'>
+<div class="mt-5">
     <a href="{{ admin_link('blogpost_category-index') }}" class="btn btn-info">{{ trans('actions.back') }}</a>
 </div>
-</br>
-</br>
 
 </div>
 @endsection
