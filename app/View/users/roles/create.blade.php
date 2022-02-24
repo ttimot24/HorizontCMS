@@ -28,7 +28,7 @@
     @endforeach
 
 
-    <li class='list-group-item bg-dark'><button type='submit' class='btn btn-warning btn-block'>Add user group</button></li>
+    <li class='list-group-item bg-dark'><button type='submit' class='btn btn-warning w-100'>Add user group</button></li>
 
 
   </ul>

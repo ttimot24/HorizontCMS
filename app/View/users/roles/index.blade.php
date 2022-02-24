@@ -71,13 +71,13 @@
 
   
 
-      Bootstrap::delete_confirmation(
-          "delete_".$role->id."",
-          trans('actions.are_you_sure'),
-          "<div style='color:black;'><b>".trans('actions.delete_this',['content_type' => 'role']).": </b>".$role->name." <b>?</b></div>",
-          "<a href='".admin_link('user_role-delete',$role->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>
-          <button type='button' class='btn btn-default' data-dismiss='modal'>".trans('actions.cancel')."</button>"
-          );
+      Bootstrap::delete_confirmation([
+          "id" => "delete_".$role->id."",
+          "header" => trans('actions.are_you_sure'),
+          "body" => "<div style='color:black;'><b>".trans('actions.delete_this',['content_type' => 'role']).": </b>".$role->name." <b>?</b></div>",
+          "footer" => "<a href='".admin_link('user_role-delete',$role->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
+          "cancel" => trans('actions.cancel')
+      ]);
 
   ?>
 
