@@ -60,7 +60,7 @@ var lockScreen = new Vue({
 		lockUpScreen: function(){
 		    $.ajax({
 		        //url:'admin/screen-lock/lock-up',
-		        url:'api/lock-up',
+		        url:'api/v1/lock-up',
 		        type: 'POST',
 		        data: {
 		        	_token: "<?= csrf_token() ?>",
