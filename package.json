@@ -21,6 +21,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "bootstrap-sass": "^3.4.1"
+        "bootstrap-sass": "^3.4.1",
+        "kartik-v/bootstrap-fileinput": "dev-master"
     }
 }

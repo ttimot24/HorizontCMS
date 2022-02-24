@@ -26,7 +26,7 @@
   <div class="row">
 
     <div class='panel panel-default col-2 bg-dark p-3'>
-        <h4 class="container bg-dark text-white">Drivers</h4>
+        <h4 class="p-2 bg-dark text-white">Drivers</h4>
         <ul class="list-group">
           @foreach(config('filesystems.disks') as $key => $value)
                 <a href="#" v-on:click.prevent="open('{{ isset($value['root'])? basename($value['root']) : ''}}',false);"><li class="list-group-item bg-dark text-white">{{$key}}</li></a>
@@ -45,7 +45,7 @@
               </ol>
             </nav>
             </div>
-            <div class="col-md-2 text-right pt-3 pr-3">
+            <div class="col-md-2 text-end pt-3 pr-3">
               <a href="a" v-on:click.prevent="open(currentDirectory,false);"><i class="fa fa-refresh" onclick="$(this).addClass('fa-spin');" aria-hidden="true" style="font-size: 22px;"></i></a>
             </div>
           </div>
