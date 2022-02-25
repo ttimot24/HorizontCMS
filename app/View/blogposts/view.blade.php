@@ -26,7 +26,7 @@
 
 <section class='row'>
 <div class='col-md-4'>
-  <button type='button' class='btn btn-link w-100' data-bs-toggle='modal' data-bs-target='.{{ $blogpost->id }}-modal-xl'>
+  <button type='button' class='btn btn-link w-100' data-bs-toggle='modal' data-bs-target='#modal-xl-{{ $blogpost->id }}'>
     <img src='{{ $blogpost->getImage() }}' width='350' class='img img-thumbnail mt-3'  />
   </button>
 

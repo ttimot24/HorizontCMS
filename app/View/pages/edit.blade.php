@@ -51,7 +51,7 @@
             </div>
             </div>
 
-            <div class='form-group pull-left col-xs-12 col-md-12' style='margin-top:20px;margin-bottom:20px;'>
+            <div class='form-group col-xs-12 col-md-12' style='margin-top:20px;margin-bottom:20px;'>
                 <label class="m-2 mr-4">{{trans('page.visibility')}}</label> 
                 <div class='form-check form-check-inline'>
                     <input class="form-check-input" type='radio' id='inlineRadio1' value='1' name='visibility' @if($page->visibility==1) checked @endif>
@@ -64,8 +64,8 @@
             </div>
         </div>
         <div class="col-xs-12 col-4">
-          <button type='button' class='btn btn-link pull-right' style='margin-top:-2%;' data-toggle='modal' data-target='.<?= $page->id ?>-modal-xl'>
-            <img src='<?= $page->getThumb() ?>' class='img img-thumbnail' width=300  >
+          <button type='button' class='btn btn-link' style='margin-top:-2%;' data-bs-toggle='modal' data-bs-target='#modal-xl-<?= $page->id ?>'>
+            <img src='<?= $page->getThumb() ?>' class='img img-thumbnail' width='300'  >
           </button>
         </div>
 

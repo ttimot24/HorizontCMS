@@ -28,7 +28,7 @@
 
 <section class='row'>
 <div class='col-md-3 text-center' valign='top'>
-<a class='btn btn-link' data-bs-toggle='modal' data-bs-target='.{{$user->id}}-modal-xl'>
+<a class='btn btn-link' data-bs-toggle='modal' data-bs-target='#modal-xl-{{$user->id}}'>
   <img src='{{$user->getImage()}}' class='img img-thumbnail mt-3' >
 </a>
 

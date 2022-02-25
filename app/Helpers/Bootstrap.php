@@ -34,64 +34,46 @@ class Bootstrap{
 
     public static function image_details($modal_id,$image){
 
+      $size = getimagesize($image);
+      $image_size = $size[3];
+      $image_size_width = explode("width=\"",$image_size);
+      $image_size_width = explode("\"",$image_size_width[1]);
 
-      echo "<div id=".$modal_id." class='modal ".$modal_id."-modal-xl' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>
-            <div class='modal-dialog modal-xl'>
-              <div class='modal-content'>
+      $image_size_height = explode("height=\"",$image_size);
+      $image_size_height = explode("\"",$image_size_height[1]);
 
-                  <div class='modal-header'>
-                  <button type='button' class='close' data-bs-dismiss='modal' aria-hidden='true'>×</button>
-                  </br>
-                  <h2 class='modal-title'><center></center></h2>
-                   </div>
-                  <div class='modal-body'>
-                  <section class='row'>";
-
-                    echo "<div class='col-md-6'> <a href='".$image."' target='_blank'>
-                    <img src='".$image."' class='img img-thumbnail' style='max-height:500px;'></a></div>
-                    <div class='col-md-6' valign='top'>
-                    <h1>Properties</h1></br>";
-                    echo "<h4>File name: </h4> " .basename($image);
-                    echo "<h4>Path: </h4> <a href='".$image."' target='_blank'>" .$image."</a>";
-
-                    $size = getimagesize($image);
-                    $image_size = $size[3];
-                    $image_size_width = explode("width=\"",$image_size);
-                    $image_size_width = explode("\"",$image_size_width[1]);
-
-                    $image_size_height = explode("height=\"",$image_size);
-                    $image_size_height = explode("\"",$image_size_height[1]);
-
-                    echo "<h4>Size: </h4>" .$image_size_width[0] ."X" .$image_size_height[0];
-
-                    echo "<h4>Extension: </h4>" .$size['mime'];
-
-                   // echo "<h4>Url: </h4><a target='_blank' href='http://" .$_SERVER['SERVER_NAME'].BASE_DIR ."" .$image."'>http://" .$_SERVER['SERVER_NAME'].BASE_DIR ."" .$image ."</a>";
-
-
-          echo "   </div>
-                  </section>
-                  </div>
-
-
-              </div>
+      echo '<div id="modal-xl-'.$modal_id.'"  class="modal '.$modal_id.'-modal-xl" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-          </div>";
+            <div class="modal-body">
+            <section class="row">';
 
+            echo "<div class='col-md-6'> <a href='".$image."' target='_blank'>
+            <img src='".$image."' class='img img-thumbnail' style='max-height:500px;'></a></div>
+            <div class='col-md-6' valign='top'>
+            <h1>Properties</h1></br>";
+            echo "<h4>File name: </h4> " .basename($image);
+            echo "<h4>Path: </h4> <a href='".$image."' target='_blank'>" .$image."</a>";
 
+            echo "<h4>Size: </h4>" .$image_size_width[0] ."X" .$image_size_height[0];
 
+            echo "<h4>Extension: </h4>" .$size['mime'];
 
+     echo '</div>
+          </section>
 
-
-
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>';
 
 
     }
-
-
-
-
-
-
 
 }

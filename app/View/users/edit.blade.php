@@ -4,7 +4,7 @@
 <div class='container main-container'>
   <h2>{{trans('user.edit_user')}}</h2>
 
-<button type='button' class='btn btn-link pull-right' data-toggle='modal' data-target='.{{ $user->id }}-modal-xl'>
+<button type='button' class='btn btn-link pull-right' data-bs-toggle='modal' data-bs-target='#modal-xl-{{ $user->id }}'>
   <img src='{{ $user->getThumb() }}' class='img img-thumbnail' width='320' >
 </button>
 

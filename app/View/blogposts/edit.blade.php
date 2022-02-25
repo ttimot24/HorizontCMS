@@ -37,7 +37,7 @@
 
         </div>
         <div class="col-xs-12 col-md-4">
-          <button type='button' class='btn btn-link pull-right' data-toggle='modal' data-target='.<?= $blogpost->id ?>-modal-xl'>
+          <button type='button' class='btn btn-link pull-right' data-bs-toggle='modal' data-bs-target='#modal-xl-<?= $blogpost->id ?>'>
               <img src=<?= $blogpost->getImage(); ?> width=300 class='img img-thumbnail' >
           </button>
         </div>
