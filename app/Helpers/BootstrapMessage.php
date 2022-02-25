@@ -14,13 +14,13 @@ class BootstrapMessage{
 
     public function success($message){
 
-      return $this->alertTemplate(['class'=> 'success','icon' => '', 'title'=> 'Success', $message]);
+      return $this->alertTemplate(['class'=> 'success','icon' => '', 'title'=> 'Success', 'message' => $message]);
     }
 
 
     public function error($message){
      
-       return $this->alertTemplate(['class'=> 'error','icon' => '', 'title'=> 'Error', $message]);
+       return $this->alertTemplate(['class'=> 'error','icon' => '', 'title'=> 'Error', 'message' => $message]);
         
     }
 
@@ -28,7 +28,7 @@ class BootstrapMessage{
 
     public function warning($message){
        
-      return $this->alertTemplate(['class'=> 'warning','icon' => '', 'title'=> 'Warning', $message]);
+      return $this->alertTemplate(['class'=> 'warning','icon' => '', 'title'=> 'Warning', 'message' => $message]);
 
     }
 
@@ -37,7 +37,7 @@ class BootstrapMessage{
 
     public function note($message){
 
-      return $this->alertTemplate(['class'=> 'info','icon' => '', 'title'=> 'Note', $message]);
+      return $this->alertTemplate(['class'=> 'info','icon' => '', 'title'=> 'Note', 'message' => $message]);
 
     }
 
