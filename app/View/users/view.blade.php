@@ -33,7 +33,7 @@
 </a>
 
   <div class='btn-group my-3' role='group'>
-    <a href='admin/{{$user->id}}' type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('actions.deactivate')}}</a>
+    <a href='admin/{{$user->id}}' type='button' class='btn btn-success mx-1'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('actions.deactivate')}}</a>
     <a href="{{admin_link('user-edit',$user->id)}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
   </div>    
   @if($user->role_id<\Auth::user()->role_id && !$user->is(Auth::user()))
