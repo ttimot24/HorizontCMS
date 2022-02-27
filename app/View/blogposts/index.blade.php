@@ -31,12 +31,12 @@
           <td><img src='{{$blogpost->getThumb()}}'  class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> </td>
           <td><a href="{{admin_link('blogpost-view',$blogpost->id)}}" >{{ $blogpost->title }}</a><br>
               @if($blogpost->isDraft())
-                <span class="badge badge-info">{{trans('actions.draft')}}</span>
+                <span class="badge bg-info text-dark">{{trans('actions.draft')}}</span>
               @elseif($blogpost->isFeatured())
-                <span class="badge badge-success">{{trans('Featured')}}</span>
+                <span class="badge bg-success">{{trans('Featured')}}</span>
               @endif
           </td>
-          <td class="text-center"><span class="badge badge-dark">{{ count($blogpost->comments) }}</span></td>
+          <td class="text-center"><span class="badge rounded-pill bg-dark">{{ count($blogpost->comments) }}</span></td>
           <td class='hidden-xs text-center col-1'><?= $blogpost->created_at->format('Y-m-d'); ?></br><font size='2'><i>at</i> <?= $blogpost->created_at->format('H:i:s'); ?></font></td>
           @if($blogpost->author)
           <td><a href="{{admin_link('user-view',$blogpost->author->id)}}" >{{ $blogpost->author->username }}</a></td>
@@ -44,7 +44,7 @@
           <td>{{ trans('blogpost.removed_user') }}</td>
           @endif
           @if($blogpost->category)
-          <td class='hidden-xs'><span class="badge badge-success d-block" style='font-size:13px;' >{{ $blogpost->category->name }}</span></td>
+          <td class='hidden-xs'><span class="badge bg-success d-block" style='font-size:13px;' >{{ $blogpost->category->name }}</span></td>
           @else
           <td class='hidden-xs'>none</td>
           @endif

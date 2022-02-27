@@ -53,7 +53,7 @@
 				<td class='col'><a href="{{ admin_link('blogpost_category-view',$each->id) }}">{{ $each->name }}</a></td>     
 
 				<td class="col">
-					<span class='badge badge-dark'>{{ $each->blogposts->count() }}</span>
+					<span class='badge rounded-pill bg-dark'>{{ $each->blogposts->count() }}</span>
 				</td>
 
 				<td class="col-5  text-center">

@@ -62,9 +62,6 @@ else{
 echo "<tr class='".$class."'>";
 echo  "<td>" .$each->id;
 
-
-  //echo " <i class='clickable fa fa-plus' data-toggle='collapse' id='row1' data-target='.row1' style='font-size:20px;'></i>&nbsp&nbsp&nbsp";
-
   if($each->is($home_page)){
     echo " <i class='fa fa-home' style='font-size:20px;'></i>";
   }
@@ -72,7 +69,7 @@ echo  "<td>" .$each->id;
     echo " <a href='admin/#' data-bs-toggle='modal' data-bs-target='.mo-".$each->id."'><i class='fa fa-home' id='hidden-home' style='font-size:20px;'></i></a>";  
   }
 
-echo "<br><span class='badge badge-secondary'>".strtoupper($each->language)."</span>";
+echo "<br><span class='badge bg-secondary'>".strtoupper($each->language)."</span>";
 
   echo "
         </td>
@@ -82,10 +79,10 @@ echo "<br><span class='badge badge-secondary'>".strtoupper($each->language)."</s
         <td>";
 
         if($each->visibility==1){
-          echo "<font color='green'>".trans('page.visible')."</font>";
+          echo "<p class='text-success'>".trans('page.visible')."</p>";
         }
         else{
-          echo "<font color='red'>".trans('page.invisible')."</font>";
+          echo "<p class='text-danger'>".trans('page.invisible')."</p>";
         } 
 
   echo "</td>
@@ -101,10 +98,10 @@ echo "<br><span class='badge badge-secondary'>".strtoupper($each->language)."</s
     echo "</td>";
 
         
-    echo "<td style='padding-left:45px;'><span class='badge badge-dark'>" .$each->subpages->count()."</span></td>";
+    echo "<td class='ps-4'><span class='badge rounded-pill bg-dark'>" .$each->subpages->count()."</span></td>
 
 
-      echo   "<td class='text-center'>
+    <td class='text-center'>
        <div class='btn-group' role='group'>
            <a href='".admin_link('page-edit',$each->id)."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;'>".trans('actions.edit')."</a>
            <a  type='button' data-bs-toggle='modal' data-bs-target='#delete_".$each->id."' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>

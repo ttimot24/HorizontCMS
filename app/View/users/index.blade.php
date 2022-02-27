@@ -16,8 +16,8 @@
         <th>{{trans('user.th_name')}}</th>
         <th>{{trans('user.th_username')}}</th>
         <th>{{trans('user.th_email')}}</th>
-        <th>{{trans('user.th_rank')}}</th>
-        <th>{{trans('user.th_session')}}</th>
+        <th class="text-center">{{trans('user.th_rank')}}</th>
+        <th class="text-center">{{trans('user.th_session')}}</th>
         <th class="text-center">{{trans('actions.th_action')}}</th>
       </tr>
     </thead>
@@ -39,7 +39,7 @@ echo "<td>".$each->username."</td>";
 echo "<td>".$each->email."</td>";
 
         echo "<td> 
-                <span class='d-block badge ".( ($each->isAdmin())? "badge-danger" : "badge-dark" ) ."' style='font-size:13px;'>".$each->role->name ."</span>
+                <span class='d-block badge rounded-pill ".( ($each->isAdmin())? "bg-danger" : "bg-dark" ) ."' style='font-size:13px;'>".$each->role->name ."</span>
              </td>";
         echo "<td style='text-align:center;'><b>"; 
 
@@ -48,10 +48,10 @@ echo "<td>".$each->email."</td>";
 
 
         if($each->isOnline()){
-          echo "<font class='text-success'>Online</font>";	
+          echo "<p class='text-success'>Online</p>";	
         }
         else{
-          echo "<font color='text-danger'>Offline</font>";	
+          echo "<p class='text-danger'>Offline</p>";	
         }
 
 

@@ -51,7 +51,7 @@
         $disable = $role->name =='Admin'? " disabled" : "";
 
 
-          $perm_name = str_replace("Admin area","<b style='color:red;'>Admin area</b>",$perm_name);
+          $perm_name = str_replace("Admin area","<b class='text-danger'>Admin area</b>",$perm_name);
 
           echo "<li class='list-group-item bg-dark text-white'>".$perm_name."<input type='checkbox' class='pull-right' name='".$key."' value='1' ".$check." ".$disable."></li>";
 
@@ -59,11 +59,11 @@
 
       echo "<li class='list-group-item bg-dark text-white'>
 
-          <div class='btn-group' role='group' style='width:100%;'>
+          <div class='btn-group w-100' role='group'>
 
-              <button type='submit' class='btn btn-success btn-sm' ".$disable." style='width:80%;'>Save changes</button>
+              <button type='submit' class='btn btn-success btn-sm w-75' ".$disable.">Save changes</button>
             
-              <a data-toggle='modal' data-target='.delete_".$role->id."' class='btn btn-danger btn-sm pull-right' ".$disable."><i class='fa fa-trash-o' aria-hidden='true'></i></a>
+              <a data-bs-toggle='modal' data-bs-target='#delete_".$role->id."' class='btn btn-danger btn-sm w-25' ".$disable."><i class='fa fa-trash-o' aria-hidden='true'></i></a>
 
         </div>
 
@@ -72,9 +72,9 @@
   
 
       Bootstrap::delete_confirmation([
-          "id" => "delete_".$role->id."",
+          "id" => "delete_".$role->id,
           "header" => trans('actions.are_you_sure'),
-          "body" => "<div style='color:black;'><b>".trans('actions.delete_this',['content_type' => 'role']).": </b>".$role->name." <b>?</b></div>",
+          "body" => "<div><b>".trans('actions.delete_this',['content_type' => 'role']).": </b>".$role->name." <b>?</b></div>",
           "footer" => "<a href='".admin_link('user_role-delete',$role->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
           "cancel" => trans('actions.cancel')
       ]);
