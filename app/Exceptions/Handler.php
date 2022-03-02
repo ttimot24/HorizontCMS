@@ -51,6 +51,11 @@ class Handler extends ExceptionHandler
         }
 
     	if(get_class($exception)!=\Illuminate\Auth\AuthenticationException::class && get_class($exception)!= \Illuminate\Validation\ValidationException::class){
+    		
+    		if ($request->expectsJson()) {
+    			return response()->json(['error' => $exception->getMessage()], 500);
+    		}
+    		
     		return response()->view('errors.exception', ['exception' => $exception]);
     	}
 
