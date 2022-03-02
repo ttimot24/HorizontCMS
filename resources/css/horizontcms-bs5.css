@@ -1,7 +1,6 @@
 body {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    font-size: 12px;
-    line-height: 1.42857143;
+    font-size: .8rem;
     color: #1f1f1f;
     background-color: #F5F5F5;
 }
@@ -71,23 +70,9 @@ body {
 }
 
 .dropdown-menu {
-    position: absolute;
-    top: 90%;
-    left: 10;
-    z-index: 1000;
-    display: none;
-    float: left;
-    min-width: 180px;
-    list-style: none;
-    font-size: 12px;
-    text-align: left;
-    background-color: #1f1f1f;
-    border: 1px solid transparent;
-    border-radius: 0;
+    font-size: .75rem;
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
 }
 
 

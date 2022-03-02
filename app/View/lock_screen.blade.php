@@ -19,7 +19,7 @@
 		    			<div class='form-group'>
 						  <label for='pwd'>Password:</label>
 						  	<div class='input-group'>
-						  		<input type='password' class='form-control' id='lock_pwd' name='lock_pwd' style='width:300px;' required/>
+						  		<input type='password' class='form-control w-100' id='lock_pwd' name='lock_pwd' required/>
 							</div>
 						</div>
 
