@@ -19,13 +19,11 @@ body {
 }*/
 
 .nav-link{
-    padding: 10px !important;
-    padding-top: 15px !important;
-    padding-bottom: 15px !important;
+    padding: 1rem .75rem !important;
 }
 
 .dropdown-menu .nav-link{
-    padding: 7px 14px !important;
+    padding: .5rem 1rem !important;
 }
 
 .nav-link .fa{
@@ -42,8 +40,6 @@ body {
 }
 
 .navbar-brand{
-    float: left;
-    padding: 9.5px 15px;
     font-size: 19px;
     line-height: 21px;
     height: 40px;

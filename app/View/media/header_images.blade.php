@@ -69,7 +69,7 @@
 	  </div>
 	  <form action='admin/file-manager/fileupload?dir_path=storage/images/header_images' method='POST' enctype='multipart/form-data'>
       <div class='modal-body'>
-		{{csrf_field()}}
+		{{ csrf_field() }}
 		<div class='form-group'>
 		<label for='file'>Upload file:</label>
 		<input name='up_file[]' id='input-2' type='file' class='file'  accept="image/*"  multiple='true' data-show-upload='false' data-show-caption='true' required>

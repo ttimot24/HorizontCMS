@@ -4,7 +4,7 @@
 <div class='container main-container' id='dashboard'> 
 
     <div class='row'>
-      <div class='col-xs-12 col-sm-12 col-md-4 mt-3'>
+      <div class='col m-auto'>
 
           <h3 class="text-center">{{ $domain }}</h3>
           <p class='text-muted text-center'>{{ trans('dashboard.server_ip')." ".$server_ip }}</p>
@@ -25,11 +25,11 @@
      </div>
 
 
-      <div class='col-xs-12 col-sm-12 col-md-4 pt-5 d-flex justify-content-center'>
+      <div class='col m-auto text-center py-5 mt-5'>
           <img src='{{ url($admin_logo) }}' class='img img-responsive img-rounded' style='max-height:250px;'/>
       </div>
 
-      <div class='col-xs-12 col-sm-12 col-md-4 mt-3'>   
+      <div class='col m-auto '>   
         
 
         @if(\Auth::user()->hasPermission('search'))

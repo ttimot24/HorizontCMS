@@ -8,9 +8,8 @@
       <span class="navbar-text">{!! $item->title !!}</span>
     @endif
     @if($item->hasChildren())
-      <ul class="dropdown-menu dropdown-menu-end">
-        @include(config('laravel-menu.views.bootstrap-items'),
-array('items' => $item->children()))
+      <ul class="dropdown-menu dropdown-menu-end m-0">
+        @include(config('laravel-menu.views.bootstrap-items'), array('items' => $item->children()))
       </ul>
     @endif
   </li>
