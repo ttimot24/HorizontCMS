@@ -8,7 +8,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ttimot24/HorizontCMS&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&utm_medium=referral&utm_content=ttimot24/HorizontCMS&utm_campaign=Badge_Coverage)
 
-HorizontCMS is an open-source, responsive Content Management System (CMS) built on Laravel 8, VueJs 2.6 and Bootstrap 3.4 which you can use to build you next generation websites and blogs.
+HorizontCMS is an open-source, responsive Content Management System (CMS) built on Laravel 8, VueJs 2.6 and Bootstrap 5.1 which you can use to build you next generation websites and blogs.
 
 This lightweight CMS platform provides end-users with the tools to extend and build sustainable web presence with one click which makes it easy to learn for users, simple to code for developers
 
@@ -46,13 +46,6 @@ After downloading and copying the files to the server, navigate to the app root 
 #### Docker Image
 https://hub.docker.com/repository/docker/ttimot24/horizont-cms  
   
-#### Revert to Views V1
-By default the CMS using the V2 version of the views on frontend, which is based on Bootstrap 4.5.3. However the previous V1 frontend is available, which was built on Bootstrap 3.4.3.
-
-  1. Remove Bootstrap 4.5.3 related css and js from ```config/horizontcms.php```
-  2. Uncomment Bootstrap 3.4.3 related css and js in the same file
-  3. Replace the trailing v2 to v1 in ```config/views.php```
-
 ### Sample plugin
 
   [GoogleMaps](https://github.com/ttimot24/GoogleMaps)

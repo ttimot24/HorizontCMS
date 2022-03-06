@@ -18,40 +18,21 @@ return [
 
 	'css' => [
 			'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
-			//'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css',
-			'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css',
-			
-			//'resources/css/darktheme.css',
-			//'resources/css/united.css',
-			//'resources/css/flaty.css',
-			//'resources/css/simplex.css',
-			//'resources/css/culean.css',
-			//'resources/css/superhero.css',
-			//   'resources/css/horizontcms.css',
-			
-			 // 'resources/css/now-ui-kit.css',
-			  'resources/css/horizontcms-bs4.css',
+			'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
+			'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css',
 
-			//'resources/css/default/style.css',
-			//'resources/css/default/bootstrap_common.css',
+			'resources/css/horizontcms-bs5.css',
+
 			'resources/assets/filemaster/css/fileinput.min.css',
-			//'resources/assets/checkboxmaster/build.css',
-			//'resources/assets/scrollbar/jquery.scrollbar.css',
 			'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'
 			],
 
 	'js' => [
-			'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
-			//'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js',
-			'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',
+			'https://code.jquery.com/jquery-3.6.0.min.js',
+			'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js',
 			'resources/assets/filemaster/js/fileinput.min.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js',
 			'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js',
-			//'resources/assets/js/app.js',
-			// 'resources/js/app.js' //compiled
-			//'resources/assets/nicescroll/jquery.nicescroll.min.js',
-			//'resources/assets/scrollbar/jquery.scrollbar.js',
-			//'https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js'
 		],
 
 	'meta' =>[

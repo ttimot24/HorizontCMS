@@ -7,7 +7,7 @@
     "require": {
         "php": ">=7.3",
         "laravel/framework": "8.*",
-        "lavary/laravel-menu": "1.7.*",
+        "lavary/laravel-menu": "1.8.*",
         "composer/semver": "*",
         "visualappeal/php-auto-update" : "0.14.0",
         "madnest/madzipper"  : "*",

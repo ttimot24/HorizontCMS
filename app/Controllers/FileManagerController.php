@@ -57,10 +57,11 @@ class FileManagerController extends Controller{
 
             if ($this->request->hasFile('up_file')){
 
-                foreach($this->request->up_file as $file){
+                $dir = str_replace("storage/", "", $this->request->input('dir_path'));
 
+                foreach($this->request->up_file as $file){                    
                     if(!\Security::isExecutable($file)){
-                        $images[] = $file->store(str_replace("storage/", "", $this->request->input('dir_path')));
+                        $images[] = $file->store($dir);
                     }
                 }
 
