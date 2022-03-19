@@ -36,15 +36,8 @@
          <tr>
             <td class='col-4 p-4'>Debug mode</td>
             <td class="col-8 p-0">
-               <div class='form-group col-xs-12 col-md-12 d-flex m-4 justify-content-center'>
-                  <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" id="inlineRadio1" value="1" name='website_debug' <?php if ($settings['website_debug'] == 1) {echo "checked";}?>>
-                     <label class="form-check-label" for="inlineRadio1">On</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" id="inlineRadio2" value="0" name='website_debug' <?php if ($settings['website_debug'] == 0) {echo "checked";}?>>
-                     <label class="form-check-label" for="inlineRadio2">Off</label>
-                  </div>
+               <div class="form-check form-switch d-flex justify-content-center">
+                  <input type='checkbox' class='form-check-input' name='website_debug' value='1' <?php if ($settings['website_debug'] == 1) {echo 'checked';}?> >
                </div>
             </td>
          </tr>
@@ -58,13 +51,21 @@
          </tr>
          <input type="hidden" name="website_down" value="0"> <!-- Checkbox hack -->
          <tr>
-            <td class='col-4 p-2'>Website down</td>
-            <td class="col-8 p-0"><input type='checkbox' class='form-control' name='website_down' value='1' <?php if ($settings['website_down'] == 1) {echo 'checked';}?> ></td>
+            <td class='col-4 p-2'>Website maintenance</td>
+            <td class="col-8 p-0">
+               <div class="form-check form-switch d-flex justify-content-center">
+                  <input type='checkbox' class='form-check-input' name='website_down' value='1' @if( $settings['website_down']==1 ) checked @endif >
+               </div>
+            </td>
          </tr>
          <input type="hidden" name="use_https" value="0"> <!-- Checkbox hack -->
          <tr>
             <td class='col-4 p-2'>Secure site with SSL (https)</td>
-            <td class="col-8 p-0"><input type='checkbox' class='form-control' name='use_https' value='1' <?php if ($settings['use_https'] == 1) {echo 'checked';}?> ></td>
+            <td class="col-8 p-0">
+               <div class="form-check form-switch d-flex justify-content-center">
+                  <input type='checkbox' class='form-check-input' name='use_https' value='1' @if( $settings['use_https']==1 ) checked @endif >
+               </div>
+            </td>
          </tr>
          <tr>
             <td class='col-4 p-2'>Logo</td>

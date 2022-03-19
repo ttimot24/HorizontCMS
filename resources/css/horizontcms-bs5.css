@@ -373,3 +373,7 @@ i.bi{
 .accordion-button::after, .accordion-button:not(.collapsed)::after{
     background-image: unset;
 }
+
+.form-switch{
+    font-size: 1.25rem;
+}
