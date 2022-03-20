@@ -2,16 +2,10 @@
 
 namespace App\Controllers;
 
-use Illuminate\Http\Request;
 use App\Libs\Controller;
-
-use App\Http\Requests;
-use App\Model\Settings;
-use App\Libs\ThemeEngine;
 use App\Model\Page;
 
-class WebsiteController extends Controller
-{
+class WebsiteController extends Controller {
 
     private $engines = [
                 'hcms' => \App\Libs\ThemeEngine::class,
@@ -22,17 +16,16 @@ class WebsiteController extends Controller
     public $theme;
 
 
-    public function before(){
+    public function before() {
         $this->theme = new \App\Libs\Theme($this->request->settings['theme']);
     }
-
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($page){
+    public function index($page) {
         
         if(\Session::has("lang")){
             \App::setLocale(\Session::get("lang"));
@@ -48,7 +41,6 @@ class WebsiteController extends Controller
 
         $theme_engine->runScript('before');
         
-
 
             if($this->request->settings['website_down']==1 && (\Auth::user()==null || !\Auth::user()->isAdmin())){
                 return $theme_engine->renderWebsiteDown();
@@ -78,14 +70,14 @@ class WebsiteController extends Controller
             $theme_engine->runScript('before_render');
 
 
-       return $theme_engine->render([
+        return $theme_engine->render([
                                     '_REQUESTED_PAGE' => $requested_page,
                                     ]);
     }
 
 
 
-    public function authenticate(){
+    public function authenticate() {
 
 
 		if (\Auth::attempt(['username' => $this->request->input('username'), 'password' => $this->request->input('password')])) {
@@ -105,9 +97,9 @@ class WebsiteController extends Controller
         return $this->redirectToSelf();
     }
 
-    public function search(){
+    public function search() {
     
-        if($this->request->isMethod('POST')){	
+        if($this->request->isMethod('POST')) {	
             
 			if($this->request->input('search')=="" || $this->request->input('search')==null){
 				return $this->redirectToSelf();
@@ -135,7 +127,7 @@ class WebsiteController extends Controller
            
     }
 
-    public function logout(){
+    public function logout() {
 
         \Auth::logout();
 

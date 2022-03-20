@@ -1,7 +1,6 @@
 <?php 
 
-
-class Website{
+class Website {
 
 	public static $_BLOGPOST;
 	public static $_USER;
@@ -17,7 +16,6 @@ class Website{
 	
 	public static $message;
 	public static $system,$pages;
-	
 
 	public static function initalize($wengine){
 		
@@ -39,15 +37,10 @@ class Website{
 
 	}
 
-
-
 	public static function define_base(){
 
 		echo "<base href=".\Config::get('app.url') ." />";
 	}
-
-
-
 
 	public static function handle_routing(){
 
@@ -81,8 +74,6 @@ class Website{
             }
             
 	}
-
-
 
 	public static function jsPlugins(){
 		foreach(app()->plugins as $plugin){

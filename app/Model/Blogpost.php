@@ -6,10 +6,6 @@ use \App\Libs\Model;
 
 class Blogpost extends Model{
     
-    private $rules = array(
-                        'title' => 'required',
-                        );
-
 
     protected $defaultImage = "resources/images/icons/newspaper.png";
 
@@ -33,16 +29,16 @@ class Blogpost extends Model{
         return NULL;
     }
 
-    public static function getPublished(){
-        return self::where('active','>',0)->get();
+    public static function getPublished($num = null, $order = 'ASC'){
+        return self::where('active','>',0)->orderBy('created_at',$order)->paginate($num);
     }
 
-    public static function getDrafts(){
-        return self::where('active',0)->get();
+    public static function getDrafts($num = null, $order = 'ASC'){
+        return self::where('active',0)->get()->orderBy('created_at',$order)->paginate($num);
     }
 
-    public static function getFeatured(){
-        return self::where('active',2)->get();
+    public static function getFeatured($num = null, $order = 'ASC'){
+        return self::where('active',2)->orderBy('created_at',$order)->paginate($num);
     }
 
     public function author(){
