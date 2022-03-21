@@ -76,13 +76,15 @@ class WebsiteController extends Controller {
     }
 
 
-
     public function authenticate() {
 
+        $mode = $this->request->has('email')? 'email' : 'username';
 
-		if (\Auth::attempt(['username' => $this->request->input('username'), 'password' => $this->request->input('password')])) {
+		if (\Auth::attempt([$mode => $this->request->input($mode), 'password' => $this->request->input('password')])) {
 
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_logged_in')]);
+            $redirect = $this->request->has('redirect_success')? $this->redirect($this->request->input('redirect_success')) : $this->redirectToSelf();
+
+            return $redirect->withMessage(['success' => trans('message.successfully_logged_in')]);
         }
 
         return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
