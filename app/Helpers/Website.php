@@ -116,4 +116,10 @@ class Website {
 		return false;
 	}
 
+	public static function getPageUrlByFunction($page_function){
+		$page = \App\Model\Page::getByFunction($page_function);
+
+		return $page == null ? "" : $page->getSlug();
+	}
+
 }
