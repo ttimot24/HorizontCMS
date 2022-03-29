@@ -16,18 +16,15 @@
   <tbody class="text-center fw-bold">
 
 
-  <tr><td>Admin theme</td><td><select name='admin_theme' class='form-select'>
+  <tr><td>Admin theme</td><td><select name='admin_theme' class='form-select' disabled>
                                           <option value=''>default</option>
-                                          <!--<option value='lightthm'>Light</option>-->
-                                          <option value='darktheme'>Dark</option>
                                       </select></td></tr>
 
-  <tr><td>Dashboard Logo</td><td>
-  <br>
-
-  <input type="hidden" name="admin_logo" value="<?= ($settings['admin_logo']!='' && file_exists('storage/images/logos/'.$settings['admin_logo']))? $settings['admin_logo'] : \Config::get('horizontcms.admin_logo')  ?>" >
-  <img id="admin_logo" class='well well-sm' src="<?= ($settings['admin_logo']!='' && file_exists('storage/images/logos/'.$settings['admin_logo']))? 'storage/images/logos/'.$settings['admin_logo'] : \Config::get('horizontcms.admin_logo')  ?>" height='100'>
-
+  <tr><td>Dashboard Logo</td><td class="p-3">
+  <div class="col-12 mb-3">
+    <input type="hidden" name="admin_logo" value="<?= ($settings['admin_logo']!='' && file_exists('storage/images/logos/'.$settings['admin_logo']))? $settings['admin_logo'] : \Config::get('horizontcms.admin_logo')  ?>" >
+    <img id="admin_logo" class='well well-sm' src="<?= ($settings['admin_logo']!='' && file_exists('storage/images/logos/'.$settings['admin_logo']))? 'storage/images/logos/'.$settings['admin_logo'] : \Config::get('horizontcms.admin_logo')  ?>" height='100'>
+  </div>
   <div class="btn-group" role="group">
   <button type='button' class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='.admin_logo_select-modal-lg'>Select</button>
   </div>

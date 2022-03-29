@@ -25,11 +25,19 @@
          </tr>
          <tr>
             <td class='col-4 p-4'>Favicon</td>
-            <td class="col-8">
-               <input type="hidden" name="favicon" value="<?=($settings['favicon'] != '' && file_exists('storage/images/favicons/' . $settings['favicon'])) ? $settings['favicon'] : ''?>" >
-               <img id="favicon" class='<?=($settings['favicon'] != '' && file_exists('storage/images/favicons/' . $settings['favicon'])) ? "well well-sm" : ""?>' src="<?=($settings['favicon'] != '' && file_exists('storage/images/favicons/' . $settings['favicon'])) ? 'storage/images/favicons/' . $settings['favicon'] : ''?>" height='50' alt="">
-               <div class="btn-group" role="group">
-                  <button type='button' id="button-favicon" class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='.admin_logo_select-modal-lg'>Select</button>
+            <td class="col-8 p-3">
+               <?php 
+                  $favicon = null;
+                  if(($settings['favicon'] != '' && file_exists('storage/images/favicons/' . $settings['favicon']))){
+                     $favicon = $settings['favicon'];
+                  }
+               ?>
+               <div class="col-12 mb-3">
+                  <input type="hidden" name="favicon" value="<?= $favicon ?>" >
+                  <img id="favicon" src="storage/images/favicons/<?= $favicon ?>" style="max-height:2.5rem;" alt="Select an image">
+               </div>
+                <div class="btn-group" role="group">
+                  <button type='button' id="button-favicon" class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='#filemanager-modal'>Select</button>
                </div>
             </td>
          </tr>
@@ -69,12 +77,20 @@
          </tr>
          <tr>
             <td class='col-4 p-2'>Logo</td>
-            <td class="col-8 p-0">
+            <td class="col-8 p-3">
                <br>
-               <input type="hidden" name="logo" value="<?=($settings['logo'] != '' && file_exists('storage/images/logos/' . $settings['logo'])) ? $settings['logo'] : ''?>" >
-               <img id="logo" class='<?=($settings['logo'] != '' && file_exists('storage/images/logos/' . $settings['logo'])) ? "well well-sm" : ""?>' src="<?=($settings['logo'] != '' && file_exists('storage/images/logos/' . $settings['logo'])) ? 'storage/images/logos/' . $settings['logo'] : ''?>" height='100' alt="">
+               <?php 
+                  $logo = null;
+                  if(($settings['logo'] != '' && file_exists('storage/images/logos/' . $settings['logo']))){
+                     $logo = $settings['logo'];
+                  }
+               ?>
+               <div class="col-12 mb-3">
+                  <input type="hidden" name="logo" value="<?= $logo ?>" >
+                  <img id="logo" src="storage/images/logos/<?= $logo ?>" style="max-height:7.5rem;" alt="Select an image">
+               </div>
                <div class="btn-group" role="group">
-                  <button type='button' id="button-logo" class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='.admin_logo_select-modal-lg'>Select</button>
+                  <button type='button' id="button-logo" class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='#filemanager-modal'>Select</button>
                </div>
             </td>
          </tr>
@@ -110,7 +126,8 @@
       </tbody>
    </table>
 </form>
-<div class='modal admin_logo_select-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabelx' aria-hidden='true'>
+
+<div id="filemanager-modal" class='modal' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabelx' aria-hidden='true'>
    <div class='modal-dialog modal-xl'>
       <div class='modal-content'>
          <div class='modal-header'>
@@ -118,11 +135,12 @@
             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
          </div>
          <div class='modal-body p-3' style="height:500px;">
-            @include('media.filemanager', ['mode' => '', 'current_dir' => 'storage/images/logos'])
+            @include('media.filemanager', ['mode' => '', 'current_dir' => 'storage/images'])
          </div>
       </div>
    </div>
 </div>
+
 <script>
    var context = "";
    
@@ -143,7 +161,6 @@
          var bname = filemanager.basename(src)+"."+filemanager.getFileExtension(src);
          $('[name="logo"]').val(bname);
          $('#logo').attr('src', 'storage/images/logos/'+bname);
-         $('#logo').addClass('well well-sm');
    
        }else if(context=="favicon"){
    
@@ -151,11 +168,10 @@
            var bname = filemanager.basename(src)+"."+filemanager.getFileExtension(src);
            $('[name="favicon"]').val(bname);
            $('#favicon').attr('src', 'storage/images/favicons/'+bname);
-           $('#favicon').addClass('well well-sm');
    
        }
    
-       $('.admin_logo_select-modal-lg').modal("hide");
+       $('#filemanager-modal').modal("hide");
    
    });
 </script>
