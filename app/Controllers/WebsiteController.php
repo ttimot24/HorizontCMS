@@ -75,16 +75,41 @@ class WebsiteController extends Controller {
                                     ]);
     }
 
+    public function registration() {
+
+        if($this->request->isMethod('POST')) {
+
+            $user = new \App\Model\User();
+
+            $user->name = $this->request->input('name');
+            $user->username = $this->request->input('username');
+            $user->password = $this->request->input('password');
+            $user->email = $this->request->input('email');
+            $user->active = 0;
+
+            if($user->save()) {
+                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_user')]);
+            }
+
+        }
+
+        return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+    }
+
 
     public function authenticate() {
 
-        $mode = $this->request->has('email')? 'email' : 'username';
+        if($this->request->isMethod('POST')) {
 
-		if (\Auth::attempt([$mode => $this->request->input($mode), 'password' => $this->request->input('password')])) {
+            $mode = $this->request->has('email')? 'email' : 'username';
 
-            $redirect = $this->request->has('redirect_success')? $this->redirect($this->request->input('redirect_success')) : $this->redirectToSelf();
+            if (\Auth::attempt([$mode => $this->request->input($mode), 'password' => $this->request->input('password')])) {
 
-            return $redirect->withMessage(['success' => trans('message.successfully_logged_in')]);
+                $redirect = $this->request->has('redirect_success')? $this->redirect($this->request->input('redirect_success')) : $this->redirectToSelf();
+
+                return $redirect->withMessage(['success' => trans('message.successfully_logged_in')]);
+            }
+
         }
 
         return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
@@ -133,7 +158,7 @@ class WebsiteController extends Controller {
 
         \Auth::logout();
 
-        return redirect()->back();
+        return $this->redirectToSelf();
     }
 
 
