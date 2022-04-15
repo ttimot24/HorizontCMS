@@ -18,6 +18,12 @@ class WebsiteController extends Controller {
 
     public function before() {
         $this->theme = new \App\Libs\Theme($this->request->settings['theme']);
+
+        \View::addNamespace('theme', [
+            $this->theme->getPath()."app".DIRECTORY_SEPARATOR."View",
+            $this->theme->getPath()."resources".DIRECTORY_SEPARATOR."views",
+        ]);
+
     }
 
     /**
@@ -158,7 +164,9 @@ class WebsiteController extends Controller {
 
         \Auth::logout();
 
-        return $this->redirectToSelf();
+        $redirect = $this->request->has('redirect')? $this->redirect($this->request->input('redirect')) : $this->redirectToSelf();
+
+        return $redirect;
     }
 
 
