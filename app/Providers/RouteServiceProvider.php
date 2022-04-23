@@ -102,16 +102,23 @@ class RouteServiceProvider extends ServiceProvider
 
     	foreach($this->app->plugins as $plugin){
 
-    		if(file_exists($plugin->getPath().'/routes/plugin.php')){
-
-                $options = $plugin->getRegister('routeOptions',[]);
+    		if(file_exists($plugin->getPath().'/routes/web.php')){
 
 		        Route::group([
-                    'middleware' => isset($options['middleware'])? $options['middleware'] : "",
-                    'namespace' => isset($options['namespace'])? $options['namespace'] : "",
-                    'prefix' => isset($options['prefix'])? $options['prefix'] : "",
+                    $plugin->getRegister('webRouteOptions',['middleware' => 'web'])
                     ], function($router) use ($plugin) {
-		            require base_path($plugin->getPath().'/routes/plugin.php');
+		            require base_path($plugin->getPath().'/routes/web.php');
+		        });
+
+	    	}
+
+
+    		if(file_exists($plugin->getPath().'/routes/api.php')){
+
+		        Route::group([
+                    $plugin->getRegister('apiRouteOptions',['middleware' => 'api'])
+                    ], function($router) use ($plugin) {
+		            require base_path($plugin->getPath().'/routes/api.php');
 		        });
 
 	    	}
