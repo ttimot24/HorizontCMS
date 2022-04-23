@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('image')->nullable();
             $table->rememberToken()->nullable();
             $table->timestamps();
+            $table->string('api_token')->unique()->nullable();
             $table->boolean('active')->default(false);
         });
 

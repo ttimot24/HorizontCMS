@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,24 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('/auth', function (Request $request) {
+   
+    if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){ 
+
+        $user = Auth::user(); 
+
+        if($user->isActive()){
+            
+            $user->api_token = Str::random(60);
+
+            $user->save();
+
+            return response()->json(['user' => $user], 200);
+        }
+    } 
+
+    return response()->json(['error'=>'Username or password incorrect'], 401);
+});
 
 Route::get('/me', function (Request $request) {
     $request->user()->image = $request->user()->getImage();
