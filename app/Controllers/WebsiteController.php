@@ -88,7 +88,7 @@ class WebsiteController extends Controller {
             $user->active = 0;
 
             if($user->save()) {
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_user')]);
+                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_user')])->withUser($user);
             }
 
         }
