@@ -8,8 +8,9 @@ use App\Libs\Controller;
 use App\Model\HeaderImage;
 use Illuminate\Support\Facades\Storage;
 
-class HeaderImageController extends Controller{
+class HeaderImageController extends Controller {
  
+    protected $imagePath = 'images/header_images';
 
     public function before(){
         if(!file_exists("storage/images/header_images")){
@@ -28,8 +29,8 @@ class HeaderImageController extends Controller{
 
         $this->view->title(trans('Header Images'));
         return $this->view->render('media/header_images',[
-            'slider_images' => collect(HeaderImage::orderBy('order')->get()),
-            'dirs' => array_slice(scandir('storage/images/header_images'),2),
+            'slider_images' => HeaderImage::getActive()->get(),
+            'slider_disabled' => HeaderImage::getInactive()->get(),
             ]);
     }
 
@@ -38,20 +39,55 @@ class HeaderImageController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($file){
+    public function create(){
 
-
+        if($this->request->isMethod('POST')){
             $header_image = new HeaderImage();
-            $header_image->title = "def";
-            $header_image->image = $file;
+            $header_image->title = $this->request->input("title");
+            $header_image->description = $this->request->input("description");
+            $header_image->active = 0;
 
+            if ($this->request->hasFile('up_file')){
+                 
+                $header_image->image = str_replace($this->imagePath."/","",$this->request->up_file->store($this->imagePath));
+
+            }
 
             if($header_image->save()){
                 return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
+        }
 
+        return $this->redirectToSelf();
+    }
+
+    public function addToSlider($id){
+
+        $header_image = \App\Model\HeaderImage::find($id);
+        $header_image->active = 1;
+
+        if($header_image->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
+
+    }
+
+    public function removeFromSlider($id){
+
+        $header_image = \App\Model\HeaderImage::find($id);
+        $header_image->active = 0;
+        
+        if($header_image->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
+
+        return $this->redirectToSelf();
 
     }
 

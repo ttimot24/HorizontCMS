@@ -20,14 +20,16 @@
 
 		<div class="row">
 
-			@if(!$slider_images->isEmpty())
+			@if($slider_images->count()>0)
 				@foreach($slider_images as $image)
-					<div class='col-md-3'>
-					   	<div class="img img-thubmnail bg-white p-3">
-							<img src='storage/images/header_images/{{ $image->image }}' alt='' class='img-rounded' width='100%' height='120px'>
-							<p style="color:#000;margin:0px;padding:0px;overflow:hidden;font-size:12px;" class="py-2">{{$image->image}}</p>
-							<a class='btn btn-danger btn-xs btn-block' href='admin/header-image/delete/{{ $image->id }}'>Remove from slider</a>
-					   	</div>
+					<div class="card col-md-3 pt-3">
+					<img src='storage/images/header_images/{{ $image->image }}' alt='' class='card-img-top' width='100%' height='75%;' style="object-fit:cover;">
+					<div class="card-body text-black">
+						<h5 class="card-title">{{$image->title}}</h5>
+					</div>
+					<ul class="list-group list-group-flush mb-3">
+							<a class='btn btn-danger btn-xs btn-block' href='admin/header-image/remove-from-slider/{{ $image->id }}'>Remove from slider</a>
+					</ul>
 					</div>
 				@endforeach
 			@else
@@ -40,22 +42,24 @@
 <div class='container'>
 	<h3>Available images:</h3>
 <div class="row">
-	@foreach($dirs as $each)
-		<div class='col-md-3 img img-thumbnail p-2 float-left' style='margin-bottom:3%;height:180px;'>
-			<a class='btn-sm btn-success col-md-6' href='admin/header-image/create/{{ $each }}'>Add to slider</a>
-			<a href='admin/file-manager/delete?file=storage/images/header_images/{{$each}}' class='pull-right'>
-				<span class='fa fa-trash' aria-hidden='true' style=' font-size: 1.4em;z-index:15;top:3px;right:3px;margin-bottom:-15px;'></span>
-			</a>
+	@foreach($slider_disabled as $each)
 
-			@if($each!="" && !is_dir('storage/images/header_images/{{ $each }}'))
-			<img src='storage/images/header_images/{{ $each }}' alt='' class='img-rounded mt-2' width='100%' height='75%;'>
-			@endif
-			<p style="color:white;margin:0px;padding:0px;overflow:hidden;">{{$each}}</p>
+		<div class="card col-md-3">
+			<div class="card-header py-2 px-0 bg-white">
+				<a class='btn-sm btn-success col-md-6' href='admin/header-image/add-to-slider/{{ $each->id }}'>Add to slider</a>
+				<a href='admin/header-image/delete/{{$each->id}}' class='pull-right'>
+					<span class='fa fa-trash' aria-hidden='true' style=' font-size: 1.4em;z-index:15;top:3px;right:3px;margin-bottom:-15px;'></span>
+				</a>
+			</div>
+			<img src='storage/images/header_images/{{ $each->image }}' alt='' class='card-img-top' width='100%' height='75%;' style="object-fit:cover;">
+			<div class="card-body text-black">
+				<h5 class="card-title">{{$each->title}}</h5>
+			</div>
 		</div>
+
 	@endforeach
 </div>
 </div>
-
 
 </div>
 
@@ -67,14 +71,21 @@
 	 	<h4 class='modal-title text-white'>Upload images</h4>
 		<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
 	  </div>
-	  <form action='admin/file-manager/fileupload?dir_path=storage/images/header_images' method='POST' enctype='multipart/form-data'>
+	  <form action='admin/header-image/create' method='POST' enctype='multipart/form-data'>
       <div class='modal-body'>
 		{{ csrf_field() }}
 		<div class='form-group'>
 		<label for='file'>Upload file:</label>
-		<input name='up_file[]' id='input-2' type='file' class='file'  accept="image/*"  multiple='true' data-show-upload='false' data-show-caption='true' required>
+		<input name='up_file' id='input-2' type='file' class='file'  accept="image/*"  multiple='true' data-show-upload='false' data-show-caption='true' required>
 		</div>
-
+		<div class="mb-3">
+			<label for="header-image-title" class="form-label">Tagline</label>
+			<input type="text" class="form-control" name="title" id="header-image-title">
+		</div>
+		<div class="mb-3">
+			<label for="exampleFormControlTextarea1" class="form-label">Summary</label>
+			<textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+		</div>
 
       </div>
       <div class='modal-footer'>
