@@ -27,7 +27,7 @@ services:
       - 8183:80    
 
   hcms_migration:
-    image: hcms:latest
+    image: ttimot24/horizont-cms:latest
     depends_on: 
         - hcms_db
     command: sh -c 'php artisan migrate --no-interaction --force && php artisan db:seed --no-interaction --force && php artisan --version && php artisan hcms:user --create-admin --name=Administrator --email=admin@admin.com --username=admin --password=admin1'
@@ -40,7 +40,7 @@ services:
         DB_TABLE_PREFIX: 'hcms_'
 
   hcms_admin_user:
-    image: hcms:latest
+    image: ttimot24/horizont-cms:latest
     depends_on: 
         - hcms_migration
     command: sh -c 'php artisan hcms:user --create-admin --name=Administrator --email=admin@admin.com --username=admin --password=admin1'
@@ -54,7 +54,7 @@ services:
         DB_TABLE_PREFIX: 'hcms_'
 
   hcms_web:
-    image: hcms:latest
+    image: ttimot24/horizont-cms:latest
     depends_on: 
         - hcms_migration
     environment:
