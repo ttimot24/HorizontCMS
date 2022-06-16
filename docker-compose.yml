@@ -13,11 +13,16 @@ services:
       MYSQL_ROOT_PASSWORD: 'password'
     ports:
       - '3306:3306'
+    healthcheck:
+        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+        timeout: 15s
+        retries: 10
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     depends_on:
-      - hcms_db
+        hcms_db:
+          condition: service_healthy
     environment:
       PMA_HOST: hcms_db
       PMA_PORT: 3306
@@ -28,45 +33,51 @@ services:
 
   hcms_migration:
     image: ttimot24/horizont-cms:latest
-    depends_on: 
-        - hcms_db
-    command: sh -c 'php artisan migrate --no-interaction --force && php artisan db:seed --no-interaction --force && php artisan --version && php artisan hcms:user --create-admin --name=Administrator --email=admin@admin.com --username=admin --password=admin1'
+    depends_on:
+        hcms_db:
+          condition: service_healthy
+    command: sh -c 'php artisan migrate --no-interaction --force && php artisan db:seed --no-interaction --force && php artisan --version'
     environment:
         DB_HOST: 'hcms_db'
         DB_CONNECTION: 'mysql'
-        DB_USERNAME: 'hcms_website'
-        DB_PASSWORD: 'website789'
+        DB_USERNAME: 'root'
+        DB_PASSWORD: 'password'
         DB_DATABASE: 'hcms_database'
         DB_TABLE_PREFIX: 'hcms_'
 
   hcms_admin_user:
     image: ttimot24/horizont-cms:latest
-    depends_on: 
-        - hcms_migration
+    depends_on:
+        hcms_migration:
+          condition: service_completed_successfully
     command: sh -c 'php artisan hcms:user --create-admin --name=Administrator --email=admin@admin.com --username=admin --password=admin1'
     environment:
         INSTALLED: 'true'
         DB_HOST: 'hcms_db'
         DB_CONNECTION: 'mysql'
-        DB_USERNAME: 'hcms_website'
-        DB_PASSWORD: 'website789'
+        DB_USERNAME: 'root'
+        DB_PASSWORD: 'password'
         DB_DATABASE: 'hcms_database'
         DB_TABLE_PREFIX: 'hcms_'
 
   hcms_web:
     image: ttimot24/horizont-cms:latest
-    depends_on: 
-        - hcms_migration
+    restart: always
+    depends_on:
+        hcms_admin_user:
+          condition: service_completed_successfully
     environment:
         INSTALLED: 'true'
         DB_HOST: 'hcms_db'
         DB_CONNECTION: 'mysql'
-        DB_USERNAME: 'hcms_website'
-        DB_PASSWORD: 'website789'
+        DB_USERNAME: 'root'
+        DB_PASSWORD: 'password'
         DB_DATABASE: 'hcms_database'
         DB_TABLE_PREFIX: 'hcms_'
     ports:
       - '8099:80'
+    volumes:
+      - ./themes:/var/www/html/themes
 
 volumes:
       - hcms-db:/var/lib/mysql
