@@ -1,3 +1,7 @@
+@import "variables";
+@import "./node_modules/bootstrap/scss/bootstrap.scss";
+@import "./node_modules/bootstrap-fileinput/scss/fileinput.scss";
+
 body {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: .8rem;
@@ -10,11 +14,11 @@ body {
 }
 
 .bg-primary{
-    background-color: #e84d08 !important;
+    background-color: $orange !important;
 }
 
 /*.active .nav-link{
-    color: #e84d08 !important;
+    color: $orange !important;
 }*/
 
 .nav-link{
@@ -34,7 +38,7 @@ body {
 }
 
 .navbar-dark .nav-link:hover{
-    color: #e84d08 !important;
+    color: $orange !important;
     background-color: black !important;
 }
 
@@ -106,7 +110,7 @@ body {
     line-height: 21px;
     color: #ffffff;
     text-align: center;
-    background-color: #e84d08;
+    background-color: $orange;
     -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
     box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
     -webkit-transition: width 0.6s ease;
@@ -121,16 +125,16 @@ body {
 
 .btn-primary, .btn-primary.focus, .btn-primary:focus, .btn-primary:active {
     color: #ffffff;
-    background-color: #e84d08;
+    background-color: $orange;
     border-color: transparent;
 }
 
 .btn-primary.focus, .btn-primary:focus{
-    box-shadow: 0 0 0 .2rem #e84d08;
+    box-shadow: 0 0 0 .2rem $orange;
 }
 
 .color-primary{
-    color:  #e84d08 !important;
+    color:  $orange !important;
 }
 
 .btn-primary:hover {
@@ -153,11 +157,11 @@ body {
 
 
 table a:not(.btn), .table a:not(.btn) {
-    /* color: #e84d08; */
+    /* color: $orange; */
     text-decoration: underline;
 }
 tr td a {
-    color: #e84d08;
+    color: $orange;
 }
 
 
@@ -167,12 +171,12 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 a {
-    color: #e84d08;
+    color: $orange;
     text-decoration: none;
 }
 
 .table-hover>tbody>tr:hover {
-    background-color: #e84d08cc;
+    background-color: $orange;
 }
 tr:hover td a {
     color: white;
@@ -276,8 +280,8 @@ tr:hover td a {
   }
 
   .page-item.active .page-link{
-    background-color:#e84d08 !important;
-    border-color:#e84d08 !important;
+    background-color:$orange !important;
+    border-color:$orange !important;
   }
 
   .page-item a{
@@ -316,25 +320,25 @@ tr:hover td a {
   }
 
   .alert-success, .badge-success{
-    background-color: #01721f;
+    background-color: $green;
     border-color: transparent;
     color: #ebebeb;
   }
 
   .alert-danger, .badge-danger{
-    background-color: #d70c0c;
+    background-color: $red;
     border-color: transparent;
     color: #ebebeb;
   }
 
   .alert-warning, .badge-warning{
-    background-color: #f0ad4e;
+    background-color: $yellow;
     border-color: transparent;
     color: #ebebeb;
   }
 
   .alert-info, .badge-info{
-    background-color: #0574a0;
+    background-color: $info;
     border-color: transparent;
     color: #ebebeb;
   }

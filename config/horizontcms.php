@@ -18,10 +18,8 @@ return [
 
 	'css' => [
 			'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
-			'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
-			'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css',
 
-			'resources/css/horizontcms-bs5.css',
+			'resources/css/horizontcms-next.css',
 
 			'resources/assets/filemaster/css/fileinput.min.css',
 			'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'
