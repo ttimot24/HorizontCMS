@@ -1,20 +1,11 @@
 @import "variables";
 @import "./node_modules/bootstrap/scss/bootstrap.scss";
+@import "./node_modules/bootstrap-icons/font/bootstrap-icons.scss";
 @import "./node_modules/bootstrap-fileinput/scss/fileinput.scss";
 
 body {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    font-size: .8rem;
     color: #1f1f1f;
     background-color: #F5F5F5;
-}
-
-.bg-dark{
-    background-color: #1f1f1f !important;
-}
-
-.bg-primary{
-    background-color: $orange !important;
 }
 
 /*.active .nav-link{
@@ -116,7 +107,7 @@ body {
     -webkit-transition: width 0.6s ease;
     -o-transition: width 0.6s ease;
     transition: width 0.6s ease;
-}
+} 
 
 .btn{
     font-size: .875rem;
@@ -168,11 +159,6 @@ tr td a {
 h1, .h1, h2, .h2, h3, .h3 {
     margin-top: 21px;
     margin-bottom: 10.5px;
-}
-
-a {
-    color: $orange;
-    text-decoration: none;
 }
 
 .table-hover>tbody>tr:hover {
@@ -319,26 +305,7 @@ tr:hover td a {
     padding: .65rem 1rem;
   }
 
-  .alert-success, .badge-success{
-    background-color: $green;
-    border-color: transparent;
-    color: #ebebeb;
-  }
-
-  .alert-danger, .badge-danger{
-    background-color: $red;
-    border-color: transparent;
-    color: #ebebeb;
-  }
-
-  .alert-warning, .badge-warning{
-    background-color: $yellow;
-    border-color: transparent;
-    color: #ebebeb;
-  }
-
-  .alert-info, .badge-info{
-    background-color: $info;
+  .alert, .badge {
     border-color: transparent;
     color: #ebebeb;
   }
