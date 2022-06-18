@@ -42,6 +42,9 @@ After downloading and copying the files to the server, navigate to the app root 
 #### Install manually from scratch
 
   [Website For Students Tutorial](https://websiteforstudents.com/how-to-install-horizontcms-on-ubuntu-18-04-16-04-with-apache2/)
+
+#### Docker compose
+``` docker-compose up ```
   
 #### Docker Image
 https://hub.docker.com/repository/docker/ttimot24/horizont-cms  
