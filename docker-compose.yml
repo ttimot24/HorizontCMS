@@ -81,11 +81,8 @@ services:
     ports:
       - '8099:80'
     volumes:
-      - ./app:/var/www/html/app
       - ./themes:/var/www/html/themes
       - ./plugins:/var/www/html/plugins
-      - ./config:/var/www/html/config
-      - ./resources:/var/www/html/resources
 
 volumes:
       - hcms-db:/var/lib/mysql
