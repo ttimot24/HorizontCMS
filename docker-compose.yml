@@ -27,6 +27,7 @@ services:
       PMA_HOST: hcms_db
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 2G
     restart: always
     ports:
       - 8183:80    
@@ -61,6 +62,9 @@ services:
         DB_TABLE_PREFIX: 'hcms_'
 
   hcms_web:
+    build:
+        context: .
+        dockerfile: Dockerfile
     image: ttimot24/horizont-cms:latest
     restart: always
     depends_on:
@@ -77,7 +81,11 @@ services:
     ports:
       - '8099:80'
     volumes:
+      - ./app:/var/www/html/app
       - ./themes:/var/www/html/themes
+      - ./plugins:/var/www/html/plugins
+      - ./config:/var/www/html/config
+      - ./resources:/var/www/html/resources
 
 volumes:
       - hcms-db:/var/lib/mysql
