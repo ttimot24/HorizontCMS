@@ -13,7 +13,8 @@
  * the application, or feel free to tweak this setup for your needs.
  */
 
-//Vue.component('example', require('./components/Example.vue'));
+require("bootstrap");
+window.Vue = require('vue');
 
 var app = new Vue({
     el: '#hcms',

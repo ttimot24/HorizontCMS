@@ -13,4 +13,6 @@ const mix = require('laravel-mix');
 
 mix.setPublicPath('./resources');
 
-mix.js('resources/assets/js/app.js', 'js').sass('resources/assets/sass/horizontcms-next.scss', 'css');
+mix.js('resources/assets/js/app.js', 'js')
+   .js('resources/assets/js/filemanager.js', 'js')
+   .sass('resources/assets/sass/horizontcms-next.scss', 'css');

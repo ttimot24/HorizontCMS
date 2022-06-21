@@ -27,10 +27,9 @@ return [
 
 	'js' => [
 			'https://code.jquery.com/jquery-3.6.0.min.js',
-			'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js',
 			'resources/assets/filemaster/js/fileinput.min.js',
-			'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js',
 			'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js',
+			'resources/js/app.js',
 		],
 
 	'meta' =>[
