@@ -225,20 +225,10 @@ tr:hover td a {
     visibility:visible;
   }
 
-    #filemanager .file:hover, #filemanager .folder:hover, #filemanager .selected{
-        border-radius:1.5px;
-        color:white;
-        background-color: #337ab7;
-    }
-
-  #filemanager .folder img{
-    width:75%;
-    margin:2px;
-    margin-top:10px;
-  }
-
-  #filemanager .file-nav{
-    margin-bottom: 5px;
+  #filemanager .file:hover, #filemanager .folder:hover, #filemanager .selected{
+    border-radius:1.5px;
+    color:white;
+    background-color: #337ab7;
   }
 
   #filemanager .file img{

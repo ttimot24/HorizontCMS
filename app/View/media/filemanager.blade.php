@@ -49,15 +49,14 @@
               <a href="a" v-on:click.prevent="open(currentDirectory,false);"><i class="fa fa-refresh" onclick="$(this).addClass('fa-spin');" aria-hidden="true" style="font-size: 22px;"></i></a>
             </div>
           </div>
-          <hr>
-          <div id="workspace" class="col-md-12">
+          <div id="workspace" class="col-md-12 py-3 pe-5">
 
             <div class="row text-white">
               <div class='folder col-md-2 col-sm-4 col-xs-4 text-center text-white' v-for="folder in folders" :id="folder" v-on:click="select(folder)" v-on:dblclick="open(folder);" >
                 
                 <div class="file-nav text-end">
-                <!--  <a v-on:click="renameModal(folder)"><i class="fa fa-pencil pull-right"></i></a> -->
-                  <a v-on:click="deleteModal(folder)" ><i class="fa fa-trash pull-right"></i></a>
+                  <a class="me-1" v-on:click="renameModal(folder)"><i class="fa fa-pencil"></i></a>
+                  <a class="me-1" v-on:click="deleteModal(folder)" ><i class="fa fa-trash"></i></a>
                 </div>
 
                 <div clas='row'>
@@ -68,12 +67,12 @@
 
               <div v-for="file in files" class='file col-md-2 col-sm-4 col-xs-4 text-center' :id="file"   @if($mode=='embed') v-on:click="returnFileUrl('storage/'+currentDirectory+'/'+file);" @else v-on:click="select(file)" @endif >
                 <div class="file-nav text-end">
-                  <a v-on:click="renameModal(file)"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp
-                  <a :href="'storage/'+currentDirectory+'/'+file"><i class="fa fa-download"></i></a>&nbsp
-                  <a v-on:click="deleteModal(file)" ><i class="fa fa-trash"></i></a>
+                  <a class="me-1" v-on:click="renameModal(file)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <a class="me-1" :href="'storage/'+currentDirectory+'/'+file"><i class="fa fa-download"></i></a>
+                  <a class="me-1" v-on:click="deleteModal(file)" ><i class="fa fa-trash"></i></a>
                 </div>
-                <img class="w-100"  v-if="isKnownExtension(file)" :src="'storage/'+currentDirectory+'/'+file" />
-                <img class="w-100"  v-else src="resources/images/icons/file.png" style='margin-bottom:5px;' />
+                <img class="w-100 mb-3"  v-if="isKnownExtension(file)" :src="'storage/'+currentDirectory+'/'+file" />
+                <img class="w-100 mb-3"  v-else src="resources/images/icons/file.png" />
                 <b>@{{file}}</b>
               </div>
             </div>
