@@ -17,3 +17,6 @@ $font-size-base: .825rem;
 $link-decoration: none;
 
 $alert-bg-scale: 0;
+
+$bootstrap-icons-font-src: url("/resources/fonts/vendor/bootstrap-icons/bootstrap-icons.woff2?08efbba7c53d8c5413793eecb19b20bb") format("woff2"),
+url("/resources/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?08efbba7c53d8c5413793eecb19b20bb") format("woff") !default;
