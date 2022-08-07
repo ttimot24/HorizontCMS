@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 
+Vue.config.devtools = true
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -14,7 +15,7 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-require('ckeditor4-vue');
+CKEditor = require('ckeditor4-vue');
 Vue.use(CKEditor);
 
 var app = new Vue({
