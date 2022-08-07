@@ -43,3 +43,9 @@ Vue.http.interceptors.push((request, next) => {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+window.axios = require('axios');
+
+//... configure axios...
+
+Vue.prototype.$http = window.axios;
