@@ -29,7 +29,7 @@
         "fontawesome-4.7": "^4.7.0",
         "icons": "^1.0.0",
         "jquery": "^3.6.0",
-        "jquery-ui": "^1.13.1",
+        "jquery-ui": "^1.13.2",
         "vue-resource": "^1.5.3"
     }
 }
