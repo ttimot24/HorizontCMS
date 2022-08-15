@@ -118,8 +118,7 @@
     <div class='modal-content'>
         <div class='modal-header'>
             <h2 class='modal-title col-md-9'>Add image</h2>
-            <a id='back-button' class='btn btn-primary col-md-2'>Back</a>
-            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button><br>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class='modal-body' style="min-height:400px;">
 
