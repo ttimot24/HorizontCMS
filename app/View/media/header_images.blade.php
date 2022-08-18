@@ -9,7 +9,7 @@
 			<h2>Header images</h2>
 		</div>
 
-		<div class='col-md-2 my-auto'>
+		<div class='col-md-2 my-auto d-flex justify-content-right'>
 			<a id='upl' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='.upload_images'><i class='fa fa-upload'></i>&nbspUpload images</a>
 		</div>
 	</div>
@@ -21,16 +21,50 @@
 		<div class="row">
 
 			@if($slider_images->count()>0)
-				@foreach($slider_images as $image)
+				@foreach($slider_images as $each)
 					<div class="card col-md-3 pt-3">
-					<img src='storage/images/header_images/{{ $image->image }}' alt='' class='card-img-top' width='100%' height='75%;' style="object-fit:cover;">
+					<a class='d-flex justify-content-end me-2 mb-4' data-bs-toggle='modal' data-bs-target='#headline-image-{{$each->id}}'>
+						<span class='fa fa-pencil' aria-hidden='true' style=' font-size: 1.4em;z-index:15;top:3px;right:3px;margin-bottom:-15px;'></span>
+					</a>
+					<img src='storage/images/header_images/{{ $each->image }}' alt='' class='card-img-top' width='100%' height='75%;' style="object-fit:cover;">
 					<div class="card-body text-black">
-						<h5 class="card-title">{{$image->title}}</h5>
+						<h5 class="card-title">{{$each->title}}</h5>
 					</div>
 					<ul class="list-group list-group-flush mb-3">
-							<a class='btn btn-danger btn-xs btn-block' href='admin/header-image/remove-from-slider/{{ $image->id }}'>Remove from slider</a>
+							<a class='btn btn-danger btn-xs btn-block' href='admin/header-image/remove-from-slider/{{ $each->id }}'>Remove from slider</a>
 					</ul>
 					</div>
+
+
+					<div class='modal edit_images' id='headline-image-{{$each->id}}' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+						<div class='modal-dialog modal-xl'>
+							<div class='modal-content'>
+							<div class='modal-header modal-header-primary bg-primary'>
+								<h4 class='modal-title text-white'>Edit headline</h4>
+								<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+							</div>
+							<form action='admin/header-image/edit/{{$each->id}}' method='POST'>
+							<div class='modal-body'>
+								{{ csrf_field() }}
+								<div class="mb-3">
+									<label for="header-image-title" class="form-label">Tagline</label>
+									<input type="text" class="form-control" name="title" id="header-image-title" value="{{$each->title}}">
+								</div>
+								<div class="mb-3">
+									<label for="exampleFormControlTextarea1" class="form-label">Summary</label>
+									<textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{$each->description}}</textarea>
+								</div>
+
+							</div>
+							<div class='modal-footer'>
+								<button type='submit' class='btn btn-primary'>{{trans('actions.save')}}</button>
+								<button type='button' class='btn btn-default' data-bs-dismiss='modal'>{{trans('actions.cancel')}}</button>
+							</div>
+							</form>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal-dialog -->
+						</div><!-- /.modal -->
+
 				@endforeach
 			@else
 				<h4 class='text-center'><br>No images on the slider!<br></h4>
@@ -50,12 +84,49 @@
 				<a href='admin/header-image/delete/{{$each->id}}' class='pull-right'>
 					<span class='fa fa-trash' aria-hidden='true' style=' font-size: 1.4em;z-index:15;top:3px;right:3px;margin-bottom:-15px;'></span>
 				</a>
+				<a class='pull-right me-2' data-bs-toggle='modal' data-bs-target='#headline-image-{{$each->id}}'>
+					<span class='fa fa-pencil' aria-hidden='true' style=' font-size: 1.4em;z-index:15;top:3px;right:3px;margin-bottom:-15px;'></span>
+				</a>
 			</div>
 			<img src='storage/images/header_images/{{ $each->image }}' alt='' class='card-img-top' width='100%' height='75%;' style="object-fit:cover;">
 			<div class="card-body text-black">
 				<h5 class="card-title">{{$each->title}}</h5>
 			</div>
 		</div>
+
+
+
+		<div class='modal edit_images' id='headline-image-{{$each->id}}' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+		<div class='modal-dialog modal-xl'>
+			<div class='modal-content'>
+			<div class='modal-header modal-header-primary bg-primary'>
+				<h4 class='modal-title text-white'>Edit headline</h4>
+				<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+			</div>
+			<form action='admin/header-image/edit/{{$each->id}}' method='POST'>
+			<div class='modal-body'>
+				{{ csrf_field() }}
+				<div class="mb-3">
+					<label for="header-image-title" class="form-label">Tagline</label>
+					<input type="text" class="form-control" name="title" id="header-image-title" value="{{$each->title}}">
+				</div>
+				<div class="mb-3">
+					<label for="exampleFormControlTextarea1" class="form-label">Summary</label>
+					<textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{$each->description}}</textarea>
+				</div>
+
+			</div>
+			<div class='modal-footer'>
+				<button type='submit' class='btn btn-primary'>{{trans('actions.save')}}</button>
+				<button type='button' class='btn btn-default' data-bs-dismiss='modal'>{{trans('actions.cancel')}}</button>
+			</div>
+			</form>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+
+
 
 	@endforeach
 </div>
@@ -84,7 +155,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="exampleFormControlTextarea1" class="form-label">Summary</label>
-			<textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+			<textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5"></textarea>
 		</div>
 
       </div>

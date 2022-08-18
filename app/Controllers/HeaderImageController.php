@@ -118,7 +118,17 @@ class HeaderImageController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
+        $header_image = \App\Model\HeaderImage::find($id);
+        $header_image->title = $this->request->input('title');
+        $header_image->description = $this->request->input('description');
+        
+        if($header_image->save()){
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
+        }else{
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
 
+        return $this->redirectToSelf();
     }
 
     /**
