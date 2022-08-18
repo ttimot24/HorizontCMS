@@ -9,13 +9,13 @@
 			<h2>Header images</h2>
 		</div>
 
-		<div class='col-md-2 my-auto d-flex justify-content-right'>
+		<div class='col-md-2 my-auto d-flex justify-content-end'>
 			<a id='upl' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='.upload_images'><i class='fa fa-upload'></i>&nbspUpload images</a>
 		</div>
 	</div>
 	<div class="clearfix"></div>
 
-	<div class='jumbotron' style='padding:2%;padding-left:3%;background-color:#31708F;color:white;'>
+	<div class='jumbotron text-white' style='padding:3rem;background-color:#31708F;'>
 		<h4>Currently on the slider:</h4>
 
 		<div class="row">
