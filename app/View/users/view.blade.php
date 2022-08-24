@@ -57,11 +57,11 @@
 
   if(!$user->isActive()){
 
-     echo "<div class='panel panel-danger' style='margin-top:4%;'>
-            <div class='panel-heading'>
-              <h3 class='panel-title'><b>Inactive user</b></h3>
+     echo "<div class='card mt-4'>
+            <div class='card-header bg-danger'>
+              <h4 class='card-title mt-2 mb-2 pt-0 pb-0'><b>Inactive user</b></h4>
             </div>
-              <div class='panel-body' style='text-align:center;'><font size='4'>
+              <div class='card-body' style='text-align:center;'><font size='4'>
               ".trans('user.inactive_about',['day_count' => $user->created_at->diffForHumans()])."
               </font> <a href='admin/user/activate/".$user->id."' class='btn btn-sm btn-danger pull-right'>Force activate</a>
               </div>
