@@ -22,6 +22,7 @@ class CreateHeaderImagesTable extends Migration
             $table->string('title');
             $table->string('image');
             $table->integer('order')->nullable();
+            $table->boolean('active')->default(true);
         });
     }
 
