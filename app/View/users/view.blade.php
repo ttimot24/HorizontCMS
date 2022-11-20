@@ -46,6 +46,7 @@
      <b class="d-block text-center mb-3">{{trans('user.view_user_name')}} : <a class="color-primary">{{ $user->username }}</a></b>
      <b class="d-block text-center mb-3">{{trans('user.view_rank')}} : <a>{{ $user->role->name }}</a></b>
      <b class="d-block text-center mb-3">{{trans('user.view_email')}} : <a class="color-primary">{{ $user->email }}</a></b>
+     <b class="d-block text-center mb-3">{{trans('user.view_phone')}} : <a class="color-primary">{{ $user->phone }}</a></b>
      <b class="d-block text-center mb-3">{{trans('user.view_registered_on')}} : </br><a class="color-primary">{{ $user->created_at->format(\Settings::get('date_format',\Config::get('horizontcms.default_date_format'),true)) }}</a></b>
      <b class="d-block text-center mb-3">{{trans('user.view_logins')}} : <a class="color-primary">{{ $user->visits }}</a></b>
      <hr/>

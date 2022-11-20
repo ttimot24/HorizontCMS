@@ -37,6 +37,7 @@ return [
 
 	'user-index' => 'user/index',
 	'user-create' => 'user/create',
+	'user-store' => 'user/store',
 	'user-edit' => 'user/edit',
 	'user-update' => 'user/update',
 	'user-view' => 'user/show',

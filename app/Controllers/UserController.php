@@ -48,15 +48,29 @@ class UserController extends Controller{
      */
     public function create(){
 
-         if($this->request->isMethod('POST')){
 
-            $user = new User();
-            $user->name = $this->request->input('name');
-            $user->username = $this->request->input('username');
+        $this->view->js('resources/js/controls.js');
+
+        $this->view->title(trans('user.create_user'));
+        return $this->view->render('users/form',[
+                                                    'current_user' => $this->request->user(),
+                                                    'role_options' => \App\Model\UserRole::all(),
+                                                    'settings' => $this->request->settings,
+                                                ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(){
+        
+        if($this->request->isMethod('POST')){
+
+            $user = new User($this->request->all());
             $user->slug = str_slug($this->request->input('username'), "-");
-            $user->password = $this->request->input('password');
-            $user->email = $this->request->input('email');
-            $user->role_id = $this->request->input('role_id');
             $user->visits = 0;
             $user->active = 1;
             
@@ -79,30 +93,9 @@ class UserController extends Controller{
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-
-
             
         }
 
-
-        $this->view->js('resources/js/controls.js');
-
-        $this->view->title(trans('user.create_user'));
-        return $this->view->render('users/create',[
-                                                    'current_user' => $this->request->user(),
-                                                    'roles' => \App\Model\UserRole::all(),
-                                                    'settings' => $this->request->settings,
-                                                ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request){
-        //
     }
 
     /**
@@ -132,10 +125,10 @@ class UserController extends Controller{
         $this->view->js('resources/js/controls.js');
 
         $this->view->title(trans('user.edit_user'));
-        return $this->view->render('users/edit',[
+        return $this->view->render('users/form',[
                                                 'current_user' => $this->request->user(),
                                                 'user' => User::find($id),
-                                                'user_roles' => \App\Model\UserRole::all(),
+                                                'role_options' => \App\Model\UserRole::all(),
                                                 ]);
     }
 
@@ -147,13 +140,14 @@ class UserController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function update($id){
-        if($this->request->isMethod('POST')){
+        if($this->request->isMethod('PUT')){
 
             $user = User::find($id);
             $user->name = $this->request->input('name');
             $user->username = $this->request->input('username');
             $user->slug = str_slug($this->request->input('username'), "-");
             $user->email = $this->request->input('email');
+            $user->phone = $this->request->input('phone');
 
             if($this->request->has('password')){
                 $user->password = $this->request->input('password');

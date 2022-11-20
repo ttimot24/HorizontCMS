@@ -32,6 +32,7 @@ return [
 	'create_password' => 'Password',
 	'create_password_again' => 'Password again',
 	'create_email' => 'Email',
+	'create_phone' => 'Phone',
 	'create_emailnotify' => 'Notify about registration',
 	'create_select_rank' => 'Select rank',
 	'create_add_user_button' => 'Add user',
@@ -41,6 +42,7 @@ return [
 	'view_user_name' => 'Username',
 	'view_rank' => 'Rank',
 	'view_email' => 'Email',
+	'view_phone' => 'Phone',
 	'view_registered_on' => 'Registered on',
 	'view_logins' => 'Logins',
 	

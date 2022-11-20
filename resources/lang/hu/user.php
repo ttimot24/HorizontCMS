@@ -31,6 +31,7 @@ return [
 	'create_password' => 'Jelszó',
 	'create_password_again' => 'Jelszó újra',
 	'create_email' => 'E-mail',
+	'create_phone' => 'Telefon',
 	'create_emailnotify' => 'Értesítés küldése a reg-ről',
 	'create_select_rank' => 'Jogkör',
 	'create_add_user_button' => 'Létrehoz',
@@ -40,6 +41,7 @@ return [
 	'view_user_name' => 'Felhasználónév',
 	'view_rank' => 'Rang',
 	'view_email' => 'E-mail',
+	'view_phone' => 'Telefon',
 	'view_registered_on' => 'Regisztrált',
 	'view_logins' => 'Belépve',
 
