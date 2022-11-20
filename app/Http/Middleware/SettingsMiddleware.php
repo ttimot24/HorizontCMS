@@ -21,7 +21,8 @@ class SettingsMiddleware
             $settings = new \App\Model\Settings();
             $settings->assignAll();
             $request->settings = json_decode(json_encode($settings->settings), true);
-            View::share('settings', json_decode(json_encode($settings->settings), true));
+           
+            View::share('settings', \App\Model\Settings::getAll());
         }
 
 
