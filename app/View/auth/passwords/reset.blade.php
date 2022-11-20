@@ -18,8 +18,8 @@
                 <div class="panel-heading" style="background-color:#1f1f1f;">Reset Password</div>
 
                 <div class="panel-body" style="color:black;">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('admin/password/reset') }}">
-                        {{ csrf_field() }}
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('password.request') }}">
+                        @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">
 

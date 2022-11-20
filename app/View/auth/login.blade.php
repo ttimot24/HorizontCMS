@@ -10,8 +10,8 @@
     </div>
 
     <div class='container'>
-        <form action="{{ admin_link('login-login') }}" role='form' method='POST' >
-            {{ csrf_field() }}
+        <form action="{{ route('login') }}" role='form' method='POST' >
+            @csrf
             <div class="row">
                 <div class='col-xs-12 col-md-3 pull-left'>  
                     <div class="form-group {{ $errors->has('username') ? ' has-error' : '' }}">
