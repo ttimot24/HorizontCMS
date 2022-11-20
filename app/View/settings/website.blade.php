@@ -54,6 +54,10 @@
             <td class="col-8 p-0"><input type='email' class='form-control' name='default_email' value="{{$settings['default_email']}}"></td>
          </tr>
          <tr>
+            <td class='col-4 p-2'>Phone</td>
+            <td class="col-8 p-0"><input type='text' class='form-control' name='default_phone' value="{{$settings['default_phone']}}"></td>
+         </tr>
+         <tr>
             <td class='col-4 p-2'>Contact info</td>
             <td class="col-8 p-0"><textarea rows='7' class='form-control' name='contact' cols='30'>{{ $settings['contact'] }}</textarea></td>
          </tr>

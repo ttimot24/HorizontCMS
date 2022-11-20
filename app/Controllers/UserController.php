@@ -54,8 +54,7 @@ class UserController extends Controller{
         $this->view->title(trans('user.create_user'));
         return $this->view->render('users/form',[
                                                     'current_user' => $this->request->user(),
-                                                    'role_options' => \App\Model\UserRole::all(),
-                                                    'settings' => $this->request->settings,
+                                                    'role_options' => \App\Model\UserRole::all()
                                                 ]);
     }
 
