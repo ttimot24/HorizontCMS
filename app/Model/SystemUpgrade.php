@@ -15,7 +15,8 @@ class SystemUpgrade extends Model{
 	        $url = \Config::get('horizontcms.sattelite_url')."/updates";
 
 	        $update = new AutoUpdate($workspace.DIRECTORY_SEPARATOR.'temp', public_path() , 60);
-            $update->setCurrentVersion(self::getCurrentVersion()->version);
+			$currentVersion = self::getCurrentVersion();
+            $update->setCurrentVersion( isset($currentVersion)? $currentVersion->version: \Config::get('horizontcms.version'));
             $update->setUpdateUrl($url);
 
             $update->addLogHandler(new \Monolog\Handler\StreamHandler($workspace . '/update.log'));
