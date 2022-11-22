@@ -53,6 +53,7 @@ return [
 
 	'page-index' => 'page/index',
 	'page-create' => 'page/create',
+	'page-store' => 'page/store',
 	'page-edit' => 'page/edit',
 	'page-update' => 'page/update',
 	'page-view' => 'page/show',

@@ -4,7 +4,16 @@ namespace App\Model;
 
 use \App\Libs\Model;
 
-class Page extends Model{
+class Page extends Model {
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'url' ,'visibility', 'password', 'phone', 'role_id', 'active',
+    ];
 
     protected $defaultImage = "resources/images/icons/page.png";
 

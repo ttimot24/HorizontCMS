@@ -50,16 +50,30 @@ class PageController extends Controller{
      */
     public function create(){
 
+        
+        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
+        $this->view->js('resources/js/pages.script.js');
+        $this->view->js('resources/js/controls.js');
 
-       
+        $this->view->title(trans('page.new_page'));
+        return $this->view->render('pages/form',[
+                                                    'all_page' => Page::all(),
+                                                    'page_templates' => (new \App\Libs\Theme($this->request->settings['theme']))->templates(),
+                                                    ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(){
 
         if($this->request->isMethod('POST')){
 
-            $page = new Page();
-            $page->name = $this->request->input('name');
+            $page = new Page($this->request->all());
             $page->slug = str_slug($this->request->input('name'), "-");
-            $page->url = $this->request->input('url');
-            $page->visibility = $this->request->input('visibility');
             $page->parent_id = $this->request->input('parent_select')==0? NULL : $this->request->input('parent_id');
             $page->queue = 99;
             $page->page = clean($this->request->input('page'));
@@ -87,27 +101,6 @@ class PageController extends Controller{
             
         }
 
-
-        
-        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
-        $this->view->js('resources/js/pages.script.js');
-        $this->view->js('resources/js/controls.js');
-
-        $this->view->title(trans('page.new_page'));
-        return $this->view->render('pages/create',[
-                                                    'all_page' => Page::all(),
-                                                    'page_templates' => (new \App\Libs\Theme($this->request->settings['theme']))->templates(),
-                                                    ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request){
-        //
     }
 
     /**
@@ -137,7 +130,7 @@ class PageController extends Controller{
 
         $this->view->title(trans('page.edit_page'));
 
-        return $this->view->render('pages/edit',[
+        return $this->view->render('pages/form',[
                                                         'page' => Page::find($id),
                                                         'all_page' => Page::all(),
                                                         'page_templates' => (new \App\Libs\Theme($this->request->settings['theme']))->templates(),
@@ -153,7 +146,7 @@ class PageController extends Controller{
      */
     public function update($id){
         
-        if($this->request->isMethod('POST')){
+        if($this->request->isMethod('PUT')){
 
             $page = Page::find($id);
             $page->name = $this->request->input('name');
