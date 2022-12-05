@@ -19,7 +19,8 @@ class CreateHeaderImagesTable extends Migration
 
         Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
             $table->string('image');
             $table->integer('order')->nullable();
             $table->boolean('active')->default(true);

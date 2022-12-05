@@ -45,7 +45,7 @@
 							</div>
 							<form action='admin/header-image/edit/{{$each->id}}' method='POST'>
 							<div class='modal-body'>
-								{{ csrf_field() }}
+								@csrf
 								<div class="mb-3">
 									<label for="header-image-title" class="form-label">Tagline</label>
 									<input type="text" class="form-control" name="title" id="header-image-title" value="{{$each->title}}">
