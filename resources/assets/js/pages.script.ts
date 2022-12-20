@@ -9,50 +9,7 @@
    });
 
 
-/*
-  $('#upload-bar').hide();
-  $('#select-bar').hide();
-  $('#back-button').hide();
-
-  $('#upload_select').click(
-      function(){
-
-        $('#img-dashboard').hide();
-        $('#upload-bar').show();
-      $('#back-button').show();
-      }
-
-    );
-
-
-   $('#select_select').click(
-      function(){
-
-        $('#img-dashboard').hide();
-        $('#select-bar').show();
-        $('#back-button').show();
-
-      }
-
-    );
-
-
-   $('#back-button').click(
-      function(){
-          $('#upload-bar').hide();
-        $('#select-bar').hide();
-        $('#back-button').hide();
-        $('#img-dashboard').show();
-
-
-      }
-    );
-*/
-
-
     $("#selected-image").hide();
-
-
 
 });
 
@@ -71,15 +28,6 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
-
-
-  /*  $("#input-2").change(() => {
-        readURL($(this));
-    }); */
-
-
-
-
 
 
   function ajaxGetSlug(){

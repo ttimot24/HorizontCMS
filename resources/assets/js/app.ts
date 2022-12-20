@@ -6,7 +6,6 @@
 
 import "bootstrap";
 import "./bootstrap";
-import "./dragndrop.js";
 import Vue from 'vue';
 import LockScreen from './components/LockScreen.vue';
 

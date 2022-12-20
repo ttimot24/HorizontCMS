@@ -37,6 +37,7 @@
         "icons": "^1.0.0",
         "jquery": "^3.6.0",
         "jquery-ui": "^1.13.1",
+        "jquery-ui-bundle": "^1.12.1-migrate",
         "ts-loader": "^9.3.1",
         "typescript": "^4.7.4",
         "vue-resource": "^1.5.3"

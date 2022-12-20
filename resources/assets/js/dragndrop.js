@@ -1,3 +1,7 @@
+'use strict';
+
+import 'jquery-ui-bundle';
+
 function dragndrop() {
 	//Helper function to keep table row from collapsing when being sorted
 	var fixHelperModified = function(e, tr) {
@@ -12,12 +16,12 @@ function dragndrop() {
 
 	function after_drop(){
 
-		var alist = {};
+		var alist = [];
 
 		$("#page-list-table tbody tr").each(function(iter) {
-		  $this = $(this);
-		  pageId = $this.find('td').eq(1).html().split(" ")[0];
-		  
+		  var $this = $(this);
+		  var pageId = $this.find('td').eq(1).html().split(" ")[0];
+
 		  alist[iter] = pageId;
 
 		});
@@ -45,8 +49,8 @@ function dragndrop() {
 
 	//Delete button in table rows
 	$('table').on('click','.btn-delete',function() {
-		tableID = '#' + $(this).closest('table').attr('id');
-		r = confirm('Delete this item?');
+		var tableID = '#' + $(this).closest('table').attr('id');
+		var r = confirm('Delete this item?');
 		if(r) {
 			$(this).closest('tr').remove();
 			renumber_table(tableID);
@@ -58,7 +62,7 @@ function dragndrop() {
 //Renumber table rows
 function renumber_table(tableID) {
 	$(tableID + " tr").each(function() {
-		count = $(this).parent().children().index($(this)) + 1;
+		var count = $(this).parent().children().index($(this)) + 1;
 		$(this).find('.priority').html(count);
 	});
 }
@@ -66,7 +70,7 @@ function renumber_table(tableID) {
 
 
 
-function dragndroporder(){
+export default function dragndroporder(){
 
 
 	$('#orderer').toggleClass('btn-default');
@@ -79,20 +83,22 @@ function dragndroporder(){
 
 		$('#page-list-table').removeClass('order-active');
 
-	}else{
+	} else {
 
 
-	$('table').find('tr').each(function(){
-		$(this).find('th').eq(0).before("<th class='col-md-1 torder'>Reorder</th>");
-        $(this).find('td').eq(0).before("<td class='torder'><i class='well well-sm fa fa-arrows-v' style='border-radius:3px;cursor:grab;font-size:20px;' aria-hidden='true'></i></td>");
-    });
+		$('table').find('tr').each(function(){
+			$(this).find('th').eq(0).before("<th class='col-md-1 torder'>Reorder</th>");
+			$(this).find('td').eq(0).before("<td class='torder'><i class='well well-sm fa fa-arrows-v' style='border-radius:3px;cursor:grab;font-size:20px;' aria-hidden='true'></i></td>");
+		});
 
 
-	$('#page-list-table').addClass('order-active');
+		$('#page-list-table').addClass('order-active');
 
 
-	dragndrop();
+		dragndrop();
 
 	}
 	
 }
+
+window.dragndroporder = dragndroporder;

@@ -5068,6 +5068,7 @@ __webpack_require__.r(__webpack_exports__);
   \******************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
+/* provided dependency */ var __webpack_provided_window_dot_jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -5075,7 +5076,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 __webpack_require__(/*! bootstrap-sass */ "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js");
 /**
@@ -5115,92 +5116,13 @@ Vue.prototype.$http = window.axios;
 
 /***/ }),
 
-/***/ "./resources/assets/js/dragndrop.js":
-/*!******************************************!*\
-  !*** ./resources/assets/js/dragndrop.js ***!
-  \******************************************/
-/***/ (() => {
-
-function dragndrop() {
-  //Helper function to keep table row from collapsing when being sorted
-  var fixHelperModified = function fixHelperModified(e, tr) {
-    var $originals = tr.children();
-    var $helper = tr.clone();
-    $helper.children().each(function (index) {
-      $(this).width($originals.eq(index).width());
-    });
-    return $helper;
-  };
-
-  function after_drop() {
-    var alist = {};
-    $("#page-list-table tbody tr").each(function (iter) {
-      $this = $(this);
-      pageId = $this.find('td').eq(1).html().split(" ")[0];
-      alist[iter] = pageId;
-    });
-    $.post("admin/page/reorder", {
-      _token: $("#orderer").data("csrf"),
-      order: JSON.stringify(alist)
-    }, function (data, status) {
-      console.log("Data: " + data + "\nStatus: " + status);
-    });
-  } //Make diagnosis table sortable
-
-
-  $("#page-list-table tbody").sortable({
-    helper: fixHelperModified,
-    stop: function stop(event, ui) {
-      renumber_table('#page-list-table');
-      after_drop();
-    }
-  }).disableSelection(); //Delete button in table rows
-
-  $('table').on('click', '.btn-delete', function () {
-    tableID = '#' + $(this).closest('table').attr('id');
-    r = confirm('Delete this item?');
-
-    if (r) {
-      $(this).closest('tr').remove();
-      renumber_table(tableID);
-    }
-  });
-}
-
-; //Renumber table rows
-
-function renumber_table(tableID) {
-  $(tableID + " tr").each(function () {
-    count = $(this).parent().children().index($(this)) + 1;
-    $(this).find('.priority').html(count);
-  });
-}
-
-function dragndroporder() {
-  $('#orderer').toggleClass('btn-default');
-  $('#orderer').toggleClass('btn-success');
-
-  if ($('#page-list-table').hasClass('order-active')) {
-    $('.torder').remove();
-    $('#page-list-table').removeClass('order-active');
-  } else {
-    $('table').find('tr').each(function () {
-      $(this).find('th').eq(0).before("<th class='col-md-1 torder'>Reorder</th>");
-      $(this).find('td').eq(0).before("<td class='torder'><i class='well well-sm fa fa-arrows-v' style='border-radius:3px;cursor:grab;font-size:20px;' aria-hidden='true'></i></td>");
-    });
-    $('#page-list-table').addClass('order-active');
-    dragndrop();
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js ***!
   \*********************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
+/* provided dependency */ var jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /*!
  * Bootstrap v3.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 Twitter, Inc.
@@ -57376,10 +57298,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _dragndrop_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dragndrop.js */ "./resources/assets/js/dragndrop.js");
-/* harmony import */ var _dragndrop_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_dragndrop_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var _components_LockScreen_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/LockScreen.vue */ "./resources/assets/js/components/LockScreen.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var _components_LockScreen_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/LockScreen.vue */ "./resources/assets/js/components/LockScreen.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * include Vue and Vue Resource. This gives a great starting point for
@@ -57389,19 +57309,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_4__["default"].config.devtools = true;
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].config.devtools = true;
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the body of the page. From here, you may begin adding components to
  * the application, or feel free to tweak this setup for your needs.
  */
 
-var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
+var app = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
   el: '#hcms',
   data: {},
   components: {
-    LockScreen: _components_LockScreen_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    LockScreen: _components_LockScreen_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   created: function created() {
     console.log("HorizontCMS: VueJS started");

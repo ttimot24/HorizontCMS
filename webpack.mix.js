@@ -13,6 +13,18 @@ const mix = require('laravel-mix');
 
 mix.setPublicPath('./resources');
 
+mix.webpackConfig(webpack => {
+   return {
+       plugins: [
+           new webpack.ProvidePlugin({
+               $: 'jquery',
+               jQuery: 'jquery', 
+               'window.jQuery': 'jquery',
+           })
+       ]
+   };
+});
+
 mix.ts('resources/assets/js/app.ts', 'js')
    .js('resources/assets/js/filemanager.js', 'js')
    .ts('resources/assets/js/pages.script.ts', 'js')
