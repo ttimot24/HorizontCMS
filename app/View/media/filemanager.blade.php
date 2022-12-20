@@ -196,4 +196,4 @@
 
 </div>
 
-<script src="resources/assets/js/filemanager.js"></script>
+<script src="resources/js/filemanager.js"></script>
