@@ -9,24 +9,19 @@ RUN apt-get update && \
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions zip pdo_mysql   
-
-RUN a2enmod rewrite
-
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-
-RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+    install-php-extensions zip pdo_mysql &&  \  
+    a2enmod rewrite && \
+    echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
+    sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php -r "if (hash_file('sha384', 'composer-setup.php') === '${INSTALLER_HASH}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');" && \
-    chown -R www-data /var/www/html
-    
-    
-RUN php composer.phar install
+    chown -R www-data /var/www/html && \
+    php composer.phar install
 
-RUN chmod -R 777 /var/www/html/storage
+RUN chmod -R 777 /var/www/html && chmod -R 777 /var/www/html/storage
 
 RUN npm run dev
 
