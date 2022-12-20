@@ -43,10 +43,15 @@
                 <li class="breadcrumb-item"><a href="storage"  v-on:click.prevent="open('',false);">storage</a></li>
                 <li class="breadcrumb-item" v-for="(bcrumb) in breadcrumb"><a :href="bcrumb.link" v-on:click.prevent="open(bcrumb.link,false);" >@{{bcrumb.text}}</a></li>
               </ol>
-            </nav>
+            </nav>  
             </div>
             <div class="col-md-2 text-end pt-3 pr-3">
-              <a href="a" v-on:click.prevent="open(currentDirectory,false);"><i class="fa fa-refresh" onclick="$(this).addClass('fa-spin');" aria-hidden="true" style="font-size: 22px;"></i></a>
+              <div class="row">
+                <div class="col text-white ">All: @{{folders.length + files.length}}</div>
+                <div class="col">
+                  <a href="a" v-on:click.prevent="open(currentDirectory,false);"><i class="fa fa-refresh" onclick="$(this).addClass('fa-spin');" aria-hidden="true" style="font-size: 22px;"></i></a>
+                </div>
+              </div>
             </div>
           </div>
           <div id="workspace" class="col-md-12 py-3 pe-5">
