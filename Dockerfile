@@ -8,12 +8,14 @@ RUN apt-get update && \
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
+# Apache configuration
 RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions zip pdo_mysql &&  \  
     a2enmod rewrite && \
     echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
     sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
+# Composer install
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php -r "if (hash_file('sha384', 'composer-setup.php') === '${INSTALLER_HASH}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
     php composer-setup.php && \
@@ -23,7 +25,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 
 RUN chmod -R 777 /var/www/html && chmod -R 777 /var/www/html/storage
 
-RUN npm install -g n && n latest && npm install -g npm && apt-get purge npm && npm run dev
+# NPM install
+RUN npm install -g n && n latest && npm run dev
 
 RUN (crontab -l ; echo "* * * * * php /var/www/html/artisan schedule:run >> /dev/null 2>&1")| crontab -
 

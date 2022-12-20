@@ -14,6 +14,8 @@
 
 </head>
 
-@include('media.filemanager')
+<body id="hcms">
+  @include('media.filemanager')
+</body>
 
 </html>
