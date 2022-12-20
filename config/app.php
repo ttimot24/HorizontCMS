@@ -171,6 +171,7 @@ return [
         Madnest\Madzipper\MadzipperServiceProvider::class,
 //        Chumper\Zipper\ZipperServiceProvider::class,
         Jackiedo\LogReader\LogReaderServiceProvider::class,
+    #    Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -226,6 +227,7 @@ return [
 
         'Settings' => \App\Model\Settings::class,
         'Zipper' => Madnest\Madzipper\Madzipper::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class
     ],
 
 ];

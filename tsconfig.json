@@ -1,0 +1,41 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+      "baseUrl": "./",
+      "paths": {
+      },
+      "resolveJsonModule": true,
+      "outDir": "./dist/out-tsc",
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,
+      "noImplicitReturns": true,
+      "noImplicitThis": false,
+      "noFallthroughCasesInSwitch": true,
+      "isolatedModules": false,
+      "sourceMap": true,
+      "declaration": false,
+      "downlevelIteration": true,
+      "experimentalDecorators": true,
+      "moduleResolution": "node",
+      "importHelpers": true,
+      "target": "es2019",
+      "module": "es2020",
+      "lib": [
+        "esnext",
+        "dom"
+      ]
+    },
+    "include": ["resources/assets/js/**/*.ts", "resources/assets/js/**/*.d.ts", "resources/assets/js/**/*.tsx", "resources/assets/js/**/*.vue", "resources/assets/js/controls.js", "resources/assets/js/filemanager.js"], 
+    "exclude": ["docs/**/*"],
+    "angularCompilerOptions": {
+      "enableI18nLegacyMessageIdFormat": false,
+      "strictInjectionParameters": true,
+      "strictInputAccessModifiers": true,
+      "strictTemplates": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+    },
+    "allowSyntheticDefaultImports": true
+  }
+  

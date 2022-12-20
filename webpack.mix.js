@@ -13,6 +13,10 @@ const mix = require('laravel-mix');
 
 mix.setPublicPath('./resources');
 
-mix.js('resources/assets/js/app.js', 'js')
+mix.ts('resources/assets/js/app.ts', 'js')
    .js('resources/assets/js/filemanager.js', 'js')
+   .ts('resources/assets/js/pages.script.ts', 'js')
+   .js('resources/assets/js/dragndrop.js', 'js')
+   .js('resources/assets/js/controls.js', 'js')
+   .vue()
    .sass('resources/assets/sass/horizontcms-next.scss', 'css');

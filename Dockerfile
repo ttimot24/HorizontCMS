@@ -23,7 +23,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 
 RUN chmod -R 777 /var/www/html && chmod -R 777 /var/www/html/storage
 
-RUN npm run dev
+RUN npm i -g npm && npm run dev
 
 RUN (crontab -l ; echo "* * * * * php /var/www/html/artisan schedule:run >> /dev/null 2>&1")| crontab -
 

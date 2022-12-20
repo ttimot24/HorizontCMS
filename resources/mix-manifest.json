@@ -1,5 +1,8 @@
 {
+    "/js/filemanager.js": "/js/filemanager.js",
+    "/js/dragndrop.js": "/js/dragndrop.js",
+    "/js/controls.js": "/js/controls.js",
     "/js/app.js": "/js/app.js",
-    "/css/horizontcms-next.css": "/css/horizontcms-next.css",
-    "/js/filemanager.js": "/js/filemanager.js"
+    "/js/pages.script.js": "/js/pages.script.js",
+    "/css/horizontcms-next.css": "/css/horizontcms-next.css"
 }

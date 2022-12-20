@@ -34,7 +34,7 @@
 
 
 <script>
-
+/*
 var lockScreen = new Vue({
 	el: '#lock_screen',
 	name: 'lock-screen',
@@ -86,6 +86,6 @@ var lockScreen = new Vue({
 	}
 });
 
-
+*/
 
 </script>

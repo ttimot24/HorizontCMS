@@ -30,6 +30,13 @@ Route::group(['middleware' => ['admin','plugin','can:global-authorization']],fun
   		 })->where('args', '(.*)');
 	
 
+/*	$path = "app/Controllers";
+	foreach(array_diff(scandir($path), array('.', '..')) as $file){
+		if(is_file($path."/".$file)){
+			$actualName = str_replace(".php","",$file);
+			Route::resource("/".strtolower(str_replace("Controller","",$actualName)), "\App\Controllers\\".$actualName );
+		}
+	} */
 
 
 	Route::any('/{controller?}/{action?}/{args?}/', 

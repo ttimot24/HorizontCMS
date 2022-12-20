@@ -16,8 +16,10 @@ require('bootstrap-sass');
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = require('vue');
-require('vue-resource');
+window.Vue = require('vue').default;
+window.VueResource = require('vue-resource');
+window.Vue.use(window.VueResource);
+
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of

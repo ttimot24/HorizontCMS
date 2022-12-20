@@ -13,9 +13,6 @@
  * the application, or feel free to tweak this setup for your needs.
  */
 
-//Vue.component('example', require('./components/Example.vue'));
-
-
 var filemanager = new Vue({
 	mounted: function(){
     	console.log("VueJS: FileManager started");
