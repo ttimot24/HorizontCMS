@@ -69,7 +69,7 @@
 
           @if(isset($page))
             <button type='button' class='btn btn-link mb-5 w-100' data-bs-toggle='modal' data-bs-target='#modal-xl-{{ $page->id }}'>
-              <img src='{{ $page->getThumb() }}' class='img img-thumbnail' >
+              <img src='{{ $page->getThumb() }}' class='img img-thumbnail w-100' >
             </button>
           @endif
 

@@ -52,7 +52,7 @@ class BlogpostController extends Controller{
         $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
        
         $this->view->title(trans('blogpost.new_blogpost'));
-        return $this->view->render('blogposts/create',[
+        return $this->view->render('blogposts/form',[
                                                         'categories' => \App\Model\BlogpostCategory::all(),
                                                         ]);
     }
@@ -66,15 +66,10 @@ class BlogpostController extends Controller{
         
         if($this->request->isMethod('POST')){
 
-            $blogpost = new Blogpost();
-            $blogpost->title = $this->request->input('title');
+            $blogpost = new Blogpost($this->request->all());
             $blogpost->slug = str_slug($this->request->input('title'), "-");
-            $blogpost->category_id = $this->request->input('category_id');
-            $blogpost->summary = $this->request->input('summary');
-            $blogpost->text = clean($this->request->input('text'));
             $blogpost->author_id = $this->request->user()->id;
             $blogpost->comments_enabled = 1;
-            $blogpost->active = $this->request->input("active");
 
             if ($this->request->hasFile('up_file')){
                  

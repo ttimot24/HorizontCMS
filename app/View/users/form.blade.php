@@ -77,7 +77,7 @@
 
         @if(isset($user))
           <button type='button' class='btn btn-link mb-5 w-100' data-bs-toggle='modal' data-bs-target='#modal-xl-{{ $user->id }}'>
-            <img src='{{ $user->getThumb() }}' class='img img-thumbnail' width='320' >
+            <img src='{{ $user->getThumb() }}' class='img img-thumbnail w-100' >
           </button>
         @endif
 
