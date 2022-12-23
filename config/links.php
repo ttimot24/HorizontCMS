@@ -13,6 +13,7 @@ return [
 
 	'blogpost-index' => 'blogpost/index',
 	'blogpost-create' => 'blogpost/create',
+	'blogpost-store' => 'blogpost/store',
 	'blogpost-edit' => 'blogpost/edit',
 	'blogpost-update' => 'blogpost/update',
 	'blogpost-view' => 'blogpost/show',

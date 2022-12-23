@@ -47,8 +47,23 @@ class BlogpostController extends Controller{
      */
     public function create(){
 
-       
 
+        $this->view->js('resources/js/controls.js');
+        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
+       
+        $this->view->title(trans('blogpost.new_blogpost'));
+        return $this->view->render('blogposts/create',[
+                                                        'categories' => \App\Model\BlogpostCategory::all(),
+                                                        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(){
+        
         if($this->request->isMethod('POST')){
 
             $blogpost = new Blogpost();
@@ -77,28 +92,8 @@ class BlogpostController extends Controller{
             }else{
             	return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-
-            
+   
         }
-
-
-        $this->view->js('resources/js/controls.js');
-        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
-       
-        $this->view->title(trans('blogpost.new_blogpost'));
-        return $this->view->render('blogposts/create',[
-                                                        'categories' => \App\Model\BlogpostCategory::all(),
-                                                        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request){
-        //
     }
 
     /**
@@ -130,7 +125,7 @@ class BlogpostController extends Controller{
 
         $this->view->title(trans('blogpost.edit_blogpost'));
 
-        return $this->view->render('blogposts/edit',[
+        return $this->view->render('blogposts/form',[
                                                         'blogpost' => Blogpost::find($id),
                                                         'categories' => \App\Model\BlogpostCategory::all(),
                                                     ]);
@@ -145,37 +140,38 @@ class BlogpostController extends Controller{
      */
     public function update($id){
       	 
+        if($this->request->isMethod('PUT')){
 
-         $blogpost = Blogpost::find($id);
+            $blogpost = Blogpost::find($id);
 
-      	 $blogpost->title = $this->request->input('title');
-      	 $blogpost->slug = str_slug($this->request->input('title'), "-");
-         $blogpost->category_id = $this->request->input('category_id');
-         $blogpost->summary = $this->request->input('summary');
-         $blogpost->text = clean($this->request->input('text'));
-         $blogpost->author_id = $this->request->user()->id;
-         if($this->request->has("active")){
-            $blogpost->active = $this->request->input("active");
-         }
-			
-			if ($this->request->hasFile('up_file')){
-                 
-            	 $img = $this->request->up_file->store($this->imagePath);
-
-                 $blogpost->image = basename($img);
-
-                 if(extension_loaded('gd')){
-                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
-                 }
+            $blogpost->title = $this->request->input('title');
+            $blogpost->slug = str_slug($this->request->input('title'), "-");
+            $blogpost->category_id = $this->request->input('category_id');
+            $blogpost->summary = $this->request->input('summary');
+            $blogpost->text = clean($this->request->input('text'));
+            $blogpost->author_id = $this->request->user()->id;
+            if($this->request->has("active")){
+                $blogpost->active = $this->request->input("active");
             }
+                
+                if ($this->request->hasFile('up_file')){
+                    
+                    $img = $this->request->up_file->store($this->imagePath);
+
+                    $blogpost->image = basename($img);
+
+                    if(extension_loaded('gd')){
+                        \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
+                    }
+                }
 
 
-         if($blogpost->save()){
-             return $this->redirect(admin_link("blogpost-edit",$blogpost->id))->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
-         }else{
-             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-         }
-
+            if($blogpost->save()){
+                return $this->redirect(admin_link("blogpost-edit",$blogpost->id))->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
+            }else{
+                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            }
+        }
 
     }
 

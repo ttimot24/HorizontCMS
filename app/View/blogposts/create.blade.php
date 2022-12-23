@@ -5,7 +5,7 @@
  
   <h2>{{trans('blogpost.new_blogpost')}}</h2>
  
-  <form  role='form' action='' method='POST' enctype='multipart/form-data'>
+  <form  role='form' action="{{admin_link('blogpost-store')}}" method='POST' enctype='multipart/form-data'>
     {{ csrf_field() }}
     <br><br>
 

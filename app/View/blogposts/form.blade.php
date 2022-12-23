@@ -2,11 +2,12 @@
 
 @section('content')
 <div class='container main-container'>
-  <h2>{{trans('blogpost.edit_blogpost')}}</h2>
+  <h2>{{trans(isset($page)? 'blogpost.edit_blogpost' : 'blogpost.new_blogpost')}}</h2>
 
   <form role='form' action="{{admin_link('blogpost-update',$blogpost->id)}}" method='POST' enctype='multipart/form-data'>
 
-  {{ csrf_field() }}
+    @csrf
+    @if(isset($blogpost)) @method('PUT') @endif
 
     <input type='hidden' name='id' value='{{ $blogpost->id }}'>
 
