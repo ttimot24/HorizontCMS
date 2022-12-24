@@ -15,7 +15,7 @@
         "intervention/image": "*",
         "laravel/helpers": "*",
         "nesbot/carbon": "2.*",
-        "ckeditor/ckeditor": "dev-full/stable",
+        "ckeditor/ckeditor": "4.*",
         "mews/purifier": "^3.3",
         "laravel/ui": "^3.0"
     },

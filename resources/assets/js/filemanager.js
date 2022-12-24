@@ -284,11 +284,18 @@ var filemanager = new Vue({
             return ( match && match.length > 1 ) ? match[1] : null;
         },
         returnFileUrl: function (filepath) {
-        	// Simulate user action of selecting a file to be returned to CKEditor.
-            var funcNum = 1;/*getUrlParam( 'CKEditorFuncNum' );*/
-            var fileUrl = filepath;
-            window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl );
-            window.close();
+            try{
+                // Simulate user action of selecting a file to be returned to CKEditor.
+                var funcNum = 1;/*getUrlParam( 'CKEditorFuncNum' );*/
+                var fileUrl = filepath;
+                window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl, '' );
+                window.close();
+            } catch(e){
+                console.log(funcNum);
+                console.log(fileUrl);
+                console.log( window.opener.CKEDITOR)
+                console.log(e);
+            }
         },
         getFileExtension: function(fileName){
             return fileName.substr(fileName.lastIndexOf('.') + 1);
