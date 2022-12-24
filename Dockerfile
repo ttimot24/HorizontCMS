@@ -23,7 +23,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     chown -R www-data /var/www/html && \
     php composer.phar install
 
-RUN chmod -R 777 /var/www/html && chmod -R 777 /var/www/html/storage
+RUN chown -R root /var/www/html && chmod -R 777 /var/www/html && chmod -R 777 /var/www/html/storage
 
 # NPM install
 RUN npm run dev
