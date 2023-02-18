@@ -4,7 +4,7 @@ namespace App\Model;
 
 use \App\Libs\Model;
 
-class Settings extends Model{
+class Settings extends Model {
   
   	protected $table = 'settings';
   	public $timestamps = false;

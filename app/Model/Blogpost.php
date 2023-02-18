@@ -17,6 +17,8 @@ class Blogpost extends Model{
 
     protected $defaultImage = "resources/images/icons/newspaper.png";
 
+    protected $imageDir = "storage/images/blogposts";
+
 
     public static function findBySlug($slug){
 
@@ -67,27 +69,6 @@ class Blogpost extends Model{
     public function getSlug(){
         return ($this->slug!=NULL && $this->slug!="")? $this->slug : str_slug($this->title);
     }
-
-	public function getThumb(){
-
-        if($this->hasImage() && file_exists("storage/images/blogposts/thumbs/".$this->image)){
-            return url("storage/images/blogposts/thumbs/".$this->image);
-        }else{
-            return $this->getImage();
-        }
-
-	}
-
-    public function getImage(){
-
-    	if($this->hasImage() && file_exists("storage/images/blogposts/".$this->image)){
-    		return url("storage/images/blogposts/".$this->image);
-    	}else{
-    		return url($this->defaultImage);
-    	}
-
-    }
-
 
     public function getExcerpt($char_num = 255){
 

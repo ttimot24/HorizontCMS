@@ -38,6 +38,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     protected $defaultImage = "resources/images/icons/profile.png";
 
+    protected $imageDir = "storage/images/users";
 
     public static function findBySlug($slug){
 
@@ -125,28 +126,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return ($this->slug!=NULL && $this->slug!="")? $this->slug : str_slug($this->username);
     }
 
-    public function getThumb(){
-
-        if($this->hasImage() && file_exists("storage/images/users/thumbs/".$this->image)){
-            return url("storage/images/users/thumbs/".$this->image);
-        }else{
-            return $this->getImage();
-        }
-
-    }
-
-    public function getImage(){
-
-        if($this->hasImage() && file_exists("storage/images/users/".$this->image)){
-            return url("storage/images/users/".$this->image);
-        }else{
-            return url($this->defaultImage);
-        }
-
-    }
-
-
-
     /**
     * Mutator for passwords
     */
@@ -162,7 +141,5 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return self::where('name', 'LIKE' ,$search_key)->orWhere('username', 'LIKE' ,$search_key)->orWhere('email', 'LIKE' ,$search_key)->get();
 
     }
-
-
 
 }

@@ -4,11 +4,11 @@ namespace App\Model;
 
 use \App\Libs\Model;
 
-class Visits extends Model{
+class Visits extends Model {
     
     protected $table = 'visits';
-    public $timestamps = false;
 
+    public $timestamps = false;
 
     public static function newVisitor(\Illuminate\Http\Request $request){
     	$visit = null;

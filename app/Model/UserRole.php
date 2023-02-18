@@ -4,7 +4,7 @@ namespace App\Model;
 
 use \App\Libs\Model;
 
-class UserRole extends Model{
+class UserRole extends Model {
    
 	public $timestamps = false;
 

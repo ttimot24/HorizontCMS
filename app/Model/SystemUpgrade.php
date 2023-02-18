@@ -5,7 +5,7 @@ namespace App\Model;
 use \App\Libs\Model;
 use \VisualAppeal\AutoUpdate;
 
-class SystemUpgrade extends Model{
+class SystemUpgrade extends Model {
 
 	public static $auto_upgrade;
 

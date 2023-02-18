@@ -17,6 +17,8 @@ class Page extends Model {
 
     protected $defaultImage = "resources/images/icons/page.png";
 
+    protected $imageDir = "storage/images/pages";
+
     public static function home(){
         return self::find(Settings::get('home_page'));
     }
@@ -81,27 +83,6 @@ class Page extends Model {
     public function getSlug(){
         return ($this->slug!=NULL && $this->slug!="")? $this->slug : str_slug($this->name);
     }
-
-   	public function getThumb(){
-
-        if($this->hasImage() && file_exists("storage/images/pages/thumbs/".$this->image)){
-            return url("storage/images/pages/thumbs/".$this->image);
-        }else{
-            return $this->getImage();
-        }
-
-	}
-
-    public function getImage(){
-
-    	if($this->hasImage() && file_exists("storage/images/pages/".$this->image)){
-    		return url("storage/images/pages/".$this->image);
-    	}else{
-    		return url($this->defaultImage);
-    	}
-
-    }
-
 
     public static function search($search_key){
 

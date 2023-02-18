@@ -4,10 +4,12 @@ namespace App\Model;
 
 use \App\Libs\Model;
 
-class Plugin extends Model
-{
+class Plugin extends Model {
+
     public $timestamps = false;
+
     protected $fillable = ['id','root_dir','area','permission','table_name','active'];
+	
     private $info = null;
 
 	public function __construct($root_dir = null){	

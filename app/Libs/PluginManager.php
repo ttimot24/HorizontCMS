@@ -2,8 +2,6 @@
 
 namespace App\Libs;
 
-use App\Model\Plugin;
-
 class PluginManager extends Model{
 
 
