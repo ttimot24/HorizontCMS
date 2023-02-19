@@ -5,6 +5,15 @@ namespace App\Model;
 use \App\Libs\Model;
 
 class HeaderImage extends Model {
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'link' ,'description', 'active',
+    ];
     
     public $timestamps = false;
 

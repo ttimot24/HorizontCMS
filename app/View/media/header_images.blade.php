@@ -44,11 +44,15 @@
 								<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
 							</div>
 							<form action='admin/header-image/edit/{{$each->id}}' method='POST'>
-							<div class='modal-body'>
+							<div class='modal-body text-dark'>
 								@csrf
 								<div class="mb-3">
 									<label for="header-image-title" class="form-label">Tagline</label>
 									<input type="text" class="form-control" name="title" id="header-image-title" value="{{$each->title}}">
+								</div>
+								<div class="mb-3">
+									<label for="header-image-title" class="form-label">Link</label>
+									<input type="text" class="form-control" name="link" id="header-image-title" value="{{$each->link}}">
 								</div>
 								<div class="mb-3">
 									<label for="exampleFormControlTextarea1" class="form-label">Summary</label>
@@ -105,11 +109,15 @@
 			</div>
 			<form action='admin/header-image/edit/{{$each->id}}' method='POST'>
 			<div class='modal-body'>
-				{{ csrf_field() }}
+				@csrf
 				<div class="mb-3">
 					<label for="header-image-title" class="form-label">Tagline</label>
 					<input type="text" class="form-control" name="title" id="header-image-title" value="{{$each->title}}">
 				</div>
+				<div class="mb-3">
+					<label for="header-image-title" class="form-label">Link</label>
+						<input type="text" class="form-control" name="link" id="header-image-title" value="{{$each->link}}">
+					</div>
 				<div class="mb-3">
 					<label for="exampleFormControlTextarea1" class="form-label">Summary</label>
 					<textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{$each->description}}</textarea>
@@ -144,7 +152,7 @@
 	  </div>
 	  <form action='admin/header-image/create' method='POST' enctype='multipart/form-data'>
       <div class='modal-body'>
-		{{ csrf_field() }}
+		@csrf
 		<div class='form-group'>
 		<label for='file'>Upload file:</label>
 		<input name='up_file' id='input-2' type='file' class='file'  accept="image/*"  multiple='true' data-show-upload='false' data-show-caption='true' required>
@@ -154,13 +162,17 @@
 			<input type="text" class="form-control" name="title" id="header-image-title">
 		</div>
 		<div class="mb-3">
+			<label for="header-image-title" class="form-label">Link</label>
+			<input type="text" class="form-control" name="link" id="header-image-title" value="{{$each->link}}">
+		</div>
+		<div class="mb-3">
 			<label for="exampleFormControlTextarea1" class="form-label">Summary</label>
 			<textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5"></textarea>
 		</div>
 
       </div>
       <div class='modal-footer'>
-		<button type='submit' class='btn btn-primary'>{{trans('actions.upload')}}</button>
+		<button type='submit' name="active" value="0" class='btn btn-primary'>{{trans('actions.upload')}}</button>
         <button type='button' class='btn btn-default' data-bs-dismiss='modal'>{{trans('actions.cancel')}}</button>
 	  </div>
 	  </form>

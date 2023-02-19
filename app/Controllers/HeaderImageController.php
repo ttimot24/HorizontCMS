@@ -42,10 +42,7 @@ class HeaderImageController extends Controller {
     public function create(){
 
         if($this->request->isMethod('POST')){
-            $header_image = new HeaderImage();
-            $header_image->title = $this->request->input("title");
-            $header_image->description = $this->request->input("description");
-            $header_image->active = 0;
+            $header_image = new HeaderImage($this->request->all());
 
             if ($this->request->hasFile('up_file')){
                  
