@@ -150,7 +150,12 @@ class Plugin extends Model {
 		$plugin_namespace = $this->getRegisterClass();
 
 		if($this->hasRegister($register)){
-            return $plugin_namespace::$register();
+
+			$instance = new $plugin_namespace();
+
+			if($instance instanceof \App\Libs\PluginInterface){
+            	return $instance->$register();
+			}
         }
 
         return $default;

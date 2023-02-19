@@ -8,12 +8,12 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ttimot24/HorizontCMS&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&utm_medium=referral&utm_content=ttimot24/HorizontCMS&utm_campaign=Badge_Coverage)
 
-HorizontCMS is an open-source, responsive Content Management System (CMS) built on Laravel 8, VueJs 2.6 and Bootstrap 5.1 which you can use to build you next generation websites and blogs.
+HorizontCMS is an open-source, responsive Content Management System (CMS) built on Laravel 8, VueJs 2.6 and Bootstrap 5.2 which you can use to build you next generation websites and blogs.
 
 This lightweight CMS platform provides end-users with the tools to extend and build sustainable web presence with one click which makes it easy to learn for users, simple to code for developers
 
 
-### Latest version: [v1.0.0-beta.2](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.0.0-beta.2)
+### Latest version: [v1.0.0-beta.3](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.0.0-beta.3)
 
 ### Try out
 
