@@ -60,32 +60,23 @@ class BlogpostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(){
-        
-        if($this->request->isMethod('POST')){
 
-            $blogpost = new Blogpost($this->request->all());
-            $blogpost->slug = str_slug($this->request->input('title'), "-");
-            $blogpost->author_id = $this->request->user()->id;
-            $blogpost->comments_enabled = 1;
+        $blogpost = new Blogpost($this->request->all());
+        $blogpost->slug = str_slug($this->request->input('title'), "-");
+        $blogpost->author_id = $this->request->user()->id;
+        $blogpost->comments_enabled = 1;
 
-            if ($this->request->hasFile('up_file')){
-                 
-            	 $img = $this->request->up_file->store($this->imagePath);
-
-                 $blogpost->image = basename($img);
-
-                 if(extension_loaded('gd')){
-                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
-                 }
+       if ($this->request->hasFile('up_file')){
+              
+         	$img = $this->request->up_file->store($this->imagePath);
+            $blogpost->image = basename($img);
+            if(extension_loaded('gd')){
+                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
             }
-
-            if($blogpost->save()){
-                return $this->redirect(route("blogpost.edit",['blogpost' => $blogpost]))->withMessage(['success' => trans('message.successfully_created_blogpost')]);
-            }else{
-            	return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-   
         }
+
+       return $blogpost->save() ? $this->redirect(route("blogpost.edit",['blogpost' => $blogpost]))->withMessage(['success' => trans('message.successfully_created_blogpost')])
+                                : $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
     /**
@@ -131,8 +122,6 @@ class BlogpostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update($id){
-      	 
-        if($this->request->isMethod('PUT')){
 
             $blogpost = Blogpost::find($id);
 
@@ -163,7 +152,6 @@ class BlogpostController extends Controller {
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-        }
 
     }
 

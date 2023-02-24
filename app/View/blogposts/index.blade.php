@@ -39,7 +39,7 @@
           <td class="text-center"><span class="badge rounded-pill bg-dark">{{ count($blogpost->comments) }}</span></td>
           <td class='hidden-xs text-center col-1'><?= $blogpost->created_at->format('Y-m-d'); ?></br><font size='2'><i>at</i> <?= $blogpost->created_at->format('H:i:s'); ?></font></td>
           @if($blogpost->author)
-          <td><a href="{{admin_link('user-view',$blogpost->author->id)}}" >{{ $blogpost->author->username }}</a></td>
+          <td><a href="{{route('user.show',['user' => $blogpost->author])}}" >{{ $blogpost->author->username }}</a></td>
           @else
           <td>{{ trans('blogpost.removed_user') }}</td>
           @endif

@@ -4,7 +4,7 @@
 <div class='container main-container'>
   <h2>{{trans(isset($blogpost)? 'blogpost.edit_blogpost' : 'blogpost.new_blogpost')}}</h2>
 
-  <form role='form' action="{{isset($blogpost)? admin_link('blogpost-update', $blogpost->id) : admin_link('blogpost-store')}}" method='POST' enctype='multipart/form-data'>
+  <form role='form' action="{{isset($blogpost)? route('blogpost.update', ['blogpost' => $blogpost]) : route('blogpost.store')}}" method='POST' enctype='multipart/form-data'>
 
     @csrf
     @if(isset($blogpost)) @method('PUT') @endif
@@ -82,7 +82,7 @@
                 <button name="active" value="1" id='submit-btn' name='submit_clicked' type='submit' class='btn btn-primary btn-lg' onclick='window.onbeforeunload = null;'>{{trans('actions.publish')}}</button> 
               @endif
             @endif
-            <a href="{{admin_link('blogpost-index')}}" type='button' class='btn btn-default'>{{trans('actions.cancel')}}</a>
+            <a href="{{route('blogpost.index')}}" type='button' class='btn btn-default'>{{trans('actions.cancel')}}</a>
           </div>
         </div>     
     
