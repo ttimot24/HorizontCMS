@@ -62,12 +62,22 @@ class SettingsController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug = 'index'){
+    public function index(){
 
         $this->view->title(trans('settings.settings'));
         return $this->view->render('settings/index',[
                                                         'panels' => $this->getSettingsPanels(),
                                                     ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id){
+        return $this->{$id}();
     }
 
 
@@ -77,7 +87,7 @@ class SettingsController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function website($slug){
+    public function website(){
 
 
         $this->view->title(trans('settings.settings'));
@@ -93,7 +103,7 @@ class SettingsController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function adminarea($slug){
+    public function adminarea(){
 
 
         $this->view->title(trans('settings.settings'));
@@ -110,7 +120,7 @@ class SettingsController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updatecenter($slug){
+    public function updatecenter(){
 
         \App\Model\SystemUpgrade::checkUpgrade();
 
@@ -242,7 +252,7 @@ class SettingsController extends Controller{
 
 
 
-    public function log($file){
+    public function log($file = null){
 
         LogReader::setLogPath(dirname(\Config::get('logging.channels.'.\Config::get('logging.default').'.path')));
 

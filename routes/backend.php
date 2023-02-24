@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 const CONTROLLER_PATH = 'app/Controllers';
 
 Route::group(['prefix'=>'/install'],function(){
@@ -13,11 +15,7 @@ Route::group(['prefix'=>'/install'],function(){
 	
 });
 
-
-
 Route::auth();
-
-
 
 Route::group(['middleware' => ['admin','plugin','can:global-authorization']],function(){
 
