@@ -38,22 +38,17 @@ class SettingsController extends Controller{
 
     private function getSettingsPanels(){
         
-        $backend_prefix = \Config::get('horizontcms.backend_prefix');
 
         return [
-            ['name' => trans('settings.website'),'link' => $backend_prefix.'/settings/website','icon' => 'fa fa-globe'],
-            ['name' => trans('settings.admin_area'),'link' => $backend_prefix.'/settings/adminarea','icon' => 'fa fa-desktop'],
-            ['name' => trans('settings.update_center'),'link' => $backend_prefix.'/settings/updatecenter','icon' => 'fa fa-arrow-circle-o-up'],
-            ['name' => trans('settings.server'),'link' => $backend_prefix.'/settings/server','icon' => 'fa fa-server'],
-//                ['name' => trans('settings.email'),'link' => $backend_prefix.'/settings/email','icon' => 'fa fa-envelope'],
-            ['name' => trans('settings.social_media'),'link' => $backend_prefix.'/settings/socialmedia','icon' => 'fa fa-thumbs-o-up'],
-            ['name' => trans('Log'),'link' => $backend_prefix.'/settings/log', 'icon' => 'fa fa-bug'],
-            ['name' => trans('settings.database'),'link' => $backend_prefix.'/settings/database','icon' => 'fa fa-database'],
-            ['name' => trans('settings.scheduler'),'link' => $backend_prefix.'/settings/schedules','icon' => 'fa fa-clock-o'],
-//                  ['name' => trans('settings.spread'),'link' => $backend_prefix.'/settings/spread','icon' => 'fa fa-paper-plane'],
-//                    ['name' => trans('settings.uninstall'),'link' => $backend_prefix.'/settings/uninstall','icon' => 'fa fa-exclamation-triangle'],
-
-            ];
+            ['name' => trans('settings.website'),'link' => route('settings.show', ['setting' => 'website']),'icon' => 'fa fa-globe'],
+            ['name' => trans('settings.admin_area'),'link' => route('settings.show', ['setting' => 'adminarea']),'icon' => 'fa fa-desktop'],
+            ['name' => trans('settings.update_center'),'link' => route('settings.show', ['setting' => 'updatecenter']),'icon' => 'fa fa-arrow-circle-o-up'],
+            ['name' => trans('settings.server'),'link' => route('settings.show', ['setting' => 'server']),'icon' => 'fa fa-server'],
+            ['name' => trans('settings.social_media'),'link' => route('settings.show', ['setting' => 'socialmedia']),'icon' => 'fa fa-thumbs-o-up'],
+            ['name' => trans('Log'),'link' => route('settings.show', ['setting' => 'log']), 'icon' => 'fa fa-bug'],
+            ['name' => trans('settings.database'),'link' => route('settings.show', ['setting' => 'database']),'icon' => 'fa fa-database'],
+            ['name' => trans('settings.scheduler'),'link' => route('settings.show', ['setting' => 'schedules']),'icon' => 'fa fa-clock-o'],
+        ];
 
     }
 
