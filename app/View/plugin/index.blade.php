@@ -30,7 +30,7 @@ foreach($all_plugin as $current_plugin){
       echo "</div>";
 
         echo "<div class='col-md-9 m-0'>
-            <h4 class='p-0'>";
+            <h4 class='list-group-item-heading p-0'>";
 
             if($current_plugin->isActive()){
               echo "<a class='color-primary' id='".$current_plugin->root_dir."' href='".config('horizontcms.backend_prefix')."/plugin/run/".$current_plugin->getSlug()."'>".$current_plugin->getName()."</a>";

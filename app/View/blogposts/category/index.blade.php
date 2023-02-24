@@ -8,7 +8,7 @@
 
 <form action="{{ admin_link('blogpost_category-create') }}" class='form-inline float-right mt-4' role='form' method='POST'>
 
-	{{ csrf_field() }}
+	@csrf
 
 	<div class="row g-3 align-items-center">
 	<div class="col-auto">
@@ -48,8 +48,7 @@
 		@foreach($all_category as $each)
 		<tr class="d-flex">
 				<td class="col-1">{{ $each->id }}</td>
-				<!--<td><img src='{{ $each->getThumb() }}'  class='img img-rounded' style='object-fit:cover;' width="70" height="50" /> </td>
-				-->
+	
 				<td class='col'><a href="{{ admin_link('blogpost_category-view',$each->id) }}">{{ $each->name }}</a></td>     
 
 				<td class="col">

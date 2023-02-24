@@ -10,7 +10,8 @@
 
 <form action="{{ admin_link('blogpost_category-update', $category->id) }}" class='form-inline float-right mt-4' role='form' method='POST'>
 
-	{{ csrf_field() }}
+	@csrf
+	@method('PUT')
 
 	<div class="row g-3 align-items-center">
 	<div class="col-auto">

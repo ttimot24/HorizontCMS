@@ -106,7 +106,7 @@ class BlogpostCategoryController extends Controller{
     public function update($id){
       	 
 
-        if($this->request->isMethod('POST')){
+        if($this->request->isMethod('PUT')){
 
             $blogpost_category = BlogpostCategory::find($id);
             $blogpost_category->name = $this->request->input('name');
