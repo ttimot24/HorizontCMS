@@ -34,12 +34,8 @@ class BlogpostCategoryController extends Controller{
      */
     public function create(){
 
-       
 
-        if($this->request->isMethod('POST')){
-
-            $blogpost_category = new BlogpostCategory();
-            $blogpost_category->name = $this->request->input('name');
+            $blogpost_category = new BlogpostCategory($this->request->all());
             $blogpost_category->author_id = \Auth::user()->id;
 
             if ($this->request->hasFile('up_file')){
@@ -54,8 +50,6 @@ class BlogpostCategoryController extends Controller{
             	return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
 
-            
-        }
 
     }
 
@@ -104,9 +98,6 @@ class BlogpostCategoryController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function update($id){
-      	 
-
-        if($this->request->isMethod('PUT')){
 
             $blogpost_category = BlogpostCategory::find($id);
             $blogpost_category->name = $this->request->input('name');
@@ -122,11 +113,6 @@ class BlogpostCategoryController extends Controller{
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-
-            
-        }
-
-
 
     }
 

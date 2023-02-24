@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
+use \Illuminate\Http\Request;
 use App\Libs\Controller;
-
 use App\Model\Blogpost;
 
 class BlogpostController extends Controller {
@@ -15,7 +15,6 @@ class BlogpostController extends Controller {
     /**
      * Creates image directories if they not exists.
      *
-     * @return \Illuminate\Http\Response
     */
     public function before(){
         if(!file_exists(storage_path($this->imagePath.'/thumbs'))){
@@ -59,16 +58,16 @@ class BlogpostController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(){
+    public function store(Request $request){
 
-        $blogpost = new Blogpost($this->request->all());
-        $blogpost->slug = str_slug($this->request->input('title'), "-");
-        $blogpost->author_id = $this->request->user()->id;
+        $blogpost = new Blogpost($request->all());
+        $blogpost->slug = str_slug($request->input('title'), "-");
+        $blogpost->author_id = $request->user()->id;
         $blogpost->comments_enabled = 1;
 
-       if ($this->request->hasFile('up_file')){
+       if ($request->hasFile('up_file')){
               
-         	$img = $this->request->up_file->store($this->imagePath);
+         	$img = $request->up_file->store($this->imagePath);
             $blogpost->image = basename($img);
             if(extension_loaded('gd')){
                  \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$blogpost->image));
@@ -85,7 +84,7 @@ class BlogpostController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
+    public function show(int $id){
 
         $this->view->title(trans('blogpost.view_blogpost'));
         return $this->view->render('blogposts/view',[
@@ -101,7 +100,7 @@ class BlogpostController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
+    public function edit(int $id){
 
         $this->view->js('resources/js/controls.js');
         $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
@@ -121,23 +120,23 @@ class BlogpostController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id){
+    public function update(Request $request, int $id){
 
             $blogpost = Blogpost::find($id);
 
-            $blogpost->title = $this->request->input('title');
-            $blogpost->slug = str_slug($this->request->input('title'), "-");
-            $blogpost->category_id = $this->request->input('category_id');
-            $blogpost->summary = $this->request->input('summary');
-            $blogpost->text = clean($this->request->input('text'));
-            $blogpost->author_id = $this->request->user()->id;
-            if($this->request->has("active")){
-                $blogpost->active = $this->request->input("active");
+            $blogpost->title = $request->input('title');
+            $blogpost->slug = str_slug($request->input('title'), "-");
+            $blogpost->category_id = $request->input('category_id');
+            $blogpost->summary = $request->input('summary');
+            $blogpost->text = clean($request->input('text'));
+            $blogpost->author_id = $request->user()->id;
+            if($request->has("active")){
+                $blogpost->active = $request->input("active");
             }
                 
-                if ($this->request->hasFile('up_file')){
+                if ($request->hasFile('up_file')){
                     
-                    $img = $this->request->up_file->store($this->imagePath);
+                    $img = $request->up_file->store($this->imagePath);
 
                     $blogpost->image = basename($img);
 
@@ -161,7 +160,7 @@ class BlogpostController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy(int $id){
         //
     }
 
@@ -172,7 +171,7 @@ class BlogpostController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id){
+    public function delete(int $id){
         
 
         if(Blogpost::find($id)->delete()){

@@ -17,23 +17,14 @@ class BlogpostCommentController extends Controller{
      */
     public function create(){
 
-       
-
-        if($this->request->isMethod('POST')){
-
-            $blogpost_comment = new BlogpostComment();
-            $blogpost_comment->blogpost_id = $this->request->input('blogpost_id');
-            $blogpost_comment->comment = $this->request->input('comment');
-            $blogpost_comment->user_id = \Auth::user()->id;
-
-            if($blogpost_comment->save()){               
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost_comment')]);
-            }else{
-            	return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-
-            
-        }
+        $blogpost_comment = new BlogpostComment($this->request->all());
+        $blogpost_comment->blogpost_id = $this->request->input('blogpost_id');
+        $blogpost_comment->user_id = \Auth::user()->id;
+           
+        return $this->redirectToSelf()->withMessage(
+                    $blogpost_comment->save()? ['success' => trans('message.successfully_created_blogpost_comment')]
+                    : ['danger' => trans('message.something_went_wrong')]
+                );
 
     }
 
@@ -69,19 +60,16 @@ class BlogpostCommentController extends Controller{
 
             $blogpost_comment = BlogpostComment::find($id);
 
-            $blogpost_comment = new BlogpostComment();
             $blogpost_comment->blogpost_id = $this->request->input('blogpost_id');
             $blogpost_comment->comment = $this->request->input('comment');
             $blogpost_comment->user_id = \Auth::user()->id;
 
 
-            if($blogpost_comment->save()){               
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_updated_blogpost_comment')]);
-            }else{
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-
-
+            return $this->redirectToSelf()->withMessage(
+                $blogpost_comment->save()? ['success' => trans('message.successfully_updated_blogpost_comment')]
+                : ['danger' => trans('message.something_went_wrong')]
+            );
+            
     }
 
     /**
