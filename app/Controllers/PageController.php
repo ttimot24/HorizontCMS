@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use Illuminate\Http\Request;
 use App\Libs\Controller;
 
 use App\Model\Page;
@@ -29,7 +28,7 @@ class PageController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug){
+    public function index(){
 
         $this->view->js('resources/js/dragndrop.js');
         $this->view->js('resources/assets/js/page.js');

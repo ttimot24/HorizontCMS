@@ -25,7 +25,7 @@ class HeaderImageController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug){
+    public function index(){
 
         $this->view->title(trans('Header Images'));
         return $this->view->render('media/header_images',[

@@ -2,12 +2,11 @@
 
 namespace App\Controllers;
 
-use Illuminate\Http\Request;
 use App\Libs\Controller;
 
 use App\Model\Blogpost;
 
-class BlogpostController extends Controller{
+class BlogpostController extends Controller {
  
 
     protected $itemPerPage = 25;
@@ -29,9 +28,7 @@ class BlogpostController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug){
-
-
+    public function index(){
 
         $this->view->title(trans('blogpost.blogposts'));
         return $this->view->render('blogposts/index',[

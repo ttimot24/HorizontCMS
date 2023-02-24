@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use Illuminate\Http\Request;
 use App\Libs\Controller;
 
 use App\Model\User;
@@ -30,7 +29,7 @@ class UserController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug){
+    public function index(){
 
 
         $this->view->title(trans('user.users'));

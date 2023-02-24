@@ -2,10 +2,8 @@
 
 namespace App\Controllers;
 
-use Illuminate\Http\Request;
 use App\Libs\Controller;
 use Illuminate\Support\Facades\Storage;
-use \Illuminate\Http\File;
 
 class FileManagerController extends Controller{
  
@@ -14,7 +12,7 @@ class FileManagerController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug){
+    public function index(){
 
 
         $mode = $this->request->get('mode');

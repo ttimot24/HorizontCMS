@@ -5,7 +5,7 @@
 
 <h2>{{trans('blogpost.blogposts')}} <small class='text-muted pull-right pt-3'>{{trans('blogpost.all')}}: {{$number_of_blogposts}}</small></h2>
 <div class='container'>
-  <a href="{{admin_link('blogpost-create')}}" class='btn btn-primary mt-3 mb-4'>{{trans('blogpost.new_post_button')}}</a>
+  <a href="{{route('blogpost.create')}}" class='btn btn-primary mt-3 mb-4'>{{trans('blogpost.new_post_button')}}</a>
 </div>
 
 <table class='table table-hover'>
@@ -29,7 +29,7 @@
         <tr>
           <td><?= $blogpost->id ?></td>
           <td><img src='{{$blogpost->getThumb()}}'  class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> </td>
-          <td><a href="{{admin_link('blogpost-view',$blogpost->id)}}" >{{ $blogpost->title }}</a><br>
+          <td><a href="{{route('blogpost.show',['blogpost' => $blogpost])}}" >{{ $blogpost->title }}</a><br>
               @if($blogpost->isDraft())
                 <span class="badge bg-info text-dark">{{trans('actions.draft')}}</span>
               @elseif($blogpost->isFeatured())
@@ -50,7 +50,7 @@
           @endif
           <td class="text-center">
               <div class="btn-group" role="group">
-                  <a href="{{admin_link('blogpost-edit',$blogpost->id)}}" type="button" class="btn btn-warning btn-sm" style='min-width:70px;'>{{trans('actions.edit')}}</a>
+                  <a href="{{route('blogpost.edit',['blogpost' => $blogpost])}}" type="button" class="btn btn-warning btn-sm" style='min-width:70px;'>{{trans('actions.edit')}}</a>
                   <a type="button" data-bs-toggle='modal' data-bs-target=#delete_<?= $blogpost->id ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
               </div>
           </td>

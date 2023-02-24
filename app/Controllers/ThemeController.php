@@ -15,7 +15,7 @@ class ThemeController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug){
+    public function index(){
 
 
         $this->view->title(trans('theme.themes'));

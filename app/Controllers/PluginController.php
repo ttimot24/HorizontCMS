@@ -20,7 +20,7 @@ class PluginController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug){
+    public function index(){
 
         $this->view->title(trans('Applications'));
         return $this->view->render('plugin/index',[
