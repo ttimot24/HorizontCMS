@@ -11,11 +11,11 @@
   <ul class='pager list-unstyled'>
 
     @if($previous_blogpost)
-        <li class='btn previous float-start' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('blogpost-view',$previous_blogpost)}}"> <span class='fa fa-angle-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+        <li class='btn previous float-start' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{route('blogpost.show',['blogpost' => $previous_blogpost])}}"> <span class='fa fa-angle-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
     @endif
 
     @if($next_blogpost)
-        <li class='btn next float-end' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('blogpost-view',$next_blogpost)}}">{{trans('actions.next')}} <span class='fa fa-angle-right' aria-hidden='true'></span> </a></li>
+        <li class='btn next float-end' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{route('blogpost.show',['blogpost' => $next_blogpost])}}">{{trans('actions.next')}} <span class='fa fa-angle-right' aria-hidden='true'></span> </a></li>
     @endif
 
 
@@ -37,7 +37,7 @@
       @else
         <a href="{{admin_link('blogpost-revoke-featured',$blogpost->id)}}" type='button' class='btn btn-success'><span class='glyphicon glyphicon-minus' aria-hidden='true'></span> {{trans('Revoke')}}</a>
       @endif
-      <a href="{{admin_link('blogpost-edit',$blogpost->id)}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}} </a>
+      <a href="{{route('blogpost.edit',['blogpost' => $blogpost])}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}} </a>
       
       <button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#delete'>
       <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.remove')}}
@@ -49,7 +49,7 @@
     @endif
 
       @if($blogpost->author)
-      <b class="d-block mb-3">{{trans('blogpost.author')}} :  <a href="{{admin_link('user-view',$blogpost->author->id)}}">{{ $blogpost->author->username }}</a></b>
+      <b class="d-block mb-3">{{trans('blogpost.author')}} :  <a href="{{route('user.show',['user' => $blogpost->author])}}">{{ $blogpost->author->username }}</a></b>
       @else
       <b class="d-block mb-3">{{trans('blogpost.author')}} : <a class="color-primary"> {{ trans('blogpost.removed_user') }} </a> </b>
       @endif 

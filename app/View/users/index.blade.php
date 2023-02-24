@@ -6,7 +6,7 @@
 <h2>{{trans('user.registered_users')}} <small class='pull-right text-muted pt-3'>{{trans('user.all')}}: {{$number_of_users}} | {{trans('user.active')}}: {{$active_users}} | {{trans('user.inactive')}}: {{$number_of_users-$active_users}}</small></h2>
 
 
-<div class='container col-md-12'><a href="{{admin_link('user-create')}}" class='btn btn-warning mb-3'>{{trans('user.new_user_button')}}</a></div>
+<div class='container col-md-12'><a href="{{route('user.create')}}" class='btn btn-warning mb-3'>{{trans('user.new_user_button')}}</a></div>
 
 <table class='table table-hover'>
     <thead>
@@ -34,7 +34,7 @@ echo "<td>";
 echo Html::img($each->getImage(),"class='img-rounded' style='object-fit:cover;' width='50' height='50'");
 echo	"</td>";
 
-echo "<td><a href='".admin_link('user-view',$each->id)."'>".$each->name."</a></td>";
+echo "<td><a href='".route('user.show',['user' => $each])."'>".$each->name."</a></td>";
 echo "<td>".$each->username."</td>";
 echo "<td>".$each->email."</td>";
 
@@ -64,7 +64,7 @@ $disabled = "";
 
 echo "
        <div class='btn-group' role='group'>
-           <a href='".admin_link('user-edit',$each->id)."' type='button' class='btn btn-warning btn-sm ".$disabled."' style='min-width:70px;' ".$disabled.">".trans('actions.edit')."</a>";
+           <a href='".route('user.edit',['user' => $each])."' type='button' class='btn btn-warning btn-sm ".$disabled."' style='min-width:70px;' ".$disabled.">".trans('actions.edit')."</a>";
          
            echo "<a type='button' data-bs-toggle='modal' data-bs-target='#delete_".$each->id."' class='btn btn-danger btn-sm ".$disabled."' ".$disabled."><i class='fa fa-trash-o' aria-hidden='true'></i></a>";
 

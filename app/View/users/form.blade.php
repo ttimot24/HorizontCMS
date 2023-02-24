@@ -7,7 +7,7 @@
   <h2>{{trans(isset($user)? 'user.edit_user' : 'user.create_user')}}</h2>
 
 
-  <form role='form' action="{{ isset($user)? admin_link('user-update', $user->id) : admin_link('user-store')}}" method='POST' enctype='multipart/form-data'>
+  <form role='form' action="{{ isset($user)? route('user.update', ['user' => $user]) : route('user.store')}}" method='POST' enctype='multipart/form-data'>
     @csrf
     
     @if(isset($user)) @method('PUT') @endif

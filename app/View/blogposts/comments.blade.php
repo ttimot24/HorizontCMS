@@ -38,7 +38,7 @@
     echo "<tr class='d-flex'>";
 
     echo "<td class='col'><img class='img-rounded' src='".$comment->user->getThumb()."' width='70'></td>";
-    echo "<td class='col'><a href='".admin_link('user-view',$comment->user->id)."'>" .$comment->user->username ."</a></td>";
+    echo "<td class='col'><a href='".route('user.show',[ 'user' => $comment->user])."'>" .$comment->user->username ."</a></td>";
     echo "<td class='col' style='text-align:justify;'>" .$comment->comment ."</td>";
 
     echo "<td>" .$comment->created_at->format('Y.m.d') ."</br><font size='2'><i>at ".$comment->created_at->format('H:i:s')."</i></font></td>";
@@ -85,10 +85,10 @@
           <h4 class='modal-title col-md-6'><span class='fa fa-comment-o'></span>  {{trans('comment.write_comment_button')}}</h4>
         </div>
         
-        <form action="{{admin_link('blogpost_comment-create')}}" method='POST'>
-        {{ csrf_field() }}
+        <form action="{{route('blogpostcomment.create')}}" method='POST'>
+        @csrf
         <div class='modal-body'>
-        <h5 style='font-weight:bolder;'>{{trans('comment.write_as')}}: <a href="{{ admin_link('user-view',$user->id) }}" >{{ $user->username }}</a>
+        <h5 style='font-weight:bolder;'>{{trans('comment.write_as')}}: <a href="{{ route('user.show',['user' => $user]) }}" >{{ $user->username }}</a>
         <img src='{{ $user->getThumb() }}' class='img img-rounded pull-right' width='30'></h5>
         <input type='hidden' name='blogpost_id' value='{{ $blogpost->id }}' >
           <textarea style='width:100%;' rows='5' name='comment' required></textarea>

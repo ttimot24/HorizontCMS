@@ -11,11 +11,11 @@
 
 
       @if($previous_user)
-          <li class='previous float-start' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('user-view',$previous_user)}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+          <li class='previous float-start' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{route('user.show',['user' => $previous_user])}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
       @endif
 
       @if($next_user)
-          <li class='next float-end' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{admin_link('user-view',$next_user)}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
+          <li class='next float-end' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{route('user.show',['user' => $next_user])}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
       @endif
 
     </ul>
@@ -33,8 +33,8 @@
 </a>
 
   <div class='btn-group my-3' role='group'>
-    <a href='admin/{{$user->id}}' type='button' class='btn btn-success mx-1'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('actions.deactivate')}}</a>
-    <a href="{{admin_link('user-edit',$user->id)}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
+    <a href='#' type='button' class='btn btn-success mx-1'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('actions.deactivate')}}</a>
+    <a href="{{route('user.edit',['user' => $user])}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}}</a>
   </div>    
   @if($user->role_id<\Auth::user()->role_id && !$user->is(Auth::user()))
     <button type='button' class='btn btn-danger my-3' data-bs-toggle='modal' data-bs-target='#delete_{{$user->id}}'>
@@ -91,11 +91,11 @@
   foreach($user->blogposts->reverse() as $each){
 
     echo "<tr class='d-flex'>";
-    echo "<td class='col-4'><a href='".admin_link('blogpost-view',$each->id)."'>";
+    echo "<td class='col-4'><a href='".route('blogpost.show',['blogpost' => $each])."'>";
       echo Html::img($each->getThumb(),"class='img img-thumbnail bg-dark', width='250' style='object-fit:cover;height:150px;'");
     echo "</a></td>";
     echo "<td class='col-6'>
-            <a href='".admin_link('blogpost-view',$each->id)."'><h5>" .$each->title ."</h5></a>
+            <a href='".route('blogpost.show',['blogpost' => $each])."'><h5>" .$each->title ."</h5></a>
             <p>".$each->summary."</p>
          </td>";
      
@@ -149,7 +149,7 @@
       if($each->blogpost!=NULL){
 
         echo "<tr class='d-flex'>";
-        echo "<td class='col-3'><a href='".admin_link('blogpost-view',$each->blogpost->id)."'>".$each->blogpost->title."</a></td>";
+        echo "<td class='col-3'><a href='".route('blogpost.show',['blogpost' => $each->blogpost])."'>".$each->blogpost->title."</a></td>";
         echo "<td class='col-8' style='text-align:justify;'>" .$each->comment ."</td>";
 
         echo "<td class='col-1'>".$each->created_at->format('Y.m.d')."</br><font size='2'><i>at</i> ".$each->created_at->format('H:i:s')."</font></td>";
@@ -174,12 +174,16 @@ var arrow = new Vue({
 
   },
   methods:{
+    @if($previous_user)
     previous: function(){
-       window.location.replace("{{admin_link('user-view',$previous_user)}}");
+       window.location.replace("{{route('user.show',['user' => $previous_user])}}");
     },
+    @endif
+    @if($next_user)
     next: function(){
-      window.location.replace("{{admin_link('user-view',$next_user)}}");
+      window.location.replace("{{route('user.show',['user' => $next_user])}}");
     }
+    @endif
   },
   beforeCreate: function(){
     console.log("Vue started.");
