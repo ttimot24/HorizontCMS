@@ -67,7 +67,7 @@ class UserRoleController extends Controller{
             $role->permission = 0;
 
             if($role->save()){
-                return $this->redirect(admin_link('user_role-index'))->withMessage(['success' => trans('User role created succesfully!')]);
+                return $this->redirect(route('userrole.index'))->withMessage(['success' => trans('User role created succesfully!')]);
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }

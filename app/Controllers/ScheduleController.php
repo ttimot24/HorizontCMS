@@ -48,7 +48,7 @@ class ScheduleController extends Controller{
         }
 
 
-        return $this->redirect(admin_link("blogpost-index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return $this->redirect(route("settings.show",['setting' => 'schedules']))->withMessage(['danger' => trans('message.something_went_wrong')]);
 
     }
 
