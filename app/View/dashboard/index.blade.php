@@ -33,8 +33,8 @@
         
 
         @if(\Auth::user()->hasPermission('search'))
-        <form class='form-inline mt-4 ' action="{{admin_link('search-index')}}" method='POST'>
-            {{ csrf_field() }}
+        <form class='form-inline mt-4 ' action="{{route('search.index')}}" method='POST'>
+          @csrf
           <div class='form-group'>
           <div class="input-group">
             <input type='text' pattern=".{3,}" title="Minimum 3 characters" class='form-control' name='search' id='exampleInputAmount' style='min-width:250px;'  placeholder="{{ trans('dashboard.search_bar') }}" required>
@@ -56,7 +56,7 @@
 
           <p class="font-weight-bold">{{ trans('dashboard.update_available')." v".$upgrade->getLatestVersion()}}</p>
           <p class="pt-1">{{ trans('dashboard.update_message') }}</p>
-          <a href='{{ admin_link("settings-update-center") }}' class='btn btn-primary btn-block d-block' style="display: block !important;">{{ trans('dashboard.update_now') }}</a>
+          <a href="{{ route('settings.show', ['setting' => 'updatecenter']) }}" class='btn btn-primary btn-block d-block' style="display: block !important;">{{ trans('dashboard.update_now') }}</a>
 
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     		</div>

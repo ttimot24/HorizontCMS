@@ -24,7 +24,7 @@ tr #hidden-home a:hover{
 
 <div class="row py-3">
     <div class='col-md-6'>
-      <a href="{{admin_link('page-create')}}" class='btn btn-info my-auto'>{{trans('page.create_page_button')}}</a>
+      <a href="{{route('page.create')}}" class='btn btn-info my-auto'>{{trans('page.create_page_button')}}</a>
     </div>
     <div class='col-md-6 text-right text-end'>
       <a class='btn btn-default my-auto' id='orderer' onclick='$(this).toggle(dragndroporder());' data-csrf="{{csrf_token()}}"><i class='fa fa-arrows-v' style='font-size:15px;'  aria-hidden='true'></i> {{trans('page.order')}}</a>
@@ -103,7 +103,7 @@ echo "<br><span class='badge bg-secondary'>".strtoupper($each->language)."</span
 
     <td class='text-center'>
        <div class='btn-group' role='group'>
-           <a href='".admin_link('page-edit',$each->id)."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;'>".trans('actions.edit')."</a>
+           <a href='".route('page.edit',['page' => $each])."' type='button' class='btn btn-warning btn-sm' style='min-width:70px;'>".trans('actions.edit')."</a>
            <a  type='button' data-bs-toggle='modal' data-bs-target='#delete_".$each->id."' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>
        </div>
       

@@ -30,7 +30,7 @@
 
 			@if(!session()->has('error'))
 			<br><br>
-				<a href="{{admin_link('login-login')}}"><button type='button' class='btn btn-primary btn-md animated pulse delay-3s'>Finish & go to admin area</button></a>
+				<a href="{{route('login')}}"><button type='button' class='btn btn-primary btn-md animated pulse delay-3s'>Finish & go to admin area</button></a>
 			@else
 				<a href="admin/install/step3"><button type='button' class='btn btn-primary btn-md'><i class="fa fa-repeat" aria-hidden="true"></i> Retry</button></a>
 			@endif

@@ -58,7 +58,7 @@
       <b class="d-block mb-3">{{trans('blogpost.published_on')}} :  <a class="color-primary">{{ $blogpost->created_at->format(\Settings::get('date_format',\Config::get('horizontcms.default_date_format'),true)) }}</a></b>
     
     @if($blogpost->category)  
-      <b class="d-block mb-3">{{trans('blogpost.category')}} :  <a class="color-primary" href="{{ admin_link('blogpost_category-view',$blogpost->category->id) }}">{{ $blogpost->category->name }}</a></b>
+      <b class="d-block mb-3">{{trans('blogpost.category')}} :  <a class="color-primary" href="{{ route('blogpostcategory.show',['blogpostcategory' => $blogpost->category]) }}">{{ $blogpost->category->name }}</a></b>
     @endif
       <b class="d-block mb-3">{{trans('blogpost.reading_time')}} : <a class="color-primary">{{ ceil($blogpost->getReadingTime()/60) }} mins</a></b>
       <b class="d-block mb-3">{{trans('blogpost.characters')}} : <a class="color-primary">{{ $blogpost->getTotalCharacterCount() }}</a></b>
@@ -111,12 +111,16 @@ var arrow = new Vue({
 
   },
   methods:{
+    @if($previous_blogpost)
     previous: function(){
-       window.location.replace("{{ admin_link('blogpost-view',$previous_blogpost) }}");
+       window.location.replace("{{route('blogpost.show',['blogpost' => $previous_blogpost])}}");
     },
+    @endif
+    @if($next_blogpost)
     next: function(){
-      window.location.replace("{{admin_link('blogpost-view',$next_blogpost)}}");
+      window.location.replace("{{route('blogpost.show',['blogpost' => $next_blogpost])}}");
     }
+    @endif
   },
   beforeCreate: function(){
     console.log("Vue started.");

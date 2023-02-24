@@ -4,7 +4,7 @@
 <div class='container main-container'>
   <h2>{{trans(isset($page)? 'page.edit_page' : 'page.add_new_page_title')}}</h2>
 
-  <form role='form' action="{{isset($page)? admin_link('page-update', $page->id) : admin_link('page-store')}}" method='POST' enctype='multipart/form-data'>
+  <form role='form' action="{{isset($page)? route('page.update', ['page' => $page]) : route('page.store')}}" method='POST' enctype='multipart/form-data'>
   
     @csrf
     @if(isset($page)) @method('PUT') @endif
