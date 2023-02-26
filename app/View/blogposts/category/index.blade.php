@@ -6,7 +6,7 @@
 <div class="col-md-12">
 <h2 class='mt-2'>{{ trans('category.category') }}</h2>
 
-<form action="{{ admin_link('blogpost_category-create') }}" class='form-inline float-right mt-4' role='form' method='POST'>
+<form action="{{ route('blogpostcategory.store') }}" class='form-inline float-right mt-4' role='form' method='POST'>
 
 	@csrf
 
@@ -49,7 +49,7 @@
 		<tr class="d-flex">
 				<td class="col-1">{{ $each->id }}</td>
 	
-				<td class='col'><a href="{{ admin_link('blogpost_category-view',$each->id) }}">{{ $each->name }}</a></td>     
+				<td class='col'><a href="{{ route('blogpostcategory.show',['blogpostcategory' => $each]) }}">{{ $each->name }}</a></td>     
 
 				<td class="col">
 					<span class='badge rounded-pill bg-dark'>{{ $each->blogposts->count() }}</span>
@@ -57,11 +57,28 @@
 
 				<td class="col-5  text-center">
 					<div class='btn-group col-3' role='group'>
-						<a href="{{ admin_link('blogpost_category-edit',$each->id) }}" type='button' class='btn btn-warning btn-sm'>{{trans('actions.edit')}}</a>
-						<a href="{{ admin_link('blogpost_category-delete',$each->id) }}" type='button' class='btn btn-danger btn-sm'><i class='fa fa-trash-o' aria-hidden='true'></i></a>
+						<a href="{{ route('blogpostcategory.edit',['blogpostcategory' => $each]) }}" type='button' class='btn btn-warning btn-sm'>{{trans('actions.edit')}}</a>
+						<a type="button" data-bs-toggle='modal' data-bs-target=#delete_<?= $each->id ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 					</div>
 				</td>
 		</tr>
+
+		<form method='POST' action="{{route('blogpostcategory.destroy',['blogpostcategory' => $each])}}"> 
+		@csrf 
+		@method('delete')
+
+		<?php 
+
+			Bootstrap::delete_confirmation([
+			"id" => "delete_".$each->id,
+			"header" => trans('actions.are_you_sure'),
+			"body" => "<b>".trans('actions.delete_this',['content_type'=>'category']).": </b>".$each->name." <b>?</b>",
+			"footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
+			"cancel" => trans('actions.cancel')
+			]);
+		?>
+		</form>
+
 		@endforeach
 
 	</tbody>

@@ -94,7 +94,7 @@
                   <img id="logo" src="storage/images/logos/<?= $logo ?>" style="max-height:7.5rem;" alt="Select an image">
                </div>
                <div class="btn-group" role="group">
-                  <button type='button' id="button-logo" class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='#filemanager-modal'>Select</button>
+                  <button type='button' id="button-logo" class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='#filemanager-modal'>{{ trans('actions.select') }}</button>
                </div>
             </td>
          </tr>

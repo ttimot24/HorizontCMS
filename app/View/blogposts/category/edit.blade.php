@@ -8,7 +8,7 @@
 
 <div class='col-md-12'>
 
-<form action="{{ admin_link('blogpost_category-update', $category->id) }}" class='form-inline float-right mt-4' role='form' method='POST'>
+<form action="{{ route('blogpostcategory.update', ['blogpostcategory' => $category]) }}" class='form-inline float-right mt-4' role='form' method='POST'>
 
 	@csrf
 	@method('PUT')
@@ -30,7 +30,7 @@
 </form>
 
 <div class="mt-5">
-    <a href="{{ admin_link('blogpost_category-index') }}" class="btn btn-info">{{ trans('actions.back') }}</a>
+    <a href="{{ route('blogpostcategory.index') }}" class="btn btn-info">{{ trans('actions.back') }}</a>
 </div>
 
 </div>

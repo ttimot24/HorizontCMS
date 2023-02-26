@@ -10,10 +10,10 @@
 <br>
 <div>
 @foreach($category->blogposts->reverse() as $blogpost)
-<div class="col-md-4" style="margin-bottom:15px;">
-    <a href="{{admin_link('blogpost-view',$blogpost->id)}}">{{$blogpost->title}}</a>
+<div class="col-md-4 mb-3">
+    <a href="{{route('blogpost.show',['blogpost' => $blogpost])}}">{{$blogpost->title}}</a>
     @if($blogpost->isDraft())
-    <span class="label label-info">{{trans('actions.draft')}}</span>
+    <span class="ms-2 badge bg-info">{{trans('actions.draft')}}</span>
     @endif
 </div>
 @endforeach
