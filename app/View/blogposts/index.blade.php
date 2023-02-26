@@ -55,15 +55,22 @@
               </div>
           </td>
         </tr>
-    <?php 
-      Bootstrap::delete_confirmation([
-        "id" => "delete_".$blogpost->id,
-        "header" => trans('actions.are_you_sure'),
-        "body" => "<b>".trans('actions.delete_this',['content_type'=>'post']).": </b>".$blogpost->title." <b>?</b>",
-        "footer" => "<a href='".admin_link('blogpost-delete',$blogpost->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
-        "cancel" => trans('actions.cancel')
-        ]);
-    ?>
+
+    <form method='POST' action="{{route('blogpost.destroy',['blogpost' => $blogpost])}}"> 
+      @csrf 
+      @method('delete')
+
+      <?php 
+
+        Bootstrap::delete_confirmation([
+          "id" => "delete_".$blogpost->id,
+          "header" => trans('actions.are_you_sure'),
+          "body" => "<b>".trans('actions.delete_this',['content_type'=>'post']).": </b>".$blogpost->title." <b>?</b>",
+          "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
+          "cancel" => trans('actions.cancel')
+          ]);
+      ?>
+    </form>
 
     <?php endforeach; ?>
 

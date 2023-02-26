@@ -4,7 +4,7 @@ namespace App\Model;
 
 use \App\Libs\Model;
 
-class Blogpost extends Model{
+class Blogpost extends Model {
     
     /**
      * The attributes that are mass assignable.

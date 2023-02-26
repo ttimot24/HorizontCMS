@@ -155,26 +155,14 @@ class BlogpostController extends Controller {
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(int $id){
-        //
-    }
-
-
-    /**
      * Remove the specified resource from database.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(int $id){
-        
+    public function destroy(Blogpost $blogpost){
 
-        if(Blogpost::find($id)->delete()){
+        if($blogpost->delete()){
 			return $this->redirect(route("blogpost.index"))->withMessage(['success' => trans('message.successfully_deleted_blogpost')]);
         }
 

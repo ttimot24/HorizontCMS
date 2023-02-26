@@ -97,7 +97,7 @@
 ?>
 
 
-@include('blogposts.comments')
+@include('blogposts.comments',['user' => \Auth::user()])
 
 
 </div>

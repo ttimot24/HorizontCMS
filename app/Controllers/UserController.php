@@ -207,9 +207,9 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id){
+    public function destroy(User $user){
         
-        if(User::find($id)->delete()){
+        if($user->delete()){
             return $this->redirect(route("user.index"))->withMessage(['success' => trans('message.successfully_deleted_user')]);
         }
 

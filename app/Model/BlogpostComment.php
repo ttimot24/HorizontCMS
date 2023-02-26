@@ -4,7 +4,7 @@ namespace App\Model;
 
 use \App\Libs\Model;
 
-class BlogpostComment extends Model{
+class BlogpostComment extends Model {
     
 	/**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class BlogpostComment extends Model{
      * @var array
      */
     protected $fillable = [
-        'comment',
+        'blogpost_id', 'comment', 'active',
     ];
 
 	public function blogpost(){
