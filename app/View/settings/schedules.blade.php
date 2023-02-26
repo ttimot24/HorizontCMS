@@ -37,22 +37,18 @@
                 </div>
             </td>
         </tr>
-
-        <form method='POST' action="{{route('schedule.destroy',['schedule' => $task])}}"> 
-          @csrf 
-          @method('delete')
-          <?php 
-
-              Bootstrap::delete_confirmation([
-              "id" => "delete_".$task->id."",
-              "header" => trans('actions.are_you_sure'),
-              "body" => "<b>".trans('actions.delete_this',['content_type'=>'task']).": </b>".$task->name." <b>?</b>",
-              "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
-              "cancel" => trans('actions.cancel')
-              ]);
-
-          ?>
-        </form>
+        
+        @include('confirm_delete', [
+          "route" => route('schedule.destroy',['schedule' => $task]),
+          "id" => "delete_".$task->id,
+          "header" => trans('actions.are_you_sure'),
+          "name" => $task->title,
+          "content_type" => "task",
+          "delete_text" => trans('actions.delete'),
+          "cancel" => trans('actions.cancel')
+          ]
+        )
+        
         @endforeach
     </tbody>
 </table>

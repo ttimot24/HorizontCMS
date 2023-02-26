@@ -118,22 +118,16 @@
    Bootstrap::image_details($user->id,$user->getImage());
 ?>
 
-<form method='POST' action="{{route('user.destroy',['user' => $user])}}"> 
-        @csrf 
-        @method('delete')
-  
-        <?php 
-
-   Bootstrap::delete_confirmation([
-    "id" => "delete_".$user->id."",
-    "header" => trans('actions.are_you_sure'),
-    "body" => "<b>".trans('actions.delete_this',['content_type' => 'user']).": </b>".$user->username." <b>?</b>",
-    "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
-    "cancel" => trans('actions.cancel')
-  ]);
-
-   ?>
-   </form>
+      @include('confirm_delete', [
+            "route" => route('user.destroy',['user' => $user]),
+            "id" => "delete_".$user->id,
+            "header" => trans('actions.are_you_sure'),
+            "name" => $user->username,
+            "content_type" => "user",
+            "delete_text" => trans('actions.delete'),
+            "cancel" => trans('actions.cancel')
+            ]
+      )
 
 
 

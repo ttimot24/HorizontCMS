@@ -84,23 +84,16 @@
 
 <?php Bootstrap::image_details($blogpost->id,$blogpost->getImage()); ?>
 
-<form method='POST' action="{{route('blogpost.destroy',['blogpost' => $blogpost])}}"> 
-      @csrf 
-      @method('delete')
-
-      <?php 
-
-        Bootstrap::delete_confirmation([
+    @include('confirm_delete', [
+          "route" => route('blogpost.destroy',['blogpost' => $blogpost]),
           "id" => "delete_".$blogpost->id,
           "header" => trans('actions.are_you_sure'),
-          "body" => "<b>".trans('actions.delete_this',['content_type'=>'post']).": </b>".$blogpost->title." <b>?</b>",
-          "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
+          "name" => $blogpost->title,
+          "content_type" => "post",
+          "delete_text" => trans('actions.delete'),
           "cancel" => trans('actions.cancel')
-          ]);
-      ?>
-
-</form>
-
+          ]
+    )
 
 @include('blogposts.comments',['user' => \Auth::user()])
 

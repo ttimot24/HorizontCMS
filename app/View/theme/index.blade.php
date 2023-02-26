@@ -61,16 +61,16 @@
   </div>
   </div>
 
-
-  <?php   Bootstrap::delete_confirmation([
-      "id" =>"delete_".$theme->root_dir,
-      "header" => trans('actions.are_you_sure'),
-      "body" => "<b>Delete this theme: </b>". $theme->getName()." <b>?</b>",
-      "footer" => "<a href='admin/theme/delete/". $theme->root_dir."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
-      "cancel" => trans('actions.cancel')
-      ]);
-
-  ?>
+      @include('confirm_delete', [
+            "route" => route('theme.destroy',['theme' => $theme->root_dir]),
+            "id" => "delete_".$theme->root_dir,
+            "header" => trans('actions.are_you_sure'),
+            "name" => $theme->getName(),
+            "content_type" => "theme",
+            "delete_text" => trans('actions.delete'),
+            "cancel" => trans('actions.cancel')
+            ]
+      )
 
   <?php endforeach; ?>
 </div>
@@ -92,8 +92,8 @@
       </div>
       <div class='modal-body'>
 
-    <form action='admin/theme/upload' method='POST' enctype='multipart/form-data'>
-    {{csrf_field()}}
+    <form action="{{route('theme.store')}}" method='POST' enctype='multipart/form-data'>
+    @csrf
     <div class='form-group'>
       <label for='file'>Upload file:</label>
       <input name='up_file[]' id='input-2' type='file' class='file' accept='.zip' multiple='true' data-show-upload='false' data-show-caption='true' required>

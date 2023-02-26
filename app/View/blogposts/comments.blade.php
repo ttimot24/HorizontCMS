@@ -47,22 +47,16 @@
       </td>
     </tr>
 
-    <form method='POST' action="{{route('blogpostcomment.destroy',['blogpostcomment' => $comment])}}"> 
-      @csrf 
-      @method('delete')
-
-      <?php 
-
-       Bootstrap::delete_confirmation([
-        "id" => "delete_".$comment->id,
-        "header" => "Are you sure?",
-        "body" => "Do you really want to delete <b>".$comment->user->username."</b>'s comment: ".$comment->comment." ?",
-        "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
-        "cancel" => trans('actions.cancel')
-        ]);
-
-      ?>
-    </form>
+    @include('confirm_delete', [
+          "route" => route('blogpostcomment.destroy',['blogpostcomment' => $comment]),
+          "id" => "delete_".$comment->id,
+          "header" => trans('actions.are_you_sure'),
+          "name" => $comment->user->username." said: \"".$comment->comment."\"",
+          "content_type" => "comment",
+          "delete_text" => trans('actions.delete'),
+          "cancel" => trans('actions.cancel')
+          ]
+    )
 
     @endforeach
 

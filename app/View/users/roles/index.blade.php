@@ -68,23 +68,18 @@
 
         </li>";
 ?>
-  
-  <form method='POST' action="{{route('userrole.destroy',['userrole' => $role])}}"> 
-      @csrf 
-      @method('delete')
 
-      <?php 
 
-      Bootstrap::delete_confirmation([
+    @include('confirm_delete', [
+          "route" => route('userrole.destroy',['userrole' => $role]),
           "id" => "delete_".$role->id,
           "header" => trans('actions.are_you_sure'),
-          "body" => "<div><b>".trans('actions.delete_this',['content_type' => 'role']).": </b>".$role->name." <b>?</b></div>",
-          "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
+          "name" => $role->name,
+          "content_type" => "role",
+          "delete_text" => trans('actions.delete'),
           "cancel" => trans('actions.cancel')
-      ]);
-
-      ?>
-    </form>
+          ]
+    )
 
     </ul>
   </div>

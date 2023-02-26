@@ -15,12 +15,12 @@ class ThemeController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index(Request $request){
 
 
         $this->view->title(trans('theme.themes'));
         return $this->view->render("theme/index",[
-                                                    'active_theme' => new \App\Libs\Theme($this->request->settings['theme']),
+                                                    'active_theme' => new \App\Libs\Theme($request->settings['theme']),
                                                     'all_themes' => collect(array_slice(scandir("themes"),2))->map(function ($theme) { return new \App\Libs\Theme($theme); })
                                                 ]);
     }
@@ -129,15 +129,15 @@ class ThemeController extends Controller{
 
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\Response
      */
-    public function upload(){
+    public function store(Request $request){
 
-        if ($this->request->hasFile('up_file')){
+        if ($request->hasFile('up_file')){
 
-            $file_name = $this->request->up_file[0]->store('framework/temp');
+            $file_name = $request->up_file[0]->store('framework/temp');
 
         }
 
@@ -155,7 +155,7 @@ class ThemeController extends Controller{
     }
 
 
-    public function delete($theme){
+    public function destroy($theme){
 
         if(\File::deleteDirectory("themes/".$theme)){
             return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully deleted the theme!')]);

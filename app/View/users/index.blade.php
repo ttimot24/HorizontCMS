@@ -62,49 +62,38 @@ $disabled = "";
         $disabled='disabled';
       }   
 
-echo "
-       <div class='btn-group' role='group'>
-           <a href='".route('user.edit',['user' => $each])."' type='button' class='btn btn-warning btn-sm ".$disabled."' style='min-width:70px;' ".$disabled.">".trans('actions.edit')."</a>";
-         
-           echo "<a type='button' data-bs-toggle='modal' data-bs-target='#delete_".$each->id."' class='btn btn-danger btn-sm ".$disabled."' ".$disabled."><i class='fa fa-trash-o' aria-hidden='true'></i></a>";
-
-echo "</div>";
-
-      
-      echo "</td></tr>";
-
-
-
-  if($disabled!='disabled'){
-
-
-    ?>
-  
-    <form method='POST' action="{{route('user.destroy',['user' => $each])}}"> 
-        @csrf 
-        @method('delete')
-  
-        <?php 
-    
-        Bootstrap::delete_confirmation([
-          "id" => "delete_".$each->id."",
-          "header" =>trans('actions.are_you_sure'),
-          "body" => "<b>".trans('actions.delete_this',['content_type' => 'user']).": </b>".$each->username." <b>?</b>",
-          "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
-          "cancel" => trans('actions.cancel')
-        ]);
-
-        ?>
-    </form>
-
-   <?php
-
- }
-
-
-}
 
 ?>
+
+
+       <div class='btn-group' role='group'>
+           <a href="{{route('user.edit',['user' => $each])}}" type='button' class='btn btn-warning btn-sm {{$disabled}}' style='min-width:70px;' {{$disabled}}>{{trans('actions.edit')}}</a>
+         
+          <a type='button' data-bs-toggle='modal' data-bs-target='#delete_{{$each->id}}' class='btn btn-danger btn-sm {{$disabled}}' {{$disabled}}><i class='fa fa-trash-o' aria-hidden='true'></i></a>
+
+    </div>
+
+    </td>
+    </tr>
+
+
+
+    @if($disabled!='disabled')
+
+      @include('confirm_delete', [
+            "route" => route('user.destroy',['user' => $each]),
+            "id" => "delete_".$each->id,
+            "header" => trans('actions.are_you_sure'),
+            "name" => $each->username,
+            "content_type" => "user",
+            "delete_text" => trans('actions.delete'),
+            "cancel" => trans('actions.cancel')
+            ]
+      )
+  
+    @endif
+
+   <?php } ?>
 
 
 

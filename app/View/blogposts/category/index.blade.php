@@ -63,21 +63,16 @@
 				</td>
 		</tr>
 
-		<form method='POST' action="{{route('blogpostcategory.destroy',['blogpostcategory' => $each])}}"> 
-		@csrf 
-		@method('delete')
-
-		<?php 
-
-			Bootstrap::delete_confirmation([
-			"id" => "delete_".$each->id,
-			"header" => trans('actions.are_you_sure'),
-			"body" => "<b>".trans('actions.delete_this',['content_type'=>'category']).": </b>".$each->name." <b>?</b>",
-			"footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
-			"cancel" => trans('actions.cancel')
-			]);
-		?>
-		</form>
+		@include('confirm_delete', [
+          "route" => route('blogpostcategory.destroy',['blogpostcategory' => $each]),
+          "id" => "delete_".$each->id,
+          "header" => trans('actions.are_you_sure'),
+          "name" => $each->name,
+          "content_type" => "category",
+          "delete_text" => trans('actions.delete'),
+          "cancel" => trans('actions.cancel')
+          ]
+    	)
 
 		@endforeach
 

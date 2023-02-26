@@ -132,27 +132,18 @@ echo '
   </div>
 </div>';
 ?>
-
-    <form method='POST' action="{{route('page.destroy',['page' => $each])}}"> 
-      @csrf 
-      @method('delete')
-
-      <?php 
-
-
-        Bootstrap::delete_confirmation([
-          "id" => "delete_".$each->id."",
-          "header" => trans('actions.are_you_sure'),
-          "body" => "<b>".trans('actions.delete_this',['content_type'=>'page']).": </b>".$each->name." <b>?</b>",
-          "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
-          "cancel" => trans('actions.cancel')
-        ]);
-
-        ?>
-   </form>
-
-
   </td></tr>
+
+    @include('confirm_delete', [
+          "route" => route('page.destroy',['page' => $each]),
+          "id" => "delete_".$each->id,
+          "header" => trans('actions.are_you_sure'),
+          "name" => $each->title,
+          "content_type" => "page",
+          "delete_text" => trans('actions.delete'),
+          "cancel" => trans('actions.cancel')
+          ]
+    )
 
 @endforeach
 

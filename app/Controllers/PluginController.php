@@ -199,23 +199,12 @@ class PluginController extends Controller{
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id){
-        //
-    }
-
-
-    /**
      * Remove the specified resource from database.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($plugin){
+    public function destroy(string $plugin){
 
         try{
 

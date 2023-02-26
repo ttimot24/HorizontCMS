@@ -17,9 +17,11 @@
 
 <div class='list-group mt-4'>
 
-<?php
 
-foreach($all_plugin as $current_plugin){
+
+@foreach($all_plugin as $current_plugin)
+
+<?php 
 
   echo  "<div class='list-group-item bg-dark p-3'>";
   	echo "<div class='row p-0'>";
@@ -66,20 +68,20 @@ foreach($all_plugin as $current_plugin){
 
       echo "</div>";
 
-
-   Bootstrap::delete_confirmation([
-    "id" => "delete_".$current_plugin->root_dir,
-    "header" => "Are you sure?",
-    "body" => "<b>Delete this plugin: </b>".$current_plugin->getName()." <b>?</b>",
-    "footer" => "<a href='".config('horizontcms.backend_prefix')."/plugin/delete/".$current_plugin->root_dir."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete</a>",
-    "cancel" => trans('actions.cancel')
-    ]);
-
-
-       
-}
-
 ?>
+
+    @include('confirm_delete', [
+          "route" => route('plugin.destroy',['plugin' => $current_plugin->root_dir]),
+          "id" => "delete_".$current_plugin->root_dir,
+          "header" => trans('actions.are_you_sure'),
+          "name" => $current_plugin->getName(),
+          "content_type" => "plugin",
+          "delete_text" => trans('actions.delete'),
+          "cancel" => trans('actions.cancel')
+          ]
+    )
+
+@endforeach
 
 
 </div>
@@ -95,7 +97,7 @@ foreach($all_plugin as $current_plugin){
       <div class='modal-body'>
 
 <form action="{{config('horizontcms.backend_prefix')}}/plugin/upload" method='POST' enctype='multipart/form-data'>
-{{ csrf_field() }}
+@csrf
 <div class='form-group'>
       <label for='file'>Upload file:</label>
       <input name='up_file[]' id='input-2' type='file' class='file' accept='.zip' multiple='true' data-show-upload='false' data-show-caption='true'>
