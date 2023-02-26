@@ -23,17 +23,13 @@ class SettingsController extends Controller{
     }
 
 
-    public function saveSettings(){
+    public function store(Request $request){
 
-        if($this->request->isMethod('POST')){
-
-            foreach($this->request->all() as $key => $value){
-              Settings::where('setting', '=', $key)->update(['value' => $value]);
-            }
-
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
+        foreach($request->all() as $key => $value){
+            Settings::where('setting', '=', $key)->update(['value' => $value]);
         }
 
+        return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
     }
 
     private function getSettingsPanels(){

@@ -3,8 +3,8 @@
 <div class='container main-container'>
 <h2>Website settings</h2>
 <br><br>
-<form action='{{admin_link("settings-save")}}' role='form' method='POST'>
-   {{ csrf_field() }}
+<form action='{{route("settings.store")}}' role='form' method='POST'>
+  @csrf
    <table class='table-bordered col-md-12 text-center' id='settings'>
       <tbody class="font-weight-bold">
          <tr>
@@ -37,7 +37,7 @@
                   <img id="favicon" src="storage/images/favicons/<?= $favicon ?>" style="max-height:2.5rem;" alt="Select an image">
                </div>
                 <div class="btn-group" role="group">
-                  <button type='button' id="button-favicon" class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='#filemanager-modal'>Select</button>
+                  <button type='button' id="button-favicon" class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='#filemanager-modal'>{{ trans('actions.select') }}</button>
                </div>
             </td>
          </tr>
@@ -124,7 +124,7 @@
          <tr>
             <td class='col-4'></td>
             <td class="col-8 p-3">
-               <button type='submit' class='btn btn-primary btn-lg'><span class='fa fa-floppy-o' aria-hidden='true'></span> Save settings</button>
+               <button type='submit' class='btn btn-primary btn-lg'><span class='fa fa-floppy-o' aria-hidden='true'></span> {{ trans('settings.adminarea_save_settings') }}</button>
             </td>
          </tr>
       </tbody>

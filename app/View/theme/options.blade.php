@@ -15,8 +15,8 @@
             <div class="tab-pane fade show active" id="v-pills-style" role="tabpanel" aria-labelledby="v-pills-style-tab">
                 <h3 class="m-0 p-0">Custom Style</h3>
                 <div>
-                    <form action="{{admin_link('settings-save')}}" method="POST">
-                        {{csrf_field()}}
+                    <form action='{{route("settings.store")}}' role='form' method='POST'>
+                        @csrf
                         <textarea rows="20" class='form-control' name="custom_css_{{snake_case($theme)}}" placeholder="Write your css here...">{{ isset($settings['custom_css_'.snake_case($theme)]) ? $settings['custom_css_'.snake_case($theme)] : ""  }}</textarea>
                         <input type="submit" class="btn btn-primary my-3" value="Save">
                     </form>

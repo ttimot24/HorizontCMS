@@ -45,7 +45,7 @@
 
         <div class='form-group'>
           <label for='title'>{{trans('user.create_phone')}}:</label>
-          <input type='text' class='form-control' id='phone' name='phone' value="{{ old('phone', isset($user)? $user->phone : '') }}" required>
+          <input type='text' class='form-control' id='phone' name='phone' value="{{ old('phone', isset($user)? $user->phone : '') }}">
         </div>
 
 

@@ -32,24 +32,27 @@
             <td>{{$task->ping_after}}</td>
             <td class='text-center'>
                 <div class="btn-group" role="group">
-                    <a href="{{admin_link('schedules-edit',$task->id)}}" type="button" class="btn btn-warning btn-sm">{{trans('actions.edit')}}</a>
-                    <a type="button" data-toggle='modal' data-target=.delete_<?= $task->id ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    <a href="{{route('schedule.update',['schedule' => $task ])}}" type="button" class="btn btn-warning btn-sm">{{trans('actions.edit')}}</a>
+                    <a type="button" data-bs-toggle='modal' data-bs-target=#delete_<?= $task->id ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </div>
             </td>
         </tr>
 
-        <?php 
+        <form method='POST' action="{{route('schedule.destroy',['schedule' => $task])}}"> 
+          @csrf 
+          @method('delete')
+          <?php 
 
-            Bootstrap::delete_confirmation([
-            "id" => "delete_".$task->id."",
-            "haeder" => trans('actions.are_you_sure'),
-            "body" => "<b>".trans('actions.delete_this',['content_type'=>'task']).": </b>".$task->name." <b>?</b>",
-            "footer" => "<a href='".admin_link('task-delete',$task->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
-            "cancel" => trans('actions.cancel')
-            ]);
+              Bootstrap::delete_confirmation([
+              "id" => "delete_".$task->id."",
+              "header" => trans('actions.are_you_sure'),
+              "body" => "<b>".trans('actions.delete_this',['content_type'=>'task']).": </b>".$task->name." <b>?</b>",
+              "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
+              "cancel" => trans('actions.cancel')
+              ]);
 
-        ?>
-
+          ?>
+        </form>
         @endforeach
     </tbody>
 </table>
@@ -64,9 +67,9 @@
         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
 
-      <form action="{{config('horizontcms.backend_prefix')}}/schedule/create" method='POST'>
+      <form action="{{route('schedule.store')}}" method='POST'>
       <div class='modal-body'>
-      {{ csrf_field() }}
+      @csrf
 
       <div class='form-group'>
       <label for='name'>Name:</label>

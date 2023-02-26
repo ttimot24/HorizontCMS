@@ -4,11 +4,11 @@
 
 <div class='container main-container'>
 
-  <h2 class="mb-5">AdminArea settings</h2>
+  <h2 class="mb-5">{{ trans('settings.adminarea_settings') }}</h2>
 
 
-  <form action='{{admin_link("settings-save")}}' role='form' method='POST'>
-  {{ csrf_field() }}
+  <form action='{{route("settings.store")}}' role='form' method='POST'>
+  @csrf
 
   <input type='hidden' name='is_actioned' value='1'>
   <table class='table-bordered w-100' id='settings'>
@@ -16,22 +16,27 @@
   <tbody class="text-center fw-bold">
 
 
-  <tr><td>Admin theme</td><td><select name='admin_theme' class='form-select' disabled>
-                                          <option value=''>default</option>
-                                      </select></td></tr>
+  <tr>
+    <td>{{ trans('settings.adminarea_theme') }}</td>
+    <td>
+      <select name='admin_theme' class='form-select' disabled>
+        <option value=''>default</option>
+      </select>
+    </td>
+  </tr>
 
-  <tr><td>Dashboard Logo</td><td class="p-3">
+  <tr><td>{{ trans('settings.adminarea_dashboard_logo') }}</td><td class="p-3">
   <div class="col-12 mb-3">
     <input type="hidden" name="admin_logo" value="<?= ($settings['admin_logo']!='' && file_exists('storage/images/logos/'.$settings['admin_logo']))? $settings['admin_logo'] : \Config::get('horizontcms.admin_logo')  ?>" >
     <img id="admin_logo" class='well well-sm' src="<?= ($settings['admin_logo']!='' && file_exists('storage/images/logos/'.$settings['admin_logo']))? 'storage/images/logos/'.$settings['admin_logo'] : \Config::get('horizontcms.admin_logo')  ?>" height='100'>
   </div>
   <div class="btn-group" role="group">
-  <button type='button' class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='.admin_logo_select-modal-lg'>Select</button>
+  <button type='button' class='btn btn-success btn-sm' data-bs-toggle='modal' data-bs-target='.admin_logo_select-modal-lg'>{{trans('actions.select')}}</button>
   </div>
 
   </td></tr>
 
-  <tr><td>Language</td><td><select name='language' class='form-select'>
+  <tr><td>{{ trans('settings.adminarea_language') }}</td><td><select name='language' class='form-select'>
 
               
 
@@ -51,7 +56,7 @@
               </select>
           </td></tr>
 
-  <tr><td>Date format</td><td><select name='date_format' class='form-select'>
+  <tr><td>{{ trans('settings.adminarea_date_format') }}</td><td><select name='date_format' class='form-select'>
 
               
 
@@ -74,7 +79,7 @@
 
 
   <input type="hidden" name="auto_upgrade_check" value="0"> <!-- Checkbox hack -->
-  <tr><td>Automatically check for updates</td>
+  <tr><td>{{ trans('settings.adminarea_auto_update_check') }}</td>
   <td>
     <div class="form-check form-switch d-flex justify-content-center">
       <input type='checkbox' class='form-check-input' name='auto_upgrade_check' value='1' @if( $settings['auto_upgrade_check']==1 ) checked @endif >
@@ -84,13 +89,13 @@
 
 
   <tr>
-  <td>Broadcast message</td>
+  <td>{{ trans('settings.adminarea_broadcast_message') }}</td>
   <td>
       <textarea type='text' class='form-control' name='admin_broadcast' rows='2' >{{$settings['admin_broadcast']}}</textarea>
   </td>
   </tr>
 
-  <tr><td></td><td class="p-2"><button type='submit' class='btn btn-primary'><span class='fa fa-floppy-o' aria-hidden='true'></span> Save settings</button> </td></tr>
+  <tr><td></td><td class="p-2"><button type='submit' class='btn btn-primary'><span class='fa fa-floppy-o' aria-hidden='true'></span> {{ trans('settings.adminarea_save_settings') }}</button> </td></tr>
 
   </tbody></table>
   </form>
@@ -102,7 +107,7 @@
       <div class='modal-content'>
 
           <div class='modal-header'>
-            <h3 class='modal-title'>Select Logo</h3>
+            <h3 class='modal-title'>{{ trans('settings.adminarea_select_logo') }}</h3>
 
             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
           </div>
