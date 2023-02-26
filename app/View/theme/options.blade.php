@@ -24,8 +24,8 @@
             </div>
             <div class="tab-pane fade" id="v-pills-translate" role="tabpanel" aria-labelledby="v-pills-translate-tab">
             <h3 class="m-0 p-0">Translations</h3>
-            <form action="{{admin_link('').'theme/update-translations/'.$theme}}" method="POST">
-                {{ csrf_field() }}
+            <form action="{{config('horizontcms.backend_prefix').'/theme/update-translations/'.$theme}}" method="POST">
+                @csrf
                 @foreach($translations as $lang => $value)
                 <h3 class="m-0 p-0">{{$lang}}</h3>
                 <table class="table">

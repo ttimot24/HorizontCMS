@@ -33,7 +33,7 @@
         
 
         @if(\Auth::user()->hasPermission('search'))
-        <form class='form-inline mt-4 ' action="{{route('search.index')}}" method='POST'>
+        <form class='form-inline mt-4 ' action="{{route('search.index')}}" method='GET'>
           @csrf
           <div class='form-group'>
           <div class="input-group">

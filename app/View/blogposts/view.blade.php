@@ -33,13 +33,13 @@
   <div class="text-center">
     <div class='btn-group my-3' role='group'>
       @if(!$blogpost->isFeatured())
-        <a href="{{admin_link('blogpost-featured',$blogpost->id)}}" type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('blogpost.primary')}}</a>
+        <a href="{{config('horizontcms.backend_prefix').'/blogpost/feature/'.$blogpost->id}}" type='button' class='btn btn-success'><span class='glyphicon glyphicon-star' aria-hidden='true'></span> {{trans('blogpost.primary')}}</a>
       @else
-        <a href="{{admin_link('blogpost-revoke-featured',$blogpost->id)}}" type='button' class='btn btn-success'><span class='glyphicon glyphicon-minus' aria-hidden='true'></span> {{trans('Revoke')}}</a>
+        <a href="{{config('horizontcms.backend_prefix').'/blogpost/revoke-feature/'.$blogpost->id}}" type='button' class='btn btn-success'><span class='glyphicon glyphicon-minus' aria-hidden='true'></span> {{trans('Revoke')}}</a>
       @endif
       <a href="{{route('blogpost.edit',['blogpost' => $blogpost])}}" type='button' class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{trans('actions.edit')}} </a>
       
-      <button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#delete'>
+      <button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#delete_{{$blogpost->id}}'>
       <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{trans('actions.remove')}}
       </button>
     </div>
@@ -82,19 +82,24 @@
 
 
 
-<?php 
+<?php Bootstrap::image_details($blogpost->id,$blogpost->getImage()); ?>
 
-  Bootstrap::image_details($blogpost->id,$blogpost->getImage());
+<form method='POST' action="{{route('blogpost.destroy',['blogpost' => $blogpost])}}"> 
+      @csrf 
+      @method('delete')
 
-  Bootstrap::delete_confirmation([
-    "id" => "delete",
-    "header" => trans('actions.are_you_sure'),
-    "body" => "<b>".trans('actions.delete_this',['content_type'=>'post']).": </b>". $blogpost->title." <b>?</b>",
-    "footer" => "<a href='".admin_link('blogpost-delete',$blogpost->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
-    "cancel" => trans('actions.cancel')
-    ]);
+      <?php 
 
-?>
+        Bootstrap::delete_confirmation([
+          "id" => "delete_".$blogpost->id,
+          "header" => trans('actions.are_you_sure'),
+          "body" => "<b>".trans('actions.delete_this',['content_type'=>'post']).": </b>".$blogpost->title." <b>?</b>",
+          "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
+          "cancel" => trans('actions.cancel')
+          ]);
+      ?>
+
+</form>
 
 
 @include('blogposts.comments',['user' => \Auth::user()])

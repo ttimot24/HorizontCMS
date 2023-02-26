@@ -45,9 +45,11 @@ tr #hidden-home a:hover{
       </tr>
     </thead><tbody id="pages">
 
-<?php 
 
-foreach($all_pages as $each){
+
+@foreach($all_pages as $each)
+
+<?php 
 
 if(!$each->isActive()){
     $class = 'danger';
@@ -129,24 +131,30 @@ echo '
     </div>
   </div>
 </div>';
-
-
-
-
-   Bootstrap::delete_confirmation([
-    "id" => "delete_".$each->id."",
-    "header" => trans('actions.are_you_sure'),
-    "body" => "<b>".trans('actions.delete_this',['content_type'=>'page']).": </b>".$each->name." <b>?</b>",
-    "footer" => "<a href='".admin_link('page-delete',$each->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete') ."</a>",
-    "cancel" => trans('actions.cancel')
-   ]);
-
-
-    echo "</td></tr>";
-
-}
-
 ?>
+
+    <form method='POST' action="{{route('page.destroy',['page' => $each])}}"> 
+      @csrf 
+      @method('delete')
+
+      <?php 
+
+
+        Bootstrap::delete_confirmation([
+          "id" => "delete_".$each->id."",
+          "header" => trans('actions.are_you_sure'),
+          "body" => "<b>".trans('actions.delete_this',['content_type'=>'page']).": </b>".$each->name." <b>?</b>",
+          "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
+          "cancel" => trans('actions.cancel')
+        ]);
+
+        ?>
+   </form>
+
+
+  </td></tr>
+
+@endforeach
 
 
 	</tbody>

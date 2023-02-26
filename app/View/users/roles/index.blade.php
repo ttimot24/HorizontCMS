@@ -6,15 +6,14 @@
 <h2>User groups <small class='pull-right text-muted pt-3'> All: {{$all_user_roles->count()}} </small></h2>
 
 <br>
-<div ><a href="{{admin_link('user_role-create')}}" class='btn btn-warning' style='margin-bottom:20px;'>New user group</a></div>
+<div ><a href="{{route('userrole.create')}}" class='btn btn-warning' style='margin-bottom:20px;'>New user group</a></div>
 
 <div class="row">
 <?php foreach($all_user_roles->reverse() as $role): ?>
   <div class='col-md-3'>
-<form action="{{admin_link('user_role-update',$role->id)}}" method='POST'>
+<form action="{{route('userrole.update',['userrole' => $role])}}" method='POST'>
 
-{{csrf_field()}}
-
+  @csrf
 
   <div class="panel panel-primary mb-4">
     <!-- Default panel contents -->
@@ -68,18 +67,24 @@
         </div>
 
         </li>";
-
+?>
   
+  <form method='POST' action="{{route('userrole.destroy',['userrole' => $role])}}"> 
+      @csrf 
+      @method('delete')
+
+      <?php 
 
       Bootstrap::delete_confirmation([
           "id" => "delete_".$role->id,
           "header" => trans('actions.are_you_sure'),
           "body" => "<div><b>".trans('actions.delete_this',['content_type' => 'role']).": </b>".$role->name." <b>?</b></div>",
-          "footer" => "<a href='".admin_link('user_role-delete',$role->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
+          "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
           "cancel" => trans('actions.cancel')
       ]);
 
-  ?>
+      ?>
+    </form>
 
     </ul>
   </div>

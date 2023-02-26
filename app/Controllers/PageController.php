@@ -194,12 +194,12 @@ class PageController extends Controller{
     /**
      * Remove the specified resource from database.
      *
-     * @param  int  $id
+     * @param  \App\Model\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function delete($id){
+    public function destroy(Page $page){
         
-        if(Page::find($id)->delete()){
+        if($page->delete()){
             return $this->redirect(route("page.index"))->withMessage(['success' => trans('message.successfully_deleted_page')]);
         }
 

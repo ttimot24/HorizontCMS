@@ -76,13 +76,29 @@ echo "</div>";
 
 
   if($disabled!='disabled'){
-   Bootstrap::delete_confirmation([
-    "id" => "delete_".$each->id."",
-    "header" =>trans('actions.are_you_sure'),
-    "body" => "<b>".trans('actions.delete_this',['content_type' => 'user']).": </b>".$each->username." <b>?</b>",
-    "footer" => "<a href='".admin_link('user-delete',$each->id)."' type='button' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
-    "cancel" => trans('actions.cancel')
-   ]);
+
+
+    ?>
+  
+    <form method='POST' action="{{route('user.destroy',['user' => $each])}}"> 
+        @csrf 
+        @method('delete')
+  
+        <?php 
+    
+        Bootstrap::delete_confirmation([
+          "id" => "delete_".$each->id."",
+          "header" =>trans('actions.are_you_sure'),
+          "body" => "<b>".trans('actions.delete_this',['content_type' => 'user']).": </b>".$each->username." <b>?</b>",
+          "footer" => "<button type='submit' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</button>",
+          "cancel" => trans('actions.cancel')
+        ]);
+
+        ?>
+    </form>
+
+   <?php
+
  }
 
 

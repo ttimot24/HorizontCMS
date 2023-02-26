@@ -4,15 +4,15 @@
 <div class='container main-container'>
 	<h2>Create User Group</h2><br><br>
 
-<form action="{{admin_link('user_role-store')}}" method='POST'>
+<form action="{{route('userrole.store')}}" method='POST'>
 
-{{csrf_field()}}
+@csrf
 
 <div class='col-md-4'>
 <div class="panel panel-primary">
   <!-- Default panel contents -->
   <div class="panel-heading bg-primary p-3">
-      <input type='text' class='form-control' name='group_name' required>
+      <input type='text' class='form-control' name='name' required>
   </div>
 
   <!-- List group -->

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Illuminate\Http\Request;
 use App\Libs\Controller;
 use App\Http\Requests;
+use App\Model\UserRole;
 
 class UserRoleController extends Controller{
 
@@ -59,11 +60,10 @@ class UserRoleController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(){
-       if($this->request->isMethod('POST')){
-            $role = new \App\Model\UserRole();
-            $role->name = $this->request->input('group_name');
-            $role->rights = array_keys($this->request->except(['_token','group_name']));
+    public function store(Request $request){
+
+            $role = new \App\Model\UserRole($request->all());
+            $role->rights = array_keys($request->except(['_token','name']));
             $role->permission = 0;
 
             if($role->save()){
@@ -71,7 +71,7 @@ class UserRoleController extends Controller{
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-       }
+
     }
 
     /**
@@ -117,25 +117,14 @@ class UserRoleController extends Controller{
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id){
-        //
-    }
-
-
-    /**
      * Remove the specified resource from database.
      *
-     * @param  int  $id
+     * @param  \App\Model\UserRole  $userrole
      * @return \Illuminate\Http\Response
      */
-    public function delete($id){
+    public function destroy(UserRole $userrole){
         
-        if(\App\Model\UserRole::find($id)->delete()){
+        if($userrole->delete()){
             return $this->redirectToSelf()->withMessage(['success' => trans('User role deleted succesfully!')]);
         }
 
