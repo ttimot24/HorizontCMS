@@ -11,11 +11,11 @@
 
 
       @if($previous_user)
-          <li class='previous float-start' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{route('user.show',['user' => $previous_user])}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+          <li class='previous float-start'><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{route('user.show',['user' => $previous_user])}}"> <span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
       @endif
 
       @if($next_user)
-          <li class='next float-end' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{route('user.show',['user' => $next_user])}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
+          <li class='next float-end'><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{route('user.show',['user' => $next_user])}}">{{trans('actions.next')}} <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
       @endif
 
     </ul>
@@ -167,31 +167,5 @@
 </div>
 
 </div></section>
-
-<script>
-
-var arrow = new Vue({
-  el: '#arrows',
-  data:{
-
-  },
-  methods:{
-    @if($previous_user)
-    previous: function(){
-       window.location.replace("{{route('user.show',['user' => $previous_user])}}");
-    },
-    @endif
-    @if($next_user)
-    next: function(){
-      window.location.replace("{{route('user.show',['user' => $next_user])}}");
-    }
-    @endif
-  },
-  beforeCreate: function(){
-    console.log("Vue started.");
-  }
-});
-
-</script>
 
 @endsection

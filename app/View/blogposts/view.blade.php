@@ -11,11 +11,11 @@
   <ul class='pager list-unstyled'>
 
     @if($previous_blogpost)
-        <li class='btn previous float-start' v-on:keyup.left="previous"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{route('blogpost.show',['blogpost' => $previous_blogpost])}}"> <span class='fa fa-angle-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
+        <li class='btn previous float-start'><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{route('blogpost.show',['blogpost' => $previous_blogpost])}}"> <span class='fa fa-angle-left' aria-hidden='true'></span> {{trans('actions.previous')}}</a></li>
     @endif
 
     @if($next_blogpost)
-        <li class='btn next float-end' v-on:keyup.right="next"><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{route('blogpost.show',['blogpost' => $next_blogpost])}}">{{trans('actions.next')}} <span class='fa fa-angle-right' aria-hidden='true'></span> </a></li>
+        <li class='btn next float-end'><a class="rounded-pill bg-dark px-3 py-2 text-white" href="{{route('blogpost.show',['blogpost' => $next_blogpost])}}">{{trans('actions.next')}} <span class='fa fa-angle-right' aria-hidden='true'></span> </a></li>
     @endif
 
 
@@ -99,34 +99,5 @@
 
 
 </div>
-
-
-<script>
-
-var arrow = new Vue({
-  el: '#arrows',
-  data:{
-
-  },
-  methods:{
-    @if($previous_blogpost)
-    previous: function(){
-       window.location.replace("{{route('blogpost.show',['blogpost' => $previous_blogpost])}}");
-    },
-    @endif
-    @if($next_blogpost)
-    next: function(){
-      window.location.replace("{{route('blogpost.show',['blogpost' => $next_blogpost])}}");
-    }
-    @endif
-  },
-  beforeCreate: function(){
-    console.log("Vue started.");
-  }
-});
-
-</script>
-
-
 
 @endsection

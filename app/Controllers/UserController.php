@@ -61,31 +61,35 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+
+        $request->validate([
+            'password' => 'required|confirmed|min:6'
+        ]);
         
-            $user = new User($request->all());
-            $user->slug = str_slug($request->input('username'), "-");
-            $user->visits = 0;
-            $user->active = 1;
+        $user = new User($request->all());
+        $user->slug = str_slug($request->input('username'), "-");
+        $user->visits = 0;
+        $user->active = 1;
             
 
-            if ($request->hasFile('up_file')){
+        if ($request->hasFile('up_file')){
                  
-                 $img = $request->up_file->store($this->imagePath);
+            $img = $request->up_file->store($this->imagePath);
 
-                 $user->image = basename($img);
+            $user->image = basename($img);
 
-                 if(extension_loaded('gd')){
-                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$user->image));
-                 }
+            if(extension_loaded('gd')){
+                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$user->image));
             }
+        }
 
 
-            if($user->save()){
+        if($user->save()){
 
-            	return $this->redirect(route("user.edit",['user' => $user]))->withMessage(['success' => trans('message.successfully_created_user')]);
-            }else{
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
+            return $this->redirect(route("user.edit",['user' => $user]))->withMessage(['success' => trans('message.successfully_created_user')]);
+        } else {
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
 
     }
 

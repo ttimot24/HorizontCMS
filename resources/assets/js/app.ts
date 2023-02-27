@@ -1,15 +1,33 @@
 /**
+ * We'll load jQuery and the Bootstrap jQuery plugin which provides support
+ * for JavaScript based Bootstrap features such as modals and tabs. This
+ * code may be modified to fit the specific needs of your application.
+ */
+
+import * as $ from 'jquery';
+import "bootstrap";
+import "bootstrap-fileinput";
+
+/**
  * First we will load all of this project's JavaScript dependencies which
  * include Vue and Vue Resource. This gives a great starting point for
  * building robust, powerful web applications using Vue and Laravel.
  */
-
-import "bootstrap";
 import Vue from 'vue';
-import "bootstrap-fileinput";
+import VueResource from 'vue-resource';
+
 import LockScreen from './components/LockScreen.vue';
 
 Vue.config.devtools = true;
+Vue.use(VueResource);
+
+/*Vue.http.interceptors.push((request: Request, next) => {
+    request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
+
+    next();
+}); */
+
+// Vue.prototype.$http = axios;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

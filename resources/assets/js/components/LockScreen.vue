@@ -1,6 +1,6 @@
 <template>
 
-<div class='modal fade' id='lock_screen' ref="lock-screen" role='dialog' v-on:keydown.enter="lockUpScreen" aria-labelledby='myModalLabel' aria-hidden='true'>
+<div class='modal fade' id='lock_screen' ref="lock-screen" role='dialog' v-on:keydown.enter="lockUpScreen" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby='myModalLabel' aria-hidden='true'>
     <div class='modal-dialog modal-lg'>
 		<div class='modal-content'>
 		      <div class='modal-header '>
@@ -8,9 +8,7 @@
 		      </div>
 		      <div class='modal-body text-center'>
 
-		    	 <img src='' class='img-thumbnail' style='max-height:15rem; object-fit:cover;'>
-
-
+		    	 <img :src='image' class='img-thumbnail' style='max-height:15rem; object-fit:cover;'>
 
 		    			<div class='form-group'>
 						  <label for='usr'>{{username}}</label>
@@ -23,8 +21,7 @@
 							</div>
 						</div>
 
-
-		    </div>
+		    	</div>
 		    	      <div class='modal-footer'>
 				        <button type='button' id='unlock_button' class='btn btn-primary' v-on:click="lockUpScreen">Unlock</button>
 				      </div>
@@ -35,7 +32,8 @@
 
 
 
-<script lang="ts">
+<script lang="ts" async="async">
+	import * as $ from 'jquery';
 	import { defineComponent } from '@vue/composition-api';
 	import axios from 'axios';
 	import { Modal } from 'bootstrap';
@@ -46,20 +44,17 @@
 			csrf: String,
 			userId: Number,
 			username: String,
-			pwd: String,
+			image: String,
 		},
 		data: function() {
 			return {
-				csrf: '',
-				userid: '',
-				username: '',
-				pwd: '',
-				modal: ''
+				pwd: null,
+				modal: null
 			}
 		},
 		created: function() {
 
-			this.modal = new Modal((this.$refs['lock-screen'] as HTMLElement));
+			this.modal = new Modal(this.$refs['lock-screen']);
 
 			if(typeof(Storage) !== "undefined") {
 			
@@ -81,7 +76,7 @@
 					{
 						password: this.pwd
 					}
-				).then(function(response){
+				).then((response) => {
 
 					if(response.data){
 
@@ -90,10 +85,10 @@
 
 					}
 
-					this.pwd='';
+					this.pwd=null;
 
-				}).catch(function(error){
-					this.pwd='';
+				}).catch((error) => {
+					this.pwd=null;
 					console.log(error);
 				});
 

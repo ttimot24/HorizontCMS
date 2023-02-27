@@ -16,11 +16,12 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <section class="row">';
+            <section class="row">
 
-            <div class='col-md-6'> <a href='{{ $image }}' target='_blank'>
-            <img src='{{ $image }}' class='img img-thumbnail' style='max-height:500px;'></a></div>
-            <div class='col-md-6' valign='top'>
+            <div class='col-6'> <a href='{{ $image }}' target='_blank'>
+                <img src='{{ $image }}' class='img img-thumbnail' style='max-height:500px;'></a>
+            </div>
+            <div class='col-6' valign='top'>
             <h1>Properties</h1></br>
             <h4>File name: </h4> {{ basename($image); }}
             <h4>Path: </h4> <a href='{{ $image }}' target='_blank'>{{ $image }}</a>

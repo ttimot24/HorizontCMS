@@ -27,13 +27,20 @@
         @if(!isset($user) || ($user && $user->is($current_user)))  
           <div class='form-group'>
               <label for='title'>{{trans('user.create_password')}}:</label>
-              <input type='password' class='form-control' id='password' name='password'  required>
+              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+              @error('password')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
           </div>
 
 
           <div class='form-group'>
-              <label for='title'>{{trans('user.create_password_again')}}:</label>
-              <input type='password' class='form-control' id='password2' name='password2' required>
+              <label for='password'>{{trans('user.create_password_again')}}:</label>
+
+              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" required autocomplete="current-password">
           </div>
         @endif
 
@@ -83,10 +90,8 @@
 
         <div class='form-group' >
           <label for='file'>{{trans('actions.upload_image')}}:</label>
-          <input name='up_file' accept='image/*' id='input-2' type='file' class='file' multiple='true' data-drop-zone-enabled="{{ isset($page)? 'false' : 'true'}}" data-show-upload='false' data-show-caption='true'>
+          <input name='up_file' accept='image/*' id='input-2' type='file' class='file' multiple='true' data-drop-zone-enabled="{{ isset($user)? 'false' : 'true'}}" data-show-upload='false' data-show-caption='true'>
         </div>
-      </div>
-
       </div>
 
         <div class='form-group pull-left col-xs-12 col-md-8' >
@@ -100,22 +105,5 @@
 @if(isset($user))
   @include('image_details', ['modal_id' => $user->id, 'image' => $user->getImage()])
 @endif
-
-
-<script type="text/javascript">
-window.onload = function () {
-  document.getElementById("password").onchange = validatePassword;
-  document.getElementById("password2").onchange = validatePassword;
-}
-function validatePassword(){
-var pass2=document.getElementById("password2").value;
-var pass1=document.getElementById("password").value;
-if(pass1!=pass2)
-  document.getElementById("password2").setCustomValidity("<?= trans('user.pws_not_equal') ?>");
-else
-  document.getElementById("password2").setCustomValidity('');  
-//empty string means no validation error
-}
-</script>
 
 @endsection

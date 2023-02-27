@@ -2,6 +2,7 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
+      "allowJs": true,
       "baseUrl": "./",
       "paths": {
       },
@@ -26,7 +27,7 @@
         "dom"
       ]
     },
-    "include": ["resources/assets/js/**/*.ts", "resources/assets/js/**/*.d.ts", "resources/assets/js/**/*.tsx", "resources/assets/js/**/*.vue", "resources/assets/js/controls.js", "resources/assets/js/filemanager.js", "resources/assets/js/dragndrop.js", "resources/assets/js/dragndrop.js", "resources/assets/js/dragndrop.js", "resources/assets/js/dragndrop.js"], 
+    "include": ["resources/assets/js/**/*.ts", "resources/assets/js/**/*.d.ts", "resources/assets/js/**/*.tsx", "resources/assets/js/**/*.vue", "resources/assets/js/controls.js", "resources/assets/js/filemanager.ts", "resources/assets/js/dragndrop.js", "resources/assets/js/dragndrop.js", "resources/assets/js/dragndrop.js", "resources/assets/js/dragndrop.js", "resources/assets/js/bootstrap.js", "resources/assets/js/bootstrap.js"], 
     "exclude": ["docs/**/*"],
     "angularCompilerOptions": {
       "enableI18nLegacyMessageIdFormat": false,
@@ -35,6 +36,12 @@
       "strictTemplates": true,
       "resolveJsonModule": true,
       "esModuleInterop": true,
+    },
+    "vueCompilerOptions": {
+      "target": 2,
+      "extensions": [
+        ".vue"
+      ]
     },
     "allowSyntheticDefaultImports": true
   }
