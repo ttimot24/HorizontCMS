@@ -10,13 +10,13 @@
 
 <div class="row">
 
-<?php 
-if(!$repo_status || $repo_status){
+    @if(!$repo_status || $repo_status)
 
-  echo (new BootstrapMessage())->warning("Theme store unreachable!"); 
-}
+      <div class="alert alert-warning" role="alert">
+        <div><b>Warning</b> Theme store unreachable!</div>
+      </div>
 
-?>
+    @endif
 
 
 	</div>
