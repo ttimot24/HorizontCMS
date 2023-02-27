@@ -75,7 +75,7 @@
 
           <div class='form-group' >
             <label for='file'>{{trans('actions.upload_image')}}:</label>
-            <input name='up_file' accept='image/*' id='input-2' type='file' class='file' multiple='true' data-show-upload='false' data-show-caption='true'>
+            <input name='up_file' accept='image/*' id='input-2' type='file' class='file' multiple='true' data-drop-zone-enabled="{{ isset($page)? 'false' : 'true'}}" data-show-upload='false' data-show-caption='true'>
           </div>
 
         </div>
@@ -107,13 +107,13 @@
   </form>
 </div>
 
-<?php 
-  if(isset($page)){
-    Bootstrap::image_details($page->id,$page->getImage()); 
-  }
-?>
+@if(isset($page))
+  @include('image_details', ['modal_id' => $page->id, 'image' => $page->getImage()])
+@endif
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
 <script type='text/javascript'>
+
  $(document).ready(function() {
 
     if($('#level').find('option:selected').val() == '1'){

@@ -9,13 +9,13 @@
 
 <div class="row">
 
-<?php 
-if(!$repo_status){
+@if(!$repo_status)
 
-  echo (new BootstrapMessage())->warning("Plugin store unreachable!"); 
-}
+	<div class="alert alert-warning" role="alert">
+	   <div><b>Warning</b> Plugin store unreachable!</div>
+	</div>
 
-?>
+@endif
 
 @foreach($online_plugins as $o_plugin)
 

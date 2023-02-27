@@ -2,11 +2,11 @@
 
 namespace App\Controllers;
 
+use Illuminate\Http\Request;
 use App\Libs\Controller;
-
 use App\Model\User;
 
-class UserController extends Controller{
+class UserController extends Controller {
  
 
     protected $itemPerPage = 100;
@@ -47,9 +47,6 @@ class UserController extends Controller{
      */
     public function create(){
 
-
-        $this->view->js('resources/js/controls.js');
-
         $this->view->title(trans('user.create_user'));
         return $this->view->render('users/form',[
                                                     'current_user' => $this->request->user(),
@@ -63,19 +60,17 @@ class UserController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(){
+    public function store(Request $request){
         
-        if($this->request->isMethod('POST')){
-
-            $user = new User($this->request->all());
-            $user->slug = str_slug($this->request->input('username'), "-");
+            $user = new User($request->all());
+            $user->slug = str_slug($request->input('username'), "-");
             $user->visits = 0;
             $user->active = 1;
             
 
-            if ($this->request->hasFile('up_file')){
+            if ($request->hasFile('up_file')){
                  
-                 $img = $this->request->up_file->store($this->imagePath);
+                 $img = $request->up_file->store($this->imagePath);
 
                  $user->image = basename($img);
 
@@ -91,8 +86,6 @@ class UserController extends Controller{
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-            
-        }
 
     }
 
@@ -120,8 +113,6 @@ class UserController extends Controller{
      */
     public function edit($id){
 
-        $this->view->js('resources/js/controls.js');
-
         $this->view->title(trans('user.edit_user'));
         return $this->view->render('users/form',[
                                                 'current_user' => $this->request->user(),
@@ -137,28 +128,27 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id){
-        if($this->request->isMethod('PUT')){
+    public function update(Request $request, $id){
 
             $user = User::find($id);
-            $user->name = $this->request->input('name');
-            $user->username = $this->request->input('username');
-            $user->slug = str_slug($this->request->input('username'), "-");
-            $user->email = $this->request->input('email');
-            $user->phone = $this->request->input('phone');
+            $user->name = $request->input('name');
+            $user->username = $request->input('username');
+            $user->slug = str_slug($request->input('username'), "-");
+            $user->email = $request->input('email');
+            $user->phone = $request->input('phone');
 
-            if($this->request->has('password')){
-                $user->password = $this->request->input('password');
+            if($request->has('password')){
+                $user->password = $request->input('password');
             }
 
-            $user->role_id = $this->request->input('role_id');
+            $user->role_id = $request->input('role_id');
            // $user->active = 1;
 
 
 
-            if ($this->request->hasFile('up_file')){
+            if ($request->hasFile('up_file')){
                  
-                 $img = $this->request->up_file->store($this->imagePath);
+                 $img = $request->up_file->store($this->imagePath);
 
                  $user->image = basename($img);
 
@@ -167,18 +157,11 @@ class UserController extends Controller{
                  }
             }
 
-
-
-
             if($user->save()){
                 return $this->redirect(route("user.edit",['user' => $user]))->withMessage(['success' => trans('message.successfully_updated_user')]);
             }else{
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-
-
-            
-        }
     }
 
     /**
@@ -215,7 +198,6 @@ class UserController extends Controller{
 
 
         return $this->redirect(route("user.index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
-
     }
 
 

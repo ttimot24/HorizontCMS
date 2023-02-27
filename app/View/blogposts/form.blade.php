@@ -45,7 +45,7 @@
 
           <div class='form-group' >
             <label for='file'>{{trans('actions.upload_image')}}:</label>
-            <input name='up_file' accept='image/*' id='input-2' type='file' class='file' multiple='true' data-show-upload='false' data-show-caption='true'>
+            <input name='up_file' accept='image/*' id='input-2' type='file' class='file' multiple='true' data-drop-zone-enabled="{{ isset($blogpost)? 'false' : 'true'}}" data-remove-class="btn btn-default" data-show-upload='false' data-show-caption='true'>
           </div>
 
         </div>
@@ -91,9 +91,8 @@
   </form>
 </div>
 
-<?php 
-  if(isset($blogpost)){
-    Bootstrap::image_details($blogpost->id,$blogpost->getImage()) ;
-  }
-?>
+@if(isset($blogpost))
+  @include('image_details', ['modal_id' => $blogpost->id, 'image' => $blogpost->getImage()])
+@endif
+
 @endsection

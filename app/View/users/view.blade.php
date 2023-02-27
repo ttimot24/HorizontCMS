@@ -113,10 +113,11 @@
 
 }
 
-
-
-   Bootstrap::image_details($user->id,$user->getImage());
 ?>
+
+
+      @include('image_details', ['modal_id' => $user->id, 'image' => $user->getImage()])
+
 
       @include('confirm_delete', [
             "route" => route('user.destroy',['user' => $user]),

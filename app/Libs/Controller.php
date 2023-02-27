@@ -9,8 +9,10 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Libs\ViewResolver;
 use Illuminate\Http\Request;
 
-abstract class Controller extends BaseController{
+abstract class Controller extends BaseController {
 	
+    protected $view;
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function __construct(Request $request,ViewResolver $viewResolver){

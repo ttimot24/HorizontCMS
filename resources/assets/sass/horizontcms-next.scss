@@ -1,7 +1,16 @@
 @import "variables";
-@import "./node_modules/bootstrap/scss/bootstrap.scss";
-@import "./node_modules/bootstrap-icons/font/bootstrap-icons.scss";
-@import "./node_modules/bootstrap-fileinput/scss/fileinput.scss";
+@import "../../../node_modules/fontawesome-4.7/scss/font-awesome.scss";
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../../node_modules/bootstrap-icons/font/bootstrap-icons.scss";
+@import "../../../node_modules/bootstrap-fileinput/scss/fileinput.scss";
+
+@font-face {
+    font-family: "FontAwesome";
+    src: url(/resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.eot?8b43027f47b20503057dfbbaa9401fef);
+    src: url(/resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.eot?8b43027f47b20503057dfbbaa9401fef) format("embedded-opentype"), url(/resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.woff2?20fd1704ea223900efa9fd4e869efb08) format("woff2"), url(/resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.woff?f691f37e57f04c152e2315ab7dbad881) format("woff"), url(/resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.ttf?1e59d2330b4c6deb84b340635ed36249) format("truetype"), url(/resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.svg?c1e38fd9e0e74ba58f7a2b77ef29fdd3) format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
 
 body {
     color: #1f1f1f;
@@ -338,3 +347,28 @@ i.bi{
 .form-switch{
     font-size: 1.25rem;
 }
+
+#hidden-home{
+    visibility:hidden;
+}
+
+tr:hover #hidden-home{
+    visibility:visible;
+    color:grey;
+}
+
+tr #hidden-home a:hover{
+  color:black;
+}
+
+.close.fileinput-remove {
+    display: none;
+}
+
+.file-caption .file-caption-name {
+    width: unset;
+}
+
+.was-validated .input-group > .form-control:not(:focus):valid, .input-group > .form-control:not(:focus).is-valid, .was-validated .input-group > .form-select:not(:focus):valid, .input-group > .form-select:not(:focus).is-valid, .was-validated .input-group > .form-floating:not(:focus-within):valid, .input-group > .form-floating:not(:focus-within).is-valid {
+    width: 50%;
+  }

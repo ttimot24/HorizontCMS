@@ -1,5 +1,7 @@
 <div id="filemanager" data-start="{{$current_dir}}" >
-  {{ csrf_field() }}
+
+@csrf
+
 <section class='container'>
 
   <section  class='row'>
@@ -60,8 +62,8 @@
               <div class='folder col-md-2 col-sm-4 col-xs-4 text-center text-white' v-for="folder in folders" :id="folder" v-on:click="select(folder)" v-on:dblclick="open(folder);" >
                 
                 <div class="file-nav text-end">
-                  <a class="me-1" v-on:click="renameModal(folder)"><i class="fa fa-pencil"></i></a>
-                  <a class="me-1" v-on:click="deleteModal(folder)" ><i class="fa fa-trash"></i></a>
+                  <a href="#" class="me-1" v-on:click="renameModal(folder)"><i class="fa fa-pencil"></i></a>
+                  <a href="#" class="me-1" v-on:click="deleteModal(folder)" ><i class="fa fa-trash"></i></a>
                 </div>
 
                 <div clas='row'>
@@ -90,20 +92,16 @@
   </div>
 </section>
 
-<?php 
-
-
-                 Bootstrap::delete_confirmation([
-                  "id" => "delete_sample",
-                  "header" => trans('actions.are_you_sure'),
-                  "body" => "<div style='color:black;'>".trans('actions.delete_this',['content_type'=>'dir']).": <b>[dir_name_sample]</b> ?</div>",
-                  "footer" => "<a type='button' class='btn btn-danger' v-on:click.prevent='deleteFile' data-file='[dir_path_sample]' ><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> ".trans('actions.delete')."</a>",
-                  "cancel" => trans('actions.cancel')
-                 ]);
-
-?>
-
-
+    @include('confirm_delete', [
+          "route" => route('filemanager.destroy',['filemanager' => 'sample']),
+          "id" => "delete_sample",
+          "header" => trans('actions.are_you_sure'),
+          "name" => "[dir_name_sample]",
+          "content_type" => "dir",
+          "delete_text" => trans('actions.delete'),
+          "cancel" => trans('actions.cancel')
+          ]
+    )
 
 <div class='modal upload_file_to_storage' id='upload_file_to_storage' tabindex='-1' role='dialog' aria-labelledby='upload_file_to_storage' aria-hidden='true'>
   <div class='modal-dialog'>
@@ -113,7 +111,7 @@
         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
 
-   <form action='admin/file-manager/fileupload' method='POST' enctype='multipart/form-data' v-on:submit.prevent="upload">
+   <form action="route('filemanager.store')" method='POST' enctype='multipart/form-data' v-on:submit.prevent="upload">
       <div class='modal-body'>
 
 
@@ -124,8 +122,8 @@
 
       </div>
       <div class='modal-footer'>
-        <button type='submit' class='btn btn-primary'>Upload</button>
-        <button type='button' class='btn btn-default' data-bs-dismiss='modal'>Cancel</button>
+        <button type='submit' class='btn btn-primary'>{{ trans('actions.upload') }}</button>
+        <button type='button' class='btn btn-default' data-bs-dismiss='modal'>{{ trans('actions.cancel') }}</button>
       </div>
       </form>
     </div><!-- /.modal-content -->
@@ -153,7 +151,7 @@
         </div>
         <div class='modal-footer'>
           <button type='submit' class='btn btn-primary'>Create</button>
-          <button type='button' class='btn btn-default' data-bs-dismiss='modal'>Cancel</button>
+          <button type='button' class='btn btn-default' data-bs-dismiss='modal'>{{ trans('actions.cancel') }}</button>
         </div>
       </form>
     </div>
@@ -191,7 +189,7 @@
       </div>
       <div class='modal-footer'>
         <button type='submit' class='btn btn-primary'>Rename</button>
-        <button type='button' class='btn btn-default' data-bs-dismiss='modal'>Cancel</button>
+        <button type='button' class='btn btn-default' data-bs-dismiss='modal'>{{ trans('actions.cancel') }}</button>
       </div>
       </form>
     </div>
@@ -201,4 +199,4 @@
 
 </div>
 
-<script src="resources/assets/js/filemanager.js"></script>
+<script src="resources/js/filemanager.js"></script>

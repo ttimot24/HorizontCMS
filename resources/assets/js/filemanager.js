@@ -5,7 +5,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-//require('./bootstrap');
+require('./bootstrap');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -179,14 +179,14 @@ var filemanager = new Vue({
     		              console.log(data);
                           $('#upload_file_to_storage').modal('hide');
                           fileSelect.val("");
+                         
                           fileSelect.fileinput("clear");
-
 
                           for (var i = 0; i < data.uploadedFileNames.length; i++) {
                                 console.log(filemanager.basename(data.uploadedFileNames[i]));
                                 filemanager.$data.files.push(filemanager.basename(data.uploadedFileNames[i])+'.'+filemanager.getFileExtension(data.uploadedFileNames[i]));
                           }
-                    }else{
+                    } else {
                         console.log("Error" +data);
                     }
 		          },
@@ -215,13 +215,16 @@ var filemanager = new Vue({
             file = filemanager.$data.currentDirectory+'/'+$(event.target).data('old_name');
             console.log(file);
 
-    		$.post(event.target.action,
-                { 
+    		$.ajax({
+                type: "PUT",
+                url: event.target.action,
+                contentType: "application/json",
+                data: JSON.stringify({ 
                     _token: filemanager.$data._csrfToken, 
                     old_file: filemanager.$data.currentDirectory+'/'+ $('[name="old_name"]').val(),
                     new_file: filemanager.$data.currentDirectory+'/'+$('[name="new_name"]').val()
-                },
-                function( data ) {
+                }),
+                success: function( data ) {
                     if(typeof data.success !== 'undefined'){
                         filemanager.open(filemanager.$data.currentDirectory);
     				    $('#rename_sample').modal('hide');
@@ -230,7 +233,7 @@ var filemanager = new Vue({
                     }
               
                 }
-            );
+            });
 
         },
     	deleteFile: function(event){
@@ -239,7 +242,7 @@ var filemanager = new Vue({
     		file = filemanager.$data.currentDirectory+'/'+$(event.target).data('file');
 
 
-    		$.get('admin/file-manager/delete',
+    		$.get('admin/file-manager/destroy',
     		{ 
     			_token: filemanager.$data._csrfToken, 
     			file: file

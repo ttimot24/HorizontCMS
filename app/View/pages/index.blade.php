@@ -1,21 +1,6 @@
 @extends('layout')
 
 @section('content')
-<style>
-#hidden-home{
-    visibility:hidden;
-}
-
-tr:hover #hidden-home{
-    visibility:visible;
-    color:grey;
-}
-
-tr #hidden-home a:hover{
-  color:black;
-}
-
-</style>
 
 <div class='container main-container'>
 
@@ -27,7 +12,7 @@ tr #hidden-home a:hover{
       <a href="{{route('page.create')}}" class='btn btn-info my-auto'>{{trans('page.create_page_button')}}</a>
     </div>
     <div class='col-md-6 text-right text-end'>
-      <a class='btn btn-default my-auto' id='orderer' onclick='$(this).toggle(dragndroporder());' data-csrf="{{csrf_token()}}"><i class='fa fa-arrows-v' style='font-size:15px;'  aria-hidden='true'></i> {{trans('page.order')}}</a>
+      <a class='btn btn-default my-auto' id='orderer' onclick='dragndroporder();' data-csrf="{{csrf_token()}}"><i class='fa fa-arrows-v' style='font-size:15px;'  aria-hidden='true'></i> {{trans('page.order')}}</a>
     </div>
 </div>
 

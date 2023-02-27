@@ -3,16 +3,17 @@
 namespace App\Controllers;
 
 use App\Libs\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class FileManagerController extends Controller{
+class FileManagerController extends Controller {
  
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index() {
 
 
         $mode = $this->request->get('mode');
@@ -48,7 +49,7 @@ class FileManagerController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function fileupload(){
+    public function store(){
         
         
         if($this->request->isMethod('POST')){
@@ -111,7 +112,7 @@ class FileManagerController extends Controller{
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $this->request
      * @return \Illuminate\Http\Response
      */
     public function newFolder(){
@@ -148,7 +149,7 @@ class FileManagerController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(){
+    public function destory(){
 
 
          $toDelete = str_replace("storage/","",$this->request->input('file'));
@@ -219,22 +220,25 @@ class FileManagerController extends Controller{
     }
 
 
-    public function rename(){
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $this->request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(){
 
-        if($this->request->isMethod('POST')){
-
-            $new_file = trim($this->request->input('new_file'),"/");
-
-            if(!\Security::isExecutable($new_file) && \Storage::move($this->request->input('old_file'), $new_file)){
-                if($this->request->ajax()){
-                    return response()->json(['success' => trans('File successfully renamed!')]);
-                }
-            }else{
-                if($this->request->ajax()){
-                    return response()->json(['danger' => trans('message.something_went_wrong')]);
-                }
+        $new_file = trim($this->request->input('new_file'),"/");
+        
+        if(!\Security::isExecutable($new_file) && \Storage::move($this->request->input('old_file'), $new_file)){
+            if($this->request->ajax()){
+                return response()->json(['success' => trans('File successfully renamed!')]);
             }
-
+        } else {
+            if($this->request->ajax()){
+                return response()->json(['danger' => trans('message.something_went_wrong')]);
+            }
         }
 
     }

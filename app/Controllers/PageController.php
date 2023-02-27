@@ -31,7 +31,6 @@ class PageController extends Controller{
     public function index(){
 
         $this->view->js('resources/js/dragndrop.js');
-        $this->view->js('resources/assets/js/page.js');
 
         $this->view->title(trans('page.pages'));
         return $this->view->render('pages/index',[
@@ -52,7 +51,6 @@ class PageController extends Controller{
         
         $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
         $this->view->js('resources/js/pages.script.js');
-        $this->view->js('resources/js/controls.js');
 
         $this->view->title(trans('page.new_page'));
         return $this->view->render('pages/form',[

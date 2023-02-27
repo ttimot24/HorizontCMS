@@ -5,8 +5,8 @@
  */
 
 import "bootstrap";
-import "./bootstrap";
 import Vue from 'vue';
+import "bootstrap-fileinput";
 import LockScreen from './components/LockScreen.vue';
 
 Vue.config.devtools = true;

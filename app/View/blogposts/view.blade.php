@@ -82,9 +82,9 @@
 
 
 
-<?php Bootstrap::image_details($blogpost->id,$blogpost->getImage()); ?>
+  @include('image_details', ['modal_id' => $blogpost->id, 'image' => $blogpost->getImage()])
 
-    @include('confirm_delete', [
+  @include('confirm_delete', [
           "route" => route('blogpost.destroy',['blogpost' => $blogpost]),
           "id" => "delete_".$blogpost->id,
           "header" => trans('actions.are_you_sure'),
@@ -93,7 +93,7 @@
           "delete_text" => trans('actions.delete'),
           "cancel" => trans('actions.cancel')
           ]
-    )
+  )
 
 @include('blogposts.comments',['user' => \Auth::user()])
 
