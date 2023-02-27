@@ -27,9 +27,9 @@
       <div class='panel panel-default col-2 bg-dark p-3'>
           <h4 class="p-2 bg-dark text-white">Drivers</h4>
           <ul class="list-group">
-            @foreach(config('filesystems.disks') as $key => $value)
+          <!--  @foreach(config('filesystems.disks') as $key => $value)
                   <a href="#" v-on:click.prevent="open('{{ isset($value['root'])? basename($value['root']) : ''}}',false);"><li class="list-group-item bg-dark text-white">{{$key}}</li></a>
-            @endforeach
+            @endforeach -->
           </ul>
       </div>
   
@@ -101,10 +101,10 @@ export default defineComponent({
 	mounted: function(){
     	console.log("VueJS: FileManager started");
         this.open($(this.$el).data('start'),false);
-        console.log('Directory: '+this.$data.currentDirectory);
+        console.log('Directory: '+this.currentDirectory);
     },
     name: 'FileManager',
-    data: () => {
+    data: function(){
         return {
             _csrfToken: $('[name="_token"]').val(),
             previousDirectory: null,
@@ -120,16 +120,16 @@ export default defineComponent({
     watch:{
         filter: function(filter){
             if(filter != null && filter != ""){
-                this.$data.folders = this.$data.folders.filter(folder => folder.includes(filter));
-                this.$data.files = this.$data.files.filter(folder => folder.includes(filter));
+                this.folders = this.folders.filter(folder => folder.includes(filter));
+                this.files = this.files.filter(folder => folder.includes(filter));
             }else{
-                this.open(this.$data.currentDirectory,false);
+                this.open(this.currentDirectory,false);
             }
         }
     },
     computed: {
         breadcrumb: function(){
-            var here = this.$data.currentDirectory.split('/');
+            var here = this.currentDirectory.split('/');
 
             var parts = [];
 
@@ -145,16 +145,16 @@ export default defineComponent({
     },
     methods:{
         select: function(file) {
-            this.$data.selected = event.currentTarget.id;
+            this.selected = event.currentTarget.id;
             $(".file").removeClass('selected');
             $(".folder").removeClass('selected');
             $(event.currentTarget).addClass('selected');
-            console.log('Selected file: '+filemanager.$data.selected);
+            console.log('Selected file: '+this.selected);
         },
         open: function(folder, useCurrent = true){
 
            if(useCurrent){
-              var folderToOpen = this.$data.currentDirectory+'/'+folder;
+              var folderToOpen = this.currentDirectory+'/'+folder;
            }else{
               var folderToOpen = folder;
            }
@@ -167,17 +167,17 @@ export default defineComponent({
                   },
                   success: function (data) {
 
-                    filemanager.$data.previousDirectory = filemanager.$data.currentDirectory;
-                    filemanager.$data.currentDirectory = data.current_dir;
-                    filemanager.$data.folders = [];
-                    filemanager.$data.files = [];
+                    this.previousDirectory = this.currentDirectory;
+                    this.currentDirectory = data.current_dir;
+                    this.folders = [];
+                    this.files = [];
 
                      console.log(data); 
 
                      if(typeof data.dirs !== 'undefined' && data.dirs.length > 0){
 
                          data.dirs.forEach(function(each){
-                            filemanager.$data.folders.push(each);
+                            this.folders.push(each);
                          });
                      }
 
@@ -185,7 +185,7 @@ export default defineComponent({
 
                       
                         data.files.forEach(function(each){
-                            filemanager.$data.files.push(each);
+                            this.files.push(each);
                          });
 
                         }
@@ -201,13 +201,13 @@ export default defineComponent({
         },
     	newFolder: function(event){
 
-    		var dirPath = this.$data.currentDirectory;
+    		var dirPath = this.currentDirectory;
     		var folderName = $('[name="new_folder_name"]').val();
 
 
     		$.post(event.target.action,
     		{ 
-    			_token: filemanager.$data._csrfToken, 
+    			_token: this._csrfToken, 
     			dir_path: dirPath,
     			new_folder_name: folderName
     		},
@@ -220,7 +220,7 @@ export default defineComponent({
     			  	$('[name="new_folder_name"]').val("");
 
 
-                    filemanager.$data.folders.push(folderName);
+                    this.folders.push(folderName);
 
 
                 }else{
@@ -235,13 +235,13 @@ export default defineComponent({
 
             console.log("Uploading ...");
 
-			var dirPath = filemanager.$data.currentDirectory;
+			var dirPath = this.currentDirectory;
 
             var fileSelect = $('#input-2');
             var files = fileSelect[0].files;
 
             var formData = new FormData();
-            formData.append('_token',filemanager.$data._csrfToken);
+            formData.append('_token',this._csrfToken);
             formData.append('dir_path',dirPath);
 
             for (var i = 0; i < files.length; i++) {
@@ -269,7 +269,7 @@ export default defineComponent({
 
                           for (var i = 0; i < data.uploadedFileNames.length; i++) {
                                 console.log(filemanager.basename(data.uploadedFileNames[i]));
-                                filemanager.$data.files.push(filemanager.basename(data.uploadedFileNames[i])+'.'+filemanager.getFileExtension(data.uploadedFileNames[i]));
+                                this.files.push(filemanager.basename(data.uploadedFileNames[i])+'.'+filemanager.getFileExtension(data.uploadedFileNames[i]));
                           }
                     } else {
                         console.log("Error" +data);
@@ -297,7 +297,7 @@ export default defineComponent({
         },
         renameFile: function(event){
 
-            file = filemanager.$data.currentDirectory+'/'+$(event.target).data('old_name');
+            file = this.currentDirectory+'/'+$(event.target).data('old_name');
             console.log(file);
 
     		$.ajax({
@@ -305,13 +305,13 @@ export default defineComponent({
                 url: event.target.action,
                 contentType: "application/json",
                 data: JSON.stringify({ 
-                    _token: filemanager.$data._csrfToken, 
-                    old_file: filemanager.$data.currentDirectory+'/'+ $('[name="old_name"]').val(),
-                    new_file: filemanager.$data.currentDirectory+'/'+$('[name="new_name"]').val()
+                    _token: this._csrfToken, 
+                    old_file: this.currentDirectory+'/'+ $('[name="old_name"]').val(),
+                    new_file: this.currentDirectory+'/'+$('[name="new_name"]').val()
                 }),
                 success: function( data ) {
                     if(typeof data.success !== 'undefined'){
-                        filemanager.open(filemanager.$data.currentDirectory);
+                        filemanager.open(this.currentDirectory);
     				    $('#rename_sample').modal('hide');
                     }else{
                         console.log(data);
@@ -324,25 +324,25 @@ export default defineComponent({
     	deleteFile: function(event){
 
 
-    		file = filemanager.$data.currentDirectory+'/'+$(event.target).data('file');
+    		file = this.currentDirectory+'/'+$(event.target).data('file');
 
 
     		$.get('admin/file-manager/destroy',
     		{ 
-    			_token: filemanager.$data._csrfToken, 
+    			_token: this._csrfToken, 
     			file: file
     		},
     		function( data ) {
     			if(typeof data.success !== 'undefined'){
 
-                    var index = filemanager.$data.files.indexOf($(event.target).data('file'));
+                    var index = this.files.indexOf($(event.target).data('file'));
                     if (index > -1) {
-                      filemanager.$data.files.splice(index, 1);
+                      this.files.splice(index, 1);
                     }
 
-                    index = filemanager.$data.folders.indexOf($(event.target).data('file'));
+                    index = this.folders.indexOf($(event.target).data('file'));
                     if (index > -1) {
-                      filemanager.$data.folders.splice(index, 1);
+                      this.folders.splice(index, 1);
                     }
 
 
@@ -389,7 +389,7 @@ export default defineComponent({
             return fileName.substr(fileName.lastIndexOf('.') + 1);
         },
         isKnownExtension: function(fileName){
-            return $.inArray( this.getFileExtension(fileName).toLowerCase() , this.$data.knownFileExtensions ) >= 0;
+            return $.inArray( this.getFileExtension(fileName).toLowerCase() , this.knownFileExtensions ) >= 0;
         }
     }
 

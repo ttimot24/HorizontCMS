@@ -14,6 +14,8 @@
 						  <label for='usr'>{{username}}</label>
 						</div>
 
+						<input type="hidden" v-model="userId" >
+
 		    			<div class='form-group'>
 						  <label for='pwd'>Password:</label>
 						  	<div class='input-group'>
@@ -42,12 +44,12 @@
 		name: 'lock-screen',
 		props: {
 			csrf: String,
-			userId: Number,
 			username: String,
 			image: String,
 		},
 		data: function() {
 			return {
+				userId: null,
 				pwd: null,
 				modal: null
 			}
@@ -74,6 +76,7 @@
 
 				axios.post('/api/v1/lock-up',
 					{
+						id: this.userId,
 						password: this.pwd
 					}
 				).then((response) => {

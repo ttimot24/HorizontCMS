@@ -80,7 +80,7 @@ Route::post('lock-up',function(Request $request){
 
     $user = \App\Model\User::find($request->input('id'));
     
-    if ($user->isActive() && \Hash::check($request->input('password'), $user->password)) {
+    if (isset($user) && $user->isActive() && \Hash::check($request->input('password'), $user->password)) {
         return response()->json(TRUE);
     }
 

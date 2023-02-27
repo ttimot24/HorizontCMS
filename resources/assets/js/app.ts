@@ -17,6 +17,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 
 import LockScreen from './components/LockScreen.vue';
+import FileManager from './components/FileManager.vue';
 
 Vue.config.devtools = true;
 Vue.use(VueResource);
@@ -41,7 +42,8 @@ var app = new Vue({
 
     },
     components: {
-        LockScreen
+        LockScreen,
+        FileManager
     },
     created: function(){
         console.log("HorizontCMS: VueJS started");
