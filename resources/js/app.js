@@ -5058,17 +5058,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_vue_composition_api__WEBPACK_IMPORTED_MODULE_3__.defineComponent)({
-  mounted: function mounted() {
-    console.log("VueJS: FileManager started");
-    this.open(jquery__WEBPACK_IMPORTED_MODULE_0__(this.$el).data('start'), false);
-    console.log('Directory: ' + this.currentDirectory);
-  },
   name: 'FileManager',
+  mounted: function mounted() {
+    var vm = this;
+    console.log("VueJS: FileManager started");
+    vm.open(vm.currentDirectory, false);
+    console.log('Directory: ' + vm.currentDirectory);
+  },
   data: function data() {
     return {
       _csrfToken: jquery__WEBPACK_IMPORTED_MODULE_0__('[name="_token"]').val(),
+      mode: 'embed',
       previousDirectory: null,
-      currentDirectory: 'storage',
+      currentDirectory: '',
+      drivers: [],
       folders: [],
       files: [],
       knownFileExtensions: ['jpg', 'png', 'jpeg'],
@@ -5079,21 +5082,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     filter: function filter(_filter) {
+      var vm = this;
       if (_filter != null && _filter != "") {
-        this.folders = this.folders.filter(function (folder) {
+        vm.folders = vm.folders.filter(function (folder) {
           return folder.includes(_filter);
         });
-        this.files = this.files.filter(function (folder) {
+        vm.files = vm.files.filter(function (folder) {
           return folder.includes(_filter);
         });
       } else {
-        this.open(this.currentDirectory, false);
+        vm.open(vm.currentDirectory, false);
       }
     }
   },
   computed: {
     breadcrumb: function breadcrumb() {
-      var here = this.currentDirectory.split('/');
+      var vm = this;
+      var here = vm.currentDirectory.split('/');
       var parts = [];
       for (var i = 0; i < here.length; i++) {
         var part = here[i];
@@ -5109,16 +5114,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     select: function select(file) {
-      this.selected = event.currentTarget.id;
+      var vm = this;
+      vm.selected = (event === null || event === void 0 ? void 0 : event.currentTarget).id;
       jquery__WEBPACK_IMPORTED_MODULE_0__(".file").removeClass('selected');
       jquery__WEBPACK_IMPORTED_MODULE_0__(".folder").removeClass('selected');
-      jquery__WEBPACK_IMPORTED_MODULE_0__(event.currentTarget).addClass('selected');
-      console.log('Selected file: ' + this.selected);
+      jquery__WEBPACK_IMPORTED_MODULE_0__(event === null || event === void 0 ? void 0 : event.currentTarget).addClass('selected');
+      console.log('Selected file: ' + vm.selected);
     },
     open: function open(folder) {
       var useCurrent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var vm = this;
       if (useCurrent) {
-        var folderToOpen = this.currentDirectory + '/' + folder;
+        var folderToOpen = vm.currentDirectory + '/' + folder;
       } else {
         var folderToOpen = folder;
       }
@@ -5129,19 +5136,19 @@ __webpack_require__.r(__webpack_exports__);
           path: folderToOpen
         },
         success: function success(data) {
-          this.previousDirectory = this.currentDirectory;
-          this.currentDirectory = data.current_dir;
-          this.folders = [];
-          this.files = [];
+          vm.previousDirectory = vm.currentDirectory;
+          vm.currentDirectory = data.current_dir;
+          vm.folders = [];
+          vm.files = [];
           console.log(data);
           if (typeof data.dirs !== 'undefined' && data.dirs.length > 0) {
             data.dirs.forEach(function (each) {
-              this.folders.push(each);
+              vm.folders.push(each);
             });
           }
           if (typeof data.files !== 'undefined' && data.files.length > 0) {
             data.files.forEach(function (each) {
-              this.files.push(each);
+              vm.files.push(each);
             });
           }
           jquery__WEBPACK_IMPORTED_MODULE_0__('.fa-refresh').removeClass('fa-spin');
@@ -5154,10 +5161,11 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     newFolder: function newFolder(event) {
-      var dirPath = this.currentDirectory;
+      var vm = this;
+      var dirPath = vm.currentDirectory;
       var folderName = jquery__WEBPACK_IMPORTED_MODULE_0__('[name="new_folder_name"]').val();
       jquery__WEBPACK_IMPORTED_MODULE_0__.post(event.target.action, {
-        _token: this._csrfToken,
+        _token: vm._csrfToken,
         dir_path: dirPath,
         new_folder_name: folderName
       }, function (data) {
@@ -5165,7 +5173,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log("Dir created: " + dirPath + '/' + folderName);
           jquery__WEBPACK_IMPORTED_MODULE_0__('#new_folder').modal('hide');
           jquery__WEBPACK_IMPORTED_MODULE_0__('[name="new_folder_name"]').val("");
-          this.folders.push(folderName);
+          vm.folders.push(folderName);
         } else {
           console.log("Error:");
           console.log(data);
@@ -5173,12 +5181,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     upload: function upload(event) {
+      var vm = this;
       console.log("Uploading ...");
-      var dirPath = this.currentDirectory;
+      var dirPath = vm.currentDirectory;
       var fileSelect = jquery__WEBPACK_IMPORTED_MODULE_0__('#input-2');
       var files = fileSelect[0].files;
       var formData = new FormData();
-      formData.append('_token', this._csrfToken);
+      formData.append('_token', vm._csrfToken);
       formData.append('dir_path', dirPath);
       for (var i = 0; i < files.length; i++) {
         var file = files[i];
@@ -5200,8 +5209,8 @@ __webpack_require__.r(__webpack_exports__);
             fileSelect.val("");
             fileSelect.fileinput("clear");
             for (var i = 0; i < data.uploadedFileNames.length; i++) {
-              console.log(filemanager.basename(data.uploadedFileNames[i]));
-              this.files.push(filemanager.basename(data.uploadedFileNames[i]) + '.' + filemanager.getFileExtension(data.uploadedFileNames[i]));
+              console.log(vm.basename(data.uploadedFileNames[i]));
+              vm.files.push(vm.basename(data.uploadedFileNames[i]) + '.' + vm.getFileExtension(data.uploadedFileNames[i]));
             }
           } else {
             console.log("Error" + data);
@@ -5213,37 +5222,40 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     basename: function basename(url) {
-      return (url = /(([^\/\\\.#\? ]+)(\.\w+)*)([?#].+)?$/.exec(url)) != null ? url[2] : '';
+      return /(([^\/\\\.#\? ]+)(\.\w+)*)([?#].+)?$/.exec(url) != null ? url[2] : '';
     },
     deleteModal: function deleteModal(file) {
+      var vm = this;
       var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#delete_sample');
       jquery__WEBPACK_IMPORTED_MODULE_0__(jquery__WEBPACK_IMPORTED_MODULE_0__(jquery__WEBPACK_IMPORTED_MODULE_0__(modal.find('div.modal-body')).find('div')).find('b')).html(function (event, html) {
-        return filemanager.basename(file);
+        return vm.basename(file);
       });
       modal.find('a').data('file', file);
       modal.modal('toggle');
     },
     renameModal: function renameModal(file) {
-      this.select(file);
+      var vm = this;
+      vm.select(file);
       var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#rename_sample');
       jquery__WEBPACK_IMPORTED_MODULE_0__("#selected").val(file);
       modal.modal('toggle');
     },
     renameFile: function renameFile(event) {
-      file = this.currentDirectory + '/' + jquery__WEBPACK_IMPORTED_MODULE_0__(event.target).data('old_name');
+      var vm = this;
+      var file = vm.currentDirectory + '/' + jquery__WEBPACK_IMPORTED_MODULE_0__(event.target).data('old_name');
       console.log(file);
       jquery__WEBPACK_IMPORTED_MODULE_0__.ajax({
         type: "PUT",
         url: event.target.action,
         contentType: "application/json",
         data: JSON.stringify({
-          _token: this._csrfToken,
-          old_file: this.currentDirectory + '/' + jquery__WEBPACK_IMPORTED_MODULE_0__('[name="old_name"]').val(),
-          new_file: this.currentDirectory + '/' + jquery__WEBPACK_IMPORTED_MODULE_0__('[name="new_name"]').val()
+          _token: vm._csrfToken,
+          old_file: vm.currentDirectory + '/' + jquery__WEBPACK_IMPORTED_MODULE_0__('[name="old_name"]').val(),
+          new_file: vm.currentDirectory + '/' + jquery__WEBPACK_IMPORTED_MODULE_0__('[name="new_name"]').val()
         }),
         success: function success(data) {
           if (typeof data.success !== 'undefined') {
-            filemanager.open(this.currentDirectory);
+            vm.open(vm.currentDirectory);
             jquery__WEBPACK_IMPORTED_MODULE_0__('#rename_sample').modal('hide');
           } else {
             console.log(data);
@@ -5252,19 +5264,20 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteFile: function deleteFile(event) {
-      file = this.currentDirectory + '/' + jquery__WEBPACK_IMPORTED_MODULE_0__(event.target).data('file');
+      var vm = this;
+      var file = vm.currentDirectory + '/' + jquery__WEBPACK_IMPORTED_MODULE_0__(event.target).data('file');
       jquery__WEBPACK_IMPORTED_MODULE_0__.get('admin/file-manager/destroy', {
-        _token: this._csrfToken,
+        _token: vm._csrfToken,
         file: file
       }, function (data) {
         if (typeof data.success !== 'undefined') {
-          var index = this.files.indexOf(jquery__WEBPACK_IMPORTED_MODULE_0__(event.target).data('file'));
+          var index = vm.files.indexOf(jquery__WEBPACK_IMPORTED_MODULE_0__(event.target).data('file'));
           if (index > -1) {
-            this.files.splice(index, 1);
+            vm.files.splice(index, 1);
           }
-          index = this.folders.indexOf(jquery__WEBPACK_IMPORTED_MODULE_0__(event.target).data('file'));
+          index = vm.folders.indexOf(jquery__WEBPACK_IMPORTED_MODULE_0__(event.target).data('file'));
           if (index > -1) {
-            this.folders.splice(index, 1);
+            vm.folders.splice(index, 1);
           }
           jquery__WEBPACK_IMPORTED_MODULE_0__('#delete_sample').modal('hide');
         } else {
@@ -5296,8 +5309,6 @@ __webpack_require__.r(__webpack_exports__);
         window.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl, '');
         window.close();
       } catch (e) {
-        console.log(funcNum);
-        console.log(fileUrl);
         console.log(window.opener.CKEDITOR);
         console.log(e);
       }
@@ -5306,7 +5317,8 @@ __webpack_require__.r(__webpack_exports__);
       return fileName.substr(fileName.lastIndexOf('.') + 1);
     },
     isKnownExtension: function isKnownExtension(fileName) {
-      return jquery__WEBPACK_IMPORTED_MODULE_0__.inArray(this.getFileExtension(fileName).toLowerCase(), this.knownFileExtensions) >= 0;
+      var vm = this;
+      return jquery__WEBPACK_IMPORTED_MODULE_0__.inArray(vm.getFileExtension(fileName).toLowerCase(), vm.knownFileExtensions) >= 0;
     }
   }
 }));
@@ -5404,12 +5416,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      editorUrl: 'https://cdn.ckeditor.com/4.20.2/full-all/ckeditor.js',
-      config: {
+      editorConfig: {
+        language: 'en',
         skin: 'moono-lisa',
         filebrowserUploadMethod: 'form',
         removeButtons: 'NewPage,Save,Font,FontSize,Styles,Flash,Print,Language,Templates,PageBreak',
-        height: 500
+        height: 500,
+        filebrowserBrowseUrl: 'admin/file-manager/index?path=images/pages&mode=embed',
+        filebrowserUploadUrl: 'admin/file-manager/upload?module=pages'
       }
     };
   }
@@ -28679,265 +28693,334 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "container" }, [
-    _c("section", { staticClass: "row" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-8 text-end mt-4" }, [
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            { staticClass: "col-md-4 offset-md-4 col-sm-7 col-xs-7 text-end" },
-            [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filter,
-                    expression: "filter",
+  return _c(
+    "section",
+    { staticClass: "container", attrs: { id: "filemanager" } },
+    [
+      _c("section", { staticClass: "row" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-8 text-end mt-4" }, [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              {
+                staticClass: "col-md-4 offset-md-4 col-sm-7 col-xs-7 text-end",
+              },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.filter,
+                      expression: "filter",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "filter", placeholder: "Filter" },
+                  domProps: { value: _vm.filter },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.filter = $event.target.value
+                    },
                   },
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", id: "filter", placeholder: "Filter" },
-                domProps: { value: _vm.filter },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.filter = $event.target.value
-                  },
-                },
-              }),
-            ]
-          ),
-          _vm._v(" "),
-          _vm._m(1),
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _vm._m(1),
+          ]),
         ]),
       ]),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _vm._m(2),
       _vm._v(" "),
-      _c("div", { staticClass: "panel panel-default col-10 bg-dark" }, [
-        _c("div", { staticClass: "panel-body" }, [
-          _c("div", { staticClass: "row p-0 m-0" }, [
-            _c("div", { staticClass: "col-md-10 m-0 p-0" }, [
-              _c("nav", { attrs: { "aria-label": "breadcrumb p-0 m-0" } }, [
-                _c(
-                  "ol",
-                  { staticClass: "breadcrumb bg-dark p-0 pt-3 m-0" },
-                  [
-                    _c("li", { staticClass: "breadcrumb-item" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "storage" },
-                          on: {
-                            click: function ($event) {
-                              $event.preventDefault()
-                              return _vm.open("", false)
-                            },
-                          },
-                        },
-                        [_vm._v("storage")]
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.breadcrumb, function (bcrumb) {
-                      return _c("li", { staticClass: "breadcrumb-item" }, [
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: bcrumb.link },
-                            on: {
-                              click: function ($event) {
-                                $event.preventDefault()
-                                return _vm.open(bcrumb.link, false)
-                              },
-                            },
-                          },
-                          [_vm._v("@" + _vm._s(bcrumb.text))]
-                        ),
-                      ])
-                    }),
-                  ],
-                  2
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-2 text-end pt-3 pr-3" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col text-white " }, [
-                  _vm._v(
-                    "All: @" + _vm._s(_vm.folders.length + _vm.files.length)
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col" }, [
-                  _c(
-                    "a",
-                    {
-                      attrs: { href: "a" },
-                      on: {
-                        click: function ($event) {
-                          $event.preventDefault()
-                          return _vm.open(_vm.currentDirectory, false)
-                        },
-                      },
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-refresh",
-                        staticStyle: { "font-size": "22px" },
-                        attrs: {
-                          onclick: "$(this).addClass('fa-spin');",
-                          "aria-hidden": "true",
-                        },
-                      }),
-                    ]
-                  ),
-                ]),
-              ]),
-            ]),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "panel panel-default col-2 bg-dark p-3" }, [
+          _c("h4", { staticClass: "p-2 bg-dark text-white" }, [
+            _vm._v("Drivers"),
           ]),
           _vm._v(" "),
           _c(
-            "div",
-            { staticClass: "col-md-12 py-3 pe-5", attrs: { id: "workspace" } },
-            [
-              _c(
-                "div",
-                { staticClass: "row text-white" },
+            "ul",
+            { staticClass: "list-group" },
+            _vm._l(_vm.drivers, function (driver) {
+              return _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function ($event) {
+                      $event.preventDefault()
+                      return _vm.open("", false)
+                    },
+                  },
+                },
                 [
-                  _vm._l(_vm.folders, function (folder) {
-                    return _c(
-                      "div",
-                      {
-                        staticClass:
-                          "folder col-md-2 col-sm-4 col-xs-4 text-center text-white",
-                        attrs: { id: folder },
-                        on: {
-                          click: function ($event) {
-                            return _vm.select(folder)
-                          },
-                          dblclick: function ($event) {
-                            return _vm.open(folder)
-                          },
-                        },
-                      },
-                      [
-                        _c("div", { staticClass: "file-nav text-end" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "me-1",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.renameModal(folder)
-                                },
-                              },
-                            },
-                            [_c("i", { staticClass: "fa fa-pencil" })]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "me-1",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.deleteModal(folder)
-                                },
-                              },
-                            },
-                            [_c("i", { staticClass: "fa fa-trash" })]
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(3, true),
-                        _vm._v(" "),
-                        _c("b", [_vm._v("@" + _vm._s(folder))]),
-                      ]
-                    )
-                  }),
-                  _vm._v(" "),
-                  _vm._v(
-                    "=='embed') v-on:click=\"returnFileUrl('storage/'+currentDirectory+'/'+file);\" @else v-on:click=\"select(file)\" @endif >\n                  "
+                  _c(
+                    "li",
+                    { staticClass: "list-group-item bg-dark text-white" },
+                    [_vm._v(_vm._s(driver))]
                   ),
-                  _c("div", { staticClass: "file-nav text-end" }, [
+                ]
+              )
+            }),
+            0
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel panel-default col-10 bg-dark" }, [
+          _c("div", { staticClass: "panel-body" }, [
+            _c("div", { staticClass: "row p-0 m-0" }, [
+              _c("div", { staticClass: "col-md-10 m-0 p-0" }, [
+                _c("nav", { attrs: { "aria-label": "breadcrumb p-0 m-0" } }, [
+                  _c(
+                    "ol",
+                    { staticClass: "breadcrumb bg-dark p-0 pt-3 m-0" },
+                    [
+                      _c("li", { staticClass: "breadcrumb-item" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "storage" },
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.open("", false)
+                              },
+                            },
+                          },
+                          [_vm._v("storage")]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.breadcrumb, function (bcrumb) {
+                        return _c("li", { staticClass: "breadcrumb-item" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: bcrumb.link },
+                              on: {
+                                click: function ($event) {
+                                  $event.preventDefault()
+                                  return _vm.open(bcrumb.link, false)
+                                },
+                              },
+                            },
+                            [_vm._v(_vm._s(bcrumb.text))]
+                          ),
+                        ])
+                      }),
+                    ],
+                    2
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-2 text-end pt-3 pr-3" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col text-white " }, [
+                    _vm._v(
+                      "All: " + _vm._s(_vm.folders.length + _vm.files.length)
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col" }, [
                     _c(
                       "a",
                       {
-                        staticClass: "me-1",
+                        attrs: { href: "a" },
                         on: {
                           click: function ($event) {
-                            return _vm.renameModal(_vm.file)
+                            $event.preventDefault()
+                            return _vm.open(_vm.currentDirectory, false)
                           },
                         },
                       },
                       [
                         _c("i", {
-                          staticClass: "fa fa-pencil",
-                          attrs: { "aria-hidden": "true" },
+                          staticClass: "fa fa-refresh",
+                          staticStyle: { "font-size": "22px" },
+                          attrs: {
+                            onclick: "$(vm).addClass('fa-spin');",
+                            "aria-hidden": "true",
+                          },
                         }),
                       ]
                     ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "me-1",
-                        attrs: {
-                          href:
-                            "storage/" + _vm.currentDirectory + "/" + _vm.file,
-                        },
-                      },
-                      [_c("i", { staticClass: "fa fa-download" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "me-1",
-                        on: {
-                          click: function ($event) {
-                            return _vm.deleteModal(_vm.file)
+                  ]),
+                ]),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "col-md-12 py-3 pe-5",
+                attrs: { id: "workspace" },
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "row text-white" },
+                  [
+                    _vm._l(_vm.folders, function (folder) {
+                      return _c(
+                        "div",
+                        {
+                          staticClass:
+                            "folder col-md-2 col-sm-4 col-xs-4 text-center text-white",
+                          attrs: { id: folder },
+                          on: {
+                            click: function ($event) {
+                              return _vm.select(folder)
+                            },
+                            dblclick: function ($event) {
+                              return _vm.open(folder)
+                            },
                           },
                         },
-                      },
-                      [_c("i", { staticClass: "fa fa-trash" })]
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _vm.isKnownExtension(_vm.file)
-                    ? _c("img", {
-                        staticClass: "w-100 mb-3",
-                        attrs: {
-                          src:
-                            "storage/" + _vm.currentDirectory + "/" + _vm.file,
+                        [
+                          _c("div", { staticClass: "file-nav text-end" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "me-1",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.renameModal(folder)
+                                  },
+                                },
+                              },
+                              [_c("i", { staticClass: "fa fa-pencil" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "me-1",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.deleteModal(folder)
+                                  },
+                                },
+                              },
+                              [_c("i", { staticClass: "fa fa-trash" })]
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(2, true),
+                          _vm._v(" "),
+                          _c("b", [_vm._v(_vm._s(folder))]),
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _vm._l(_vm.files, function (file) {
+                      return _c(
+                        "div",
+                        {
+                          staticClass:
+                            "file col-md-2 col-sm-4 col-xs-4 text-center",
+                          attrs: { id: file },
+                          on: {
+                            click: function ($event) {
+                              _vm.mode == "embed"
+                                ? _vm.returnFileUrl(
+                                    "storage/" +
+                                      _vm.currentDirectory +
+                                      "/" +
+                                      file
+                                  )
+                                : _vm.select(file)
+                            },
+                          },
                         },
-                      })
-                    : _c("img", {
-                        staticClass: "w-100 mb-3",
-                        attrs: { src: "resources/images/icons/file.png" },
-                      }),
-                  _vm._v(" "),
-                  _c("b", [_vm._v("@" + _vm._s(_vm.file))]),
-                ],
-                2
-              ),
-            ]
-          ),
+                        [
+                          _c("div", { staticClass: "file-nav text-end" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "me-1",
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.renameModal(file)
+                                  },
+                                },
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-pencil",
+                                  attrs: { "aria-hidden": "true" },
+                                }),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "me-1",
+                                attrs: {
+                                  href:
+                                    "storage/" +
+                                    _vm.currentDirectory +
+                                    "/" +
+                                    file,
+                                },
+                              },
+                              [_c("i", { staticClass: "fa fa-download" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "me-1",
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.deleteModal(file)
+                                  },
+                                },
+                              },
+                              [_c("i", { staticClass: "fa fa-trash" })]
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _vm.isKnownExtension(file)
+                            ? _c("img", {
+                                staticClass: "w-100 mb-3",
+                                attrs: {
+                                  src:
+                                    "storage/" +
+                                    _vm.currentDirectory +
+                                    "/" +
+                                    file,
+                                },
+                              })
+                            : _c("img", {
+                                staticClass: "w-100 mb-3",
+                                attrs: {
+                                  src: "resources/images/icons/file.png",
+                                },
+                              }),
+                          _vm._v(" "),
+                          _c("b", [_vm._v(_vm._s(file))]),
+                        ]
+                      )
+                    }),
+                  ],
+                  2
+                ),
+              ]
+            ),
+          ]),
         ]),
       ]),
-    ]),
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function () {
@@ -28990,16 +29073,6 @@ var staticRenderFns = [
           _vm._v(" Create Folder"),
         ]
       ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel panel-default col-2 bg-dark p-3" }, [
-      _c("h4", { staticClass: "p-2 bg-dark text-white" }, [_vm._v("Drivers")]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "list-group" }),
     ])
   },
   function () {
@@ -29210,8 +29283,7 @@ var render = function () {
         attrs: {
           "tag-name": "textarea",
           name: _vm.name,
-          config: _vm.config,
-          "editor-url": _vm.editorUrl,
+          config: _vm.editorConfig,
         },
         model: {
           value: _vm.data,

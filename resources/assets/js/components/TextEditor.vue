@@ -1,7 +1,7 @@
 <template>
     <div id="text-editor">
         <textarea style="display: none;" v-model="data" :name="name" ></textarea>
-        <ckeditor v-model="data" :tag-name="'textarea'" :name="name" :config="config" :editor-url="editorUrl"></ckeditor>
+        <ckeditor v-model="data" :tag-name="'textarea'" :name="name" :config="editorConfig"></ckeditor>
     </div>
 </template>
 
@@ -17,12 +17,14 @@
         },
         data: function() {
             return {
-                editorUrl: 'https://cdn.ckeditor.com/4.20.2/full-all/ckeditor.js',
-                config: {
+                editorConfig: {
+                    language: 'en',
                     skin: 'moono-lisa',
                     filebrowserUploadMethod: 'form',
                     removeButtons: 'NewPage,Save,Font,FontSize,Styles,Flash,Print,Language,Templates,PageBreak',
                     height: 500,
+                    filebrowserBrowseUrl: 'admin/file-manager/index?path=images/pages&mode=embed',
+                    filebrowserUploadUrl: 'admin/file-manager/upload?module=pages'
                 }
             };
         }

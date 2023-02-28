@@ -1,8 +1,6 @@
-<div id="filemanager" data-start="{{$current_dir}}" >
+<div>
 
-@csrf
-
-  <file-manager></file-manager>
+  <file-manager currentDirectory="{{$current_dir}}"></file-manager>
 
     @include('confirm_delete', [
           "route" => route('filemanager.destroy',['filemanager' => 'sample']),

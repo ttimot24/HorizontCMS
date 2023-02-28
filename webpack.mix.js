@@ -27,7 +27,7 @@ mix.webpackConfig(webpack => {
 
 mix.ts('resources/assets/js/app.ts', 'js')
    .js('resources/assets/js/filemanager.js', 'js')
-   .ts('resources/assets/js/pages.script.ts', 'js')
+   .ts('resources/assets/js/pages.ts', 'js')
    .js('resources/assets/js/dragndrop.js', 'js')
    .vue()
    .sass('resources/assets/sass/horizontcms-next.scss', 'css');

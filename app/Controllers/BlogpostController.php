@@ -43,8 +43,6 @@ class BlogpostController extends Controller {
      */
     public function create(){
 
-        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
-       
         $this->view->title(trans('blogpost.new_blogpost'));
         return $this->view->render('blogposts/form',[
                                                         'categories' => \App\Model\BlogpostCategory::all(),
@@ -99,8 +97,6 @@ class BlogpostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(int $id){
-
-        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
 
         $this->view->title(trans('blogpost.edit_blogpost'));
 

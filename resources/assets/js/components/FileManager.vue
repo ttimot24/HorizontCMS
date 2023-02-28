@@ -1,5 +1,5 @@
 <template>
-<section class='container'>
+<section id="filemanager" class='container'>
 
     <section  class='row'>
   
@@ -27,9 +27,7 @@
       <div class='panel panel-default col-2 bg-dark p-3'>
           <h4 class="p-2 bg-dark text-white">Drivers</h4>
           <ul class="list-group">
-          <!--  @foreach(config('filesystems.disks') as $key => $value)
-                  <a href="#" v-on:click.prevent="open('{{ isset($value['root'])? basename($value['root']) : ''}}',false);"><li class="list-group-item bg-dark text-white">{{$key}}</li></a>
-            @endforeach -->
+                <a href="#" v-for="(driver) in drivers" v-on:click.prevent="open('', false);"><li class="list-group-item bg-dark text-white">{{driver}}</li></a>
           </ul>
       </div>
   
@@ -40,15 +38,15 @@
               <nav aria-label="breadcrumb p-0 m-0">
                 <ol class="breadcrumb bg-dark p-0 pt-3 m-0">
                   <li class="breadcrumb-item"><a href="storage"  v-on:click.prevent="open('',false);">storage</a></li>
-                  <li class="breadcrumb-item" v-for="(bcrumb) in breadcrumb"><a :href="bcrumb.link" v-on:click.prevent="open(bcrumb.link,false);" >@{{bcrumb.text}}</a></li>
+                  <li class="breadcrumb-item" v-for="(bcrumb) in breadcrumb"><a :href="bcrumb.link" v-on:click.prevent="open(bcrumb.link,false);" >{{bcrumb.text}}</a></li>
                 </ol>
               </nav>  
               </div>
               <div class="col-md-2 text-end pt-3 pr-3">
                 <div class="row">
-                  <div class="col text-white ">All: @{{folders.length + files.length}}</div>
+                  <div class="col text-white ">All: {{folders.length + files.length}}</div>
                   <div class="col">
-                    <a href="a" v-on:click.prevent="open(currentDirectory,false);"><i class="fa fa-refresh" onclick="$(this).addClass('fa-spin');" aria-hidden="true" style="font-size: 22px;"></i></a>
+                    <a href="a" v-on:click.prevent="open(currentDirectory,false);"><i class="fa fa-refresh" onclick="$(vm).addClass('fa-spin');" aria-hidden="true" style="font-size: 22px;"></i></a>
                   </div>
                 </div>
               </div>
@@ -66,10 +64,10 @@
                   <div clas='row'>
                     <img style="width:7rem;" src='resources/images/icons/dir.png' >
                   </div>
-                  <b>@{{folder}}</b>
+                  <b>{{folder}}</b>
                 </div>
   
-                <div v-for="file in files" class='file col-md-2 col-sm-4 col-xs-4 text-center' :id="file"   @if($mode=='embed') v-on:click="returnFileUrl('storage/'+currentDirectory+'/'+file);" @else v-on:click="select(file)" @endif >
+                <div v-for="file in files" class='file col-md-2 col-sm-4 col-xs-4 text-center' :id="file"  v-on:click="mode=='embed'? returnFileUrl('storage/'+currentDirectory+'/'+file) : select(file)" >
                   <div class="file-nav text-end">
                     <a class="me-1" v-on:click="renameModal(file)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                     <a class="me-1" :href="'storage/'+currentDirectory+'/'+file"><i class="fa fa-download"></i></a>
@@ -77,7 +75,7 @@
                   </div>
                   <img class="w-100 mb-3"  v-if="isKnownExtension(file)" :src="'storage/'+currentDirectory+'/'+file" />
                   <img class="w-100 mb-3"  v-else src="resources/images/icons/file.png" />
-                  <b>@{{file}}</b>
+                  <b>{{file}}</b>
                 </div>
               </div>
   
@@ -98,17 +96,20 @@ import "bootstrap-fileinput";
 import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
-	mounted: function(){
-    	console.log("VueJS: FileManager started");
-        this.open($(this.$el).data('start'),false);
-        console.log('Directory: '+this.currentDirectory);
-    },
     name: 'FileManager',
+    mounted: function(){
+        var vm = this;
+    	  console.log("VueJS: FileManager started");
+        vm.open(vm.currentDirectory,false);
+        console.log('Directory: '+vm.currentDirectory);
+    },
     data: function(){
         return {
             _csrfToken: $('[name="_token"]').val(),
+            mode: 'embed',
             previousDirectory: null,
-            currentDirectory: 'storage',
+            currentDirectory: '',
+            drivers: [],
             folders: [],
             files: [],
             knownFileExtensions: ['jpg','png','jpeg'],
@@ -119,17 +120,21 @@ export default defineComponent({
     },
     watch:{
         filter: function(filter){
+            var vm = this;
+
             if(filter != null && filter != ""){
-                this.folders = this.folders.filter(folder => folder.includes(filter));
-                this.files = this.files.filter(folder => folder.includes(filter));
+                vm.folders = vm.folders.filter((folder: string) => folder.includes(filter));
+                vm.files = vm.files.filter((folder: string) => folder.includes(filter));
             }else{
-                this.open(this.currentDirectory,false);
+                vm.open(vm.currentDirectory,false);
             }
         }
     },
     computed: {
         breadcrumb: function(){
-            var here = this.currentDirectory.split('/');
+            var vm = this;
+
+            var here = vm.currentDirectory.split('/');
 
             var parts = [];
 
@@ -144,17 +149,21 @@ export default defineComponent({
         }
     },
     methods:{
-        select: function(file) {
-            this.selected = event.currentTarget.id;
+        select: function(file: string) {
+            var vm = this;
+
+            vm.selected = (event?.currentTarget as any).id;
             $(".file").removeClass('selected');
             $(".folder").removeClass('selected');
-            $(event.currentTarget).addClass('selected');
-            console.log('Selected file: '+this.selected);
+            $((event?.currentTarget as any)).addClass('selected');
+            console.log('Selected file: '+vm.selected);
         },
-        open: function(folder, useCurrent = true){
+        open: function(folder: string, useCurrent = true){
+
+           var vm = this;
 
            if(useCurrent){
-              var folderToOpen = this.currentDirectory+'/'+folder;
+              var folderToOpen = vm.currentDirectory+'/'+folder;
            }else{
               var folderToOpen = folder;
            }
@@ -167,25 +176,25 @@ export default defineComponent({
                   },
                   success: function (data) {
 
-                    this.previousDirectory = this.currentDirectory;
-                    this.currentDirectory = data.current_dir;
-                    this.folders = [];
-                    this.files = [];
+                    vm.previousDirectory = vm.currentDirectory;
+                    vm.currentDirectory = data.current_dir;
+                    vm.folders = [];
+                    vm.files = [];
 
                      console.log(data); 
 
                      if(typeof data.dirs !== 'undefined' && data.dirs.length > 0){
 
-                         data.dirs.forEach(function(each){
-                            this.folders.push(each);
+                         data.dirs.forEach(function(each: string){
+                            vm.folders.push(each);
                          });
                      }
 
                     if(typeof data.files !== 'undefined' && data.files.length > 0){
 
                       
-                        data.files.forEach(function(each){
-                            this.files.push(each);
+                        data.files.forEach(function(each: string){
+                            vm.files.push(each);
                          });
 
                         }
@@ -199,15 +208,17 @@ export default defineComponent({
               });
 
         },
-    	newFolder: function(event){
+    	newFolder: function(event: any){
 
-    		var dirPath = this.currentDirectory;
+        var vm = this;
+
+    		var dirPath = vm.currentDirectory;
     		var folderName = $('[name="new_folder_name"]').val();
 
 
     		$.post(event.target.action,
     		{ 
-    			_token: this._csrfToken, 
+    			_token: vm._csrfToken, 
     			dir_path: dirPath,
     			new_folder_name: folderName
     		},
@@ -220,7 +231,7 @@ export default defineComponent({
     			  	$('[name="new_folder_name"]').val("");
 
 
-                    this.folders.push(folderName);
+                    vm.folders.push(folderName);
 
 
                 }else{
@@ -231,17 +242,19 @@ export default defineComponent({
 			);
 
     	},
-		upload: function(event){
+		upload: function(event: any){
 
-            console.log("Uploading ...");
+      var vm = this;
 
-			var dirPath = this.currentDirectory;
+      console.log("Uploading ...");
 
-            var fileSelect = $('#input-2');
+			var dirPath = vm.currentDirectory;
+
+            var fileSelect = ($('#input-2') as any);
             var files = fileSelect[0].files;
 
             var formData = new FormData();
-            formData.append('_token',this._csrfToken);
+            formData.append('_token',vm._csrfToken);
             formData.append('dir_path',dirPath);
 
             for (var i = 0; i < files.length; i++) {
@@ -268,8 +281,8 @@ export default defineComponent({
                           fileSelect.fileinput("clear");
 
                           for (var i = 0; i < data.uploadedFileNames.length; i++) {
-                                console.log(filemanager.basename(data.uploadedFileNames[i]));
-                                this.files.push(filemanager.basename(data.uploadedFileNames[i])+'.'+filemanager.getFileExtension(data.uploadedFileNames[i]));
+                                console.log(vm.basename(data.uploadedFileNames[i]));
+                                vm.files.push(vm.basename(data.uploadedFileNames[i])+'.'+vm.getFileExtension(data.uploadedFileNames[i]));
                           }
                     } else {
                         console.log("Error" +data);
@@ -280,24 +293,29 @@ export default defineComponent({
 		          }
 		      });
 		},
-		basename: function (url){
-		    return ((url=/(([^\/\\\.#\? ]+)(\.\w+)*)([?#].+)?$/.exec(url))!= null)? url[2]: '';
+		basename: function (url: string){
+		    return ((/(([^\/\\\.#\? ]+)(\.\w+)*)([?#].+)?$/.exec(url))!= null)? url[2]: '';
 		},
-        deleteModal: function(file){
+    deleteModal: function(file: string){
+            var vm = this;
+
             var modal = $('#delete_sample');
-            $($($(modal.find('div.modal-body')).find('div')).find('b')).html(function(event,html){ return filemanager.basename(file); });
+            $($($(modal.find('div.modal-body')).find('div')).find('b')).html(function(event,html){ return vm.basename(file); });
             modal.find('a').data('file',file);
             modal.modal('toggle');
         },
-        renameModal: function(file){
-            this.select(file);
+        renameModal: function(file: string){
+            var vm = this;
+
+            vm.select(file);
             var modal = $('#rename_sample');
             $("#selected").val(file);
             modal.modal('toggle');
         },
-        renameFile: function(event){
+        renameFile: function(event: any){
+            var vm = this;
 
-            file = this.currentDirectory+'/'+$(event.target).data('old_name');
+            var file = vm.currentDirectory+'/'+$(event.target).data('old_name');
             console.log(file);
 
     		$.ajax({
@@ -305,13 +323,13 @@ export default defineComponent({
                 url: event.target.action,
                 contentType: "application/json",
                 data: JSON.stringify({ 
-                    _token: this._csrfToken, 
-                    old_file: this.currentDirectory+'/'+ $('[name="old_name"]').val(),
-                    new_file: this.currentDirectory+'/'+$('[name="new_name"]').val()
+                    _token: vm._csrfToken, 
+                    old_file: vm.currentDirectory+'/'+ $('[name="old_name"]').val(),
+                    new_file: vm.currentDirectory+'/'+$('[name="new_name"]').val()
                 }),
                 success: function( data ) {
                     if(typeof data.success !== 'undefined'){
-                        filemanager.open(this.currentDirectory);
+                      vm.open(vm.currentDirectory);
     				    $('#rename_sample').modal('hide');
                     }else{
                         console.log(data);
@@ -321,75 +339,76 @@ export default defineComponent({
             });
 
         },
-    	deleteFile: function(event){
+    	deleteFile: function(event: any){
 
+        var vm = this;
 
-    		file = this.currentDirectory+'/'+$(event.target).data('file');
+    		var file = vm.currentDirectory+'/'+$(event.target).data('file');
 
 
     		$.get('admin/file-manager/destroy',
     		{ 
-    			_token: this._csrfToken, 
+    			_token: vm._csrfToken, 
     			file: file
     		},
     		function( data ) {
     			if(typeof data.success !== 'undefined'){
 
-                    var index = this.files.indexOf($(event.target).data('file'));
+                    var index = vm.files.indexOf($(event.target).data('file'));
                     if (index > -1) {
-                      this.files.splice(index, 1);
+                      vm.files.splice(index, 1);
                     }
 
-                    index = this.folders.indexOf($(event.target).data('file'));
+                    index = vm.folders.indexOf($(event.target).data('file'));
                     if (index > -1) {
-                      this.folders.splice(index, 1);
+                      vm.folders.splice(index, 1);
                     }
 
 
-    				$('#delete_sample').modal('hide');
-    			}else{
-    				 console.log(data);
-    			}
-			}
-			);
+              $('#delete_sample').modal('hide');
+            } else {
+              console.log(data);
+            }
+        }
+        );
 
     	},
-        getUrlVar: function (location,vary){
+        getUrlVar: function (location:string, vary: any){
             var vars = [], hash;
             var hashes = location.slice(location.indexOf('?') + 1).split('&');
             for(var i = 0; i < hashes.length; i++)
             {
                 hash = hashes[i].split('=');
                 vars.push(hash[0]);
-                vars[hash[0]] = hash[1];
+                vars[(hash[0] as any)] = hash[1];
             }
             return vars[vary];
         },
-    	getUrlParam: function ( paramName ) {
+    	getUrlParam: function ( paramName: string ) {
             var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' );
             var match = window.location.search.match( reParam );
 
             return ( match && match.length > 1 ) ? match[1] : null;
         },
-        returnFileUrl: function (filepath) {
+        returnFileUrl: function (filepath: string) {
             try{
                 // Simulate user action of selecting a file to be returned to CKEditor.
-                var funcNum = 1;/*getUrlParam( 'CKEditorFuncNum' );*/
-                var fileUrl = filepath;
+                var funcNum: number = 1;/*getUrlParam( 'CKEditorFuncNum' );*/
+                var fileUrl: string = filepath;
                 window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl, '' );
                 window.close();
             } catch(e){
-                console.log(funcNum);
-                console.log(fileUrl);
                 console.log( window.opener.CKEDITOR)
                 console.log(e);
             }
         },
-        getFileExtension: function(fileName){
+        getFileExtension: function(fileName: string){
             return fileName.substr(fileName.lastIndexOf('.') + 1);
         },
-        isKnownExtension: function(fileName){
-            return $.inArray( this.getFileExtension(fileName).toLowerCase() , this.knownFileExtensions ) >= 0;
+        isKnownExtension: function(fileName: string){
+            var vm = this;
+
+            return $.inArray( vm.getFileExtension(fileName).toLowerCase() , vm.knownFileExtensions ) >= 0;
         }
     }
 

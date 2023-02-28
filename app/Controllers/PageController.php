@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
+use Illuminate\Http\Request;
 use App\Libs\Controller;
-
 use App\Model\Page;
 
 class PageController extends Controller{
@@ -46,16 +46,14 @@ class PageController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
+    public function create(Request $request){
 
-        
-        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
-        $this->view->js('resources/js/pages.script.js');
+        $this->view->js('resources/js/pages.js');
 
         $this->view->title(trans('page.new_page'));
         return $this->view->render('pages/form',[
                                                     'all_page' => Page::all(),
-                                                    'page_templates' => (new \App\Libs\Theme($this->request->settings['theme']))->templates(),
+                                                    'page_templates' => (new \App\Libs\Theme($request->settings['theme']))->templates(),
                                                     ]);
     }
 
@@ -65,21 +63,19 @@ class PageController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(){
+    public function store(Request $request){
 
-        if($this->request->isMethod('POST')){
-
-            $page = new Page($this->request->all());
-            $page->slug = str_slug($this->request->input('name'), "-");
-            $page->parent_id = $this->request->input('parent_select')==0? NULL : $this->request->input('parent_id');
+            $page = new Page($request->all());
+            $page->slug = str_slug($request->input('name'), "-");
+            $page->parent_id = $request->input('parent_select')==0? NULL : $request->input('parent_id');
             $page->queue = 99;
-            $page->page = clean($this->request->input('page'));
-            $page->author_id = $this->request->user()->id;
+            $page->page = clean($request->input('page'));
+            $page->author_id = $request->user()->id;
 
 
-            if ($this->request->hasFile('up_file')){
+            if ($request->hasFile('up_file')){
                  
-                 $img = $this->request->up_file->store($this->imagePath);
+                 $img = $request->up_file->store($this->imagePath);
 
                  $page->image = basename($img);
 
@@ -94,9 +90,6 @@ class PageController extends Controller{
             }else{
                 return $this->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-
-            
-        }
 
     }
 
@@ -118,19 +111,16 @@ class PageController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
+    public function edit(Request $request, $id){
 
-
-        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
-        $this->view->js('resources/js/pages.script.js');
-        $this->view->js('resources/js/controls.js');
+        $this->view->js('resources/js/pages.js');
 
         $this->view->title(trans('page.edit_page'));
 
         return $this->view->render('pages/form',[
                                                         'page' => Page::find($id),
                                                         'all_page' => Page::all(),
-                                                        'page_templates' => (new \App\Libs\Theme($this->request->settings['theme']))->templates(),
+                                                        'page_templates' => (new \App\Libs\Theme($request->settings['theme']))->templates(),
                                                     ]);
     }
 
@@ -141,22 +131,20 @@ class PageController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id){
+    public function update(Request $request, $id){
         
-        if($this->request->isMethod('PUT')){
-
             $page = Page::find($id);
-            $page->name = $this->request->input('name');
-            $page->slug = str_slug($this->request->input('name'), "-");
-            $page->url = $this->request->input('url');
-            $page->visibility = $this->request->input('visibility');
-            $page->parent_id = $this->request->input('parent_select')==0? NULL : $this->request->input('parent_id');
-            $page->page = clean($this->request->input('page'));
+            $page->name = $request->input('name');
+            $page->slug = str_slug($request->input('name'), "-");
+            $page->url = $request->input('url');
+            $page->visibility = $request->input('visibility');
+            $page->parent_id = $request->input('parent_select')==0? NULL : $request->input('parent_id');
+            $page->page = clean($request->input('page'));
 
 
-            if ($this->request->hasFile('up_file')){
+            if ($request->hasFile('up_file')){
                  
-                 $img = $this->request->up_file->store($this->imagePath);
+                 $img = $request->up_file->store($this->imagePath);
 
                  $page->image = basename($img);
 
@@ -171,9 +159,6 @@ class PageController extends Controller{
             }else{
                 return $this->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-
-            
-        }
 
     }
 
@@ -221,7 +206,7 @@ class PageController extends Controller{
                 $page->save();
             }
 
-        }catch(Exception $e){
+        } catch (\Exception $e){
             echo $e->getMessage();
         }
 
