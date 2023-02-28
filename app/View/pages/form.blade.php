@@ -83,17 +83,15 @@
         
         <div class='form-group pull-left col-xs-12 col-md-12' >
             <label for='text'>{{trans('page.page_content')}}</label>
-            <!-------------------------------------------------- $ TEXT EDITOR ------------------------------------------------------>
-            <textarea name='page' id='editor' rows="15" cols="80">{{ old('page', isset($page)? $page->page : '') }}</textarea>
-            <script>
 
-                CKEDITOR.replace( 'editor' );
-                CKEDITOR.config.language = '<?= Config::get('app.locale') ?>';
-                CKEDITOR.config.filebrowserBrowseUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/file-manager/index?path=images/pages&mode=embed') ?>';
-                CKEDITOR.config.filebrowserUploadUrl = '<?= url(Config::get('horizontcms.backend_prefix').'/file-manager/upload?module=pages') ?>';
-                CKEDITOR.config.customConfig = '<?= url(Config::get('app.url').'/resources/assets/ckeditor/config.js') ?>'; 
-            </script>
-            <!-------------------------------------------------------- $ TEXT EDITOR ------------------------------------------------------>
+              <text-editor 
+              :editorData="'{{ old('page', isset($page)? $page->page : '') }}'"
+              :editorConfig="{
+                language: '{{ config('app.locale') }} ?>',
+                filebrowserBrowseUrl: '{{ url(config('horizontcms.backend_prefix').'/file-manager/index?path=images/pages&mode=embed') }} ?>',
+                filebrowserUploadUrl: '{{ url(config('horizontcms.backend_prefix').'/file-manager/upload?module=pages') }}'
+              }"></text-editor>
+
         </div>
 
         <div class='form-group pull-left col-xs-12 col-md-8' >

@@ -3,6 +3,8 @@
  * include Vue and Vue Resource. This gives a great starting point for
  * building robust, powerful web applications using Vue and Laravel.
  */
+import * as $ from 'jquery';
+import 'jquery-ui-bundle';
  
  $(document).ready(function() {
 
@@ -36,7 +38,8 @@
     }
 
 
-  function ajaxGetSlug(){
+  
+    function ajaxGetSlug(){
 
     let text = $('#menu-title').val();
 

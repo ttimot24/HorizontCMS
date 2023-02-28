@@ -16,11 +16,16 @@ import "bootstrap-fileinput";
 import Vue from 'vue';
 import VueResource from 'vue-resource';
 
+import CKEditor from 'ckeditor4-vue';
+
 import LockScreen from './components/LockScreen.vue';
 import FileManager from './components/FileManager.vue';
+import TextEditor from './components/TextEditor.vue';
 
 Vue.config.devtools = true;
 Vue.use(VueResource);
+
+Vue.use(CKEditor);
 
 /*Vue.http.interceptors.push((request: Request, next) => {
     request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
@@ -43,6 +48,7 @@ var app = new Vue({
     },
     components: {
         LockScreen,
+        TextEditor,
         FileManager
     },
     created: function(){
