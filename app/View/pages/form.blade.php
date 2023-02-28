@@ -70,7 +70,7 @@
 
         <div class="col-md-4 col-sm-12">
 
-          @if(isset($page))
+          @if(isset($page) && $page->hasImage())
             <button type='button' class='btn btn-link mb-5 w-100' data-bs-toggle='modal' data-bs-target='#modal-xl-{{ $page->id }}'>
               <img src='{{ $page->getThumb() }}' class='img img-thumbnail w-100' >
             </button>
@@ -78,7 +78,7 @@
 
           <div class='form-group' >
             <label for='file'>{{trans('actions.upload_image')}}:</label>
-            <input name='up_file' accept='image/*' id='input-2' type='file' class='file' multiple='true' data-drop-zone-enabled="{{ isset($page)? 'false' : 'true'}}" data-show-upload='false' data-show-caption='true'>
+            <input name='up_file' accept='image/*' id='input-2' type='file' class='file' multiple='true' data-drop-zone-enabled="{{ isset($page) && $page->hasImage()? 'false' : 'true'}}" data-show-upload='false' data-show-caption='true'>
           </div>
 
         </div>
@@ -114,7 +114,7 @@
 
 </div>
 
-@if(isset($page))
+@if(isset($page) && $page->hasImage())
   @include('image_details', ['modal_id' => $page->id, 'image' => $page->getImage()])
 @endif
 

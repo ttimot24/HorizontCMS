@@ -39,7 +39,7 @@
         </div>
         <div class="col-md-4 col-sm-12">
 
-          @if(isset($blogpost))
+          @if(isset($blogpost) && $blogpost->hasImage())
             <button type='button' class='btn btn-link mb-5 w-100' data-bs-toggle='modal' data-bs-target='#modal-xl-{{ $blogpost->id }}'>
               <img src='{{ $blogpost->getThumb() }}' class='img img-thumbnail w-100' >
             </button>
@@ -47,7 +47,7 @@
 
           <div class='form-group' >
             <label for='file'>{{trans('actions.upload_image')}}:</label>
-            <input name='up_file' accept='image/*' id='input-2' type='file' class='file' multiple='true' data-drop-zone-enabled="{{ isset($blogpost)? 'false' : 'true'}}" data-remove-class="btn btn-default" data-show-upload='false' data-show-caption='true'>
+            <input name='up_file' accept='image/*' id='input-2' type='file' class='file' multiple='true' data-drop-zone-enabled="{{ isset($blogpost) && $blogpost->hasImage()? 'false' : 'true'}}" data-remove-class="btn btn-default" data-show-upload='false' data-show-caption='true'>
           </div>
 
         </div>
@@ -89,7 +89,7 @@
   </div>
 </div>
 
-@if(isset($blogpost))
+@if(isset($blogpost) && $blogpost->hasImage())
   @include('image_details', ['modal_id' => $blogpost->id, 'image' => $blogpost->getImage()])
 @endif
 

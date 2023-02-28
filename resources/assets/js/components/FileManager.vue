@@ -90,7 +90,7 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 
 import * as $ from 'jquery';
 import "bootstrap";
