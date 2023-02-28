@@ -55,11 +55,12 @@
         <div class="col-12">
         <div class='form-group pull-left col-12'>
               <label for='text'>{{trans('blogpost.post')}}:</label>
-              <text-editor 
-                :editorData="'{{ old('blogpost', isset($blogpost)? $blogpost->text: '') }}'" 
-                :editorConfig="{
-                  language: '{{ config('app.locale') }} ?>',
-                  filebrowserBrowseUrl: '{{ url(config('horizontcms.backend_prefix').'/file-manager/index?path=images/pages&mode=embed') }} ?>',
+              <text-editor
+                :name="'text'" 
+                :data="'{{ old('blogpost', isset($blogpost)? $blogpost->text: '') }}'" 
+                :config="{
+                  language: '{{ config('app.locale') }}',
+                  filebrowserBrowseUrl: '{{ url(config('horizontcms.backend_prefix').'/file-manager/index?path=images/pages&mode=embed') }}',
                   filebrowserUploadUrl: '{{ url(config('horizontcms.backend_prefix').'/file-manager/upload?module=pages') }}'
                 }">
               </text-editor>
@@ -84,6 +85,7 @@
 
   </form>
   </div>
+
   </div>
 </div>
 

@@ -5121,10 +5121,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_vue_composition_api__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   name: 'text-editor',
+  props: {
+    name: String,
+    data: String
+  },
   data: function data() {
     return {
-      editorData: '',
-      editorConfig: {
+      editorUrl: 'https://cdn.ckeditor.com/4.20.2/full-all/ckeditor.js',
+      config: {
         skin: 'moono-lisa',
         filebrowserUploadMethod: 'form',
         removeButtons: 'NewPage,Save,Font,FontSize,Styles,Flash,Print,Language,Templates,PageBreak',
@@ -29273,14 +29277,41 @@ var render = function () {
     "div",
     { attrs: { id: "text-editor" } },
     [
-      _c("ckeditor", {
-        attrs: { config: _vm.editorConfig },
-        model: {
-          value: _vm.editorData,
-          callback: function ($$v) {
-            _vm.editorData = $$v
+      _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.data,
+            expression: "data",
           },
-          expression: "editorData",
+        ],
+        staticStyle: { display: "none" },
+        attrs: { name: _vm.name },
+        domProps: { value: _vm.data },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.data = $event.target.value
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c("ckeditor", {
+        attrs: {
+          "tag-name": "textarea",
+          name: _vm.name,
+          config: _vm.config,
+          "editor-url": _vm.editorUrl,
+        },
+        model: {
+          value: _vm.data,
+          callback: function ($$v) {
+            _vm.data = $$v
+          },
+          expression: "data",
         },
       }),
     ],

@@ -88,12 +88,14 @@
             <label for='text'>{{trans('page.page_content')}}</label>
 
               <text-editor 
-              :editorData="'{{ old('page', isset($page)? $page->page : '') }}'"
-              :editorConfig="{
-                language: '{{ config('app.locale') }} ?>',
-                filebrowserBrowseUrl: '{{ url(config('horizontcms.backend_prefix').'/file-manager/index?path=images/pages&mode=embed') }} ?>',
-                filebrowserUploadUrl: '{{ url(config('horizontcms.backend_prefix').'/file-manager/upload?module=pages') }}'
-              }"></text-editor>
+                :name="'page'"
+                :data="'{{ old('page', isset($page)? $page->page : '') }}'" 
+                :config="{
+                  language: '{{ config('app.locale') }}',
+                  filebrowserBrowseUrl: '{{ url(config('horizontcms.backend_prefix').'/file-manager/index?path=images/pages&mode=embed') }}',
+                  filebrowserUploadUrl: '{{ url(config('horizontcms.backend_prefix').'/file-manager/upload?module=pages') }}'
+                }">
+              </text-editor>
 
         </div>
 
