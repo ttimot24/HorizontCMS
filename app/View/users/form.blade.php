@@ -3,9 +3,9 @@
 @section('content')
 <div class='container main-container'>
 
-
-  <h2>{{trans(isset($user)? 'user.edit_user' : 'user.create_user')}}</h2>
-
+    <div class="card mb-3">
+      <div class="card-header fw-bold"><h2>{{trans(isset($user)? 'user.edit_user' : 'user.create_user')}}</h2></div>
+        <div class="card-body">
 
   <form role='form' action="{{ isset($user)? route('user.update', ['user' => $user]) : route('user.store')}}" method='POST' enctype='multipart/form-data'>
     @csrf
@@ -99,7 +99,8 @@
         </div>
 
   </form>
-
+  </div>
+  </div>
 </div>
 
 @if(isset($user))

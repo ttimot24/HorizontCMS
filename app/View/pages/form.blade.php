@@ -2,7 +2,10 @@
 
 @section('content')
 <div class='container main-container'>
-  <h2>{{trans(isset($page)? 'page.edit_page' : 'page.add_new_page_title')}}</h2>
+
+      <div class="card mb-3">
+      <div class="card-header fw-bold"><h2>{{trans(isset($page)? 'page.edit_page' : 'page.add_new_page_title')}}</h2></div>
+        <div class="card-body">
 
   <form role='form' action="{{isset($page)? route('page.update', ['page' => $page]) : route('page.store')}}" method='POST' enctype='multipart/form-data'>
   
@@ -103,6 +106,10 @@
 
 
   </form>
+
+  </div>
+  </div>
+
 </div>
 
 @if(isset($page))

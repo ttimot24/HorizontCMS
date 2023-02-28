@@ -22782,5 +22782,9 @@ tr #hidden-home a:hover {
 }
 
 .was-validated .input-group > .form-control:not(:focus):valid, .input-group > .form-control:not(:focus).is-valid, .was-validated .input-group > .form-select:not(:focus):valid, .input-group > .form-select:not(:focus).is-valid, .was-validated .input-group > .form-floating:not(:focus-within):valid, .input-group > .form-floating:not(:focus-within).is-valid {
-  width: 50%;
+  width: 45%;
+}
+
+.card label {
+  font-weight: bold;
 }

@@ -2,7 +2,9 @@
 
 @section('content')
 <div class='container main-container'>
-  <h2>{{trans(isset($blogpost)? 'blogpost.edit_blogpost' : 'blogpost.new_blogpost')}}</h2>
+    <div class="card mb-3">
+      <div class="card-header fw-bold"><h2>{{trans(isset($blogpost)? 'blogpost.edit_blogpost' : 'blogpost.new_blogpost')}}</h2></div>
+        <div class="card-body">
 
   <form role='form' action="{{isset($blogpost)? route('blogpost.update', ['blogpost' => $blogpost]) : route('blogpost.store')}}" method='POST' enctype='multipart/form-data'>
 
@@ -81,6 +83,8 @@
     </div>
 
   </form>
+  </div>
+  </div>
 </div>
 
 @if(isset($blogpost))

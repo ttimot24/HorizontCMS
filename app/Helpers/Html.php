@@ -1,6 +1,6 @@
 <?php
 
-class Html{
+class Html {
 
 
 	public static function cssFile($file){
@@ -39,14 +39,4 @@ class Html{
 		return "<a href='".$link."' ".$attr.">".$name."</a>";
 	}
 
-
-
-
-
-
 }
-
-
-
-
-?>
