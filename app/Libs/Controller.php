@@ -25,7 +25,7 @@ abstract class Controller extends BaseController {
             foreach(app()->plugins as $plugin){
 
                     foreach($plugin->getRegister('injectAdminJs',[]) as $js){
-                           $this->view->data['jsplugins'][] = $plugin->getPath().'/'.$js; 
+                           $this->view->data['jsplugins'][] = $plugin->getPath().$js; 
                     }
 
             }

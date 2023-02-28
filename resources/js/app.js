@@ -45393,18 +45393,18 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_7__["default"].config.devtools = true;
 vue__WEBPACK_IMPORTED_MODULE_7__["default"].use(vue_resource__WEBPACK_IMPORTED_MODULE_2__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_7__["default"].use((ckeditor4_vue__WEBPACK_IMPORTED_MODULE_3___default()));
-/*Vue.http.interceptors.push((request: Request, next) => {
+//Vue.prototype.$http = axios;
+/*Vue.prototype.$http.interceptors.push((request: Request, next) => {
     request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
     next();
 }); */
-// Vue.prototype.$http = axios;
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the body of the page. From here, you may begin adding components to
  * the application, or feel free to tweak this setup for your needs.
  */
-var app = new vue__WEBPACK_IMPORTED_MODULE_7__["default"]({
+window.hcms = new vue__WEBPACK_IMPORTED_MODULE_7__["default"]({
   el: '#hcms',
   data: {},
   components: {

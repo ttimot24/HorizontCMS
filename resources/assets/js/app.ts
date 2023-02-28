@@ -15,7 +15,7 @@ import "bootstrap-fileinput";
  */
 import Vue from 'vue';
 import VueResource from 'vue-resource';
-
+import axios from 'axios';
 import CKEditor from 'ckeditor4-vue';
 
 import LockScreen from './components/LockScreen.vue';
@@ -27,13 +27,13 @@ Vue.use(VueResource);
 
 Vue.use(CKEditor);
 
-/*Vue.http.interceptors.push((request: Request, next) => {
+//Vue.prototype.$http = axios;
+
+/*Vue.prototype.$http.interceptors.push((request: Request, next) => {
     request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
     next();
 }); */
-
-// Vue.prototype.$http = axios;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -41,7 +41,7 @@ Vue.use(CKEditor);
  * the application, or feel free to tweak this setup for your needs.
  */
 
-var app = new Vue({
+window.hcms = new Vue({
     el: '#hcms',
     data: {
 
