@@ -21,13 +21,7 @@
 		@if (!Auth::guest())
 			@include('navbar')
 			@include('messages')
-			<!-- @include('lock_screen') -->
-			<lock-screen 
-				csrf="{{ csrf_token() }}" 
-				image="{{ Auth::user()->getImage() }}" 
-				userId="{{Auth::user()->id}}" 
-				username="{{ Auth::user()->username }}" >
-			</lock-screen>
+			@include('lock_screen')
 		@endif
 
 		
@@ -40,12 +34,12 @@
 				<div class="row py-5 px-3">
 					<div class='col-md-6'>
 						<p class='text-muted credit mb-0'>
-						{{ Config::get('app.name') }} &copy 2015 - {{ date('Y') }} <a href='http://www.twitter.com/timottarjani'>Timot Tarjani</a> 
+						{{ config('app.name') }} &copy 2015 - {{ date('Y') }} <a href='http://www.twitter.com/timottarjani'>Timot Tarjani</a> 
 						&nbsp&nbsp<a href='https://github.com/ttimot24/HorizontCMS'><i style='font-size: 1.2em' class="fa fa-github" aria-hidden="true"></i></a>
 						</p>
 					</div>
 					<div class='col-md-6 text-right text-end'>
-						Version: {{Config::get('horizontcms.version')}}
+						Version: {{config('horizontcms.version')}}
 					</div>
 				</div>
 			</div>	

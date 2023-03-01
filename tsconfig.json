@@ -4,6 +4,7 @@
     "compilerOptions": {
       "allowJs": true,
       "baseUrl": "./",
+      "types": ["jquery","bootstrap"],
       "paths": {
       },
       "resolveJsonModule": true,
@@ -27,7 +28,12 @@
         "dom"
       ]
     },
-    "include": ["resources/assets/js/**/*.ts", "resources/assets/js/**/*.d.ts", "resources/assets/js/**/*.tsx", "resources/assets/js/**/*.vue", "resources/assets/js/controls.js", "resources/assets/js/filemanager.ts", "resources/assets/js/dragndrop.ts", "resources/assets/js/dragndrop.ts", "resources/assets/js/dragndrop.ts", "resources/assets/js/dragndrop.ts", "resources/assets/js/bootstrap.js", "resources/assets/js/bootstrap.js"], 
+    "include": [
+      "resources/assets/js/**/*.ts", 
+      "resources/assets/js/**/*.d.ts", 
+      "resources/assets/js/**/*.tsx", 
+      "resources/assets/js/**/*.vue", 
+    ], 
     "exclude": ["docs/**/*"],
     "angularCompilerOptions": {
       "enableI18nLegacyMessageIdFormat": false,

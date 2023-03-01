@@ -1,5 +1,5 @@
 export {};
 
 declare global {
-    var hcms: Vue;
+    var lockscreen: LockScreen;
 }

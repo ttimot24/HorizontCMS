@@ -87,7 +87,7 @@
         <div class='form-group pull-left col-xs-12 col-md-12' >
             <label for='text'>{{trans('page.page_content')}}</label>
 
-              <text-editor 
+              <text-editor id="texteditor" 
                 :name="'page'"
                 :data="'{{ old('page', isset($page)? $page->page : '') }}'" 
                 :config="{
@@ -140,5 +140,6 @@
 });
 </script>
 
+<script src="{{asset('resources/js/texteditor.js')}}"></script>
 
 @endsection

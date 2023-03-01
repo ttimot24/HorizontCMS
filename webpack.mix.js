@@ -13,7 +13,7 @@ const mix = require('laravel-mix');
 
 mix.setPublicPath('resources');
 
-mix.webpackConfig(webpack => {
+/*mix.webpackConfig(webpack => {
    return {
        plugins: [
            new webpack.ProvidePlugin({
@@ -23,10 +23,12 @@ mix.webpackConfig(webpack => {
            })
        ]
    };
-});
+}); */
 
 mix.ts('resources/assets/js/app.ts', 'js')
-   .js('resources/assets/js/filemanager.js', 'js')
+   .ts('resources/assets/js/lock-screen.ts', 'js')
+   .ts('resources/assets/js/texteditor.ts', 'js')
+   .ts('resources/assets/js/filemanager.ts', 'js')
    .ts('resources/assets/js/pages.ts', 'js')
    .js('resources/assets/js/dragndrop.js', 'js')
    .vue()

@@ -1,6 +1,102 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./resources/assets/js/dragndrop.js":
+/*!******************************************!*\
+  !*** ./resources/assets/js/dragndrop.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ dragndroporder)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery-ui-bundle */ "./node_modules/jquery-ui-bundle/jquery-ui.js");
+/* harmony import */ var jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * include Vue and Vue Resource. This gives a great starting point for
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+
+function dragndrop() {
+  //Helper function to keep table row from collapsing when being sorted
+  var fixHelperModified = function fixHelperModified(e, tr) {
+    var $originals = tr.children();
+    var $helper = tr.clone();
+    $helper.children().each(function (index) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).width($originals.eq(index).width());
+    });
+    return $helper;
+  };
+  function after_drop() {
+    var alist = [];
+    jquery__WEBPACK_IMPORTED_MODULE_0__("#page-list-table tbody tr").each(function (iter) {
+      var $this = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+      var pageId = $this.find('td').eq(1).html().split(" ")[0];
+      alist[iter] = pageId;
+    });
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post("admin/page/reorder", {
+      _token: jquery__WEBPACK_IMPORTED_MODULE_0__("#orderer").data("csrf"),
+      order: JSON.stringify(alist)
+    }, function (data, status) {
+      console.log("Data: " + data + "\nStatus: " + status);
+    });
+  }
+
+  //Make diagnosis table sortable
+  jquery__WEBPACK_IMPORTED_MODULE_0__("#page-list-table tbody").sortable({
+    helper: fixHelperModified,
+    stop: function stop(event, ui) {
+      renumber_table('#page-list-table');
+      after_drop();
+    }
+  }).disableSelection();
+
+  //Delete button in table rows
+  jquery__WEBPACK_IMPORTED_MODULE_0__('table').on('click', '.btn-delete', function () {
+    var tableID = '#' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('table').attr('id');
+    var r = confirm('Delete this item?');
+    if (r) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr').remove();
+      renumber_table(tableID);
+    }
+  });
+}
+;
+
+//Renumber table rows
+function renumber_table(tableID) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(tableID + " tr").each(function () {
+    var count = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().children().index(jquery__WEBPACK_IMPORTED_MODULE_0__(this)) + 1;
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('.priority').html(count);
+  });
+}
+function dragndroporder() {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#orderer').toggleClass('btn-default');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#orderer').toggleClass('btn-success');
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#page-list-table').hasClass('order-active')) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.torder').remove();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#page-list-table').removeClass('order-active');
+  } else {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('table').find('tr').each(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('th').eq(0).before("<th class='col-md-1 torder'>Reorder</th>");
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('td').eq(0).before("<td class='torder'><i class='well well-sm fa fa-arrows-v' style='border-radius:3px;cursor:grab;font-size:20px;' aria-hidden='true'></i></td>");
+    });
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#page-list-table').addClass('order-active');
+    dragndrop();
+  }
+}
+window.dragndroporder = dragndroporder;
+
+/***/ }),
+
 /***/ "./node_modules/jquery-ui-bundle/jquery-ui.js":
 /*!****************************************************!*\
   !*** ./node_modules/jquery-ui-bundle/jquery-ui.js ***!
@@ -29717,6 +29813,19 @@ return jQuery;
 } );
 
 
+/***/ }),
+
+/***/ "./resources/assets/sass/horizontcms-next.scss":
+/*!*****************************************************!*\
+  !*** ./resources/assets/sass/horizontcms-next.scss ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
 /***/ })
 
 /******/ 	});
@@ -29745,7 +29854,42 @@ return jQuery;
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -29786,101 +29930,68 @@ return jQuery;
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"/js/dragndrop": 0,
+/******/ 			"css/horizontcms-next": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
-/*!******************************************!*\
-  !*** ./resources/assets/js/dragndrop.js ***!
-  \******************************************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ dragndroporder)
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery-ui-bundle */ "./node_modules/jquery-ui-bundle/jquery-ui.js");
-/* harmony import */ var jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_1__);
-
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * include Vue and Vue Resource. This gives a great starting point for
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-
-function dragndrop() {
-  //Helper function to keep table row from collapsing when being sorted
-  var fixHelperModified = function fixHelperModified(e, tr) {
-    var $originals = tr.children();
-    var $helper = tr.clone();
-    $helper.children().each(function (index) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).width($originals.eq(index).width());
-    });
-    return $helper;
-  };
-  function after_drop() {
-    var alist = [];
-    jquery__WEBPACK_IMPORTED_MODULE_0__("#page-list-table tbody tr").each(function (iter) {
-      var $this = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-      var pageId = $this.find('td').eq(1).html().split(" ")[0];
-      alist[iter] = pageId;
-    });
-    jquery__WEBPACK_IMPORTED_MODULE_0__.post("admin/page/reorder", {
-      _token: jquery__WEBPACK_IMPORTED_MODULE_0__("#orderer").data("csrf"),
-      order: JSON.stringify(alist)
-    }, function (data, status) {
-      console.log("Data: " + data + "\nStatus: " + status);
-    });
-  }
-
-  //Make diagnosis table sortable
-  jquery__WEBPACK_IMPORTED_MODULE_0__("#page-list-table tbody").sortable({
-    helper: fixHelperModified,
-    stop: function stop(event, ui) {
-      renumber_table('#page-list-table');
-      after_drop();
-    }
-  }).disableSelection();
-
-  //Delete button in table rows
-  jquery__WEBPACK_IMPORTED_MODULE_0__('table').on('click', '.btn-delete', function () {
-    var tableID = '#' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('table').attr('id');
-    var r = confirm('Delete this item?');
-    if (r) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr').remove();
-      renumber_table(tableID);
-    }
-  });
-}
-;
-
-//Renumber table rows
-function renumber_table(tableID) {
-  jquery__WEBPACK_IMPORTED_MODULE_0__(tableID + " tr").each(function () {
-    var count = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().children().index(jquery__WEBPACK_IMPORTED_MODULE_0__(this)) + 1;
-    jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('.priority').html(count);
-  });
-}
-function dragndroporder() {
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#orderer').toggleClass('btn-default');
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#orderer').toggleClass('btn-success');
-  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#page-list-table').hasClass('order-active')) {
-    jquery__WEBPACK_IMPORTED_MODULE_0__('.torder').remove();
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#page-list-table').removeClass('order-active');
-  } else {
-    jquery__WEBPACK_IMPORTED_MODULE_0__('table').find('tr').each(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('th').eq(0).before("<th class='col-md-1 torder'>Reorder</th>");
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('td').eq(0).before("<td class='torder'><i class='well well-sm fa fa-arrows-v' style='border-radius:3px;cursor:grab;font-size:20px;' aria-hidden='true'></i></td>");
-    });
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#page-list-table').addClass('order-active');
-    dragndrop();
-  }
-}
-window.dragndroporder = dragndroporder;
-})();
-
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	__webpack_require__.O(undefined, ["css/horizontcms-next"], () => (__webpack_require__("./resources/assets/js/dragndrop.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/horizontcms-next"], () => (__webpack_require__("./resources/assets/sass/horizontcms-next.scss")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
 /******/ })()
 ;

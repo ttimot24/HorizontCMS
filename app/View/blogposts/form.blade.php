@@ -55,7 +55,7 @@
         <div class="col-12">
         <div class='form-group pull-left col-12'>
               <label for='text'>{{trans('blogpost.post')}}:</label>
-              <text-editor
+              <text-editor id="texteditor" 
                 :name="'text'" 
                 :data="'{{ old('blogpost', isset($blogpost)? $blogpost->text: '') }}'"
                 :editorConfig="{
@@ -92,5 +92,7 @@
 @if(isset($blogpost) && $blogpost->hasImage())
   @include('image_details', ['modal_id' => $blogpost->id, 'image' => $blogpost->getImage()])
 @endif
+
+<script src="{{asset('resources/js/texteditor.js')}}"></script>
 
 @endsection
