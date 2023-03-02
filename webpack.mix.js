@@ -13,17 +13,11 @@ const mix = require('laravel-mix');
 
 mix.setPublicPath('resources');
 
-/*mix.webpackConfig(webpack => {
-   return {
-       plugins: [
-           new webpack.ProvidePlugin({
-               $: 'jquery',
-               jQuery: 'jquery', 
-               'window.jQuery': 'jquery',
-           })
-       ]
-   };
-}); */
+/*mix.webpackConfig({
+    externals: {
+       vue: 'Vue',
+    },
+ }); */
 
 mix.ts('resources/assets/js/app.ts', 'js')
    .ts('resources/assets/js/lock-screen.ts', 'js')

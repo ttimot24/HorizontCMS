@@ -7,19 +7,21 @@ use App\Libs\Controller;
 use App\Http\Requests;
 use App\Model\UserRole;
 
-class UserRoleController extends Controller{
+class UserRoleController extends Controller
+{
 
-    public function index(){
+    public function index()
+    {
 
 
 
-    //    dd($permission_list);
+        //    dd($permission_list);
 
         $this->view->title('User roles');
-        return $this->view->render('users/roles/index',[
-                                                        'all_user_roles' => \App\Model\UserRole::all(),
-                                                        'permission_list' => $this->getPermissionList(),
-                                                        ]);
+        return $this->view->render('users/roles/index', [
+            'all_user_roles' => \App\Model\UserRole::all(),
+            'permission_list' => $this->getPermissionList(),
+        ]);
     }
 
     /**
@@ -27,28 +29,30 @@ class UserRoleController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
+    public function create()
+    {
 
 
         $this->view->title('Create role');
-        return $this->view->render('users/roles/create',[
-                                                        'permission_list' => $this->getPermissionList(),
-                                                        ]);
+        return $this->view->render('users/roles/create', [
+            'permission_list' => $this->getPermissionList(),
+        ]);
     }
 
 
-    private function getPermissionList(){
+    private function getPermissionList()
+    {
 
-        $controllers = array_slice(scandir(app_path('Controllers')),3);
+        $controllers = array_slice(scandir(app_path('Controllers')), 3);
 
         $permission_list['admin_area'] = 'Admin area';
 
-        foreach($controllers as $controller){
-            $name = str_replace("Controller.php","",$controller);
+        foreach ($controllers as $controller) {
+            $name = str_replace("Controller.php", "", $controller);
             $permission_list[str_slug($name)] = $name;
         }
 
-        unset($permission_list['website'], $permission_list['install'],$permission_list['dashboard']);
+        unset($permission_list['website'], $permission_list['install'], $permission_list['dashboard']);
 
         return $permission_list;
     }
@@ -60,18 +64,18 @@ class UserRoleController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
-            $role = new \App\Model\UserRole($request->all());
-            $role->rights = array_keys($request->except(['_token','name']));
-            $role->permission = 0;
+        $role = new \App\Model\UserRole($request->all());
+        $role->rights = array_keys($request->except(['_token', 'name']));
+        $role->permission = 0;
 
-            if($role->save()){
-                return $this->redirect(route('userrole.index'))->withMessage(['success' => trans('User role created succesfully!')]);
-            }else{
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-
+        if ($role->save()) {
+            return $this->redirect(route('userrole.index'))->withMessage(['success' => trans('User role created succesfully!')]);
+        } else {
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
     }
 
     /**
@@ -80,8 +84,8 @@ class UserRoleController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
-
+    public function show($id)
+    {
     }
 
     /**
@@ -90,8 +94,8 @@ class UserRoleController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
-
+    public function edit($id)
+    {
     }
 
     /**
@@ -101,19 +105,20 @@ class UserRoleController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id){
-       if($this->request->isMethod('POST')){
-            $role = \App\Model\UserRole::find($id); 
-            
-            $role->rights = array_keys($this->request->except('_token'));
-            
+    public function update($id)
+    {
+        if ($this->request->isMethod('POST')) {
+            $role = \App\Model\UserRole::find($id);
 
-            if($role->save()){
+            $role->rights = array_keys($this->request->except('_token'));
+
+
+            if ($role->save()) {
                 return $this->redirectToSelf()->withMessage(['success' => trans('Rights saved succesfully!')]);
-            }else{
+            } else {
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-       }
+        }
     }
 
     /**
@@ -122,13 +127,13 @@ class UserRoleController extends Controller{
      * @param  \App\Model\UserRole  $userrole
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserRole $userrole){
-        
-        if($userrole->delete()){
+    public function destroy(UserRole $userrole)
+    {
+
+        if ($userrole->delete()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('User role deleted succesfully!')]);
         }
 
         return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-
     }
 }

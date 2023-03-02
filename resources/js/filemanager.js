@@ -31628,14 +31628,17 @@ new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
   el: '#filemanager',
   mounted: function mounted() {
     var vm = this;
+    vm._csrfToken = jquery__WEBPACK_IMPORTED_MODULE_0__('[name="_token"]').val();
+    vm.modalRename = jquery__WEBPACK_IMPORTED_MODULE_0__('#rename_sample').get(0) || {};
     console.log("VueJS: FileManager started");
     vm.open(vm.currentDirectory, false);
     console.log('Directory: ' + vm.currentDirectory);
   },
   data: function data() {
     return {
-      _csrfToken: jquery__WEBPACK_IMPORTED_MODULE_0__('[name="_token"]').val(),
+      _csrfToken: '',
       mode: 'embed',
+      modalRename: null,
       previousDirectory: null,
       currentDirectory: '',
       drivers: [],
@@ -31738,7 +31741,8 @@ new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
       }, function (data) {
         if (typeof data.success !== 'undefined') {
           console.log("Dir created: " + dirPath + '/' + folderName);
-          jquery__WEBPACK_IMPORTED_MODULE_0__('#new_folder').modal('hide');
+          var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#new_folder');
+          new bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal(modal.get(0) || {}).hide();
           jquery__WEBPACK_IMPORTED_MODULE_0__('[name="new_folder_name"]').val("");
           vm.folders.push(folderName);
         } else {
@@ -31772,7 +31776,8 @@ new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
         success: function success(data) {
           if (typeof data.success !== 'undefined') {
             console.log(data);
-            jquery__WEBPACK_IMPORTED_MODULE_0__('#upload_file_to_storage').modal('hide');
+            var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#upload_file_to_storage');
+            new bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal(modal.get(0) || {}).hide();
             fileSelect.val("");
             fileSelect.fileinput("clear");
             for (var i = 0; i < data.uploadedFileNames.length; i++) {
@@ -31798,15 +31803,13 @@ new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
         return vm.basename(file);
       });
       modal.find('a').data('file', file);
-      //  modal.modal('toggle');
-      new bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal(modal.get(0) || {}).toggle();
+      new bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal(modal.get(0) || {}).show();
     },
     renameModal: function renameModal(file) {
       var vm = this;
       vm.select(file);
-      var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#rename_sample');
       jquery__WEBPACK_IMPORTED_MODULE_0__("#selected").val(file);
-      new bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal(modal.get(0) || {}).toggle();
+      new bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal(vm.modalRename).show();
     },
     renameFile: function renameFile(event) {
       var vm = this;
@@ -31824,7 +31827,7 @@ new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
         success: function success(data) {
           if (typeof data.success !== 'undefined') {
             vm.open(vm.currentDirectory);
-            jquery__WEBPACK_IMPORTED_MODULE_0__('#rename_sample').modal('hide');
+            new bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal(vm.modalRename).hide();
           } else {
             console.log(data);
           }
@@ -31847,7 +31850,8 @@ new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
           if (index > -1) {
             vm.folders.splice(index, 1);
           }
-          jquery__WEBPACK_IMPORTED_MODULE_0__('#delete_sample').modal('hide');
+          var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#delete_sample');
+          new bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal(modal.get(0) || {}).hide();
         } else {
           console.log(data);
         }

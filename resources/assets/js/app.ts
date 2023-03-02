@@ -13,3 +13,5 @@ import VueResource from 'vue-resource';
 
 Vue.config.devtools = true;
 Vue.use(VueResource);
+
+window.vue = Vue;

@@ -10,7 +10,7 @@
     src: url(/resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.eot) format("embedded-opentype"), url(/resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.woff2) format("woff2"), url(/resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.woff) format("woff"), url(/resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.ttf) format("truetype"), url(/resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.svg) format("svg");
     font-weight: normal;
     font-style: normal;
-  }
+}
 
 body {
     color: #1f1f1f;
@@ -21,28 +21,28 @@ body {
     color: $orange !important;
 }*/
 
-.nav-link{
+.nav-link {
     padding: 1rem .75rem !important;
 }
 
-.dropdown-menu .nav-link{
+.dropdown-menu .nav-link {
     padding: .5rem 1rem !important;
 }
 
-.nav-link .fa{
-    margin-right: 5px;   
+.nav-link .fa {
+    margin-right: 5px;
 }
 
-.navbar-dark .nav-link{
+.navbar-dark .nav-link {
     color: white !important;
 }
 
-.navbar-dark .nav-link:hover{
+.navbar-dark .nav-link:hover {
     color: $orange !important;
     background-color: black !important;
 }
 
-.navbar-brand{
+.navbar-brand {
     font-size: 19px;
     line-height: 21px;
     height: 40px;
@@ -58,6 +58,7 @@ body {
     clip: rect(0, 0, 0, 0);
     border: 0;
 }
+
 .navbar-expand-lg .navbar-toggler .icon-bar {
     background-color: #ebebeb;
 }
@@ -116,25 +117,29 @@ body {
     -webkit-transition: width 0.6s ease;
     -o-transition: width 0.6s ease;
     transition: width 0.6s ease;
-} 
+}
 
-.btn{
+.btn {
     font-size: .875rem;
     border-radius: 2px;
 }
 
-.btn-primary, .btn-primary.focus, .btn-primary:focus, .btn-primary:active {
+.btn-primary,
+.btn-primary.focus,
+.btn-primary:focus,
+.btn-primary:active {
     color: #ffffff;
     background-color: $orange;
     border-color: transparent;
 }
 
-.btn-primary.focus, .btn-primary:focus{
+.btn-primary.focus,
+.btn-primary:focus {
     box-shadow: 0 0 0 .2rem $orange;
 }
 
-.color-primary{
-    color:  $orange !important;
+.color-primary {
+    color: $orange !important;
 }
 
 .btn-primary:hover {
@@ -142,6 +147,7 @@ body {
     background-color: #b15315;
     border-color: rgba(0, 0, 0, 0);
 }
+
 .btn-default {
     color: #ffffff !important;
     background-color: #1f1f1f;
@@ -151,21 +157,29 @@ body {
 .hide {
     display: none !important;
 }
+
 .form-group {
     margin-bottom: 15px;
 }
 
 
-table a:not(.btn), .table a:not(.btn) {
+table a:not(.btn),
+.table a:not(.btn) {
     /* color: $orange; */
     text-decoration: underline;
 }
+
 tr td a {
     color: $orange;
 }
 
 
-h1, .h1, h2, .h2, h3, .h3 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
     margin-top: 21px;
     margin-bottom: 10.5px;
 }
@@ -173,6 +187,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 .table-hover>tbody>tr:hover {
     background-color: $orange;
 }
+
 tr:hover td a {
     color: white;
 }
@@ -197,13 +212,18 @@ tr:hover td a {
         padding-top: 48px;
         padding-bottom: 48px;
     }
-    .container .jumbotron, .container-fluid .jumbotron {
+
+    .container .jumbotron,
+    .container-fluid .jumbotron {
         padding-left: 60px;
         padding-right: 60px;
     }
-    .jumbotron h1, .jumbotron .h1 {
+
+    .jumbotron h1,
+    .jumbotron .h1 {
         font-size: 68px;
     }
+
     .navbar-nav.ml-auto .dropdown-menu {
         left: auto;
         right: 0;
@@ -212,153 +232,163 @@ tr:hover td a {
 
 /*------------FileManager Styles------------------*/
 
-    #filemanager .list-group-item:hover, #filemanager .selected{
-        border-radius: 0px;
-        color:white;
-        background-color: #337ab7;  
-    }
-
-  #filemanager .file, #filemanager .folder{
-    overflow:hidden;
-    height:160px;
-    cursor:pointer;
-    padding:5px;
-    text-align:center;
-  }
-
-  #filemanager .file a i, #filemanager .folder a i{
-    visibility:hidden;
-  }
-
-  #filemanager .file:hover a i, #filemanager .folder:hover a i, #filemanager .selected a i{
-    visibility:visible;
-  }
-
-  #filemanager .file:hover, #filemanager .folder:hover, #filemanager .selected{
-    border-radius:1.5px;
-    color:white;
+#filemanager .list-group-item:hover,
+#filemanager .selected {
+    border-radius: 0px;
+    color: white;
     background-color: #337ab7;
-  }
+}
 
-  #filemanager .file img{
-    object-fit:cover;
-    width:100%;
-    height:100px;
-  }
+#filemanager .file,
+#filemanager .folder {
+    overflow: hidden;
+    height: 160px;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
+}
 
-  h4{
-      margin-top: 5px !important;
-  }
+#filemanager .file a i,
+#filemanager .folder a i {
+    visibility: hidden;
+}
 
-  .text-muted{
-      color: #42494f !important;
-  }
+#filemanager .file:hover a i,
+#filemanager .folder:hover a i,
+#filemanager .selected a i {
+    visibility: visible;
+}
 
-  table tr{
-      font-size: 13px !important;
-  }
+#filemanager .file:hover,
+#filemanager .folder:hover,
+#filemanager .selected {
+    border-radius: 1.5px;
+    color: white;
+    background-color: #337ab7;
+}
 
-  .badge{
-      padding: 5px !important;
-      margin-top: 5px !important;
-      border-radius: 2px;
-  }
+#filemanager .file img {
+    object-fit: cover;
+    width: 100%;
+    height: 100px;
+}
 
-  .page-item.active .page-link{
-    background-color:$orange !important;
-    border-color:$orange !important;
-  }
+h4 {
+    margin-top: 5px !important;
+}
 
-  .page-item a{
-      background-color: #2e343b;
-      border-color: #2e343b;
-      color: white;
-  }
+.text-muted {
+    color: #42494f !important;
+}
 
-  .page-item a:hover{
+table tr {
+    font-size: 13px !important;
+}
+
+.badge {
+    padding: 5px !important;
+    margin-top: 5px !important;
+    border-radius: 2px;
+}
+
+.page-item.active .page-link {
+    background-color: $orange !important;
+    border-color: $orange !important;
+}
+
+.page-item a {
+    background-color: #2e343b;
+    border-color: #2e343b;
+    color: white;
+}
+
+.page-item a:hover {
     background-color: #42484f;
     border-color: #42484f;
     color: white;
 }
 
-  .pagination .disabled .page-link{
-      background-color: #42484f;
-      border-color: #42484f;
-      cursor: not-allowed;
-      color:white;
-  }
+.pagination .disabled .page-link {
+    background-color: #42484f;
+    border-color: #42484f;
+    cursor: not-allowed;
+    color: white;
+}
 
-  .table .bg-danger a{
-      color: white;
-  }
+.table .bg-danger a {
+    color: white;
+}
 
-  .small, small {
+.small,
+small {
     font-size: 70%;
-  }
+}
 
-  .alert{
-      border-radius: 2px;
-  }
+.alert {
+    border-radius: 2px;
+}
 
-  .alert-dismissible .close {
+.alert-dismissible .close {
     padding: .65rem 1rem;
-  }
+}
 
-  .alert, .badge {
+.alert,
+.badge {
     border-color: transparent;
     color: #ebebeb;
-  }
+}
 
-  .form-control{
-      font-size: 15px;
-  }
+.form-control {
+    font-size: 15px;
+}
 
 /*------CKEDITOR-----*/
-.cke_dialog_tabs a{
-  text-decoration:none;
+.cke_dialog_tabs a {
+    text-decoration: none;
 }
 
-.cke_dialog_contents_body{
-    min-width:500px;
+.cke_dialog_contents_body {
+    min-width: 500px;
 }
 
-.cke_dialog_body a{
-    color:black;
-    text-decoration:none !important;
+.cke_dialog_body a {
+    color: black;
+    text-decoration: none !important;
 }
 
-.cke_dialog_body:hover a{
-    color:black;
-    text-decoration:none;
+.cke_dialog_body:hover a {
+    color: black;
+    text-decoration: none;
 }
 
 pre {
     color: black;
 }
 
-i.bi{
+i.bi {
     font-size: 1.5em;
 }
 
-.accordion-button::after, .accordion-button:not(.collapsed)::after{
+.accordion-button::after,
+.accordion-button:not(.collapsed)::after {
     background-image: unset;
 }
 
-.form-switch{
+.form-switch {
     font-size: 1.25rem;
 }
 
-#hidden-home{
-    visibility:hidden;
+#hidden-home {
+    visibility: hidden;
 }
 
-tr:hover #hidden-home{
-    visibility:visible;
-    color:grey;
+tr:hover #hidden-home {
+    visibility: visible;
+    color: grey;
 }
 
-tr #hidden-home a:hover{
-  color:black;
+tr #hidden-home a:hover {
+    color: black;
 }
 
 .close.fileinput-remove {
@@ -369,9 +399,14 @@ tr #hidden-home a:hover{
     width: unset;
 }
 
-.was-validated .input-group > .form-control:not(:focus):valid, .input-group > .form-control:not(:focus).is-valid, .was-validated .input-group > .form-select:not(:focus):valid, .input-group > .form-select:not(:focus).is-valid, .was-validated .input-group > .form-floating:not(:focus-within):valid, .input-group > .form-floating:not(:focus-within).is-valid {
+.was-validated .input-group>.form-control:not(:focus):valid,
+.input-group>.form-control:not(:focus).is-valid,
+.was-validated .input-group>.form-select:not(:focus):valid,
+.input-group>.form-select:not(:focus).is-valid,
+.was-validated .input-group>.form-floating:not(:focus-within):valid,
+.input-group>.form-floating:not(:focus-within).is-valid {
     width: 45%;
-  }
+}
 
 .card label {
     font-weight: bold;

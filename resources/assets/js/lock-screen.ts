@@ -7,19 +7,19 @@ class LockScreen {
 
     private modal: any;
 
-    constructor(){
+    constructor() {
         this.modal = new Modal(document.getElementById('lock_screen') as HTMLElement);
     }
 
-    lockUpScreenMounted(){
+    lockUpScreenMounted() {
 
-        if(typeof(Storage) !== "undefined") {
-        
-            if(localStorage.locksession != null){
-                if(localStorage.locksession=='true'){
+        if (typeof (Storage) !== "undefined") {
+
+            if (localStorage.locksession != null) {
+                if (localStorage.locksession == 'true') {
                     this.modal.show();
                 }
-                else if(localStorage.locksession=='false'){
+                else if (localStorage.locksession == 'false') {
                     this.modal.hide();
                 }
             }
@@ -27,38 +27,38 @@ class LockScreen {
 
     };
 
-    lock(){
+    lock() {
         this.modal.show();
         localStorage.locksession = 'true';
     };
 
-    unlock(userId: string){
+    unlock(userId: string) {
 
-        
+
         var pwd: string | null = ($("#lock_pwd").val()) as string;
 
-            axios.post('/api/v1/lock-up',
-                {
-                    id: userId,
-                    password: pwd
-                }
-            ).then((response) => {
+        axios.post('/api/v1/lock-up',
+            {
+                id: userId,
+                password: pwd
+            }
+        ).then((response) => {
 
-                if(response.data){
+            if (response.data) {
 
-                    this.modal.hide();
-                    localStorage.locksession = 'false';
+                this.modal.hide();
+                localStorage.locksession = 'false';
 
-                }
+            }
 
-                pwd = null;
+            pwd = null;
 
-            }).catch((error) => {
-                pwd = null;
-                console.log(error);
-            });
+        }).catch((error) => {
+            pwd = null;
+            console.log(error);
+        });
 
-        };
+    };
 
 }
 
