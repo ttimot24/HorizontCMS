@@ -22534,13 +22534,17 @@ body {
   border-radius: 2px;
 }
 
-.btn-primary, .btn-primary.focus, .btn-primary:focus, .btn-primary:active {
+.btn-primary,
+.btn-primary.focus,
+.btn-primary:focus,
+.btn-primary:active {
   color: #ffffff;
   background-color: #e84d08;
   border-color: transparent;
 }
 
-.btn-primary.focus, .btn-primary:focus {
+.btn-primary.focus,
+.btn-primary:focus {
   box-shadow: 0 0 0 0.2rem #e84d08;
 }
 
@@ -22568,7 +22572,8 @@ body {
   margin-bottom: 15px;
 }
 
-table a:not(.btn), .table a:not(.btn) {
+table a:not(.btn),
+.table a:not(.btn) {
   /* color: $orange; */
   text-decoration: underline;
 }
@@ -22577,7 +22582,12 @@ tr td a {
   color: #e84d08;
 }
 
-h1, .h1, h2, .h2, h3, .h3 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
   margin-top: 21px;
   margin-bottom: 10.5px;
 }
@@ -22610,11 +22620,18 @@ tr:hover td a {
     padding-top: 48px;
     padding-bottom: 48px;
   }
-  .container .jumbotron, .container-fluid .jumbotron, .container-sm .jumbotron, .container-md .jumbotron, .container-lg .jumbotron, .container-xl .jumbotron, .container-xxl .jumbotron {
+  .container .jumbotron,
+  .container-fluid .jumbotron,
+  .container-sm .jumbotron,
+  .container-md .jumbotron,
+  .container-lg .jumbotron,
+  .container-xl .jumbotron,
+  .container-xxl .jumbotron {
     padding-left: 60px;
     padding-right: 60px;
   }
-  .jumbotron h1, .jumbotron .h1 {
+  .jumbotron h1,
+  .jumbotron .h1 {
     font-size: 68px;
   }
   .navbar-nav.ml-auto .dropdown-menu {
@@ -22623,13 +22640,15 @@ tr:hover td a {
   }
 }
 /*------------FileManager Styles------------------*/
-#filemanager .list-group-item:hover, #filemanager .selected {
+#filemanager .list-group-item:hover,
+#filemanager .selected {
   border-radius: 0px;
   color: white;
   background-color: #337ab7;
 }
 
-#filemanager .file, #filemanager .folder {
+#filemanager .file,
+#filemanager .folder {
   overflow: hidden;
   height: 160px;
   cursor: pointer;
@@ -22637,15 +22656,20 @@ tr:hover td a {
   text-align: center;
 }
 
-#filemanager .file a i, #filemanager .folder a i {
+#filemanager .file a i,
+#filemanager .folder a i {
   visibility: hidden;
 }
 
-#filemanager .file:hover a i, #filemanager .folder:hover a i, #filemanager .selected a i {
+#filemanager .file:hover a i,
+#filemanager .folder:hover a i,
+#filemanager .selected a i {
   visibility: visible;
 }
 
-#filemanager .file:hover, #filemanager .folder:hover, #filemanager .selected {
+#filemanager .file:hover,
+#filemanager .folder:hover,
+#filemanager .selected {
   border-radius: 1.5px;
   color: white;
   background-color: #337ab7;
@@ -22704,7 +22728,8 @@ table tr {
   color: white;
 }
 
-.small, small {
+.small,
+small {
   font-size: 70%;
 }
 
@@ -22716,7 +22741,8 @@ table tr {
   padding: 0.65rem 1rem;
 }
 
-.alert, .badge {
+.alert,
+.badge {
   border-color: transparent;
   color: #ebebeb;
 }
@@ -22752,7 +22778,8 @@ i.bi {
   font-size: 1.5em;
 }
 
-.accordion-button::after, .accordion-button:not(.collapsed)::after {
+.accordion-button::after,
+.accordion-button:not(.collapsed)::after {
   background-image: unset;
 }
 
@@ -22781,7 +22808,12 @@ tr #hidden-home a:hover {
   width: unset;
 }
 
-.was-validated .input-group > .form-control:not(:focus):valid, .input-group > .form-control:not(:focus).is-valid, .was-validated .input-group > .form-select:not(:focus):valid, .input-group > .form-select:not(:focus).is-valid, .was-validated .input-group > .form-floating:not(:focus-within):valid, .input-group > .form-floating:not(:focus-within).is-valid {
+.was-validated .input-group > .form-control:not(:focus):valid,
+.input-group > .form-control:not(:focus).is-valid,
+.was-validated .input-group > .form-select:not(:focus):valid,
+.input-group > .form-select:not(:focus).is-valid,
+.was-validated .input-group > .form-floating:not(:focus-within):valid,
+.input-group > .form-floating:not(:focus-within).is-valid {
   width: 45%;
 }
 

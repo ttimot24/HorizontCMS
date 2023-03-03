@@ -10,7 +10,7 @@ new Vue({
         var vm = this;
         vm._csrfToken = $('[name="_token"]').val();
 
-        vm.modalRename = $('#rename_sample').get(0) || {} as Element;
+        vm.modalRename = new Modal($('#rename_sample').get(0) || {} as Element);
 
         console.log("VueJS: FileManager started");
         vm.open(vm.currentDirectory, false);
@@ -219,7 +219,7 @@ new Vue({
             var vm = this;
 
             var modal = $('#delete_sample');
-            $($($(modal.find('div.modal-body')).find('div')).find('b')).html(function (event, html) { return vm.basename(file); });
+            $($($(modal.find('div.modal-body')).find('p')).find('b')).html(function (event, html) { return vm.basename(file); });
             modal.find('a').data('file', file);
             (new Modal(modal.get(0) || {} as Element)).show();
         },
@@ -228,7 +228,7 @@ new Vue({
 
             vm.select(file);
             $("#selected").val(file);
-            (new Modal(vm.modalRename)).show();
+            vm.modalRename.show();
         },
         renameFile: function (event: any) {
             var vm = this;
@@ -248,8 +248,7 @@ new Vue({
                 success: function (data) {
                     if (typeof data.success !== 'undefined') {
                         vm.open(vm.currentDirectory);
-
-                        (new Modal(vm.modalRename)).hide();
+                        vm.modalRename.hide();
                     } else {
                         console.log(data);
                     }
