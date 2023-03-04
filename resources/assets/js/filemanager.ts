@@ -1,16 +1,18 @@
 import * as $ from 'jquery';
-import "bootstrap";
 import Vue from 'vue';
 import { Modal } from 'bootstrap';
+import CKEDITOR from 'ckeditor4-vue';
 
-new Vue({
+var fileamanager = new Vue({
     name: 'FileManager',
     el: '#filemanager',
     mounted: function () {
         var vm = this;
         vm._csrfToken = $('[name="_token"]').val();
 
-        vm.modalRename = new Modal($('#rename_sample').get(0) || {} as Element);
+        vm.modalRename = vm.getModal("rename_sample");
+        vm.modalUpload = vm.getModal("upload_file_to_storage");
+        vm.modalNewFolder = vm.getModal("new_folder");
 
         console.log("VueJS: FileManager started");
         vm.open(vm.currentDirectory, false);
@@ -45,7 +47,10 @@ new Vue({
         }
     },
     computed: {
-        breadcrumb: function () {
+        breadcrumb: function (): {
+            text: any,
+            link: string
+        }[] {
             var vm = this;
 
             var here = vm.currentDirectory.split('/');
@@ -63,7 +68,10 @@ new Vue({
         }
     },
     methods: {
-        select: function (file: string) {
+        getModal: function(id: string): Modal {
+            return  (new Modal(document.getElementById(id) || {} as HTMLElement));
+        },
+        select: function (file: string): void {
             var vm = this;
 
             vm.selected = (event?.currentTarget as any).id;
@@ -72,7 +80,7 @@ new Vue({
             $((event?.currentTarget as any)).addClass('selected');
             console.log('Selected file: ' + vm.selected);
         },
-        open: function (folder: string, useCurrent = true) {
+        open: function (folder: string, useCurrent = true): void {
 
             var vm = this;
 
@@ -122,7 +130,7 @@ new Vue({
             });
 
         },
-        newFolder: function (event: any) {
+        newFolder: function (event: any): void {
 
             var vm = this;
 
@@ -137,15 +145,13 @@ new Vue({
                     new_folder_name: folderName
                 },
                 function (data) {
-                    if (typeof data.success !== 'undefined') {
+                    if (typeof data.success !== undefined) {
 
                         console.log("Dir created: " + dirPath + '/' + folderName);
 
-                        var modal = $('#new_folder');
-                        (new Modal(modal.get(0) || {} as Element)).hide();
+                        vm.modalNewFolder.hide();
 
                         $('[name="new_folder_name"]').val("");
-
 
                         vm.folders.push(folderName);
 
@@ -158,7 +164,7 @@ new Vue({
             );
 
         },
-        upload: function (event: any) {
+        upload: function (event: any): void {
 
             var vm = this;
 
@@ -168,6 +174,11 @@ new Vue({
 
             var fileSelect = ($('#input-2') as any);
             var files = fileSelect[0].files;
+
+            if(!files){
+                console.log("No file is selected");
+                return;
+            }
 
             var formData = new FormData();
             formData.append('_token', vm._csrfToken);
@@ -192,8 +203,7 @@ new Vue({
                     if (typeof data.success !== 'undefined') {
                         console.log(data);
 
-                        var modal = $('#upload_file_to_storage');
-                        (new Modal(modal.get(0) || {} as Element)).hide();
+                        vm.modalUpload.hide();
 
                         fileSelect.val("");
 
@@ -201,7 +211,7 @@ new Vue({
 
                         for (var i = 0; i < data.uploadedFileNames.length; i++) {
                             console.log(vm.basename(data.uploadedFileNames[i]));
-                            vm.files.push(vm.basename(data.uploadedFileNames[i]) + '.' + vm.getFileExtension(data.uploadedFileNames[i]));
+                            vm.files.push(vm.basename(data.uploadedFileNames[i]).concat('.').concat(vm.getFileExtension(data.uploadedFileNames[i])));
                         }
                     } else {
                         console.log("Error" + data);
@@ -212,28 +222,30 @@ new Vue({
                 }
             });
         },
-        basename: function (url: string) {
+        basename: function (url: string): string {
             return ((/(([^\/\\\.#\? ]+)(\.\w+)*)([?#].+)?$/.exec(url)) != null) ? url[2] : '';
         },
-        deleteModal: function (file: string) {
+        deleteModal: function (file: string): void {
             var vm = this;
 
             var modal = $('#delete_sample');
             $($($(modal.find('div.modal-body')).find('p')).find('b')).html(function (event, html) { return vm.basename(file); });
             modal.find('a').data('file', file);
-            (new Modal(modal.get(0) || {} as Element)).show();
+
+            vm.getModal(modal.get(0)).show();
+
         },
-        renameModal: function (file: string) {
+        renameModal: function (file: string): void {
             var vm = this;
 
             vm.select(file);
             $("#selected").val(file);
             vm.modalRename.show();
         },
-        renameFile: function (event: any) {
+        renameFile: function (event: any): void {
             var vm = this;
 
-            var file = vm.currentDirectory + '/' + $('[name="old_name"]').val();
+            var file = vm.currentDirectory.concat('/').concat($('[name="old_name"]').val());
             console.log(file);
 
             $.ajax({
@@ -242,8 +254,8 @@ new Vue({
                 contentType: "application/json",
                 data: JSON.stringify({
                     _token: vm._csrfToken,
-                    old_file: vm.currentDirectory + '/' + $('[name="old_name"]').val(),
-                    new_file: vm.currentDirectory + '/' + $('[name="new_name"]').val()
+                    old_file: vm.currentDirectory.concat('/').concat($('[name="old_name"]').val()),
+                    new_file: vm.currentDirectory.concat('/').concat($('[name="new_name"]').val())
                 }),
                 success: function (data) {
                     if (typeof data.success !== 'undefined') {
@@ -257,11 +269,11 @@ new Vue({
             });
 
         },
-        deleteFile: function (event: any) {
+        deleteFile: function (event: any): void {
 
             var vm = this;
 
-            var file = vm.currentDirectory + '/' + $(event.target).data('file');
+            var file = vm.currentDirectory.concat('/').concat($(event.target).data('file'));
 
 
             $.get('admin/file-manager/destroy',
@@ -282,8 +294,8 @@ new Vue({
                             vm.folders.splice(index, 1);
                         }
 
-                        var modal = $('#delete_sample');
-                        (new Modal(modal.get(0) || {} as Element)).hide();
+                        var modal = vm.getModal('delete_sample');
+                        modal.hide();
 
                     } else {
                         console.log(data);
@@ -292,7 +304,7 @@ new Vue({
             );
 
         },
-        getUrlVar: function (location: string, vary: any) {
+        getUrlVar: function (location: string, vary: any): any {
             var vars = [], hash;
             var hashes = location.slice(location.indexOf('?') + 1).split('&');
             for (var i = 0; i < hashes.length; i++) {
@@ -302,31 +314,34 @@ new Vue({
             }
             return vars[vary];
         },
-        getUrlParam: function (paramName: string) {
+        getUrlParam: function (paramName: string): string | null {
             var reParam = new RegExp('(?:[\?&]|&)' + paramName + '=([^&]+)', 'i');
             var match = window.location.search.match(reParam);
 
             return (match && match.length > 1) ? match[1] : null;
         },
-        returnFileUrl: function (filepath: string) {
+        returnFileUrl: function (filepath: string): void {
+
+            console.log(CKEDITOR);
+
             try {
                 // Simulate user action of selecting a file to be returned to CKEditor.
                 var funcNum: number = 1;/*getUrlParam( 'CKEditorFuncNum' );*/
                 var fileUrl: string = filepath;
-                window.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl, '');
+                CKEDITOR.tools.callFunction(funcNum, fileUrl, '');
                 window.close();
             } catch (e) {
-                console.log(window.opener.CKEDITOR)
+                console.log(CKEDITOR)
                 console.log(e);
             }
         },
-        getFileExtension: function (fileName: string) {
-            return fileName.substr(fileName.lastIndexOf('.') + 1);
+        getFileExtension: function (fileName: string): string {
+            return fileName.substring(fileName.lastIndexOf('.') + 1);
         },
-        isKnownExtension: function (fileName: string) {
+        isKnownExtension: function (fileName: string): boolean {
             var vm = this;
 
-            return $.inArray(vm.getFileExtension(fileName).toLowerCase(), vm.knownFileExtensions) >= 0;
+            return vm.knownFileExtensions.includes(vm.getFileExtension(fileName).toLowerCase());
         }
     }
 

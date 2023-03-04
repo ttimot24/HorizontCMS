@@ -10,6 +10,7 @@ return [
 	'add' => 'Add',
 	'edit' => 'Edit',
 	'options' => 'Options',
+	'create' => 'Create',
 	'update' => 'Update',
 	'delete' => 'Delete',
 	'remove' => 'Remove',

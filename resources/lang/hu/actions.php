@@ -9,6 +9,7 @@ return [
 	'save_draft' => 'Mentés vázlatként',
 	'add' => 'Hozzáadás',
 	'edit' => 'Szerkesztés',
+	'create' => 'Létrehoz',
 	'options' => 'Beállítások',
 	'update' => 'Frissít',
 	'delete' => 'Törlés',

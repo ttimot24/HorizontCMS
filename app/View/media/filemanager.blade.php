@@ -150,7 +150,7 @@
             </div>
         </div>
         <div class='modal-footer'>
-          <button type='submit' class='btn btn-primary'>Create</button>
+          <button type='submit' class='btn btn-primary'>{{ trans('actions.create') }}</button>
           <button type='button' class='btn btn-default' data-bs-dismiss='modal'>{{ trans('actions.cancel') }}</button>
         </div>
       </form>

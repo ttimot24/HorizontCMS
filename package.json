@@ -12,6 +12,7 @@
     },
     "devDependencies": {
         "@types/bootstrap": "^5.2.3",
+        "@types/bootstrap-fileinput": "^5.2.1",
         "@types/ckeditor4": "^4.16.5",
         "@types/jquery": "^3.5.16",
         "axios": "^0.19",
