@@ -1,7 +1,7 @@
 <template>
     <div id="text-editor">
         <textarea style="display: none;" v-model="data" :name="name" ></textarea>
-        <ckeditor v-model="data" :tag-name="'textarea'" :name="name" :config="editorConfig"></ckeditor>
+        <ckeditor v-model="content" :tag-name="'textarea'" :name="name" :config="editorConfig"></ckeditor>
     </div>
 </template>
 
@@ -13,18 +13,22 @@
         name: 'text-editor',
         props: {
             name: String,
-            data: String
+            data: String,
+            language: String,
+            filebrowserbrowseurl: String,
+            filebrowseruploadurl: String,
         },
         data: function() {
             return {
+                content: this.data,
                 editorConfig: {
-                    language: 'en',
+                    language: this.language,
                     skin: 'moono-lisa',
                     filebrowserUploadMethod: 'form',
                     removeButtons: 'NewPage,Save,Font,FontSize,Styles,Flash,Print,Language,Templates,PageBreak',
                     height: 500,
-                    filebrowserBrowseUrl: 'admin/file-manager/index?path=images/pages&mode=embed',
-                    filebrowserUploadUrl: 'admin/file-manager/upload?module=pages'
+                    filebrowserBrowseUrl: this.filebrowserbrowseurl,
+                    filebrowserUploadUrl: this.filebrowseruploadurl
                 }
             };
         }

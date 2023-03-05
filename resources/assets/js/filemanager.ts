@@ -107,14 +107,14 @@ var fileamanager = new Vue({
 
                     console.log(data);
 
-                    if (typeof data.dirs !== 'undefined' && data.dirs.length > 0) {
+                    if (typeof data.dirs !== undefined && data.dirs.length > 0) {
 
                         data.dirs.forEach(function (each: string) {
                             vm.folders.push(each);
                         });
                     }
 
-                    if (typeof data.files !== 'undefined' && data.files.length > 0) {
+                    if (typeof data.files !== undefined && data.files.length > 0) {
 
 
                         data.files.forEach(function (each: string) {
@@ -202,7 +202,7 @@ var fileamanager = new Vue({
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    if (typeof data.success !== 'undefined') {
+                    if (typeof data.success !== undefined) {
                         console.log(data);
 
                         vm.modalUpload.hide();
@@ -261,7 +261,7 @@ var fileamanager = new Vue({
                     new_file: vm.currentDirectory.concat('/').concat($('[name="new_name"]').val())
                 }),
                 success: function (data) {
-                    if (typeof data.success !== 'undefined') {
+                    if (typeof data.success !== undefined) {
                         vm.open(vm.currentDirectory);
                         vm.modalRename.hide();
                         $('[name="new_name"]').val('');
@@ -333,7 +333,7 @@ var fileamanager = new Vue({
                 // Simulate user action of selecting a file to be returned to CKEditor.
                 var funcNum: number = 1;/*getUrlParam( 'CKEditorFuncNum' );*/
                 var fileUrl: string = filepath;
-                CKEDITOR.tools.callFunction(funcNum, fileUrl, '');
+                CKEDITOR.config.tools.callFunction(funcNum, fileUrl, '');
                 window.close();
             } catch (e) {
                 console.log(CKEDITOR)

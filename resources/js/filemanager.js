@@ -31748,12 +31748,12 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
           vm.folders = [];
           vm.files = [];
           console.log(data);
-          if (typeof data.dirs !== 'undefined' && data.dirs.length > 0) {
+          if (_typeof(data.dirs) !== undefined && data.dirs.length > 0) {
             data.dirs.forEach(function (each) {
               vm.folders.push(each);
             });
           }
-          if (typeof data.files !== 'undefined' && data.files.length > 0) {
+          if (_typeof(data.files) !== undefined && data.files.length > 0) {
             data.files.forEach(function (each) {
               vm.files.push(each);
             });
@@ -31814,7 +31814,7 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
         contentType: false,
         processData: false,
         success: function success(data) {
-          if (typeof data.success !== 'undefined') {
+          if (_typeof(data.success) !== undefined) {
             console.log(data);
             vm.modalUpload.hide();
             fileSelect.val("");
@@ -31862,7 +31862,7 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
           new_file: vm.currentDirectory.concat('/').concat(jquery__WEBPACK_IMPORTED_MODULE_0__('[name="new_name"]').val())
         }),
         success: function success(data) {
-          if (typeof data.success !== 'undefined') {
+          if (_typeof(data.success) !== undefined) {
             vm.open(vm.currentDirectory);
             vm.modalRename.hide();
             jquery__WEBPACK_IMPORTED_MODULE_0__('[name="new_name"]').val('');
@@ -31917,7 +31917,7 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
         // Simulate user action of selecting a file to be returned to CKEditor.
         var funcNum = 1; /*getUrlParam( 'CKEditorFuncNum' );*/
         var fileUrl = filepath;
-        ckeditor4_vue__WEBPACK_IMPORTED_MODULE_2___default().tools.callFunction(funcNum, fileUrl, '');
+        ckeditor4_vue__WEBPACK_IMPORTED_MODULE_2___default().config.tools.callFunction(funcNum, fileUrl, '');
         window.close();
       } catch (e) {
         console.log((ckeditor4_vue__WEBPACK_IMPORTED_MODULE_2___default()));

@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Libs\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FileManagerController extends Controller

@@ -58,11 +58,10 @@
               <text-editor id="texteditor" 
                 :name="'text'" 
                 :data="'{{ old('blogpost', isset($blogpost)? $blogpost->text: '') }}'"
-                :editorConfig="{
-                  language: '{{ config('app.locale') }}',
-                  filebrowserBrowseUrl: '{{ url(config('horizontcms.backend_prefix').'/file-manager/index?path=images/blogpost&mode=embed') }}',
-                  filebrowserUploadUrl: '{{ url(config('horizontcms.backend_prefix').'/file-manager/upload?module=blogpost') }}'
-                }">
+                :language="'{{ config('app.locale') }}'"
+                :filebrowserBrowseUrl= "'{{ route('filemanager.index',['path'=>'images/blogposts', 'mode' => 'embed']) }}'"
+                :filebrowserUploadUrl= "'{{ route('filemanager.store',['module' => 'blogpost']) }}'"
+              >
               </text-editor>
         </div>
 
