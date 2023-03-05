@@ -31667,7 +31667,6 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
     return {
       _csrfToken: '',
       mode: 'embed',
-      modalRename: null,
       previousDirectory: null,
       currentDirectory: '',
       drivers: [],

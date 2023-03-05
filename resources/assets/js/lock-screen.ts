@@ -1,19 +1,21 @@
 import * as $ from 'jquery';
 import axios from 'axios';
-import "bootstrap";
 import { Modal } from 'bootstrap';
+import Vue from 'vue';
 
-class LockScreen {
+var lockscreen = new Vue({
+    name: 'LockScreen',
+    el: '#lock_screen',
+    data: {
 
-    private modal: any;
+    },
+    mounted: function() {
 
-    constructor() {
-        this.modal = new Modal(document.getElementById('lock_screen') as HTMLElement);
-    }
+        var vm = this;
 
-    lockUpScreenMounted() {
+        vm.modal = new Modal(document.getElementById('lock_screen') as HTMLElement);
 
-        if (typeof (Storage) !== "undefined") {
+        if (typeof (Storage) !== undefined) {
 
             if (localStorage.locksession != null) {
                 if (localStorage.locksession == 'true') {
@@ -25,44 +27,44 @@ class LockScreen {
             }
         }
 
-    };
+    },
+    methods: {
+        lock: function(): void {
+            var vm = this;
+            vm.modal.show();
+            localStorage.locksession = 'true';
+            vm.invalid_pw = false;
+        },
+        unlock: function(userId: string): void {
+            var vm = this;
 
-    lock() {
-        this.modal.show();
-        localStorage.locksession = 'true';
-    };
+            var password_field: any = $("#lock_pwd");
 
-    unlock(userId: string) {
+            axios.post('/api/v1/lock-up',
+                {
+                    id: userId,
+                    password: (password_field.val()) as string,
+                }
+            ).then((response) => {
 
+                if (response.data) {
 
-        var pwd: string | null = ($("#lock_pwd").val()) as string;
+                    vm.modal.hide();
+                    localStorage.locksession = 'false';
 
-        axios.post('/api/v1/lock-up',
-            {
-                id: userId,
-                password: pwd
-            }
-        ).then((response) => {
+                } else {
+                    password_field.addClass('is-invalid');
+                }
 
-            if (response.data) {
+                password_field = null;
 
-                this.modal.hide();
-                localStorage.locksession = 'false';
+            }).catch((error) => {
+                password_field = null;
+                console.log(error);
+            });
 
-            }
+        }
+    }
+});
 
-            pwd = null;
-
-        }).catch((error) => {
-            pwd = null;
-            console.log(error);
-        });
-
-    };
-
-}
-
-
-
-window.lockscreen = new LockScreen();
-window.lockscreen.lockUpScreenMounted();
+window.lockscreen = lockscreen;

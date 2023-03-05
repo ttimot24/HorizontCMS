@@ -22,7 +22,6 @@ var fileamanager = new Vue({
         return {
             _csrfToken: '',
             mode: 'embed',
-            modalRename: null,
             previousDirectory: null,
             currentDirectory: '',
             drivers: [],

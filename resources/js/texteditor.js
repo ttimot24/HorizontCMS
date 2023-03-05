@@ -14774,6 +14774,7 @@ var texteditor = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
     console.log("HorizontCMS: TextEditor started");
   }
 });
+window.texteditor = texteditor;
 })();
 
 /******/ })()

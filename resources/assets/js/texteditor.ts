@@ -21,3 +21,5 @@ var texteditor = new Vue({
     }
 
 });
+
+window.texteditor = texteditor;
