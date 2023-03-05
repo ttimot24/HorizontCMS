@@ -6,17 +6,17 @@
             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
           </div>
           <div class='modal-body'>
-            <p>
-              <b>{{trans('actions.delete_this',['content_type' => $content_type])}}: </b> {{ $name }}<b>?</b>
-            </p>
+              {{trans('actions.delete_this',['content_type' => $content_type])}}:
+              <b id="content-name">{{ $name }}</b>
+              ?
           </div>
           <div class='modal-footer'>
 
-          <form method='POST' action="{{ $route }}"> 
+          <form id="delete-form" method='POST' action="{{ $route }}"> 
             @csrf 
             @method('delete')
 
-            <button type='submit' class='btn btn-danger'><i class="fa fa-trash" aria-hidden="true"></i></span> {{ $delete_text }}</button>
+            <button type='submit' id="delete-submit" class='btn btn-danger'><i class="fa fa-trash" aria-hidden="true"></i></span> {{ $delete_text }}</button>
           </form>
         
           @if(isset($cancel))

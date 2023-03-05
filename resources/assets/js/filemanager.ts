@@ -13,6 +13,9 @@ var fileamanager = new Vue({
         vm.modalRename = vm.getModal("rename_sample");
         vm.modalUpload = vm.getModal("upload_file_to_storage");
         vm.modalNewFolder = vm.getModal("new_folder");
+        vm.modalDelete = vm.getModal("delete_sample");
+
+        $('#delete-form').on('submit', (event) => {event.preventDefault(); this.deleteFile();});
 
         console.log("VueJS: FileManager started");
         vm.open(vm.currentDirectory, false);
@@ -222,16 +225,17 @@ var fileamanager = new Vue({
             });
         },
         basename: function (url: string): string {
-            return ((/(([^\/\\\.#\? ]+)(\.\w+)*)([?#].+)?$/.exec(url)) != null) ? url[2] : '';
+            //return ((/(([^\/\\\.#\? ]+)(\.\w+)*)([?#].+)?$/.exec(url)) != null) ? url[2] : '';
+            return url.substring(url.lastIndexOf('/')+1);
         },
         deleteModal: function (file: string): void {
             var vm = this;
+ 
+            $('#content-name').text(vm.basename(file));
 
-            var modal = $('#delete_sample');
-            $($($(modal.find('div.modal-body')).find('p')).find('b')).html(function (event, html) { return vm.basename(file); });
-            modal.find('a').data('file', file);
+            $("#delete-submit").data('file', file);
 
-            vm.getModal(modal.get(0)).show();
+            vm.modalDelete.show();
 
         },
         renameModal: function (file: string): void {
@@ -260,6 +264,7 @@ var fileamanager = new Vue({
                     if (typeof data.success !== 'undefined') {
                         vm.open(vm.currentDirectory);
                         vm.modalRename.hide();
+                        $('[name="new_name"]').val('');
                     } else {
                         console.log(data);
                     }
@@ -268,33 +273,34 @@ var fileamanager = new Vue({
             });
 
         },
-        deleteFile: function (event: any): void {
+        deleteFile: function (): void {
 
             var vm = this;
 
-            var file = vm.currentDirectory.concat('/').concat($(event.target).data('file'));
+            var deleteSubmit =  $("#delete-submit");
+
+            var file = vm.currentDirectory.concat('/').concat(deleteSubmit.data('file'));
 
 
-            $.get('admin/file-manager/destroy',
+            $.post('admin/file-manager/destroy',
                 {
                     _token: vm._csrfToken,
                     file: file
                 },
                 function (data) {
-                    if (typeof data.success !== 'undefined') {
+                    if (typeof data.success !== undefined) {
 
-                        var index = vm.files.indexOf($(event.target).data('file'));
+                        var index = vm.files.indexOf(deleteSubmit.data('file'));
                         if (index > -1) {
                             vm.files.splice(index, 1);
                         }
 
-                        index = vm.folders.indexOf($(event.target).data('file'));
+                        index = vm.folders.indexOf(deleteSubmit.data('file'));
                         if (index > -1) {
                             vm.folders.splice(index, 1);
                         }
 
-                        var modal = vm.getModal('delete_sample');
-                        modal.hide();
+                        vm.modalDelete.hide();
 
                     } else {
                         console.log(data);

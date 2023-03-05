@@ -31654,11 +31654,17 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
   name: 'FileManager',
   el: '#filemanager',
   mounted: function mounted() {
+    var _this = this;
     var vm = this;
     vm._csrfToken = jquery__WEBPACK_IMPORTED_MODULE_0__('[name="_token"]').val();
     vm.modalRename = vm.getModal("rename_sample");
     vm.modalUpload = vm.getModal("upload_file_to_storage");
     vm.modalNewFolder = vm.getModal("new_folder");
+    vm.modalDelete = vm.getModal("delete_sample");
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#delete-form').on('submit', function (event) {
+      event.preventDefault();
+      _this.deleteFile();
+    });
     console.log("VueJS: FileManager started");
     vm.open(vm.currentDirectory, false);
     console.log('Directory: ' + vm.currentDirectory);
@@ -31827,16 +31833,14 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
       });
     },
     basename: function basename(url) {
-      return /(([^\/\\\.#\? ]+)(\.\w+)*)([?#].+)?$/.exec(url) != null ? url[2] : '';
+      //return ((/(([^\/\\\.#\? ]+)(\.\w+)*)([?#].+)?$/.exec(url)) != null) ? url[2] : '';
+      return url.substring(url.lastIndexOf('/') + 1);
     },
     deleteModal: function deleteModal(file) {
       var vm = this;
-      var modal = jquery__WEBPACK_IMPORTED_MODULE_0__('#delete_sample');
-      jquery__WEBPACK_IMPORTED_MODULE_0__(jquery__WEBPACK_IMPORTED_MODULE_0__(jquery__WEBPACK_IMPORTED_MODULE_0__(modal.find('div.modal-body')).find('p')).find('b')).html(function (event, html) {
-        return vm.basename(file);
-      });
-      modal.find('a').data('file', file);
-      vm.getModal(modal.get(0)).show();
+      jquery__WEBPACK_IMPORTED_MODULE_0__('#content-name').text(vm.basename(file));
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#delete-submit").data('file', file);
+      vm.modalDelete.show();
     },
     renameModal: function renameModal(file) {
       var vm = this;
@@ -31861,30 +31865,31 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
           if (typeof data.success !== 'undefined') {
             vm.open(vm.currentDirectory);
             vm.modalRename.hide();
+            jquery__WEBPACK_IMPORTED_MODULE_0__('[name="new_name"]').val('');
           } else {
             console.log(data);
           }
         }
       });
     },
-    deleteFile: function deleteFile(event) {
+    deleteFile: function deleteFile() {
       var vm = this;
-      var file = vm.currentDirectory.concat('/').concat(jquery__WEBPACK_IMPORTED_MODULE_0__(event.target).data('file'));
-      jquery__WEBPACK_IMPORTED_MODULE_0__.get('admin/file-manager/destroy', {
+      var deleteSubmit = jquery__WEBPACK_IMPORTED_MODULE_0__("#delete-submit");
+      var file = vm.currentDirectory.concat('/').concat(deleteSubmit.data('file'));
+      jquery__WEBPACK_IMPORTED_MODULE_0__.post('admin/file-manager/destroy', {
         _token: vm._csrfToken,
         file: file
       }, function (data) {
-        if (typeof data.success !== 'undefined') {
-          var index = vm.files.indexOf(jquery__WEBPACK_IMPORTED_MODULE_0__(event.target).data('file'));
+        if (_typeof(data.success) !== undefined) {
+          var index = vm.files.indexOf(deleteSubmit.data('file'));
           if (index > -1) {
             vm.files.splice(index, 1);
           }
-          index = vm.folders.indexOf(jquery__WEBPACK_IMPORTED_MODULE_0__(event.target).data('file'));
+          index = vm.folders.indexOf(deleteSubmit.data('file'));
           if (index > -1) {
             vm.folders.splice(index, 1);
           }
-          var modal = vm.getModal('delete_sample');
-          modal.hide();
+          vm.modalDelete.hide();
         } else {
           console.log(data);
         }
