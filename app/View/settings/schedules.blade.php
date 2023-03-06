@@ -46,7 +46,7 @@
                         'route' => route('schedule.destroy', ['schedule' => $task]),
                         'id' => 'delete_' . $task->id,
                         'header' => trans('actions.are_you_sure'),
-                        'name' => $task->title,
+                        'name' => $task->name,
                         'content_type' => 'task',
                         'delete_text' => trans('actions.delete'),
                         'cancel' => trans('actions.cancel'),
