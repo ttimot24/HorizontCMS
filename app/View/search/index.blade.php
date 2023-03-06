@@ -9,7 +9,7 @@
             <h2 class='col-md-8'>{!! trans('search.found_matches', ['quantity' => $search_engine->getTotalCount(), 'search_word' => $search_for]) !!}</h2>
 
             <div class='col-md-4 col-sm-12 my-auto pt-3'>
-                <form class='form-inline' action="{{ route('search.index') }}" method='POST'>
+                <form class='form-inline' action="{{ route('search.show', ['search' => 'search']) }}" method="GET">
                     @csrf
                     <div class='form-group'>
                         <div class='input-group'>
