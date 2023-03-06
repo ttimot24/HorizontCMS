@@ -174,12 +174,7 @@ tr td a {
 }
 
 
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3 {
+h1, .h1, h2, .h2, h3, .h3 {
     margin-top: 21px;
     margin-bottom: 10.5px;
 }
@@ -192,12 +187,6 @@ tr:hover td a {
     color: white;
 }
 
-.jumbotron p {
-    margin-bottom: 15px;
-    font-size: 23px;
-    font-weight: 200;
-}
-
 .jumbotron {
     padding-top: 30px;
     padding-bottom: 30px;
@@ -205,6 +194,13 @@ tr:hover td a {
     color: white;
     border-radius: 0 !important;
     background-color: #1f1f1f;
+
+    p {
+        margin-bottom: 15px;
+        font-size: 23px;
+        font-weight: 200;
+    }
+
 }
 
 @media screen and (min-width:768px) {
@@ -232,45 +228,43 @@ tr:hover td a {
 
 /*------------FileManager Styles------------------*/
 
-#filemanager .list-group-item:hover,
-#filemanager .selected {
-    border-radius: 0px;
-    color: white;
-    background-color: #337ab7;
-}
+#filemanager {
 
-#filemanager .file,
-#filemanager .folder {
-    overflow: hidden;
-    height: 160px;
-    cursor: pointer;
-    padding: 5px;
-    text-align: center;
-}
+    .file, .folder {
 
-#filemanager .file a i,
-#filemanager .folder a i {
-    visibility: hidden;
-}
+        overflow: hidden;
+        height: 160px;
+        cursor: pointer;
+        padding: 5px;
+        text-align: center;
 
-#filemanager .file:hover a i,
-#filemanager .folder:hover a i,
-#filemanager .selected a i {
-    visibility: visible;
-}
+        a i{
+            visibility: hidden;
+        }
+    }
 
-#filemanager .file:hover,
-#filemanager .folder:hover,
-#filemanager .selected {
-    border-radius: 1.5px;
-    color: white;
-    background-color: #337ab7;
-}
+    .file img {
+        object-fit: cover;
+        width: 100%;
+        height: 100px;
+    }
 
-#filemanager .file img {
-    object-fit: cover;
-    width: 100%;
-    height: 100px;
+    .list-group-item:hover, .selected {
+        border-radius: 0px;
+        color: white;
+        background-color: #337ab7;
+    }
+
+    .file:hover a i, .folder:hover a i, .selected a i {
+        visibility: visible;
+    }
+    
+    .file:hover, .folder:hover, .selected {
+        border-radius: 1.5px;
+        color: white;
+        background-color: #337ab7;
+    }
+
 }
 
 h4 {
