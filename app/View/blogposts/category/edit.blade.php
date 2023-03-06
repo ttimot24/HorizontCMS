@@ -1,37 +1,39 @@
 @extends('layout')
 
 @section('content')
-<div class='container main-container'>
-<h2>{{ trans('category.edit_category') }}:</h2>
+    <div class='container main-container'>
+        <h2>{{ trans('category.edit_category') }}:</h2>
 
 
 
-<div class='col-md-12'>
+        <div class='col-md-12'>
 
-<form action="{{ route('blogpostcategory.update', ['blogpostcategory' => $category]) }}" class='form-inline float-right mt-4' role='form' method='POST'>
+            <form action="{{ route('blogpostcategory.update', ['blogpostcategory' => $category]) }}"
+                class='form-inline float-right mt-4' role='form' method='POST'>
 
-	@csrf
-	@method('PUT')
+                @csrf
+                @method('PUT')
 
-	<div class="row g-3 align-items-center">
-	<div class="col-auto">
-		<label for="inputPassword6" class="col-form-label">Rename:</label>
-	</div>
-	<div class="col-auto">
-		<input type='text' class='form-control' id='cat' name='name' value="{{ $category->name }}" required autofocus>
-	</div>
-	<div class="col-auto">
-		<span class="form-text">
-			<button type='submit' class='btn btn-primary'>{{ trans('actions.save') }}</button> 
-		</span>
-	</div>
-	</div>
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="inputPassword6" class="col-form-label">Rename:</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type='text' class='form-control' id='cat' name='name'
+                            value="{{ $category->name }}" required autofocus>
+                    </div>
+                    <div class="col-auto">
+                        <span class="form-text">
+                            <button type='submit' class='btn btn-primary'>{{ trans('actions.save') }}</button>
+                        </span>
+                    </div>
+                </div>
 
-</form>
+            </form>
 
-<div class="mt-5">
-    <a href="{{ route('blogpostcategory.index') }}" class="btn btn-info">{{ trans('actions.back') }}</a>
-</div>
+            <div class="mt-5">
+                <a href="{{ route('blogpostcategory.index') }}" class="btn btn-info">{{ trans('actions.back') }}</a>
+            </div>
 
-</div>
-@endsection
+        </div>
+    @endsection

@@ -107,7 +107,7 @@ class PageController extends Controller
     {
 
         $this->view->title(trans('page.view_page'));
-        return $this->view->render('pages/view', ['blogpost' => Page::find($id)]);
+        return $this->view->render('pages/view', ['page' => Page::find($id)]);
     }
 
     /**

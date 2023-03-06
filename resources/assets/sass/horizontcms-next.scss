@@ -406,3 +406,7 @@ tr #hidden-home a:hover {
 .card label {
     font-weight: bold;
 }
+
+.list-group-item:first-child {
+    border-radius: 0px;
+}
