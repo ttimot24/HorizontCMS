@@ -21,8 +21,6 @@ return [
 			],
 
 	'js' => [
-				'https://code.jquery.com/jquery-3.6.0.min.js',
-				'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js',
 				'resources/js/app.js',
 				'resources/js/lock-screen.js',
 			],

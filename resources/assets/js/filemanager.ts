@@ -1,4 +1,4 @@
-import * as $ from 'jquery';
+import $ from 'jquery';
 import Vue from 'vue';
 import { Modal } from 'bootstrap';
 import CKEDITOR from 'ckeditor4-vue';
@@ -7,6 +7,7 @@ var fileamanager = new Vue({
     name: 'FileManager',
     el: '#filemanager',
     mounted: function () {
+        
         var vm = this;
         vm._csrfToken = $('[name="_token"]').val();
 
@@ -209,7 +210,7 @@ var fileamanager = new Vue({
 
                         fileSelect.val("");
 
-                        fileSelect.fileinput("clear");
+                        //fileSelect.fileinput("clear");
 
                         for (var i = 0; i < data.uploadedFileNames.length; i++) {
                             console.log(vm.basename(data.uploadedFileNames[i]));

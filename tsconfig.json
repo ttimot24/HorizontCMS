@@ -21,6 +21,7 @@
       "experimentalDecorators": true,
       "moduleResolution": "node",
       "importHelpers": true,
+      "allowSyntheticDefaultImports": true,
       "target": "es2019",
       "module": "es2020",
       "lib": [
@@ -48,7 +49,6 @@
       "extensions": [
         ".vue"
       ]
-    },
-    "allowSyntheticDefaultImports": true
+    }
   }
   
