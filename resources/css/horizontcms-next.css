@@ -22564,12 +22564,17 @@ body {
   border-color: transparent;
 }
 
+.btn-default:hover {
+  background-color: #1f1f1f;
+  border-color: #1f1f1f;
+}
+
 .hide {
   display: none !important;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 table a:not(.btn),
@@ -22727,10 +22732,6 @@ small {
 .badge {
   border-color: transparent;
   color: #ebebeb;
-}
-
-.form-control {
-  font-size: 15px;
 }
 
 /*------CKEDITOR-----*/

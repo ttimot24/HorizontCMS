@@ -150,8 +150,13 @@ body {
 
 .btn-default {
     color: #ffffff !important;
-    background-color: #1f1f1f;
+    background-color: $dark;
     border-color: transparent;
+}
+
+.btn-default:hover{
+    background-color: $dark;
+    border-color: $dark;
 }
 
 .hide {
@@ -159,7 +164,7 @@ body {
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
 }
 
 
@@ -330,10 +335,6 @@ small {
 .badge {
     border-color: transparent;
     color: #ebebeb;
-}
-
-.form-control {
-    font-size: 15px;
 }
 
 /*------CKEDITOR-----*/
