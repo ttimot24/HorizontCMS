@@ -99,7 +99,7 @@
 
                                 <div v-for="file in files" class='file col-md-2 col-sm-4 col-xs-4 text-center'
                                     :id="file"
-                                    @if ($mode == 'embed') v-on:click="returnFileUrl('storage/'+currentDirectory+'/'+file);" @else v-on:click="select(file)" @endif>
+                                    @if ($mode == 'embed') v-on:click="returnFileUrl('<?= asset("") ?>storage/'+currentDirectory+'/'+file);" @else v-on:click="select(file)" @endif>
                                     <div class="file-nav text-end">
                                         <a class="me-1" v-on:click="renameModal(file)"><i class="fa fa-pencil"
                                                 aria-hidden="true"></i></a>

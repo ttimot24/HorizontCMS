@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import CKEDITOR from 'ckeditor4-vue';
 
 var fileamanager = new Vue({
     name: 'FileManager',
@@ -320,24 +319,22 @@ var fileamanager = new Vue({
             }
             return vars[vary];
         },
-        getUrlParam: function (paramName: string): string | null {
+        getUrlParam: function (paramName: string): number {
             var reParam = new RegExp('(?:[\?&]|&)' + paramName + '=([^&]+)', 'i');
             var match = window.location.search.match(reParam);
 
-            return (match && match.length > 1) ? match[1] : null;
+            return Number((match && match.length > 1) ? match[1] : null);
         },
         returnFileUrl: function (filepath: string): void {
 
-            console.log(CKEDITOR);
-
             try {
                 // Simulate user action of selecting a file to be returned to CKEditor.
-                var funcNum: number = 1;/*getUrlParam( 'CKEditorFuncNum' );*/
+                var funcNum: number = this.getUrlParam("CKEditorFuncNum");
                 var fileUrl: string = filepath;
-                CKEDITOR.config.tools.callFunction(funcNum, fileUrl, '');
+                window.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl, '');
                 window.close();
             } catch (e) {
-                console.log(CKEDITOR)
+                console.log(window.opener.CKEDITOR)
                 console.log(e);
             }
         },
