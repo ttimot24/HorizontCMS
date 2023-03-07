@@ -3,30 +3,41 @@
 @section('content')
     <div class='container main-container'>
 
+        <div class="card mb-3">
+            <div class="card-header fw-bold">
 
         <section class='row'>
-            <h2 class='col-md-9'>{{ trans('blogpost.view_blogpost') }}</h2>
 
-            <nav id="arrows" class='col-xs-12 col-md-3 pt-4'>
-                <ul class='pager list-unstyled'>
+            <div class="col-9">
+                <h2>{{ trans('blogpost.view_blogpost') }}</h2>
+            </div>
 
-                    @if ($previous_blogpost)
-                        <li class='btn previous float-start'><a class="rounded-pill bg-dark px-3 py-2 text-white"
-                                href="{{ route('blogpost.show', ['blogpost' => $previous_blogpost]) }}"> <span
-                                    class='fa fa-angle-left' aria-hidden='true'></span> {{ trans('actions.previous') }}</a>
-                        </li>
-                    @endif
+            <div class="col-3">
+                <nav id="arrows" class='col-xs-12 pt-4'>
+                    <ul class='pager list-unstyled'>
 
-                    @if ($next_blogpost)
-                        <li class='btn next float-end'><a class="rounded-pill bg-dark px-3 py-2 text-white"
-                                href="{{ route('blogpost.show', ['blogpost' => $next_blogpost]) }}">{{ trans('actions.next') }}
-                                <span class='fa fa-angle-right' aria-hidden='true'></span> </a></li>
-                    @endif
+                        @if ($previous_blogpost)
+                            <li class='btn previous float-start'><a class="rounded-pill bg-dark px-3 py-2 text-white"
+                                    href="{{ route('blogpost.show', ['blogpost' => $previous_blogpost]) }}"> <span
+                                        class='fa fa-angle-left' aria-hidden='true'></span> {{ trans('actions.previous') }}</a>
+                            </li>
+                        @endif
+
+                        @if ($next_blogpost)
+                            <li class='btn next float-end'><a class="rounded-pill bg-dark px-3 py-2 text-white"
+                                    href="{{ route('blogpost.show', ['blogpost' => $next_blogpost]) }}">{{ trans('actions.next') }}
+                                    <span class='fa fa-angle-right' aria-hidden='true'></span> </a></li>
+                        @endif
 
 
-                </ul>
-            </nav>
+                    </ul>
+                </nav>
+            </div>
         </section>
+
+        </div>
+
+        <div class="card-body">
 
 
         <section class='row'>
@@ -121,6 +132,8 @@
 
         @include('blogposts.comments', ['user' => \Auth::user()])
 
+
+    </div>
 
     </div>
 @endsection

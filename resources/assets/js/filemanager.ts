@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import { Modal } from 'bootstrap';
 import CKEDITOR from 'ckeditor4-vue';
 
 var fileamanager = new Vue({
@@ -70,8 +69,8 @@ var fileamanager = new Vue({
         }
     },
     methods: {
-        getModal: function(id: string): Modal {
-            return  (new Modal(document.getElementById(id) || {} as HTMLElement));
+        getModal: function(id: string): bootstrap.Modal {
+            return  (new bootstrap.Modal(document.getElementById(id) || {} as HTMLElement));
         },
         select: function (file: string): void {
             var vm = this;

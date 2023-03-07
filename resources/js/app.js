@@ -39713,6 +39713,7 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].config.devtools = true;
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vue_resource__WEBPACK_IMPORTED_MODULE_2__["default"]);
 window.vue = vue__WEBPACK_IMPORTED_MODULE_3__["default"];
+window.bootstrap = bootstrap__WEBPACK_IMPORTED_MODULE_0__;
 })();
 
 /******/ })()

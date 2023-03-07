@@ -3,31 +3,42 @@
 @section('content')
     <div class='container main-container'>
 
+
+        <div class="card mb-3">
+            <div class="card-header fw-bold">
+
         <section class='row'>
-            <h2 class='col-md-9'>{{ trans('user.view_user') }}</h2>
 
-            <nav id="arrows" class='col-md-3 pt-4'>
-                <ul class='pager list-unstyled'>
+            <div class='col-9'>
+                <h2>{{ trans('user.view_user') }}</h2>
+            </div>
+
+            <div class='col-3'>
+                <nav id="arrows" class='pt-4'>
+                    <ul class='pager list-unstyled'>
 
 
-                    @if ($previous_user)
-                        <li class='previous float-start'><a class="rounded-pill bg-dark px-3 py-2 text-white"
-                                href="{{ route('user.show', ['user' => $previous_user]) }}"> <span
-                                    class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>
-                                {{ trans('actions.previous') }}</a></li>
-                    @endif
+                        @if ($previous_user)
+                            <li class='previous float-start'><a class="rounded-pill bg-dark px-3 py-2 text-white"
+                                    href="{{ route('user.show', ['user' => $previous_user]) }}"> <i class="fa fa-angle-left" aria-hidden="true"></i>
 
-                    @if ($next_user)
-                        <li class='next float-end'><a class="rounded-pill bg-dark px-3 py-2 text-white"
-                                href="{{ route('user.show', ['user' => $next_user]) }}">{{ trans('actions.next') }} <span
-                                    class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span> </a></li>
-                    @endif
+                                    {{ trans('actions.previous') }}</a></li>
+                        @endif
 
-                </ul>
-            </nav>
+                        @if ($next_user)
+                            <li class='next float-end'><a class="rounded-pill bg-dark px-3 py-2 text-white"
+                                    href="{{ route('user.show', ['user' => $next_user]) }}">{{ trans('actions.next') }} <i class="fa fa-angle-right" aria-hidden="true"></i>
+ </a></li>
+                        @endif
+
+                    </ul>
+                </nav>
+            </div>
         </section>
 
+        </div>
 
+        <div class="card-body">
 
 
 
@@ -179,4 +190,6 @@
 
     </div>
     </section>
+
+    </div>
 @endsection

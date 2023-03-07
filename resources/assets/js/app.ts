@@ -3,7 +3,7 @@
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
  */
-import "bootstrap";
+import * as bootstrap from "bootstrap";
 import "bootstrap-fileinput";
 
 import Vue from 'vue';
@@ -13,3 +13,5 @@ Vue.config.devtools = true;
 Vue.use(VueResource);
 
 window.vue = Vue;
+
+window.bootstrap = bootstrap;
