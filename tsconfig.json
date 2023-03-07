@@ -33,7 +33,7 @@
       "resources/assets/js/**/*.ts", 
       "resources/assets/js/**/*.d.ts", 
       "resources/assets/js/**/*.tsx", 
-      "resources/assets/js/**/*.vue", 
+      "resources/assets/js/**/*.vue", "resources/assets/js/dragndrop.js", 
     ], 
     "exclude": ["docs/**/*"],
     "angularCompilerOptions": {
