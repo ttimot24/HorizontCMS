@@ -122,9 +122,6 @@
             </div>
         </section>
 
-        </div>
-        </div>
-
         @include('confirm_delete', [
             'route' => route('filemanager.destroy', ['filemanager' => 'sample']),
             'id' => 'delete_sample',
@@ -158,8 +155,7 @@
                         </div>
                         <div class='modal-footer'>
                             <button type='submit' class='btn btn-primary'>{{ trans('actions.upload') }}</button>
-                            <button type='button' class='btn btn-default'
-                                data-bs-dismiss='modal'>{{ trans('actions.cancel') }}</button>
+                            <button type='button' class='btn btn-default' data-bs-dismiss='modal'>{{ trans('actions.cancel') }}</button>
                         </div>
                     </form>
                 </div><!-- /.modal-content -->
@@ -191,8 +187,7 @@
                         </div>
                         <div class='modal-footer'>
                             <button type='submit' class='btn btn-primary'>{{ trans('actions.create') }}</button>
-                            <button type='button' class='btn btn-default'
-                                data-bs-dismiss='modal'>{{ trans('actions.cancel') }}</button>
+                            <button type='button' class='btn btn-default' data-bs-dismiss='modal'>{{ trans('actions.cancel') }}</button>
                         </div>
                     </form>
                 </div>
@@ -242,6 +237,9 @@
             </div>
         </div>
 
+
+        </div>
+        </div>
 
     </div>
 

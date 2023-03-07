@@ -22,7 +22,6 @@ return [
 
 	'js' => [
 				'resources/js/app.js',
-				'resources/js/lock-screen.js',
 			],
 
 	'meta' =>[

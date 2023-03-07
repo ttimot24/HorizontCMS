@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Modal } from 'bootstrap';
 import Vue from 'vue';
 
 var lockscreen = new Vue({
@@ -12,7 +11,7 @@ var lockscreen = new Vue({
 
         var vm = this;
 
-        vm.modal = new Modal(document.getElementById('lock_screen') as HTMLElement);
+        vm.modal = new window.bootstrap.Modal(document.getElementById('lock_screen') as HTMLElement);
 
         if (typeof (Storage) !== undefined) {
 
