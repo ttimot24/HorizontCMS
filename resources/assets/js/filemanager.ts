@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import Vue from 'vue';
 import { Modal } from 'bootstrap';
 import CKEDITOR from 'ckeditor4-vue';
@@ -19,7 +18,7 @@ var fileamanager = new Vue({
         $('#delete-form').on('submit', (event) => {event.preventDefault(); this.deleteFile();});
 
         console.log("VueJS: FileManager started");
-        vm.open(vm.currentDirectory, false);
+        vm.open($(this.$el).data('start'), false);
         console.log('Directory: ' + vm.currentDirectory);
     },
     data: function () {
@@ -352,3 +351,5 @@ var fileamanager = new Vue({
     }
 
 });
+
+window.filemanager = fileamanager;

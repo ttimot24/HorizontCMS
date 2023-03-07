@@ -5060,6 +5060,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/index.js");
 /* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/popper.js");
+/* provided dependency */ var __webpack_provided_window_dot_jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /*!
   * Bootstrap v5.2.3 (https://getbootstrap.com/)
   * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -5271,8 +5272,8 @@ const reflow = element => {
 };
 
 const getjQuery = () => {
-  if (window.jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
-    return window.jQuery;
+  if (__webpack_provided_window_dot_jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
+    return __webpack_provided_window_dot_jQuery;
   }
 
   return null;
@@ -33596,12 +33597,11 @@ var __webpack_exports__ = {};
   !*** ./resources/assets/js/lock-screen.ts ***!
   \********************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
@@ -33614,14 +33614,13 @@ function _typeof(obj) {
 
 
 
-
-var lockscreen = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
+var lockscreen = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
   name: 'LockScreen',
   el: '#lock_screen',
   data: {},
   mounted: function mounted() {
     var vm = this;
-    vm.modal = new bootstrap__WEBPACK_IMPORTED_MODULE_2__.Modal(document.getElementById('lock_screen'));
+    vm.modal = new bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal(document.getElementById('lock_screen'));
     if ((typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) !== undefined) {
       if (localStorage.locksession != null) {
         if (localStorage.locksession == 'true') {
@@ -33641,8 +33640,8 @@ var lockscreen = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
     },
     unlock: function unlock(userId) {
       var vm = this;
-      var password_field = jquery__WEBPACK_IMPORTED_MODULE_0__("#lock_pwd");
-      axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/v1/lock-up', {
+      var password_field = $("#lock_pwd");
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/v1/lock-up', {
         id: userId,
         password: password_field.val()
       }).then(function (response) {

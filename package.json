@@ -30,6 +30,7 @@
         "webpack-cli": "^5.0.1"
     },
     "dependencies": {
+        "@popperjs/core": "^2.11.6",
         "@vue/compiler-sfc": "^3.2.37",
         "@vue/composition-api": "^1.7.0",
         "@vue/runtime-dom": "^3.2.47",

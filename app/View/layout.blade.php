@@ -14,6 +14,14 @@
         <link rel="stylesheet" type="text/css" href="{{ asset($each_css) }}">
     @endforeach
 
+	@foreach ($js as $each_js)
+        <script type="text/javascript" src="{{ asset($each_js) }}"></script>
+    @endforeach
+
+    @foreach ($jsplugins as $each_js)
+        <script type="text/javascript" src="{{ asset($each_js) }}"></script>
+    @endforeach
+
 </head>
 
 <body @if (Auth::user()) style="padding-top: 5rem;" @endif>
@@ -49,14 +57,6 @@
             </div>
         </footer>
     </div>
-
-    @foreach ($js as $each_js)
-        <script type="text/javascript" src="{{ asset($each_js) }}"></script>
-    @endforeach
-
-    @foreach ($jsplugins as $each_js)
-        <script type="text/javascript" src="{{ asset($each_js) }}"></script>
-    @endforeach
 
 </body>
 

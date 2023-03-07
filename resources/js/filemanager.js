@@ -3273,6 +3273,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/index.js");
 /* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/popper.js");
+/* provided dependency */ var __webpack_provided_window_dot_jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /*!
   * Bootstrap v5.2.3 (https://getbootstrap.com/)
   * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -3484,8 +3485,8 @@ const reflow = element => {
 };
 
 const getjQuery = () => {
-  if (window.jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
-    return window.jQuery;
+  if (__webpack_provided_window_dot_jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
+    return __webpack_provided_window_dot_jQuery;
   }
 
   return null;
@@ -31631,12 +31632,11 @@ var __webpack_exports__ = {};
   !*** ./resources/assets/js/filemanager.ts ***!
   \********************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
-/* harmony import */ var ckeditor4_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ckeditor4-vue */ "./node_modules/ckeditor4-vue/dist/ckeditor.js");
-/* harmony import */ var ckeditor4_vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(ckeditor4_vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
+/* harmony import */ var ckeditor4_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ckeditor4-vue */ "./node_modules/ckeditor4-vue/dist/ckeditor.js");
+/* harmony import */ var ckeditor4_vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(ckeditor4_vue__WEBPACK_IMPORTED_MODULE_1__);
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
@@ -31649,24 +31649,23 @@ function _typeof(obj) {
 
 
 
-
-var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
+var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
   name: 'FileManager',
   el: '#filemanager',
   mounted: function mounted() {
     var _this = this;
     var vm = this;
-    vm._csrfToken = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[name="_token"]').val();
+    vm._csrfToken = $('[name="_token"]').val();
     vm.modalRename = vm.getModal("rename_sample");
     vm.modalUpload = vm.getModal("upload_file_to_storage");
     vm.modalNewFolder = vm.getModal("new_folder");
     vm.modalDelete = vm.getModal("delete_sample");
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#delete-form').on('submit', function (event) {
+    $('#delete-form').on('submit', function (event) {
       event.preventDefault();
       _this.deleteFile();
     });
     console.log("VueJS: FileManager started");
-    vm.open(vm.currentDirectory, false);
+    vm.open($(this.$el).data('start'), false);
     console.log('Directory: ' + vm.currentDirectory);
   },
   data: function data() {
@@ -31718,14 +31717,14 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
   },
   methods: {
     getModal: function getModal(id) {
-      return new bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal(document.getElementById(id) || {});
+      return new bootstrap__WEBPACK_IMPORTED_MODULE_0__.Modal(document.getElementById(id) || {});
     },
     select: function select(file) {
       var vm = this;
       vm.selected = (event === null || event === void 0 ? void 0 : event.currentTarget).id;
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(".file").removeClass('selected');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(".folder").removeClass('selected');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(event === null || event === void 0 ? void 0 : event.currentTarget).addClass('selected');
+      $(".file").removeClass('selected');
+      $(".folder").removeClass('selected');
+      $(event === null || event === void 0 ? void 0 : event.currentTarget).addClass('selected');
       console.log('Selected file: ' + vm.selected);
     },
     open: function open(folder) {
@@ -31736,7 +31735,7 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
       } else {
         var folderToOpen = folder;
       }
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      $.ajax({
         url: 'admin/file-manager/index',
         type: 'GET',
         data: {
@@ -31758,7 +31757,7 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
               vm.files.push(each);
             });
           }
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.fa-refresh').removeClass('fa-spin');
+          $('.fa-refresh').removeClass('fa-spin');
         },
         error: function error(data) {
           console.log(data);
@@ -31770,8 +31769,8 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
     newFolder: function newFolder(event) {
       var vm = this;
       var dirPath = vm.currentDirectory;
-      var folderName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[name="new_folder_name"]').val();
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().post(event.target.action, {
+      var folderName = $('[name="new_folder_name"]').val();
+      $.post(event.target.action, {
         _token: vm._csrfToken,
         dir_path: dirPath,
         new_folder_name: folderName
@@ -31779,7 +31778,7 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
         if (_typeof(data.success) !== undefined) {
           console.log("Dir created: " + dirPath + '/' + folderName);
           vm.modalNewFolder.hide();
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('[name="new_folder_name"]').val("");
+          $('[name="new_folder_name"]').val("");
           vm.folders.push(folderName);
         } else {
           console.log("Error:");
@@ -31791,7 +31790,7 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
       var vm = this;
       console.log("Uploading ...");
       var dirPath = vm.currentDirectory;
-      var fileSelect = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#input-2');
+      var fileSelect = $('#input-2');
       var files = fileSelect[0].files;
       if (!files) {
         console.log("No file is selected");
@@ -31804,7 +31803,7 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
         var file = files[i];
         formData.append('up_file[]', file, file.name);
       }
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      $.ajax({
         url: event.target.action,
         type: 'POST',
         enctype: 'multipart/form-data',
@@ -31838,34 +31837,34 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
     },
     deleteModal: function deleteModal(file) {
       var vm = this;
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#content-name').text(vm.basename(file));
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()("#delete-submit").data('file', file);
+      $('#content-name').text(vm.basename(file));
+      $("#delete-submit").data('file', file);
       vm.modalDelete.show();
     },
     renameModal: function renameModal(file) {
       var vm = this;
       vm.select(file);
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()("#selected").val(file);
+      $("#selected").val(file);
       vm.modalRename.show();
     },
     renameFile: function renameFile(event) {
       var vm = this;
-      var file = vm.currentDirectory.concat('/').concat(jquery__WEBPACK_IMPORTED_MODULE_0___default()('[name="old_name"]').val());
+      var file = vm.currentDirectory.concat('/').concat($('[name="old_name"]').val());
       console.log(file);
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      $.ajax({
         type: "PUT",
         url: event.target.action,
         contentType: "application/json",
         data: JSON.stringify({
           _token: vm._csrfToken,
-          old_file: vm.currentDirectory.concat('/').concat(jquery__WEBPACK_IMPORTED_MODULE_0___default()('[name="old_name"]').val()),
-          new_file: vm.currentDirectory.concat('/').concat(jquery__WEBPACK_IMPORTED_MODULE_0___default()('[name="new_name"]').val())
+          old_file: vm.currentDirectory.concat('/').concat($('[name="old_name"]').val()),
+          new_file: vm.currentDirectory.concat('/').concat($('[name="new_name"]').val())
         }),
         success: function success(data) {
           if (_typeof(data.success) !== undefined) {
             vm.open(vm.currentDirectory);
             vm.modalRename.hide();
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('[name="new_name"]').val('');
+            $('[name="new_name"]').val('');
           } else {
             console.log(data);
           }
@@ -31874,9 +31873,9 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
     },
     deleteFile: function deleteFile() {
       var vm = this;
-      var deleteSubmit = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#delete-submit");
+      var deleteSubmit = $("#delete-submit");
       var file = vm.currentDirectory.concat('/').concat(deleteSubmit.data('file'));
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().post('admin/file-manager/destroy', {
+      $.post('admin/file-manager/destroy', {
         _token: vm._csrfToken,
         file: file
       }, function (data) {
@@ -31912,15 +31911,15 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
       return match && match.length > 1 ? match[1] : null;
     },
     returnFileUrl: function returnFileUrl(filepath) {
-      console.log((ckeditor4_vue__WEBPACK_IMPORTED_MODULE_2___default()));
+      console.log((ckeditor4_vue__WEBPACK_IMPORTED_MODULE_1___default()));
       try {
         // Simulate user action of selecting a file to be returned to CKEditor.
         var funcNum = 1; /*getUrlParam( 'CKEditorFuncNum' );*/
         var fileUrl = filepath;
-        ckeditor4_vue__WEBPACK_IMPORTED_MODULE_2___default().config.tools.callFunction(funcNum, fileUrl, '');
+        ckeditor4_vue__WEBPACK_IMPORTED_MODULE_1___default().config.tools.callFunction(funcNum, fileUrl, '');
         window.close();
       } catch (e) {
-        console.log((ckeditor4_vue__WEBPACK_IMPORTED_MODULE_2___default()));
+        console.log((ckeditor4_vue__WEBPACK_IMPORTED_MODULE_1___default()));
         console.log(e);
       }
     },
@@ -31933,6 +31932,7 @@ var fileamanager = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
     }
   }
 });
+window.filemanager = fileamanager;
 })();
 
 /******/ })()

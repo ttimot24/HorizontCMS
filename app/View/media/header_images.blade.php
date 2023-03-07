@@ -3,6 +3,9 @@
 @section('content')
     <div class='container main-container'>
 
+            <div class="card mb-3">
+                <div class="card-header fw-bold">
+
         <div class="row">
 
             <div class='col-md-10'>
@@ -15,6 +18,10 @@
             </div>
         </div>
         <div class="clearfix"></div>
+
+        </div>
+
+        <div class="card-body">
 
         <div class='jumbotron text-white' style='padding:3rem;background-color:#31708F;'>
             <h4>Currently on the slider:</h4>
@@ -113,7 +120,6 @@
                     </div>
 
 
-
                     <div class='modal edit_images' id='headline-image-{{ $each->id }}' tabindex='-1'
                         role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
                         <div class='modal-dialog modal-xl'>
@@ -201,5 +207,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+</div>
+</div>
 
 @endsection

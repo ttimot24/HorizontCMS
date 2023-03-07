@@ -187,14 +187,14 @@
                 if (context == "logo") {
 
                     var src = $(event.target).attr('src');
-                    var bname = filemanager.basename(src) + "." + filemanager.getFileExtension(src);
+                    var bname = filemanager.basename(src);
                     $('[name="logo"]').val(bname);
                     $('#logo').attr('src', 'storage/images/logos/' + bname);
 
                 } else if (context == "favicon") {
 
                     var src = $(event.target).attr('src');
-                    var bname = filemanager.basename(src) + "." + filemanager.getFileExtension(src);
+                    var bname = filemanager.basename(src);
                     $('[name="favicon"]').val(bname);
                     $('#favicon').attr('src', 'storage/images/favicons/' + bname);
 

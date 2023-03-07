@@ -1,7 +1,10 @@
 export {};
 
 declare global {
-    var vue: VueConstructor<Vue>;
-    var lockscreen: LockScreen;
-    var texteditor: TextEditor;
+    interface Window {
+        vue: VueConstructor<Vue>;
+        lockscreen: LockScreen;
+        filemanager: FileManager;
+        texteditor: TextEditor;
+    }
 }

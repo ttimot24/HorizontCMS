@@ -13,6 +13,10 @@ const mix = require('laravel-mix');
 
 mix.setPublicPath('resources');
 
+mix.autoload({
+   jquery: ['$', 'window.jQuery']
+});
+
 mix.ts('resources/assets/js/app.ts', 'js')
    .ts('resources/assets/js/lock-screen.ts', 'js')
    .ts('resources/assets/js/texteditor.ts', 'js')

@@ -118,8 +118,7 @@
 
 
 
-        <div class='modal admin_logo_select-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel'
-            aria-hidden='true'>
+        <div class='modal admin_logo_select-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>
             <div class='modal-dialog modal-xl'>
                 <div class='modal-content'>
 
@@ -147,7 +146,7 @@
     <script>
         $("#workspace").on('click', ".file", function(event) {
             var src = $(event.target).attr('src');
-            var bname = filemanager.basename(src) + "." + filemanager.getFileExtension(src);
+            var bname = filemanager.basename(src);
             $('[name="admin_logo"]').val(bname);
             $('#admin_logo').attr('src', 'storage/images/logos/' + bname);
             $('.admin_logo_select-modal-lg').modal("hide");

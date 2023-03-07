@@ -4,15 +4,18 @@
         @csrf
         <section class='container'>
 
+            <div class="card mb-3">
+                <div class="card-header fw-bold">
+
             <section class='row'>
 
                 <div class='col-md-4'>
-                    <h2>File manager</h2>
+                    <h2>{{ trans('File manager') }}</h2>
                 </div>
 
                 <div class='col-md-8 text-end mt-4'>
                     <div class="row">
-                        <div class="col-md-4 offset-md-4 col-sm-7 col-xs-7 text-end">
+                        <div class="col-md-4 offset-md-3 col-sm-7 col-xs-7 text-end">
                             <input type="text" v-model="filter" class="form-control" id="filter"
                                 placeholder="Filter">
                         </div>
@@ -30,9 +33,13 @@
 
             </section>
 
+            </div>
+
+            <div class="card-body container py-0">
+
             <div class="row">
 
-                <div class='panel panel-default col-2 bg-dark p-3'>
+                <div class='panel panel-default col-2 bg-dark p-3' style="min-height:500px;">
                     <h4 class="p-2 bg-dark text-white">Drivers</h4>
                     <ul class="list-group">
                         @foreach (config('filesystems.disks') as $key => $value)
@@ -114,6 +121,9 @@
 
             </div>
         </section>
+
+        </div>
+        </div>
 
         @include('confirm_delete', [
             'route' => route('filemanager.destroy', ['filemanager' => 'sample']),

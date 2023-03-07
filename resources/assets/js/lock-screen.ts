@@ -1,4 +1,3 @@
-import * as $ from 'jquery';
 import axios from 'axios';
 import { Modal } from 'bootstrap';
 import Vue from 'vue';
