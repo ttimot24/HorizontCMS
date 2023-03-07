@@ -3,25 +3,29 @@
 @section('content')
     <div class='container main-container'>
 
-        <div class='row'>
-            <div class='col-md-7'>
-                <h2>System Update Center</h2>
+        <div class="card mb-3">
+            <div class="card-header fw-bold">
+
+            <div class='row'>
+                <div class='col-7'>
+                    <h2>{{ trans('System Update Center') }}</h2>
+                </div>
+
+                <div class='col-5'>
+                    <br>
+                    <a class="list-group-item active bg-primary border-0 p-3">
+                        <h4 class="list-group-item-heading">Current version: v{{ $current_version->version }}</h4>
+                        <p class="list-group-item-text">Installed:
+                            {{ $current_version->created_at->format(\Settings::get('date_format', \Config::get('horizontcms.default_date_format'), true)) }}
+                        </p>
+                    </a>
+
+                </div>
             </div>
 
-            <div class='col-md-5'>
-                <br>
-                <a class="list-group-item active bg-primary border-0">
-                    <h4 class="list-group-item-heading">Current version: v{{ $current_version->version }}</h4>
-                    <p class="list-group-item-text">Installed:
-                        {{ $current_version->created_at->format(\Settings::get('date_format', \Config::get('horizontcms.default_date_format'), true)) }}
-                    </p>
-                </a>
-
-            </div>
         </div>
 
-        <br><br>
-
+        <div class="card-body">
         <section class='row'>
 
             <div class='col-md-4'
@@ -87,5 +91,5 @@
 
     </div>
 
-    <br><br><br>
+    </div>
 @endsection

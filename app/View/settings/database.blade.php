@@ -2,17 +2,20 @@
 
 @section('content')
     <div class='container'>
-        <section class="row">
-            <div class="col-md-8">
-                <h2 class="mb-5">{{ trans('settings.database') }}</h2>
-            </div>
-            <div class='col-md-4'>
-                <br>
-                <a class='btn btn-primary pull-right' disabled>Backup database</a>
-            </div>
-            <br><br><br><br>
+        <div class="card mb-3">
+            <div class="card-header fw-bold">
+                <div class="row">
+                    <div class='col-md-8'>
+                        <h2>{{ trans('settings.database') }}</h2>
+                    </div>
 
+                    <div class='col-md-4 text-end'><br>
+                        <a class='btn btn-primary' disabled>Backup database</a>
+                    </div>
+                </div>
+            </div>
 
+            <div class="card-body">
             <table class='table table-bordered table-hover'>
                 <thead>
                     <th class="col-md-8">Table</th>
@@ -32,6 +35,6 @@
 
                 </tbody>
             </table>
-        </section>
+            </div>
     </div>
 @endsection

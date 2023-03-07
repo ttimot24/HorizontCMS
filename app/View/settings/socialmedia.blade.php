@@ -3,8 +3,13 @@
 @section('content')
     <div class='container main-container'>
 
-        <h2 class="mb-5">Social media</h2>
+        <div class="card mb-3">
+            <div class="card-header fw-bold">
 
+                <h2>Social media</h2>
+
+            </div>
+        <div class="card-body">
         <form action='' role='form' method='POST'>
             @csrf
 
@@ -34,6 +39,6 @@
                 </tbody>
             </table>
         </form>
-
+        </div>
     </div>
 @endsection

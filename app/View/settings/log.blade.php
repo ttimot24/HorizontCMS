@@ -2,8 +2,13 @@
 
 @section('content')
     <div class='container'>
-        <h2 class="mb-5">System log <small class='pull-right text-muted'>Files: {{ $all_files->count() }}</small></h2>
 
+            <div class="card mb-3">
+            <div class="card-header fw-bold">
+                <h2>System log <small class='pull-right text-muted'>Files: {{ $all_files->count() }}</small></h2>
+            </div>
+
+        <div class="card-body">
         <section class="row">
 
 
@@ -89,5 +94,6 @@
         </div>
 
     </section>
+    </div>
 </div>
 @endsection

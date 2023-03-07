@@ -2,8 +2,12 @@
 
 @section('content')
     <div class='container'>
-        <section class="row">
-            <h2 class="mb-5">Server Information</h2>
+        <div class="card mb-3">
+            <div class="card-header fw-bold">
+                <h2>{{ trans('Server Information') }}</h2>
+            </div>
+
+        <div class="card-body">
 
             <table class='table table-bordered'>
                 <thead>
@@ -24,6 +28,7 @@
 
                 </tbody>
             </table>
-        </section>
+
+        </div>
     </div>
 @endsection

@@ -1,8 +1,15 @@
 @extends('layout')
 @section('content')
     <div class='container main-container'>
-        <h2>Website settings</h2>
-        <br><br>
+
+        <div class="card mb-3">
+            <div class="card-header fw-bold">
+
+        <h2>{{ trans('Website settings') }}</h2>
+
+        </div>
+
+        <div class="card-body">
         <form action='{{ route('settings.store') }}' role='form' method='POST'>
             @csrf
             <table class='table-bordered col-md-12 text-center' id='settings'>
@@ -168,6 +175,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+
         </div>
 
         <script>

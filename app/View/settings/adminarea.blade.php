@@ -3,9 +3,14 @@
 @section('content')
     <div class='container main-container'>
 
-        <h2 class="mb-5">{{ trans('settings.adminarea_settings') }}</h2>
+        <div class="card mb-3">
+            <div class="card-header fw-bold">
 
+        <h2>{{ trans('settings.adminarea_settings') }}</h2>
 
+        </div>
+
+        <div class="card-body">
         <form action='{{ route('settings.store') }}' role='form' method='POST'>
             @csrf
 
@@ -140,6 +145,8 @@
         </div>
 
 
+
+    </div>
 
     </div>
 
