@@ -22,7 +22,7 @@
                         <div class="col text-end">
                             <a class='btn btn-primary mr-2' data-bs-toggle='modal' data-bs-backdrop='static'
                                 data-bs-target='.upload_file_to_storage'><i class="fa fa-upload" aria-hidden="true"></i>
-                                Upload</a>
+                                {{ trans('actions.upload') }}</a>
                             <a class='btn btn-primary' data-bs-toggle='modal' data-bs-backdrop='static'
                                 data-bs-target='.new_folder'><i class="fa fa-folder" aria-hidden="true"></i> Create
                                 Folder</a>
