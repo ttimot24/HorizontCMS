@@ -9,7 +9,7 @@
         <div class="row">
 
             <div class='col-md-10'>
-                <h2>Header images</h2>
+                <h2>{{ trans('Header images') }}</h2>
             </div>
 
             <div class='col-md-2 my-auto d-flex justify-content-end'>

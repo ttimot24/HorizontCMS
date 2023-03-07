@@ -2,8 +2,15 @@
 
 @section('content')
     <div class='container'>
-        <h2>Theme options</h2>
 
+            <div class="card mb-3">
+                <div class="card-header fw-bold">
+
+        <h2>{{ trans('Theme options') }}</h2>
+
+            </div>
+
+        <div class="card-body">
 
         <div class="d-flex align-items-start pt-4">
             <div class="nav flex-column nav-pills me-3 col-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -63,6 +70,9 @@
                 </div>
             </div>
         </div>
+
+    </div>
+
 
     </div>
 @endsection

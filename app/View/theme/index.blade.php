@@ -3,6 +3,9 @@
 @section('content')
     <div class='container'>
 
+            <div class="card mb-3">
+                <div class="card-header fw-bold">
+
         <div class="row">
             <div class='col-md-8'>
                 <h1>{{ trans('theme.themes') }}</h1>
@@ -15,7 +18,11 @@
                         class='fa fa-upload'></i>&nbsp{{ trans('theme.upload_theme_button') }}</a>
             </div>
 
+        </div>
 
+        </div>
+
+        <div class="card-body">
 
             <div class='col-md-12'>
                 <div class='jumbotron' style='background-color:#31708F;'>
@@ -95,7 +102,8 @@
 
     </div>
 
-
+    </div>
+    </div>
 
 
     <div class='modal upload_theme' id='create_file' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'
