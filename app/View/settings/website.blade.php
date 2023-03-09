@@ -170,7 +170,7 @@
                         <h3 class='modal-title text-center'>Select Logo</h3>
                         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                     </div>
-                    <div class='modal-body p-3' style="height:500px;">
+                    <div class='modal-body p-3' style="max-height:75vh; overflow-y: scroll;">
                         @include('media.filemanager', ['mode' => '', 'current_dir' => 'storage/images'])
                     </div>
                 </div>

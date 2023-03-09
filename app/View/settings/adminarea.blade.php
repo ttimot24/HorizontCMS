@@ -132,7 +132,7 @@
 
                         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                     </div>
-                    <div class='modal-body'>
+                    <div class='modal-body' style="max-height:75vh; overflow-y: scroll;">
 
                         @include('media.filemanager', [
                             'mode' => '',
