@@ -17,20 +17,12 @@ return [
 	'sattelite_url' => env('HCMS_CENTRAL_REPO','http://eterfesztival.hu/hcms_online_store/satellite/public/api'),
 
 	'css' => [
-			'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
-
 			'resources/css/horizontcms-next.css',
-
-			'resources/assets/filemaster/css/fileinput.min.css',
-			'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'
 			],
 
 	'js' => [
-			'https://code.jquery.com/jquery-3.6.0.min.js',
-			'resources/assets/filemaster/js/fileinput.min.js',
-			'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js',
-			'resources/js/app.js',
-		],
+				'resources/js/app.js',
+			],
 
 	'meta' =>[
 				[ "name" => "viewport", 

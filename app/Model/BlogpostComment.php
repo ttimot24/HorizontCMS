@@ -4,8 +4,16 @@ namespace App\Model;
 
 use \App\Libs\Model;
 
-class BlogpostComment extends Model{
-    //
+class BlogpostComment extends Model {
+    
+	/**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'blogpost_id', 'comment', 'active',
+    ];
 
 	public function blogpost(){
 		return $this->belongsTo(\App\Model\Blogpost::class,'blogpost_id','id');

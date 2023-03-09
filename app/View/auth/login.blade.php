@@ -14,24 +14,24 @@
             @csrf
             <div class="row">
                 <div class='col-xs-12 col-md-3 pull-left'>  
-                    <div class="form-group {{ $errors->has('username') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for='text'>{{trans('login.username')}}:</label>
-                        <input type='text' class='form-control' id='username' name='username' placeholder="{{trans('login.enter_username')}}" autofocus required>
-                            @if ($errors->has('username'))
-                                <span class="help-block">
+                        <input type='text' class="form-control  @error('username') is-invalid @enderror" id='username' name='username' placeholder="{{trans('login.enter_username')}}" autofocus required>
+                            @error('username')
+                                <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('username') }}</strong>
                                 </span>
-                            @endif
+                            @enderror
                     </div>
                     
-                    <div class="form-group {{ $errors->has('username') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for='pwd'>{{trans('login.password')}}:</label>
-                        <input type='password' class='form-control' id='pwd' name='password' placeholder="{{trans('login.enter_password')}}" required>
-                            @if ($errors->has('password'))
-                                <span class="help-block">
+                        <input type='password' class="form-control  @error('password') is-invalid @enderror" id='pwd' name='password' placeholder="{{trans('login.enter_password')}}" required>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('password') }}</strong>
                                 </span>
-                            @endif
+                            @enderror
                     </div>
 
                     @if ($errors->has('username') || $errors->has('password'))

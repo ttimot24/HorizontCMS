@@ -9,6 +9,7 @@ return [
 	'save_draft' => 'Mentés vázlatként',
 	'add' => 'Hozzáadás',
 	'edit' => 'Szerkesztés',
+	'create' => 'Létrehoz',
 	'options' => 'Beállítások',
 	'update' => 'Frissít',
 	'delete' => 'Törlés',
@@ -22,9 +23,10 @@ return [
 	'previous' => 'Előző',
 	'back' => 'Vissza',
 	'upload' => 'Feltöltés',
+	'unlock' => 'Feloldás',
 	'are_you_sure' => 'Biztos vagy benne?',
 	'delete_this' => 'Törlöd ezt a(z) :content_type -t',
 	'upload_image' => 'Kép feltöltés',
 	'deactivate' => 'Tiltás',
-
+	'select' => 'Kiválaszt'
 ];

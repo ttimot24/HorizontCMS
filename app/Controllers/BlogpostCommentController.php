@@ -7,34 +7,17 @@ use App\Libs\Controller;
 
 use App\Model\BlogpostComment;
 
-class BlogpostCommentController extends Controller{
- 
+class BlogpostCommentController extends Controller
+{
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
-
-       
-
-        if($this->request->isMethod('POST')){
-
-            $blogpost_comment = new BlogpostComment();
-            $blogpost_comment->blogpost_id = $this->request->input('blogpost_id');
-            $blogpost_comment->comment = $this->request->input('comment');
-            $blogpost_comment->user_id = \Auth::user()->id;
-
-            if($blogpost_comment->save()){               
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost_comment')]);
-            }else{
-            	return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-
-            
-        }
-
+    public function create()
+    {
     }
 
     /**
@@ -43,8 +26,17 @@ class BlogpostCommentController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-        //
+    public function store(Request $request)
+    {
+
+        $blogpost_comment = new BlogpostComment($request->all());
+        $blogpost_comment->blogpost_id = $request->input('blogpost_id');
+        $blogpost_comment->user_id = \Auth::user()->id;
+
+        return $this->redirectToSelf()->withMessage(
+            $blogpost_comment->save() ? ['success' => trans('message.successfully_created_blogpost_comment')]
+                : ['danger' => trans('message.something_went_wrong')]
+        );
     }
 
     /**
@@ -53,8 +45,8 @@ class BlogpostCommentController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
-
+    public function show($id)
+    {
     }
 
     /**
@@ -64,24 +56,21 @@ class BlogpostCommentController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id){
-      	 
-
-            $blogpost_comment = BlogpostComment::find($id);
-
-            $blogpost_comment = new BlogpostComment();
-            $blogpost_comment->blogpost_id = $this->request->input('blogpost_id');
-            $blogpost_comment->comment = $this->request->input('comment');
-            $blogpost_comment->user_id = \Auth::user()->id;
+    public function update($id)
+    {
 
 
-            if($blogpost_comment->save()){               
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_updated_blogpost_comment')]);
-            }else{
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
+        $blogpost_comment = BlogpostComment::find($id);
+
+        $blogpost_comment->blogpost_id = $this->request->input('blogpost_id');
+        $blogpost_comment->comment = $this->request->input('comment');
+        $blogpost_comment->user_id = \Auth::user()->id;
 
 
+        return $this->redirectToSelf()->withMessage(
+            $blogpost_comment->save() ? ['success' => trans('message.successfully_updated_blogpost_comment')]
+                : ['danger' => trans('message.something_went_wrong')]
+        );
     }
 
     /**
@@ -90,28 +79,13 @@ class BlogpostCommentController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
-        //
+    public function destroy(BlogpostComment $blogpostcomment)
+    {
+
+
+        return $this->redirectToSelf()->withMessage(
+            $blogpostcomment->delete() ? ['success' => trans('message.successfully_deleted_blogpost_comment')]
+                : ['danger' => trans('message.something_went_wrong')]
+        );
     }
-
-
-    /**
-     * Remove the specified resource from database.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id){
-        
-
-        if(BlogpostComment::find($id)->delete()){
-			return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpost_comment')]);
-        }
-
-
-        return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-
-    }
-
-
 }

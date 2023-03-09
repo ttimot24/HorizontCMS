@@ -1,25 +1,23 @@
 @extends('layout')
 
 @section('content')
-<div class='container main-container'>
+    <div class='container main-container'>
 
 
-<h2>Online Store</h2>
-<hr>
-<br>
+        <h2>Online Store</h2>
+        <hr>
+        <br>
 
-<div class="row">
+        <div class="row">
 
-<?php 
-if(!$repo_status || $repo_status){
-
-  echo (new BootstrapMessage())->warning("Theme store unreachable!"); 
-}
-
-?>
+            @if (!$repo_status || $repo_status)
+                <div class="alert alert-warning" role="alert">
+                    <div><b>Warning</b> Theme store unreachable!</div>
+                </div>
+            @endif
 
 
-	</div>
+        </div>
 
-</div>
+    </div>
 @endsection

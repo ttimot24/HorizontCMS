@@ -4,11 +4,11 @@ namespace App\Controllers;
 
 use Illuminate\Http\Request;
 use App\Libs\Controller;
-
 use App\Model\User;
 
-class UserController extends Controller{
- 
+class UserController extends Controller
+{
+
 
     protected $itemPerPage = 100;
     protected $imagePath = 'images/users';
@@ -17,10 +17,11 @@ class UserController extends Controller{
      * Creates image directories if they not exists.
      *
      * @return \Illuminate\Http\Response
-    */
-    public function before(){
-        if(!file_exists(storage_path($this->imagePath.'/thumbs'))){
-            \File::makeDirectory(storage_path($this->imagePath.'/thumbs'), $mode = 0777, true, true);
+     */
+    public function before()
+    {
+        if (!file_exists(storage_path($this->imagePath . '/thumbs'))) {
+            \File::makeDirectory(storage_path($this->imagePath . '/thumbs'), $mode = 0777, true, true);
         }
     }
 
@@ -30,15 +31,16 @@ class UserController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug){
+    public function index()
+    {
 
 
         $this->view->title(trans('user.users'));
-        return $this->view->render('users/index',[
-                                                        'number_of_users' => User::count(),
-                                                        'all_users' => User::paginate($this->itemPerPage),
-                                                        'active_users' => User::where('active',1)->count(),
-                                                    ]);
+        return $this->view->render('users/index', [
+            'number_of_users' => User::count(),
+            'all_users' => User::paginate($this->itemPerPage),
+            'active_users' => User::where('active', 1)->count(),
+        ]);
     }
 
     /**
@@ -46,16 +48,14 @@ class UserController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
-
-
-        $this->view->js('resources/js/controls.js');
+    public function create()
+    {
 
         $this->view->title(trans('user.create_user'));
-        return $this->view->render('users/form',[
-                                                    'current_user' => $this->request->user(),
-                                                    'role_options' => \App\Model\UserRole::all()
-                                                ]);
+        return $this->view->render('users/form', [
+            'current_user' => $this->request->user(),
+            'role_options' => \App\Model\UserRole::all()
+        ]);
     }
 
     /**
@@ -64,37 +64,37 @@ class UserController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(){
-        
-        if($this->request->isMethod('POST')){
+    public function store(Request $request)
+    {
 
-            $user = new User($this->request->all());
-            $user->slug = str_slug($this->request->input('username'), "-");
-            $user->visits = 0;
-            $user->active = 1;
-            
+        $request->validate([
+            'password' => 'required|confirmed|min:6'
+        ]);
 
-            if ($this->request->hasFile('up_file')){
-                 
-                 $img = $this->request->up_file->store($this->imagePath);
+        $user = new User($request->all());
+        $user->slug = str_slug($request->input('username'), "-");
+        $user->visits = 0;
+        $user->active = 1;
 
-                 $user->image = basename($img);
 
-                 if(extension_loaded('gd')){
-                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$user->image));
-                 }
+        if ($request->hasFile('up_file')) {
+
+            $img = $request->up_file->store($this->imagePath);
+
+            $user->image = basename($img);
+
+            if (extension_loaded('gd')) {
+                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath . '/thumbs/' . $user->image));
             }
-
-
-            if($user->save()){
-
-            	return $this->redirect(admin_link("user-edit",$user->id))->withMessage(['success' => trans('message.successfully_created_user')]);
-            }else{
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-            
         }
 
+
+        if ($user->save()) {
+
+            return $this->redirect(route("user.edit", ['user' => $user]))->withMessage(['success' => trans('message.successfully_created_user')]);
+        } else {
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
     }
 
     /**
@@ -103,14 +103,15 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
+    public function show($id)
+    {
 
         $this->view->title(trans('user.view_user'));
-        return $this->view->render('users/view',[
-                                                    'user' => User::find($id),
-                                                    'previous_user' => User::where('id', '<', $id)->max('id'),
-                                                    'next_user' =>  User::where('id', '>', $id)->min('id'),
-                                                ]);
+        return $this->view->render('users/view', [
+            'user' => User::find($id),
+            'previous_user' => User::where('id', '<', $id)->max('id'),
+            'next_user' =>  User::where('id', '>', $id)->min('id'),
+        ]);
     }
 
     /**
@@ -119,16 +120,15 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
-
-        $this->view->js('resources/js/controls.js');
+    public function edit($id)
+    {
 
         $this->view->title(trans('user.edit_user'));
-        return $this->view->render('users/form',[
-                                                'current_user' => $this->request->user(),
-                                                'user' => User::find($id),
-                                                'role_options' => \App\Model\UserRole::all(),
-                                                ]);
+        return $this->view->render('users/form', [
+            'current_user' => $this->request->user(),
+            'user' => User::find($id),
+            'role_options' => \App\Model\UserRole::all(),
+        ]);
     }
 
     /**
@@ -138,47 +138,40 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id){
-        if($this->request->isMethod('PUT')){
+    public function update(Request $request, $id)
+    {
 
-            $user = User::find($id);
-            $user->name = $this->request->input('name');
-            $user->username = $this->request->input('username');
-            $user->slug = str_slug($this->request->input('username'), "-");
-            $user->email = $this->request->input('email');
-            $user->phone = $this->request->input('phone');
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->username = $request->input('username');
+        $user->slug = str_slug($request->input('username'), "-");
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
 
-            if($this->request->has('password')){
-                $user->password = $this->request->input('password');
+        if ($request->has('password')) {
+            $user->password = $request->input('password');
+        }
+
+        $user->role_id = $request->input('role_id');
+        // $user->active = 1;
+
+
+
+        if ($request->hasFile('up_file')) {
+
+            $img = $request->up_file->store($this->imagePath);
+
+            $user->image = basename($img);
+
+            if (extension_loaded('gd')) {
+                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath . '/thumbs/' . $user->image));
             }
+        }
 
-            $user->role_id = $this->request->input('role_id');
-           // $user->active = 1;
-
-
-
-            if ($this->request->hasFile('up_file')){
-                 
-                 $img = $this->request->up_file->store($this->imagePath);
-
-                 $user->image = basename($img);
-
-                 if(extension_loaded('gd')){
-                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$user->image));
-                 }
-            }
-
-
-
-
-            if($user->save()){
-                return $this->redirect(admin_link("user-edit",$user->id))->withMessage(['success' => trans('message.successfully_updated_user')]);
-            }else{
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-
-
-            
+        if ($user->save()) {
+            return $this->redirect(route("user.edit", ['user' => $user]))->withMessage(['success' => trans('message.successfully_updated_user')]);
+        } else {
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -188,17 +181,17 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function activate($id){
+    public function activate($id)
+    {
         $user = \App\Model\User::find($id);
 
         $user->active = 1;
 
-        if($user->save()){
+        if ($user->save()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('User successfully activated!')]);
         } else {
             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
-
     }
 
 
@@ -208,16 +201,14 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id){
-        
-        if(User::find($id)->delete()){
-            return $this->redirect(admin_link("user-index"))->withMessage(['success' => trans('message.successfully_deleted_user')]);
+    public function destroy(User $user)
+    {
+
+        if ($user->delete()) {
+            return $this->redirect(route("user.index"))->withMessage(['success' => trans('message.successfully_deleted_user')]);
         }
 
 
-        return $this->redirect(admin_link("user-index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
-
+        return $this->redirect(route("user.index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
-
-
 }

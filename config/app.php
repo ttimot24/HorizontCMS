@@ -227,7 +227,6 @@ return [
 
         'Settings' => \App\Model\Settings::class,
         'Zipper' => Madnest\Madzipper\Madzipper::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class
     ],
 
 ];

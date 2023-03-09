@@ -6,17 +6,14 @@ $orange: #e84d08;
 $blue: #0574a0;
 $red: #d70c0c;
 $black: #1f1f1f;
-
-$primary:   $orange;
-$info:      $blue;
-$dark:      $black;
-
+$primary: $orange;
+$info: $blue;
+$dark: $black;
 $font-family-sans-serif: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-size-base: .825rem;
-
 $link-decoration: none;
-
 $alert-bg-scale: 0;
-
-$bootstrap-icons-font-src: url("/resources/fonts/vendor/bootstrap-icons/bootstrap-icons.woff2?08efbba7c53d8c5413793eecb19b20bb") format("woff2"),
-url("/resources/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?08efbba7c53d8c5413793eecb19b20bb") format("woff") !default;
+$bootstrap-icons-font-src: url("/resources/fonts/vendor/bootstrap-icons/bootstrap-icons.woff2?08efbba7c53d8c5413793eecb19b20bb") format("woff2"),;
+$jumbotron-color: $white;
+$jumbotron-bg: $black;
+$jumbotron-padding: 3.5rem;

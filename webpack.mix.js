@@ -11,24 +11,17 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.setPublicPath('./resources');
+mix.setPublicPath('resources');
 
-mix.webpackConfig(webpack => {
-   return {
-       plugins: [
-           new webpack.ProvidePlugin({
-               $: 'jquery',
-               jQuery: 'jquery', 
-               'window.jQuery': 'jquery',
-           })
-       ]
-   };
+mix.autoload({
+   jquery: ['$', 'window.jQuery']
 });
 
 mix.ts('resources/assets/js/app.ts', 'js')
-   .js('resources/assets/js/filemanager.js', 'js')
-   .ts('resources/assets/js/pages.script.ts', 'js')
+   .ts('resources/assets/js/lock-screen.ts', 'js')
+   .ts('resources/assets/js/texteditor.ts', 'js')
+   .ts('resources/assets/js/filemanager.ts', 'js')
+   .ts('resources/assets/js/pages.ts', 'js')
    .js('resources/assets/js/dragndrop.js', 'js')
-   .js('resources/assets/js/controls.js', 'js')
    .vue()
    .sass('resources/assets/sass/horizontcms-next.scss', 'css');

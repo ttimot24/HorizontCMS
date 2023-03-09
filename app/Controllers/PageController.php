@@ -4,11 +4,11 @@ namespace App\Controllers;
 
 use Illuminate\Http\Request;
 use App\Libs\Controller;
-
 use App\Model\Page;
 
-class PageController extends Controller{
- 
+class PageController extends Controller
+{
+
 
     protected $itemPerPage = 25;
     protected $imagePath = 'images/pages';
@@ -17,10 +17,11 @@ class PageController extends Controller{
      * Creates image directories if they not exists.
      *
      * @return \Illuminate\Http\Response
-    */
-    public function before(){
-        if(!file_exists(storage_path($this->imagePath.'/thumbs'))){
-            \File::makeDirectory(storage_path($this->imagePath.'/thumbs'), $mode = 0777, true, true);
+     */
+    public function before()
+    {
+        if (!file_exists(storage_path($this->imagePath . '/thumbs'))) {
+            \File::makeDirectory(storage_path($this->imagePath . '/thumbs'), $mode = 0777, true, true);
         }
     }
 
@@ -29,18 +30,18 @@ class PageController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug){
+    public function index()
+    {
 
         $this->view->js('resources/js/dragndrop.js');
-        $this->view->js('resources/assets/js/page.js');
 
         $this->view->title(trans('page.pages'));
-        return $this->view->render('pages/index',[
-                                                        'number_of_pages' => Page::count(),
-                                                        'all_pages' => Page::orderBy('queue')->paginate($this->itemPerPage),
-                                                        'visible_pages' => Page::where('visibility',1)->count(), 
-                                                        'home_page' => Page::find($this->request->settings['home_page']),
-                                                    ]);
+        return $this->view->render('pages/index', [
+            'number_of_pages' => Page::count(),
+            'all_pages' => Page::orderBy('queue')->paginate($this->itemPerPage),
+            'visible_pages' => Page::where('visibility', 1)->count(),
+            'home_page' => Page::find($this->request->settings['home_page']),
+        ]);
     }
 
     /**
@@ -48,18 +49,16 @@ class PageController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
+    public function create(Request $request)
+    {
 
-        
-        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
-        $this->view->js('resources/js/pages.script.js');
-        $this->view->js('resources/js/controls.js');
+        $this->view->js('resources/js/pages.js');
 
         $this->view->title(trans('page.new_page'));
-        return $this->view->render('pages/form',[
-                                                    'all_page' => Page::all(),
-                                                    'page_templates' => (new \App\Libs\Theme($this->request->settings['theme']))->templates(),
-                                                    ]);
+        return $this->view->render('pages/form', [
+            'all_page' => Page::all(),
+            'page_templates' => (new \App\Libs\Theme($request->settings['theme']))->templates(),
+        ]);
     }
 
     /**
@@ -68,39 +67,34 @@ class PageController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(){
+    public function store(Request $request)
+    {
 
-        if($this->request->isMethod('POST')){
-
-            $page = new Page($this->request->all());
-            $page->slug = str_slug($this->request->input('name'), "-");
-            $page->parent_id = $this->request->input('parent_select')==0? NULL : $this->request->input('parent_id');
-            $page->queue = 99;
-            $page->page = clean($this->request->input('page'));
-            $page->author_id = $this->request->user()->id;
+        $page = new Page($request->all());
+        $page->slug = str_slug($request->input('name'), "-");
+        $page->parent_id = $request->input('parent_select') == 0 ? NULL : $request->input('parent_id');
+        $page->queue = 99;
+        $page->page = clean($request->input('page'));
+        $page->author_id = $request->user()->id;
 
 
-            if ($this->request->hasFile('up_file')){
-                 
-                 $img = $this->request->up_file->store($this->imagePath);
+        if ($request->hasFile('up_file')) {
 
-                 $page->image = basename($img);
+            $img = $request->up_file->store($this->imagePath);
 
-                 
-                 if(extension_loaded('gd')){
-                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$page->image));
-                 }
+            $page->image = basename($img);
+
+
+            if (extension_loaded('gd')) {
+                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath . '/thumbs/' . $page->image));
             }
-
-            if($page->save()){
-                return $this->redirect(admin_link("page-edit",$page->id))->withMessage(['success' => trans('message.successfully_created_page')]);
-            }else{
-                return $this->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-
-            
         }
 
+        if ($page->save()) {
+            return $this->redirect(route("page.edit", ['page' => $page]))->withMessage(['success' => trans('message.successfully_created_page')]);
+        } else {
+            return $this->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
     }
 
     /**
@@ -109,10 +103,11 @@ class PageController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
+    public function show($id)
+    {
 
         $this->view->title(trans('page.view_page'));
-        return $this->view->render('pages/view',['blogpost' => Page::find($id)]);
+        return $this->view->render('pages/view', ['page' => Page::find($id)]);
     }
 
     /**
@@ -121,20 +116,18 @@ class PageController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
+    public function edit(Request $request, $id)
+    {
 
-
-        $this->view->js('vendor/ckeditor/ckeditor/ckeditor.js');
-        $this->view->js('resources/js/pages.script.js');
-        $this->view->js('resources/js/controls.js');
+        $this->view->js('resources/js/pages.js');
 
         $this->view->title(trans('page.edit_page'));
 
-        return $this->view->render('pages/form',[
-                                                        'page' => Page::find($id),
-                                                        'all_page' => Page::all(),
-                                                        'page_templates' => (new \App\Libs\Theme($this->request->settings['theme']))->templates(),
-                                                    ]);
+        return $this->view->render('pages/form', [
+            'page' => Page::find($id),
+            'all_page' => Page::all(),
+            'page_templates' => (new \App\Libs\Theme($request->settings['theme']))->templates(),
+        ]);
     }
 
     /**
@@ -144,92 +137,84 @@ class PageController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id){
-        
-        if($this->request->isMethod('PUT')){
+    public function update(Request $request, $id)
+    {
 
-            $page = Page::find($id);
-            $page->name = $this->request->input('name');
-            $page->slug = str_slug($this->request->input('name'), "-");
-            $page->url = $this->request->input('url');
-            $page->visibility = $this->request->input('visibility');
-            $page->parent_id = $this->request->input('parent_select')==0? NULL : $this->request->input('parent_id');
-            $page->page = clean($this->request->input('page'));
+        $page = Page::find($id);
+        $page->name = $request->input('name');
+        $page->slug = str_slug($request->input('name'), "-");
+        $page->url = $request->input('url');
+        $page->visibility = $request->input('visibility');
+        $page->parent_id = $request->input('parent_select') == 0 ? NULL : $request->input('parent_id');
+        $page->page = clean($request->input('page'));
 
 
-            if ($this->request->hasFile('up_file')){
-                 
-                 $img = $this->request->up_file->store($this->imagePath);
+        if ($request->hasFile('up_file')) {
 
-                 $page->image = basename($img);
+            $img = $request->up_file->store($this->imagePath);
 
-                 if(extension_loaded('gd')){
-                    \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath.'/thumbs/'.$page->image));
-                 }
+            $page->image = basename($img);
+
+            if (extension_loaded('gd')) {
+                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath . '/thumbs/' . $page->image));
             }
-            
-
-            if($page->save()){
-                return $this->redirect(admin_link("page-edit",$page->id))->withMessage(['success' => trans('message.successfully_updated_page')]);
-            }else{
-                return $this->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-
-            
         }
 
+
+        if ($page->save()) {
+            return $this->redirect(route("page.edit", ['page' => $page]))->withMessage(['success' => trans('message.successfully_updated_page')]);
+        } else {
+            return $this->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
     }
 
 
-    public function setHomePage($id){
+    public function setHomePage($id)
+    {
 
-        if(\App\Model\Settings::where("setting","home_page")->update(['value' => $id])){
+        if (\App\Model\Settings::where("setting", "home_page")->update(['value' => $id])) {
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_set_homepage')]);
-        }
-        else{
+        } else {
             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }    
+        }
     }
 
 
     /**
      * Remove the specified resource from database.
      *
-     * @param  int  $id
+     * @param  \App\Model\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function delete($id){
-        
-        if(Page::find($id)->delete()){
-            return $this->redirect(admin_link("page-index"))->withMessage(['success' => trans('message.successfully_deleted_page')]);
+    public function destroy(Page $page)
+    {
+
+        if ($page->delete()) {
+            return $this->redirect(route("page.index"))->withMessage(['success' => trans('message.successfully_deleted_page')]);
         }
 
 
-        return $this->redirect(admin_link("page-index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return $this->redirect(route("page.index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
 
 
 
-    public function reorder(){
+    public function reorder()
+    {
 
-        try{
-            
-            $order = json_decode($this->request->input("order"),true);
-            
-            for($i=0; $i<count($order); $i++){
+        try {
+
+            $order = json_decode($this->request->input("order"), true);
+
+            for ($i = 0; $i < count($order); $i++) {
                 $page = \App\Model\Page::find($order[$i]);
                 $page->queue = $i;
 
                 $page->save();
             }
-
-        }catch(Exception $e){
+        } catch (\Exception $e) {
             echo $e->getMessage();
         }
-
-
     }
-
-
 }

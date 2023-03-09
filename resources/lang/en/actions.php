@@ -10,6 +10,7 @@ return [
 	'add' => 'Add',
 	'edit' => 'Edit',
 	'options' => 'Options',
+	'create' => 'Create',
 	'update' => 'Update',
 	'delete' => 'Delete',
 	'remove' => 'Remove',
@@ -22,10 +23,11 @@ return [
 	'previous' => 'Previous',
 	'back' => 'Back',
 	'upload' => 'Upload',
+	'unlock' => 'Unlock',
 	'are_you_sure' => 'Are you sure?',
 	'delete_this' => 'Delete this :content_type',
 	'upload_image' => 'Upload image',
 	'deactivate' => 'Deactivate',
-
+	'select' => 'Select'
 
 ];
