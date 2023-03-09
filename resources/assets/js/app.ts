@@ -1,32 +1,19 @@
 /**
- * First we will load all of this project's JavaScript dependencies which
- * include Vue and Vue Resource. This gives a great starting point for
- * building robust, powerful web applications using Vue and Laravel.
+ * We'll load jQuery and the Bootstrap jQuery plugin which provides support
+ * for JavaScript based Bootstrap features such as modals and tabs. This
+ * code may be modified to fit the specific needs of your application.
  */
+import * as jquery from "jquery";
+import * as bootstrap from "bootstrap";
+import "bootstrap-fileinput";
 
-import "bootstrap";
-import "./bootstrap";
 import Vue from 'vue';
-import LockScreen from './components/LockScreen.vue';
+import VueResource from 'vue-resource';
 
 Vue.config.devtools = true;
+Vue.use(VueResource);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the body of the page. From here, you may begin adding components to
- * the application, or feel free to tweak this setup for your needs.
- */
+window.vue = Vue;
 
-var app = new Vue({
-    el: '#hcms',
-    data: {
-
-    },
-    components: {
-        LockScreen
-    },
-    created: function(){
-        console.log("HorizontCMS: VueJS started");
-    }
-
-});
+window.$ = jquery;
+window.bootstrap = bootstrap;

@@ -7,8 +7,9 @@ use App\Libs\Controller;
 
 use App\Model\BlogpostCategory;
 
-class BlogpostCategoryController extends Controller{
- 
+class BlogpostCategoryController extends Controller
+{
+
 
     protected $itemPerPage = 25;
 
@@ -17,14 +18,15 @@ class BlogpostCategoryController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index()
+    {
 
 
 
         $this->view->title(trans('category.category'));
-        return $this->view->render('blogposts/category/index',[
-                                                        'all_category' => BlogpostCategory::all(),
-                                                    ]);
+        return $this->view->render('blogposts/category/index', [
+            'all_category' => BlogpostCategory::all(),
+        ]);
     }
 
     /**
@@ -32,8 +34,8 @@ class BlogpostCategoryController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
-
+    public function create()
+    {
     }
 
     /**
@@ -42,24 +44,23 @@ class BlogpostCategoryController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-        
+    public function store(Request $request)
+    {
+
 
         $blogpost_category = new BlogpostCategory($request->all());
         $blogpost_category->author_id = \Auth::user()->id;
 
-        if ($request->hasFile('up_file')){
-             
-             $blogpost_category->image = str_replace('images/blogpostscategories/','',$request->up_file->store('images/blogpostscategories'));
+        if ($request->hasFile('up_file')) {
 
+            $blogpost_category->image = str_replace('images/blogpostscategories/', '', $request->up_file->store('images/blogpostscategories'));
         }
 
-        if($blogpost_category->save()){
+        if ($blogpost_category->save()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost_category')]);
-        }else{
+        } else {
             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
-
     }
 
     /**
@@ -68,9 +69,10 @@ class BlogpostCategoryController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
+    public function show($id)
+    {
         $this->view->title(trans('category.category'));
-        return $this->view->render('blogposts.category.view',['category' => \App\Model\BlogpostCategory::find($id)]);
+        return $this->view->render('blogposts.category.view', ['category' => \App\Model\BlogpostCategory::find($id)]);
     }
 
     /**
@@ -79,14 +81,15 @@ class BlogpostCategoryController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
+    public function edit($id)
+    {
 
 
         $this->view->title(trans('blogpost.edit_blogpost'));
 
-        return $this->view->render('blogposts/category/edit',[
-                                                        'category' => \App\Model\BlogpostCategory::find($id),
-                                                    ]);
+        return $this->view->render('blogposts/category/edit', [
+            'category' => \App\Model\BlogpostCategory::find($id),
+        ]);
     }
 
     /**
@@ -96,23 +99,22 @@ class BlogpostCategoryController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
 
-            $blogpost_category = BlogpostCategory::find($id);
-            $blogpost_category->name = $request->input('name');
+        $blogpost_category = BlogpostCategory::find($id);
+        $blogpost_category->name = $request->input('name');
 
-            if ($request->hasFile('up_file')){
-                 
-                 $blogpost_category->image = str_replace('images/blogpostscategories/','',$request->up_file->store('images/blogpostscategories'));
+        if ($request->hasFile('up_file')) {
 
-            }
+            $blogpost_category->image = str_replace('images/blogpostscategories/', '', $request->up_file->store('images/blogpostscategories'));
+        }
 
-            if($blogpost_category->save()){
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_updated_blogpost_category')]);
-            }else{
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-
+        if ($blogpost_category->save()) {
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_updated_blogpost_category')]);
+        } else {
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
     }
 
     /**
@@ -121,17 +123,15 @@ class BlogpostCategoryController extends Controller{
      * @param  \App\Model\BlogpostCategory  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BlogpostCategory $blogpostcategory){
-        
+    public function destroy(BlogpostCategory $blogpostcategory)
+    {
 
-        if($blogpostcategory->delete()){
-			return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpost_category')]);
+
+        if ($blogpostcategory->delete()) {
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpost_category')]);
         }
 
 
         return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-
     }
-
-
 }
