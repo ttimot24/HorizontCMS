@@ -24,7 +24,7 @@
                                 <label for='title'>{{ trans('page.menu_name') }}</label>
                                 <input type='text' class='form-control' id='menu-title' name='name'
                                     onkeyup="ajaxGetSlug();" value="{{ old('name', isset($page) ? $page->name : '') }}"
-                                    required></input>
+                                    required>
                                 <div class="form-text">
                                     <b>{{ trans('page.semantic_url') }}:</b>&nbsp&nbsp&nbsp{{ rtrim(Config::get('app.url'), '/') }}<a
                                         class='text-muted'
@@ -110,8 +110,8 @@
                         <div class='form-group pull-left col-xs-12 col-md-12'>
                             <label for='text'>{{ trans('page.page_content') }}</label>
 
-                            <text-editor id="texteditor" :name="'text'"
-                                :data="'{{ old('blogpost', isset($blogpost) ? $blogpost->text : '') }}'"
+                            <text-editor id="texteditor" :name="'page'"
+                                :data="'{{ old('page', isset($page) ? $page->page : '') }}'"
                                 :language="'{{ config('app.locale') }}'"
                                 :filebrowserBrowseUrl="'{{ route('filemanager.index', ['path' => 'images/pages', 'mode' => 'embed']) }}'"
                                 :filebrowserUploadUrl="'{{ route('filemanager.store', ['module' => 'pages']) }}'">

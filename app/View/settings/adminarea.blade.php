@@ -112,8 +112,7 @@
 
                     <tr>
                         <td></td>
-                        <td class="p-2"><button type='submit' class='btn btn-primary'><span class='fa fa-floppy-o'
-                                    aria-hidden='true'></span> {{ trans('settings.adminarea_save_settings') }}</button>
+                        <td class="p-2"><button type='submit' class='btn btn-primary'><span class='fa fa-floppy-o' aria-hidden='true'></span> {{ trans('settings.adminarea_save_settings') }}</button>
                         </td>
                     </tr>
 
