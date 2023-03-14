@@ -83,7 +83,7 @@ class HeaderImageController extends Controller
 
         if ($request->hasFile('up_file')) {
 
-            $header_image->image = str_replace($this->imagePath . "/", "", $request->up_file->store($this->imagePath));
+            $header_image->image = basename($request->up_file->store($this->imagePath));
         }
 
         if ($header_image->save()) {
