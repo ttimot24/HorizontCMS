@@ -12,9 +12,7 @@ class PluginController extends Controller
 
     public function before()
     {
-        if (!file_exists("plugins")) {
-            \File::makeDirectory("plugins", $mode = 0777, true, true);
-        }
+        \File::ensureDirectoryExists('plugins');
     }
 
     /**

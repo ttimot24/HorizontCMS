@@ -15,12 +15,8 @@ class HeaderImageController extends Controller
 
     public function before()
     {
-        if (!file_exists("storage/images/header_images")) {
-            \File::makeDirectory("storage/images/header_images", $mode = 0777, true, true);
-        }
+        \File::ensureDirectoryExists($this->imagePath . '/thumbs');
     }
-
-
 
     /**
      * Display a listing of the resource.
@@ -45,22 +41,6 @@ class HeaderImageController extends Controller
     public function create()
     {
 
-        if ($this->request->isMethod('POST')) {
-            $header_image = new HeaderImage($this->request->all());
-
-            if ($this->request->hasFile('up_file')) {
-
-                $header_image->image = str_replace($this->imagePath . "/", "", $this->request->up_file->store($this->imagePath));
-            }
-
-            if ($header_image->save()) {
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
-            } else {
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-        }
-
-        return $this->redirectToSelf();
     }
 
     public function addToSlider($id)
@@ -99,7 +79,20 @@ class HeaderImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $header_image = new HeaderImage($request->all());
+
+        if ($request->hasFile('up_file')) {
+
+            $header_image->image = str_replace($this->imagePath . "/", "", $request->up_file->store($this->imagePath));
+        }
+
+        if ($header_image->save()) {
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
+        } else {
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
+
+        return $this->redirectToSelf();
     }
 
     /**
@@ -120,17 +113,7 @@ class HeaderImageController extends Controller
      */
     public function edit($id)
     {
-        $header_image = \App\Model\HeaderImage::find($id);
-        $header_image->title = $this->request->input('title');
-        $header_image->description = $this->request->input('description');
 
-        if ($header_image->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
-        } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-
-        return $this->redirectToSelf();
     }
 
     /**
@@ -142,7 +125,17 @@ class HeaderImageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $header_image = \App\Model\HeaderImage::find($id);
+        $header_image->title = $request->input('title');
+        $header_image->description = $request->input('description');
+
+        if ($header_image->save()) {
+            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
+        } else {
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
+
+        return $this->redirectToSelf();
     }
 
 
@@ -152,7 +145,7 @@ class HeaderImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy($id)
     {
 
         if (HeaderImage::find($id)->delete()) {

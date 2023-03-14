@@ -19,9 +19,7 @@ class BlogpostController extends Controller
      */
     public function before()
     {
-        if (!file_exists(storage_path($this->imagePath . '/thumbs'))) {
-            \File::makeDirectory(storage_path($this->imagePath . '/thumbs'), $mode = 0777, true, true);
-        }
+		\File::ensureDirectoryExists($this->imagePath . '/thumbs');
     }
 
     /**
