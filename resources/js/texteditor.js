@@ -25,6 +25,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      name: this.name,
       content: this.data,
       editorConfig: {
         language: this.language,
@@ -154,19 +155,19 @@ var render = function () {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.data,
-            expression: "data",
+            value: _vm.content,
+            expression: "content",
           },
         ],
         staticStyle: { display: "none" },
         attrs: { name: _vm.name },
-        domProps: { value: _vm.data },
+        domProps: { value: _vm.content },
         on: {
           input: function ($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.data = $event.target.value
+            _vm.content = $event.target.value
           },
         },
       }),

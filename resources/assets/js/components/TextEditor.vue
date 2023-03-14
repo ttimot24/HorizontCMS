@@ -1,6 +1,6 @@
 <template>
     <div id="text-editor">
-        <textarea style="display: none;" v-model="data" :name="name" ></textarea>
+        <textarea style="display: none;" v-model="content" :name="name" ></textarea>
         <ckeditor v-model="content" :tag-name="'textarea'" :name="name" :config="editorConfig"></ckeditor>
     </div>
 </template>
@@ -20,6 +20,7 @@
         },
         data: function() {
             return {
+                name: this.name,
                 content: this.data,
                 editorConfig: {
                     language: this.language,

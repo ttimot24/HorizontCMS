@@ -12,7 +12,7 @@ class Page extends Model {
      * @var array
      */
     protected $fillable = [
-        'name', 'url' ,'visibility', 'password', 'phone', 'role_id', 'active',
+        'name', 'url' ,'visibility', 'parent_id', 'queue', 'page', 'active',
     ];
 
     protected $defaultImage = "resources/images/icons/page.png";
