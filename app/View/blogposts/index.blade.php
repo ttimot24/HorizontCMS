@@ -2,6 +2,8 @@
 
 @section('content')
     <div class='container main-container'>
+        <div class="card mb-3">
+            <div class="card-header fw-bold">
 
         <h2>{{ trans('blogpost.blogposts') }} <small class='text-muted pull-right pt-3'>{{ trans('blogpost.all') }}:
                 {{ $number_of_blogposts }}</small></h2>
@@ -9,6 +11,10 @@
             <a href="{{ route('blogpost.create') }}"
                 class='btn btn-primary mt-3 mb-4'>{{ trans('blogpost.new_post_button') }}</a>
         </div>
+
+        </div>
+
+        <div class="card-body">
 
         <table class='table table-hover'>
             <thead>
@@ -87,5 +93,6 @@
             {{ $all_blogposts->links() }}
         </div>
 
+        </div>
     </div>
 @endsection

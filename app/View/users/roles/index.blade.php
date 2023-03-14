@@ -3,11 +3,18 @@
 @section('content')
     <div class='container main-container'>
 
+            <div class="card mb-3">
+            <div class="card-header fw-bold">
+
         <h2>User groups <small class='pull-right text-muted pt-3'> All: {{ $all_user_roles->count() }} </small></h2>
 
         <br>
         <div><a href="{{ route('userrole.create') }}" class='btn btn-warning' style='margin-bottom:20px;'>New user group</a>
         </div>
+
+        </div>
+
+        <div class="card-body">
 
         <div class="row">
             <?php foreach($all_user_roles->reverse() as $role): ?>
@@ -88,6 +95,8 @@
                 </form>
             </div>
             <?php endforeach; ?>
+
+        </div>
 
         </div>
 

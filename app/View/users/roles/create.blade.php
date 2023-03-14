@@ -2,7 +2,15 @@
 
 @section('content')
     <div class='container main-container'>
-        <h2>Create User Group</h2><br><br>
+
+        <div class="card mb-3">
+            <div class="card-header fw-bold">
+
+        <h2>Create User Group</h2>
+
+        </div>
+
+        <div class="card-body">
 
         <form action="{{ route('userrole.store') }}" method='POST'>
 
@@ -38,7 +46,7 @@
         </form>
 
 
-
+        </div>
 
     </div>
 @endsection

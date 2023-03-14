@@ -4,6 +4,10 @@
     <div class='container main-container'>
         <div class='row'>
             <div class="col-md-12">
+
+        <div class="card mb-3">
+            <div class="card-header fw-bold">
+
                 <h2 class='mt-2'>{{ trans('category.category') }}</h2>
 
                 <form action="{{ route('blogpostcategory.store') }}" class='form-inline float-right mt-4' role='form'
@@ -28,14 +32,9 @@
 
                 </form>
             </div>
+            <div class='card-body'>
 
-            <div class='col-md-12'>
-
-
-
-
-
-                <table class='table table-hover mt-5'>
+                <table class='table table-hover'>
                     <thead>
                         <tr class="d-flex bg-dark text-white">
                             <th class="col-1">{{ trans('category.th_id') }}</th>
@@ -83,6 +82,8 @@
 
                     </tbody>
                 </table>
+
+            </div>
 
             </div>
         </div>

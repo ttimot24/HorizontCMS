@@ -2,11 +2,15 @@
 
 @section('content')
     <div class='container main-container'>
-        <h2>{{ trans('category.edit_category') }}:</h2>
+
+            <div class="card mb-3">
+            <div class="card-header fw-bold">
+        <h2>{{ trans('category.edit_category') }}</h2>
+
+</div>
 
 
-
-        <div class='col-md-12'>
+        <div class='card-body'>
 
             <form action="{{ route('blogpostcategory.update', ['blogpostcategory' => $category]) }}"
                 class='form-inline float-right mt-4' role='form' method='POST'>
@@ -33,6 +37,8 @@
 
             <div class="mt-5">
                 <a href="{{ route('blogpostcategory.index') }}" class="btn btn-info">{{ trans('actions.back') }}</a>
+            </div>
+
             </div>
 
         </div>

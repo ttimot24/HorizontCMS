@@ -3,6 +3,8 @@
 @section('content')
     <div class='container main-container'>
 
+        <div class="card mb-3">
+            <div class="card-header fw-bold">
 
         <h2>{{ trans('page.pages') }} <small class='pull-right text-muted pt-3'>{{ trans('page.all') }}:
                 {{ $number_of_pages }} | {{ trans('page.visible') }}: {{ $visible_pages }} | {{ trans('page.invisible') }}:
@@ -18,6 +20,10 @@
                         aria-hidden='true'></i> {{ trans('page.order') }}</a>
             </div>
         </div>
+
+        </div>
+
+        <div class="card-body">
 
         <table id="page-list-table" class='table table-hover table-condensed'>
             <thead>
@@ -161,6 +167,8 @@
 
         <div class="d-flex justify-content-center">
             {{ $all_pages->links() }}
+        </div>
+
         </div>
 
     </div>

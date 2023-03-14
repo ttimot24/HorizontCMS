@@ -3,6 +3,9 @@
 @section('content')
     <div class='container main-container'>
 
+            <div class="card mb-3">
+            <div class="card-header fw-bold">
+
         <h2>{{ trans('user.registered_users') }} <small class='pull-right text-muted pt-3'>{{ trans('user.all') }}:
                 {{ $number_of_users }} | {{ trans('user.active') }}: {{ $active_users }} | {{ trans('user.inactive') }}:
                 {{ $number_of_users - $active_users }}</small></h2>
@@ -10,6 +13,10 @@
 
         <div class='container col-md-12'><a href="{{ route('user.create') }}"
                 class='btn btn-warning mb-3'>{{ trans('user.new_user_button') }}</a></div>
+
+        </div>
+
+        <div class="card-body">
 
         <table class='table table-hover'>
             <thead>
@@ -107,6 +114,8 @@ $disabled = "";
 
         <div class="d-flex justify-content-center">
             {{ $all_users->links() }}
+        </div>
+
         </div>
 
     </div>
