@@ -7,7 +7,6 @@ use \App\Libs\Model;
 class Settings extends Model {
   
   	protected $table = 'settings';
-  	public $timestamps = false;
   	public $settings;
   	private static $static_settings = null;
 

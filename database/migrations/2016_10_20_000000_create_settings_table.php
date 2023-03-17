@@ -21,6 +21,7 @@ class CreateSettingsTable extends Migration
             $table->increments('id');
             $table->string('setting')->comment("Key");
             $table->string('value',4000)->nullable()->comment("Value");
+            $table->timestamps();
             $table->boolean('more')->default(NULL);
         });
     }
