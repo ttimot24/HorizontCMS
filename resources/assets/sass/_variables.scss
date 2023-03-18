@@ -17,3 +17,11 @@ $bootstrap-icons-font-src: url("/resources/fonts/vendor/bootstrap-icons/bootstra
 $jumbotron-color: $white;
 $jumbotron-bg: $black;
 $jumbotron-padding: 3.5rem;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1200px,
+  xxl: 1400px
+);
