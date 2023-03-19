@@ -22530,7 +22530,6 @@ body {
 }
 
 .btn {
-  font-size: 0.875rem;
   border-radius: 2px;
 }
 
@@ -22587,7 +22586,12 @@ tr td a {
   color: #e84d08;
 }
 
-h1, .h1, h2, .h2, h3, .h3 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
   margin-top: 21px;
   margin-bottom: 10.5px;
 }
@@ -22639,14 +22643,16 @@ tr:hover td a {
   }
 }
 /*------------FileManager Styles------------------*/
-#filemanager .file, #filemanager .folder {
+#filemanager .file,
+#filemanager .folder {
   overflow: hidden;
   height: 160px;
   cursor: pointer;
   padding: 5px;
   text-align: center;
 }
-#filemanager .file a i, #filemanager .folder a i {
+#filemanager .file a i,
+#filemanager .folder a i {
   visibility: hidden;
 }
 #filemanager .file img {
@@ -22655,15 +22661,20 @@ tr:hover td a {
   width: 100%;
   height: 100px;
 }
-#filemanager .list-group-item:hover, #filemanager .selected {
+#filemanager .list-group-item:hover,
+#filemanager .selected {
   border-radius: 0px;
   color: white;
   background-color: #337ab7;
 }
-#filemanager .file:hover a i, #filemanager .folder:hover a i, #filemanager .selected a i {
+#filemanager .file:hover a i,
+#filemanager .folder:hover a i,
+#filemanager .selected a i {
   visibility: visible;
 }
-#filemanager .file:hover, #filemanager .folder:hover, #filemanager .selected {
+#filemanager .file:hover,
+#filemanager .folder:hover,
+#filemanager .selected {
   border-radius: 1.5px;
   color: white;
   background-color: #337ab7;
