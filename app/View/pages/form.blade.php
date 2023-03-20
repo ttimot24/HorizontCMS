@@ -111,7 +111,7 @@
                             <label for='text'>{{ trans('page.page_content') }}</label>
 
                             <text-editor id="texteditor" :name="'page'"
-                                :data="'{{ old('page', isset($page) ? $page->page : '') }}'"
+                                :data="'{{ remove_linebreaks(old('page', isset($page) ? $page->page : '')) }}'"
                                 :language="'{{ config('app.locale') }}'"
                                 :filebrowserBrowseUrl="'{{ route('filemanager.index', ['path' => 'images/pages', 'mode' => 'embed']) }}'"
                                 :filebrowserUploadUrl="'{{ route('filemanager.store', ['module' => 'pages']) }}'">

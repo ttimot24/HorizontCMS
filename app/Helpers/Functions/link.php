@@ -2,7 +2,7 @@
 
 function plugin_link($link,$param = null){
 
-	$link = \Config::get('horizontcms.backend_prefix')."/plugin/run/".$link;
+	$link = config('horizontcms.backend_prefix')."/plugin/run/".$link;
 
 	return isset($param)? $link."/".$param : $link;
 
@@ -11,4 +11,8 @@ function plugin_link($link,$param = null){
 
 function namespace_to_slug($string){
 	return ltrim(strtolower(preg_replace('/(?<!\ )[A-Z]/', '-$0', $string)),"-");
+}
+
+function remove_linebreaks($string){
+	return str_replace(["\n", "\\n", "\r\n","\\r\\n", "\r", "\\r"],"", $string);
 }
