@@ -5,7 +5,8 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.4",
+        "php": "^7.3|^8.0",
+        "fruitcake/laravel-cors": "^2.0",
         "laravel/framework": "8.*",
         "lavary/laravel-menu": "1.8.*",
         "composer/semver": "*",
@@ -15,7 +16,6 @@
         "intervention/image": "*",
         "laravel/helpers": "*",
         "nesbot/carbon": "2.*",
-        "ckeditor/ckeditor": "4.*",
         "mews/purifier": "^3.3",
         "laravel/ui": "^3.0"
     },
