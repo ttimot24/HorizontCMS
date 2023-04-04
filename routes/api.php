@@ -27,6 +27,8 @@ Route::post('/auth', function (Request $request) {
 
             $user->save();
 
+            $user->load('role');
+
             return response()->json(['user' => $user], 200);
         }
     } 
