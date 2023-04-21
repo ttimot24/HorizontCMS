@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('laravel-vue-i18n/mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -17,11 +18,10 @@ mix.autoload({
    jquery: ['$', 'window.jQuery']
 });
 
-mix.ts('resources/assets/js/app.ts', 'js')
-   .ts('resources/assets/js/lock-screen.ts', 'js')
-   .ts('resources/assets/js/texteditor.ts', 'js')
-   .ts('resources/assets/js/filemanager.ts', 'js')
-   .ts('resources/assets/js/pages.ts', 'js')
-   .js('resources/assets/js/dragndrop.js', 'js')
+mix.i18n('resources/lang');
+
+mix.ts('resources/assets/ts/app.ts', 'js')
+   .ts('resources/assets/ts/pages.ts', 'js')
+   .js('resources/assets/ts/dragndrop.js', 'js')
    .vue()
    .sass('resources/assets/sass/horizontcms-next.scss', 'css');

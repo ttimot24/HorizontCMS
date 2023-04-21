@@ -17,7 +17,7 @@ return [
 	'sattelite_url' => env('HCMS_CENTRAL_REPO','http://eterfesztival.hu/hcms_online_store/satellite/public/api'),
 
 	'css' => [
-			'resources/css/horizontcms-next.css',
+				'resources/css/horizontcms-next.css',
 			],
 
 	'js' => [

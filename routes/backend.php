@@ -19,7 +19,7 @@ Route::auth();
 
 Route::group(['middleware' => ['admin','plugin','can:global-authorization']],function(){
 
-	app()->plugins->each(function($plugin){
+	/*app()->plugins->each(function($plugin){
 
 		foreach(array_diff(scandir($plugin->getPath().DIRECTORY_SEPARATOR.CONTROLLER_PATH), ['.', '..']) as $file){
 			if(is_file($plugin->getPath().DIRECTORY_SEPARATOR.CONTROLLER_PATH."/".$file)){
@@ -37,7 +37,7 @@ Route::group(['middleware' => ['admin','plugin','can:global-authorization']],fun
 			}
 		}
 
-	});
+	});*/
 	
 
 	foreach(array_diff(scandir(CONTROLLER_PATH), ['.', '..']) as $file){

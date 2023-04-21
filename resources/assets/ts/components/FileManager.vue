@@ -1,10 +1,153 @@
-import Vue from 'vue';
+<template>
+    <div id="filemanager">
 
-var fileamanager = new Vue({
+        <section class='container'>
+
+            <div class="card mb-3">
+                <div class="card-header fw-bold">
+
+                    <section class='row'>
+
+                        <div class='col-md-4'>
+                            <h2>File manager</h2>
+                        </div>
+
+                        <div class='col-md-8 text-end mt-4'>
+                            <div class="row">
+                                <div class="col-md-4 offset-md-3 col-sm-7 col-xs-7 text-end">
+                                    <input type="text" v-model="filter" class="form-control" id="filter"
+                                        placeholder="Filter">
+                                </div>
+                                <div class="col text-end">
+                                    <a class='btn btn-primary mr-2' data-bs-toggle='modal' data-bs-backdrop='static'
+                                        data-bs-target='.upload_file_to_storage'><i class="fa fa-upload"
+                                            aria-hidden="true"></i>
+                                        Upload</a>
+                                    <a class='btn btn-primary' data-bs-toggle='modal' data-bs-backdrop='static'
+                                        data-bs-target='.new_folder'><i class="fa fa-folder" aria-hidden="true"></i> Create
+                                        Folder</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+                <div class="card-body container py-0">
+
+                    <div class="row">
+
+                        <div class='panel panel-default col-2 bg-dark p-3' style="min-height:500px;">
+                            <h4 class="p-2 bg-dark text-white">Drivers</h4>
+                            <ul class="list-group">
+                                @foreach (config('filesystems.disks') as $key => $value)
+                                <!-- v-on:click.prevent="open('{{ isset($value['root']) ? basename($value['root']) : '' }}', false);" -->
+                                <a href="#"
+                                   
+                                   
+                                   >
+                                    <li class="list-group-item bg-dark text-white">{{ $key }}</li>
+                                </a>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <div class="panel panel-default col-10 bg-dark">
+                            <div class="panel-body">
+                                <div class="row p-0 m-0">
+                                    <div class="col-md-10 m-0 p-0">
+                                        <nav aria-label="breadcrumb p-0 m-0">
+                                            <ol class="breadcrumb bg-dark p-0 pt-3 m-0">
+                                                <li class="breadcrumb-item"><a href="storage"
+                                                        v-on:click.prevent=" open('', false); ">storage</a></li>
+                                                <li class="breadcrumb-item" v-for="( bcrumb ) in  breadcrumb "><a
+                                                        :href=" bcrumb.link "
+                                                        v-on:click.prevent=" open(bcrumb.link, false); ">@{{ bcrumb.text }}</a>
+                                                </li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                    <div class="col-md-2 text-end pt-3 pr-3">
+                                        <div class="row">
+                                            <div class="col text-white ">All: {{ folders.length + files.length }}</div>
+                                            <div class="col">
+                                                <a href="a" v-on:click.prevent=" open(currentDirectory, false); "><i
+                                                        class="fa fa-refresh" onclick="$(this).addClass('fa-spin');"
+                                                        aria-hidden="true" style="font-size: 22px;"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="workspace" class="col-md-12 py-3 pe-5">
+
+                                    <div class="row text-white">
+                                        <div class='folder col-md-2 col-sm-4 col-xs-4 text-center text-white'
+                                            v-for=" folder  in  folders " :id=" folder " v-on:click=" select(folder) "
+                                            v-on:dblclick=" open(folder); ">
+
+                                            <div class="file-nav text-end">
+                                                <a class="me-1" v-on:click=" renameModal(folder) "><i
+                                                        class="fa fa-pencil"></i></a>
+                                                <a class="me-1" v-on:click=" deleteModal(folder) "><i
+                                                        class="fa fa-trash"></i></a>
+                                            </div>
+
+                                            <div clas='row'>
+                                                <img style="width:7rem;" src='resources/images/icons/dir.png'>
+                                            </div>
+                                            <b>{{ folder }}</b>
+                                        </div>
+
+                                        <div v-for=" file  in files" class='file col-md-2 col-sm-4 col-xs-4 text-center'
+                                            :id=" file " 
+                                            v-on:click="
+                                            mode=='embed'?
+                                                returnFileUrl('storage/'+currentDirectory+'/'+file) :
+                                                select(file
+                                                )">
+                                            <div class="file-nav text-end">
+                                                <a class="me-1" v-on:click="renameModal(file)"><i class="fa fa-pencil"
+                                                        aria-hidden="true"></i></a>
+                                                <a class="me-1" :href="'storage/' + currentDirectory + '/' + file"><i
+                                                        class="fa fa-download"></i></a>
+                                                <a class="me-1" v-on:click="deleteModal(file)"><i
+                                                        class="fa fa-trash"></i></a>
+                                            </div>
+                                            <img class="w-100 mb-3" v-if="isKnownExtension(file)"
+                                                :src="'storage/' + currentDirectory + '/' + file" />
+                                            <img class="w-100 mb-3" v-else src="resources/images/icons/file.png" />
+                                            <b>{{ file }}</b>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    
+
+    </div>
+</template>
+
+<script lang="ts">
+
+import * as bootstrap from 'bootstrap';
+
+import { defineComponent } from '@vue/composition-api';
+
+export default defineComponent({
     name: 'FileManager',
-    el: '#filemanager',
     mounted: function () {
-        
+
         var vm = this;
         vm._csrfToken = $('[name="_token"]').val();
 
@@ -13,11 +156,21 @@ var fileamanager = new Vue({
         vm.modalNewFolder = vm.getModal("new_folder");
         vm.modalDelete = vm.getModal("delete_sample");
 
-        $('#delete-form').on('submit', (event) => {event.preventDefault(); this.deleteFile();});
+        $('#delete-form').on('submit', (event) => { event.preventDefault(); this.deleteFile(); });
 
         console.log("VueJS: FileManager started");
         vm.open($(this.$el).data('start'), false);
         console.log('Directory: ' + vm.currentDirectory);
+    },
+    props: {
+        _csrfToken: {
+            type: String,
+            default: ''
+        },
+        currentDirectory: {
+            type: String,
+            default: ''
+        }
     },
     data: function () {
         return {
@@ -68,8 +221,8 @@ var fileamanager = new Vue({
         }
     },
     methods: {
-        getModal: function(id: string): bootstrap.Modal {
-            return  (new window.bootstrap.Modal(document.getElementById(id) || {} as HTMLElement));
+        getModal: function (id: string): bootstrap.Modal {
+            return (new bootstrap.Modal(document.getElementById(id) || {} as HTMLElement));
         },
         select: function (file: string): void {
             var vm = this;
@@ -177,7 +330,7 @@ var fileamanager = new Vue({
             var fileSelect = ($('#input-2') as any);
             var files = fileSelect[0].files;
 
-            if(!files){
+            if (!files) {
                 console.log("No file is selected");
                 return;
             }
@@ -226,11 +379,11 @@ var fileamanager = new Vue({
         },
         basename: function (url: string): string {
             //return ((/(([^\/\\\.#\? ]+)(\.\w+)*)([?#].+)?$/.exec(url)) != null) ? url[2] : '';
-            return url.substring(url.lastIndexOf('/')+1);
+            return url.substring(url.lastIndexOf('/') + 1);
         },
         deleteModal: function (file: string): void {
             var vm = this;
- 
+
             $('#content-name').text(vm.basename(file));
 
             $("#delete-submit").data('file', file);
@@ -277,7 +430,7 @@ var fileamanager = new Vue({
 
             var vm = this;
 
-            var deleteSubmit =  $("#delete-submit");
+            var deleteSubmit = $("#delete-submit");
 
             var file = vm.currentDirectory.concat('/').concat(deleteSubmit.data('file'));
 
@@ -350,4 +503,4 @@ var fileamanager = new Vue({
 
 });
 
-window.filemanager = fileamanager;
+</script>

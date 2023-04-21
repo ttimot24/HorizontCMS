@@ -114,6 +114,4 @@
         @include('image_details', ['modal_id' => $blogpost->id, 'image' => $blogpost->getImage()])
     @endif
 
-    <script src="{{ asset('resources/js/texteditor.js') }}"></script>
-
 @endsection

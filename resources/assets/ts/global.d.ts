@@ -8,8 +8,7 @@ declare global {
         vue: VueConstructor<Vue>;
         CKEDITOR: any,
         bootstrap: any;
-        lockscreen: LockScreen;
+        hcms: Vue;
         filemanager: FileManager;
-        texteditor: TextEditor;
     }
 }
