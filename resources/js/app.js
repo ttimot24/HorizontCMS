@@ -5036,6 +5036,46 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-7!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/ts/components/DeleteModal.vue?vue&type=script&lang=ts&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-7!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/ts/components/DeleteModal.vue?vue&type=script&lang=ts& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _vue_composition_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/composition-api */ "./node_modules/@vue/composition-api/dist/vue-composition-api.mjs");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_vue_composition_api__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
+  name: 'DeleteModal',
+  props: {
+    id: {
+      type: String,
+      required: true
+    },
+    route: {
+      type: String
+    },
+    delete_text: {
+      type: String
+    },
+    header: {
+      type: String
+    },
+    name: {
+      type: String
+    },
+    cancel: {
+      type: String
+    }
+  }
+}));
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-7!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/ts/components/FileManager.vue?vue&type=script&lang=ts&":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-7!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/ts/components/FileManager.vue?vue&type=script&lang=ts& ***!
@@ -5047,8 +5087,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
 /* harmony import */ var _vue_composition_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/composition-api */ "./node_modules/@vue/composition-api/dist/vue-composition-api.mjs");
+/* harmony import */ var _DeleteModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteModal.vue */ "./resources/assets/ts/components/DeleteModal.vue");
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -5063,10 +5103,15 @@ function _typeof(obj) {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_vue_composition_api__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
   name: 'FileManager',
+  components: {
+    DeleteModal: _DeleteModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   mounted: function mounted() {
     var _this = this;
     var vm = this;
-    vm._csrfToken = $('[name="_token"]').val();
+    console.log("VueJS: FileManager started");
+    vm.open(this.currentDirectory, false);
+    console.log('Directory: ' + vm.currentDirectory);
     vm.modalRename = vm.getModal("rename_sample");
     vm.modalUpload = vm.getModal("upload_file_to_storage");
     vm.modalNewFolder = vm.getModal("new_folder");
@@ -5075,26 +5120,32 @@ function _typeof(obj) {
       event.preventDefault();
       _this.deleteFile();
     });
-    console.log("VueJS: FileManager started");
-    vm.open($(this.$el).data('start'), false);
-    console.log('Directory: ' + vm.currentDirectory);
   },
+  inject: ['bootstrap'],
   props: {
-    _csrfToken: {
+    token: {
+      type: String,
+      "default": '',
+      required: true
+    },
+    directory: {
       type: String,
       "default": ''
     },
-    currentDirectory: {
+    disks: {
+      type: Array,
+      "default": []
+    },
+    mode: {
       type: String,
-      "default": ''
+      "default": 'standalone'
     }
   },
   data: function data() {
     return {
-      _csrfToken: '',
-      mode: 'embed',
+      mode: this.mode,
       previousDirectory: null,
-      currentDirectory: '',
+      currentDirectory: this.directory,
       drivers: [],
       folders: [],
       files: [],
@@ -5138,7 +5189,7 @@ function _typeof(obj) {
   },
   methods: {
     getModal: function getModal(id) {
-      return new bootstrap__WEBPACK_IMPORTED_MODULE_0__.Modal(document.getElementById(id) || {});
+      return new this.bootstrap.Modal(document.getElementById(id) || {});
     },
     select: function select(file) {
       var vm = this;
@@ -5192,7 +5243,7 @@ function _typeof(obj) {
       var dirPath = vm.currentDirectory;
       var folderName = $('[name="new_folder_name"]').val();
       $.post(event.target.action, {
-        _token: vm._csrfToken,
+        _token: vm.token,
         dir_path: dirPath,
         new_folder_name: folderName
       }, function (data) {
@@ -5219,7 +5270,7 @@ function _typeof(obj) {
         return;
       }
       var formData = new FormData();
-      formData.append('_token', vm._csrfToken);
+      formData.append('_token', vm.token);
       formData.append('dir_path', dirPath);
       for (var i = 0; i < files.length; i++) {
         var file = files[i];
@@ -5278,7 +5329,7 @@ function _typeof(obj) {
         url: event.target.action,
         contentType: "application/json",
         data: JSON.stringify({
-          _token: vm._csrfToken,
+          _token: vm.token,
           old_file: vm.currentDirectory.concat('/').concat($('[name="old_name"]').val()),
           new_file: vm.currentDirectory.concat('/').concat($('[name="new_name"]').val())
         }),
@@ -5298,7 +5349,7 @@ function _typeof(obj) {
       var deleteSubmit = $("#delete-submit");
       var file = vm.currentDirectory.concat('/').concat(deleteSubmit.data('file'));
       $.post('admin/file-manager/destroy', {
-        _token: vm._csrfToken,
+        _token: vm.token,
         file: file
       }, function (data) {
         if (_typeof(data.success) !== undefined) {
@@ -28508,6 +28559,45 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./resources/assets/ts/components/DeleteModal.vue":
+/*!********************************************************!*\
+  !*** ./resources/assets/ts/components/DeleteModal.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DeleteModal_vue_vue_type_template_id_4cd1f136___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteModal.vue?vue&type=template&id=4cd1f136& */ "./resources/assets/ts/components/DeleteModal.vue?vue&type=template&id=4cd1f136&");
+/* harmony import */ var _DeleteModal_vue_vue_type_script_lang_ts___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeleteModal.vue?vue&type=script&lang=ts& */ "./resources/assets/ts/components/DeleteModal.vue?vue&type=script&lang=ts&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DeleteModal_vue_vue_type_script_lang_ts___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DeleteModal_vue_vue_type_template_id_4cd1f136___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DeleteModal_vue_vue_type_template_id_4cd1f136___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/ts/components/DeleteModal.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/assets/ts/components/FileManager.vue":
 /*!********************************************************!*\
   !*** ./resources/assets/ts/components/FileManager.vue ***!
@@ -28625,6 +28715,22 @@ component.options.__file = "resources/assets/ts/components/TextEditor.vue"
 
 /***/ }),
 
+/***/ "./resources/assets/ts/components/DeleteModal.vue?vue&type=script&lang=ts&":
+/*!*********************************************************************************!*\
+  !*** ./resources/assets/ts/components/DeleteModal.vue?vue&type=script&lang=ts& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_use_0_node_modules_ts_loader_index_js_clonedRuleSet_7_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteModal_vue_vue_type_script_lang_ts___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-6.use[0]!../../../../node_modules/ts-loader/index.js??clonedRuleSet-7!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DeleteModal.vue?vue&type=script&lang=ts& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-7!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/ts/components/DeleteModal.vue?vue&type=script&lang=ts&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_use_0_node_modules_ts_loader_index_js_clonedRuleSet_7_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteModal_vue_vue_type_script_lang_ts___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/assets/ts/components/FileManager.vue?vue&type=script&lang=ts&":
 /*!*********************************************************************************!*\
   !*** ./resources/assets/ts/components/FileManager.vue?vue&type=script&lang=ts& ***!
@@ -28670,6 +28776,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_use_0_node_modules_ts_loader_index_js_clonedRuleSet_7_node_modules_vue_loader_lib_index_js_vue_loader_options_TextEditor_vue_vue_type_script_lang_ts___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-6.use[0]!../../../../node_modules/ts-loader/index.js??clonedRuleSet-7!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TextEditor.vue?vue&type=script&lang=ts& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-7!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/ts/components/TextEditor.vue?vue&type=script&lang=ts&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_use_0_node_modules_ts_loader_index_js_clonedRuleSet_7_node_modules_vue_loader_lib_index_js_vue_loader_options_TextEditor_vue_vue_type_script_lang_ts___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/ts/components/DeleteModal.vue?vue&type=template&id=4cd1f136&":
+/*!***************************************************************************************!*\
+  !*** ./resources/assets/ts/components/DeleteModal.vue?vue&type=template&id=4cd1f136& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteModal_vue_vue_type_template_id_4cd1f136___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteModal_vue_vue_type_template_id_4cd1f136___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteModal_vue_vue_type_template_id_4cd1f136___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DeleteModal.vue?vue&type=template&id=4cd1f136& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/ts/components/DeleteModal.vue?vue&type=template&id=4cd1f136&");
+
 
 /***/ }),
 
@@ -28724,6 +28847,108 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/ts/components/DeleteModal.vue?vue&type=template&id=4cd1f136&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/ts/components/DeleteModal.vue?vue&type=template&id=4cd1f136& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "modal", attrs: { id: _vm.id, tabindex: "-1" } },
+    [
+      _c("div", { staticClass: "modal-dialog" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c(
+            "div",
+            { staticClass: "modal-header modal-header-danger bg-danger" },
+            [
+              _c("h4", { staticClass: "modal-title text-white" }, [
+                _vm._v(_vm._s(_vm.header)),
+              ]),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "btn-close",
+                attrs: {
+                  type: "button",
+                  "data-bs-dismiss": "modal",
+                  "aria-label": "Close",
+                },
+              }),
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _vm._v(
+              "\n                Are you sure you want to delete:\n                "
+            ),
+            _c("b", { attrs: { id: "content-name" } }, [
+              _vm._v(_vm._s(_vm.name)),
+            ]),
+            _vm._v("\n                ?\n            "),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer" }, [
+            _c(
+              "form",
+              {
+                attrs: { id: "delete-form", method: "POST", action: _vm.route },
+              },
+              [
+                _c("input", {
+                  attrs: { type: "hidden", name: "_method", value: "delete" },
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "submit", id: "delete-submit" },
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-trash",
+                      attrs: { "aria-hidden": "true" },
+                    }),
+                    _vm._v(" " + _vm._s(_vm.delete_text)),
+                  ]
+                ),
+              ]
+            ),
+            _vm._v(" "),
+            _vm.cancel
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-default",
+                    attrs: { type: "button", "data-bs-dismiss": "modal" },
+                  },
+                  [_vm._v(_vm._s(_vm.cancel))]
+                )
+              : _vm._e(),
+          ]),
+        ]),
+      ]),
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/ts/components/FileManager.vue?vue&type=template&id=adb70298&":
 /*!******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/ts/components/FileManager.vue?vue&type=template&id=adb70298& ***!
@@ -28740,347 +28965,504 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "filemanager" } }, [
-    _c("section", { staticClass: "container" }, [
-      _c("div", { staticClass: "card mb-3" }, [
-        _c("div", { staticClass: "card-header fw-bold" }, [
-          _c("section", { staticClass: "row" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-8 text-end mt-4" }, [
-              _c("div", { staticClass: "row" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "col-md-4 offset-md-3 col-sm-7 col-xs-7 text-end",
-                  },
-                  [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.filter,
-                          expression: "filter",
+  return _c(
+    "div",
+    { attrs: { id: "filemanager" } },
+    [
+      _c("section", { staticClass: "container" }, [
+        _c("div", { staticClass: "card mb-3" }, [
+          _c("div", { staticClass: "card-header fw-bold" }, [
+            _c("section", { staticClass: "row" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-8 text-end mt-4" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-md-4 offset-md-3 col-sm-7 col-xs-7 text-end",
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.filter,
+                            expression: "filter",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "filter",
+                          placeholder: "Filter",
                         },
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        id: "filter",
-                        placeholder: "Filter",
-                      },
-                      domProps: { value: _vm.filter },
-                      on: {
-                        input: function ($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.filter = $event.target.value
+                        domProps: { value: _vm.filter },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.filter = $event.target.value
+                          },
                         },
-                      },
-                    }),
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._m(1),
+                      }),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1),
+                ]),
               ]),
             ]),
           ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body container py-0" }, [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              {
-                staticClass: "panel panel-default col-2 bg-dark p-3",
-                staticStyle: { "min-height": "500px" },
-              },
-              [
-                _c("h4", { staticClass: "p-2 bg-dark text-white" }, [
-                  _vm._v("Drivers"),
-                ]),
-                _vm._v(" "),
-                _c("ul", { staticClass: "list-group" }, [
-                  _vm._v(
-                    "\n                            @foreach (config('filesystems.disks') as $key => $value)\n                            "
-                  ),
-                  _vm._v(" "),
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c(
-                      "li",
-                      { staticClass: "list-group-item bg-dark text-white" },
-                      [_vm._v(_vm._s(_vm.$key))]
-                    ),
-                  ]),
-                  _vm._v(
-                    "\n                            @endforeach\n                        "
-                  ),
-                ]),
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "panel panel-default col-10 bg-dark" }, [
-              _c("div", { staticClass: "panel-body" }, [
-                _c("div", { staticClass: "row p-0 m-0" }, [
-                  _c("div", { staticClass: "col-md-10 m-0 p-0" }, [
-                    _c(
-                      "nav",
-                      { attrs: { "aria-label": "breadcrumb p-0 m-0" } },
-                      [
-                        _c(
-                          "ol",
-                          { staticClass: "breadcrumb bg-dark p-0 pt-3 m-0" },
-                          [
-                            _c("li", { staticClass: "breadcrumb-item" }, [
-                              _c(
-                                "a",
-                                {
-                                  attrs: { href: "storage" },
-                                  on: {
-                                    click: function ($event) {
-                                      $event.preventDefault()
-                                      return _vm.open("", false)
-                                    },
-                                  },
-                                },
-                                [_vm._v("storage")]
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(_vm.breadcrumb, function (bcrumb) {
-                              return _c(
-                                "li",
-                                { staticClass: "breadcrumb-item" },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: bcrumb.link },
-                                      on: {
-                                        click: function ($event) {
-                                          $event.preventDefault()
-                                          return _vm.open(bcrumb.link, false)
-                                        },
-                                      },
-                                    },
-                                    [_vm._v("@" + _vm._s(bcrumb.text))]
-                                  ),
-                                ]
-                              )
-                            }),
-                          ],
-                          2
-                        ),
-                      ]
-                    ),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body container py-0" }, [
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "panel panel-default col-2 bg-dark p-3",
+                  staticStyle: { "min-height": "500px" },
+                },
+                [
+                  _c("h4", { staticClass: "p-2 bg-dark text-white" }, [
+                    _vm._v("Drivers"),
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2 text-end pt-3 pr-3" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col text-white " }, [
-                        _vm._v(
-                          "All: " +
-                            _vm._s(_vm.folders.length + _vm.files.length)
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col" }, [
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "a" },
-                            on: {
-                              click: function ($event) {
-                                $event.preventDefault()
-                                return _vm.open(_vm.currentDirectory, false)
-                              },
+                  _c(
+                    "ul",
+                    { staticClass: "list-group" },
+                    _vm._l(_vm.disks, function (disk) {
+                      return _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function ($event) {
+                              $event.preventDefault()
+                              return _vm.open(disk, false)
                             },
                           },
-                          [
-                            _c("i", {
-                              staticClass: "fa fa-refresh",
-                              staticStyle: { "font-size": "22px" },
-                              attrs: {
-                                onclick: "$(this).addClass('fa-spin');",
-                                "aria-hidden": "true",
+                        },
+                        [
+                          _c(
+                            "li",
+                            {
+                              staticClass: "list-group-item bg-dark text-white",
+                            },
+                            [_vm._v(_vm._s(disk))]
+                          ),
+                        ]
+                      )
+                    }),
+                    0
+                  ),
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "panel panel-default col-10 bg-dark" }, [
+                _c("div", { staticClass: "panel-body" }, [
+                  _c("div", { staticClass: "row p-0 m-0" }, [
+                    _c("div", { staticClass: "col-md-10 m-0 p-0" }, [
+                      _c(
+                        "nav",
+                        { attrs: { "aria-label": "breadcrumb p-0 m-0" } },
+                        [
+                          _c(
+                            "ol",
+                            { staticClass: "breadcrumb bg-dark p-0 pt-3 m-0" },
+                            [
+                              _c("li", { staticClass: "breadcrumb-item" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { href: "storage" },
+                                    on: {
+                                      click: function ($event) {
+                                        $event.preventDefault()
+                                        return _vm.open("", false)
+                                      },
+                                    },
+                                  },
+                                  [_vm._v("storage")]
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.breadcrumb, function (bcrumb) {
+                                return _c(
+                                  "li",
+                                  { staticClass: "breadcrumb-item" },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: bcrumb.link },
+                                        on: {
+                                          click: function ($event) {
+                                            $event.preventDefault()
+                                            return _vm.open(bcrumb.link, false)
+                                          },
+                                        },
+                                      },
+                                      [_vm._v(_vm._s(bcrumb.text))]
+                                    ),
+                                  ]
+                                )
+                              }),
+                            ],
+                            2
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-2 text-end pt-3 pr-3" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col text-white " }, [
+                          _vm._v(
+                            "All: " +
+                              _vm._s(_vm.folders.length + _vm.files.length)
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "a" },
+                              on: {
+                                click: function ($event) {
+                                  $event.preventDefault()
+                                  return _vm.open(_vm.currentDirectory, false)
+                                },
                               },
-                            }),
-                          ]
-                        ),
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fa fa-refresh",
+                                staticStyle: { "font-size": "22px" },
+                                attrs: {
+                                  onclick: "$(this).addClass('fa-spin');",
+                                  "aria-hidden": "true",
+                                },
+                              }),
+                            ]
+                          ),
+                        ]),
                       ]),
                     ]),
                   ]),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "col-md-12 py-3 pe-5",
-                    attrs: { id: "workspace" },
-                  },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "row text-white" },
-                      [
-                        _vm._l(_vm.folders, function (folder) {
-                          return _c(
-                            "div",
-                            {
-                              staticClass:
-                                "folder col-md-2 col-sm-4 col-xs-4 text-center text-white",
-                              attrs: { id: folder },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.select(folder)
-                                },
-                                dblclick: function ($event) {
-                                  return _vm.open(folder)
-                                },
-                              },
-                            },
-                            [
-                              _c("div", { staticClass: "file-nav text-end" }, [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "me-1",
-                                    on: {
-                                      click: function ($event) {
-                                        return _vm.renameModal(folder)
-                                      },
-                                    },
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col-md-12 py-3 pe-5",
+                      attrs: { id: "workspace" },
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "row text-white" },
+                        [
+                          _vm._l(_vm.folders, function (folder) {
+                            return _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "folder col-md-2 col-sm-4 col-xs-4 text-center text-white",
+                                attrs: { id: folder },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.select(folder)
                                   },
-                                  [_c("i", { staticClass: "fa fa-pencil" })]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "me-1",
-                                    on: {
-                                      click: function ($event) {
-                                        return _vm.deleteModal(folder)
-                                      },
-                                    },
+                                  dblclick: function ($event) {
+                                    return _vm.open(folder)
                                   },
-                                  [_c("i", { staticClass: "fa fa-trash" })]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _vm._m(2, true),
-                              _vm._v(" "),
-                              _c("b", [_vm._v(_vm._s(folder))]),
-                            ]
-                          )
-                        }),
-                        _vm._v(" "),
-                        _vm._l(_vm.files, function (file) {
-                          return _c(
-                            "div",
-                            {
-                              staticClass:
-                                "file col-md-2 col-sm-4 col-xs-4 text-center",
-                              attrs: { id: file },
-                              on: {
-                                click: function ($event) {
-                                  _vm.mode == "embed"
-                                    ? _vm.returnFileUrl(
-                                        "storage/" +
-                                          _vm.currentDirectory +
-                                          "/" +
-                                          file
-                                      )
-                                    : _vm.select(file)
                                 },
                               },
-                            },
-                            [
-                              _c("div", { staticClass: "file-nav text-end" }, [
+                              [
                                 _c(
-                                  "a",
-                                  {
-                                    staticClass: "me-1",
-                                    on: {
-                                      click: function ($event) {
-                                        return _vm.renameModal(file)
-                                      },
-                                    },
-                                  },
+                                  "div",
+                                  { staticClass: "file-nav text-end" },
                                   [
-                                    _c("i", {
-                                      staticClass: "fa fa-pencil",
-                                      attrs: { "aria-hidden": "true" },
-                                    }),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "me-1",
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.renameModal(folder)
+                                          },
+                                        },
+                                      },
+                                      [_c("i", { staticClass: "fa fa-pencil" })]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "me-1",
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.deleteModal(folder)
+                                          },
+                                        },
+                                      },
+                                      [_c("i", { staticClass: "fa fa-trash" })]
+                                    ),
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "me-1",
-                                    attrs: {
-                                      href:
-                                        "storage/" +
-                                        _vm.currentDirectory +
-                                        "/" +
-                                        file,
-                                    },
+                                _vm._m(2, true),
+                                _vm._v(" "),
+                                _c("b", [_vm._v(_vm._s(folder))]),
+                              ]
+                            )
+                          }),
+                          _vm._v(" "),
+                          _vm._l(_vm.files, function (file) {
+                            return _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "file col-md-2 col-sm-4 col-xs-4 text-center",
+                                attrs: { id: file },
+                                on: {
+                                  click: function ($event) {
+                                    _vm.mode === "embed"
+                                      ? _vm.returnFileUrl(
+                                          "storage/" +
+                                            _vm.currentDirectory +
+                                            "/" +
+                                            file
+                                        )
+                                      : _vm.select(file)
                                   },
-                                  [_c("i", { staticClass: "fa fa-download" })]
+                                },
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "file-nav text-end" },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "me-1",
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.renameModal(file)
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fa fa-pencil",
+                                          attrs: { "aria-hidden": "true" },
+                                        }),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "me-1",
+                                        attrs: {
+                                          href:
+                                            "storage/" +
+                                            _vm.currentDirectory +
+                                            "/" +
+                                            file,
+                                        },
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fa fa-download",
+                                        }),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "me-1",
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.deleteModal(file)
+                                          },
+                                        },
+                                      },
+                                      [_c("i", { staticClass: "fa fa-trash" })]
+                                    ),
+                                  ]
                                 ),
                                 _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "me-1",
-                                    on: {
-                                      click: function ($event) {
-                                        return _vm.deleteModal(file)
+                                _vm.isKnownExtension(file)
+                                  ? _c("img", {
+                                      staticClass: "w-100 mb-3",
+                                      attrs: {
+                                        src:
+                                          "storage/" +
+                                          _vm.currentDirectory +
+                                          "/" +
+                                          file,
                                       },
-                                    },
-                                  },
-                                  [_c("i", { staticClass: "fa fa-trash" })]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _vm.isKnownExtension(file)
-                                ? _c("img", {
-                                    staticClass: "w-100 mb-3",
-                                    attrs: {
-                                      src:
-                                        "storage/" +
-                                        _vm.currentDirectory +
-                                        "/" +
-                                        file,
-                                    },
-                                  })
-                                : _c("img", {
-                                    staticClass: "w-100 mb-3",
-                                    attrs: {
-                                      src: "resources/images/icons/file.png",
-                                    },
-                                  }),
-                              _vm._v(" "),
-                              _c("b", [_vm._v(_vm._s(file))]),
-                            ]
-                          )
-                        }),
-                      ],
-                      2
-                    ),
-                  ]
-                ),
+                                    })
+                                  : _c("img", {
+                                      staticClass: "w-100 mb-3",
+                                      attrs: {
+                                        src: "resources/images/icons/file.png",
+                                      },
+                                    }),
+                                _vm._v(" "),
+                                _c("b", [_vm._v(_vm._s(file))]),
+                              ]
+                            )
+                          }),
+                        ],
+                        2
+                      ),
+                    ]
+                  ),
+                ]),
               ]),
             ]),
           ]),
         ]),
       ]),
-    ]),
-  ])
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal new_folder",
+          attrs: {
+            id: "new_folder",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "new_folder",
+            "aria-hidden": "true",
+          },
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  attrs: {
+                    action: "admin/file-manager/new-folder",
+                    method: "POST",
+                    enctype: "multipart/form-data",
+                  },
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      return _vm.newFolder.apply(null, arguments)
+                    },
+                  },
+                },
+                [_vm._m(4), _vm._v(" "), _vm._m(5)]
+              ),
+            ]),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal rename_modal",
+          attrs: {
+            id: "rename_sample",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "rename_file",
+            "aria-hidden": "true",
+          },
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  attrs: {
+                    action: "admin/file-manager/rename",
+                    method: "POST",
+                  },
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      return _vm.renameFile.apply(null, arguments)
+                    },
+                  },
+                },
+                [_vm._m(7), _vm._v(" "), _vm._m(8)]
+              ),
+            ]),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal upload_file_to_storage",
+          attrs: {
+            id: "upload_file_to_storage",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "upload_file_to_storage",
+            "aria-hidden": "true",
+          },
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(9),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  attrs: {
+                    action: "admin/filemanager",
+                    method: "POST",
+                    enctype: "multipart/form-data",
+                  },
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      return _vm.upload.apply(null, arguments)
+                    },
+                  },
+                },
+                [_vm._m(10), _vm._v(" "), _vm._m(11)]
+              ),
+            ]),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c("delete-modal", {
+        ref: "deletemodal",
+        attrs: {
+          id: "delete_sample",
+          route: "admin/file-manager/destroy",
+          header: "Are you sure you want to delete?",
+          name: "[dir_name_sample]",
+          delete_text: "Delete",
+          cancel: "Cancel",
+        },
+      }),
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function () {
@@ -29144,6 +29526,215 @@ var staticRenderFns = [
         staticStyle: { width: "7rem" },
         attrs: { src: "resources/images/icons/dir.png" },
       }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "modal-header modal-header-primary bg-primary" },
+      [
+        _c("h4", { staticClass: "modal-title text-white" }, [
+          _vm._v("Create new folder"),
+        ]),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn-close",
+          attrs: {
+            type: "button",
+            "data-bs-dismiss": "modal",
+            "aria-label": "Close",
+          },
+        }),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "title" } }, [_vm._v("Name:")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "new_folder_name",
+              placeholder: "Enter folder name",
+              required: "",
+            },
+          }),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Create")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default",
+          attrs: { type: "button", "data-bs-dismiss": "modal" },
+        },
+        [_vm._v("Cancel")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header modal-header-primary" }, [
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Rename")]),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-bs-dismiss": "modal",
+          "aria-label": "Close",
+        },
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "title" } }, [_vm._v("Selected:")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "old_name",
+              id: "selected",
+              disabled: "",
+            },
+          }),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "title" } }, [_vm._v("New name:")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "new_name",
+              id: "selected",
+              required: "",
+            },
+          }),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Rename")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default",
+          attrs: { type: "button", "data-bs-dismiss": "modal" },
+        },
+        [_vm._v("Cancel")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "modal-header modal-header-primary bg-primary" },
+      [
+        _c("h4", { staticClass: "modal-title text-white" }, [
+          _vm._v("Upload file"),
+        ]),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn-close",
+          attrs: {
+            type: "button",
+            "data-bs-dismiss": "modal",
+            "aria-label": "Close",
+          },
+        }),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "file" } }, [_vm._v("Upload file:")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "file",
+          attrs: {
+            name: "up_file[]",
+            id: "input-2",
+            type: "file",
+            multiple: "true",
+            "data-show-upload": "false",
+            "data-show-caption": "true",
+            required: "",
+          },
+        }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Upload")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default",
+          attrs: { type: "button", "data-bs-dismiss": "modal" },
+        },
+        [_vm._v("Cancel")]
+      ),
     ])
   },
 ]
@@ -45432,6 +46023,11 @@ var hcms = new vue__WEBPACK_IMPORTED_MODULE_8__["default"]({
   name: 'HorizontCMS',
   el: '#hcms',
   data: {},
+  provide: function provide() {
+    return {
+      bootstrap: bootstrap__WEBPACK_IMPORTED_MODULE_1__
+    };
+  },
   components: {
     LockScreen: _components_LockScreen_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
     TextEditor: _components_TextEditor_vue__WEBPACK_IMPORTED_MODULE_5__["default"],

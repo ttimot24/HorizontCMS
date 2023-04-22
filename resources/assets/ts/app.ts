@@ -25,6 +25,11 @@ const hcms = new Vue({
     data: {
 
     },
+    provide() {
+        return {
+          bootstrap: bootstrap
+        }
+    },
     components: {
         LockScreen,
         TextEditor,

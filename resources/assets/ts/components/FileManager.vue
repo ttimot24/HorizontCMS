@@ -42,15 +42,12 @@
                         <div class='panel panel-default col-2 bg-dark p-3' style="min-height:500px;">
                             <h4 class="p-2 bg-dark text-white">Drivers</h4>
                             <ul class="list-group">
-                                @foreach (config('filesystems.disks') as $key => $value)
+
                                 <!-- v-on:click.prevent="open('{{ isset($value['root']) ? basename($value['root']) : '' }}', false);" -->
-                                <a href="#"
-                                   
-                                   
-                                   >
-                                    <li class="list-group-item bg-dark text-white">{{ $key }}</li>
+                                <a href="#" v-for="(disk) in disks" v-on:click.prevent="open(disk, false)">
+                                    <li class="list-group-item bg-dark text-white">{{ disk }}</li>
                                 </a>
-                                @endforeach
+
                             </ul>
                         </div>
 
@@ -61,10 +58,11 @@
                                         <nav aria-label="breadcrumb p-0 m-0">
                                             <ol class="breadcrumb bg-dark p-0 pt-3 m-0">
                                                 <li class="breadcrumb-item"><a href="storage"
-                                                        v-on:click.prevent=" open('', false); ">storage</a></li>
-                                                <li class="breadcrumb-item" v-for="( bcrumb ) in  breadcrumb "><a
+                                                        v-on:click.prevent="open('', false); ">storage</a></li>
+                                                <li class="breadcrumb-item" v-for="(  bcrumb  ) in   breadcrumb  "><a
                                                         :href=" bcrumb.link "
-                                                        v-on:click.prevent=" open(bcrumb.link, false); ">@{{ bcrumb.text }}</a>
+                                                        v-on:click.prevent=" open(bcrumb.link, false); ">{{ bcrumb.text
+                                                        }}</a>
                                                 </li>
                                             </ol>
                                         </nav>
@@ -84,7 +82,7 @@
 
                                     <div class="row text-white">
                                         <div class='folder col-md-2 col-sm-4 col-xs-4 text-center text-white'
-                                            v-for=" folder  in  folders " :id=" folder " v-on:click=" select(folder) "
+                                            v-for="  folder   in   folders  " :id=" folder " v-on:click=" select(folder) "
                                             v-on:dblclick=" open(folder); ">
 
                                             <div class="file-nav text-end">
@@ -100,23 +98,22 @@
                                             <b>{{ folder }}</b>
                                         </div>
 
-                                        <div v-for=" file  in files" class='file col-md-2 col-sm-4 col-xs-4 text-center'
-                                            :id=" file " 
-                                            v-on:click="
-                                            mode=='embed'?
-                                                returnFileUrl('storage/'+currentDirectory+'/'+file) :
-                                                select(file
-                                                )">
+                                        <div v-for="  file   in  files " class='file col-md-2 col-sm-4 col-xs-4 text-center'
+                                            :id=" file " v-on:click="
+                                                mode === 'embed' ?
+                                                    returnFileUrl('storage/' + currentDirectory + '/' + file) :
+                                                    select(file)
+                                            ">
                                             <div class="file-nav text-end">
-                                                <a class="me-1" v-on:click="renameModal(file)"><i class="fa fa-pencil"
+                                                <a class="me-1" v-on:click=" renameModal(file) "><i class="fa fa-pencil"
                                                         aria-hidden="true"></i></a>
-                                                <a class="me-1" :href="'storage/' + currentDirectory + '/' + file"><i
+                                                <a class="me-1" :href=" 'storage/' + currentDirectory + '/' + file "><i
                                                         class="fa fa-download"></i></a>
-                                                <a class="me-1" v-on:click="deleteModal(file)"><i
+                                                <a class="me-1" v-on:click=" deleteModal(file) "><i
                                                         class="fa fa-trash"></i></a>
                                             </div>
-                                            <img class="w-100 mb-3" v-if="isKnownExtension(file)"
-                                                :src="'storage/' + currentDirectory + '/' + file" />
+                                            <img class="w-100 mb-3" v-if=" isKnownExtension(file) "
+                                                :src=" 'storage/' + currentDirectory + '/' + file " />
                                             <img class="w-100 mb-3" v-else src="resources/images/icons/file.png" />
                                             <b>{{ file }}</b>
                                         </div>
@@ -133,23 +130,131 @@
             </div>
         </section>
 
-    
+
+
+    <div class='modal new_folder' id='new_folder' tabindex='-1' role='dialog' aria-labelledby='new_folder'
+        aria-hidden='true'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header modal-header-primary bg-primary'>
+                    <h4 class='modal-title text-white'>Create new folder</h4>
+                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                </div>
+
+                <form action='admin/file-manager/new-folder' method='POST' enctype='multipart/form-data'
+                    v-on:submit.prevent=" newFolder ">
+                    <div class='modal-body'>
+                        <div class='form-group'>
+                            <div class='form-group'>
+                                <label for='title'>Name:</label>
+                                <input type='text' class='form-control' name='new_folder_name'
+                                    placeholder='Enter folder name' required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='modal-footer'>
+                        <button type='submit' class='btn btn-primary'>Create</button>
+                        <button type='button' class='btn btn-default' data-bs-dismiss='modal'>Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class='modal rename_modal' id='rename_sample' tabindex='-1' role='dialog' aria-labelledby='rename_file'
+        aria-hidden='true'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header modal-header-primary'>
+                    <h4 class='modal-title'>Rename</h4>
+                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                </div>
+
+                <form action='admin/file-manager/rename' method='POST' v-on:submit.prevent=" renameFile ">
+                    <div class='modal-body'>
+
+                        <div class='form-group'>
+                            <div class='form-group'>
+                                <label for='title'>Selected:</label>
+                                <input type='text' class='form-control' name='old_name' id="selected" disabled>
+                            </div>
+                        </div>
+
+                        <div class='form-group'>
+                            <div class='form-group'>
+                                <label for='title'>New name:</label>
+                                <input type='text' class='form-control' name='new_name' id="selected" required>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class='modal-footer'>
+                        <button type='submit' class='btn btn-primary'>Rename</button>
+                        <button type='button' class='btn btn-default' data-bs-dismiss='modal'>Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class='modal upload_file_to_storage' id='upload_file_to_storage' tabindex='-1' role='dialog'
+        aria-labelledby='upload_file_to_storage' aria-hidden='true'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header modal-header-primary bg-primary'>
+                    <h4 class='modal-title text-white'>Upload file</h4>
+                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                </div>
+
+                <form action="admin/filemanager" method='POST' enctype='multipart/form-data'
+                    v-on:submit.prevent="upload">
+                    <div class='modal-body'>
+
+
+                        <div class='form-group'>
+                            <label for='file'>Upload file:</label>
+                            <input name='up_file[]' id='input-2' type='file' class='file' multiple='true'
+                                data-show-upload='false' data-show-caption='true' required>
+                        </div>
+
+                    </div>
+                    <div class='modal-footer'>
+                        <button type='submit' class='btn btn-primary'>Upload</button>
+                        <button type='button' class='btn btn-default'
+                            data-bs-dismiss='modal'>Cancel</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <delete-modal :id="'delete_sample'" :route="'admin/file-manager/destroy'" :header="'Are you sure you want to delete?'" :name="'[dir_name_sample]'" :delete_text="'Delete'" :cancel="'Cancel'" ref="deletemodal"></delete-modal>
 
     </div>
+
 </template>
 
 <script lang="ts">
 
-import * as bootstrap from 'bootstrap';
-
 import { defineComponent } from '@vue/composition-api';
+import DeleteModal from './DeleteModal.vue';
 
 export default defineComponent({
     name: 'FileManager',
+    components: {
+        DeleteModal
+    },
     mounted: function () {
 
         var vm = this;
-        vm._csrfToken = $('[name="_token"]').val();
+
+        console.log("VueJS: FileManager started");
+        vm.open(this.currentDirectory, false);
+        console.log('Directory: ' + vm.currentDirectory);
+
 
         vm.modalRename = vm.getModal("rename_sample");
         vm.modalUpload = vm.getModal("upload_file_to_storage");
@@ -157,27 +262,32 @@ export default defineComponent({
         vm.modalDelete = vm.getModal("delete_sample");
 
         $('#delete-form').on('submit', (event) => { event.preventDefault(); this.deleteFile(); });
-
-        console.log("VueJS: FileManager started");
-        vm.open($(this.$el).data('start'), false);
-        console.log('Directory: ' + vm.currentDirectory);
     },
+    inject: ['bootstrap'],
     props: {
-        _csrfToken: {
+        token: {
+            type: String,
+            default: '',
+            required: true
+        },
+        directory: {
             type: String,
             default: ''
         },
-        currentDirectory: {
+        disks: {
+            type: Array<string>,
+            default: []
+        },
+        mode: {
             type: String,
-            default: ''
+            default: 'standalone'
         }
     },
     data: function () {
         return {
-            _csrfToken: '',
-            mode: 'embed',
+            mode: this.mode,
             previousDirectory: null,
-            currentDirectory: '',
+            currentDirectory: this.directory,
             drivers: [],
             folders: [],
             files: [],
@@ -222,7 +332,7 @@ export default defineComponent({
     },
     methods: {
         getModal: function (id: string): bootstrap.Modal {
-            return (new bootstrap.Modal(document.getElementById(id) || {} as HTMLElement));
+            return (new this.bootstrap.Modal(document.getElementById(id) || {} as HTMLElement));
         },
         select: function (file: string): void {
             var vm = this;
@@ -293,7 +403,7 @@ export default defineComponent({
 
             $.post(event.target.action,
                 {
-                    _token: vm._csrfToken,
+                    _token: vm.token,
                     dir_path: dirPath,
                     new_folder_name: folderName
                 },
@@ -336,7 +446,7 @@ export default defineComponent({
             }
 
             var formData = new FormData();
-            formData.append('_token', vm._csrfToken);
+            formData.append('_token', vm.token);
             formData.append('dir_path', dirPath);
 
             for (var i = 0; i < files.length; i++) {
@@ -409,7 +519,7 @@ export default defineComponent({
                 url: event.target.action,
                 contentType: "application/json",
                 data: JSON.stringify({
-                    _token: vm._csrfToken,
+                    _token: vm.token,
                     old_file: vm.currentDirectory.concat('/').concat($('[name="old_name"]').val()),
                     new_file: vm.currentDirectory.concat('/').concat($('[name="new_name"]').val())
                 }),
@@ -437,7 +547,7 @@ export default defineComponent({
 
             $.post('admin/file-manager/destroy',
                 {
-                    _token: vm._csrfToken,
+                    _token: vm.token,
                     file: file
                 },
                 function (data) {

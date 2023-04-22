@@ -17,7 +17,7 @@
 
 <body>
     <div id="hcms">
-        @include('media.filemanager')
+        @include('media.filemanager', ['mode' => 'embed'])
     </div>
 
 </body>

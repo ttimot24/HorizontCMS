@@ -30,8 +30,14 @@ class NavbarPluginMiddleware
 
                 foreach($plugin_nav as $key => $item){
 
-                  $item['url'] = isset($item['url'])? $item['url'] : route(namespace_to_slug($plugin->root_dir).".index");
-                  
+                  $item['url'] = isset($item['url'])? $item['url'] : 
+
+                  rescue(function () use ($plugin) {
+                      return route(namespace_to_slug($plugin->root_dir).".index");
+                  }, function () use ($plugin) {
+                      return plugin_link(namespace_to_slug($plugin->root_dir));
+                  });
+                    
                   if(!isset($item['menu']) || $item['menu']=='main'){  
                     if(isset($item['submenu_of'])){
                         $main_menu->find($item['submenu_of'])->add($item['label'],$item['url'])->id($key);
