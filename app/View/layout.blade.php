@@ -18,14 +18,13 @@
 
     @yield('head')
 
-    @foreach ($jsplugins as $each_js)
-        <script type="text/javascript" src="{{ asset($each_js) }}" defer></script>
-    @endforeach
-
     @foreach ($js as $each_js)
         <script type="text/javascript" src="{{ asset($each_js) }}" defer></script>
     @endforeach
 
+    @foreach ($jsplugins as $each_js)
+        <script type="text/javascript" src="{{ asset($each_js) }}" defer></script>
+    @endforeach
 
 </head>
 

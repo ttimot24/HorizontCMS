@@ -33961,9 +33961,6 @@ __webpack_require__.r(__webpack_exports__);
 window.vue.config.devtools = true;
 window.vue.use(vue_resource__WEBPACK_IMPORTED_MODULE_3__["default"]);
 window.vue.use((ckeditor4_vue__WEBPACK_IMPORTED_MODULE_4___default()));
-window.vue.component('text-editor', _components_TextEditor_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
-window.vue.component('lock-screen', _components_LockScreen_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
-window.vue.component('file-manager', _components_FileManager_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 var hcms = new window.vue({
   name: 'HorizontCMS',
   el: '#hcms',
@@ -33972,6 +33969,11 @@ var hcms = new window.vue({
     return {
       bootstrap: bootstrap__WEBPACK_IMPORTED_MODULE_1__
     };
+  },
+  components: {
+    TextEditor: _components_TextEditor_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    LockScreen: _components_LockScreen_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    FileManager: _components_FileManager_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   created: function created() {
     console.log("HorizontCMS started");

@@ -18,10 +18,6 @@ window.vue.config.devtools = true;
 window.vue.use(VueResource);
 window.vue.use(CKEditor);
 
-window.vue.component('text-editor', TextEditor);
-window.vue.component('lock-screen', LockScreen);
-window.vue.component('file-manager', FileManager);
-
 const hcms = new window.vue({
     name: 'HorizontCMS',
     el: '#hcms',
@@ -32,6 +28,11 @@ const hcms = new window.vue({
         return {
           bootstrap: bootstrap
         }
+    },
+    components: {
+        TextEditor,
+        LockScreen,
+        FileManager
     },
     created: function(){
         console.log("HorizontCMS started");
