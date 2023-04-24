@@ -1,102 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/assets/ts/dragndrop.js":
-/*!******************************************!*\
-  !*** ./resources/assets/ts/dragndrop.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ dragndroporder)
-/* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery-ui-bundle */ "./node_modules/jquery-ui-bundle/jquery-ui.js");
-/* harmony import */ var jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_1__);
-
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * include Vue and Vue Resource. This gives a great starting point for
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-
-function dragndrop() {
-  //Helper function to keep table row from collapsing when being sorted
-  var fixHelperModified = function fixHelperModified(e, tr) {
-    var $originals = tr.children();
-    var $helper = tr.clone();
-    $helper.children().each(function (index) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).width($originals.eq(index).width());
-    });
-    return $helper;
-  };
-  function after_drop() {
-    var alist = [];
-    jquery__WEBPACK_IMPORTED_MODULE_0__("#page-list-table tbody tr").each(function (iter) {
-      var $this = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
-      var pageId = $this.find('td').eq(1).html().split(" ")[0];
-      alist[iter] = pageId;
-    });
-    jquery__WEBPACK_IMPORTED_MODULE_0__.post("admin/page/reorder", {
-      _token: jquery__WEBPACK_IMPORTED_MODULE_0__("#orderer").data("csrf"),
-      order: JSON.stringify(alist)
-    }, function (data, status) {
-      console.log("Data: " + data + "\nStatus: " + status);
-    });
-  }
-
-  //Make diagnosis table sortable
-  jquery__WEBPACK_IMPORTED_MODULE_0__("#page-list-table tbody").sortable({
-    helper: fixHelperModified,
-    stop: function stop(event, ui) {
-      renumber_table('#page-list-table');
-      after_drop();
-    }
-  }).disableSelection();
-
-  //Delete button in table rows
-  jquery__WEBPACK_IMPORTED_MODULE_0__('table').on('click', '.btn-delete', function () {
-    var tableID = '#' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('table').attr('id');
-    var r = confirm('Delete this item?');
-    if (r) {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr').remove();
-      renumber_table(tableID);
-    }
-  });
-}
-;
-
-//Renumber table rows
-function renumber_table(tableID) {
-  jquery__WEBPACK_IMPORTED_MODULE_0__(tableID + " tr").each(function () {
-    var count = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().children().index(jquery__WEBPACK_IMPORTED_MODULE_0__(this)) + 1;
-    jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('.priority').html(count);
-  });
-}
-function dragndroporder() {
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#orderer').toggleClass('btn-default');
-  jquery__WEBPACK_IMPORTED_MODULE_0__('#orderer').toggleClass('btn-success');
-  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#page-list-table').hasClass('order-active')) {
-    jquery__WEBPACK_IMPORTED_MODULE_0__('.torder').remove();
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#page-list-table').removeClass('order-active');
-  } else {
-    jquery__WEBPACK_IMPORTED_MODULE_0__('table').find('tr').each(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('th').eq(0).before("<th class='col-md-1 torder'>Reorder</th>");
-      jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('td').eq(0).before("<td class='torder'><i class='well well-sm fa fa-arrows-v' style='border-radius:3px;cursor:grab;font-size:20px;' aria-hidden='true'></i></td>");
-    });
-    jquery__WEBPACK_IMPORTED_MODULE_0__('#page-list-table').addClass('order-active');
-    dragndrop();
-  }
-}
-window.dragndroporder = dragndroporder;
-
-/***/ }),
-
 /***/ "./node_modules/jquery-ui-bundle/jquery-ui.js":
 /*!****************************************************!*\
   !*** ./node_modules/jquery-ui-bundle/jquery-ui.js ***!
@@ -29812,6 +29716,102 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
+
+/***/ }),
+
+/***/ "./resources/assets/ts/dragndrop.js":
+/*!******************************************!*\
+  !*** ./resources/assets/ts/dragndrop.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ dragndroporder)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery-ui-bundle */ "./node_modules/jquery-ui-bundle/jquery-ui.js");
+/* harmony import */ var jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * include Vue and Vue Resource. This gives a great starting point for
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+
+function dragndrop() {
+  //Helper function to keep table row from collapsing when being sorted
+  var fixHelperModified = function fixHelperModified(e, tr) {
+    var $originals = tr.children();
+    var $helper = tr.clone();
+    $helper.children().each(function (index) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).width($originals.eq(index).width());
+    });
+    return $helper;
+  };
+  function after_drop() {
+    var alist = [];
+    jquery__WEBPACK_IMPORTED_MODULE_0__("#page-list-table tbody tr").each(function (iter) {
+      var $this = jquery__WEBPACK_IMPORTED_MODULE_0__(this);
+      var pageId = $this.find('td').eq(1).html().split(" ")[0];
+      alist[iter] = pageId;
+    });
+    jquery__WEBPACK_IMPORTED_MODULE_0__.post("admin/page/reorder", {
+      _token: jquery__WEBPACK_IMPORTED_MODULE_0__("#orderer").data("csrf"),
+      order: JSON.stringify(alist)
+    }, function (data, status) {
+      console.log("Data: " + data + "\nStatus: " + status);
+    });
+  }
+
+  //Make diagnosis table sortable
+  jquery__WEBPACK_IMPORTED_MODULE_0__("#page-list-table tbody").sortable({
+    helper: fixHelperModified,
+    stop: function stop(event, ui) {
+      renumber_table('#page-list-table');
+      after_drop();
+    }
+  }).disableSelection();
+
+  //Delete button in table rows
+  jquery__WEBPACK_IMPORTED_MODULE_0__('table').on('click', '.btn-delete', function () {
+    var tableID = '#' + jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('table').attr('id');
+    var r = confirm('Delete this item?');
+    if (r) {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).closest('tr').remove();
+      renumber_table(tableID);
+    }
+  });
+}
+;
+
+//Renumber table rows
+function renumber_table(tableID) {
+  jquery__WEBPACK_IMPORTED_MODULE_0__(tableID + " tr").each(function () {
+    var count = jquery__WEBPACK_IMPORTED_MODULE_0__(this).parent().children().index(jquery__WEBPACK_IMPORTED_MODULE_0__(this)) + 1;
+    jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('.priority').html(count);
+  });
+}
+function dragndroporder() {
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#orderer').toggleClass('btn-default');
+  jquery__WEBPACK_IMPORTED_MODULE_0__('#orderer').toggleClass('btn-success');
+  if (jquery__WEBPACK_IMPORTED_MODULE_0__('#page-list-table').hasClass('order-active')) {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('.torder').remove();
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#page-list-table').removeClass('order-active');
+  } else {
+    jquery__WEBPACK_IMPORTED_MODULE_0__('table').find('tr').each(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('th').eq(0).before("<th class='col-md-1 torder'>Reorder</th>");
+      jquery__WEBPACK_IMPORTED_MODULE_0__(this).find('td').eq(0).before("<td class='torder'><i class='well well-sm fa fa-arrows-v' style='border-radius:3px;cursor:grab;font-size:20px;' aria-hidden='true'></i></td>");
+    });
+    jquery__WEBPACK_IMPORTED_MODULE_0__('#page-list-table').addClass('order-active');
+    dragndrop();
+  }
+}
+window.dragndroporder = dragndroporder;
 
 /***/ }),
 

@@ -9,6 +9,5 @@ declare global {
         CKEDITOR: any,
         bootstrap: any;
         hcms: Vue;
-        filemanager: FileManager;
     }
 }

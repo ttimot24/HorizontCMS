@@ -21,6 +21,7 @@ mix.autoload({
 mix.i18n('resources/lang');
 
 mix.ts('resources/assets/ts/app.ts', 'js')
+   .ts('resources/assets/ts/main.ts', 'js')
    .ts('resources/assets/ts/pages.ts', 'js')
    .js('resources/assets/ts/dragndrop.js', 'js')
    .vue()

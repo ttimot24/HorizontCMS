@@ -7,7 +7,6 @@ import * as jquery from "jquery";
 import * as bootstrap from "bootstrap";
 import "bootstrap-fileinput";
 
-import Vue from 'vue';
 import VueResource from 'vue-resource';
 
 import CKEditor from 'ckeditor4-vue';
@@ -15,11 +14,15 @@ import TextEditor from './components/TextEditor.vue';
 import LockScreen from './components/LockScreen.vue';
 import FileManager from './components/FileManager.vue';
 
-Vue.config.devtools = true;
-Vue.use(VueResource);
-Vue.use(CKEditor);
+window.vue.config.devtools = true;
+window.vue.use(VueResource);
+window.vue.use(CKEditor);
 
-const hcms = new Vue({
+window.vue.component('text-editor', TextEditor);
+window.vue.component('lock-screen', LockScreen);
+window.vue.component('file-manager', FileManager);
+
+const hcms = new window.vue({
     name: 'HorizontCMS',
     el: '#hcms',
     data: {
@@ -29,11 +32,6 @@ const hcms = new Vue({
         return {
           bootstrap: bootstrap
         }
-    },
-    components: {
-        LockScreen,
-        TextEditor,
-        FileManager
     },
     created: function(){
         console.log("HorizontCMS started");
@@ -49,7 +47,6 @@ const hcms = new Vue({
 export default hcms;
 
 window.hcms = hcms;
-window.vue = Vue;
 
 window.$ = jquery;
 window.bootstrap = bootstrap;

@@ -14,13 +14,18 @@
         <link rel="stylesheet" type="text/css" href="{{ asset($each_css) }}">
     @endforeach
 
-	@foreach ($js as $each_js)
-        <script type="text/javascript" src="{{ asset($each_js) }}" defer></script>
-    @endforeach
+    <script type="text/javascript" src="{{ asset('resources/js/main.js') }}" defer></script>
+
+    @yield('head')
 
     @foreach ($jsplugins as $each_js)
         <script type="text/javascript" src="{{ asset($each_js) }}" defer></script>
     @endforeach
+
+    @foreach ($js as $each_js)
+        <script type="text/javascript" src="{{ asset($each_js) }}" defer></script>
+    @endforeach
+
 
 </head>
 
