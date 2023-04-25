@@ -129,7 +129,7 @@
                     <div class='modal-header'>
                         <h3 class='modal-title'>{{ trans('settings.adminarea_select_logo') }}</h3>
 
-                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                        <button id="close-modal" type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                     </div>
                     <div class='modal-body' style="max-height:75vh; overflow-y: scroll;">
 
@@ -149,13 +149,23 @@
 
     </div>
 
-    <script>
+@endsection
+
+@section('head')
+
+    <script defer>
+
+    window.onload = function () {
+
         $("#workspace").on('click', ".file", function(event) {
             var src = $(event.target).attr('src');
-            var bname = filemanager.basename(src);
+            var bname = src.substring(src.lastIndexOf('/') + 1);
             $('[name="admin_logo"]').val(bname);
             $('#admin_logo').attr('src', 'storage/images/logos/' + bname);
-            $('.admin_logo_select-modal-lg').modal("hide");
+            $('#close-modal').click();
         });
+
+    }
     </script>
+
 @endsection

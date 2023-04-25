@@ -6,6 +6,8 @@ class RouteResolver{
 
 	private $defaultNamespace = "\App\\Controllers\\";
 
+	private $namespace;
+
 	public function __construct(){
 		$this->resetNamespace();
 	}

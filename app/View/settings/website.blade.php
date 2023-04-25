@@ -168,7 +168,7 @@
                 <div class='modal-content'>
                     <div class='modal-header'>
                         <h3 class='modal-title text-center'>Select Logo</h3>
-                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                        <button id="close-modal" type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                     </div>
                     <div class='modal-body p-3' style="max-height:75vh; overflow-y: scroll;">
                         @include('media.filemanager', ['mode' => '', 'current_dir' => 'storage/images'])
@@ -178,8 +178,16 @@
         </div>
 
         </div>
+      
+    @endsection
 
-        <script>
+@section('head')
+
+  <script defer>
+
+
+    window.onload = function () {
+
             var context = "";
 
             $("#button-favicon").on('click', function(event) {
@@ -196,21 +204,25 @@
                 if (context == "logo") {
 
                     var src = $(event.target).attr('src');
-                    var bname = filemanager.basename(src);
+                    var bname = src.substring(src.lastIndexOf('/') + 1);
                     $('[name="logo"]').val(bname);
                     $('#logo').attr('src', 'storage/images/logos/' + bname);
 
                 } else if (context == "favicon") {
 
                     var src = $(event.target).attr('src');
-                    var bname = filemanager.basename(src);
+                    var bname = src.substring(src.lastIndexOf('/') + 1);
                     $('[name="favicon"]').val(bname);
                     $('#favicon').attr('src', 'storage/images/favicons/' + bname);
 
                 }
 
-                $('#filemanager-modal').modal("hide");
+                $('#close-modal').click();
 
             });
+
+
+        }
         </script>
-    @endsection
+
+@endsection

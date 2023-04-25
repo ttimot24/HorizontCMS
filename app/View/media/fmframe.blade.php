@@ -2,6 +2,6 @@
 
 @section('content')
 
-@include('media.filemanager')
+@include('media.filemanager', ['mode' => ''])
 
 @endsection

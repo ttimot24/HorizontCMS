@@ -48,9 +48,9 @@
                             </div>
 
                             <div class="row p-3">
-                                <div class='form-group col-xs-12 col-md-6' id='level'>
+                                <div class='form-group col-xs-12 col-md-6'>
                                     <label for='level'>{{ trans('page.page_level') }}</label>
-                                    <select class='form-select' name='parent_select'>
+                                    <select class='form-select' name='parent_select' id='level'>
                                         <option value='0' @if (isset($page) && $page->parent_id == null) selected @endif>Main menu
                                         </option>
                                         <option value='1' @if (isset($page) && $page->parent_id != null) selected @endif>Submenu
@@ -139,8 +139,11 @@
         @include('image_details', ['modal_id' => $page->id, 'image' => $page->getImage()])
     @endif
 
+@endsection
+
+@section('head')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js">
-        < script type = 'text/javascript' >
+    <script type='text/javascript' defer>
 
             $(document).ready(function() {
 
@@ -159,6 +162,5 @@
                 });
             });
     </script>
-
-    <script src="{{ asset('resources/js/texteditor.js') }}"></script>
+    
 @endsection

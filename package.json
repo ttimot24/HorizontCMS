@@ -43,6 +43,7 @@
         "jquery": "^3.6.0",
         "jquery-ui": "^1.13.1",
         "jquery-ui-bundle": "^1.12.1-migrate",
+        "laravel-vue-i18n": "^2.4.2",
         "vue-resource": "^1.5.3"
     }
 }
