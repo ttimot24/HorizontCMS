@@ -1,7 +1,7 @@
 <template>
     <div id="text-editor">
         <textarea style="display: none;" v-model="content" :name="name" ></textarea>
-        <ckeditor @input="output" v-model="content" :tag-name="'textarea'" :name="name" :config="editorConfig"></ckeditor>
+        <ckeditor @input="output" v-model="content" :tag-name="'textarea'" :name="name" :config="editorConfig" :editor-url="editorUrl"></ckeditor>
     </div>
 </template>
 
@@ -25,6 +25,7 @@
         data: function() {
             return {
                 content: this.data,
+                editorUrl: 'https://cdn.ckeditor.com/4.21.0/full/ckeditor.js',
                 editorConfig: {
                     language: this.language,
                     skin: 'moono-lisa',

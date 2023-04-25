@@ -28358,6 +28358,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       content: this.data,
+      editorUrl: 'https://cdn.ckeditor.com/4.21.0/full/ckeditor.js',
       editorConfig: {
         language: this.language,
         skin: 'moono-lisa',
@@ -29942,6 +29943,7 @@ var render = function () {
           "tag-name": "textarea",
           name: _vm.name,
           config: _vm.editorConfig,
+          "editor-url": _vm.editorUrl,
         },
         on: { input: _vm.output },
         model: {
