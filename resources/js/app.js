@@ -28278,6 +28278,11 @@ function _typeof(obj) {
       type: Object
     }
   },
+  data: function data() {
+    return {
+      password: ''
+    };
+  },
   mounted: function mounted() {
     var vm = this;
     vm.modal = new bootstrap__WEBPACK_IMPORTED_MODULE_0__.Modal(vm.$refs.lock_screen);
@@ -28305,7 +28310,7 @@ function _typeof(obj) {
       var password_field = $("#lock_pwd");
       axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/v1/lock-up', {
         id: this.user.id,
-        password: password_field.val()
+        password: this.password
       }).then(function (response) {
         if (response.data) {
           vm.modal.hide();
@@ -29805,7 +29810,34 @@ var render = function () {
               ]),
             ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("div", { staticClass: "form-group mt-5" }, [
+              _c("label", { attrs: { for: "pwd" } }, [_vm._v("Password")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.password,
+                    expression: "password",
+                  },
+                ],
+                ref: "password_field",
+                staticClass: "form-control w-100",
+                attrs: { type: "password", id: "lock_pwd", required: "" },
+                domProps: { value: _vm.password },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.password = $event.target.value
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _vm._m(1),
+            ]),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "modal-footer" }, [
@@ -29840,20 +29872,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group mt-5" }, [
-      _c("label", { attrs: { for: "pwd" } }, [_vm._v("Password")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control w-100",
-        attrs: { type: "password", id: "lock_pwd", required: "" },
-      }),
-      _vm._v(" "),
-      _c(
-        "span",
-        { staticClass: "invalid-feedback", attrs: { role: "alert" } },
-        [_c("strong", [_vm._v("Wrong password")])]
-      ),
-    ])
+    return _c(
+      "span",
+      { staticClass: "invalid-feedback", attrs: { role: "alert" } },
+      [_c("strong", [_vm._v("Wrong password")])]
+    )
   },
 ]
 render._withStripped = true

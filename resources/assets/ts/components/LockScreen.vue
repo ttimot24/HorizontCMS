@@ -19,7 +19,7 @@
 
                     <div class='form-group mt-5'>
                         <label for='pwd'>Password</label>
-                        <input type='password' class='form-control w-100' id='lock_pwd' required />
+                        <input type='password' class='form-control w-100' id='lock_pwd' v-model="password" ref="password_field" required />
                         <span class="invalid-feedback" role="alert">
                             <strong>Wrong password</strong>
                         </span>
@@ -48,6 +48,11 @@ export default defineComponent({
     props: {
         user: {
             type: Object as () => User
+        }
+    },
+    data: function(){
+        return {
+            password: ''
         }
     },
     mounted: function () {
@@ -81,12 +86,13 @@ export default defineComponent({
             var vm = this;
 
             console.log(vm);
+
             var password_field: any = $("#lock_pwd");
 
             axios.post('/api/v1/lock-up',
                 {
                     id: this.user.id,
-                    password: (password_field.val()) as string,
+                    password: (this.password) as string,
                 }
             ).then((response) => {
 
