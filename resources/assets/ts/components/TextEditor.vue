@@ -1,7 +1,7 @@
 <template>
     <div id="text-editor">
         <textarea style="display: none;" v-model="content" :name="name" ></textarea>
-        <ckeditor v-model="content" :tag-name="'textarea'" :name="name" :config="editorConfig"></ckeditor>
+        <ckeditor @input="output" v-model="content" :tag-name="'textarea'" :name="name" :config="editorConfig"></ckeditor>
     </div>
 </template>
 
@@ -12,7 +12,11 @@
 	export default defineComponent({
         name: 'text-editor',
         props: {
-            name: String,
+            name: {
+                type: String,
+                default: '',
+                required: true
+            },
             data: String,
             language: String,
             filebrowserbrowseurl: String,
@@ -20,7 +24,6 @@
         },
         data: function() {
             return {
-                name: this.name,
                 content: this.data,
                 editorConfig: {
                     language: this.language,
@@ -29,9 +32,16 @@
                     removeButtons: 'NewPage,Save,Font,FontSize,Styles,Flash,Print,Language,Templates,PageBreak',
                     height: 500,
                     filebrowserBrowseUrl: this.filebrowserbrowseurl,
-                    filebrowserUploadUrl: this.filebrowseruploadurl
+                    filebrowserUploadUrl: this.filebrowseruploadurl,
+                    fullPage: true,
+	                allowedContent: true
                 }
             };
+        },
+        methods:{
+            output: function(data: string){
+                this.$emit('output', data);
+            }
         }
     });
 

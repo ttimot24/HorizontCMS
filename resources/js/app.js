@@ -28345,7 +28345,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_vue_composition_api__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   name: 'text-editor',
   props: {
-    name: String,
+    name: {
+      type: String,
+      "default": '',
+      required: true
+    },
     data: String,
     language: String,
     filebrowserbrowseurl: String,
@@ -28353,7 +28357,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      name: this.name,
       content: this.data,
       editorConfig: {
         language: this.language,
@@ -28362,9 +28365,16 @@ __webpack_require__.r(__webpack_exports__);
         removeButtons: 'NewPage,Save,Font,FontSize,Styles,Flash,Print,Language,Templates,PageBreak',
         height: 500,
         filebrowserBrowseUrl: this.filebrowserbrowseurl,
-        filebrowserUploadUrl: this.filebrowseruploadurl
+        filebrowserUploadUrl: this.filebrowseruploadurl,
+        fullPage: true,
+        allowedContent: true
       }
     };
+  },
+  methods: {
+    output: function output(data) {
+      this.$emit('output', data);
+    }
   }
 }));
 
@@ -29933,6 +29943,7 @@ var render = function () {
           name: _vm.name,
           config: _vm.editorConfig,
         },
+        on: { input: _vm.output },
         model: {
           value: _vm.content,
           callback: function ($$v) {
