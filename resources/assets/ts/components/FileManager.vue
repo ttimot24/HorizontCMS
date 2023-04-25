@@ -261,7 +261,7 @@ export default defineComponent({
         vm.modalNewFolder = vm.getModal("new_folder");
         vm.modalDelete = vm.getModal("delete_sample");
 
-        $('#delete-form').on('submit', (event) => { event.preventDefault(); this.deleteFile(); });
+        $('#delete-form').on('submit', (event: Event) => { event.preventDefault(); this.deleteFile(); });
     },
     inject: ['bootstrap'],
     props: {
@@ -359,7 +359,7 @@ export default defineComponent({
                 data: {
                     path: folderToOpen
                 },
-                success: function (data) {
+                success: function (data: any) {
 
                     vm.previousDirectory = vm.currentDirectory;
                     vm.currentDirectory = data.current_dir;
@@ -386,7 +386,7 @@ export default defineComponent({
 
                     $('.fa-refresh').removeClass('fa-spin');
                 },
-                error: function (data) {
+                error: function (data: any) {
                     console.log(data);
                     //  throw "Error in ajax form submission";
                 }
@@ -407,7 +407,7 @@ export default defineComponent({
                     dir_path: dirPath,
                     new_folder_name: folderName
                 },
-                function (data) {
+                function (data: any) {
                     if (typeof data.success !== undefined) {
 
                         console.log("Dir created: " + dirPath + '/' + folderName);
@@ -464,7 +464,7 @@ export default defineComponent({
                 cache: false,
                 contentType: false,
                 processData: false,
-                success: function (data) {
+                success: function (data: any) {
                     if (typeof data.success !== undefined) {
                         console.log(data);
 
@@ -523,7 +523,7 @@ export default defineComponent({
                     old_file: vm.currentDirectory.concat('/').concat($('[name="old_name"]').val()),
                     new_file: vm.currentDirectory.concat('/').concat($('[name="new_name"]').val())
                 }),
-                success: function (data) {
+                success: function (data: any) {
                     if (typeof data.success !== undefined) {
                         vm.open(vm.currentDirectory);
                         vm.modalRename.hide();
@@ -550,7 +550,7 @@ export default defineComponent({
                     _token: vm.token,
                     file: file
                 },
-                function (data) {
+                function (data: any) {
                     if (typeof data.success !== undefined) {
 
                         var index = vm.files.indexOf(deleteSubmit.data('file'));

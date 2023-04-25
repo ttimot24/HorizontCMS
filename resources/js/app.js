@@ -33957,17 +33957,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
-/* harmony import */ var bootstrap_fileinput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap-fileinput */ "./node_modules/bootstrap-fileinput/js/fileinput.js");
-/* harmony import */ var bootstrap_fileinput__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap_fileinput__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vue_resource__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-resource */ "./node_modules/vue-resource/dist/vue-resource.esm.js");
-/* harmony import */ var ckeditor4_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ckeditor4-vue */ "./node_modules/ckeditor4-vue/dist/ckeditor.js");
-/* harmony import */ var ckeditor4_vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ckeditor4_vue__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_TextEditor_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/TextEditor.vue */ "./resources/assets/ts/components/TextEditor.vue");
-/* harmony import */ var _components_LockScreen_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/LockScreen.vue */ "./resources/assets/ts/components/LockScreen.vue");
-/* harmony import */ var _components_FileManager_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/FileManager.vue */ "./resources/assets/ts/components/FileManager.vue");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
+/* harmony import */ var bootstrap_fileinput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap-fileinput */ "./node_modules/bootstrap-fileinput/js/fileinput.js");
+/* harmony import */ var bootstrap_fileinput__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap_fileinput__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_resource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-resource */ "./node_modules/vue-resource/dist/vue-resource.esm.js");
+/* harmony import */ var ckeditor4_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ckeditor4-vue */ "./node_modules/ckeditor4-vue/dist/ckeditor.js");
+/* harmony import */ var ckeditor4_vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(ckeditor4_vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_TextEditor_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/TextEditor.vue */ "./resources/assets/ts/components/TextEditor.vue");
+/* harmony import */ var _components_LockScreen_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/LockScreen.vue */ "./resources/assets/ts/components/LockScreen.vue");
+/* harmony import */ var _components_FileManager_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/FileManager.vue */ "./resources/assets/ts/components/FileManager.vue");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -33980,23 +33978,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 window.vue.config.devtools = true;
-window.vue.use(vue_resource__WEBPACK_IMPORTED_MODULE_3__["default"]);
-window.vue.use((ckeditor4_vue__WEBPACK_IMPORTED_MODULE_4___default()));
+window.vue.use(vue_resource__WEBPACK_IMPORTED_MODULE_2__["default"]);
+window.vue.use((ckeditor4_vue__WEBPACK_IMPORTED_MODULE_3___default()));
 var hcms = new window.vue({
   name: 'HorizontCMS',
   el: '#hcms',
   data: {},
   provide: function provide() {
     return {
-      bootstrap: bootstrap__WEBPACK_IMPORTED_MODULE_1__
+      bootstrap: bootstrap__WEBPACK_IMPORTED_MODULE_0__
     };
   },
   components: {
-    TextEditor: _components_TextEditor_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    LockScreen: _components_LockScreen_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    FileManager: _components_FileManager_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    TextEditor: _components_TextEditor_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    LockScreen: _components_LockScreen_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    FileManager: _components_FileManager_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
   created: function created() {
     console.log("HorizontCMS started");
@@ -34009,8 +34006,7 @@ var hcms = new window.vue({
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (hcms);
 window.hcms = hcms;
-window.$ = jquery__WEBPACK_IMPORTED_MODULE_0__;
-window.bootstrap = bootstrap__WEBPACK_IMPORTED_MODULE_1__;
+window.bootstrap = bootstrap__WEBPACK_IMPORTED_MODULE_0__;
 })();
 
 /******/ })()
