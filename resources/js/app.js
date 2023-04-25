@@ -28350,10 +28350,23 @@ __webpack_require__.r(__webpack_exports__);
       "default": '',
       required: true
     },
-    data: String,
-    language: String,
-    filebrowserbrowseurl: String,
-    filebrowseruploadurl: String
+    data: {
+      type: String
+    },
+    language: {
+      type: String,
+      "default": 'en'
+    },
+    filebrowserbrowseurl: {
+      type: String
+    },
+    filebrowseruploadurl: {
+      type: String
+    },
+    height: {
+      type: Number,
+      "default": 500
+    }
   },
   data: function data() {
     return {
@@ -28364,7 +28377,7 @@ __webpack_require__.r(__webpack_exports__);
         skin: 'moono-lisa',
         filebrowserUploadMethod: 'form',
         removeButtons: 'NewPage,Save,Font,FontSize,Styles,Flash,Print,Language,Templates,PageBreak',
-        height: 500,
+        height: this.height,
         filebrowserBrowseUrl: this.filebrowserbrowseurl,
         filebrowserUploadUrl: this.filebrowseruploadurl,
         fullPage: true,
