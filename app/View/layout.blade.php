@@ -29,8 +29,6 @@
 
 <body @if (Auth::user()) style="padding-top: 5rem;" @endif>
 
-    @yield('before')
-
     <div id="hcms">
 
         @if (!Auth::guest())
@@ -62,7 +60,7 @@
             </div>
         </footer>
     </div>
-    
+
 </body>
 
 </html>
