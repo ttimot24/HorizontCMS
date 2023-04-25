@@ -36,7 +36,7 @@
         @if (!Auth::guest())
             @include('navbar')
             @include('messages')
-            <lock-screen :user='<?= json_encode(Auth::user()) ?>' ref="lockscreen"></lock-screen>
+            <lock-screen :user='@json(Auth::user())' ref="lockscreen"></lock-screen>
         @endif
 
 
@@ -62,9 +62,7 @@
             </div>
         </footer>
     </div>
-
-    @yield('after')
-
+    
 </body>
 
 </html>
