@@ -9,7 +9,6 @@
     <title>{{ $title }} - {{ config('app.name') }}</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('resources/images/icons/favicon16.png') }}" />
 
-
     @foreach ($css as $each_css)
         <link rel="stylesheet" type="text/css" href="{{ asset($each_css) }}">
     @endforeach
