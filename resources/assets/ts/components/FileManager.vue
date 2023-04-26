@@ -593,7 +593,7 @@ export default defineComponent({
             try {
                 // Simulate user action of selecting a file to be returned to CKEditor.
                 var funcNum: number = this.getUrlParam("CKEditorFuncNum");
-                var fileUrl: string = filepath;
+                var fileUrl: string = window.location.protocol + '//' +window.location.host+'/'+filepath;
                 window.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl, '');
                 window.close();
             } catch (e) {

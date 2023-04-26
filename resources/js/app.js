@@ -28223,7 +28223,7 @@ function _typeof(obj) {
       try {
         // Simulate user action of selecting a file to be returned to CKEditor.
         var funcNum = this.getUrlParam("CKEditorFuncNum");
-        var fileUrl = filepath;
+        var fileUrl = window.location.protocol + '//' + window.location.host + '/' + filepath;
         window.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl, '');
         window.close();
       } catch (e) {
