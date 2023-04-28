@@ -12,12 +12,13 @@
             </div>
             <div class='modal-footer'>
 
-                <form id="delete-form" method='POST' action="{{ $route }}">
+                <form id="delete-form" method="POST" action="{{ $route }}">
                     @csrf
                     @method('delete')
 
-                    <button type='submit' id="delete-submit" class='btn btn-danger'><i class="fa fa-trash"
-                            aria-hidden="true"></i></span> {{ $delete_text }}</button>
+                    <button type='submit' id="delete-submit" class='btn btn-danger'>
+                        <i class="fa fa-trash" aria-hidden="true"></i> {{ $delete_text }}
+                    </button>
                 </form>
 
                 @if (isset($cancel))
