@@ -1,17 +1,25 @@
 import * as jquery from "jquery";
 import Vue from 'vue';
 import VueResource from "vue-resource";
+import axios, { AxiosStatic }  from 'axios';
 
 Vue.use(VueResource);
 
-//window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+Vue.config.devtools = true;
 
 const csrfToken: HTMLElement = document.head.querySelector('meta[name="csrf-token"]') as HTMLElement;
+
+axios.defaults.headers.common['Content-Type'] = "application/json";
+axios.defaults.headers.common['Accept'] = "application/json";
+axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken.getAttribute('content');
 
 Vue.mixin({
     data: function() {
       return {
-        get csrfToken() {
+        get axios(): AxiosStatic {
+            return axios;
+        },
+        get csrfToken(): string | null {
           return csrfToken?.getAttribute('content');
         }
       }

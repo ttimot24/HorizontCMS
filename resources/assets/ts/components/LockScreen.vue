@@ -41,7 +41,7 @@
 import { Modal } from 'bootstrap';
 import { defineComponent } from '@vue/composition-api';
 import { User } from './../entity/User';
-import axios from 'axios';
+import { AxiosResponse, AxiosError } from 'axios';
 
 export default defineComponent({
     name: 'LockScreen',
@@ -89,12 +89,12 @@ export default defineComponent({
 
             var password_field: any = $("#lock_pwd");
 
-            axios.post('/api/v1/lock-up',
+            this.axios.post('/api/v1/lock-up',
                 {
                     id: this.user.id,
                     password: (this.password) as string,
                 }
-            ).then((response) => {
+            ).then((response: AxiosResponse) => {
 
                 if (response.data) {
 
@@ -107,7 +107,7 @@ export default defineComponent({
 
                 password_field = null;
 
-            }).catch((error) => {
+            }).catch((error: AxiosError) => {
                 password_field = null;
                 console.log(error);
             });
