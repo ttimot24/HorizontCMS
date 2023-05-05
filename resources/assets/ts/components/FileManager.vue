@@ -265,11 +265,6 @@ export default defineComponent({
     },
     inject: ['bootstrap'],
     props: {
-        token: {
-            type: String,
-            default: '',
-            required: true
-        },
         directory: {
             type: String,
             default: ''
@@ -403,7 +398,7 @@ export default defineComponent({
 
             $.post(event.target.action,
                 {
-                    _token: vm.token,
+                    _token: vm.csrfToken,
                     dir_path: dirPath,
                     new_folder_name: folderName
                 },
@@ -446,7 +441,7 @@ export default defineComponent({
             }
 
             var formData = new FormData();
-            formData.append('_token', vm.token);
+            formData.append('_token', vm.csrfToken);
             formData.append('dir_path', dirPath);
 
             for (var i = 0; i < files.length; i++) {
@@ -519,7 +514,7 @@ export default defineComponent({
                 url: event.target.action,
                 contentType: "application/json",
                 data: JSON.stringify({
-                    _token: vm.token,
+                    _token: vm.csrfToken,
                     old_file: vm.currentDirectory.concat('/').concat($('[name="old_name"]').val()),
                     new_file: vm.currentDirectory.concat('/').concat($('[name="new_name"]').val())
                 }),
@@ -547,7 +542,7 @@ export default defineComponent({
 
             $.post('admin/file-manager/destroy',
                 {
-                    _token: vm.token,
+                    _token: vm.csrfToken,
                     file: file
                 },
                 function (data: any) {

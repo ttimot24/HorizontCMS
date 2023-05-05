@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Model\Settings;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 | to using a Closure or controller method. Build something great!
 |
 */
+
+//Route::resource('/', \App\Controllers\WebsiteController::class);
 
 Route::any('/{slug?}/{args?}',function($slug="",$args = null){
 

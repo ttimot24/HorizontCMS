@@ -6,15 +6,12 @@
 import * as bootstrap from "bootstrap";
 import "bootstrap-fileinput";
 
-import VueResource from 'vue-resource';
-
 import CKEditor from 'ckeditor4-vue';
 import TextEditor from './components/TextEditor.vue';
 import LockScreen from './components/LockScreen.vue';
 import FileManager from './components/FileManager.vue';
 
 window.vue.config.devtools = true;
-window.vue.use(VueResource);
 window.vue.use(CKEditor);
 
 const hcms = new window.vue({
