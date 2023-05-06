@@ -67,6 +67,18 @@ Route::get('/categories',function(Request $request){
     return $categories;
 });
 
+Route::get('/users',function(Request $request){
+
+    if(\Auth::user()->hasPermission("users")){
+        return response()->json(['message' => 'Permission denied!'], 403);
+    }
+
+    $users = \App\Model\User::all()->forPage($request->input('page'),$request->input('num'));
+
+    return $users;
+
+})->middleware('auth:api');
+
 Route::get('/plugins',function(Request $request){
 
     if(\Auth::user()->hasPermission("plugins")){
