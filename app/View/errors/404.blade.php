@@ -3,12 +3,11 @@
 @section('content')
 <div class="p-5">
     <div class="container text-center my-5">
-        <h1>Access Denied!</h1>
+        <h1>Resource not found!</h1>
 
         <p>
-            You are not allowed to perform this action!
+            The requested resource does not exists!
         </p>
 
     </div>
-</div>
 @endsection

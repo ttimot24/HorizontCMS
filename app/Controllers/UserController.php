@@ -101,14 +101,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
 
         $this->view->title(trans('user.view_user'));
         return $this->view->render('users/view', [
-            'user' => User::find($id),
-            'previous_user' => User::where('id', '<', $id)->max('id'),
-            'next_user' =>  User::where('id', '>', $id)->min('id'),
+            'user' => $user,
+            'previous_user' => User::where('id', '<', $user->id)->max('id'),
+            'next_user' =>  User::where('id', '>', $user->id)->min('id'),
         ]);
     }
 
@@ -118,13 +118,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
 
         $this->view->title(trans('user.edit_user'));
         return $this->view->render('users/form', [
             'current_user' => $this->request->user(),
-            'user' => User::find($id),
+            'user' => $user,
             'role_options' => \App\Model\UserRole::all(),
         ]);
     }

@@ -45,4 +45,10 @@ class DashboardController extends Controller
         $this->view->title('Access denied');
         return $this->view->render('errors/unauthorized');
     }
+
+    public function notfound()
+    {
+        $this->view->title('Access denied');
+        return $this->view->render('errors/404');
+    }
 }

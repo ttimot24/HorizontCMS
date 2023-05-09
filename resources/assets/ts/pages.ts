@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 import 'jquery-ui-bundle';
+import { environment } from './environments/environment';
 
 $(document).ready(function () {
 
@@ -43,7 +44,7 @@ export function ajaxGetSlug() {
   let text = $('#menu-title').val();
 
   if (text != "") {
-    $.get("api/get-page-slug/" + text, function (data) {
+    $.get(environment.REST_API_BASE+"/get-page-slug/" + text, function (data) {
 
       $("#ajaxSlug").html("/" + data);
     });

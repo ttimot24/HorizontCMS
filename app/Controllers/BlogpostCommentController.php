@@ -56,11 +56,8 @@ class BlogpostCommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(BlogpostComment $blogpost_comment)
     {
-
-
-        $blogpost_comment = BlogpostComment::find($id);
 
         $blogpost_comment->blogpost_id = $this->request->input('blogpost_id');
         $blogpost_comment->comment = $this->request->input('comment');

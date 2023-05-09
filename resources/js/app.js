@@ -3627,7 +3627,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
-/* harmony import */ var _vue_composition_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/composition-api */ "./node_modules/@vue/composition-api/dist/vue-composition-api.mjs");
+/* harmony import */ var _vue_composition_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vue/composition-api */ "./node_modules/@vue/composition-api/dist/vue-composition-api.mjs");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../environments/environment */ "./resources/assets/ts/environments/environment.ts");
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -3640,7 +3641,8 @@ function _typeof(obj) {
 }
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_vue_composition_api__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_vue_composition_api__WEBPACK_IMPORTED_MODULE_2__.defineComponent)({
   name: 'LockScreen',
   props: {
     user: {
@@ -3677,7 +3679,7 @@ function _typeof(obj) {
       var vm = this;
       console.log(vm);
       var password_field = $("#lock_pwd");
-      this.axios.post('/api/v1/lock-up', {
+      this.axios.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.REST_API_BASE + '/lock-up', {
         id: this.user.id,
         password: this.password
       }).then(function (response) {
@@ -3760,6 +3762,23 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/assets/ts/environments/environment.ts":
+/*!*********************************************************!*\
+  !*** ./resources/assets/ts/environments/environment.ts ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "environment": () => (/* binding */ environment)
+/* harmony export */ });
+var environment = {
+  REST_API_BASE: "api/v1"
+};
 
 /***/ }),
 

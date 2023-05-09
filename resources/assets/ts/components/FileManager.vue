@@ -293,7 +293,7 @@ export default defineComponent({
         }
     },
     watch: {
-        filter: function (filter) {
+        filter: function (filter: string) {
             var vm = this;
 
             if (filter != null && filter != "") {

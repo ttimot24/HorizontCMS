@@ -18,7 +18,7 @@
                 <input type="hidden" name="_method" value="delete">
 
                 <button type='submit' id="delete-submit" class='btn btn-danger'><i class="fa fa-trash"
-                            aria-hidden="true"></i></span> {{ delete_text }}</button>
+                            aria-hidden="true"></i> {{ delete_text }}</button>
                 </form>
 
   

@@ -83,14 +83,14 @@ class BlogpostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show(Blogpost $blogpost)
     {
 
         $this->view->title(trans('blogpost.view_blogpost'));
         return $this->view->render('blogposts/view', [
-            'blogpost' => Blogpost::find($id),
-            'previous_blogpost' => Blogpost::where('id', '<', $id)->max('id'),
-            'next_blogpost' =>  Blogpost::where('id', '>', $id)->min('id'),
+            'blogpost' => $blogpost,
+            'previous_blogpost' => Blogpost::where('id', '<', $blogpost->id)->max('id'),
+            'next_blogpost' =>  Blogpost::where('id', '>', $blogpost->id)->min('id'),
         ]);
     }
 
@@ -100,13 +100,13 @@ class BlogpostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(int $id)
+    public function edit(Blogpost $blogpost)
     {
 
         $this->view->title(trans('blogpost.edit_blogpost'));
 
         return $this->view->render('blogposts/form', [
-            'blogpost' => Blogpost::find($id),
+            'blogpost' => $blogpost,
             'categories' => \App\Model\BlogpostCategory::all(),
         ]);
     }
@@ -118,10 +118,8 @@ class BlogpostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, Blogpost $blogpost)
     {
-
-        $blogpost = Blogpost::find($id);
 
         $blogpost->title = $request->input('title');
         $blogpost->slug = str_slug($request->input('title'), "-");

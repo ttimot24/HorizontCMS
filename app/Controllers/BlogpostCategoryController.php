@@ -69,10 +69,10 @@ class BlogpostCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(BlogpostCategory $blogpostcategory)
     {
         $this->view->title(trans('category.category'));
-        return $this->view->render('blogposts.category.view', ['category' => \App\Model\BlogpostCategory::find($id)]);
+        return $this->view->render('blogposts.category.view', ['category' => $blogpostcategory]);
     }
 
     /**
@@ -81,14 +81,12 @@ class BlogpostCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(BlogpostCategory $blogpostcategory)
     {
-
-
         $this->view->title(trans('blogpost.edit_blogpost'));
 
         return $this->view->render('blogposts/category/edit', [
-            'category' => \App\Model\BlogpostCategory::find($id),
+            'category' => $blogpostcategory,
         ]);
     }
 
@@ -99,18 +97,17 @@ class BlogpostCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, BlogpostCategory $blogpostcategory)
     {
 
-        $blogpost_category = BlogpostCategory::find($id);
-        $blogpost_category->name = $request->input('name');
+        $blogpostcategory->name = $request->input('name');
 
         if ($request->hasFile('up_file')) {
 
-            $blogpost_category->image = str_replace('images/blogpostscategories/', '', $request->up_file->store('images/blogpostscategories'));
+            $blogpostcategory->image = str_replace('images/blogpostscategories/', '', $request->up_file->store('images/blogpostscategories'));
         }
 
-        if ($blogpost_category->save()) {
+        if ($blogpostcategory->save()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_updated_blogpost_category')]);
         } else {
             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);

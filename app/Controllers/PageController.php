@@ -101,11 +101,11 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Page $page)
     {
 
         $this->view->title(trans('page.view_page'));
-        return $this->view->render('pages/view', ['page' => Page::find($id)]);
+        return $this->view->render('pages/view', ['page' => $page]);
     }
 
     /**
@@ -114,7 +114,7 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, Page $page)
     {
 
         $this->view->js('resources/js/pages.js');
@@ -122,7 +122,7 @@ class PageController extends Controller
         $this->view->title(trans('page.edit_page'));
 
         return $this->view->render('pages/form', [
-            'page' => Page::find($id),
+            'page' => $page,
             'all_page' => Page::all(),
             'page_templates' => (new \App\Libs\Theme($request->settings['theme']))->templates(),
         ]);

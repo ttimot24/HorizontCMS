@@ -123,13 +123,12 @@ class HeaderImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, HeaderImage $headerImage)
     {
-        $header_image = \App\Model\HeaderImage::find($id);
-        $header_image->title = $request->input('title');
-        $header_image->description = $request->input('description');
+        $headerImage->title = $request->input('title');
+        $headerImage->description = $request->input('description');
 
-        if ($header_image->save()) {
+        if ($headerImage->save()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
         } else {
             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
@@ -145,10 +144,10 @@ class HeaderImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(HeaderImage $headerImage)
     {
 
-        if (HeaderImage::find($id)->delete()) {
+        if ($headerImage->delete()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpost')]);
         }
 

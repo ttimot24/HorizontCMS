@@ -1,6 +1,23 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./resources/assets/ts/environments/environment.ts":
+/*!*********************************************************!*\
+  !*** ./resources/assets/ts/environments/environment.ts ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "environment": () => (/* binding */ environment)
+/* harmony export */ });
+var environment = {
+  REST_API_BASE: "api/v1"
+};
+
+/***/ }),
+
 /***/ "./node_modules/jquery-ui-bundle/jquery-ui.js":
 /*!****************************************************!*\
   !*** ./node_modules/jquery-ui-bundle/jquery-ui.js ***!
@@ -29800,12 +29817,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery-ui-bundle */ "./node_modules/jquery-ui-bundle/jquery-ui.js");
 /* harmony import */ var jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./environments/environment */ "./resources/assets/ts/environments/environment.ts");
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * include Vue and Vue Resource. This gives a great starting point for
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 
 $(document).ready(function () {
   var submenus = $('#submenus');
@@ -29830,7 +29849,7 @@ function readURL(input) {
 function ajaxGetSlug() {
   var text = $('#menu-title').val();
   if (text != "") {
-    $.get("api/get-page-slug/" + text, function (data) {
+    $.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.REST_API_BASE + "/get-page-slug/" + text, function (data) {
       $("#ajaxSlug").html("/" + data);
     });
   } else {
