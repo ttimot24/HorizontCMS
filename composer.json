@@ -10,7 +10,7 @@
         "laravel/framework": "8.*",
         "lavary/laravel-menu": "1.8.*",
         "composer/semver": "*",
-        "visualappeal/php-auto-update" : "0.14.0",
+        "visualappeal/php-auto-update" : "1.0.2",
         "madnest/madzipper"  : "*",
         "jackiedo/log-reader": "*",
         "intervention/image": "*",

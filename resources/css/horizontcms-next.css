@@ -22387,6 +22387,10 @@ body {
 /*.active .nav-link{
     color: $orange !important;
 }*/
+.dropdown-menu[data-bs-popper] {
+  left: unset !important;
+}
+
 .nav-link {
   padding: 1rem 0.75rem !important;
 }
