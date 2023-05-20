@@ -52,7 +52,7 @@
 
                             @if ($errors->has('username') || $errors->has('password'))
                                 <div class="col-6 text-center">
-                                    <b><a href="{{ route('password.reset') }}"
+                                    <b><a href="{{ route('password.reset', ['token' => 'empty']) }}"
                                             style="font-size:10px;">{{ trans('login.forgot_password') }}</a></b>
                                 </div>
                             @endif

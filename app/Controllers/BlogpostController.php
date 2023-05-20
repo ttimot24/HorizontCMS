@@ -61,7 +61,7 @@ class BlogpostController extends Controller
 
         $blogpost = new Blogpost($request->all());
         $blogpost->slug = str_slug($request->input('title'), "-");
-        $blogpost->author_id = $request->user()->id;
+        $blogpost->author()->associate($request->user());
         $blogpost->comments_enabled = 1;
 
         if ($request->hasFile('up_file')) {
@@ -121,15 +121,13 @@ class BlogpostController extends Controller
     public function update(Request $request, Blogpost $blogpost)
     {
 
-        $blogpost->title = $request->input('title');
-        $blogpost->slug = str_slug($request->input('title'), "-");
-        $blogpost->category_id = $request->input('category_id');
-        $blogpost->summary = $request->input('summary');
-        $blogpost->text = clean($request->input('text'));
-        $blogpost->author_id = $request->user()->id;
-        if ($request->has("active")) {
-            $blogpost->active = $request->input("active");
-        }
+	    $blogpost->fill($request->all());
+
+        $blogpost->slug = str_slug($request->input('title', $blogpost->title), "-");
+        $blogpost->category_id = $request->input('category_id', $blogpost->category_id);
+        
+        $blogpost->author()->associate($request->user());
+
 
         if ($request->hasFile('up_file')) {
 
@@ -144,7 +142,7 @@ class BlogpostController extends Controller
 
 
         if ($blogpost->save()) {
-            return $this->redirect(route("blogpost.edit", ['blogpost' => $blogpost]))->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
+            return $this->redirectToSelf()->with('blogpost', $blogpost)->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
         } else {
             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
@@ -167,52 +165,4 @@ class BlogpostController extends Controller
         return $this->redirect(route("blogpost.index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
-    public function feature($id)
-    {
-        $blogpost = Blogpost::find($id);
-        $blogpost->active = 2;
-
-        if ($blogpost->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('Action completed!')]);
-        } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-    }
-
-    public function revokeFeature($id)
-    {
-        $blogpost = Blogpost::find($id);
-        $blogpost->active = 1;
-
-        if ($blogpost->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('Action completed!')]);
-        } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-    }
-
-    public function enableComment($id)
-    {
-        $blogpost = Blogpost::find($id);
-        $blogpost->comments_enabled = 1;
-
-        if ($blogpost->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_enabled_blogpost')]);
-        } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-    }
-
-
-    public function disableComment($id)
-    {
-        $blogpost = Blogpost::find($id);
-        $blogpost->comments_enabled = 0;
-
-        if ($blogpost->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_disabled_blogpost')]);
-        } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-    }
 }

@@ -50,13 +50,34 @@
                 <div class="text-center">
                     <div class='btn-group my-3' role='group'>
                         @if (!$blogpost->isFeatured())
-                            <a href="{{ config('horizontcms.backend_prefix') . '/blogpost/feature/' . $blogpost->id }}"
-                                type='button' class='btn btn-success'><span class='glyphicon glyphicon-star'
-                                    aria-hidden='true'></span> {{ trans('blogpost.primary') }}</a>
+
+                        <form method="POST" action="{{ route('blogpost.update', ['blogpost' => $blogpost]) }}">
+                            @csrf
+                            @method('PUT')
+
+                            <input type="hidden" name="active" value="2">
+                            <button type="submit" class='btn btn-success'>
+                                <span class='fa fa-star' aria-hidden='true'></span>
+                                {{ trans('blogpost.primary') }}
+                            </button>
+
+                        </form>
+
                         @else
-                            <a href="{{ config('horizontcms.backend_prefix') . '/blogpost/revoke-feature/' . $blogpost->id }}"
-                                type='button' class='btn btn-success'><span class='glyphicon glyphicon-minus'
-                                    aria-hidden='true'></span> {{ trans('Revoke') }}</a>
+
+
+                        <form method="POST" action="{{ route('blogpost.update', ['blogpost' => $blogpost]) }}">
+                            @csrf
+                            @method('PUT')
+
+                            <input type="hidden" name="active" value="1">
+                            <button type="submit" class='btn btn-info'>
+                                <span class='fa fa-minus' aria-hidden='true'></span>
+                                {{ trans('Revoke') }}
+                            </button>
+
+                        </form>
+
                         @endif
                         <a href="{{ route('blogpost.edit', ['blogpost' => $blogpost]) }}" type='button'
                             class='btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
@@ -70,8 +91,11 @@
                     </div>
 
                     @if ($blogpost->isDraft())
-                        <span class="badge badge-info d-block mb-3"
-                            style='font-size:14px;'>{{ trans('actions.draft') }}</span>
+                    <div class="row m-3 d-flex justify-content-center">
+                        <span class="badge bg-info text-white w-50">
+                            {{ trans('actions.draft') }}
+                        </span>
+                    </div>
                     @endif
 
                     @if ($blogpost->author)
