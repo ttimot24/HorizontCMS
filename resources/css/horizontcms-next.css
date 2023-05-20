@@ -22384,11 +22384,8 @@ body {
   background-color: #F5F5F5;
 }
 
-/*.active .nav-link{
-    color: $orange !important;
-}*/
 .dropdown-menu[data-bs-popper] {
-  left: unset !important;
+  left: auto;
 }
 
 .nav-link {
