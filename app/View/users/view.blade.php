@@ -49,15 +49,15 @@
                 </a>
 
                 <div class='btn-group my-3' role='group'>
-                    <a href='#' type='button' class='btn btn-success mx-1'><span class='glyphicon glyphicon-star'
+                    <a href='#' type='button' class='btn btn-warning mx-1'><span class='fa fa-star'
                             aria-hidden='true'></span> {{ trans('actions.deactivate') }}</a>
                     <a href="{{ route('user.edit', ['user' => $user]) }}" type='button' class='btn btn-warning'><span
-                            class='glyphicon glyphicon-pencil' aria-hidden='true'></span> {{ trans('actions.edit') }}</a>
+                            class='fa fa-pencil' aria-hidden='true'></span> {{ trans('actions.edit') }}</a>
                 </div>
                 @if ($user->role_id < \Auth::user()->role_id && !$user->is(Auth::user()))
                     <button type='button' class='btn btn-danger my-3' data-bs-toggle='modal'
                         data-bs-target='#delete_{{ $user->id }}'>
-                        <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> {{ trans('actions.remove') }}
+                        <span class='fa fa-trash' aria-hidden='true'></span> {{ trans('actions.remove') }}
                     </button>
                 @endif
 

@@ -92,8 +92,18 @@
                                 </td>
                             </tr>
 
+                        @endforeach
 
+                    </tbody>
+                </table>
 
+                <div class="d-flex justify-content-center">
+                    {{ $all_users->links() }}
+                </div>
+
+            </div>
+
+                        @foreach ($all_users as $each)
                             @if($disabled != 'disabled')
                                 @include('confirm_delete', [
                                     'route' => route('user.destroy', ['user' => $each]),
@@ -107,14 +117,6 @@
                             @endif
                         @endforeach
 
-                    </tbody>
-                </table>
-
-                <div class="d-flex justify-content-center">
-                    {{ $all_users->links() }}
-                </div>
-
-            </div>
 
         </div>
     @endsection
