@@ -73,7 +73,7 @@ class PageController extends Controller
         $page->parent_id = $request->input('parent_select') == 0 ? NULL : $request->input('parent_id');
         $page->queue = 99;
         $page->page = clean($request->input('page'));
-        $page->author_id = $request->user()->id;
+        $page->author()->associate($request->user());
 
 
         if ($request->hasFile('up_file')) {
@@ -135,17 +135,14 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Page $page)
     {
 
-        $page = Page::find($id);
-        $page->name = $request->input('name');
+        $page->fill($request->all());
+
         $page->slug = str_slug($request->input('name'), "-");
-        $page->url = $request->input('url');
-        $page->visibility = $request->input('visibility');
         $page->parent_id = $request->input('parent_select') == 0 ? NULL : $request->input('parent_id');
         $page->page = clean($request->input('page'));
-
 
         if ($request->hasFile('up_file')) {
 

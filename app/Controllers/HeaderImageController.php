@@ -125,8 +125,7 @@ class HeaderImageController extends Controller
      */
     public function update(Request $request, HeaderImage $headerImage)
     {
-        $headerImage->title = $request->input('title');
-        $headerImage->description = $request->input('description');
+        $headerImage->fill($request->all());
 
         if ($headerImage->save()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);

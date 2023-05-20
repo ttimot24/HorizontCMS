@@ -136,24 +136,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
 
-        $user = User::find($id);
-        $user->name = $request->input('name');
-        $user->username = $request->input('username');
+        $user->fill($request->all());
         $user->slug = str_slug($request->input('username'), "-");
-        $user->email = $request->input('email');
-        $user->phone = $request->input('phone');
 
         if ($request->has('password')) {
             $user->password = $request->input('password');
-        }
-
-        $user->role_id = $request->input('role_id');
-        // $user->active = 1;
-
-
+        } 
 
         if ($request->hasFile('up_file')) {
 
