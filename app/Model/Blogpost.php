@@ -12,7 +12,7 @@ class Blogpost extends Model {
      * @var array
      */
     protected $fillable = [
-        'title', 'summary' ,'text', 'category_id', 'active',
+        'title', 'summary' ,'text', 'category_id', 'comments_enabled', 'active',
     ];
 
     protected $defaultImage = "resources/images/icons/newspaper.png";

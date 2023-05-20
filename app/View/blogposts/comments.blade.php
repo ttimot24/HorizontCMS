@@ -2,10 +2,25 @@
     <h2 class="col">{{ trans('comment.moderator') }}</h2>
     @if ($blogpost->comments_enabled == 1)
         <div class="col">
-            <a type='button' class='btn btn-warning' data-bs-toggle='modal'
+           <div class="row">
+
+            <div class="col d-flex justify-content-end">
+            <a class='btn btn-warning' data-bs-toggle='modal'
                 data-bs-target='#comment-modal-xl'>{{ trans('comment.write_comment_button') }}</a>
-            <a class='btn btn-danger btn-sm'
-                href="admin/blogpost/disable-comment/{{ $blogpost->id }}">{{ trans('comment.disable_comments_button') }}</a>
+            </div>
+
+            <div class="col">
+                <form method="POST" action="{{ route('blogpost.update', ['blogpost' => $blogpost]) }}">
+                    @csrf
+                    @method('PUT')
+
+                    <input type="hidden" name="comments_enabled" value="0">
+                    <button type="submit" class='btn btn-danger btn-sm mt-1'>{{ trans('comment.disable_comments_button') }}</button>
+
+                </form>
+            </div>
+            </div>
+
         </div>
     @endif
     <div class='col text-muted pt-2 text-end fs-5'>{{ trans('comment.all_comments') }}:
@@ -16,8 +31,15 @@
     <div class="alert alert-warning" role="alert">
         <div class="row">
             <div class="col-9">{!! trans('comment.comments_not_enabled') !!}</div>
-            <div class="col-3 text-end"><a class="btn btn-info btn-sm"
-                    href="admin/blogpost/enable-comment/{{ $blogpost->id }}">{{ trans('comment.enable_comments_button') }}</a>
+            <div class="col-3 text-end">
+                <form method="POST" action="{{ route('blogpost.update', ['blogpost' => $blogpost]) }}">
+                    @csrf
+                    @method('PUT')
+
+                    <input type="hidden" name="comments_enabled" value="1">
+                    <button type="submit" class='btn btn-info btn-sm mt-1'>{{ trans('comment.enable_comments_button') }}</button>
+
+                </form>
             </div>
         </div>
     </div>

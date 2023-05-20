@@ -40,7 +40,7 @@
                             height=50 /> </td>
                     <td><a href="{{ route('blogpost.show', ['blogpost' => $blogpost]) }}">{{ $blogpost->title }}</a><br>
                         @if ($blogpost->isDraft())
-                            <span class="badge bg-info text-dark">{{ trans('actions.draft') }}</span>
+                            <span class="badge bg-info">{{ trans('actions.draft') }}</span>
                         @elseif($blogpost->isFeatured())
                             <span class="badge bg-success">{{ trans('Featured') }}</span>
                         @endif

@@ -13,6 +13,9 @@
         <link rel="stylesheet" type="text/css" href="{{ asset($each_css) }}">
     @endforeach
 
+    @stash('styles')
+    @stash('scripts')
+
     <script type="text/javascript" src="{{ asset('resources/js/main.js') }}" defer></script>
 
     @yield('head')
