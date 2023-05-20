@@ -33,7 +33,7 @@
 
 
 
-                <?php foreach($all_blogposts as $blogpost): ?>
+                @foreach($all_blogposts as $blogpost)
                 <tr>
                     <td><?= $blogpost->id ?></td>
                     <td><img src='{{ $blogpost->getThumb() }}' class='img img-rounded' style='object-fit:cover;' width=70
@@ -71,19 +71,10 @@
                                 class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                         </div>
                     </td>
+                
                 </tr>
 
-                @include('confirm_delete', [
-                    'route' => route('blogpost.destroy', ['blogpost' => $blogpost]),
-                    'id' => 'delete_' . $blogpost->id,
-                    'header' => trans('actions.are_you_sure'),
-                    'name' => $blogpost->title,
-                    'content_type' => 'post',
-                    'delete_text' => trans('actions.delete'),
-                    'cancel' => trans('actions.cancel'),
-                ])
-
-                <?php endforeach; ?>
+                @endforeach
 
 
             </tbody>
@@ -94,5 +85,18 @@
         </div>
 
         </div>
+
+        @foreach($all_blogposts as $blogpost)
+                @include('confirm_delete', [
+                    'route' => route('blogpost.destroy', ['blogpost' => $blogpost]),
+                    'id' => 'delete_' . $blogpost->id,
+                    'header' => trans('actions.are_you_sure'),
+                    'name' => $blogpost->title,
+                    'content_type' => 'post',
+                    'delete_text' => trans('actions.delete'),
+                    'cancel' => trans('actions.cancel'),
+                ])
+        @endforeach
+
     </div>
 @endsection
