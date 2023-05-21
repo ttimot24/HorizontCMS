@@ -8,6 +8,7 @@ use App\Libs\Controller;
 use App\Model\Settings;
 use \VisualAppeal\AutoUpdate;
 use \Jackiedo\LogReader\Facades\LogReader;
+use Illuminate\Support\Facades\File;
 
 class SettingsController extends Controller
 {
@@ -15,11 +16,11 @@ class SettingsController extends Controller
     public function before()
     {
         if (!file_exists("storage/images/logos")) {
-            \File::makeDirectory("storage/images/logos", $mode = 0777, true, true);
+            File::makeDirectory("storage/images/logos", $mode = 0777, true, true);
         }
 
         if (!file_exists("storage/images/favicons")) {
-            \File::makeDirectory("storage/images/favicons", $mode = 0777, true, true);
+            File::makeDirectory("storage/images/favicons", $mode = 0777, true, true);
         }
     }
 

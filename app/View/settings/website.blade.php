@@ -56,14 +56,13 @@
                             </div>
                         </td>
                     </tr>
+                     <input type="hidden" name="website_debug" value="0"> <!-- Checkbox hack -->
                     <tr>
                         <td class='col-4 p-4'>Debug mode</td>
                         <td class="col-8 p-0">
                             <div class="form-check form-switch d-flex justify-content-center">
                                 <input type='checkbox' class='form-check-input' name='website_debug' value='1'
-                                    <?php if ($settings['website_debug'] == 1) {
-                                        echo 'checked';
-                                    } ?>>
+                                @if ($settings['website_debug'] == 1) checked @endif >
                             </div>
                         </td>
                     </tr>

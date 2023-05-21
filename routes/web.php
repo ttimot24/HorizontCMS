@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Model\Settings;
+use Illuminate\Http\Request;
+use Illuminate\Contracts\Container\Container;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,41 +18,41 @@ use \App\Model\Settings;
 
 //Route::resource('/', \App\Controllers\WebsiteController::class);
 
-Route::any('/{slug?}/{args?}',function($slug="",$args = null){
+Route::any('/{slug?}/{args?}', function ($slug = "", $args = null, Request $request, Container $container) {
+
+	try {
+
+		try {
+
+			$this->router->changeNamespace("Theme\\" . Settings::get('theme') . "\\App\\Controllers\\");
+
+			$action = explode("/", $args)[0];
+
+			return $this->router->resolve($slug, $action, ltrim($args, $action . "/"));
+		} catch (Exception $e) {
 
 
-	try{
+			if ($e instanceof \App\Exceptions\FileNotFoundException || $e instanceof BadMethodCallException) {
 
-		$this->router->changeNamespace("Theme\\".Settings::get('theme')."\\App\\Controllers\\");
+				$controller = \App::make('\App\Controllers\WebsiteController');
 
-		$action = explode("/",$args)[0];
+				$controller->before();
 
-		return $this->router->resolve($slug,$action,ltrim($args,$action."/"));
+				if (method_exists($controller, $slug)) {
 
-	}catch(Exception $e){
+					return $controller->callAction($slug, [$slug, $args]);
+				}
 
 
-		if($e instanceof \App\Exceptions\FileNotFoundException || $e instanceof BadMethodCallException){
-
-			$controller = \App::make('\App\Controllers\WebsiteController');
-
-			$controller->before();
-
-			if(method_exists($controller, $slug)){
-				          
-				return $controller->callAction($slug, [$slug,$args]);
+				return $controller->callAction('index', [$slug, $args]);
 			}
 
 
-			return $controller->callAction('index',[$slug,$args]);
-
+			throw $e;
 		}
+	} catch (Exception $e) {
+		$handler = new \App\Exceptions\WebsiteExceptionHandler($container);
 
-
-		throw $e;
+		return $handler->render($request, $e);
 	}
-
-
 })->where('args', '(.*)');
-
-
