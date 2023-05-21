@@ -19,7 +19,7 @@ class WebsiteExceptionHandler extends Handler
     public function render($request, Throwable $exception)
     {
 
-        if($request->settings['website_debug'] != 0){
+        if($request->settings['website_debug'] == 0){
             return response()->view('theme::errors.exception', ['exception' => $exception]);
         }
 
