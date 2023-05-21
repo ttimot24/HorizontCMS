@@ -28,7 +28,7 @@ class SettingsController extends Controller
     {
 
         foreach ($request->all() as $key => $value) {
-            Settings::where('setting', '=', $key)->update(['value' => $value]);
+            Settings::updateOrCreate(['setting' => $key], ['value' => $value, 'more' => 1]);
         }
 
         return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);

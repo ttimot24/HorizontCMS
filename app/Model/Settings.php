@@ -6,6 +6,15 @@ use \App\Libs\Model;
 
 class Settings extends Model {
   
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'setting', 'value', 'more'
+    ];
+
   	protected $table = 'settings';
   	public $settings;
   	private static $static_settings = null;
