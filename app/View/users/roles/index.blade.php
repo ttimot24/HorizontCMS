@@ -27,7 +27,7 @@
                         <!-- Default panel contents -->
                         <div class="panel-heading bg-primary p-3">
                             <h4 class="text-white">
-                                <?= $role->name ?>
+                                {{ $role->name }} <small class="text-dark">({{ $role->users->count() }})</small>
                                 <small>
                                     <?php
                                     if (\Auth::user()->role->is($role)) {
