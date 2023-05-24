@@ -73,8 +73,8 @@ class MenuMiddleware{
                 $menu->add("<img style='height:30px;margin-top:-10px;margin-bottom:-10px;object-fit:cover;border-radius:1.5px;' src='".Auth::user()->getThumb()."' />  ". \Auth::user()->username)->id('current_user');
                 $menu->find('current_user')->add("<img style='border-radius:1.5px;width:95%;height:135px;margin:10px 2.5% 10px 2.5%;object-fit:cover;' class='img img-rounded' src='".Auth::user()->getThumb()."' /><br> <p style='color:white;font-size:14px;'>".\Auth::user()->username." (".strtolower(\Auth::user()->role->name).")</p>",[ 'url' => '#', 'style'=>'clear:both;width:215px;text-align:center;', 'class'=>'current-image' ])->id('current_image');
                 $menu->find('current_image')->divide();
-                $menu->find('current_user')->add(trans('navbar.profile_view'), ['url'=> route('user.show', ['user' => \Auth::user()])])->id('view_account');
-                $menu->find('current_user')->add(trans('navbar.profile_settings'), ['url'=> route('user.edit',['user' => \Auth::user()])])->id('account_settings');
+                $menu->find('current_user')->add(trans('navbar.profile_view'), ['route' => ['user.show', 'user' => \Auth::user()]])->id('view_account');
+                $menu->find('current_user')->add(trans('navbar.profile_settings'), ['route' => ['user.edit', 'user' => \Auth::user()]])->id('account_settings');
            
 
             if(\Auth::user()->hasPermission("settings")){
@@ -86,7 +86,7 @@ class MenuMiddleware{
                 $menu->find('shutdown')->add("<i class='fa fa-lock'></i> ".trans('navbar.lock_screen'), ['url'=>'#', '@click.prevent'=>'lock'])->id('lock_screen');
                 $menu->find('lock_screen')->divide();
                 $menu->find('shutdown')->add("<i class='fa fa-external-link'></i> ".trans('navbar.visit_site',['site_name' => $request->settings['site_name']]), '');
-                $menu->find('shutdown')->add("<i class='fa fa-sign-out'></i> ".trans('navbar.logout'), ['onclick' => 'event.preventDefault(); document.getElementById(\'logout-form\').submit();']);
+                $menu->find('shutdown')->add("<i class='fa fa-sign-out'></i> ".trans('navbar.logout'), ["route" => 'logout', 'onclick' => 'event.preventDefault(); document.getElementById(\'logout-form\').submit();']);
 
         
 

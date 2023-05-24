@@ -27854,7 +27854,11 @@ var render = function () {
               _c("img", {
                 staticClass: "img-thumbnail",
                 staticStyle: { "max-height": "15rem", "object-fit": "cover" },
-                attrs: { src: "storage/images/users/" + _vm.user.image },
+                attrs: {
+                  src: _vm.user.image
+                    ? "storage/images/users/" + _vm.user.image
+                    : "resources/images/icons/profile.png",
+                },
               }),
               _vm._v(" "),
               _c("br"),

@@ -22392,6 +22392,11 @@ body {
   padding: 1rem 0.75rem !important;
 }
 
+.nav-item .active {
+  padding: 1rem 0.75rem !important;
+  color: #e84d08;
+}
+
 .dropdown-menu .nav-link {
   padding: 0.5rem 1rem !important;
 }

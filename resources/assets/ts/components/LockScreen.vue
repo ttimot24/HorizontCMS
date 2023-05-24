@@ -9,7 +9,7 @@
                 <div class='modal-body text-center'>
 
                     <div>
-                        <img v-bind:src="'storage/images/users/' + user.image" class='img-thumbnail'
+                        <img v-bind:src="user.image? 'storage/images/users/' + user.image : 'resources/images/icons/profile.png'" class='img-thumbnail'
                             style="max-height:15rem; object-fit:cover;" />
                         <br>
               

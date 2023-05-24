@@ -25,6 +25,11 @@ body {
     padding: 1rem .75rem !important;
 }
 
+.nav-item .active {
+    padding: 1rem .75rem !important;
+    color: $orange;
+}
+
 .dropdown-menu .nav-link {
     padding: .5rem 1rem !important;
 }

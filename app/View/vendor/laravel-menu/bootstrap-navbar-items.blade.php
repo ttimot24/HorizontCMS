@@ -1,10 +1,25 @@
 @foreach ($items as $item)
     <li class="nav-item  {{ $item->hasChildren() ? 'dropdown"' : '' }}">
         @if ($item->link)
-            <a @if ($item->hasChildren()) class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+
+            <?php
+            
+                $attributes = $item->attr();
+                $class = $item->attr('class'); 
+
+                unset($attributes['class']);
+            
+            ?>
+
+            <a 
+
+            @foreach($attributes as $key => $value) {{ $key }}="{{ $value }}" @endforeach 
+
+            
+            @if ($item->hasChildren()) class="nav-link dropdown-toggle {{ $class  }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false"
             @else
-                class="nav-link" @endif
+                class="nav-link {{ $class  }}" @endif
                 href="{!! $item->url() !!}"> {!! $item->title !!}
 
                 @if ($item->hasChildren())
