@@ -105,20 +105,16 @@ class UserRoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(UserRole $userrole)
     {
-        if ($this->request->isMethod('POST')) {
-            $role = \App\Model\UserRole::find($id);
 
-            $role->rights = array_keys($this->request->except('_token'));
+            $userrole->rights = array_keys($this->request->except('_token'));
 
-
-            if ($role->save()) {
+            if ($userrole->save()) {
                 return $this->redirectToSelf()->withMessage(['success' => trans('Rights saved succesfully!')]);
             } else {
                 return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
-        }
     }
 
     /**

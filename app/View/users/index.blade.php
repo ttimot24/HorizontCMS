@@ -54,7 +54,11 @@
                                     <span
                                         class="d-block badge rounded-pill {{ $each->isAdmin()? 'bg-danger' : 'bg-dark' }}"
                                         style='font-size:13px;'>
-                                        {{ $each->role->name }}
+                                        @if($each->role)
+                                            {{ $each->role->name }}
+                                        @else
+                                            Unassigned
+                                        @endif
                                     </span>
                                 </td>
 
