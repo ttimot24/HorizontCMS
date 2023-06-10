@@ -155,9 +155,9 @@ class PluginServiceProvider extends ServiceProvider
 
     		if(file_exists($plugin->getPath().'/routes/web.php')){
 
-		        Route::group([
+		        Route::group(
                     $plugin->getRegister('webRouteOptions',['middleware' => 'web'])
-                    ], function($router) use ($plugin) {
+                    , function($router) use ($plugin) {
 		            require base_path($plugin->getPath().'/routes/web.php');
 		        });
 
@@ -166,9 +166,9 @@ class PluginServiceProvider extends ServiceProvider
 
     		if(file_exists($plugin->getPath().'/routes/api.php')){
 
-		        Route::group([
+		        Route::group(
                     $plugin->getRegister('apiRouteOptions',['middleware' => 'api'])
-                    ], function($router) use ($plugin) {
+                    , function($router) use ($plugin) {
 		            require base_path($plugin->getPath().'/routes/api.php');
 		        });
 
