@@ -4,7 +4,9 @@ namespace App\Libs;
 
 interface PluginInterface {
 
-    public function routeOptions(): array;
+    public function webRouteOptions(): array;
+
+	public function apiRouteOptions(): array;
 
 	public function navigation(): array;
 

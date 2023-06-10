@@ -39,8 +39,6 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
-        $this->mapPluginRoutes();
-
         $this->mapBackendRoutes();
 
         $this->mapWebRoutes();
@@ -94,38 +92,5 @@ class RouteServiceProvider extends ServiceProvider
             require base_path('routes/backend.php');
         });
     }
-
-
-    protected function mapPluginRoutes(){
-
-    	if(!isset($this->app->plugins)){ return false; }
-
-    	foreach($this->app->plugins as $plugin){
-
-    		if(file_exists($plugin->getPath().'/routes/web.php')){
-
-		        Route::group([
-                    $plugin->getRegister('webRouteOptions',['middleware' => 'web'])
-                    ], function($router) use ($plugin) {
-		            require base_path($plugin->getPath().'/routes/web.php');
-		        });
-
-	    	}
-
-
-    		if(file_exists($plugin->getPath().'/routes/api.php')){
-
-		        Route::group([
-                    $plugin->getRegister('apiRouteOptions',['middleware' => 'api'])
-                    ], function($router) use ($plugin) {
-		            require base_path($plugin->getPath().'/routes/api.php');
-		        });
-
-	    	}
-
-		}
-
-    }
-
 
 }

@@ -91,7 +91,7 @@ class PluginModelTest extends TestCase
 		$this->assertFalse($this->plugin->hasRegisterClass());
 
     	$externalMock = \Mockery::mock("overload:\Plugin\\".$this->dummyName."\\Register");
-        $externalMock->shouldReceive('routeOptions')
+        $externalMock->shouldReceive('webRouteOptions')
             ->andReturn($returnRouteOptions);
 
         $this->assertTrue($this->plugin->hasRegisterClass());
@@ -99,8 +99,8 @@ class PluginModelTest extends TestCase
         $default = ['test'];
         $this->assertNull($this->plugin->getRegister("dummy"));
         $this->assertEquals($this->plugin->getRegister("dummy",$default),$default);
-       // $this->assertInternalType('array',$this->plugin->getRegister("routeOptions"));
-       // $this->assertEquals($this->plugin->getRegister("routeOptions"),$returnRouteOptions);
+       // $this->assertInternalType('array',$this->plugin->getRegister('webRouteOptions'));
+       // $this->assertEquals($this->plugin->getRegister('webRouteOptions'),$returnRouteOptions);
 
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class PluginServiceProvider extends ServiceProvider
@@ -22,6 +23,7 @@ class PluginServiceProvider extends ServiceProvider
 
                 $this->registerPluginAutoloaders();
 
+                $this->registerPluginRoutes();
                 $this->registerPluginProviders();
                 $this->registerPluginMiddlewares();
                 $this->registerPluginEvents();
@@ -142,6 +144,37 @@ class PluginServiceProvider extends ServiceProvider
                                             $plugin->getPath().DIRECTORY_SEPARATOR."resources".DIRECTORY_SEPARATOR."views",
                                         ]);
         }
+
+    }
+
+    protected function registerPluginRoutes(){
+
+    	if(!isset($this->app->plugins)){ return false; }
+
+    	foreach($this->app->plugins as $plugin){
+
+    		if(file_exists($plugin->getPath().'/routes/web.php')){
+
+		        Route::group([
+                    $plugin->getRegister('webRouteOptions',['middleware' => 'web'])
+                    ], function($router) use ($plugin) {
+		            require base_path($plugin->getPath().'/routes/web.php');
+		        });
+
+	    	}
+
+
+    		if(file_exists($plugin->getPath().'/routes/api.php')){
+
+		        Route::group([
+                    $plugin->getRegister('apiRouteOptions',['middleware' => 'api'])
+                    ], function($router) use ($plugin) {
+		            require base_path($plugin->getPath().'/routes/api.php');
+		        });
+
+	    	}
+
+		}
 
     }
 
