@@ -206,8 +206,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="header-image-title" class="form-label">Link</label>
-                                    <input type="text" class="form-control" name="link" id="header-image-title"
-                                        value="{{ $each->link }}">
+                                    <input type="text" class="form-control" name="link" id="header-image-title">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Summary</label>
