@@ -45,7 +45,7 @@
         <footer id='footer'>
             <div class='container'>
                 <div class="row py-5 px-3">
-                    <div class='col-md-6'>
+                    <div class='col-lg-6 col-sm-12 text-center text-lg-start'>
                         <p class='text-muted credit mb-0'>
                             {{ config('app.name') }} &copy 2015 - {{ date('Y') }} <a
                                 href='http://www.twitter.com/timottarjani'>Timot Tarjani</a>
@@ -53,7 +53,7 @@
                                     class="fa fa-github" aria-hidden="true"></i></a>
                         </p>
                     </div>
-                    <div class='col-md-6 text-right text-end'>
+                    <div class='col-lg-6 col-sm-12 text-center text-lg-end'>
                         Version: {{ config('horizontcms.version') }}
                     </div>
                 </div>

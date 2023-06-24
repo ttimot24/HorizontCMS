@@ -25,8 +25,8 @@
             </div>
 
 
-            <div class='col m-auto text-center py-5 mt-5'>
-                <img src='{{ url($admin_logo) }}' class='img img-responsive img-rounded' style='max-height:250px;' />
+            <div class='col-lg-4 col-sm-12 m-auto text-center py-5 mt-5'>
+                <img src='{{ url($admin_logo) }}' class='img img-responsive img-rounded my-5' style='max-height:15rem;max-width:100%;' />
             </div>
 
             <div class='col m-auto '>
