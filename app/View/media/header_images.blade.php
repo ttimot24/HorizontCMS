@@ -58,33 +58,79 @@
                                                 <button type='button' class='btn-close' data-bs-dismiss='modal'
                                                     aria-label='Close'></button>
                                             </div>
-                                            <form action='admin/header-image/edit/{{ $each->id }}' method='POST'>
-                                                <div class='modal-body text-dark'>
-                                                    @csrf
-                                                    <div class="mb-3">
-                                                        <label for="header-image-title" class="form-label">Tagline</label>
-                                                        <input type="text" class="form-control" name="title"
-                                                            id="header-image-title" value="{{ $each->title }}">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="header-image-title" class="form-label">Link</label>
-                                                        <input type="text" class="form-control" name="link"
-                                                            id="header-image-title" value="{{ $each->link }}">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleFormControlTextarea1"
-                                                            class="form-label">Summary</label>
-                                                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{ $each->description }}</textarea>
-                                                    </div>
+                                            <form action='{{ route('headerimage.update', ['headerimage' => $each]) }}'
+                                            method='POST'>
+                                            <div class='modal-body text-dark'>
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="mb-3">
+                                                    <label for="header-image-title" class="form-label">Tagline</label>
+                                                    <input type="text" class="form-control" name="title"
+                                                        id="header-image-title" value="{{ $each->title }}">
+                                                    <input type="hidden" name="image" value="{{ $each->image }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <div class="row">
+                                                        <div class="col-11">
+                                                            <label for="header-image-image"
+                                                                class="form-label">Image</label>
+                                                            <input type="text" class="form-control disabled"
+                                                                id="header-image-title" value="{{ $each->getImage() }}"
+                                                                disabled>
 
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <label for="header-image-image"
+                                                                class="form-label">Show</label><br>
+                                                            <a href="{{ $each->getImage() }}" target="_blank"
+                                                                class="btn btn-default"><i class="fa fa-external-link"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class='modal-footer'>
-                                                    <button type='submit'
-                                                        class='btn btn-primary'>{{ trans('actions.save') }}</button>
-                                                    <button type='button' class='btn btn-default'
-                                                        data-bs-dismiss='modal'>{{ trans('actions.cancel') }}</button>
+                                                <div class="mb-3">
+                                                    <label for="header-image-title" class="form-label">Link</label>
+                                                    <input type="text" class="form-control" name="link"
+                                                        id="header-image-title" value="{{ $each->link }}">
                                                 </div>
-                                            </form>
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlTextarea1"
+                                                        class="form-label">Summary</label>
+                                                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{ $each->description }}</textarea>
+                                                </div>
+                                                <input type="hidden" name="active" value="{{ $each->active }}">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <b>Created at: </b> {{ $each->created_at }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <b>Created by: </b> <a
+                                                                    href="{{ route('user.show', ['user' => $each->author]) }}">{{ $each->author->username }}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <b>Updated at: </b> {{ $each->updated_at }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='modal-footer'>
+                                                <button type='submit'
+                                                    class='btn btn-primary'>{{ trans('actions.save') }}</button>
+                                                <button type='button' class='btn btn-default'
+                                                    data-bs-dismiss='modal'>{{ trans('actions.cancel') }}</button>
+                                            </div>
+                                        </form>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
@@ -109,7 +155,8 @@
                                                 slider</a>
                                         </div>
                                         <div class="col-1">
-                                            <a href="#" data-bs-toggle='modal' data-bs-target='#headline-image-{{ $each->id }}'>
+                                            <a href="#" data-bs-toggle='modal'
+                                                data-bs-target='#headline-image-{{ $each->id }}'>
                                                 <span class='fa fa-pencil' aria-hidden='true'
                                                     style=' font-size: 1.4em;z-index:15;'></span>
                                             </a>
@@ -153,6 +200,26 @@
                                                     <label for="header-image-title" class="form-label">Tagline</label>
                                                     <input type="text" class="form-control" name="title"
                                                         id="header-image-title" value="{{ $each->title }}">
+                                                    <input type="hidden" name="image" value="{{ $each->image }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <div class="row">
+                                                        <div class="col-11">
+                                                            <label for="header-image-image"
+                                                                class="form-label">Image</label>
+                                                            <input type="text" class="form-control disabled"
+                                                                id="header-image-title" value="{{ $each->getImage() }}"
+                                                                disabled>
+
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <label for="header-image-image"
+                                                                class="form-label">Show</label><br>
+                                                            <a href="{{ $each->getImage() }}" target="_blank"
+                                                                class="btn btn-default"><i class="fa fa-external-link"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="header-image-title" class="form-label">Link</label>
@@ -164,7 +231,31 @@
                                                         class="form-label">Summary</label>
                                                     <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{ $each->description }}</textarea>
                                                 </div>
-
+                                                <input type="hidden" name="active" value="{{ $each->active }}">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <b>Created at: </b> {{ $each->created_at }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <b>Created by: </b> <a
+                                                                    href="{{ route('user.show', ['user' => $each->author]) }}">{{ $each->author->username }}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <b>Updated at: </b> {{ $each->updated_at }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class='modal-footer'>
                                                 <button type='submit'

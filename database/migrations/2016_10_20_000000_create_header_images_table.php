@@ -24,6 +24,8 @@ class CreateHeaderImagesTable extends Migration
             $table->text('description')->nullable();
             $table->string('image');
             $table->integer('order')->nullable();
+            $table->integer('author_id');
+            $table->timestamps();
             $table->boolean('active')->default(true);
         });
     }

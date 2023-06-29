@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Libs\Controller;
 
 use App\Model\HeaderImage;
-use Illuminate\Support\Facades\Storage;
 
 class HeaderImageController extends Controller
 {
@@ -80,6 +79,7 @@ class HeaderImageController extends Controller
     public function store(Request $request)
     {
         $header_image = new HeaderImage($request->all());
+        $header_image->author()->associate($request->user());
 
         if ($request->hasFile('up_file')) {
 
@@ -123,11 +123,13 @@ class HeaderImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HeaderImage $headerImage)
+    public function update(Request $request, HeaderImage $headerimage)
     {
-        $headerImage->fill($request->all());
 
-        if ($headerImage->save()) {
+        $headerimage->fill($request->all());
+        $headerimage->author()->associate($request->user());
+
+        if($headerimage->save()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
         } else {
             return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
@@ -143,10 +145,10 @@ class HeaderImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HeaderImage $headerImage)
+    public function destroy(HeaderImage $headerimage)
     {
 
-        if ($headerImage->delete()) {
+        if ($headerimage->delete()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpost')]);
         }
 
