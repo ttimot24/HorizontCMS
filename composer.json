@@ -27,7 +27,8 @@
         "codeception/codeception" : "*",
         "codacy/coverage": "1.4.*",
         "laravel/dusk": "6.*",
-        "filp/whoops" : "~2.0"
+        "filp/whoops" : "~2.0",
+        "bamarni/composer-bin-plugin": "^1.8"
     },
     "autoload": {
         "classmap": [
@@ -66,7 +67,10 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true
+        }
     },
     "extra": {
         "laravel": {

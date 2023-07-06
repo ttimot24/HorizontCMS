@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-const CONTROLLER_PATH = 'app'.DIRECTORY_SEPARATOR.'Controllers';
+if (!defined('CONTROLLER_PATH')) {
+	define('CONTROLLER_PATH', 'app'.DIRECTORY_SEPARATOR.'Controllers');
+}
 
 Route::group(['prefix'=>'/install'],function(){
 
