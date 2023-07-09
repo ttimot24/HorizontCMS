@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: HorizontCMS CI/CD
 
 on:
   push:
@@ -8,15 +8,18 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest 
+    runs-on: alpine-latest 
     steps:
       - uses: actions/checkout@v3
       - uses: php-actions/composer@v6
+        with:
+          php-version: '8.2'
+          extensions: zip
       - name: Run unit tests
         run: vendor/bin/phpunit --testsuite Unit
     
   docker_image:
-    runs-on: ubuntu-latest
+    runs-on: alpine-latest
     steps:
     - uses: actions/checkout@v3
     - name: Build Docker Image
