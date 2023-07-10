@@ -10,10 +10,12 @@ jobs:
   test:
     runs-on: ubuntu-latest 
     env:
+      DB_HOST: localhost
+      DB_CONNECTION: mysql
       DB_DATABASE: horizontlaravel
       DB_USERNAME: root
       DB_PASSWORD: password
-      LOG_PATH: storage/framework/logs/laravel.log
+      LOG_PATH: ./storage/logs/laravel.log
     services:
       mysql:
         image: mysql:latest
