@@ -30,8 +30,7 @@ jobs:
         with:
           args: --ignore-platform-reqs
       - name: Set up before tests
-        run: > 
-          sleep 15
+        run: | 
           php artisan migrate --no-interaction --force 
           php artisan db:seed --no-interaction --force
       - name: Force installed variable
@@ -39,7 +38,7 @@ jobs:
       - name: Run unit tests
         run: INSTALLED=YES XDEBUG_MODE=coverage vendor/bin/phpunit --testsuite Unit,Integration --coverage-clover reports/coverage.xml
       - name: After test steps
-        run: > 
+        run: | 
           if [ -f "reports/coverage.xml" ]; then vendor/bin/codacycoverage clover reports/coverage.xml; fi
           php artisan --version
           php artisan hcms:version   
