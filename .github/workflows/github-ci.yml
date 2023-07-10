@@ -15,7 +15,7 @@ jobs:
       DB_DATABASE: horizontlaravel
       DB_USERNAME: root
       DB_PASSWORD: password
-      LOG_PATH: storage/framework/logs/laravel.log
+      LOG_PATH: logs/laravel.log
     services:
       mysql:
         image: mysql:latest
@@ -33,7 +33,7 @@ jobs:
           args: --ignore-platform-reqs
       - name: Set up before tests
         run: | 
-          chmod -R 777 storage
+          mkdir logs
           php artisan migrate --no-interaction --force 
           php artisan db:seed --no-interaction --force
       - name: Force installed variable
