@@ -9,13 +9,17 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest 
+    env:
+      DB_DATABASE: horizontlaravel
+      DB_USERNAME: root
+      DB_PASSWORD: password
     services:
       mysql:
         image: mysql:latest
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: false
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: laravel
+          MYSQL_DATABASE: horizontlaravel
         ports:
           - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
