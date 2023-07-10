@@ -14,6 +14,7 @@ jobs:
       DB_USERNAME: root
       DB_PASSWORD: password
       LOG_CHANNEL: stderr
+      LOG_PATH: /home/runner/work/HorizontCMS/storage/logs/laravel.log
     services:
       mysql:
         image: mysql:latest
