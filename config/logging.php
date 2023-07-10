@@ -82,7 +82,7 @@ return [
         ],
 
         'emergency' => [
-            'path' => storage_path('framework/logs/laravel.log'),
+            'path' => env('LOG_PATH',storage_path('framework/logs/laravel.log')),
         ],
     ],
 
