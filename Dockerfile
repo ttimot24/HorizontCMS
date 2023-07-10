@@ -1,7 +1,7 @@
 FROM php:8.0-apache
 COPY ./ /var/www/html/
 
-ENV INSTALLER_HASH='55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae'
+ENV INSTALLER_HASH='e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02'
 
 RUN apt-get update && \
     apt-get install -y git zip cron	npm nodejs
