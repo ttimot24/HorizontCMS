@@ -33,7 +33,7 @@ jobs:
           args: --ignore-platform-reqs
       - name: Set up before tests
         run: | 
-          chmod -R 0777 storage
+          chmod -R 777 storage
           php artisan migrate --no-interaction --force 
           php artisan db:seed --no-interaction --force
       - name: Force installed variable
