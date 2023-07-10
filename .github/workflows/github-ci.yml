@@ -15,7 +15,7 @@ jobs:
       DB_DATABASE: horizontlaravel
       DB_USERNAME: root
       DB_PASSWORD: password
-      LOG_PATH: logs/laravel.log
+      LOG_CHANNEL: stderr
     services:
       mysql:
         image: mysql:latest
