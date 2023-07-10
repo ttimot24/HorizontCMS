@@ -33,7 +33,6 @@ jobs:
           args: --ignore-platform-reqs
       - name: Set up before tests
         run: | 
-          mkdir logs
           php artisan migrate --no-interaction --force 
           php artisan db:seed --no-interaction --force
       - name: Force installed variable
