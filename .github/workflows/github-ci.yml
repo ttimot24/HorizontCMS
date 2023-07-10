@@ -13,7 +13,6 @@ jobs:
       DB_DATABASE: horizontlaravel
       DB_USERNAME: root
       DB_PASSWORD: password
-      LOG_CHANNEL: stderr
       LOG_PATH: ./storage/logs/laravel.log
     services:
       mysql:
@@ -54,3 +53,17 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build Docker Image
       run: docker build . --file Dockerfile --tag ttimot24/horizont-cms:latest
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
+      if: ${{ github.ref_type == 'tag' }}
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: ${{ github.event.base_ref =='refs/heads/main' && github.ref_type == 'tag' && !startsWith(github.ref, 'refs/tags/v0.')}}
+        tags: ${{ steps.metadata.outputs.tags }}
+        labels: ${{ steps.metadata.outputs.labels }}
