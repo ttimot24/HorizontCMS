@@ -31,6 +31,8 @@ jobs:
           args: --ignore-platform-reqs
       - name: Set up before tests
         run: > 
+          sleep 15
+          php artisan cache:clear
           php artisan migrate --no-interaction --force 
           php artisan db:seed --no-interaction --force
       - name: Force installed variable
