@@ -1,11 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+class AbstractControllerImplementation extends \App\Libs\Controller{
 
-class AbstractControllerImplementation extends \App\Libs\Controller{}
+    public function getViewAttribute() {
+        return $this->view;
+    }
+
+}
 
 
 class AbstractControllerTest extends TestCase
@@ -54,7 +56,7 @@ class AbstractControllerTest extends TestCase
 
          $this->assertInstanceOf(\Illuminate\Http\Request::class,$controller->request);
 
-         $this->assertInstanceOf(\App\Libs\ViewResolver::class,$controller->view);
+         $this->assertInstanceOf(\App\Libs\ViewResolver::class,$controller->getViewAttribute());
     }
 
 

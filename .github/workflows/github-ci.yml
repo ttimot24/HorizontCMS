@@ -1,4 +1,4 @@
-name: HorizontCMS CI/CD
+name: Docker Image CI
 
 on:
   push:
@@ -9,13 +9,38 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest 
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: laravel
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v3
       - uses: php-actions/composer@v6
         with:
           args: --ignore-platform-reqs
+      - name: Set up before tests
+        run: > 
+          php artisan migrate --no-interaction --force 
+          php artisan db:seed --no-interaction --force
+      - name: Force installed variable
+        run: export INSTALLED=YES
       - name: Run unit tests
-        run: vendor/bin/phpunit --testsuite Unit
+        run: INSTALLED=YES XDEBUG_MODE=coverage vendor/bin/phpunit --testsuite Unit,Integration --coverage-clover reports/coverage.xml
+      - name: After test steps
+        run: > 
+          if [ -f "reports/coverage.xml" ]; then vendor/bin/codacycoverage clover reports/coverage.xml; fi
+          php artisan --version
+          php artisan hcms:version   
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ['7.4', '8.0', '8.1']
     
   docker_image:
     runs-on: ubuntu-latest
