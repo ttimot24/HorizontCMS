@@ -45,19 +45,7 @@
 
 
                         @foreach ($all_pages as $each)
-                            <?php
-                            
-                            if (!$each->isActive()) {
-                                $class = 'danger';
-                            } elseif (isset($each->parent)) {
-                                $class = 'bg-info';
-                            } else {
-                                $class = '';
-                            }
-                            
-                            ?>
-
-                            <tr class='{{ $class }}'>
+                            <tr>
                                 <td>{{ $each->id }}
 
                                     @if ($each->is($home_page))
@@ -76,14 +64,13 @@
                                         class='img img-rounded' /></td>
                                 <td>{{ $each->name }}
                                 </td>
-                                <td>{{ $each->url }}
-                                </td>
+                                <td>@if($each->url)<span class='badge bg-dark'> {{$each->url}}</span> @endif</td>
                                 <td>
 
                                     @if ($each->visibility == 1)
-                                        <p class='text-success'>{{ trans('page.visible') }}</p>
+                                        <span class='badge rounded-pill bg-success'>{{ trans('page.visible') }}</span>
                                     @else
-                                        <p class='text-danger'>{{ trans('page.invisible') }}</p>
+                                        <span class='badge rounded-pill bg-danger'>{{ trans('page.invisible') }}</span>
                                     @endif
 
                                 </td>
@@ -92,7 +79,9 @@
                                     @if ($each->parent == null)
                                         <b>{{ trans('page.menu_type1') }}</b>
                                     @else
-                                        {!! trans('page.menu_type2', ['parent_menu' => $each->parent->name]) !!}
+                                        <span class='badge bg-info'>
+                                            {!! trans('page.menu_type2', ['parent_menu' => $each->parent->name]) !!}
+                                        </span>
                                     @endif
 
                                 </td>
@@ -105,21 +94,21 @@
 
                                 <td class='text-center'>
                                     <div class='btn-group' role='group'>
-                                        <a href='{{ route('page.edit', ['page' => $each]) }}'
-                                            type='button' class='btn btn-warning btn-sm'
+                                        <a href='{{ route('page.edit', ['page' => $each]) }}' type='button'
+                                            class='btn btn-warning btn-sm'
                                             style='min-width:70px;'>{{ trans('actions.edit') }}
                                         </a>
                                         <a type='button' data-bs-toggle='modal'
-                                            data-bs-target='#delete_{{ $each->id }}'
-                                            class='btn btn-danger btn-sm'><i class='fa fa-trash-o'
-                                                aria-hidden='true'></i></a>
+                                            data-bs-target='#delete_{{ $each->id }}' class='btn btn-danger btn-sm'><i
+                                                class='fa fa-trash-o' aria-hidden='true'></i></a>
                                     </div>
 
                                 </td>
                             </tr>
 
 
-                            <div class="modal mo-{{ $each->id }}" id="mo-{{ $each->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal mo-{{ $each->id }}" id="mo-{{ $each->id }}" tabindex="-1"
+                                role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header modal-header-warning bg-warning text-white">
@@ -135,8 +124,8 @@
                                             <button type="button" class="btn btn-default"
                                                 data-bs-dismiss="modal">{{ trans('actions.close') }}
                                             </button>
-                                            <a href="admin/page/set-home-page/{{ $each->id }}"
-                                                type="button" class="btn btn-primary">{{ trans('actions.set') }}
+                                            <a href="admin/page/set-home-page/{{ $each->id }}" type="button"
+                                                class="btn btn-primary">{{ trans('actions.set') }}
                                             </a>
                                         </div>
                                     </div>

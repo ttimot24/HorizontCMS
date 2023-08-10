@@ -35,7 +35,7 @@
                     <tbody>
 
                         @foreach ($all_users as $each)
-                            <tr @if($each->active == 0) class='bg-danger' @endif>
+                            <tr>
 
                                 <td>{{ $each->id }}</td>
 
@@ -48,7 +48,7 @@
 
                                 <td>{{ $each->username }}</td>
 
-                                <td>{{ $each->email }}</td>
+                                <td>{{ $each->email }} <br> @if(!$each->isActive()) <span class="badge rounded-pill w-75 text-bg-danger">{{ trans('user.inactive') }}</span> @endif</td>
 
                                 <td>
                                     <span
