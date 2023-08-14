@@ -4,11 +4,15 @@
     <div class='container main-container'>
 
         <div class="card mb-3">
-            <div class="card-header fw-bold">
 
-
-                <h2>{{ trans('Online Store') }}</h2>
-            </div>
+            @include('breadcrumb', [
+                'links' => [
+                    ['name' => 'Content'],
+                    ['name' => trans('Plugin manager'), 'url' => route('plugin.index')],
+                ],
+                'page_title' => trans('Online Store'),
+               // 'stats' => [['label' => trans('user.all'), 'value' => count($online_plugins)]],
+            ])
 
             <div class="card-body">
 

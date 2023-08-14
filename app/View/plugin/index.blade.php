@@ -4,84 +4,89 @@
     <div class='container main-container'>
 
         <div class="card mb-3">
-            <div class="card-header fw-bold">
 
-                <section class="row">
-                    <div class="col-4">
-                        <h2>{{ trans('Plugin manager') }}</h2>
-                    </div>
+            @include('breadcrumb', [
+                'links' => [['name' => 'Content'], ['name' => trans('Plugins'), 'url' => route('plugin.index')]],
+                'page_title' => trans('Plugin manager'),
+                'stats' => [['label' => trans('user.all'), 'value' => $all_plugin->count()]],
+                'buttons_right' => [
+                    [
+                        'icon' => 'fa-cloud-download',
+                        'label' => 'Download apps',
+                        'route' => config('horizontcms.backend_prefix') . '/plugin/onlinestore',
+                        'class' => 'btn-info',
+                    ],
+                    [
+                        'icon' => 'fa-upload',
+                        'label' => 'Upload plugin',
+                        'class' => 'btn-primary',
+                        'data' =>
+                            'data-bs-toggle=modal data-bs-target=.upload_plugin ' .
+                            ($zip_enabled ? '' : 'disabled'),
+                    ],
+                ],
+            ])
 
-                    <div class='col-8 text-right text-end pt-4'>
-                        <a href="{{ config('horizontcms.backend_prefix') }}/plugin/onlinestore" class='btn btn-info'><i
-                                class="fa fa-cloud-download" aria-hidden="true"></i> Download apps</a>
-                        <a id='upl' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='.upload_plugin'
-                            @if (!$zip_enabled) disabled @endif><i class='fa fa-upload'></i>&nbspUpload newplugin</a>
-                    </div>
-                </section>
-
-            </div>
 
             <div class="card-body">
 
-
-                <div class='list-group mt-4'>
-
-
+                <div class='list-group'>
 
                     @foreach ($all_plugin as $current_plugin)
-                        <?php
-                        
-                        echo "<div class='list-group-item bg-dark p-3'>";
-                        echo "<div class='row p-0'>";
-                        echo "<div class='col-md-1 col-sm-12 col-xs-12 p-0 pl-3 text-center'>";
-                        
-                        echo Html::img($current_plugin->getIcon(), "class='img img-thumbnail mt-1' style='width: 70px; height: 70px;' ");
-                        
-                        echo '</div>';
-                        
-                        echo "<div class='col-md-9 m-0'>
-                                                    <h4 class='list-group-item-heading p-0'>";
-                        
-                        if ($current_plugin->isActive()) {
-                            echo "<a class='color-primary' id='" . $current_plugin->root_dir . "' href='" . config('horizontcms.backend_prefix') . '/plugin/run/' . $current_plugin->getSlug() . "'>" . $current_plugin->getName() . '</a>';
-                        } else {
-                            echo "<a class='color-primary' id='" . $current_plugin->root_dir . "' >" . $current_plugin->getName() . '</a>';
-                        }
-                        
-                        echo " <small class='text-muted'>version: " .
-                            $current_plugin->getInfo('version') .
-                            " | author: <a href='" .
-                            $current_plugin->getInfo('author_url') .
-                            "'>" .
-                            $current_plugin->getInfo('author') .
-                            "</a></small></h4>
+                        <div class='list-group-item bg-dark p-3'>
+                            <div class='row p-0'>
+                                <div class='col-md-1 col-sm-12 col-xs-12 p-0 pl-3 text-center'>
+
+                                    {!! Html::img($current_plugin->getIcon(), "class='img img-thumbnail mt-1' style='width: 70px; height: 70px;' ") !!}
+
+                                </div>
+
+                                <div class='col-md-9 m-0'>
+                                    <h4 class='list-group-item-heading p-0'>
+
+                                        <?php
                                         
-                                                    <p class='text-white'>" .
-                            $current_plugin->getInfo('description') .
-                            '</p>';
-                        
-                        echo '</div>';
-                        
-                        echo "<div class='col-md-2 col-sm-4 col-xs-4 text-end'>";
-                        
-                        if (!$current_plugin->isInstalled()) {
-                            echo "<a id='install' class='btn btn-primary btn-block' href='" . config('horizontcms.backend_prefix') . '/plugin/install/' . $current_plugin->root_dir . "'>Install</a>";
-                        } else {
-                            if (!$current_plugin->isActive()) {
-                                echo "<a class='btn btn-success btn-block' href='" . config('horizontcms.backend_prefix') . '/plugin/activate/' . $current_plugin->root_dir . "'>Activate</a>";
-                            } else {
-                                echo "<a class='btn btn-info btn-block' href='" . config('horizontcms.backend_prefix') . '/plugin/deactivate/' . $current_plugin->root_dir . "'>Deactivate</a>";
-                            }
-                        }
-                        echo "<button class='btn btn-danger btn-block' data-bs-toggle='modal' data-bs-target='#delete_" . $current_plugin->root_dir . "' >Delete</button>";
-                        
-                        echo '</div>';
-                        
-                        echo '</div>';
-                        
-                        echo '</div>';
-                        
-                        ?>
+                                        if ($current_plugin->isActive()) {
+                                            echo "<a class='color-primary' id='" . $current_plugin->root_dir . "' href='" . config('horizontcms.backend_prefix') . '/plugin/run/' . $current_plugin->getSlug() . "'>" . $current_plugin->getName() . '</a>';
+                                        } else {
+                                            echo "<a class='color-primary' id='" . $current_plugin->root_dir . "' >" . $current_plugin->getName() . '</a>';
+                                        }
+                                        
+                                        echo " <small class='text-muted'>version: " .
+                                            $current_plugin->getInfo('version') .
+                                            " | author: <a href='" .
+                                            $current_plugin->getInfo('author_url') .
+                                            "'>" .
+                                            $current_plugin->getInfo('author') .
+                                            "</a></small></h4>
+                                                                                                                    
+                                                                                                                                <p class='text-white'>" .
+                                            $current_plugin->getInfo('description') .
+                                            '</p>';
+                                        
+                                        echo '</div>';
+                                        
+                                        echo "<div class='col-md-2 col-sm-4 col-xs-4 text-end'>";
+                                        
+                                        if (!$current_plugin->isInstalled()) {
+                                            echo "<a id='install' class='btn btn-primary btn-block' href='" . config('horizontcms.backend_prefix') . '/plugin/install/' . $current_plugin->root_dir . "'>Install</a>";
+                                        } else {
+                                            if (!$current_plugin->isActive()) {
+                                                echo "<a class='btn btn-success btn-block' href='" . config('horizontcms.backend_prefix') . '/plugin/activate/' . $current_plugin->root_dir . "'>Activate</a>";
+                                            } else {
+                                                echo "<a class='btn btn-info btn-block' href='" . config('horizontcms.backend_prefix') . '/plugin/deactivate/' . $current_plugin->root_dir . "'>Deactivate</a>";
+                                            }
+                                        }
+                                        echo "<button class='btn btn-danger btn-block' data-bs-toggle='modal' data-bs-target='#delete_" . $current_plugin->root_dir . "' >Delete</button>";
+                                        
+                                        ?>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
 
                         @include('confirm_delete', [
                             'route' => route('plugin.destroy', ['plugin' => $current_plugin->root_dir]),

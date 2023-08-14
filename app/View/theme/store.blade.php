@@ -3,12 +3,16 @@
 @section('content')
     <div class='container main-container'>
 
+        <div class="card">
+            @include('breadcrumb', [
+                'links' => [
+                    ['name' => 'Content'],
+                    ['name' => trans('Themes'), 'url' => route('theme.index')],
+                ],
+                'page_title' => trans('Online Store'),
+            ])
 
-        <h2>Online Store</h2>
-        <hr>
-        <br>
-
-        <div class="row">
+        <div class="container">
 
             @if (!$repo_status || $repo_status)
                 <div class="alert alert-warning" role="alert">
@@ -16,6 +20,8 @@
                 </div>
             @endif
 
+
+        </div>
 
         </div>
 
