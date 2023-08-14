@@ -52,7 +52,7 @@
 
     </div>
 
-    @if (isset($buttons) || isset($buttons_right))
+    @if (isset($buttons) || (isset($buttons_right)))
             <div class="container">
         <div class="row my-3">
 
