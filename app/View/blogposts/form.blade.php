@@ -3,9 +3,7 @@
 @section('content')
     <div class='container main-container'>
         <div class="card mb-3">
-            <div class="card-header fw-bold">
-                <h2>{{ trans(isset($blogpost) ? 'blogpost.edit_blogpost' : 'blogpost.new_blogpost') }}</h2>
-            </div>
+            @include('breadcrumb', ['links' => [['name'=> 'Content'], ['name'=> 'Blog', 'url' => route('blogpost.index')]], 'page_title' => trans(isset($blogpost) ? 'blogpost.edit_blogpost' : 'blogpost.new_blogpost') ] )
             <div class="card-body">
 
                 <form role='form'
