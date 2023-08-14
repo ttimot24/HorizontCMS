@@ -4,26 +4,31 @@
     <div class='container main-container'>
 
         <div class="card mb-3">
-            <div class="card-header fw-bold">
 
-                <h2>{{ trans('page.pages') }} <small class='pull-right text-muted pt-3'>{{ trans('page.all') }}:
-                        {{ $number_of_pages }} | {{ trans('page.visible') }}: {{ $visible_pages }} |
-                        {{ trans('page.invisible') }}:
-                        {{ $number_of_pages - $visible_pages }}</small></h2>
+            @include('breadcrumb', [
+                'links' => [['name' => 'Content'], ['name' => trans('page.pages'), 'url' => route('page.index')]],
+                'page_title' => trans('page.pages'),
+                'stats' => [['label' => trans('page.all'), 'value' => $number_of_pages],
+                ['label' => trans('page.visible'), 'value' => $visible_pages],
+                ['label' => trans('page.invisible'), 'value' => $number_of_pages - $visible_pages]],
+                'buttons' => [
+                   [
+                        'label' => trans('page.create_page_button'),
+                        'route' => route('page.create'),
+                        'class' => 'btn-info',
+                    ],
+                ],
+                'buttons_right' => [
+                    [
+                        'icon' => 'fa-arrows-v',
+                        'label' => trans('page.order'),
+                        'class' => 'btn-default',
+                        'data' => "id=orderer onclick=dragndroporder();  data-csrf=".csrf_token(),
+                          
+                    ],
+                ],
+            ])
 
-                <div class="row py-3">
-                    <div class='col-md-6'>
-                        <a href="{{ route('page.create') }}"
-                            class='btn btn-info my-auto'>{{ trans('page.create_page_button') }}</a>
-                    </div>
-                    <div class='col-md-6 text-right text-end'>
-                        <a class='btn btn-default my-auto' id='orderer' onclick='dragndroporder();'
-                            data-csrf="{{ csrf_token() }}"><i class='fa fa-arrows-v' style='font-size:15px;'
-                                aria-hidden='true'></i> {{ trans('page.order') }}</a>
-                    </div>
-                </div>
-
-            </div>
 
             <div class="card-body">
 

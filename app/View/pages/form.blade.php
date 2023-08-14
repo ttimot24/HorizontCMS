@@ -5,7 +5,7 @@
 
         <div class="card mb-3">
                     @include('breadcrumb', [
-                        'links' => [['name' => 'Content'], ['name' => trans('page.pages'), 'url' => route('user.index')]],
+                        'links' => [['name' => 'Content'], ['name' => trans('page.pages'), 'url' => route('page.index')]],
                         'page_title' => trans(isset($page) ? 'page.edit_page' : 'page.add_new_page_title'),
                     ])
             <div class="card-body">
