@@ -3,6 +3,14 @@
 @section('content')
     <div class='container main-container'>
 
+    <div class="card pb-5">
+
+            @include('breadcrumb', [
+                'links' => [['name' => 'Content'], ['name' => trans('Dashboard'), 'url' => route('dashboard.index')]],
+                'page_title' => "Search",
+            ])
+
+    <div class="container">
         <div class="row py-4">
 
 
@@ -68,5 +76,8 @@
         @endif
 
 
-        <br /><br /><br /><br /><br />
+        </div>
+
+        </div>
+        </div>
     @endsection

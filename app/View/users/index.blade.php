@@ -4,18 +4,23 @@
     <div class='container main-container'>
 
         <div class="card mb-3">
-            <div class="card-header fw-bold">
 
-                <h2>{{ trans('user.registered_users') }} <small class='pull-right text-muted pt-3'>{{ trans('user.all') }}:
-                        {{ $number_of_users }} | {{ trans('user.active') }}: {{ $active_users }} |
-                        {{ trans('user.inactive') }}:
-                        {{ $number_of_users - $active_users }}</small></h2>
-
-
-                <div class='container col-md-12'><a href="{{ route('user.create') }}"
-                        class='btn btn-warning mb-3'>{{ trans('user.new_user_button') }}</a></div>
-
-            </div>
+                @include('breadcrumb', [
+                        'links' => [['name' => 'Content'], ['name' => trans('user.users'), 'url' => route('user.index')]],
+                        'page_title' => trans('user.registered_users'),
+                        'stats' => [
+                            ['label'=> trans('user.all'), 'value'=> $number_of_users],
+                            ['label'=> trans('user.active'), 'value'=> $active_users],
+                            ['label'=> trans('user.inactive'), 'value'=> $number_of_users - $active_users]
+                        ],
+                        'buttons' => [
+                            [
+                                'label' => trans('user.new_user_button'),
+                                'route' => route('user.create'),
+                                'class' => 'btn-warning'
+                            ]
+                        ]
+                    ])
 
             <div class="card-body">
 

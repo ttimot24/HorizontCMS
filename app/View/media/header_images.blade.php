@@ -4,22 +4,23 @@
     <div class='container main-container'>
 
         <div class="card mb-3">
-            <div class="card-header fw-bold">
 
-                <div class="row">
-
-                    <div class='col-md-10'>
-                        <h2>{{ trans('Header images') }}</h2>
-                    </div>
-
-                    <div class='col-md-2 my-auto d-flex justify-content-end'>
-                        <a id='upl' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='.upload_images'><i
-                                class='fa fa-upload'></i>&nbspUpload images</a>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-
-            </div>
+            @include('breadcrumb', [
+                'links' => [['name' => 'Content'], ['name' => trans('Media')]],
+                'page_title' => trans('Header images'),
+                'stats' => [
+                    ['label' => trans('user.all'), 'value' => $slider_images->count()+$slider_disabled->count()],
+                    ['label' => trans('Slider'), 'value' => $slider_images->count()]
+                ],
+                'buttons_right' => [
+                    [
+                        'icon' => 'fa-upload',
+                        'label' => 'Upload images',
+                        'class' => 'btn-primary',
+                        'data' => 'data-bs-toggle=modal data-bs-target=.upload_images'
+                    ]
+                ],
+            ])
 
             <div class="card-body">
 

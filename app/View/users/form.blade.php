@@ -4,9 +4,12 @@
     <div class='container main-container'>
 
         <div class="card mb-3">
-            <div class="card-header fw-bold">
-                <h2>{{ trans(isset($user) ? 'user.edit_user' : 'user.create_user') }}</h2>
-            </div>
+
+                    @include('breadcrumb', [
+                        'links' => [['name' => 'Content'], ['name' => trans('user.users'), 'url' => route('user.index')]],
+                        'page_title' => trans(isset($user) ? 'user.edit_user' : 'user.create_user'),
+                    ])
+        
             <div class="card-body">
 
                 <form role='form'

@@ -4,9 +4,10 @@
     <div class='container main-container'>
 
         <div class="card mb-3">
-            <div class="card-header fw-bold">
-                <h2>{{ trans(isset($page) ? 'page.edit_page' : 'page.add_new_page_title') }}</h2>
-            </div>
+                    @include('breadcrumb', [
+                        'links' => [['name' => 'Content'], ['name' => trans('page.pages'), 'url' => route('page.index')]],
+                        'page_title' => trans(isset($page) ? 'page.edit_page' : 'page.add_new_page_title'),
+                    ])
             <div class="card-body">
 
                 <form role='form'

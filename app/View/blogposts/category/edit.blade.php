@@ -4,10 +4,8 @@
     <div class='container main-container'>
 
             <div class="card mb-3">
-            <div class="card-header fw-bold">
-        <h2>{{ trans('category.edit_category') }}</h2>
 
-</div>
+         @include('breadcrumb', ['links' => [['name'=> 'Content'], ['name'=> 'Blog', 'url' => route('blogpost.index')]], 'page_title' => trans('category.edit_category')  ] )
 
 
         <div class='card-body'>

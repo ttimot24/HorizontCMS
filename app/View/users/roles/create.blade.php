@@ -4,11 +4,11 @@
     <div class='container main-container'>
 
         <div class="card mb-3">
-            <div class="card-header fw-bold">
 
-        <h2>Create User Group</h2>
-
-        </div>
+                    @include('breadcrumb', [
+                        'links' => [['name' => 'Content'], ['name' => trans('user.users'), 'url' => route('user.index')]],
+                        'page_title' => 'Create User Group',
+                    ])
 
         <div class="card-body">
 

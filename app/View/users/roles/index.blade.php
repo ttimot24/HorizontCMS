@@ -4,16 +4,24 @@
     <div class='container main-container'>
 
         <div class="card mb-3">
-            <div class="card-header fw-bold">
 
-                <h2>User groups <small class='pull-right text-muted pt-3'> All: {{ $all_user_roles->count() }} </small></h2>
+            @include('breadcrumb', [
+                'links' => [
+                    ['name' => 'Content'],
+                    ['name' => trans('user.users'), 'url' => route('user.index')],
+                    ['name' => 'Roles', 'url' => route('userrole.index')],
+                ],
+                'page_title' => 'User roles',
+                'stats' => [['label' => trans('user.all'), 'value' => $all_user_roles->count()]],
+                'buttons' => [
+                    [
+                        'label' => 'New role',
+                        'route' => route('userrole.create'),
+                        'class' => 'btn-warning',
+                    ],
+                ],
+            ])
 
-                <br>
-                <div><a href="{{ route('userrole.create') }}" class='btn btn-warning' style='margin-bottom:20px;'>New user
-                        group</a>
-                </div>
-
-            </div>
 
             <div class="card-body">
 
@@ -85,15 +93,15 @@
 
                         </form>
 
-                                    @include('confirm_delete', [
-                                        'route' => route('userrole.destroy', ['userrole' => $role]),
-                                        'id' => 'delete_' . $role->id,
-                                        'header' => trans('actions.are_you_sure'),
-                                        'name' => $role->name,
-                                        'content_type' => 'role',
-                                        'delete_text' => trans('actions.delete'),
-                                        'cancel' => trans('actions.cancel'),
-                                    ])
+                        @include('confirm_delete', [
+                            'route' => route('userrole.destroy', ['userrole' => $role]),
+                            'id' => 'delete_' . $role->id,
+                            'header' => trans('actions.are_you_sure'),
+                            'name' => $role->name,
+                            'content_type' => 'role',
+                            'delete_text' => trans('actions.delete'),
+                            'cancel' => trans('actions.cancel'),
+                        ])
 
                     </div>
                     <?php endforeach; ?>

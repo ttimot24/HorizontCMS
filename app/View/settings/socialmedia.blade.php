@@ -4,11 +4,10 @@
     <div class='container main-container'>
 
         <div class="card mb-3">
-            <div class="card-header fw-bold">
-
-                <h2>Social media</h2>
-
-            </div>
+            @include('breadcrumb', [
+                'links' => [['name' => trans('settings.settings'), 'url' => route('settings.index')]],
+                'page_title' => trans('Social media'),
+            ])
         <div class="card-body">
         <form action='' role='form' method='POST'>
             @csrf
