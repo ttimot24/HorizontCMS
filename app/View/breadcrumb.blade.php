@@ -54,10 +54,10 @@
 
     @if (isset($buttons) || (isset($buttons_right)))
             <div class="container">
-        <div class="row my-3">
+        <div class="row">
 
                 @if (isset($buttons))
-                    <div class="col">
+                    <div class="col my-3">
                         @foreach ($buttons as $button)
                             <a @if (isset($button['route'])) href="{{ $button['route'] }}" @endif
                                 class="btn {{ $button['class'] }}" {{ isset($button['data'])? $button['data'] : '' }}>
@@ -71,7 +71,7 @@
                 @endif
 
                 @if (isset($stats) && isset($buttons_right))
-                    <div class="col text-end">
+                    <div class="col text-end my-3">
                         @foreach ($buttons_right as $button)
                             <a @if (isset($button['route'])) href="{{ $button['route'] }}" @endif
                                 class="btn {{ $button['class'] }}" {{ isset($button['data'])? $button['data'] : '' }}>
