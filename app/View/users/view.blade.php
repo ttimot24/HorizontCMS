@@ -48,8 +48,9 @@
 
                                 <div class="my-3">
                                     <div class='btn-group' role='group'>
-                                        <a href='#' type='button' class='btn btn-warning me-1'><span class='fa fa-star'
-                                                aria-hidden='true'></span> {{ trans('actions.deactivate') }}</a>
+                                        <a href='#' type='button' class='btn btn-warning me-1'><span
+                                                class='fa fa-star' aria-hidden='true'></span>
+                                            {{ trans('actions.deactivate') }}</a>
                                         <a href="{{ route('user.edit', ['user' => $user]) }}" type='button'
                                             class='btn btn-warning'><span class='fa fa-pencil' aria-hidden='true'></span>
                                             {{ trans('actions.edit') }}</a>
@@ -85,7 +86,7 @@
                     <div valign='top' class='col-md-8'>
 
                         @if (!$user->isActive())
-                            <div class='card mt-4'>
+                            <div class='card mb-3'>
                                 <div class='card-header bg-danger'>
                                     <h4 class='card-title mt-2 mb-2 pt-0 pb-0'><b>Inactive user</b></h4>
                                 </div>
@@ -102,101 +103,115 @@
                             </div>
                         @endif
 
-                        
+
                         @if ($user->isAdmin())
-                        <div class="card">
-                            <div class="card-header">
-                            <h2>{{ trans('blogpost.blogposts') }} ({{$user->blogposts->count()}})</h2>
-                            </div>
-                            <div class="card-body">
-                            <table class='table table-condensed table-hover'>
-                               <thead>
-                                 <tr class='d-flex bg-dark text-white'>
-                                   <th class='col-4'>Image</th>
-                                   <th class='col-6'>Title</th>
-                                   <th class='col-2'>Date</th>
-                                 </tr>
-                               </thead>
-                               <tbody>
-                        
-                            @foreach ($user->blogposts->reverse() as $each)
-                                <tr class='d-flex'>
-                                <td class='col-4'><a href="{{ route('blogpost.show', ['blogpost' => $each])}}">
-                                {!! Html::img($each->getThumb(), "class='img img-thumbnail bg-dark', width='250' style='object-fit:cover;height:150px;'") !!}
-                                </a></td>
-                                <td class='col-6'>
-                                    <a href="{{ route('blogpost.show', ['blogpost' => $each]) }}"><h5>{{$each->title }}</h5></a>
-                                    <p>{{$each->summary }}
-                                    </p>
-                                </td>
-                        
-                                <td class='col-2 text-right'>{{ $each->created_at->format('Y.m.d') }}</br><font size='2'><i>at</i> {{$each->created_at->format('H:i:s') }}</font></td>
-                                </tr>
-                            @endforeach
-                        
-                            </tbody></table>
-                            </div></div>
-                        
-                            </div></section>
-                        
-                            </br></br>
-                        @endif
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>{{ trans('blogpost.blogposts') }} ({{ $user->blogposts->count() }})</h2>
+                                </div>
+                                <div class="card-body">
+                                    <table class='table table-condensed table-hover'>
+                                        <thead>
+                                            <tr class='d-flex bg-dark text-white'>
+                                                <th class='col-4'>Image</th>
+                                                <th class='col-6'>Title</th>
+                                                <th class='col-2'>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                        @include('image_details', ['modal_id' => $user->id, 'image' => $user->getImage()])
+                                            @foreach ($user->blogposts->reverse() as $each)
+                                                <tr class='d-flex'>
+                                                    <td class='col-4'><a
+                                                            href="{{ route('blogpost.show', ['blogpost' => $each]) }}">
+                                                            {!! Html::img(
+                                                                $each->getThumb(),
+                                                                "class='img img-thumbnail bg-dark', width='250' style='object-fit:cover;height:150px;'",
+                                                            ) !!}
+                                                        </a></td>
+                                                    <td class='col-6'>
+                                                        <a href="{{ route('blogpost.show', ['blogpost' => $each]) }}">
+                                                            <h5>{{ $each->title }}</h5>
+                                                        </a>
+                                                        <p>{{ $each->summary }}
+                                                        </p>
+                                                    </td>
 
+                                                    <td class='col-2 text-right'>
+                                                        {{ $each->created_at->format('Y.m.d') }}</br>
+                                                        <font size='2'><i>at</i>
+                                                            {{ $each->created_at->format('H:i:s') }}</font>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
 
-                        @include('confirm_delete', [
-                            'route' => route('user.destroy', ['user' => $user]),
-                            'id' => 'delete_' . $user->id,
-                            'header' => trans('actions.are_you_sure'),
-                            'name' => $user->username,
-                            'content_type' => 'user',
-                            'delete_text' => trans('actions.delete'),
-                            'cancel' => trans('actions.cancel'),
-                        ])
-
-                        <div class="card">
-
-                            <div class="card-header">
-                                <h2>{{ trans('blogpost.comments') }} ({{ $user->comments->count() }})</h2>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
-                            <div class="card-body">
+                    </div>
+                </section>
 
-                                <table class='table table-condensed table-hover'>
-                                    <thead>
-                                        <tr class="d-flex bg-dark text-white">
-                                            <th class="col-3">{{ trans('blogpost.post') }}</th>
-                                            <th class="col-8">{{ trans('blogpost.th_comment') }}</th>
-                                            <th class="col-1">{{ trans('blogpost.th_date') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                </br></br>
+                @endif
 
-                                        <?php
-                                        
-                                        foreach ($user->comments as $each) {
-                                            if ($each->blogpost != null) {
-                                                echo "<tr class='d-flex'>";
-                                                echo "<td class='col-3'><a href='" . route('blogpost.show', ['blogpost' => $each->blogpost]) . "'>" . $each->blogpost->title . '</a></td>';
-                                                echo "<td class='col-8' style='text-align:justify;'>" . $each->comment . '</td>';
-                                        
-                                                echo "<td class='col-1'>" . $each->created_at->format('Y.m.d') . "</br><font size='2'><i>at</i> " . $each->created_at->format('H:i:s') . '</font></td>';
-                                                echo '</tr>';
-                                            }
-                                        }
-                                        
-                                        ?>
+                @include('image_details', ['modal_id' => $user->id, 'image' => $user->getImage()])
 
-                                    </tbody>
-                                </table>
-                            </div>
 
-                        </div>
+                @include('confirm_delete', [
+                    'route' => route('user.destroy', ['user' => $user]),
+                    'id' => 'delete_' . $user->id,
+                    'header' => trans('actions.are_you_sure'),
+                    'name' => $user->username,
+                    'content_type' => 'user',
+                    'delete_text' => trans('actions.delete'),
+                    'cancel' => trans('actions.cancel'),
+                ])
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h2>{{ trans('blogpost.comments') }} ({{ $user->comments->count() }})</h2>
                     </div>
 
+                    <div class="card-body">
+
+                        <table class='table table-condensed table-hover'>
+                            <thead>
+                                <tr class="d-flex bg-dark text-white">
+                                    <th class="col-3">{{ trans('blogpost.post') }}</th>
+                                    <th class="col-8">{{ trans('blogpost.th_comment') }}</th>
+                                    <th class="col-1">{{ trans('blogpost.th_date') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach ($user->comments as $each)
+                                    @if ($each->blogpost != null)
+                                        <tr class='d-flex'>
+                                            <td class='col-3'>
+                                                <a href="{{ route('blogpost.show', ['blogpost' => $each->blogpost]) }}">{{ $each->blogpost->title }}</a>
+                                            </td>
+                                            <td class='col-8' style='text-align:justify;'>{{ $each->comment }}</td>
+
+                                            <td class='col-1'>{{ $each->created_at->format('Y.m.d') }}</br>
+                                                <font size='2'><i>at</i> {{ $each->created_at->format('H:i:s') }}
+                                                </font>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
             </div>
-            </section>
 
         </div>
-    @endsection
+        </section>
+
+    </div>
+@endsection
