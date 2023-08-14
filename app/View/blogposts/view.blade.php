@@ -32,6 +32,7 @@
                 @include('breadcrumb', [
                     'links' => [['name' => 'Content'], ['name' => 'Blog', 'url' => route('blogpost.index')]],
                     'page_title' => trans('blogpost.view_blogpost'),
+                    'buttons' => null,
                     'buttons_right' => $buttons,
                 ])
 

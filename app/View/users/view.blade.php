@@ -32,6 +32,7 @@
             @include('breadcrumb', [
                 'links' => [['name' => 'Content'], ['name' => trans('user.users'), 'url' => route('user.index')]],
                 'page_title' => trans('user.view_user'),
+                'buttons' => null,
                 'buttons_right' => $buttons,
             ])
 
@@ -76,7 +77,6 @@
                                         class="color-primary">{{ $user->created_at->format(\Settings::get('date_format', \Config::get('horizontcms.default_date_format'), true)) }}</a></b>
                                 <b class="d-block text-center mb-3">{{ trans('user.view_logins') }} : <a
                                         class="color-primary">{{ $user->visits }}</a></b>
-                                <hr />
                             </div>
                         </div>
 
