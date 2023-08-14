@@ -3,39 +3,7 @@
 
         <section class='container'>
 
-            <div class="card mb-3">
-                <div class="card-header fw-bold">
-
-                    <section class='row'>
-
-                        <div class='col-md-4'>
-                            <h2>File manager</h2>
-                        </div>
-
-                        <div class='col-md-8 text-end mt-4'>
-                            <div class="row">
-                                <div class="col-md-4 offset-md-3 col-sm-7 col-xs-7 text-end">
-                                    <input type="text" v-model="filter" class="form-control" id="filter"
-                                        placeholder="Filter">
-                                </div>
-                                <div class="col text-end">
-                                    <a class='btn btn-primary mr-2' data-bs-toggle='modal' data-bs-backdrop='static'
-                                        data-bs-target='.upload_file_to_storage'><i class="fa fa-upload"
-                                            aria-hidden="true"></i>
-                                        Upload</a>
-                                    <a class='btn btn-primary' data-bs-toggle='modal' data-bs-backdrop='static'
-                                        data-bs-target='.new_folder'><i class="fa fa-folder" aria-hidden="true"></i> Create
-                                        Folder</a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </section>
-
-                </div>
-
-                <div class="card-body container py-0">
+                <div class="container py-0">
 
                     <div class="row">
 
@@ -54,7 +22,7 @@
                         <div class="panel panel-default col-10 bg-dark">
                             <div class="panel-body">
                                 <div class="row p-0 m-0">
-                                    <div class="col-md-10 m-0 p-0">
+                                    <div class="col-md-2 m-0 p-0">
                                         <nav aria-label="breadcrumb p-0 m-0">
                                             <ol class="breadcrumb bg-dark p-0 pt-3 m-0">
                                                 <li class="breadcrumb-item"><a href="storage"
@@ -66,6 +34,26 @@
                                                 </li>
                                             </ol>
                                         </nav>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class='col text-end mt-2'>
+                                            <div class="row">
+                                                <div class="col-md-4 offset-md-3 col-sm-7 col-xs-7 text-end">
+                                                    <input type="text" v-model="filter" class="form-control input-sm" id="filter"
+                                                        placeholder="Filter">
+                                                </div>
+                                                <div class="col text-end">
+                                                    <a class='btn btn-primary btn-sm mr-2' data-bs-toggle='modal' data-bs-backdrop='static'
+                                                        data-bs-target='.upload_file_to_storage'><i class="fa fa-upload"
+                                                            aria-hidden="true"></i>
+                                                        Upload</a>
+                                                    <a class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-backdrop='static'
+                                                        data-bs-target='.new_folder'><i class="fa fa-folder" aria-hidden="true"></i> Create
+                                                        Folder</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                     <div class="col-md-2 text-end pt-3 pr-3">
                                         <div class="row">
@@ -127,7 +115,6 @@
                     </div>
 
                 </div>
-            </div>
         </section>
 
 

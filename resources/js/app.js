@@ -27029,363 +27029,343 @@ var render = function () {
     { attrs: { id: "filemanager" } },
     [
       _c("section", { staticClass: "container" }, [
-        _c("div", { staticClass: "card mb-3" }, [
-          _c("div", { staticClass: "card-header fw-bold" }, [
-            _c("section", { staticClass: "row" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-8 text-end mt-4" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-md-4 offset-md-3 col-sm-7 col-xs-7 text-end",
-                    },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.filter,
-                            expression: "filter",
-                          },
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          id: "filter",
-                          placeholder: "Filter",
-                        },
-                        domProps: { value: _vm.filter },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.filter = $event.target.value
-                          },
-                        },
-                      }),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm._m(1),
+        _c("div", { staticClass: "container py-0" }, [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              {
+                staticClass: "panel panel-default col-2 bg-dark p-3",
+                staticStyle: { "min-height": "500px" },
+              },
+              [
+                _c("h4", { staticClass: "p-2 bg-dark text-white" }, [
+                  _vm._v("Drivers"),
                 ]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body container py-0" }, [
-            _c("div", { staticClass: "row" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "panel panel-default col-2 bg-dark p-3",
-                  staticStyle: { "min-height": "500px" },
-                },
-                [
-                  _c("h4", { staticClass: "p-2 bg-dark text-white" }, [
-                    _vm._v("Drivers"),
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "ul",
-                    { staticClass: "list-group" },
-                    _vm._l(_vm.disks, function (disk) {
-                      return _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function ($event) {
-                              $event.preventDefault()
-                              return _vm.open(disk, false)
-                            },
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  { staticClass: "list-group" },
+                  _vm._l(_vm.disks, function (disk) {
+                    return _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function ($event) {
+                            $event.preventDefault()
+                            return _vm.open(disk, false)
                           },
                         },
-                        [
-                          _c(
-                            "li",
-                            {
-                              staticClass: "list-group-item bg-dark text-white",
-                            },
-                            [_vm._v(_vm._s(disk))]
-                          ),
-                        ]
-                      )
-                    }),
-                    0
-                  ),
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "panel panel-default col-10 bg-dark" }, [
-                _c("div", { staticClass: "panel-body" }, [
-                  _c("div", { staticClass: "row p-0 m-0" }, [
-                    _c("div", { staticClass: "col-md-10 m-0 p-0" }, [
-                      _c(
-                        "nav",
-                        { attrs: { "aria-label": "breadcrumb p-0 m-0" } },
-                        [
-                          _c(
-                            "ol",
-                            { staticClass: "breadcrumb bg-dark p-0 pt-3 m-0" },
-                            [
-                              _c("li", { staticClass: "breadcrumb-item" }, [
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: { href: "storage" },
-                                    on: {
-                                      click: function ($event) {
-                                        $event.preventDefault()
-                                        return _vm.open("", false)
-                                      },
+                      },
+                      [
+                        _c(
+                          "li",
+                          { staticClass: "list-group-item bg-dark text-white" },
+                          [_vm._v(_vm._s(disk))]
+                        ),
+                      ]
+                    )
+                  }),
+                  0
+                ),
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "panel panel-default col-10 bg-dark" }, [
+              _c("div", { staticClass: "panel-body" }, [
+                _c("div", { staticClass: "row p-0 m-0" }, [
+                  _c("div", { staticClass: "col-md-2 m-0 p-0" }, [
+                    _c(
+                      "nav",
+                      { attrs: { "aria-label": "breadcrumb p-0 m-0" } },
+                      [
+                        _c(
+                          "ol",
+                          { staticClass: "breadcrumb bg-dark p-0 pt-3 m-0" },
+                          [
+                            _c("li", { staticClass: "breadcrumb-item" }, [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "storage" },
+                                  on: {
+                                    click: function ($event) {
+                                      $event.preventDefault()
+                                      return _vm.open("", false)
                                     },
                                   },
-                                  [_vm._v("storage")]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _vm._l(_vm.breadcrumb, function (bcrumb) {
-                                return _c(
-                                  "li",
-                                  { staticClass: "breadcrumb-item" },
-                                  [
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: { href: bcrumb.link },
-                                        on: {
-                                          click: function ($event) {
-                                            $event.preventDefault()
-                                            return _vm.open(bcrumb.link, false)
-                                          },
+                                },
+                                [_vm._v("storage")]
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.breadcrumb, function (bcrumb) {
+                              return _c(
+                                "li",
+                                { staticClass: "breadcrumb-item" },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: { href: bcrumb.link },
+                                      on: {
+                                        click: function ($event) {
+                                          $event.preventDefault()
+                                          return _vm.open(bcrumb.link, false)
                                         },
                                       },
-                                      [_vm._v(_vm._s(bcrumb.text))]
-                                    ),
-                                  ]
-                                )
-                              }),
-                            ],
-                            2
-                          ),
-                        ]
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-2 text-end pt-3 pr-3" }, [
+                                    },
+                                    [_vm._v(_vm._s(bcrumb.text))]
+                                  ),
+                                ]
+                              )
+                            }),
+                          ],
+                          2
+                        ),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c("div", { staticClass: "col text-end mt-2" }, [
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col text-white " }, [
-                          _vm._v(
-                            "All: " +
-                              _vm._s(_vm.folders.length + _vm.files.length)
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col" }, [
-                          _c(
-                            "a",
-                            {
-                              attrs: { href: "a" },
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "col-md-4 offset-md-3 col-sm-7 col-xs-7 text-end",
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.filter,
+                                  expression: "filter",
+                                },
+                              ],
+                              staticClass: "form-control input-sm",
+                              attrs: {
+                                type: "text",
+                                id: "filter",
+                                placeholder: "Filter",
+                              },
+                              domProps: { value: _vm.filter },
                               on: {
-                                click: function ($event) {
-                                  $event.preventDefault()
-                                  return _vm.open(_vm.currentDirectory, false)
+                                input: function ($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.filter = $event.target.value
                                 },
                               },
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fa fa-refresh",
-                                staticStyle: { "font-size": "22px" },
-                                attrs: {
-                                  onclick: "$(this).addClass('fa-spin');",
-                                  "aria-hidden": "true",
-                                },
-                              }),
-                            ]
-                          ),
-                        ]),
+                            }),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(0),
                       ]),
                     ]),
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "col-md-12 py-3 pe-5",
-                      attrs: { id: "workspace" },
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "row text-white" },
-                        [
-                          _vm._l(_vm.folders, function (folder) {
-                            return _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "folder col-md-2 col-sm-4 col-xs-4 text-center text-white",
-                                attrs: { id: folder },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.select(folder)
-                                  },
-                                  dblclick: function ($event) {
-                                    return _vm.open(folder)
-                                  },
+                  _c("div", { staticClass: "col-md-2 text-end pt-3 pr-3" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col text-white " }, [
+                        _vm._v(
+                          "All: " +
+                            _vm._s(_vm.folders.length + _vm.files.length)
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "a" },
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.open(_vm.currentDirectory, false)
+                              },
+                            },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fa fa-refresh",
+                              staticStyle: { "font-size": "22px" },
+                              attrs: {
+                                onclick: "$(this).addClass('fa-spin');",
+                                "aria-hidden": "true",
+                              },
+                            }),
+                          ]
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-md-12 py-3 pe-5",
+                    attrs: { id: "workspace" },
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "row text-white" },
+                      [
+                        _vm._l(_vm.folders, function (folder) {
+                          return _c(
+                            "div",
+                            {
+                              staticClass:
+                                "folder col-md-2 col-sm-4 col-xs-4 text-center text-white",
+                              attrs: { id: folder },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.select(folder)
+                                },
+                                dblclick: function ($event) {
+                                  return _vm.open(folder)
                                 },
                               },
-                              [
+                            },
+                            [
+                              _c("div", { staticClass: "file-nav text-end" }, [
                                 _c(
-                                  "div",
-                                  { staticClass: "file-nav text-end" },
-                                  [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "me-1",
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.renameModal(folder)
-                                          },
-                                        },
+                                  "a",
+                                  {
+                                    staticClass: "me-1",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.renameModal(folder)
                                       },
-                                      [_c("i", { staticClass: "fa fa-pencil" })]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "me-1",
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.deleteModal(folder)
-                                          },
-                                        },
-                                      },
-                                      [_c("i", { staticClass: "fa fa-trash" })]
-                                    ),
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _vm._m(2, true),
-                                _vm._v(" "),
-                                _c("b", [_vm._v(_vm._s(folder))]),
-                              ]
-                            )
-                          }),
-                          _vm._v(" "),
-                          _vm._l(_vm.files, function (file) {
-                            return _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "file col-md-2 col-sm-4 col-xs-4 text-center",
-                                attrs: { id: file },
-                                on: {
-                                  click: function ($event) {
-                                    _vm.mode === "embed"
-                                      ? _vm.returnFileUrl(
-                                          "storage/" +
-                                            _vm.currentDirectory +
-                                            "/" +
-                                            file
-                                        )
-                                      : _vm.select(file)
+                                    },
                                   },
-                                },
-                              },
-                              [
-                                _c(
-                                  "div",
-                                  { staticClass: "file-nav text-end" },
-                                  [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "me-1",
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.renameModal(file)
-                                          },
-                                        },
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "fa fa-pencil",
-                                          attrs: { "aria-hidden": "true" },
-                                        }),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "me-1",
-                                        attrs: {
-                                          href:
-                                            "storage/" +
-                                            _vm.currentDirectory +
-                                            "/" +
-                                            file,
-                                        },
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "fa fa-download",
-                                        }),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "me-1",
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.deleteModal(file)
-                                          },
-                                        },
-                                      },
-                                      [_c("i", { staticClass: "fa fa-trash" })]
-                                    ),
-                                  ]
+                                  [_c("i", { staticClass: "fa fa-pencil" })]
                                 ),
                                 _vm._v(" "),
-                                _vm.isKnownExtension(file)
-                                  ? _c("img", {
-                                      staticClass: "w-100 mb-3",
-                                      attrs: {
-                                        src:
-                                          "storage/" +
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "me-1",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.deleteModal(folder)
+                                      },
+                                    },
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash" })]
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(1, true),
+                              _vm._v(" "),
+                              _c("b", [_vm._v(_vm._s(folder))]),
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _vm._l(_vm.files, function (file) {
+                          return _c(
+                            "div",
+                            {
+                              staticClass:
+                                "file col-md-2 col-sm-4 col-xs-4 text-center",
+                              attrs: { id: file },
+                              on: {
+                                click: function ($event) {
+                                  _vm.mode === "embed"
+                                    ? _vm.returnFileUrl(
+                                        "storage/" +
                                           _vm.currentDirectory +
                                           "/" +
-                                          file,
+                                          file
+                                      )
+                                    : _vm.select(file)
+                                },
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "file-nav text-end" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "me-1",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.renameModal(file)
                                       },
-                                    })
-                                  : _c("img", {
-                                      staticClass: "w-100 mb-3",
-                                      attrs: {
-                                        src: "resources/images/icons/file.png",
-                                      },
+                                    },
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-pencil",
+                                      attrs: { "aria-hidden": "true" },
                                     }),
+                                  ]
+                                ),
                                 _vm._v(" "),
-                                _c("b", [_vm._v(_vm._s(file))]),
-                              ]
-                            )
-                          }),
-                        ],
-                        2
-                      ),
-                    ]
-                  ),
-                ]),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "me-1",
+                                    attrs: {
+                                      href:
+                                        "storage/" +
+                                        _vm.currentDirectory +
+                                        "/" +
+                                        file,
+                                    },
+                                  },
+                                  [_c("i", { staticClass: "fa fa-download" })]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "me-1",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.deleteModal(file)
+                                      },
+                                    },
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash" })]
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _vm.isKnownExtension(file)
+                                ? _c("img", {
+                                    staticClass: "w-100 mb-3",
+                                    attrs: {
+                                      src:
+                                        "storage/" +
+                                        _vm.currentDirectory +
+                                        "/" +
+                                        file,
+                                    },
+                                  })
+                                : _c("img", {
+                                    staticClass: "w-100 mb-3",
+                                    attrs: {
+                                      src: "resources/images/icons/file.png",
+                                    },
+                                  }),
+                              _vm._v(" "),
+                              _c("b", [_vm._v(_vm._s(file))]),
+                            ]
+                          )
+                        }),
+                      ],
+                      2
+                    ),
+                  ]
+                ),
               ]),
             ]),
           ]),
@@ -27407,7 +27387,7 @@ var render = function () {
         [
           _c("div", { staticClass: "modal-dialog" }, [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "form",
@@ -27424,7 +27404,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._m(4), _vm._v(" "), _vm._m(5)]
+                [_vm._m(3), _vm._v(" "), _vm._m(4)]
               ),
             ]),
           ]),
@@ -27446,7 +27426,7 @@ var render = function () {
         [
           _c("div", { staticClass: "modal-dialog" }, [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(6),
+              _vm._m(5),
               _vm._v(" "),
               _c(
                 "form",
@@ -27462,7 +27442,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._m(7), _vm._v(" "), _vm._m(8)]
+                [_vm._m(6), _vm._v(" "), _vm._m(7)]
               ),
             ]),
           ]),
@@ -27484,7 +27464,7 @@ var render = function () {
         [
           _c("div", { staticClass: "modal-dialog" }, [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(9),
+              _vm._m(8),
               _vm._v(" "),
               _c(
                 "form",
@@ -27501,7 +27481,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._m(10), _vm._v(" "), _vm._m(11)]
+                [_vm._m(9), _vm._v(" "), _vm._m(10)]
               ),
             ]),
           ]),
@@ -27528,19 +27508,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
-      _c("h2", [_vm._v("File manager")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col text-end" }, [
       _c(
         "a",
         {
-          staticClass: "btn btn-primary mr-2",
+          staticClass: "btn btn-primary btn-sm mr-2",
           attrs: {
             "data-bs-toggle": "modal",
             "data-bs-backdrop": "static",
@@ -27552,14 +27524,16 @@ var staticRenderFns = [
             staticClass: "fa fa-upload",
             attrs: { "aria-hidden": "true" },
           }),
-          _vm._v("\n                                    Upload"),
+          _vm._v(
+            "\n                                                    Upload"
+          ),
         ]
       ),
       _vm._v(" "),
       _c(
         "a",
         {
-          staticClass: "btn btn-primary",
+          staticClass: "btn btn-sm btn-primary",
           attrs: {
             "data-bs-toggle": "modal",
             "data-bs-backdrop": "static",
@@ -27571,7 +27545,9 @@ var staticRenderFns = [
             staticClass: "fa fa-folder",
             attrs: { "aria-hidden": "true" },
           }),
-          _vm._v(" Create\n                                    Folder"),
+          _vm._v(
+            " Create\n                                                    Folder"
+          ),
         ]
       ),
     ])

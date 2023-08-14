@@ -18,7 +18,7 @@
             </h1>
         </div>
 
-        <div class="col-4 pt-3 text-end">
+        <div class="col-4 pt-2 text-end">
 
             @if (isset($stats))
                 <small class='text-end text-muted fs-4'>

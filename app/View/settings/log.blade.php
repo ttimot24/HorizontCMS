@@ -3,10 +3,13 @@
 @section('content')
     <div class='container'>
 
-            <div class="card mb-3">
-            <div class="card-header fw-bold">
-                <h2>System log <small class='pull-right text-muted'>Files: {{ $all_files->count() }}</small></h2>
-            </div>
+        @include('breadcrumb', [
+            'links' => [['name' => trans('settings.settings'), 'url' => route('settings.index')]],
+            'page_title' => 'System log',
+            'stats' => [
+                ['label'=> 'Files', 'value' => $all_files->count()]
+            ]
+        ])
 
         <div class="card-body">
         <section class="row">

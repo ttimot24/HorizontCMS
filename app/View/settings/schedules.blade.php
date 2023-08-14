@@ -4,15 +4,22 @@
     <div class='container'>
     
         <div class="card mb-3">
-            <div class="card-header fw-bold">
 
-        <h2>{{ trans('settings.scheduler') }} <small class='pull-right text-muted'>All: {{ $scheduled_tasks->count() }} |
-                Available: {{ count($commands) }}</small></h2>
-        <br>
-        <div class='container col-md-12 mb-3'><a class='btn btn-warning' data-bs-toggle='modal'
-                data-bs-target='.new_task'>{{ trans('Schedule task') }}</a></div>
+        @include('breadcrumb', [
+            'links' => [['name' => trans('settings.settings'), 'url' => route('settings.index')]],
+            'page_title' => trans('settings.scheduler'),
+            'stats' => [
+                ['label'=> trans('user.all'), 'value' => $scheduled_tasks->count()]
+            ],
+                'buttons' => [
+                   [
+                        'label' => trans('Schedule task'),
+                        'class' => 'btn-warning',
+                        'data' => 'data-bs-toggle=modal data-bs-target=.new_task'
+                    ],
+                ],
+        ])
 
-        </div>
         <div class="card-body">
 
         <table class='table table-hover'>
