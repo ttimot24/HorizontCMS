@@ -1,11 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
 class ViewResolverTest extends TestCase
 {
+	private $viewResolver;
 
 	public function inArrayRecurse($needle,$haystack){
 		foreach($haystack as $value)

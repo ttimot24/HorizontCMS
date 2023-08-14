@@ -1,5 +1,6 @@
 {
     "name": "ttimot24/horizont-cms",
+    "version": "1.0.0-beta.4",
     "description": "The CMS that fits exactly to your needs",
     "keywords": ["hcms", "laravel","vuejs","bootstrap","website"],
     "license": "MIT",
