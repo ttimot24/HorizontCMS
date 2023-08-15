@@ -22384,7 +22384,7 @@ body {
   background-color: #F5F5F5;
 }
 
-h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+.card-header h6, .card-header .h6, .card-header h5, .card-header .h5, .card-header h4, .card-header .h4, .card-header h3, .card-header .h3, .card-header h2, .card-header .h2, .card-header h1, .card-header .h1 {
   margin-top: 1rem !important;
 }
 
