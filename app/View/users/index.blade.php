@@ -70,9 +70,9 @@
                                 <td class="text-center text-bold">
 
                                     @if ($each->isOnline())
-                                        <p class='text-success'>Online</p>
+                                        <span class='badge rounded-pill bg-success w-75'>Online</span>
                                     @else
-                                        <p class='text-danger'>Offline</p>
+                                        <span class='badge rounded-pill bg-danger w-75'>Offline</span>
                                     @endif
 
                                 </td>

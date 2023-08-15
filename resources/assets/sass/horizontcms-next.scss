@@ -17,7 +17,7 @@ body {
     background-color: #F5F5F5;
 }
 
-.dropdown-menu[data-bs-popper]{
+.dropdown-menu[data-bs-popper] {
     left: auto;
 }
 
@@ -171,34 +171,25 @@ body {
     margin-bottom: 1rem;
 }
 
+.table>tbody>tr>td {
+    font-size: 0.8rem;
+    vertical-align: middle;
 
-table a:not(.btn),
-.table a:not(.btn) {
-    /* color: $orange; */
-    text-decoration: underline;
-}
+    a:not(.btn) {
+        color: $orange;
+        text-decoration: underline;
+    }
 
-tr td a {
-    color: $orange;
-}
-
-
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3 {
-    margin-top: 21px;
-    margin-bottom: 10.5px;
 }
 
 .table-hover>tbody>tr:hover {
+    transition: .5s;
     background-color: $orange;
-}
 
-tr:hover td a {
-    color: white;
+    td a {
+        color: white;
+    }
+
 }
 
 .jumbotron {

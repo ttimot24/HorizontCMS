@@ -43,7 +43,7 @@
 
                         <table class='table table-hover'>
                             <thead>
-                                <tr class="d-flex bg-dark text-white">
+                                <tr class="bg-dark text-white">
                                     <th class="col-1">{{ trans('category.th_id') }}</th>
                                     <!--<th>{{ trans('category.th_image') }}</th>-->
                                     <th class="col">{{ trans('category.th_category') }}</th>
@@ -54,7 +54,7 @@
                             <tbody>
 
                                 @foreach ($all_category as $each)
-                                    <tr class="d-flex">
+                                    <tr>
                                         <td class="col-1">{{ $each->id }}</td>
 
                                         <td class='col'><a
