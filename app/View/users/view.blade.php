@@ -107,12 +107,12 @@
                         @if ($user->isAdmin())
                             <div class="card">
                                 <div class="card-header">
-                                    <h2>{{ trans('blogpost.blogposts') }} ({{ $user->blogposts->count() }})</h2>
+                                    <h3>{{ trans('blogpost.blogposts') }} ({{ $user->blogposts->count() }})</h3>
                                 </div>
                                 <div class="card-body">
                                     <table class='table table-condensed table-hover'>
                                         <thead>
-                                            <tr class='d-flex bg-dark text-white'>
+                                            <tr class='bg-dark text-white'>
                                                 <th class='col-4'>Image</th>
                                                 <th class='col-6'>Title</th>
                                                 <th class='col-2'>Date</th>
@@ -121,7 +121,7 @@
                                         <tbody>
 
                                             @foreach ($user->blogposts->reverse() as $each)
-                                                <tr class='d-flex'>
+                                                <tr>
                                                     <td class='col-4'><a
                                                             href="{{ route('blogpost.show', ['blogpost' => $each]) }}">
                                                             {!! Html::img(
@@ -172,14 +172,14 @@
                 <div class="card">
 
                     <div class="card-header">
-                        <h2>{{ trans('blogpost.comments') }} ({{ $user->comments->count() }})</h2>
+                        <h3>{{ trans('blogpost.comments') }} ({{ $user->comments->count() }})</h3>
                     </div>
 
                     <div class="card-body">
 
                         <table class='table table-condensed table-hover'>
                             <thead>
-                                <tr class="d-flex bg-dark text-white">
+                                <tr class="bg-dark text-white">
                                     <th class="col-3">{{ trans('blogpost.post') }}</th>
                                     <th class="col-8">{{ trans('blogpost.th_comment') }}</th>
                                     <th class="col-1">{{ trans('blogpost.th_date') }}</th>
@@ -189,9 +189,10 @@
 
                                 @foreach ($user->comments as $each)
                                     @if ($each->blogpost != null)
-                                        <tr class='d-flex'>
+                                        <tr>
                                             <td class='col-3'>
-                                                <a href="{{ route('blogpost.show', ['blogpost' => $each->blogpost]) }}">{{ $each->blogpost->title }}</a>
+                                                <a
+                                                    href="{{ route('blogpost.show', ['blogpost' => $each->blogpost]) }}">{{ $each->blogpost->title }}</a>
                                             </td>
                                             <td class='col-8' style='text-align:justify;'>{{ $each->comment }}</td>
 
