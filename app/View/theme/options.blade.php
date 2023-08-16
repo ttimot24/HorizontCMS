@@ -6,7 +6,11 @@
         <div class="card mb-3">
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => trans('Themes'), 'url' => route('theme.index')], ['name' => $theme]],
+                'links' => [
+                    ['name' => 'Content'],
+                    ['name' => trans('Themes'), 'url' => route('theme.index')],
+                    ['name' => $theme],
+                ],
                 'page_title' => trans('Theme options'),
             ])
 
@@ -27,49 +31,63 @@
                         <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="v-pills-style" role="tabpanel"
                                 aria-labelledby="v-pills-style-tab">
-                                <h3 class="m-0 p-0">Custom Style</h3>
-                                <div>
-                                    <form action='{{ route('settings.store') }}' role='form' method='POST'>
-                                        @csrf
-                                        <textarea rows="20" class='form-control' name="custom_css_{{ snake_case($theme) }}"
-                                            placeholder="Write your css here...">{{ isset($settings['custom_css_' . snake_case($theme)]) ? $settings['custom_css_' . snake_case($theme)] : '' }}</textarea>
-                                        <input type="submit" class="btn btn-primary my-3" value="Save">
-                                    </form>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="m-0 p-0">Custom Style</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div>
+                                            <form action='{{ route('settings.store') }}' role='form' method='POST'>
+                                                @csrf
+                                                <textarea rows="20" class='form-control' name="custom_css_{{ snake_case($theme) }}"
+                                                    placeholder="Write your css here...">{{ isset($settings['custom_css_' . snake_case($theme)]) ? $settings['custom_css_' . snake_case($theme)] : '' }}</textarea>
+                                                <input type="submit" class="btn btn-primary my-3" value="Save">
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="v-pills-translate" role="tabpanel"
                                 aria-labelledby="v-pills-translate-tab">
-                                <h3 class="m-0 p-0">Translations</h3>
-                                <form
-                                    action="{{ config('horizontcms.backend_prefix') . '/theme/update-translations/' . $theme }}"
-                                    method="POST">
-                                    @csrf
-                                    @foreach ($translations as $lang => $value)
-                                        <h3 class="m-0 p-0">{{ $lang }}</h3>
-                                        <table class="table">
-                                            <thead>
-                                                <tr class="d-flex bg-dark text-white">
-                                                    <th class="col-md-4">Phrase</th>
-                                                    <th class="col-md-2">Language</th>
-                                                    <th class="col-md-6">Translation</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($value as $a => $b)
-                                                    <tr class="d-flex">
-                                                        <td class="col-md-4"><i>{{ $a }}</i></td>
-                                                        <td class="col-md-2">{{ $lang }}</td>
-                                                        <td class="col-md-6"><input type='text' class='form-control'
-                                                                name='{{ $lang }}[{{ $a }}]'
-                                                                value="{{ $b }}"></td>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    @endforeach
-                                    <input type="submit" class="btn btn-primary my-3" value="Save">
-                                </form>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="m-0 p-0">Translations</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <form
+                                            action="{{ config('horizontcms.backend_prefix') . '/theme/update-translations/' . $theme }}"
+                                            method="POST">
+                                            @csrf
+                                            @foreach ($translations as $lang => $value)
+                                                <h3 class="m-0 p-0">{{ $lang }}</h3>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr class="d-flex bg-dark text-white">
+                                                            <th class="col-md-4">Phrase</th>
+                                                            <th class="col-md-2">Language</th>
+                                                            <th class="col-md-6">Translation</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($value as $a => $b)
+                                                            <tr class="d-flex">
+                                                                <td class="col-md-4"><i>{{ $a }}</i></td>
+                                                                <td class="col-md-2">{{ $lang }}</td>
+                                                                <td class="col-md-6"><input type='text'
+                                                                        class='form-control'
+                                                                        name='{{ $lang }}[{{ $a }}]'
+                                                                        value="{{ $b }}"></td>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @endforeach
+                                            <input type="submit" class="btn btn-primary my-3" value="Save">
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
