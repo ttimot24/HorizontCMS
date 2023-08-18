@@ -96,8 +96,7 @@
                                         {{ trans('user.inactive_about', ['day_count' => $user->created_at->diffForHumans()]) }}
 
                                     </font> <a
-                                        href='admin/user/activate/" .
-                                {{ $user->id }}'
+                                        href='admin/user/activate/{{ $user->id }}'
                                         class='btn btn-sm btn-danger pull-right'>Force activate</a>
                                 </div>
                             </div>
