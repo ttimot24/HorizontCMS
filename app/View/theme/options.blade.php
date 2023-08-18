@@ -41,7 +41,7 @@
                                                 @csrf
                                                 <textarea rows="20" class='form-control' name="custom_css_{{ snake_case($theme) }}"
                                                     placeholder="Write your css here...">{{ isset($settings['custom_css_' . snake_case($theme)]) ? $settings['custom_css_' . snake_case($theme)] : '' }}</textarea>
-                                                <input type="submit" class="btn btn-primary my-3" value="Save">
+                                                <input type="submit" class="btn btn-primary my-3" value="{{trans('actions.save')}}">
                                             </form>
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@
                                                 <h3 class="m-0 p-0">{{ $lang }}</h3>
                                                 <table class="table">
                                                     <thead>
-                                                        <tr class="d-flex bg-dark text-white">
+                                                        <tr class="bg-dark text-white">
                                                             <th class="col-md-4">Phrase</th>
                                                             <th class="col-md-2">Language</th>
                                                             <th class="col-md-6">Translation</th>
@@ -71,7 +71,7 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($value as $a => $b)
-                                                            <tr class="d-flex">
+                                                            <tr>
                                                                 <td class="col-md-4"><i>{{ $a }}</i></td>
                                                                 <td class="col-md-2">{{ $lang }}</td>
                                                                 <td class="col-md-6"><input type='text'
@@ -84,7 +84,7 @@
                                                     </tbody>
                                                 </table>
                                             @endforeach
-                                            <input type="submit" class="btn btn-primary my-3" value="Save">
+                                            <input type="submit" class="btn btn-primary my-3" value="{{trans('actions.save')}}">
                                         </form>
                                     </div>
                                 </div>

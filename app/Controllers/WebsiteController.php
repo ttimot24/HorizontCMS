@@ -83,12 +83,7 @@ class WebsiteController extends Controller
 
         if ($this->request->isMethod('POST')) {
 
-            $user = new \App\Model\User();
-
-            $user->name = $this->request->input('name');
-            $user->username = $this->request->input('username');
-            $user->password = $this->request->input('password');
-            $user->email = $this->request->input('email');
+            $user = new \App\Model\User($this->request->all());
             $user->active = 0;
 
             if ($user->save()) {
