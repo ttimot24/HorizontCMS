@@ -19,7 +19,9 @@ class SystemUpgrade extends Model {
             $update->setCurrentVersion( isset($currentVersion)? $currentVersion->version: \Config::get('horizontcms.version'));
             $update->setUpdateUrl($url);
 
-            $update->addLogHandler(new \Monolog\Handler\StreamHandler($workspace . '/update.log'));
+			$logger = new \Monolog\Logger("default");
+			$logger->pushHandler(new \Monolog\Handler\StreamHandler($workspace . '/update.log'));
+			$update->setLogger($logger);
             $update->setCache(new \Desarrolla2\Cache\File($workspace . '/cache'), 3600);
             
             $update->checkUpdate();

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class='container'>
+    <div class='container card'>
 
         @include('breadcrumb', [
             'links' => [['name' => trans('settings.settings'), 'url' => route('settings.index')]],
