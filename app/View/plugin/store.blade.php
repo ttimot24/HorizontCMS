@@ -28,11 +28,11 @@
                         <?php $local_plugin = new \App\Model\Plugin($o_plugin->dir); ?>
 
                         <div class="col-sm-6 col-md-3 mb-3">
-                            <div class="thumbnail  bg-dark p-2 text-white">
-                                <img src="{{ $o_plugin->icon }}" style='width:100%;height:150px;object-fit:cover;'
+                            <div class="card  bg-dark p-2 text-white">
+                                <img src="{{ $o_plugin->icon }}" class="img w-100" style='height:10rem;object-fit:cover;'
                                     alt="...">
                                 <div class="caption">
-                                    <h3 style='height:50px;'>{{ $o_plugin->info->name }}</h3>
+                                    <h3 class="mt-3">{{ $o_plugin->info->name }}</h3>
                                     <p>version: {{ $o_plugin->info->version }} author: {{ $o_plugin->info->author }}</p>
 
                                     @if ($local_plugin->exists() && $local_plugin->getInfo('version') < $o_plugin->info->version)
