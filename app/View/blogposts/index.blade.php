@@ -69,40 +69,56 @@
                                     <td class='hidden-xs'>none</td>
                                 @endif
                                 <td class="text-center">
-                                    <div class="btn-group" role="group">
-                                        <a href="{{ route('blogpost.edit', ['blogpost' => $blogpost]) }}" type="button"
-                                            class="btn btn-warning btn-sm"
-                                            style='min-width:70px;'>{{ trans('actions.edit') }}</a>
-                                        <a type="button" data-bs-toggle='modal' data-bs-target=#delete_<?= $blogpost->id ?>
-                                            class="btn btn-danger btn-sm"><i class="fa fa-trash-o"
-                                                aria-hidden="true"></i></a>
+
+                                    <div class="dropdown">
+                                        <div data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
+                                            <i class="bi bi-three-dots-vertical text-dark"></i>
+                                        </div>
+                                        <ul class="dropdown-menu text-dark">
+                                            <li>
+                                                <a href="{{ route('blogpost.edit', ['blogpost' => $blogpost]) }}"
+                                                    class="dropdown-item text-decoration-none text-dark">
+                                                    <i class="fa fa-pencil me-2" aria-hidden="true"></i>
+                                                    {{ trans('actions.edit') }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a data-bs-toggle='modal' data-bs-target=#delete_<?= $blogpost->id ?>
+                                                    class="dropdown-item text-danger text-decoration-none"
+                                                    style="cursor: pointer;">
+                                                    <i class="fa fa-trash-o me-2" aria-hidden="true"></i>
+                                                    {{ trans('actions.delete') }}
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </td>
-
-                            </tr>
-                        @endforeach
-
-
-                    </tbody>
-                </table>
-
-                <div class="d-flex justify-content-center">
-                    {{ $all_blogposts->links() }}
-                </div>
-
             </div>
+            </td>
 
-            @foreach ($all_blogposts as $blogpost)
-                @include('confirm_delete', [
-                    'route' => route('blogpost.destroy', ['blogpost' => $blogpost]),
-                    'id' => 'delete_' . $blogpost->id,
-                    'header' => trans('actions.are_you_sure'),
-                    'name' => $blogpost->title,
-                    'content_type' => 'post',
-                    'delete_text' => trans('actions.delete'),
-                    'cancel' => trans('actions.cancel'),
-                ])
+            </tr>
             @endforeach
 
+
+            </tbody>
+            </table>
+
+            <div class="d-flex justify-content-center">
+                {{ $all_blogposts->links() }}
+            </div>
+
         </div>
-    @endsection
+
+        @foreach ($all_blogposts as $blogpost)
+            @include('confirm_delete', [
+                'route' => route('blogpost.destroy', ['blogpost' => $blogpost]),
+                'id' => 'delete_' . $blogpost->id,
+                'header' => trans('actions.are_you_sure'),
+                'name' => $blogpost->title,
+                'content_type' => 'post',
+                'delete_text' => trans('actions.delete'),
+                'cancel' => trans('actions.cancel'),
+            ])
+        @endforeach
+
+    </div>
+@endsection

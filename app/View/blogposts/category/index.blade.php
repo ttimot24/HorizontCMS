@@ -55,25 +55,42 @@
 
                                 @foreach ($all_category as $each)
                                     <tr>
-                                        <td class="col-1">{{ $each->id }}</td>
+                                        <td class="col">{{ $each->id }}</td>
 
-                                        <td class='col'><a
-                                                href="{{ route('blogpostcategory.show', ['blogpostcategory' => $each]) }}">{{ $each->name }}</a>
+                                        <td class='col'>
+                                        <a href="{{ route('blogpostcategory.show', ['blogpostcategory' => $each]) }}">{{ $each->name }}</a>
                                         </td>
 
                                         <td class="col">
                                             <span class='badge rounded-pill bg-dark'>{{ $each->blogposts->count() }}</span>
                                         </td>
 
-                                        <td class="col-5  text-center">
-                                            <div class='btn-group col-3' role='group'>
+                                        <td class="col  text-center">
+
+
+                                    <div class="dropdown">
+                                        <div data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
+                                            <i class="bi bi-three-dots-vertical text-dark"></i>
+                                        </div>
+                                        <ul class="dropdown-menu text-dark">
+                                            <li>
                                                 <a href="{{ route('blogpostcategory.edit', ['blogpostcategory' => $each]) }}"
-                                                    type='button'
-                                                    class='btn btn-warning btn-sm'>{{ trans('actions.edit') }}</a>
-                                                <a type="button" data-bs-toggle='modal'
-                                                    data-bs-target=#delete_<?= $each->id ?> class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                            </div>
+                                                    class="dropdown-item text-decoration-none text-dark">
+                                                    <i class="fa fa-pencil me-2" aria-hidden="true"></i>
+                                                    {{ trans('actions.edit') }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a data-bs-toggle='modal' data-bs-target=#delete_<?= $each->id ?>
+                                                    class="dropdown-item text-danger text-decoration-none"
+                                                    style="cursor: pointer;">
+                                                    <i class="fa fa-trash-o me-2" aria-hidden="true"></i>
+                                                    {{ trans('actions.delete') }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
                                         </td>
                                     </tr>
 

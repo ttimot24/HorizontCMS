@@ -78,24 +78,29 @@
                                 </td>
                                 <td class='text-center'>
 
-                                    <?php
-                                    $disabled = '';
-                                    if ($each->role_id >= \Auth::user()->role_id || $each->is(Auth::user())) {
-                                        $disabled = 'disabled';
-                                    }
-                                    ?>
-
-
-                                    <div class='btn-group' role='group'>
-                                        <a href="{{ route('user.edit', ['user' => $each]) }}" type='button'
-                                            class='btn btn-warning btn-sm {{ $disabled }}' style='min-width:70px;'
-                                            {{ $disabled }}>{{ trans('actions.edit') }}</a>
-
-                                        <a type='button' data-bs-toggle='modal'
-                                            data-bs-target='#delete_{{ $each->id }}'
-                                            class='btn btn-danger btn-sm {{ $disabled }}' {{ $disabled }}><i
-                                                class='fa fa-trash-o' aria-hidden='true'></i></a>
-
+                                    <div class="dropdown">
+                                        <div data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
+                                            <i class="bi bi-three-dots-vertical text-dark"></i>
+                                        </div>
+                                        <ul class="dropdown-menu text-dark">
+                                            <li>
+                                                <a href="{{ route('user.edit', ['user' => $each]) }}"
+                                                    class="dropdown-item text-decoration-none text-dark">
+                                                    <i class="fa fa-pencil me-2" aria-hidden="true"></i>
+                                                    {{ trans('actions.edit') }}
+                                                </a>
+                                            </li>
+                                            @if ($each->role_id <= \Auth::user()->role_id && !$each->is(Auth::user()))
+                                            <li>
+                                                <a data-bs-toggle='modal' data-bs-target=#delete_<?= $each->id ?>
+                                                    class="dropdown-item text-danger text-decoration-none"
+                                                    style="cursor: pointer;">
+                                                    <i class="fa fa-trash-o me-2" aria-hidden="true"></i>
+                                                    {{ trans('actions.delete') }}
+                                                </a>
+                                            </li>
+                                            @endif
+                                        </ul>
                                     </div>
 
                                 </td>
@@ -113,7 +118,7 @@
             </div>
 
                         @foreach ($all_users as $each)
-                            @if($disabled != 'disabled')
+                            @if($each->role_id <= \Auth::user()->role_id && !$each->is(Auth::user()))
                                 @include('confirm_delete', [
                                     'route' => route('user.destroy', ['user' => $each]),
                                     'id' => 'delete_' . $each->id,
