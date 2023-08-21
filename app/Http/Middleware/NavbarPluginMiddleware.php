@@ -6,61 +6,63 @@ use Closure;
 
 class NavbarPluginMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
-    {
-      
+  /**
+   * Handle an incoming request.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  \Closure  $next
+   * @return mixed
+   */
+  public function handle($request, Closure $next)
+  {
 
-        if(app()->plugins!=null && !app()->plugins->isEmpty()){
 
-            $main_menu = \Menu::get('MainMenu');
-            $right_menu = \Menu::get('RightMenu');
+    if (app()->plugins != null && !app()->plugins->isEmpty()) {
 
-            foreach(app()->plugins as $plugin){
+      $main_menu = \Menu::get('MainMenu');
+      $right_menu = \Menu::get('RightMenu');
 
-              try{
 
-                $plugin_nav = $plugin->getRegister('navigation',[]);
+      foreach (app()->plugins as $plugin) {
 
-                foreach($plugin_nav as $key => $item){
+        try {
 
-                  $item['url'] = isset($item['url'])? $item['url'] : 
+          if(!auth()->user()->hasPermission(str_slug($plugin->root_dir,'_'))){
+            continue;
+          }
 
-                  rescue(function () use ($plugin) {
-                      return route(namespace_to_slug($plugin->root_dir).".index");
-                  }, function () use ($plugin) {
-                      return plugin_link(namespace_to_slug($plugin->root_dir));
-                  });
-                    
-                  if(!isset($item['menu']) || $item['menu']=='main'){  
-                    if(isset($item['submenu_of'])){
-                        $main_menu->find($item['submenu_of'])->add($item['label'],$item['url'])->id($key);
-                    }
-                    else{
-                        $main_menu->add($item['label'],$item['url'])->id($key);
-                    }
-                  }else if(isset($item['menu']) && $item['menu']=='right'){
-                    if(isset($item['submenu_of'])){
-                        $right_menu->find($item['submenu_of'])->add($item['label'],$item['url'])->id($key);
-                    }
-                    else{
-                        $right_menu->add($item['label'],$item['url'])->id($key);
-                    }
-                  }
-                }
+          $plugin_nav = $plugin->getRegister('navigation', []);
 
-              }catch(\Error $e){
-                 // throw $e;
+          foreach ($plugin_nav as $key => $item) {
+
+            $item['url'] = isset($item['url']) ? $item['url'] :
+
+              rescue(function () use ($plugin) {
+                return route(namespace_to_slug($plugin->root_dir) . ".index");
+              }, function () use ($plugin) {
+                return plugin_link(namespace_to_slug($plugin->root_dir));
+              });
+
+            if (!isset($item['menu']) || $item['menu'] == 'main') {
+              if (isset($item['submenu_of'])) {
+                $main_menu->find($item['submenu_of'])->add($item['label'], $item['url'])->id($key);
+              } else {
+                $main_menu->add($item['label'], $item['url'])->id($key);
+              }
+            } else if (isset($item['menu']) && $item['menu'] == 'right') {
+              if (isset($item['submenu_of'])) {
+                $right_menu->find($item['submenu_of'])->add($item['label'], $item['url'])->id($key);
+              } else {
+                $right_menu->add($item['label'], $item['url'])->id($key);
               }
             }
+          }
+        } catch (\Error $e) {
+          // throw $e;
         }
-
-        return $next($request);
+      }
     }
+
+    return $next($request);
+  }
 }

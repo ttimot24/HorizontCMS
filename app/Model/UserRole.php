@@ -37,6 +37,12 @@ class UserRole extends Model {
     	$this->attributes['rights'] = json_encode($value);
     }
 
+    public function addRight($right){
+        $all_rights = $this->getRightsAttribute();
+        array_push($all_rights, $right);
+        $this->setRightsAttribute($all_rights);
+    }
+
     public function isAdminRole(){
         $roles = $this->getRightsAttribute();
 

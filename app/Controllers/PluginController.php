@@ -141,6 +141,13 @@ class PluginController extends Controller
 
             $plugin->save();
 
+            foreach(\App\Model\UserRole::all() as $role){
+                if($role->isAdminRole()){
+                    $role->addRight(str_slug($plugin->root_dir));
+                    $role->save();
+                }
+            }
+
 
             return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully installed ' . $plugin_name)]);
         } catch (\Exception $e) {

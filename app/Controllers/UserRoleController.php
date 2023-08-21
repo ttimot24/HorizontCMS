@@ -54,6 +54,18 @@ class UserRoleController extends Controller
 
         unset($permission_list['website'], $permission_list['install'], $permission_list['dashboard']);
 
+
+        foreach (\App\Model\Plugin::all() as $plugin) {
+
+            try {
+                if ($plugin->isActive()) {
+                    $permission_list[str_slug($plugin->root_dir)] = $plugin->getName();
+                }
+            } catch (Exception $e) {
+            }
+        }
+
+
         return $permission_list;
     }
 
@@ -108,13 +120,13 @@ class UserRoleController extends Controller
     public function update(UserRole $userrole)
     {
 
-            $userrole->rights = array_keys($this->request->except('_token'));
+        $userrole->rights = array_keys($this->request->except('_token'));
 
-            if ($userrole->save()) {
-                return $this->redirectToSelf()->withMessage(['success' => trans('Rights saved succesfully!')]);
-            } else {
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
+        if ($userrole->save()) {
+            return $this->redirectToSelf()->withMessage(['success' => trans('Rights saved succesfully!')]);
+        } else {
+            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
     }
 
     /**
