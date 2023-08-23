@@ -61,21 +61,21 @@
                                     </div>
                                 </td>
                             </tr>
-
-                            @include('confirm_delete', [
-                                'route' => route('schedule.destroy', ['schedule' => $task]),
-                                'id' => 'delete_' . $task->id,
-                                'header' => trans('actions.are_you_sure'),
-                                'name' => $task->name,
-                                'content_type' => 'task',
-                                'delete_text' => trans('actions.delete'),
-                                'cancel' => trans('actions.cancel'),
-                            ])
                         @endforeach
                     </tbody>
                 </table>
 
-
+                @foreach ($scheduled_tasks as $task)
+                    @include('confirm_delete', [
+                        'route' => route('schedule.destroy', ['schedule' => $task]),
+                        'id' => 'delete_' . $task->id,
+                        'header' => trans('actions.are_you_sure'),
+                        'name' => $task->name,
+                        'content_type' => 'task',
+                        'delete_text' => trans('actions.delete'),
+                        'cancel' => trans('actions.cancel'),
+                    ])
+                @endforeach
 
                 <div class='modal new_task' id='create_file' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'
                     aria-hidden='true'>
