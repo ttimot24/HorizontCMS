@@ -5,7 +5,7 @@
             <img src="{{ url(config('horizontcms.admin_logo')) }}" class="m-0 p-0 h-100">
             <!--HorizontCMS <!-- SatelliteCMS -->
         </a>
-        <div class='d-block d-sm-none navbar-brand'>{{ config('app.name') }}</div>
+        <div class='d-sm-none navbar-brand pt-2'>{{ config('app.name') }}</div>
 
         <!-- Collapsed Hamburger -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

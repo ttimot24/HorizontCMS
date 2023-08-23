@@ -290,6 +290,7 @@
                 </div>
 
             </div>
+            </div>
         @endsection
 
         @section('head')

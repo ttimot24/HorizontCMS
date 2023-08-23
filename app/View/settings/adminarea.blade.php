@@ -3,152 +3,158 @@
 @section('content')
     <div class='container main-container'>
 
-    <div class="card">
+        <div class="card">
 
-        @include('breadcrumb', [
-            'links' => [['name' => trans('settings.settings'), 'url' => route('settings.index')]],
-            'page_title' => trans('settings.adminarea_settings'),
-        ])
+            @include('breadcrumb', [
+                'links' => [['name' => trans('settings.settings'), 'url' => route('settings.index')]],
+                'page_title' => trans('settings.adminarea_settings'),
+            ])
 
-        <div class="card-body">
-            <form action='{{ route('settings.store') }}' role='form' method='POST'>
-                @csrf
+            <div class="card-body">
+                <form action='{{ route('settings.store') }}' role='form' method='POST'>
+                    @csrf
 
-                <input type='hidden' name='is_actioned' value='1'>
-                <table class='table-bordered w-100' id='settings'>
-
-                    <tbody class="text-center fw-bold">
+                    <input type='hidden' name='is_actioned' value='1'>
 
 
-                        <tr>
-                            <td>{{ trans('settings.adminarea_theme') }}</td>
-                            <td>
-                                <select name='admin_theme' class='form-select' disabled>
-                                    <option value=''>default</option>
-                                </select>
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td>{{ trans('settings.adminarea_dashboard_logo') }}</td>
-                            <td class="p-3">
-                                <div class="col-12 mb-3">
-                                    <input type="hidden" name="admin_logo"
-                                        value="<?= $settings['admin_logo'] != '' && file_exists('storage/images/logos/' . $settings['admin_logo']) ? $settings['admin_logo'] : \Config::get('horizontcms.admin_logo') ?>">
-                                    <img id="admin_logo" class='well well-sm'
-                                        src="<?= $settings['admin_logo'] != '' && file_exists('storage/images/logos/' . $settings['admin_logo']) ? 'storage/images/logos/' . $settings['admin_logo'] : \Config::get('horizontcms.admin_logo') ?>"
-                                        height='100'>
+                    <div class="card mb-3 border-secondary">
+                        <div class="card-header text-bg-light fs-3">Options</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <h6 class="text-dark fw-bold">{{ trans('settings.adminarea_theme') }}</h6>
+                                    <p class="text-muted">You can modify the admin area theme and design.</p>
                                 </div>
-                                <div class="btn-group" role="group">
-                                    <button type='button' class='btn btn-success btn-sm' data-bs-toggle='modal'
-                                        data-bs-target='.admin_logo_select-modal-lg'>{{ trans('actions.select') }}</button>
+                                <div class="col-12 col-md-6 mt-3">
+                                    <select name='admin_theme' class='form-select' disabled>
+                                        <option value=''>default</option>
+                                    </select>
                                 </div>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>{{ trans('settings.adminarea_language') }}</td>
-                            <td><select name='language' class='form-select'>
-
-
-
-
-                                    @foreach ($languages as $key => $language)
-                                        @if ($key == $settings['language'])
-                                            <option value='{{ $key }}' selected>{{ ucfirst($language) }}</option>
-                                        @else
-                                            <option value='{{ $key }}'>{{ ucfirst($language) }}</option>
-                                        @endif
-                                    @endforeach
-
-
-
-                                </select>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>{{ trans('settings.adminarea_date_format') }}</td>
-                            <td><select name='date_format' class='form-select'>
-
-
-
-
-                                    @foreach ($dateFormats as $format)
-                                        @if ($format == $settings['date_format'])
-                                            <option value='{{ $format }}' selected>{{ date($format) }}</option>
-                                        @else
-                                            <option value='{{ $format }}'>{{ date($format) }}</option>
-                                        @endif
-                                    @endforeach
-
-
-
-                                </select>
-                            </td>
-                        </tr>
-
-
-
-                        <input type="hidden" name="auto_upgrade_check" value="0"> <!-- Checkbox hack -->
-                        <tr>
-                            <td>{{ trans('settings.adminarea_auto_update_check') }}</td>
-                            <td>
-                                <div class="form-check form-switch d-flex justify-content-center">
-                                    <input type='checkbox' class='form-check-input' name='auto_upgrade_check' value='1'
-                                        @if ($settings['auto_upgrade_check'] == 1) checked @endif>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <h6 class="text-dark fw-bold">{{ trans('settings.adminarea_dashboard_logo') }}</h6>
+                                    <p class="text-muted">You can change the logo that is shown on the dashboard.</p>
                                 </div>
-                            </td>
+                                <div class="col-12 col-md-6 mt-3 text-center">
+                                    <div class="col-12 mb-3">
+                                        <input type="hidden" name="admin_logo"
+                                            value="<?= $settings['admin_logo'] != '' && file_exists('storage/images/logos/' . $settings['admin_logo']) ? $settings['admin_logo'] : \Config::get('horizontcms.admin_logo') ?>">
+                                        <img id="admin_logo" class='well well-sm'
+                                            src="<?= $settings['admin_logo'] != '' && file_exists('storage/images/logos/' . $settings['admin_logo']) ? 'storage/images/logos/' . $settings['admin_logo'] : \Config::get('horizontcms.admin_logo') ?>"
+                                            height='100'>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type='button' class='btn btn-success btn-sm' data-bs-toggle='modal'
+                                            data-bs-target='.admin_logo_select-modal-lg'>{{ trans('actions.select') }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <h6 class="text-dark fw-bold">{{ trans('settings.adminarea_language') }}</h6>
+                                    <p class="text-muted">You can set the admin area language globally.</p>
+                                </div>
+                                <div class="col-12 col-md-6 mt-3">
+                                    <select name='language' class='form-select'>
 
+                                        @foreach ($languages as $key => $language)
+                                            @if ($key == $settings['language'])
+                                                <option value='{{ $key }}' selected>{{ ucfirst($language) }}
+                                                </option>
+                                            @else
+                                                <option value='{{ $key }}'>{{ ucfirst($language) }}</option>
+                                            @endif
+                                        @endforeach
 
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <h6 class="text-dark fw-bold">{{ trans('settings.adminarea_date_format') }}</h6>
+                                    <p class="text-muted">You can change the dateformat on admin area.</p>
+                                </div>
+                                <div class="col-12 col-md-6 mt-3">
+                                    <select name='date_format' class='form-select'>
 
-                        <tr>
-                            <td>{{ trans('settings.adminarea_broadcast_message') }}</td>
-                            <td>
-                                <textarea type='text' class='form-control' name='admin_broadcast' rows='2'>{{ $settings['admin_broadcast'] }}</textarea>
-                            </td>
-                        </tr>
+                                        @foreach ($dateFormats as $format)
+                                            @if ($format == $settings['date_format'])
+                                                <option value='{{ $format }}' selected>{{ date($format) }}</option>
+                                            @else
+                                                <option value='{{ $format }}'>{{ date($format) }}</option>
+                                            @endif
+                                        @endforeach
 
-                        <tr>
-                            <td></td>
-                            <td class="p-2"><button type='submit' class='btn btn-primary'><span class='fa fa-floppy-o'
-                                        aria-hidden='true'></span> {{ trans('settings.adminarea_save_settings') }}</button>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </form>
-
-
-
-            <div class='modal admin_logo_select-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel'
-                aria-hidden='true'>
-                <div class='modal-dialog modal-xl'>
-                    <div class='modal-content'>
-
-                        <div class='modal-header'>
-                            <h3 class='modal-title'>{{ trans('settings.adminarea_select_logo') }}</h3>
-
-                            <button id="close-modal" type='button' class='btn-close' data-bs-dismiss='modal'
-                                aria-label='Close'></button>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <h6 class="text-dark fw-bold">{{ trans('settings.adminarea_auto_update_check') }}</h6>
+                                    <p class="text-muted">Turns on and off automatic upgrade check.</p>
+                                </div>
+                                <div class="col-12 col-md-6 mt-3">
+                                    <input type="hidden" name="auto_upgrade_check" value="0"> <!-- Checkbox hack -->
+                                    <div class="form-check form-switch d-flex justify-content-center">
+                                        <input type='checkbox' class='form-check-input' name='auto_upgrade_check'
+                                            value='1' @if ($settings['auto_upgrade_check'] == 1) checked @endif>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <h6 class="text-dark fw-bold">{{ trans('settings.adminarea_broadcast_message') }}</h6>
+                                    <p class="text-muted">Write anything here, this will be displayed across the admin area
+                                        constantly.</p>
+                                </div>
+                                <div class="col-12 col-md-6 mt-3">
+                                    <textarea type='text' class='form-control' name='admin_broadcast' rows='2'>{{ $settings['admin_broadcast'] }}</textarea>
+                                </div>
+                            </div>
                         </div>
-                        <div class='modal-body' style="max-height:75vh; overflow-y: scroll;">
+                    </div>
 
-                            @include('media.filemanager', [
-                                'mode' => 'embed',
-                                'current_dir' => 'storage/images/logos',
-                            ])
+                    <div class="text-center">
+                        <button type='submit' class='btn btn-primary btn-lg'><span class='fa fa-floppy-o'
+                                aria-hidden='true'></span> {{ trans('settings.adminarea_save_settings') }}</button>
+                    </div>
+                </form>
 
+
+
+                <div class='modal admin_logo_select-modal-lg' tabindex='-1' role='dialog'
+                    aria-labelledby='myLargeModalLabel' aria-hidden='true'>
+                    <div class='modal-dialog modal-xl'>
+                        <div class='modal-content'>
+
+                            <div class='modal-header'>
+                                <h3 class='modal-title'>{{ trans('settings.adminarea_select_logo') }}</h3>
+
+                                <button id="close-modal" type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+                            <div class='modal-body' style="max-height:75vh; overflow-y: scroll;">
+
+                                @include('media.filemanager', [
+                                    'mode' => 'embed',
+                                    'current_dir' => 'storage/images/logos',
+                                ])
+
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
-
-
-
-        </div>
         </div>
 
     </div>
