@@ -13,6 +13,7 @@ class Website {
 	public static $_PLUGINS;
 	public static $_HEADER_IMAGES;
 	public static $_SOCIAL_MEDIA;
+	public static $_THEME;
 	
 	public static $system,$pages;
 
@@ -24,6 +25,8 @@ class Website {
 		self::$_SETTINGS = json_decode(json_encode($wengine->request->settings));
 
 		self::$_THEME_PATH = rtrim($wengine->getTheme()->getPath(),'/');
+
+		self::$_THEME = $wengine->getTheme();
 
 		self::$_CURRENT_USER = \Auth::user();
 
