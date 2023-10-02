@@ -5,6 +5,7 @@ namespace App\Libs;
 class Theme
 {
 
+	public $languagePath = "resources/lang";
 
 	public function __construct($root_dir)
 	{
@@ -71,7 +72,7 @@ class Theme
 
 	public function getSupportedLanguages()
 	{
-		$lang_dir = $this->getPath() . 'lang';
+		$lang_dir = $this->getPath() . $this->languagePath;
 
 		if (!file_exists($lang_dir)) {
 			return collect();

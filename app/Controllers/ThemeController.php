@@ -82,7 +82,7 @@ class ThemeController extends Controller
         $translations = [];
 
         foreach ($theme->getSupportedLanguages() as $lang) {
-            $translations[$lang] = json_decode(file_get_contents($theme->getPath() . "lang/" . $lang . ".json"));
+            $translations[$lang] = json_decode(file_get_contents($theme->getPath() . $theme->languagePath . "/" . $lang . ".json"));
         }
 
 
