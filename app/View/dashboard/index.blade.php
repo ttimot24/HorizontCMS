@@ -53,19 +53,17 @@
 
 
                 @if ($upgrade != null && $upgrade->newVersionAvailable())
-                    <div class="alert alert-warning alert-dismissible col-md-10 mt-4" role="alert">
+                <div class="container">
+                    <div class="alert alert-warning mt-4" role="alert">
 
-
-                        <p class="font-weight-bold">
-                            {{ trans('dashboard.update_available') . ' v' . $upgrade->getLatestVersion() }}</p>
+                        <p class="fw-bold"> {{ trans('dashboard.update_available') . ' v' . $upgrade->getLatestVersion() }}</p>
                         <p class="pt-1">{{ trans('dashboard.update_message') }}</p>
-                        <a href="{{ route('settings.show', ['setting' => 'updatecenter']) }}"
-                            class='btn btn-primary btn-block d-block'
-                            style="display: block !important;">{{ trans('dashboard.update_now') }}</a>
 
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                        <a href="{{ route('settings.show', ['setting' => 'updatecenter']) }}" class='btn btn-primary w-100' >{{ trans('dashboard.update_now') }}</a>
+
+
                     </div>
+                </div>
                 @endif
 
             </div>
