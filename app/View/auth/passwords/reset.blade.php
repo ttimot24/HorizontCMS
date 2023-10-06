@@ -2,9 +2,9 @@
 
 @section('content')
     <div class='jumbotron'>
-        <div class='container'>
+        <div class='container my-5'>
             <div class="row">
-                <div class="col-md-2 col-xs-12 text-center pt-3">
+                <div class="col-md-2 col-xs-12 text-center">
                     <img src='{{ $admin_logo }}' width="150" alt="">
                 </div>
                 <div class="col-md-4 col-xs-12 text-center">
