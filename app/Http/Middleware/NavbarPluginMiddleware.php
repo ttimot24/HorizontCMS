@@ -38,7 +38,7 @@ class NavbarPluginMiddleware
             $item['url'] = isset($item['url']) ? $item['url'] :
 
               rescue(function () use ($plugin) {
-                return route(namespace_to_slug($plugin->root_dir) . ".index");
+                return route('plugin.'.str_slug($plugin->root_dir) . ".start.index");
               }, function () use ($plugin) {
                 return plugin_link(namespace_to_slug($plugin->root_dir));
               });
