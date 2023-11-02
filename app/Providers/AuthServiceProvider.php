@@ -42,7 +42,10 @@ class AuthServiceProvider extends ServiceProvider
                 }
 
 
-                if(!in_array(str_replace("-","",$this->app->request->is($prefix.'/plugin/run/*')? $this->app->request->segment(4) : $this->app->request->segment(2)),$user->role->rights)){
+                if(
+                    !in_array(str_replace("-","",$this->app->request->is($prefix.'/plugin/run/*')? $this->app->request->segment(4) : $this->app->request->segment(2)),$user->role->rights) &&
+                    !in_array(str_replace("-","",$this->app->request->is($prefix.'/plugin/*')? $this->app->request->segment(3) : $this->app->request->segment(1)),$user->role->rights)
+                ){
                     return false;
                 }
 
