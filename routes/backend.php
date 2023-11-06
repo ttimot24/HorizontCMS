@@ -31,7 +31,7 @@ Route::group(['middleware' => ['admin','plugin','can:global-authorization']],fun
 				$plugin_name_prefix = 'plugin.'.str_slug($plugin->root_dir).'.'.strtolower(str_replace("Controller","",$actualName));
 
 				Route::resource(
-					"/plugin/".str_slug($plugin->root_dir).'/'.strtolower(str_replace("Controller","",$actualName)), 
+					"/plugin/run/".namespace_to_slug($plugin->root_dir).'/'.strtolower(str_replace("Controller","",$actualName)), 
 					"\Plugin\\".studly_case($plugin->root_dir)."\\App\\Controllers\\".$actualName 
 				)->names(collect(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'])->mapWithKeys(function($item) use ($plugin_name_prefix){
 					return [$item => $plugin_name_prefix.'.'.$item];
