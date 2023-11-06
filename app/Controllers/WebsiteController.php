@@ -102,15 +102,17 @@ class WebsiteController extends Controller
 
             $mode = $this->request->has('email') ? 'email' : 'username';
 
-            if (\Auth::attempt([$mode => $this->request->input($mode), 'password' => $this->request->input('password')])) {
+            if (\Auth::attempt([$mode => $this->request->input($mode), 'password' => $this->request->input('password')]) && \Auth::user()->isActive()) {
 
-                $redirect = $this->request->has('redirect_success') ? $this->redirect($this->request->input('redirect_success')) : $this->redirectToSelf();
+                $redirect = $this->request->has('redirect_success')? $this->redirect($this->request->input('redirect_success')) : $this->redirectToSelf();
 
                 return $redirect->withMessage(['success' => trans('message.successfully_logged_in')]);
+            } else {
+                \Auth::logout();
             }
         }
 
-        return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return $this->redirectToSelf()->withMessage(['danger' => trans('auth.failed')]);
     }
 
     public function language()

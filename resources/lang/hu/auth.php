@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Nem található ilyen adat.',
+    'failed' => 'Helytelen email/felhasználó vagy jelszó.',
     'throttle' => 'Túl sok próbálkozás. Próbáld újra :seconds perc múlva.',
 
 ];
