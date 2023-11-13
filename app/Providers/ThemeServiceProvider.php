@@ -14,7 +14,7 @@ class ThemeServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        if (!\Request::is(\Config::get('horizontcms.backend_prefix') . "/*")) {
+        if (!app()->runningInConsole() && !\Request::is(\Config::get('horizontcms.backend_prefix') . "/*")) {
             $theme = \App\Model\Settings::get('theme');
             $this->loadJsonTranslationsFrom(base_path("themes/" . $theme . "/resources/lang"));
         }

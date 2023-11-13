@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
 
         \Illuminate\Pagination\Paginator::useBootstrap();
 
-        if ($this->app->environment("local") || $this->app->environment("testing") ) {
+        if (!app()->runningInConsole() && ($this->app->environment("local") || $this->app->environment("testing")) ) {
                 \DB::connection()->enableQueryLog();
 
                 if ( $this->app->request->has('sql-debug') ) {
