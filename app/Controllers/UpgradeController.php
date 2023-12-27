@@ -38,7 +38,6 @@ class UpgradeController extends Controller
         $this->view->title(trans('settings.settings'));
         return $this->view->render('upgrade/index', [
             'current_version' => $this->updateManager->source()->getVersionInstalled(),
-            'latest_version' => $this->updateManager->source()->getVersionAvailable(),
             'available_list' => $available_list,
             'upgrade_list' => $releases->filter(fn($release) => Comparator::lessThanOrEqualTo($release['tag_name'], $this->updateManager->source()->getVersionInstalled()))->slice(0,5),
             'selected_version' => $selectedVersion? $releases->first(fn($release) => $release['tag_name'] === $selectedVersion) : $releases->first(fn($release) => $release['tag_name'] === $this->updateManager->source()->getVersionInstalled())
