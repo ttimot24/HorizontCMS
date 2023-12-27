@@ -28,7 +28,6 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'admin/dashboard';
     protected $redirectAfterLogout = 'admin/login';
 
     /**
@@ -42,6 +41,14 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    public function redirectTo(){
+        return route('dashboard.index');
+    }
 
     /**
     *
