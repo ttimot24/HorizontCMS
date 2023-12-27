@@ -24,13 +24,6 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectAfterLogout = 'admin/login';
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -82,7 +75,7 @@ class LoginController extends Controller
         $request->session()->flush();
         $request->session()->regenerate(true);
 
-        return redirect($this->redirectAfterLogout);
+        return redirect(route('login'));
     }
 
     
