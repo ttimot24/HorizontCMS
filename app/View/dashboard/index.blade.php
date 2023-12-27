@@ -52,14 +52,14 @@
                 @endif
 
 
-                @if ($upgrade != null && $upgrade->newVersionAvailable())
+                @if ($upgrade != null && $upgrade->isNewVersionAvailable())
                 <div class="container">
                     <div class="alert alert-warning mt-4" role="alert">
 
-                        <p class="fw-bold"> {{ trans('dashboard.update_available') . ' v' . $upgrade->getLatestVersion() }}</p>
+                        <p class="fw-bold"> {{ trans('dashboard.update_available') . ' ' . $upgrade->getVersionAvailable() }}</p>
                         <p class="pt-1">{{ trans('dashboard.update_message') }}</p>
 
-                        <a href="{{ route('settings.show', ['setting' => 'updatecenter']) }}" class='btn btn-primary w-100' >{{ trans('dashboard.update_now') }}</a>
+                        <a href="{{ route('upgrade.index') }}" class='btn btn-primary w-100' >{{ trans('dashboard.update_now') }}</a>
 
 
                     </div>

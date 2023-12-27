@@ -112,28 +112,6 @@ class SettingsController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function updatecenter()
-    {
-
-        \App\Model\SystemUpgrade::checkUpgrade();
-
-        $this->view->title(trans('settings.settings'));
-        return $this->view->render('settings/updatecenter', [
-            'current_version' => \App\Model\SystemUpgrade::getCurrentVersion(),
-            'latest_version' => \App\Model\SystemUpgrade::getLatestVersion(),
-            'available_list' => array_reverse(\App\Model\SystemUpgrade::getAllAvailable()),
-            'upgrade_list' => \App\Model\SystemUpgrade::getUpgrades(),
-            'installed_version' => \App\Model\SystemUpgrade::getCore(),
-
-        ]);
-    }
-
 
     public function sysUpgrade()
     {
