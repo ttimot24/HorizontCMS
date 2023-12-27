@@ -10,14 +10,28 @@ import CKEditor from 'ckeditor4-vue';
 import TextEditor from './components/TextEditor.vue';
 import LockScreen from './components/LockScreen.vue';
 import FileManager from './components/FileManager.vue';
+import { createI18n, useI18n } from 'vue-i18n-composable';
 
 window.vue.use(CKEditor);
+
+const i18n = createI18n({
+    locale:  window.navigator.language.split('-')[0],
+    fallbackLocale: 'en', // set fallback locale
+    messages: {
+    }
+});
 
 const hcms = new window.vue({
     name: 'HorizontCMS',
     el: '#hcms',
+    i18n,
     data: {
 
+    },
+    setup() {
+        return {
+        ...useI18n()
+        }
     },
     provide() {
         return {

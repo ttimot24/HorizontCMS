@@ -45,9 +45,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+
+        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+            return redirect()->route('login');
+        }
       
         if(get_class($exception)==\Illuminate\Auth\Access\AuthorizationException::class){
-            return redirect(route('dashboard.show', ['dashboard' => 'unauthorized']));
+            return redirect()->route('dashboard.show', ['dashboard' => 'unauthorized']);
         }
 
     	if(get_class($exception)!=\Illuminate\Auth\AuthenticationException::class && get_class($exception)!= \Illuminate\Validation\ValidationException::class){

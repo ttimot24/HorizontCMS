@@ -14,7 +14,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(\Codedge\Updater\UpdaterManager $updater)
     {
 
         $admin_logo = $this->request->settings['admin_logo'];
@@ -30,7 +30,7 @@ class DashboardController extends Controller
             'visits' => \App\Model\Visits::count(),
             'admin_logo' => ($admin_logo != "" && file_exists("storage/images/logos/" . $admin_logo)) ? "storage/images/logos/" . $admin_logo : \Config::get('horizontcms.admin_logo'),
             'disk_space' => @(disk_free_space("/") / disk_total_space("/")) * 100,
-            'upgrade' => $this->request->settings['auto_upgrade_check'] == 1 && \Auth::user()->hasPermission('settings') ? \App\Model\SystemUpgrade::checkUpgrade() : NULL,
+            'upgrade' => $this->request->settings['auto_upgrade_check'] == 1 && \Auth::user()->hasPermission('upgrade')? $updater->source() : NULL,
 
         ]);
     }

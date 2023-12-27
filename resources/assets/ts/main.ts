@@ -1,9 +1,11 @@
 import * as jquery from "jquery";
 import Vue from 'vue';
 import VueResource from "vue-resource";
+import VueI18n from 'vue-i18n';
 import axios, { AxiosStatic }  from 'axios';
 
 Vue.use(VueResource);
+Vue.use(VueI18n);
 
 Vue.config.devtools = true;
 
