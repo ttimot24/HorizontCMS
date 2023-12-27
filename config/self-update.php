@@ -24,7 +24,7 @@ return [
     |
     */
 
-    'version_installed' => env('SELF_UPDATER_VERSION_INSTALLED', 'v1.0.0-beta.3'),
+    'version_installed' => env('SELF_UPDATER_VERSION_INSTALLED', 'v1.0.0-beta.5'),
 
     /*
     |--------------------------------------------------------------------------
@@ -148,7 +148,14 @@ return [
             //]
         ],
         'post_update' => [
-
+           // \Artisan::call("migrate", ['--no-interaction' => '', '--force' => true]);
+            'command:migrate' => [
+                'class' => \Illuminate\Database\Console\Migrations\MigrateCommand::class,
+                'params' => [
+                    'no-interaction' => '',
+                    'force' => true
+                ]
+            ]
         ],
     ],
 

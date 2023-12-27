@@ -42,7 +42,7 @@ class SettingsController extends Controller
         return [
             ['name' => trans('settings.website'), 'link' => route('settings.show', ['setting' => 'website']), 'icon' => 'fa fa-globe'],
             ['name' => trans('settings.admin_area'), 'link' => route('settings.show', ['setting' => 'adminarea']), 'icon' => 'fa fa-desktop'],
-            ['name' => trans('settings.update_center'), 'link' => route('settings.show', ['setting' => 'updatecenter']), 'icon' => 'fa fa-arrow-circle-o-up'],
+            ['name' => trans('settings.update_center'), 'link' => route('upgrade.index'), 'icon' => 'fa fa-arrow-circle-o-up'],
             ['name' => trans('settings.server'), 'link' => route('settings.show', ['setting' => 'server']), 'icon' => 'fa fa-server'],
             ['name' => trans('settings.social_media'), 'link' => route('settings.show', ['setting' => 'socialmedia']), 'icon' => 'fa fa-thumbs-o-up'],
             ['name' => trans('Log'), 'link' => route('settings.show', ['setting' => 'log']), 'icon' => 'fa fa-bug'],
@@ -111,72 +111,6 @@ class SettingsController extends Controller
             'dateFormats' => ['Y.m.d H:i:s', 'Y-m-d H:i:s', 'Y. M. d H:i:s', 'd-m-Y H:i:s', 'd/m/Y H:i:s', 'm/d/Y H:i:s'],
         ]);
     }
-
-
-    public function sysUpgrade()
-    {
-
-        $echo = array();
-
-        $workspace = storage_path("framework/upgrade");
-        $url = \Config::get('horizontcms.sattelite_url') . "/updates";
-
-
-        $update = new AutoUpdate($workspace . '/temp', public_path(), 60);
-        $update->setCurrentVersion(\App\Model\SystemUpgrade::getCurrentVersion()->version);
-        $update->setUpdateUrl($url); //Replace with your server update directory
-        // Optional:
-        $update->addLogHandler(new \Monolog\Handler\StreamHandler($workspace . '/update.log'));
-        $update->setCache(new \Desarrolla2\Cache\File($workspace . '/cache'), 3600);
-        //Check for a new update
-
-
-        if ($update->checkUpdate() === false) {
-            $echo[] = 'Could not check for updates! See log file for details.';
-        } else {
-            if ($update->newVersionAvailable()) {
-                //Install new update
-                $echo[] =  'New Version: ' . $update->getLatestVersion() . '<br>';
-                $echo[] =  'Installing Updates: <br>';
-                $echo[] =  '<pre>';
-                $echo[] = print_r(array_map(function ($version) {
-                    return (string) $version;
-                }, $update->getVersionsToUpdate()), true);
-                $echo[] =  '</pre>';
-                // This call will only simulate an update.
-                // Set the first argument (simulate) to "false" to install the update
-                // i.e. $update->update(false);
-                $result = $update->update(false);
-                if ($result === true) {
-                    $echo[] = 'Update successful<br>';
-                    $sys_upgrade = new \App\Model\SystemUpgrade();
-                    $sys_upgrade->version = $update->getLatestVersion();
-                    $sys_upgrade->nickname = "Upgrade";
-                    $sys_upgrade->importance = "important";
-                    $sys_upgrade->description = "It was a successful update!";
-                    $sys_upgrade->save();
-
-                    \Artisan::call("migrate", ['--no-interaction' => '', '--force' => true]);
-                } else {
-                    $echo[] = 'Update failed: ' . $result . '!<br>';
-                    if ($result = AutoUpdate::ERROR_SIMULATE) {
-                        $echo[] = '<pre>';
-                        $echo[] = print_r($update->getSimulationResults(), true);
-                        $echo[] = '</pre>';
-                    }
-                }
-            } else {
-                $echo[] = 'Current Version is up to date<br>';
-            }
-        }
-        $echo[] = 'Log:<br>';
-        $echo[] = nl2br(file_get_contents($workspace . '/update.log'));
-
-
-        return $this->redirectToSelf()->with(['upgrade_console' => implode("<br>", $echo)]);
-    }
-
-
 
     public function server()
     {
