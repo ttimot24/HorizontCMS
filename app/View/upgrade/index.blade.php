@@ -56,7 +56,7 @@
                         <div class="card">
                             <div class="card-body" style='min-height:400px;'>
                                 <p>
-                                    {!! \Str::of($selected_version['body'])->markdown() !!}
+                                    {!! $selected_version? \Str::of($selected_version['body'])->markdown() : '' !!}
                                 </p>
                             </div>
                         </div>
