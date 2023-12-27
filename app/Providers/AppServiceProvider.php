@@ -15,6 +15,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
+        \Config::set('self-update.version_installed', \Config::get('horizontcms.version'));
+
         \Illuminate\Pagination\Paginator::useBootstrap();
 
         if (!app()->runningInConsole() && ($this->app->environment("local") || $this->app->environment("testing")) ) {
