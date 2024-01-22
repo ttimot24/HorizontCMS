@@ -14,25 +14,25 @@ import { createI18n, useI18n } from 'vue-i18n-composable';
 
 window.vue.use(CKEditor);
 
-const i18n = createI18n({
+/*const i18n = createI18n({
     locale:  window.navigator.language.split('-')[0],
     fallbackLocale: 'en', // set fallback locale
     messages: {
     }
-});
+});*/
 
 const hcms = new window.vue({
     name: 'HorizontCMS',
     el: '#hcms',
-    i18n,
+   // i18n,
     data: {
 
     },
-    setup() {
+  /*  setup() {
         return {
         ...useI18n()
         }
-    },
+    }, */
     provide() {
         return {
           bootstrap: bootstrap
