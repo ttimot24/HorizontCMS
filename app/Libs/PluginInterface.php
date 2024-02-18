@@ -22,6 +22,8 @@ interface PluginInterface {
 
 	public function addProviders(): array;
 
+	public function addMiddlewares(): array;
+
     public function cliCommands(): array;
 
 }
