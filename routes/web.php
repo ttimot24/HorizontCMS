@@ -18,6 +18,25 @@ use Illuminate\Contracts\Container\Container;
 
 //Route::resource('/', \App\Controllers\WebsiteController::class);
 
+$_THEME_NAME = Settings::get('theme');
+
+if (!defined('THEME_CONTROLLER_PATH')) {
+	define('THEME_CONTROLLER_PATH', 'themes'.DIRECTORY_SEPARATOR.$_THEME_NAME.DIRECTORY_SEPARATOR.'app'.DIRECTORY_SEPARATOR.'Controllers');
+}
+
+foreach(array_diff(scandir(THEME_CONTROLLER_PATH), ['.', '..']) as $file){
+	if(is_file(THEME_CONTROLLER_PATH."/".$file)){
+		$actualName = pathinfo($file, PATHINFO_FILENAME);
+		$controller_route = strtolower(str_replace("Controller","",$actualName));
+
+
+		Route::resource("/".$controller_route , "\Theme\\".$_THEME_NAME."\App\Controllers\\".$actualName )
+		->names(collect(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'])->mapWithKeys(function($item) use ($controller_route){
+			return [$item => 'theme.'.$controller_route.'.'.$item];
+		})->toArray());
+	}
+}
+
 Route::any('/{slug?}/{args?}', function ($slug = "", $args = null, Request $request, Container $container) {
 
 	try {
