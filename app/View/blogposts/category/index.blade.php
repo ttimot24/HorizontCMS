@@ -10,9 +10,7 @@
                     @include('breadcrumb', [
                         'links' => [['name' => 'Content'], ['name' => 'Blog', 'url' => route('blogpost.index')]],
                         'page_title' => trans('category.category'),
-                        'stats' => [
-                            ['label'=> trans('blogpost.all'), 'value'=> $all_category->count()]
-                        ]
+                        'stats' => [['label' => trans('blogpost.all'), 'value' => $all_category->count()]],
                     ])
 
                     <div class='card-body'>
@@ -58,7 +56,8 @@
                                         <td class="col">{{ $each->id }}</td>
 
                                         <td class='col'>
-                                        <a href="{{ route('blogpostcategory.show', ['blogpostcategory' => $each]) }}">{{ $each->name }}</a>
+                                            <a
+                                                href="{{ route('blogpostcategory.show', ['blogpostcategory' => $each]) }}">{{ $each->name }}</a>
                                         </td>
 
                                         <td class="col">
@@ -68,48 +67,50 @@
                                         <td class="col  text-center">
 
 
-                                    <div class="dropdown">
-                                        <div data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
-                                            <i class="bi bi-three-dots-vertical text-dark"></i>
-                                        </div>
-                                        <ul class="dropdown-menu text-dark">
-                                            <li>
-                                                <a href="{{ route('blogpostcategory.edit', ['blogpostcategory' => $each]) }}"
-                                                    class="dropdown-item text-decoration-none text-dark">
-                                                    <i class="fa fa-pencil me-2" aria-hidden="true"></i>
-                                                    {{ trans('actions.edit') }}
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a data-bs-toggle='modal' data-bs-target=#delete_<?= $each->id ?>
-                                                    class="dropdown-item text-danger text-decoration-none"
-                                                    style="cursor: pointer;">
-                                                    <i class="fa fa-trash-o me-2" aria-hidden="true"></i>
-                                                    {{ trans('actions.delete') }}
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                            <div class="dropdown">
+                                                <div data-bs-toggle="dropdown" aria-expanded="false"
+                                                    style="cursor:pointer;">
+                                                    <i class="bi bi-three-dots-vertical text-dark"></i>
+                                                </div>
+                                                <ul class="dropdown-menu text-dark">
+                                                    <li>
+                                                        <a href="{{ route('blogpostcategory.edit', ['blogpostcategory' => $each]) }}"
+                                                            class="dropdown-item text-decoration-none text-dark">
+                                                            <i class="fa fa-pencil me-2" aria-hidden="true"></i>
+                                                            {{ trans('actions.edit') }}
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-bs-toggle='modal' data-bs-target=#delete_<?= $each->id ?>
+                                                            class="dropdown-item text-danger text-decoration-none"
+                                                            style="cursor: pointer;">
+                                                            <i class="fa fa-trash-o me-2" aria-hidden="true"></i>
+                                                            {{ trans('actions.delete') }}
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
 
                                         </td>
                                     </tr>
-
-                                    @include('confirm_delete', [
-                                        'route' => route('blogpostcategory.destroy', [
-                                            'blogpostcategory' => $each,
-                                        ]),
-                                        'id' => 'delete_' . $each->id,
-                                        'header' => trans('actions.are_you_sure'),
-                                        'name' => $each->name,
-                                        'content_type' => 'category',
-                                        'delete_text' => trans('actions.delete'),
-                                        'cancel' => trans('actions.cancel'),
-                                    ])
                                 @endforeach
 
                             </tbody>
                         </table>
 
+                        @foreach ($all_category as $each)
+                            @include('confirm_delete', [
+                                'route' => route('blogpostcategory.destroy', [
+                                    'blogpostcategory' => $each,
+                                ]),
+                                'id' => 'delete_' . $each->id,
+                                'header' => trans('actions.are_you_sure'),
+                                'name' => $each->name,
+                                'content_type' => 'category',
+                                'delete_text' => trans('actions.delete'),
+                                'cancel' => trans('actions.cancel'),
+                            ])
+                        @endforeach
                     </div>
 
                 </div>
