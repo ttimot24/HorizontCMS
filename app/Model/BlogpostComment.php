@@ -19,11 +19,9 @@ class BlogpostComment extends Model {
 		return $this->belongsTo(\App\Model\Blogpost::class,'blogpost_id','id');
 	}
 
+    // TODO Use HasAuthor trait 
 	public function user(){
 		return $this->belongsTo(\App\Model\User::class,'user_id','id');
 	}
-
-
-
 
 }

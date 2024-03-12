@@ -2,46 +2,13 @@
 
 namespace App\Libs;
 
+use \App\Model\Trait\HasImage;
+
 abstract class Model extends \Illuminate\Database\Eloquent\Model {
+
+    use HasImage;
     
     private $rules = array();
-
-    protected $defaultImage = null;
-    protected $imageDir = null;
-
-
-    public function hasImage(){
-        return (isset($this->image) && !empty($this->image));
-    }
-
-    public function getThumb(){
-
-        if($this->hasImage() && file_exists($this->imageDir."/thumbs/".$this->image)){
-            return url($this->imageDir."/thumbs/".$this->image);
-        }else{
-            return $this->getImage();
-        }
-
-	}
-
-    public function getImage(){
-
-    	if($this->hasImage() && file_exists($this->imageDir."/".$this->image)){
-    		return url($this->imageDir."/".$this->image);
-    	}else{
-    		return url($this->defaultImage);
-    	}
-
-    }
-
-    public function getDefaultImage(){
-        return $this->defaultImage;
-    }
-
-
-    public function setDefaultImage($image){
-        $this->defaultImage = $image;
-    }
 
     public function equals($other){
 

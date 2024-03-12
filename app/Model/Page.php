@@ -3,8 +3,11 @@
 namespace App\Model;
 
 use \App\Libs\Model;
+use App\Model\Trait\HasAuthor;
 
 class Page extends Model {
+
+    use HasAuthor;
 
     /**
      * The attributes that are mass assignable.
@@ -75,10 +78,6 @@ class Page extends Model {
     public function subpages(){
         return $this->hasMany(self::class,'parent_id','id');
     }
-
-    public function author(){
-        return $this->belongsTo(\App\Model\User::class,'author_id','id'); //In db it has to be author_id else it won't work because Laravel priority is attr -> function
-   }   
 
     public function getSlug(){
         return ($this->slug!=NULL && $this->slug!="")? $this->slug : str_slug($this->name);

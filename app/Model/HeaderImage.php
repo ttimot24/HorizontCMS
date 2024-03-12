@@ -3,8 +3,11 @@
 namespace App\Model;
 
 use \App\Libs\Model;
+use App\Model\Trait\HasAuthor;
 
 class HeaderImage extends Model {
+
+    use HasAuthor;
 
     /**
      * The attributes that are mass assignable.
@@ -19,9 +22,6 @@ class HeaderImage extends Model {
 
     protected $imageDir = "storage/images/header_images";
 
-    public function author(){
-        return $this->belongsTo(\App\Model\User::class,'author_id','id'); //In db it has to be author_id else it won't work because Laravel priority is attr -> function
-    }   
 
     public static function getActive($order = 'ASC'){
         return self::where('active','>',0)->orderBy('order',$order);

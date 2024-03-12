@@ -3,8 +3,13 @@
 namespace App\Model;
 
 use \App\Libs\Model;
+use \App\Model\Trait\HasAuthor;
+use \App\Model\Trait\Draftable;
 
 class Blogpost extends Model {
+
+    use HasAuthor;
+    use Draftable;
     
     /**
      * The attributes that are mass assignable.
@@ -51,10 +56,6 @@ class Blogpost extends Model {
         return self::where('active',2)->orderBy('created_at',$order)->paginate($num);
     }
 
-    public function author(){
-    	 return $this->belongsTo(\App\Model\User::class,'author_id','id'); //In db it has to be author_id else it won't work because Laravel priority is attr -> function
-    }   
-
 	public function category(){
 
         return $this->hasOne(BlogpostCategory::class,'id','category_id'); //In db it has to be category_id else it won't work because Laravel priority is attr -> function
@@ -93,10 +94,6 @@ class Blogpost extends Model {
 
     public function isPublished(){
         return $this->active > 0;
-    }
-
-    public function isDraft(){
-        return $this->active == 0;
     }
 
     public function isFeatured(){

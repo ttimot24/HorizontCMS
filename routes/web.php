@@ -16,7 +16,9 @@ use Illuminate\Contracts\Container\Container;
 |
 */
 
-//Route::resource('/', \App\Controllers\WebsiteController::class);
+/* Route::group(['prefix'=>'/'],function(){
+	Route::resource('/', \App\Controllers\WebsiteController::class);
+}); */
 
 $_THEME_NAME = Settings::get('theme');
 
@@ -62,8 +64,9 @@ Route::any('/{slug?}/{args?}', function ($slug = "", $args = null, Request $requ
 					return $controller->callAction($slug, [$slug, $args]);
 				}
 
-
-				return $controller->callAction('index', [$slug, $args]);
+				
+				//TODO change to show method
+				return $controller->callAction('show', [$slug, $args]);
 			}
 
 
