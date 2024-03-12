@@ -40,9 +40,4 @@ abstract class Controller extends BaseController {
         return redirect()->back();
     }
 
-    public function insideLink($location){
-    	return redirect(\Config::get('horizontcms.backend_prefix')."/".$location);
-    }
-
-
 }

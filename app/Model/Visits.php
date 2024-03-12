@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-use \App\Libs\Model;
+use \Illuminate\Database\Eloquent\Model;
 
 class Visits extends Model {
     

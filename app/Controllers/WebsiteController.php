@@ -78,6 +78,10 @@ class WebsiteController extends Controller
         ]);
     }
 
+    public function show($page){
+        return $this->index($page);
+    }
+
     public function registration()
     {
 

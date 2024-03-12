@@ -2,7 +2,8 @@
 
 namespace App\Model;
 
-use App\Libs\Model;
+use App\Model\Trait\HasImage;
+use \Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 //use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Auth\Authenticatable;
@@ -16,6 +17,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
 
     use Notifiable, Authenticatable, Authorizable, CanResetPassword;
+    use HasImage;
 
     /**
      * The attributes that are mass assignable.

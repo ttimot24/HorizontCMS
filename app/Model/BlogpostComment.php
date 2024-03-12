@@ -2,9 +2,12 @@
 
 namespace App\Model;
 
-use \App\Libs\Model;
+use App\Model\Trait\HasAuthor;
+use \Illuminate\Database\Eloquent\Model;
 
 class BlogpostComment extends Model {
+
+    use HasAuthor;
     
 	/**
      * The attributes that are mass assignable.
@@ -21,7 +24,7 @@ class BlogpostComment extends Model {
 
     // TODO Use HasAuthor trait 
 	public function user(){
-		return $this->belongsTo(\App\Model\User::class,'user_id','id');
+		return $this->author();
 	}
 
 }

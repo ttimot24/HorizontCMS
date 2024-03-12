@@ -2,11 +2,13 @@
 
 namespace App\Model;
 
-use \App\Libs\Model;
+use \Illuminate\Database\Eloquent\Model;
 use App\Model\Trait\HasAuthor;
+use App\Model\Trait\HasImage;
 
 class HeaderImage extends Model {
 
+    use HasImage;
     use HasAuthor;
 
     /**

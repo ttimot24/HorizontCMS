@@ -2,9 +2,13 @@
 
 namespace App\Model;
 
-use \App\Libs\Model;
+use App\Model\Trait\HasImage;
+use \Illuminate\Database\Eloquent\Model;
 
 class BlogpostCategory extends Model {
+
+    use HasImage;
+
     /**
      * The attributes that are mass assignable.
      *

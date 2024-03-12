@@ -23,7 +23,7 @@
     
         if($page->language != \Config::get('app.locale')){continue;}
 
-        $class = $page->equals(Website::$_REQUESTED_PAGE)? "active": "";
+        $class = $page->is(Website::$_REQUESTED_PAGE)? "active": "";
         
         if(!$page->hasSubpages()){
          echo "<li class='nav-item ".$class."'><a class='nav-link' href='".$page->getSlug()."'>".$page->name."</a></li>";
@@ -33,7 +33,7 @@
                   <ul class="dropdown-menu">';
               foreach($page->subpages as $subpage){  
 
-                $class = $subpage->equals(Website::$_REQUESTED_PAGE)? "active": "";   
+                $class = $subpage->is(Website::$_REQUESTED_PAGE)? "active": "";   
                 if($subpage->isActive()){     
                   echo "<li class='".$class."'><a class='dropdown-item' href='".$subpage->getSlug()."'>".$subpage->name."</a></li>";
                 }
