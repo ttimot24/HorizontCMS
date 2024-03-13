@@ -5,25 +5,6 @@
 class UrlManager{
 
 
-	public static function get_slugs(){
-
-		if(isset($_GET['r'])){
-			$url = rtrim($_GET['r'],"/"); 
-			$url = explode("/",$url);
-			return $url;
-		}else if(isset($_GET['route'])){
-			$url = rtrim($_GET['route'],"/"); 
-			$url = explode("/",$url);
-			return $url;
-		}
-		else{
-			return NULL;
-		}
-		
-	}
-
-
-
 	public static function seo_url($string){
 
 		$string = explode("/",$string);
