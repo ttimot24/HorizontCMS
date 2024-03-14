@@ -8,36 +8,38 @@
                 'links' => [['name' => trans('settings.settings'), 'url' => route('settings.index')]],
                 'page_title' => trans('Social media'),
             ])
-        <div class="card-body">
-        <form action='' role='form' method='POST'>
-            @csrf
+            <div class="card-body">
+                <form action='{{ route('settings.store') }}' role='form' method='POST'>
+                    @csrf
 
-            <table class='table-bordered' id='settings' style='width:100%;text-align:center;'>
+                    <table id='settings' class="w-100">
 
-                <tbody style='text-align:center;font-weight:bolder;'>
-                    
-                    @foreach ($all_socialmedia as $each)
-                        <tr>
-							<td>
-                    			<i class='fa fa-{{$each->getName()}}"' aria-hidden='true' style='font-size:26px;'></i> 
-                            {{ ucfirst($each->getName()) }}
-                            </td>
-							<td>
-                    			<input type='text' class='form-control' name='{{$each->getName()}}' value='{{htmlspecialchars($each->value)}}'>
-                    		</td>
-						</tr>
-                    @endforeach
+                        <tbody style='text-align:center;font-weight:bolder;'>
+
+                            @foreach ($all_socialmedia as $each)
+                                <tr>
+                                    <td>
+                                        <i class='fa fa-{{ $each->getName() }}"' aria-hidden='true'></i>
+                                        {{ ucfirst($each->getName()) }}
+                                    </td>
+                                    <td>
+                                        <input type='text' class='form-control' name='{{ $each->getName() }}'
+                                            value='{{ htmlspecialchars($each->value) }}'>
+                                    </td>
+                                </tr>
+                            @endforeach
 
 
-                    <tr>
-                        <td></td>
-                        <td><button type='submit' class='btn btn-primary'>
-                                <span class='fa fa-floppy-o' aria-hidden='true'></span> {{ trans('settings.adminarea_save_settings') }}</button> </td>
-                    </tr>
+                            <tr>
+                                <td></td>
+                                <td><button type='submit' class='btn btn-primary'>
+                                        <span class='fa fa-floppy-o' aria-hidden='true'></span>
+                                        {{ trans('settings.adminarea_save_settings') }}</button> </td>
+                            </tr>
 
-                </tbody>
-            </table>
-        </form>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
         </div>
-    </div>
-@endsection
+    @endsection
