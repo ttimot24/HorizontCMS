@@ -92,17 +92,17 @@
                                     @csrf
 
                                     <div class='form-group'>
-                                        <label for='name'>Name:</label>
+                                        <label for='name'>Name</label>
                                         <input type='text' class='form-control' id='name' name='name' required>
                                     </div>
 
                                     <div class='form-group'>
-                                        <label for='frequency'>Cron:</label>
+                                        <label for='frequency'>Cron</label>
                                         <input type='text' class='form-control' id='cron' name='frequency' required>
                                     </div>
 
                                     <div class='form-group'>
-                                        <label for='command'>Command:</label>
+                                        <label for='command'>Command</label>
                                         <select name='command' class='form-select' required>
                                             @foreach ($commands as $key => $command)
                                                 <option value='{{ $key }}'>{{ $key }}</option>
@@ -111,17 +111,17 @@
                                     </div>
 
                                     <div class='form-group'>
-                                        <label for='ping_before'>Arguments:</label>
+                                        <label for='ping_before'>Arguments</label>
                                         <input type='text' class='form-control' id='arguments' name='arguments'>
                                     </div>
 
                                     <div class='form-group'>
-                                        <label for='ping_before'>Ping before:</label>
+                                        <label for='ping_before'>Ping before</label>
                                         <input type='text' class='form-control' id='ping_before' name='ping_before'>
                                     </div>
 
                                     <div class='form-group'>
-                                        <label for='ping_after'>Ping after:</label>
+                                        <label for='ping_after'>Ping after</label>
                                         <input type='text' class='form-control' id='ping_after' name='ping_after'>
                                     </div>
 
@@ -129,7 +129,7 @@
                                 </div>
                                 <div class='modal-footer'>
                                     <button type='submit' class='btn btn-primary'>Schedule</button>
-                                    <button type='button' class='btn btn-default' data-bs-dismiss='modal'>Cancel</button>
+                                    <button type='button' class='btn btn-default' data-bs-dismiss='modal'>{{ trans('actions.cancel') }}</button>
                                 </div>
                             </form>
                         </div><!-- /.modal-content -->
