@@ -93,17 +93,17 @@
 
                                     <div class='form-group'>
                                         <label for='name'>Name:</label>
-                                        <input type='text' class='form-control' id='name' name='name'>
+                                        <input type='text' class='form-control' id='name' name='name' required>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='frequency'>Cron:</label>
-                                        <input type='text' class='form-control' id='cron' name='frequency'>
+                                        <input type='text' class='form-control' id='cron' name='frequency' required>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='command'>Command:</label>
-                                        <select name='command' class='form-select'>
+                                        <select name='command' class='form-select' required>
                                             @foreach ($commands as $key => $command)
                                                 <option value='{{ $key }}'>{{ $key }}</option>
                                             @endforeach

@@ -2,9 +2,12 @@
 
 namespace App\Model;
 
+use App\Model\Trait\HasAuthor;
 use \Illuminate\Database\Eloquent\Model;
 
 class ScheduledTask extends Model {
+
+    use HasAuthor;
 
     protected $table = 'schedules';
 
@@ -16,7 +19,7 @@ class ScheduledTask extends Model {
      * @var array
      */
     protected $fillable = [
-        'name', 'command', 'arguments', 'frequency', 'ping_before', 'ping_after' , 'active',
+        'name', 'command', 'arguments', 'frequency', 'ping_before', 'ping_after', 'author_id', 'active',
     ];
 
 }

@@ -25,6 +25,7 @@ class CreateSchedulesTable extends Migration
             $table->string('frequency');
             $table->string('ping_before')->nullable();
             $table->string('ping_after')->nullable();
+            $table->string('author_id');
             $table->integer('active');
         });
     }
