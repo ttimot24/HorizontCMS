@@ -9,7 +9,7 @@
                 'page_title' => trans('Social media'),
             ])
             <div class="card-body">
-                <form action='{{ route('settings.store') }}' role='form' method='POST'>
+                <form action='' role='form' method='POST'>
                     @csrf
 
                     <table id='settings' class="w-100">
