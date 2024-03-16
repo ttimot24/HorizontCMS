@@ -119,7 +119,7 @@ class InstallController extends Controller
 
             Session::put('step2', $this->request->all());
 
-            return $this->redirect('admin/install/step3')->withMessage(['success' => trans('Connection to database established!')]);
+            return $this->redirect(route('install.show', 'step3'))->withMessage(['success' => trans('Connection to database established!')]);
         } catch (\PDOException $except) {
             return $this->redirectToSelf()->withMessage(['danger' => trans('Can not establish the connection: ' . $except->getMessage())]);
         }
@@ -173,14 +173,14 @@ class InstallController extends Controller
             $administrator->active = 1;
 
             if (!$administrator->save()) {
-                return $this->redirect('admin/install/step4')->withMessage(['danger' => 'Something went wrong!'])->withError(true);
+                return $this->redirect(route('install.show', 'step4'))->withMessage(['danger' => 'Something went wrong!'])->withError(true);
             }
         } catch (\Exception $e) {
 
-            return $this->redirect('admin/install/step4')->withMessage(['danger' => $e->getMessage()])->withError(true);
+            return $this->redirect(route('install.show', 'step4'))->withMessage(['danger' => $e->getMessage()])->withError(true);
         }
 
-        return $this->redirect('admin/install/step4')->withMessage(['success' => 'Succesfully installed!']);
+        return $this->redirect(route('install.show', 'step4'))->withMessage(['success' => 'Succesfully installed!']);
     }
 
     /**
