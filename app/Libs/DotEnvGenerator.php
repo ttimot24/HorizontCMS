@@ -3,10 +3,10 @@
 namespace App\Libs;
 
 
-class DotEnvGenerator{
+class DotEnvGenerator {
 
 
-	private $content = array();
+	private $content = [];
 	private $path = "";
 	private $file = ".env";
 

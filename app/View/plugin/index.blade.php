@@ -30,25 +30,22 @@
 
             <div class="card-body">
 
-                <div class='list-group'>
-
                     @foreach ($all_plugin as $current_plugin)
-                        <div class='list-group-item bg-dark p-3'>
+                    <div class='card mb-3'>
+                        <div class='card-body p-3 bg-dark'>
                             <div class='row p-0'>
                                 <div class='col-md-1 col-sm-12 col-xs-12 p-0 pl-3 text-center'>
-
-                                    {!! Html::img($current_plugin->getIcon(), "class='img img-thumbnail mt-1' style='width: 70px; height: 70px;' ") !!}
-
+                                    <img src="{{ $current_plugin->getIcon() }}" class='img img-thumbnail mt-1' style='width: 5rem; height: 5rem;' />
                                 </div>
 
                                 <div class='col-md-9 m-0'>
-                                    <h4 class='list-group-item-heading p-0'>
+                                    <h4 class='p-0'>
 
                                         @if ($current_plugin->isActive())
-                                            <a class='color-primary' id='{{ $current_plugin->root_dir }}'
-                                                href='{{ config('horizontcms.backend_prefix') . '/plugin/run/' . $current_plugin->getSlug() }}'>{{ $current_plugin->getName() }}</a>
+                                            <a class='card-title text-primary' id='{{ $current_plugin->root_dir }}'
+                                                href='{{ route('plugin.'.str_slug($current_plugin->root_dir).'.start.index') }}'>{{ $current_plugin->getName() }}</a>
                                         @else
-                                            <a class='color-primary'
+                                            <a class='text-white'
                                                 id='{{ $current_plugin->root_dir }}'>{{ $current_plugin->getName() }}</a>
                                         @endif
 
@@ -93,6 +90,8 @@
 
                         </div>
 
+                        </div>
+
 
                         @include('confirm_delete', [
                             'route' => route('plugin.destroy', ['plugin' => $current_plugin->root_dir]),
@@ -104,9 +103,6 @@
                             'cancel' => trans('actions.cancel'),
                         ])
                     @endforeach
-
-
-                </div>
 
 
                 <div class='modal upload_plugin' id='create_file' tabindex='-1' role='dialog'

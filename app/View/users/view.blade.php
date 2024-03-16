@@ -6,9 +6,9 @@
 
         <div class="card mb-3">
             @php
-                
+
                 $buttons = [];
-                
+
                 if ($previous_user) {
                     array_push($buttons, [
                         'icon' => 'fa-angle-left',
@@ -17,7 +17,7 @@
                         'route' => route('user.show', ['user' => $previous_user]),
                     ]);
                 }
-                
+
                 if ($next_user) {
                     array_push($buttons, [
                         'icon' => 'fa-angle-right',
@@ -26,7 +26,7 @@
                         'route' => route('user.show', ['user' => $next_user]),
                     ]);
                 }
-                
+
             @endphp
 
             @include('breadcrumb', [
@@ -95,8 +95,7 @@
 
                                         {{ trans('user.inactive_about', ['day_count' => $user->created_at->diffForHumans()]) }}
 
-                                    </font> <a
-                                        href='admin/user/activate/{{ $user->id }}'
+                                    </font> <a href='admin/user/activate/{{ $user->id }}'
                                         class='btn btn-sm btn-danger pull-right'>Force activate</a>
                                 </div>
                             </div>
@@ -121,13 +120,13 @@
 
                                             @foreach ($user->blogposts->reverse() as $each)
                                                 <tr>
-                                                    <td class='col-4'><a
-                                                            href="{{ route('blogpost.show', ['blogpost' => $each]) }}">
-                                                            {!! Html::img(
-                                                                $each->getThumb(),
-                                                                "class='img img-thumbnail bg-dark', width='250' style='object-fit:cover;height:150px;'",
-                                                            ) !!}
-                                                        </a></td>
+                                                    <td class='col-4'>
+                                                        <a href="{{ route('blogpost.show', ['blogpost' => $each]) }}">
+                                                            <img src="{{ $each->getThumb() }}"
+                                                                class='img img-thumbnail bg-dark', width='250'
+                                                                style='object-fit:cover;height:150px;' />
+                                                        </a>
+                                                    </td>
                                                     <td class='col-6'>
                                                         <a href="{{ route('blogpost.show', ['blogpost' => $each]) }}">
                                                             <h5>{{ $each->title }}</h5>
@@ -190,14 +189,13 @@
                                     @if ($each->blogpost != null)
                                         <tr>
                                             <td class='col-3'>
-                                                <a
-                                                    href="{{ route('blogpost.show', ['blogpost' => $each->blogpost]) }}">{{ $each->blogpost->title }}</a>
+                                                <a href="{{ route('blogpost.show', ['blogpost' => $each->blogpost]) }}">{{ $each->blogpost->title }}</a>
                                             </td>
                                             <td class='col-8' style='text-align:justify;'>{{ $each->comment }}</td>
 
                                             <td class='col-1'>{{ $each->created_at->format('Y.m.d') }}</br>
-                                                <font size='2'><i>at</i> {{ $each->created_at->format('H:i:s') }}
-                                                </font>
+                                                <div class="fs-6"><i>at</i> {{ $each->created_at->format('H:i:s') }}
+                                                </div>
                                             </td>
                                         </tr>
                                     @endif

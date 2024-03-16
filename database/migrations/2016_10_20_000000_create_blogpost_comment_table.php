@@ -20,7 +20,7 @@ class CreateBlogpostCommentTable extends Migration
         Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
             $table->integer('blogpost_id');
-            $table->integer('user_id');
+            $table->integer('author_id');
             $table->text('comment');
             $table->timestamps();
             $table->boolean('active')->default(true);

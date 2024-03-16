@@ -5,17 +5,12 @@
 	<meta charset="utf-8">
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<?php
-		if(Website::$_SETTINGS->favicon!=""){
+		if(!empty(Website::$_SETTINGS->favicon)){
 			Html::favicon(asset("storage/images/favicons/".Website::$_SETTINGS->favicon)); 
 		}else{ 
 			Html::favicon(asset(Website::$_THEME_PATH."/images/favicon.png")); 
 		}
 	?>
-<!--	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	-->
-
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

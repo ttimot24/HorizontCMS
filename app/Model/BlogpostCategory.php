@@ -2,11 +2,13 @@
 
 namespace App\Model;
 
+use App\Model\Trait\HasAuthor;
 use App\Model\Trait\HasImage;
 use \Illuminate\Database\Eloquent\Model;
 
 class BlogpostCategory extends Model {
 
+    use HasAuthor;
     use HasImage;
 
     /**

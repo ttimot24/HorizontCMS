@@ -16,14 +16,6 @@ class Html {
 		return "<meta property='".$property."' content='".$content."' />";
 	}
 
-	public static function img($src,$attr=NULL){
-		return "<img src='".$src."' ".$attr." />";
-	}
-
-	public static function title($string){
-		return "<title>".$string."</title>";
-	}
-
 	public static function favicon($string){
 
 		$ext = pathinfo($string, PATHINFO_EXTENSION);
@@ -31,12 +23,5 @@ class Html {
 		return "<link rel='shortcut icon' type='image/".$ext."' href='".$string."'/>";
 	}
 
-	public static function inputField($name,$value,$reguired){
-		return "<input type='text' name='".$name."' value='".$value."' ".$required."/>";
-	}
-
-	public static function a($name,$link,$attr){
-		return "<a href='".$link."' ".$attr.">".$name."</a>";
-	}
 
 }
