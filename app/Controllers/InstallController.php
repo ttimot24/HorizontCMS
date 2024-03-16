@@ -25,6 +25,10 @@ class InstallController extends Controller
         return $this->view->render("install/index", ['enable_continue' => true]);
     }
 
+    public function show($id){
+        return $this->{$id}();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -39,13 +39,13 @@ foreach(array_diff(scandir(THEME_CONTROLLER_PATH), ['.', '..', 'WebsiteControlle
 	}
 }
 
-Route::any('/{slug?}/{args?}', function ($slug = "", $args = null, Request $request, Container $container) {
+Route::any('/{slug?}/{args?}', function ($slug = "", $args = null, Request $request, Container $container) use ($_THEME_NAME) {
 
 	try {
 
 		try {
 
-			$this->router->changeNamespace("Theme\\" . Settings::get('theme') . "\\App\\Controllers\\");
+			$this->router->changeNamespace("Theme\\" . $_THEME_NAME . "\\App\\Controllers\\");
 
 			$action = explode("/", $args)[0];
 
