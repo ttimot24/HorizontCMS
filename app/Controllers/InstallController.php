@@ -2,13 +2,11 @@
 
 namespace App\Controllers;
 
-use Illuminate\Http\Request;
 use App\Libs\Controller;
 use Session;
 use Config;
-use Schema;
 
-
+// TODO User routes
 class InstallController extends Controller
 {
 
@@ -21,11 +19,7 @@ class InstallController extends Controller
     public function index()
     {
 
-        $cachePath = storage_path('framework/upgrade/cache');
-
-        if (!file_exists($cachePath)) {
-            \File::makeDirectory($cachePath, $mode = 0777, true, true);
-        }
+        \File::ensureDirectoryExists('framework/upgrade/cache');
 
         $this->view->title("Install");
         return $this->view->render("install/index", ['enable_continue' => true]);
@@ -38,7 +32,7 @@ class InstallController extends Controller
      */
     public function step1()
     {
-
+        // TODO Read language file list
         $languages = ['English', 'Magyar', 'Deutsch'];
 
         $this->view->title("Install");
@@ -78,7 +72,7 @@ class InstallController extends Controller
         try {
 
 
-            switch ($this->request->input('db_driver')) {
+            switch ($this->request->input('db_driver', 'mysql')) {
 
                 case 'mysql':
 
@@ -174,20 +168,7 @@ class InstallController extends Controller
             $administrator->role_id = 6;
             $administrator->active = 1;
 
-            if ($administrator->save()) {
-
-                $systemupgrade = new \App\Model\SystemUpgrade();
-                $systemupgrade->version = \Config::get('horizontcms.version');
-                $systemupgrade->nickname = "Core";
-                $systemupgrade->importance = "Fresh install";
-                $systemupgrade->description = "welcome!";
-
-                $systemupgrade->save();
-
-                // \Artisan::call("key:generate");
-
-            } else {
-
+            if (!$administrator->save()) {
                 return $this->redirect('admin/install/step4')->withMessage(['danger' => 'Something went wrong!'])->withError(true);
             }
         } catch (\Exception $e) {
