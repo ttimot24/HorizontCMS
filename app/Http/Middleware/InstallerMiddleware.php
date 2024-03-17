@@ -17,9 +17,9 @@ class InstallerMiddleware
     {
 
         if(!\App\HorizontCMS::isInstalled() && !$request->is(\Config::get('horizontcms.backend_prefix').'/install*')){
-            
+
             \Auth::logout();
-            // FIXME Use router
+
             return redirect(route('install.index'));
 
         }else if(\App\HorizontCMS::isInstalled() && $request->is(\Config::get('horizontcms.backend_prefix').'/install*')){

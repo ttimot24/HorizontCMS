@@ -41,11 +41,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapBackendRoutes();
 
-        if(app()->isInstalled()){
-            $this->mapWebRoutes();
-        }
-
-        //
+        $this->mapWebRoutes();
+        
     }
 
     /**
