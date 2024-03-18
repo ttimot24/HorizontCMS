@@ -24,10 +24,12 @@ class Page extends Model {
 
     protected $imageDir = "storage/images/pages";
 
+    //TODO Use local scope
     public static function home(){
         return self::find(Settings::get('home_page'));
     }
 
+    //TODO Use local scope
     public static function getByFunction($function){
         return self::where('url',$function)->get()->first();        
     }
@@ -52,10 +54,12 @@ class Page extends Model {
         return NULL;
     }
 
+    //TODO Use local scope
     public static function activeMain(){
          return self::where('visibility',1)->where('parent_id',NULL)->orderBy('queue')->orderBy('id')->get();
     }
 
+    //TODO Use local scope
     public static function active(){
         return self::where('visibility',1)->orderBy('queue')->orderBy('id')->get();
     }
@@ -85,6 +89,8 @@ class Page extends Model {
         return ($this->slug!=NULL && $this->slug!="")? $this->slug : str_slug($this->name);
     }
 
+    //TODO Use local scope
+    //TODO Use trait
     public static function search($search_key){
 
         $search_key = '%'.$search_key.'%';

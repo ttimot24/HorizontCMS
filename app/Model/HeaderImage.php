@@ -24,11 +24,12 @@ class HeaderImage extends Model {
 
     protected $imageDir = "storage/images/header_images";
 
-
+    //TODO Use local scope
     public static function getActive($order = 'ASC'){
         return self::where('active','>',0)->orderBy('order',$order);
     }
 
+    //TODO Use local scope
     public static function getInactive($order = 'ASC'){
         return self::where('active','=',0)->orderBy('order',$order);
     }

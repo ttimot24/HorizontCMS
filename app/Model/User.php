@@ -135,7 +135,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     	$this->attributes['password'] = \Hash::make($value);
     }
 
-
+    //TODO Use local scope
+    //TODO Use trait
     public static function search($search_key){
 
         $search_key = '%'.$search_key.'%';

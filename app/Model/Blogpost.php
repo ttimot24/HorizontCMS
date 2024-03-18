@@ -46,14 +46,17 @@ class Blogpost extends Model {
         return NULL;
     }
 
+    //TODO Use local scope
     public static function getPublished($num = null, $order = 'ASC'){
         return self::where('active','>',0)->orderBy('created_at',$order)->paginate($num);
     }
 
+    //TODO Use local scope
     public static function getDrafts($num = null, $order = 'ASC'){
         return self::where('active',0)->get()->orderBy('created_at',$order)->paginate($num);
     }
 
+    //TODO Use local scope
     public static function getFeatured($num = null, $order = 'ASC'){
         return self::where('active',2)->orderBy('created_at',$order)->paginate($num);
     }
@@ -102,6 +105,8 @@ class Blogpost extends Model {
         return $this->active == 2;
     }
 
+    //TODO Use local scope
+    //TODO Use trait
     public static function search($search_key){
 
         $search_key = '%'.$search_key.'%';
