@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\Trait\HasImage;
+use App\Model\Trait\Searchable;
 use \Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 //use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,6 +19,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     use Notifiable, Authenticatable, Authorizable, CanResetPassword;
     use HasImage;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +29,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $fillable = [
         'name', 'username' ,'email', 'password', 'phone', 'role_id', 'active',
     ];
+
+    protected $search = ['name', 'username', 'email'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -125,7 +129,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 	}
 
     public function getSlug(){
-        return ($this->slug!=NULL && $this->slug!="")? $this->slug : str_slug($this->username);
+        return empty($this->slug)? str_slug($this->username) : $this->slug;
     }
 
     /**
@@ -133,16 +137,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     */
     public function setPasswordAttribute($value){
     	$this->attributes['password'] = \Hash::make($value);
-    }
-
-    //TODO Use local scope
-    //TODO Use trait
-    public static function search($search_key){
-
-        $search_key = '%'.$search_key.'%';
-
-        return self::where('name', 'LIKE' ,$search_key)->orWhere('username', 'LIKE' ,$search_key)->orWhere('email', 'LIKE' ,$search_key)->get();
-
     }
 
 }

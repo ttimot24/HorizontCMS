@@ -5,11 +5,13 @@ namespace App\Model;
 use \Illuminate\Database\Eloquent\Model;
 use App\Model\Trait\HasAuthor;
 use App\Model\Trait\HasImage;
+use App\Model\Trait\Searchable;
 
 class Page extends Model {
 
     use HasImage;
     use HasAuthor;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +21,8 @@ class Page extends Model {
     protected $fillable = [
         'name', 'url' ,'visibility', 'parent_id', 'queue', 'page', 'active',
     ];
+
+    protected $search = ['name', 'page'];
 
     protected $defaultImage = "resources/images/icons/page.png";
 
@@ -84,18 +88,7 @@ class Page extends Model {
     }
 
     public function getSlug(){
-        return ($this->slug!=NULL && $this->slug!="")? $this->slug : str_slug($this->name);
+        return empty($this->slug)? str_slug($this->name) : $this->slug;
     }
-
-    //TODO Use local scope
-    //TODO Use trait
-    public static function search($search_key){
-
-        $search_key = '%'.$search_key.'%';
-
-        return self::where('name', 'LIKE' ,$search_key)->orWhere('page', 'LIKE' ,$search_key)->get();
-
-    }
-
 
 }
