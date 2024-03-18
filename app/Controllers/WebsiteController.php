@@ -156,7 +156,7 @@ class WebsiteController extends Controller
 
             $search_engine->executeSearch($this->request->input('search'));
 
-            return redirect(\App\Model\Page::getByFunction('search.php')->slug)->withSearchResult(
+            return redirect(\App\Model\Page::withTemplate('search.php')->first()->getSlug())->withSearchResult(
                 $search_engine
             );
         }

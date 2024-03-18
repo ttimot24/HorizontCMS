@@ -29,11 +29,9 @@ class Page extends Model {
         return self::find(Settings::get('home_page'));
     }
 
-    //TODO Use local scope
-    public static function getByFunction($function){
-        return self::where('url',$function)->get()->first();        
+    public function scopeWithTemplate($query, $template){
+        return $query->where('url', $template);
     }
-
 
     public static function findBySlug($slug){
 
