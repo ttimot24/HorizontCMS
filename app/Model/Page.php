@@ -19,7 +19,7 @@ class Page extends Model {
      * @var array
      */
     protected $fillable = [
-        'name', 'url' ,'visibility', 'parent_id', 'queue', 'page', 'active',
+        'name', 'url' ,'visibility', 'parent_id', 'language' , 'queue', 'page', 'active',
     ];
 
     protected $search = ['name', 'page'];
@@ -31,10 +31,6 @@ class Page extends Model {
     //TODO Use local scope
     public static function home(){
         return self::find(Settings::get('home_page'));
-    }
-
-    public function scopeWithTemplate($query, $template){
-        return $query->where('url', $template);
     }
 
     public static function findBySlug($slug){
@@ -56,14 +52,20 @@ class Page extends Model {
         return NULL;
     }
 
-    //TODO Use local scope
-    public static function activeMain(){
-         return self::where('visibility',1)->where('parent_id',NULL)->orderBy('queue')->orderBy('id')->get();
+    public function scopeWithTemplate($query, $template){
+        return $query->where('url', $template);
     }
 
-    //TODO Use local scope
-    public static function active(){
-        return self::where('visibility',1)->orderBy('queue')->orderBy('id')->get();
+    public function scopeMain($query){
+         return $query->where('parent_id', null)->orderBy('queue')->orderBy('id');
+    }
+
+    public function scopeActive($query){
+        return $query->where('visibility',1)->orderBy('queue')->orderBy('id');
+    }
+
+    public function scopeLanguage($query, $lang){
+        return $query->where('language', $lang)->orderBy('queue')->orderBy('id');
     }
 
     public function isActive(){
