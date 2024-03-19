@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 class HorizontCMS extends \Illuminate\Foundation\Application
 {
 
+    // TODO Settings should be added here
     public $plugins;
 
     public function __construct($basePath = null)
@@ -19,12 +20,11 @@ class HorizontCMS extends \Illuminate\Foundation\Application
 
     public static function isInstalled()
     {
-        return file_exists(base_path(".env")) || env("INSTALLED", "") != "";
+        return file_exists(base_path(".env")) || env("INSTALLED", false);
     }
 
     public function publicPath()
     {
-
         return $this->basePath . DIRECTORY_SEPARATOR;
     }
 

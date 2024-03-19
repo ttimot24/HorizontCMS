@@ -19,7 +19,7 @@ class PluginServiceProvider extends ServiceProvider
         try{
 
             if($this->app->isInstalled()){
-                $this->app->plugins = \App\Model\Plugin::where('active','1')->get()->keyBy('root_dir');
+                $this->app->plugins = \App\Model\Plugin::active()->get()->keyBy('root_dir');
 
                 $this->registerPluginAutoloaders();
 

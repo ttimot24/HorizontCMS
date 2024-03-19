@@ -7,6 +7,15 @@ use Illuminate\Support\Facades\View;
 
 class SettingsMiddleware
 {
+
+    private $settings;
+
+    public function __construct(\App\Model\Settings $settings)
+    {
+        $this->settings = $settings;
+    }
+
+
     /**
      * Handle an incoming request.
      *
@@ -18,11 +27,11 @@ class SettingsMiddleware
     {
 
         if(\App\HorizontCMS::isInstalled()){
-            $settings = new \App\Model\Settings();
-            $settings->assignAll();
-            $request->settings = json_decode(json_encode($settings->settings), true);
+
+            $this->settings->assignAll();
+            $request->settings = json_decode(json_encode($this->settings->settings), true);
            
-            View::share('settings', \App\Model\Settings::getAll());
+            View::share('settings', $this->settings::getAll());
         }
 
 

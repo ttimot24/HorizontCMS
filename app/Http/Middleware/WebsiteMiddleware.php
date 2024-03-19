@@ -3,9 +3,19 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class WebsiteMiddleware
 {
+
+    private $widgets;
+
+    public function __construct(\App\Libs\ShortCode $shortcode_engine){
+        $this->widgets = $shortcode_engine;
+    }
+
+
     /**
      * Handle an incoming request.
      *
@@ -13,14 +23,13 @@ class WebsiteMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
         $response = $next($request);
 
-        $widgets = new \App\Libs\ShortCode();
-        $widgets->initalize(app()->plugins);
+        $this->widgets->initalize(app()->plugins);
 
-        $response->setContent($widgets->compile($response->getContent()));
+        $response->setContent($this->widgets->compile($response->getContent()));
 
         return $response;
     }

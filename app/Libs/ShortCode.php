@@ -1,49 +1,47 @@
-<?php 
+<?php
 
 namespace App\Libs;
 
-use \App\Model\Plugin as Plugin;
-
-class ShortCode{
+class ShortCode
+{
 
 	private $widgets = array();
 
-	public function initalize($plugins){
+	public function initalize($plugins)
+	{
 
-		foreach($plugins as $plugin){
+		foreach ($plugins as $plugin) {
 
 
-			if( $plugin->hasRegister('widget') ){
+			if ($plugin->hasRegister('widget')) {
 
 				\View::addNamespace('plugin', [
-												$plugin->getPath()."/app/View",
-												$plugin->getPath()."/app/resources/views"
-												]);
+					$plugin->getPath() . "/app/View",
+					$plugin->getPath() . "/app/resources/views"
+				]);
 
-				$this->addWidget($plugin->getShortCode(),$plugin->getRegister('widget'));
+				$this->addWidget($plugin->getShortCode(), $plugin->getRegister('widget'));
 			}
-
-
 		}
-
 	}
 
-	public function addWidget($key,$value){
+	public function addWidget($key, $value)
+	{
 		$this->widgets[$key] = $value;
 	}
 
-	public function getWidget($key){
+	public function getWidget($key)
+	{
 		return $this->widgets[$key];
 	}
 
-	public function getAll(){
+	public function getAll()
+	{
 		return $this->widgets;
 	}
 
-	public function compile($page){
-
-		return count($this->widgets) === 0? $page : str_replace(array_keys($this->widgets), array_values($this->widgets), $page); 
+	public function compile($page)
+	{
+		return count($this->widgets) === 0 ? $page : str_replace(array_keys($this->widgets), array_values($this->widgets), $page);
 	}
-
-
 }
