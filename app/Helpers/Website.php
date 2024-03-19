@@ -116,7 +116,7 @@ class Website {
 	}
 
 	public static function getPageUrlByTemplate($page_template){
-		$page = \App\Model\Page::getByFunction($page_template);
+		$page = \App\Model\Page::withTemplate($page_template)->first();
 
 		return $page == null ? "" : $page->getSlug();
 	}

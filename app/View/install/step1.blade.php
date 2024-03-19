@@ -14,11 +14,11 @@
 
             <h2>Step 1: Language</h2>
 
-            <form action="{{ url('admin/install/step2') }}" role="form" method="POST">
-                {{ csrf_field() }}
+            <form action="{{route('install.show', 'step2')}}" role="form" method="POST">
+                @csrf
 
                 <div class='form-group'>
-                    <label for='sel1'>Select language:</label>
+                    <label for='sel1'>Select language</label>
                     <select class='form-select' id='sel1' name='lang'>
                         @foreach ($languages as $language)
                             <option value='{{ strtolower($language) }}'>{{ $language }}</option>
@@ -26,7 +26,7 @@
                     </select>
                 </div>
                 </br></br>
-                <a href='admin/install' class='btn btn-secondary btn-sm'><i class="fa fa-arrow-circle-o-left"
+                <a href="{{ route('install.index') }}" class='btn btn-secondary btn-sm'><i class="fa fa-arrow-circle-o-left"
                         aria-hidden="true"></i> Previous</a>
                 <button type='submit' class='btn btn-primary btn-md px-3'>Next <i class="fa fa-arrow-circle-o-right ml-2"
                         aria-hidden="true"></i></button>

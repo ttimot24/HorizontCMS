@@ -2,11 +2,14 @@
 
 namespace App\Controllers;
 
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
+use Illuminate\Http\Request;
 use App\Model\Page;
 
 class WebsiteController extends Controller
 {
+
+    private $request;
 
     private $engines = [
         'hcms' => \App\Libs\ThemeEngine::class,
@@ -14,12 +17,14 @@ class WebsiteController extends Controller
         //'twig' => \App\Libs\TwigThemeEngine::class,
     ];
 
-    public $theme;
+    private $theme;
 
+    public function __construct(Request $request){
 
-    public function before()
-    {
-        $this->theme = new \App\Libs\Theme($this->request->settings['theme']);
+        $this->request = $request;
+
+        $this->theme = new \App\Libs\Theme(\Settings::get('theme'));
+
     }
 
     /**
@@ -27,7 +32,7 @@ class WebsiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($page)
+    public function index($page = null)
     {
 
         if (\Session::has("lang")) {
@@ -50,7 +55,7 @@ class WebsiteController extends Controller
         }
 
 
-        $requested_page = ($page == "" || $page == NULL) ? Page::find($this->request->settings['home_page']) : Page::findBySlug($page);
+        $requested_page = empty($page)? Page::find($this->request->settings['home_page']) : Page::findBySlug($page);
 
 
         \App\Model\Visits::newVisitor($this->request);
@@ -78,6 +83,10 @@ class WebsiteController extends Controller
         ]);
     }
 
+    public function show($page){
+        return $this->index($page);
+    }
+
     public function registration()
     {
 
@@ -87,11 +96,11 @@ class WebsiteController extends Controller
             $user->active = 0;
 
             if ($user->save()) {
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_user')])->withUser($user);
+                return redirect()->back()->withMessage(['success' => trans('message.successfully_created_user')])->withUser($user);
             }
         }
 
-        return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
 
@@ -104,7 +113,7 @@ class WebsiteController extends Controller
 
             if (\Auth::attempt([$mode => $this->request->input($mode), 'password' => $this->request->input('password')]) && \Auth::user()->isActive()) {
 
-                $redirect = $this->request->has('redirect_success')? $this->redirect($this->request->input('redirect_success')) : $this->redirectToSelf();
+                $redirect = $this->request->has('redirect_success')? redirect($this->request->input('redirect_success')) : redirect()->back();
 
                 return $redirect->withMessage(['success' => trans('message.successfully_logged_in')]);
             } else {
@@ -112,7 +121,7 @@ class WebsiteController extends Controller
             }
         }
 
-        return $this->redirectToSelf()->withMessage(['danger' => trans('auth.failed')]);
+        return redirect()->back()->withMessage(['danger' => trans('auth.failed')]);
     }
 
     public function language()
@@ -122,7 +131,7 @@ class WebsiteController extends Controller
             \Session::put('lang', $this->request->input("lang"));
         }
 
-        return $this->redirectToSelf();
+        return redirect()->back();
     }
 
     public function search()
@@ -131,7 +140,7 @@ class WebsiteController extends Controller
         if ($this->request->isMethod('POST')) {
 
             if ($this->request->input('search') == "" || $this->request->input('search') == null) {
-                return $this->redirectToSelf();
+                return redirect()->back();
             }
 
 
@@ -147,12 +156,12 @@ class WebsiteController extends Controller
 
             $search_engine->executeSearch($this->request->input('search'));
 
-            return $this->redirect(\App\Model\Page::getByFunction('search.php')->slug)->withSearchResult(
+            return redirect(\App\Model\Page::withTemplate('search.php')->first()->getSlug())->withSearchResult(
                 $search_engine
             );
         }
 
-        return $this->redirectToSelf();
+        return redirect()->back();
     }
 
     public function logout()
@@ -160,7 +169,7 @@ class WebsiteController extends Controller
 
         \Auth::logout();
 
-        $redirect = $this->request->has('redirect') ? $this->redirect($this->request->input('redirect')) : $this->redirectToSelf();
+        $redirect = $this->request->has('redirect') ? redirect($this->request->input('redirect')) : redirect()->back();
 
         return $redirect;
     }

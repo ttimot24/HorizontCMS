@@ -2,9 +2,16 @@
 
 namespace App\Model;
 
-use \App\Libs\Model;
+use \Illuminate\Database\Eloquent\Model;
+use App\Model\Trait\HasAuthor;
+use App\Model\Trait\HasImage;
+use App\Model\Trait\Searchable;
 
 class Page extends Model {
+
+    use HasImage;
+    use HasAuthor;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -12,21 +19,19 @@ class Page extends Model {
      * @var array
      */
     protected $fillable = [
-        'name', 'url' ,'visibility', 'parent_id', 'queue', 'page', 'active',
+        'name', 'url' ,'visibility', 'parent_id', 'language' , 'queue', 'page', 'active',
     ];
+
+    protected $search = ['name', 'page'];
 
     protected $defaultImage = "resources/images/icons/page.png";
 
     protected $imageDir = "storage/images/pages";
 
+    //TODO Use local scope
     public static function home(){
         return self::find(Settings::get('home_page'));
     }
-
-    public static function getByFunction($function){
-        return self::where('url',$function)->get()->first();        
-    }
-
 
     public static function findBySlug($slug){
 
@@ -47,12 +52,20 @@ class Page extends Model {
         return NULL;
     }
 
-    public static function activeMain(){
-         return self::where('visibility',1)->where('parent_id',NULL)->orderBy('queue')->orderBy('id')->get();
+    public function scopeWithTemplate($query, $template){
+        return $query->where('url', $template);
     }
 
-    public static function active(){
-        return self::where('visibility',1)->orderBy('queue')->orderBy('id')->get();
+    public function scopeMain($query){
+         return $query->where('parent_id', null)->orderBy('queue')->orderBy('id');
+    }
+
+    public function scopeActive($query){
+        return $query->where('visibility',1)->orderBy('queue')->orderBy('id');
+    }
+
+    public function scopeLanguage($query, $lang){
+        return $query->where('language', $lang)->orderBy('queue')->orderBy('id');
     }
 
     public function isActive(){
@@ -76,21 +89,8 @@ class Page extends Model {
         return $this->hasMany(self::class,'parent_id','id');
     }
 
-    public function author(){
-        return $this->belongsTo(\App\Model\User::class,'author_id','id'); //In db it has to be author_id else it won't work because Laravel priority is attr -> function
-   }   
-
     public function getSlug(){
-        return ($this->slug!=NULL && $this->slug!="")? $this->slug : str_slug($this->name);
+        return empty($this->slug)? str_slug($this->name) : $this->slug;
     }
-
-    public static function search($search_key){
-
-        $search_key = '%'.$search_key.'%';
-
-        return self::where('name', 'LIKE' ,$search_key)->orWhere('page', 'LIKE' ,$search_key)->get();
-
-    }
-
 
 }

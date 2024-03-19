@@ -2,8 +2,9 @@
 
 namespace App\Model;
 
-use \App\Libs\Model;
+use \Illuminate\Database\Eloquent\Model;
 
+//TODO Use has image trait
 class Plugin extends Model {
 
     public $timestamps = false;
@@ -171,13 +172,7 @@ class Plugin extends Model {
 	}
 
 	public function isCompatibleWithCore(){
-
-		$sysversion = \App\Model\SystemUpgrade::getCurrentVersion();
-
-		$currentVersion = $sysversion==null? \Config::get("horizontcms.version") : $sysversion->version;
-		$currentVersion = isset($currentVersion)? $currentVersion : \Config::get('horizontcms.version');
-
-		return \Composer\Semver\Comparator::greaterThanOrEqualTo($currentVersion,$this->getRequiredCoreVersion());
+		return \Composer\Semver\Comparator::greaterThanOrEqualTo(config('horizontcms.version'), $this->getRequiredCoreVersion());
 	}
 
 

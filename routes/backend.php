@@ -46,7 +46,7 @@ Route::group(['middleware' => ['admin','plugin','can:global-authorization']],fun
 	});
 	
 
-	foreach(array_diff(scandir(CONTROLLER_PATH), ['.', '..']) as $file){
+	foreach(array_diff(scandir(CONTROLLER_PATH), ['.', '..', 'WebsiteController.php']) as $file){
 		if(is_file(CONTROLLER_PATH."/".$file)){
 			$actualName = pathinfo($file, PATHINFO_FILENAME);
 			Route::resource("/".strtolower(str_replace("Controller","",$actualName)), "\App\Controllers\\".$actualName )

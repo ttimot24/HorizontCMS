@@ -7,7 +7,7 @@
 
             @include('breadcrumb', [
                 'links' => [['name' => 'Content'], ['name' => trans('Dashboard'), 'url' => route('dashboard.index')]],
-                'page_title' => "Search",
+                'page_title' => trans('search.title'),
             ])
 
     <div class="container">
@@ -25,7 +25,7 @@
                                 name='search' id='exampleInputAmount' placeholder="{{ trans('dashboard.search_bar') }}"
                                 required>
                             <div class="input-group-prepend">
-                                <button type='submit' class='btn btn-link btn-sm border-0' style='padding:0px;'>
+                                <button type='submit' class='btn btn-link btn-sm border-0 p-0'>
                                     <span class='fa fa-search text-white' aria-hidden='true'></span>
                                 </button>
                             </div>

@@ -39,11 +39,13 @@
                                     <h4 class="text-white">
                                         {{ $role->name }} <small class="text-dark">({{ $role->users->count() }})</small>
                                         <small>
-                                            <?php
-                                            if (\Auth::user()->role->is($role)) {
-                                                echo Html::img(\Auth::user()->getThumb(), "class='img-rounded pull-right' style='width:15%;height:15%;'");
-                                            }
-                                            ?>
+                                            
+                                            @if (\Auth::user()->role->is($role))
+
+                                                <img src="{{ \Auth::user()->getThumb() }}" class='img-rounded pull-right' style='width:15%;height:15%;' />
+
+                                            @endif
+                                            
                                         </small>
                                     </h4>
 

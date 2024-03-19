@@ -25,66 +25,39 @@ class UpgradeCommand extends Command
      *
      * @return void
      */
-    public function __construct()
+
+    private $updateManager = null;
+
+    public function __construct(\Codedge\Updater\UpdaterManager $updater)
     {
         parent::__construct();
+
+        $this->updateManager = $updater;
     }
 
+    public function handle()
+    {
 
+        try {
 
-    public function handle(){
- 
-        $workspace = storage_path().DIRECTORY_SEPARATOR."framework".DIRECTORY_SEPARATOR."upgrade";
-        $url = \Config::get('horizontcms.sattelite_url')."/updates";
+            if ($this->updateManager->source()->isNewVersionAvailable()) {
 
-        $update = new \VisualAppeal\AutoUpdate($workspace.DIRECTORY_SEPARATOR.'temp', getcwd() , 60);
-        $update->setCurrentVersion(\App\Model\SystemUpgrade::getCurrentVersion()->version);
-        $update->setUpdateUrl($url); //Replace with your server update directory
-        // Optional:
-        $update->addLogHandler(new \Monolog\Handler\StreamHandler($workspace . '/update.log'));
-        $update->setCache(new \Desarrolla2\Cache\Adapter\File($workspace . '/cache'), 3600);
-        //Check for a new update
+                $latestVersion = $this->updateManager->source()->getVersionAvailable();
 
+                //Install new update
+                echo 'New Version: ' . $latestVersion . '<br>';
+                echo 'Installing Updates: <br>';
 
-        if ($update->checkUpdate() === false)
-            die('Could not check for updates! See log file for details.');
-        if ($update->newVersionAvailable()) {
-            //Install new update
-            echo 'New Version: ' . $update->getLatestVersion() . '<br>';
-            echo 'Installing Updates: <br>';
-            echo '<pre>';
-            var_dump(array_map(function($version) {
-                return (string) $version;
-            }, $update->getVersionsToUpdate()));
-            echo '</pre>';
-            // This call will only simulate an update.
-            // Set the first argument (simulate) to "false" to install the update
-            // i.e. $update->update(false);
-            $result = $update->update(false);
-            if ($result === true) {
-                echo 'Update successful<br>';
-                $sys_upgrade = new \App\Model\SystemUpgrade();
-                $sys_upgrade->version = $update->getLatestVersion();
-                $sys_upgrade->nickname = "Upgrade";
-                $sys_upgrade->importance = "important";
-                $sys_upgrade->description = "It was a successful update!";
-                $sys_upgrade->save();
+                $release = $this->updateManager->source()->fetch($latestVersion);
+
+                $result = $this->updateManager->source()->update($release);
+
+                echo $result ? 'Update successful<br>' : 'Update failed: ' . $result . '!<br>';
             } else {
-                echo 'Update failed: ' . $result . '!<br>';
-                if ($result = AutoUpdate::ERROR_SIMULATE) {
-                    echo '<pre>';
-                    var_dump($update->getSimulationResults());
-                    echo '</pre>';
-                }
+                echo 'Current Version is up to date<br>';
             }
-        } else {
-            echo 'Current Version is up to date<br>';
+        } catch (\Exception $e) {
+            die('Could not check for updates! ' . $e->getMessage());
         }
-        echo 'Log:<br>';
-        echo nl2br(file_get_contents($workspace. '/update.log'));
-
-
     }
-
-
 }

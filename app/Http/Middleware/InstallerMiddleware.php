@@ -17,13 +17,14 @@ class InstallerMiddleware
     {
 
         if(!\App\HorizontCMS::isInstalled() && !$request->is(\Config::get('horizontcms.backend_prefix').'/install*')){
-            
+
             \Auth::logout();
-            return redirect(\Config::get('horizontcms.backend_prefix').'/install');
+
+            return redirect(route('install.index'));
 
         }else if(\App\HorizontCMS::isInstalled() && $request->is(\Config::get('horizontcms.backend_prefix').'/install*')){
 
-            return redirect(\Config::get('horizontcms.backend_prefix').'/login');
+            return redirect(route('login'));
         }
 
 

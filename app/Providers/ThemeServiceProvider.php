@@ -14,13 +14,13 @@ class ThemeServiceProvider extends ServiceProvider
     public function boot()
     {
         // For website
-        if (!app()->runningInConsole() && !\Request::is(\Config::get('horizontcms.backend_prefix') . "/*")) {
+        if (!app()->runningInConsole() && app()->isInstalled() && !\Request::is(\Config::get('horizontcms.backend_prefix') . "/*")) {
             $theme = \App\Model\Settings::get('theme');
             $this->loadJsonTranslationsFrom(base_path("themes/" . $theme . "/resources/lang"));
         }
 
         // For everything
-        if(!app()->runningInConsole()){
+        if(!app()->runningInConsole() && app()->isInstalled()){
             $theme = \App\Model\Settings::get('theme');
             \View::addNamespace('theme', [
                 "themes/".$theme."/app".DIRECTORY_SEPARATOR."View",

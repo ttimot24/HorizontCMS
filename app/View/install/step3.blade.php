@@ -22,9 +22,9 @@
 
             </br>
 
-            <form action='admin/install/migrate' method='POST'>
+            <form action="{{route('install.show', 'migrate')}}" method='POST'>
 
-                {{ csrf_field() }}
+                @csrf
 
                 <div class='container'>
 
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="pt-5">
-                    <a href='admin/install/step2'><button type='button' class='btn btn-secondary btn-sm'><i
+                    <a href="{{route('install.show', 'step2')}}"><button type='button' class='btn btn-secondary btn-sm'><i
                                 class="fa fa-arrow-circle-o-left" aria-hidden="true"></i> Previous</button></a>
                     <button type='submit' class='btn btn-primary btn-md px-3'>Next <i
                             class="fa fa-arrow-circle-o-right ml-2" aria-hidden="true"></i></button>

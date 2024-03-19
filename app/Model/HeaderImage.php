@@ -2,9 +2,14 @@
 
 namespace App\Model;
 
-use \App\Libs\Model;
+use \Illuminate\Database\Eloquent\Model;
+use App\Model\Trait\HasAuthor;
+use App\Model\Trait\HasImage;
 
 class HeaderImage extends Model {
+
+    use HasImage;
+    use HasAuthor;
 
     /**
      * The attributes that are mass assignable.
@@ -19,14 +24,12 @@ class HeaderImage extends Model {
 
     protected $imageDir = "storage/images/header_images";
 
-    public function author(){
-        return $this->belongsTo(\App\Model\User::class,'author_id','id'); //In db it has to be author_id else it won't work because Laravel priority is attr -> function
-    }   
-
+    //TODO Use local scope
     public static function getActive($order = 'ASC'){
         return self::where('active','>',0)->orderBy('order',$order);
     }
 
+    //TODO Use local scope
     public static function getInactive($order = 'ASC'){
         return self::where('active','=',0)->orderBy('order',$order);
     }

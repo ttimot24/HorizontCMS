@@ -30,60 +30,65 @@
 
             <div class="card-body">
 
-                <div class='list-group'>
-
                     @foreach ($all_plugin as $current_plugin)
-                        <div class='list-group-item bg-dark p-3'>
+                    <div class='card mb-3'>
+                        <div class='card-body p-3 bg-dark'>
                             <div class='row p-0'>
                                 <div class='col-md-1 col-sm-12 col-xs-12 p-0 pl-3 text-center'>
-
-                                    {!! Html::img($current_plugin->getIcon(), "class='img img-thumbnail mt-1' style='width: 70px; height: 70px;' ") !!}
-
+                                    <img src="{{ $current_plugin->getIcon() }}" class='img img-thumbnail mt-1' style='width: 5rem; height: 5rem;' />
                                 </div>
 
                                 <div class='col-md-9 m-0'>
-                                    <h4 class='list-group-item-heading p-0'>
+                                    <h4 class='p-0'>
 
-                                        <?php
-                                        
-                                        if ($current_plugin->isActive()) {
-                                            echo "<a class='color-primary' id='" . $current_plugin->root_dir . "' href='" . config('horizontcms.backend_prefix') . '/plugin/run/' . $current_plugin->getSlug() . "'>" . $current_plugin->getName() . '</a>';
-                                        } else {
-                                            echo "<a class='color-primary' id='" . $current_plugin->root_dir . "' >" . $current_plugin->getName() . '</a>';
-                                        }
-                                        
-                                        echo " <small class='text-muted'>version: " .
-                                            $current_plugin->getInfo('version') .
-                                            " | author: <a href='" .
-                                            $current_plugin->getInfo('author_url') .
-                                            "'>" .
-                                            $current_plugin->getInfo('author') .
-                                            "</a></small></h4>
-                                                                                                                    
-                                                                                                                                <p class='text-white'>" .
-                                            $current_plugin->getInfo('description') .
-                                            '</p>';
-                                        
-                                        echo '</div>';
-                                        
-                                        echo "<div class='col-md-2 col-sm-4 col-xs-4 text-end'>";
-                                        
-                                        if (!$current_plugin->isInstalled()) {
-                                            echo "<a id='install' class='btn btn-primary btn-block' href='" . config('horizontcms.backend_prefix') . '/plugin/install/' . $current_plugin->root_dir . "'>Install</a>";
-                                        } else {
-                                            if (!$current_plugin->isActive()) {
-                                                echo "<a class='btn btn-success btn-block' href='" . config('horizontcms.backend_prefix') . '/plugin/activate/' . $current_plugin->root_dir . "'>Activate</a>";
-                                            } else {
-                                                echo "<a class='btn btn-info btn-block' href='" . config('horizontcms.backend_prefix') . '/plugin/deactivate/' . $current_plugin->root_dir . "'>Deactivate</a>";
-                                            }
-                                        }
-                                        echo "<button class='btn btn-danger btn-block' data-bs-toggle='modal' data-bs-target='#delete_" . $current_plugin->root_dir . "' >Delete</button>";
-                                        
-                                        ?>
+                                        @if ($current_plugin->isActive())
+                                            <a class='card-title text-primary' id='{{ $current_plugin->root_dir }}'
+                                                href='{{ route('plugin.'.str_slug($current_plugin->root_dir).'.start.index') }}'>{{ $current_plugin->getName() }}</a>
+                                        @else
+                                            <a class='text-white'
+                                                id='{{ $current_plugin->root_dir }}'>{{ $current_plugin->getName() }}</a>
+                                        @endif
+
+
+                                        <small class='text-muted'>version: {{ $current_plugin->getInfo('version') }}
+                                            | author: <a href='{{ $current_plugin->getInfo('author_url') }}'>
+                                                {{ $current_plugin->getInfo('author') }}</a>
+                                        </small>
+                                    </h4>
+
+                                    <p class='text-white'>
+                                        {{ $current_plugin->getInfo('description') }}
+                                    </p>
+
+                                </div>
+
+                                <div class='col-md-2 col-sm-4 col-xs-4 text-end'>
+
+
+                                    @if (!$current_plugin->isInstalled())
+                                        <a id='install' class='btn btn-primary btn-block'
+                                            href='{{ config('horizontcms.backend_prefix') }}/plugin/install/{{ $current_plugin->root_dir }}'>Install</a>
+                                    @else
+                                        @if (!$current_plugin->isActive())
+                                            <a class='btn btn-success btn-block'
+                                                href='{{ config('horizontcms.backend_prefix') }}/plugin/activate/{{ $current_plugin->root_dir }}'>Activate</a>
+                                        @else
+                                            <a class='btn btn-info btn-block'
+                                                href='{{ config('horizontcms.backend_prefix') }}/plugin/deactivate/{{ $current_plugin->root_dir }}'>Deactivate</a>
+                                        @endif
+                                    @endif
+
+
+
+                                    <button class='btn btn-danger btn-block' data-bs-toggle='modal'
+                                        data-bs-target='#delete_{{ $current_plugin->root_dir }}'>{{ trans('actions.delete') }}</button>
+
 
                                 </div>
 
                             </div>
+
+                        </div>
 
                         </div>
 
@@ -98,9 +103,6 @@
                             'cancel' => trans('actions.cancel'),
                         ])
                     @endforeach
-
-
-                </div>
 
 
                 <div class='modal upload_plugin' id='create_file' tabindex='-1' role='dialog'
@@ -127,7 +129,8 @@
                             </div>
                             <div class='modal-footer'>
                                 <button type='submit' class='btn btn-primary'>Upload</button></form>
-                                <button type='button' class='btn btn-default' data-bs-dismiss='modal'>Cancel</button>
+                                <button type='button' class='btn btn-default'
+                                    data-bs-dismiss='modal'>{{ trans('actions.cancel') }}</button>
                             </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->

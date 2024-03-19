@@ -1,62 +1,38 @@
-<?php 
+<?php
 
 /* This helper is for legacy theme compability purposes */
 
-class UrlManager{
+class UrlManager
+{
 
 
-	public static function get_slugs(){
+	public static function seo_url($string)
+	{
 
-		if(isset($_GET['r'])){
-			$url = rtrim($_GET['r'],"/"); 
-			$url = explode("/",$url);
-			return $url;
-		}else if(isset($_GET['route'])){
-			$url = rtrim($_GET['route'],"/"); 
-			$url = explode("/",$url);
-			return $url;
-		}
-		else{
-			return NULL;
-		}
-		
-	}
+		$string = explode("/", $string);
 
-
-
-	public static function seo_url($string){
-
-		$string = explode("/",$string);
-
-		if(count($string)>1){
+		if (count($string) > 1) {
 
 			$url = "";
 
 			foreach ($string as $slug) {
-				$url .= "/".str_slug($slug, "-");	
+				$url .= "/" . str_slug($slug, "-");
 			}
 
-			return ltrim($url,"/");
-		}else{
+			return ltrim($url, "/");
+		} else {
 			return str_slug($string[0], "-");
 		}
-
-	}
-
-	public static function prepare_slug($string){
-		return str_replace("-","%",$string);
 	}
 
 
-	public static function http_protocol($string){
+	public static function http_protocol($string)
+	{
 
 		if (strpos($string, 'http') === false) {
-		    $string = "http://".$string;
+			$string = "http://" . $string;
 		}
 
 		return $string;
 	}
-
-
-
 }

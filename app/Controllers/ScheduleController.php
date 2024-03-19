@@ -16,6 +16,12 @@ class ScheduleController extends Controller
      */
     public function index()
     {
+
+        $this->view->title("Schedules");
+        return $this->view->render('settings/schedules', [
+            'commands' => rescue(fn() => \Artisan::all(), fn() => []),
+            'scheduled_tasks' => \App\Model\ScheduledTask::all(),
+        ]);
     }
 
     public function create()
@@ -31,6 +37,7 @@ class ScheduleController extends Controller
     {
 
         $task = new ScheduledTask($request->all());
+        $task->author_id = \Auth::user()->id;
         $task->active = 1;
 
         if ($task->save()) {

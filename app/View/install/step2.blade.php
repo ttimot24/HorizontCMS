@@ -26,7 +26,7 @@
 
             <form action='admin/install/check-connection' method='POST'>
 
-                {{ csrf_field() }}
+                @csrf
                 <div class='container'>
 
                     <div class='form-group'>
@@ -87,7 +87,7 @@
 
                 </div>
                 <div class="pt-5">
-                    <a href='admin/install/step1'><button type='button' class='btn btn-secondary btn-sm'><i
+                    <a href="{{route('install.show', 'step1')}}"><button type='button' class='btn btn-secondary btn-sm'><i
                                 class="fa fa-arrow-circle-o-left" aria-hidden="true"></i> Previous</button></a>
                     <button type='submit' class='btn btn-primary btn-md px-3'>Next <i
                             class="fa fa-arrow-circle-o-right ml-2" aria-hidden="true"></i></button>

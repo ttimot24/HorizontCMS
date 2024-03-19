@@ -1,8 +1,8 @@
 <?php
 
-use \App\Libs\Model;
+use \Illuminate\Database\Eloquent\Model;
 
-class SocialLink extends Model{
+class SocialLink extends Model {
   
   	protected $table = 'settings';
   	public $timestamps = false;
