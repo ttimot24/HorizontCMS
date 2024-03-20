@@ -33,7 +33,7 @@ class UpgradeController extends Controller
 
         $releases = collect($this->updateManager->source()->getReleases()->json());
 
-        $available_list = $releases->filter(fn($release) => Comparator::greaterThan($release['tag_name'], $this->updateManager->source()->getVersionInstalled()));
+        $available_list = $releases->filter(fn($release) => Comparator::greaterThan($release['tag_name'], 'v'.$this->updateManager->source()->getVersionInstalled()));
 
         $this->view->title(trans('settings.settings'));
         return $this->view->render('upgrade/index', [

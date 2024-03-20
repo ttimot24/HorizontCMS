@@ -32,7 +32,7 @@
                                                 action="{{ route('upgrade.update', $available['tag_name']) }}">
                                                 @method('PUT')
                                                 @csrf
-                                                <button type="submit" class="btn btn-link m-0 p-0">Upgrade</button>
+                                                <button type="submit" class="btn btn-sm btn-primary">Upgrade</button>
                                             </form>
                                         </div>
                                     </div>
