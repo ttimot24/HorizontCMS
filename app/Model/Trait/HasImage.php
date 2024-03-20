@@ -13,8 +13,8 @@ trait HasImage
     public function getThumb()
     {
 
-        if ($this->hasImage() && file_exists($this->imageDir . "/thumbs/" . $this->image)) {
-            return url($this->imageDir . "/thumbs/" . $this->image);
+        if ($this->hasImage() && file_exists(rtrim($this->imageDir, DIRECTORY_SEPARATOR) . "/thumbs/" . $this->image)) {
+            return url(rtrim($this->imageDir, DIRECTORY_SEPARATOR). "/thumbs/" . $this->image);
         } else {
             return $this->getImage();
         }
@@ -22,9 +22,8 @@ trait HasImage
 
     public function getImage()
     {
-
-        if ($this->hasImage() && file_exists($this->imageDir . "/" . $this->image)) {
-            return url($this->imageDir . "/" . $this->image);
+        if ($this->hasImage() && file_exists(rtrim($this->imageDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $this->image)) {
+            return url(rtrim($this->imageDir, DIRECTORY_SEPARATOR) . "/" . $this->image);
         } else {
             return url($this->getDefaultImage());
         }

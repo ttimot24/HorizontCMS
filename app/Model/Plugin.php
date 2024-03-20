@@ -2,182 +2,206 @@
 
 namespace App\Model;
 
+use App\Model\Trait\HasImage;
 use \Illuminate\Database\Eloquent\Model;
 
-//TODO Use has image trait
-class Plugin extends Model {
+class Plugin extends Model
+{
 
-    public $timestamps = false;
+	use HasImage;
 
-    protected $fillable = ['id','root_dir','area','permission','table_name','active'];
-	
-    private $info = null;
+	public $timestamps = false;
 
-	public function __construct($root_dir = null){	
+	protected $fillable = ['id', 'root_dir', 'area', 'permission', 'table_name', 'active'];
 
-		if($root_dir!==null && !is_array($root_dir)){
+	private $info = null;
 
-			$eloquent = self::where('root_dir',$root_dir)->get();
+	protected $image = "icon.jpg";
 
-			if($eloquent!=null){
+	protected $defaultImage = "resources/images/icons/plugin.png";
 
-				$attributes = $eloquent->toArray();
+	protected $imageDir = null;
 
-				!isset($attributes[0])? : $attributes = $attributes[0];
+	public function __construct($root_dir = null)
+	{
 
-				$this->fill($attributes);
+		if (isset($root_dir) && !is_array($root_dir)) {
 
+			// FIXME Use first
+			$eloquent = self::rootDir($root_dir)->first();
+
+			if (isset($eloquent)) {
+				$this->fill($eloquent->attributes);
 			}
-		
+
+			isset($this->root_dir) ?: $this->setRootDir($root_dir);
+
+			$this->imageDir = $this->getPath();
 		}
-
-
-		isset($this->root_dir) ? : $this->setRootDir($root_dir);	
-		
 	}
 
-	public function scopeActive($query){
-		return $query->where('active','1');
+	public function scopeRootDir($query, $root_dir)
+	{
+		return $query->where('root_dir', $root_dir);
 	}
 
-	public function setRootDir($root_dir){
+	public function scopeActive($query)
+	{
+		return $query->where('active', '1');
+	}
+
+	public function setRootDir($root_dir)
+	{
 		$this->root_dir = $root_dir;
 	}
 
-	public function exists(){
+	public function exists()
+	{
 		return file_exists($this->getPath());
 	}
 
-    public function isInstalled(){
-    	$result = self::where('root_dir',$this->root_dir)->get();
+	public function isInstalled()
+	{
+		$result = self::rootDir($this->root_dir)->get();
 
-    	return !$result->isEmpty();
-    }
-
-    public function isActive(){
-    	
-    	return ($this->isInstalled() && $this->active==1);
-    }
-
-	public function getConfig($config, $default = NULL){
-
-		isset($this->config)? : $this->config = file_exists($this->getPath()."config.php")? require($this->getPath()."config.php") : NULL;
-
-		return isset($this->config[$config])? $this->config[$config]: $default;
+		return !$result->isEmpty();
 	}
 
-	public function getName(){
-		return $this->getInfo('name')==NULL? $this->root_dir : $this->getInfo('name');
+	public function isActive()
+	{
+
+		return ($this->isInstalled() && $this->active == 1);
 	}
 
-	public function getNamespaceFor($for){
-		return "\Plugin\\".$this->root_dir."\\App\\".ucfirst($for)."\\";
+	public function getConfig($config, $default = null)
+	{
+
+		isset($this->config) ?: $this->config = file_exists($this->getPath() . "config.php") ? require($this->getPath() . "config.php") : null;
+
+		return isset($this->config[$config]) ? $this->config[$config] : $default;
 	}
 
-	public function getSlug(){
+	public function getName()
+	{
+		return $this->getInfo('name') == null ? $this->root_dir : $this->getInfo('name');
+	}
+
+	public function getNamespaceFor($for)
+	{
+		return "\Plugin\\" . $this->root_dir . "\\App\\" . ucfirst($for) . "\\";
+	}
+
+	public function getSlug()
+	{
 		return namespace_to_slug($this->root_dir);
 	}
 
-	public function getPath(){
-		return 'plugins'.DIRECTORY_SEPARATOR.$this->root_dir.DIRECTORY_SEPARATOR;
+	public function getPath()
+	{
+		return 'plugins' . DIRECTORY_SEPARATOR . $this->root_dir . DIRECTORY_SEPARATOR;
 	}
 
-	public function getDatabaseFilesPath(){
+	public function getDatabaseFilesPath()
+	{
 
-		$path_to_db = $this->getPath().'database';
+		$path_to_db = $this->getPath() . 'database';
 
-		if(file_exists($path_to_db) && is_dir($path_to_db)){
-			return $this->getPath().'database';
-		}
-	 
-		return NULL;
-	}
-
-
-	public function getIcon(){
-		return file_exists($this->getPath()."icon.jpg")? $this->getPath()."icon.jpg" : 'resources/images/icons/plugin.png';
-	}
-
-	private function loadInfoFromFile(){
-
-		$file_without_extension = $this->getPath()."plugin_info";
-		
-		if(file_exists($file_without_extension.".yml") && class_exists('\Symfony\Component\Yaml\Yaml')){
-			$this->setAllInfo( (object) \Symfony\Component\Yaml\Yaml::parse(
-																	file_get_contents($file_without_extension.".yml"),
-																	\Symfony\Component\Yaml\Yaml::PARSE_OBJECT
-																  ));
-		}else if(file_exists($file_without_extension.".json")){
-				$this->setAllInfo( json_decode(file_get_contents($file_without_extension.".json")) );
-		}else if(file_exists($file_without_extension.".xml")){
-				$this->setAllInfo(simplexml_load_file($file_without_extension.".xml"));
+		if (file_exists($path_to_db) && is_dir($path_to_db)) {
+			return $path_to_db;
 		}
 
+		return null;
 	}
 
-	public function hasInfo(){
+	private function loadInfoFromFile()
+	{
+
+		$file_without_extension = $this->getPath() . "plugin_info";
+
+		if (file_exists($file_without_extension . ".yml") && class_exists('\Symfony\Component\Yaml\Yaml')) {
+			$this->setAllInfo((object) \Symfony\Component\Yaml\Yaml::parse(
+				file_get_contents($file_without_extension . ".yml"),
+				\Symfony\Component\Yaml\Yaml::PARSE_OBJECT
+			));
+		} else if (file_exists($file_without_extension . ".json")) {
+			$this->setAllInfo(json_decode(file_get_contents($file_without_extension . ".json")));
+		} else if (file_exists($file_without_extension . ".xml")) {
+			$this->setAllInfo(simplexml_load_file($file_without_extension . ".xml"));
+		}
+	}
+
+	public function hasInfo()
+	{
 		return isset($this->info);
 	}
 
-	public function setAllInfo($all_info){
+	public function setAllInfo($all_info)
+	{
 		$this->info = $all_info;
 	}
 
-	public function getInfo($info){
+	public function getInfo($info)
+	{
 
-		if(!$this->hasInfo()){
+		if (!$this->hasInfo()) {
 			$this->loadInfoFromFile();
 		}
 
-		return isset($this->info->{$info})? $this->info->{$info}: NULL;
+		return isset($this->info->{$info}) ? $this->info->{$info} : null;
 	}
 
-	public function getShortCode(){
-		return "{[".$this->root_dir."]}";
+	public function getShortCode()
+	{
+		return "{[" . $this->root_dir . "]}";
 	}
 
-	
-	public function hasRegisterClass(){
+
+	public function hasRegisterClass()
+	{
 		return class_exists($this->getRegisterClass());
 	}
 
-	public function getRegisterClass(){
-		return "\Plugin\\".$this->root_dir."\Register";
+	public function getRegisterClass()
+	{
+		return "\Plugin\\" . $this->root_dir . "\Register";
 	}
 
-	public function hasRegister($register){
-		return method_exists($this->getRegisterClass(),$register);
+	public function hasRegister($register)
+	{
+		return method_exists($this->getRegisterClass(), $register);
 	}
 
 
-	public function getRegister($register,$default = null){
+	public function getRegister($register, $default = null)
+	{
 
 		$plugin_namespace = $this->getRegisterClass();
 
-		if($this->hasRegister($register)){
+		if ($this->hasRegister($register)) {
 
 			$instance = new $plugin_namespace();
 
-			if($instance instanceof \App\Libs\PluginInterface){
-            	return $instance->$register();
+			if ($instance instanceof \App\Libs\PluginInterface) {
+				return $instance->$register();
 			}
-        }
+		}
 
-        return $default;
+		return $default;
 	}
 
 
-	public function getRequirements(){
+	public function getRequirements()
+	{
 		return $this->getInfo('requires');
 	}
 
-	public function getRequiredCoreVersion(){
-		return isset($this->getInfo('requires')->core)? $this->getInfo('requires')->core : NULL;
+	public function getRequiredCoreVersion()
+	{
+		return isset($this->getInfo('requires')->core) ? $this->getInfo('requires')->core : NULL;
 	}
 
-	public function isCompatibleWithCore(){
+	public function isCompatibleWithCore()
+	{
 		return \Composer\Semver\Comparator::greaterThanOrEqualTo(config('horizontcms.version'), $this->getRequiredCoreVersion());
 	}
-
-
 }

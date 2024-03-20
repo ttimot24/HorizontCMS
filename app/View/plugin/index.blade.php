@@ -35,7 +35,7 @@
                         <div class='card-body p-3 bg-dark'>
                             <div class='row p-0'>
                                 <div class='col-md-1 col-sm-12 col-xs-12 p-0 pl-3 text-center'>
-                                    <img src="{{ $current_plugin->getIcon() }}" class='img img-thumbnail mt-1' style='width: 5rem; height: 5rem;' />
+                                    <img src="{{ $current_plugin->getImage() }}" class='img img-thumbnail mt-1' style='width: 5rem; height: 5rem;' />
                                 </div>
 
                                 <div class='col-md-9 m-0'>

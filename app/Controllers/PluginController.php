@@ -58,7 +58,7 @@ class PluginController extends Controller
         $repo_status = true;
 
         try {
-            $plugins = json_decode(file_get_contents(\Config::get('horizontcms.sattelite_url') . '/get_plugins.php'));
+            $plugins = json_decode(file_get_contents(config('horizontcms.sattelite_url') . '/get_plugins.php'));
         } catch (\ErrorException $e) {
             $plugins = [];
             $repo_status = false;
@@ -164,7 +164,7 @@ class PluginController extends Controller
     public function activate($plugin_name)
     {
 
-        $plugin = \App\Model\Plugin::where('root_dir', $plugin_name)->first();
+        $plugin = \App\Model\Plugin::rootDir($plugin_name)->first();
         $plugin->active = 1;
 
         if ($plugin->save()) {
@@ -183,7 +183,7 @@ class PluginController extends Controller
     public function deactivate($plugin_name)
     {
 
-        $plugin = \App\Model\Plugin::where('root_dir', $plugin_name)->first();
+        $plugin = \App\Model\Plugin::rootDir($plugin_name)->first();
         $plugin->active = 0;
 
 
@@ -217,7 +217,7 @@ class PluginController extends Controller
 
         try {
 
-            \App\Model\Plugin::where('root_dir', $plugin)->delete();
+            \App\Model\Plugin::rootDir($plugin)->delete();
 
             if (file_exists("plugins/" . $plugin)) {
                 \Storage::disk('plugins')->deleteDirectory($plugin);
