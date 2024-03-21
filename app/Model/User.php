@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\Trait\HasImage;
+use App\Model\Trait\IsActive;
 use App\Model\Trait\Searchable;
 use \Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -19,6 +20,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     use Notifiable, Authenticatable, Authorizable, CanResetPassword;
     use HasImage;
+    use IsActive;
     use Searchable;
 
     /**
@@ -111,12 +113,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function isAdmin(){
         return $this->hasPermission('admin_area');
     }
-
-
-    public function isActive(){
-        return $this->active==1;
-    }
-
 
     /**
     *

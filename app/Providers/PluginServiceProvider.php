@@ -7,6 +7,9 @@ use Illuminate\Support\ServiceProvider;
 
 class PluginServiceProvider extends ServiceProvider
 {
+
+    protected $kernel;
+
     /**
      * Bootstrap any application services.
      *
@@ -32,9 +35,9 @@ class PluginServiceProvider extends ServiceProvider
                 $this->registerPluginViewPaths();
             }
         }catch(\Exception $e){
-            if(\Settings::get('website_debug')==1 && !\Request::is(\Config::get('horizontcms.backend_prefix')."*")){
+            if(\Settings::get('website_debug')==1 && !\Request::is(config('horizontcms.backend_prefix')."*")){
                 throw $e;
-            }else if(\Settings::get('admin_debug')==1 && \Request::is(\Config::get('horizontcms.backend_prefix')."*")){
+            }else if(\Settings::get('admin_debug')==1 && \Request::is(config('horizontcms.backend_prefix')."*")){
                 throw $e;
             }
         }

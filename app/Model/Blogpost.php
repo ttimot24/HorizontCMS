@@ -6,6 +6,7 @@ use \Illuminate\Database\Eloquent\Model;
 use \App\Model\Trait\HasAuthor;
 use \App\Model\Trait\Draftable;
 use App\Model\Trait\HasImage;
+use App\Model\Trait\IsActive;
 use App\Model\Trait\Searchable;
 
 class Blogpost extends Model
@@ -15,6 +16,7 @@ class Blogpost extends Model
     use HasAuthor;
     use Draftable;
     use Searchable;
+    use IsActive;
 
     /**
      * The attributes that are mass assignable.
@@ -37,30 +39,31 @@ class Blogpost extends Model
 
         $blogpost = self::where('slug', $slug)->get()->first();
 
-        if ($blogpost != NULL) {
+        if (!isset($blogpost)) {
             return $blogpost;
         } else {
 
-            foreach (self::where('slug', NULL)->orWhere('slug', "")->get() as $blogpost) {
+            //FIXME Use find
+            foreach (self::where('slug', null)->orWhere('slug', "")->get() as $blogpost) {
                 if (str_slug($blogpost->title) == $slug) {
                     return $blogpost;
                 }
             }
         }
 
-        return NULL;
+        return null;
     }
 
     //TODO Use local scope
     public static function getPublished($num = null, $order = 'ASC')
     {
-        return self::where('active', '>', 0)->orderBy('created_at', $order)->paginate($num);
+        return self::active()->orderBy('created_at', $order)->paginate($num);
     }
 
     //TODO Use local scope
     public static function getDrafts($num = null, $order = 'ASC')
     {
-        return self::where('active', 0)->get()->orderBy('created_at', $order)->paginate($num);
+        return self::inactive()->get()->orderBy('created_at', $order)->paginate($num);
     }
 
     //TODO Use local scope
@@ -110,7 +113,7 @@ class Blogpost extends Model
 
     public function isPublished()
     {
-        return $this->active > 0;
+        return $this->isActive();
     }
 
     public function isFeatured()

@@ -3,12 +3,14 @@
 namespace App\Model;
 
 use App\Model\Trait\HasImage;
+use App\Model\Trait\IsActive;
 use \Illuminate\Database\Eloquent\Model;
 
 class Plugin extends Model
 {
 
 	use HasImage;
+	use IsActive;
 
 	public $timestamps = false;
 

@@ -27,8 +27,8 @@ class HeaderImageController extends Controller
 
         $this->view->title(trans('Header Images'));
         return $this->view->render('media/header_images', [
-            'slider_images' => HeaderImage::getActive()->get(),
-            'slider_disabled' => HeaderImage::getInactive()->get(),
+            'slider_images' => HeaderImage::active()->get()->orderBy('order', 'ASC'),
+            'slider_disabled' => HeaderImage::inactive()->get()->orderBy('order','ASC'),
         ]);
     }
 

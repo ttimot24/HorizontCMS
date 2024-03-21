@@ -3,11 +3,13 @@
 namespace App\Model;
 
 use App\Model\Trait\HasAuthor;
+use App\Model\Trait\IsActive;
 use \Illuminate\Database\Eloquent\Model;
 
 class ScheduledTask extends Model {
 
     use HasAuthor;
+    use IsActive;
 
     protected $table = 'schedules';
 

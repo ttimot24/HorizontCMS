@@ -3,11 +3,13 @@
 namespace App\Model;
 
 use App\Model\Trait\HasAuthor;
+use App\Model\Trait\IsActive;
 use \Illuminate\Database\Eloquent\Model;
 
 class BlogpostComment extends Model {
 
     use HasAuthor;
+    use IsActive;
     
 	/**
      * The attributes that are mass assignable.

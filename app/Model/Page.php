@@ -73,7 +73,7 @@ class Page extends Model {
     }
 
     public function isParent(){
-        return $this->parent_id==NULL;
+        return $this->parent_id==null;
     }
 
     public function hasSubpages(){
