@@ -78,7 +78,7 @@ class Plugin extends Model
 	public function getConfig($config, $default = null)
 	{
 
-		isset($this->config) ?: $this->config = file_exists($this->getPath() . "config.php") ? require($this->getPath() . "config.php") : null;
+		isset($this->config) ?: $this->config = file_exists($this->getPath() . "/config.php") ? require($this->getPath() . "/config.php") : null;
 
 		return isset($this->config[$config]) ? $this->config[$config] : $default;
 	}
@@ -100,13 +100,13 @@ class Plugin extends Model
 
 	public function getPath()
 	{
-		return 'plugins' . DIRECTORY_SEPARATOR . $this->root_dir . DIRECTORY_SEPARATOR;
+		return 'plugins' . DIRECTORY_SEPARATOR . $this->root_dir;
 	}
 
 	public function getDatabaseFilesPath()
 	{
 
-		$path_to_db = $this->getPath() . 'database';
+		$path_to_db = $this->getPath() . '/database';
 
 		if (file_exists($path_to_db) && is_dir($path_to_db)) {
 			return $path_to_db;
@@ -118,7 +118,7 @@ class Plugin extends Model
 	private function loadInfoFromFile()
 	{
 
-		$file_without_extension = $this->getPath() . "plugin_info";
+		$file_without_extension = $this->getPath() . "/plugin_info";
 
 		if (file_exists($file_without_extension . ".yml") && class_exists('\Symfony\Component\Yaml\Yaml')) {
 			$this->setAllInfo((object) \Symfony\Component\Yaml\Yaml::parse(

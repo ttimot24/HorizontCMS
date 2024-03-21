@@ -50,7 +50,7 @@ class PluginServiceProvider extends ServiceProvider
 
        foreach($this->app->plugins as $plugin){
 
-            $autoloader = $plugin->getPath()."vendor/autoload.php";
+            $autoloader = $plugin->getPath()."/vendor/autoload.php";
             if(file_exists($autoloader)){
                 require_once($autoloader);
             }
@@ -109,7 +109,7 @@ class PluginServiceProvider extends ServiceProvider
 
     private function registerPluginLanguage(){
 
-           if(\Request::is(\Config::get('horizontcms.backend_prefix')."/plugin/run/*")){
+           if(\Request::is(config('horizontcms.backend_prefix')."/plugin/run/*")){
       
                 $plugin = $this->app->plugins->get(studly_case(\Request::segment(4)));
 

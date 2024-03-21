@@ -16,7 +16,6 @@ class NavbarPluginMiddleware
   public function handle($request, Closure $next)
   {
 
-
     if (app()->plugins != null && !app()->plugins->isEmpty()) {
 
       $main_menu = \Menu::get('MainMenu');
@@ -27,7 +26,7 @@ class NavbarPluginMiddleware
 
         try {
 
-          if(!auth()->user()->hasPermission(str_slug($plugin->root_dir,'_'))){
+          if (!auth()->user()->hasPermission(str_slug($plugin->root_dir, '_'))) {
             continue;
           }
 
@@ -38,7 +37,7 @@ class NavbarPluginMiddleware
             $item['url'] = isset($item['url']) ? $item['url'] :
 
               rescue(function () use ($plugin) {
-                return route('plugin.'.str_slug($plugin->root_dir) . ".start.index");
+                return route('plugin.' . str_slug($plugin->root_dir) . ".start.index");
               }, function () use ($plugin) {
                 return plugin_link(namespace_to_slug($plugin->root_dir));
               });
