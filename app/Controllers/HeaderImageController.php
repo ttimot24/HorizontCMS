@@ -27,8 +27,8 @@ class HeaderImageController extends Controller
 
         $this->view->title(trans('Header Images'));
         return $this->view->render('media/header_images', [
-            'slider_images' => HeaderImage::active()->get()->orderBy('order', 'ASC'),
-            'slider_disabled' => HeaderImage::inactive()->get()->orderBy('order','ASC'),
+            'slider_images' => HeaderImage::active()->orderBy('order', 'ASC')->get(),
+            'slider_disabled' => HeaderImage::inactive()->orderBy('order','ASC')->get(),
         ]);
     }
 
@@ -83,7 +83,7 @@ class HeaderImageController extends Controller
 
         if ($request->hasFile('up_file')) {
 
-            $header_image->image = basename($request->up_file->store($this->imagePath));
+            $header_image->attachImage($request->up_file->store($this->imagePath));
         }
 
         if ($header_image->save()) {

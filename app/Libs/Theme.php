@@ -107,11 +107,11 @@ class Theme
 
 	public function getRequiredCoreVersion()
 	{
-		return isset($this->getInfo('requires')->core) ? $this->getInfo('requires')->core : NULL;
+		return ltrim(empty($this->getInfo('requires')->core)? 'v0.0.0' :  $this->getInfo('requires')->core, 'v');
 	}
 
 	public function isCompatibleWithCore()
 	{
-		return \Composer\Semver\Comparator::greaterThanOrEqualTo(\App\Model\SystemUpgrade::getCurrentVersion()->version, $this->getRequiredCoreVersion());
+		return \Composer\Semver\Comparator::greaterThanOrEqualTo(ltrim(config('horizontcms.version'), 'v'), $this->getRequiredCoreVersion());
 	}
 }

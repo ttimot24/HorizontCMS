@@ -34,7 +34,10 @@ class WebsiteController extends Controller
      */
     public function index($page = null)
     {
+        return $this->show($page);
+    }
 
+    public function show($page){
         if (\Session::has("lang")) {
             \App::setLocale(\Session::get("lang"));
         }
@@ -61,8 +64,8 @@ class WebsiteController extends Controller
         \App\Model\Visits::newVisitor($this->request);
 
 
-        if ($requested_page != NULL) {
-            if (isset($requested_page->url) && $requested_page->url != "" && $theme_engine->templateExists($requested_page->url)) {
+        if (!empty($requested_page)) {
+            if (!empty($requested_page->url) && $theme_engine->templateExists($requested_page->url)) {
                 $template = "page_templates." . $requested_page->url;
             } else {
                 $template = 'page';
@@ -81,10 +84,6 @@ class WebsiteController extends Controller
         return $theme_engine->render([
             '_REQUESTED_PAGE' => $requested_page,
         ]);
-    }
-
-    public function show($page){
-        return $this->index($page);
     }
 
     public function registration()

@@ -4,6 +4,9 @@ namespace App\Libs;
 
 use Config;
 
+/**
+ * @deprecated deprecated since version 1.0.0
+ */
 class ViewResolver
 {
 

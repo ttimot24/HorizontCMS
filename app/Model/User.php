@@ -45,8 +45,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
 
     protected $defaultImage = "resources/images/icons/profile.png";
-
-    protected $imageDir = "storage/images/users";
+    
 
     public static function findBySlug($slug){
 

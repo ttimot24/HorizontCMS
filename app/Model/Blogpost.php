@@ -30,16 +30,15 @@ class Blogpost extends Model
     protected $search = ['title', 'summary', 'text'];
 
     protected $defaultImage = "resources/images/icons/newspaper.png";
+    
 
-    protected $imageDir = "storage/images/blogposts";
-
-
+    //TODO Use https://github.com/spatie/laravel-sluggable
     public static function findBySlug($slug)
     {
 
         $blogpost = self::where('slug', $slug)->get()->first();
 
-        if (!isset($blogpost)) {
+        if (isset($blogpost)) {
             return $blogpost;
         } else {
 

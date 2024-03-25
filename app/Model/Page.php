@@ -26,8 +26,6 @@ class Page extends Model {
 
     protected $defaultImage = "resources/images/icons/page.png";
 
-    protected $imageDir = "storage/images/pages";
-
     //TODO Use local scope
     public static function home(){
         return self::find(Settings::get('home_page'));
@@ -37,7 +35,7 @@ class Page extends Model {
 
         $page = self::where('slug',$slug)->get()->first();
 
-        if($page!=NULL){
+        if(isset($page)){
             return $page;
         }else{
 

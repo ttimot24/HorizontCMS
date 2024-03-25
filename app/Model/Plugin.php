@@ -20,7 +20,7 @@ class Plugin extends Model
 
 	protected $defaultImage = "resources/images/icons/plugin.png";
 
-	protected $imageDir = null;
+	protected $imageDir;
 
 	public function __construct($root_dir = null)
 	{

@@ -15,13 +15,8 @@ class SettingsController extends Controller
 
     public function before()
     {
-        if (!file_exists("storage/images/logos")) {
-            File::makeDirectory("storage/images/logos", $mode = 0777, true, true);
-        }
-
-        if (!file_exists("storage/images/favicons")) {
-            File::makeDirectory("storage/images/favicons", $mode = 0777, true, true);
-        }
+        \File::ensureDirectoryExists('images/logos');
+        \File::ensureDirectoryExists('images/favicons');
     }
 
 

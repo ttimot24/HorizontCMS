@@ -5,16 +5,42 @@ namespace App\Model\Trait;
 trait HasImage
 {
 
+    public function attachImage($image)
+    {
+        $this->image = basename($image);
+    }
+
+    public function getImageDirectory()
+    {
+
+        return empty($this->imageDir) ? 'storage/images/' . $this->getTable() : rtrim($this->imageDir, DIRECTORY_SEPARATOR);
+    }
+
+    public function getThumbnailDirectory()
+    {
+        return $this->getImageDirectory() . DIRECTORY_SEPARATOR . 'thumbs';
+    }
+
     public function hasImage()
     {
         return (isset($this->image) && !empty($this->image));
     }
 
+    public function imageFileExists()
+    {
+        return $this->hasImage() && file_exists($this->getImageDirectory() . DIRECTORY_SEPARATOR . $this->image);
+    }
+
+    public function thumbnailFileExists()
+    {
+        return $this->hasImage() && file_exists($this->getImageDirectory() . DIRECTORY_SEPARATOR . $this->image);
+    }
+
     public function getThumb()
     {
 
-        if ($this->hasImage() && file_exists(rtrim($this->imageDir, DIRECTORY_SEPARATOR) . "/thumbs/" . $this->image)) {
-            return url(rtrim($this->imageDir, DIRECTORY_SEPARATOR). "/thumbs/" . $this->image);
+        if ($this->thumbnailFileExists()) {
+            return url($this->getThumbnailDirectory() . DIRECTORY_SEPARATOR . $this->image);
         } else {
             return $this->getImage();
         }
@@ -22,8 +48,9 @@ trait HasImage
 
     public function getImage()
     {
-        if ($this->hasImage() && file_exists(rtrim($this->imageDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $this->image)) {
-            return url(rtrim($this->imageDir, DIRECTORY_SEPARATOR) . "/" . $this->image);
+
+        if ($this->imageFileExists()) {
+            return url($this->getImageDirectory() . DIRECTORY_SEPARATOR . $this->image);
         } else {
             return url($this->getDefaultImage());
         }

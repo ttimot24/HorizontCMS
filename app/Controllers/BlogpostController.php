@@ -11,6 +11,8 @@ class BlogpostController extends Controller
 
 
     protected $itemPerPage = 25;
+
+    //TODO Use model path
     protected $imagePath = 'images/blogposts';
 
     /**
@@ -19,6 +21,7 @@ class BlogpostController extends Controller
      */
     public function before()
     {
+        //TODO Use model path
 		\File::ensureDirectoryExists($this->imagePath . '/thumbs');
     }
 
@@ -66,10 +69,11 @@ class BlogpostController extends Controller
 
         if ($request->hasFile('up_file')) {
 
+            //TODO Use model path
             $img = $request->up_file->store($this->imagePath);
-            $blogpost->image = basename($img);
+            $blogpost->attachImage($img);
             if (extension_loaded('gd')) {
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath . '/thumbs/' . $blogpost->image));
+                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($blogpost->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $blogpost->image);
             }
         }
 
@@ -133,10 +137,10 @@ class BlogpostController extends Controller
 
             $img = $request->up_file->store($this->imagePath);
 
-            $blogpost->image = basename($img);
+            $blogpost->attachImage($img);
 
             if (extension_loaded('gd')) {
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath . '/thumbs/' . $blogpost->image));
+                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($blogpost->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $blogpost->image);
             }
         }
 

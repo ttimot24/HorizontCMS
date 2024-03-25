@@ -79,10 +79,10 @@ class UserController extends Controller
 
             $img = $request->up_file->store($this->imagePath);
 
-            $user->image = basename($img);
+            $user->attachImage($img);
 
             if (extension_loaded('gd')) {
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath . '/thumbs/' . $user->image));
+                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($user->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $user->image);
             }
         }
 
@@ -150,10 +150,10 @@ class UserController extends Controller
 
             $img = $request->up_file->store($this->imagePath);
 
-            $user->image = basename($img);
+            $user->attachImage($img);
 
             if (extension_loaded('gd')) {
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath . '/thumbs/' . $user->image));
+                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($user->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $user->image);
             }
         }
 

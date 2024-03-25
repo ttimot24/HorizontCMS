@@ -80,11 +80,11 @@ class PageController extends Controller
 
             $img = $request->up_file->store($this->imagePath);
 
-            $page->image = basename($img);
+            $page->attachImage($img);
 
 
             if (extension_loaded('gd')) {
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath . '/thumbs/' . $page->image));
+                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($page->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $page->image);
             }
         }
 
@@ -148,10 +148,11 @@ class PageController extends Controller
 
             $img = $request->up_file->store($this->imagePath);
 
-            $page->image = basename($img);
+            $page->attachImage($img);
 
             if (extension_loaded('gd')) {
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save(storage_path($this->imagePath . '/thumbs/' . $page->image));
+                // TODO Thumbnail size to config
+                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($page->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $page->image);
             }
         }
 

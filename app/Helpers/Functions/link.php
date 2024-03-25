@@ -11,7 +11,9 @@ function plugin_link($link,$param = null){
 
 }
 
-
+/**
+ * @deprecated deprecated since version 1.0.0
+ */
 function namespace_to_slug($string){
 	return ltrim(strtolower(preg_replace('/(?<!\ )[A-Z]/', '-$0', $string)),"-");
 }
