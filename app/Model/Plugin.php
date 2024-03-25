@@ -197,7 +197,7 @@ class Plugin extends Model
 
 	public function getRequiredCoreVersion()
 	{
-		return isset($this->getInfo('requires')->core) ? $this->getInfo('requires')->core : null;
+		return empty($this->getInfo('requires')->core)? '0.0.0' : $this->getInfo('requires')->core;
 	}
 
 	public function isCompatibleWithCore()
