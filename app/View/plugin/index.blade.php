@@ -60,15 +60,21 @@
                                         {{ $current_plugin->getInfo('description') }}
                                     </p>
 
+                                    @if (!$current_plugin->isCompatibleWithCore())
+                                        <p class='text-danger m-0 p-0'>
+                                        Required core version: {{$current_plugin->getRequiredCoreVersion()}}
+                                        </p>
+                                    @endif
+
                                 </div>
 
                                 <div class='col-md-2 col-sm-4 col-xs-4 text-end'>
 
 
-                                    @if (!$current_plugin->isInstalled())
+                                    @if (!$current_plugin->isInstalled() && $current_plugin->isCompatibleWithCore())
                                         <a id='install' class='btn btn-primary btn-block'
                                             href='{{ config('horizontcms.backend_prefix') }}/plugin/install/{{ $current_plugin->root_dir }}'>Install</a>
-                                    @else
+                                    @elseif($current_plugin->isInstalled())
                                         @if (!$current_plugin->isActive())
                                             <a class='btn btn-success btn-block'
                                                 href='{{ config('horizontcms.backend_prefix') }}/plugin/activate/{{ $current_plugin->root_dir }}'>Activate</a>

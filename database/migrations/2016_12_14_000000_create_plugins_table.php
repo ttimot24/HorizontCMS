@@ -23,6 +23,7 @@ class CreatePluginsTable extends Migration
             $table->integer('area')->nullable();
             $table->integer('permission')->nullable();
             $table->string('tables')->nullable();
+            $table->timestamps();
             $table->integer('active');
         });
     }

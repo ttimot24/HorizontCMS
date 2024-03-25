@@ -12,8 +12,6 @@ class Plugin extends Model
 	use HasImage;
 	use IsActive;
 
-	public $timestamps = false;
-
 	protected $fillable = ['id', 'root_dir', 'area', 'permission', 'table_name', 'active'];
 
 	private $info = null;
@@ -33,7 +31,7 @@ class Plugin extends Model
 			$eloquent = self::rootDir($root_dir)->first();
 
 			if (isset($eloquent)) {
-				$this->fill($eloquent->attributes);
+				parent::__construct($eloquent->attributes);
 			}
 
 			isset($this->root_dir) ?: $this->setRootDir($root_dir);
@@ -199,11 +197,11 @@ class Plugin extends Model
 
 	public function getRequiredCoreVersion()
 	{
-		return isset($this->getInfo('requires')->core) ? $this->getInfo('requires')->core : NULL;
+		return isset($this->getInfo('requires')->core) ? $this->getInfo('requires')->core : null;
 	}
 
 	public function isCompatibleWithCore()
 	{
-		return \Composer\Semver\Comparator::greaterThanOrEqualTo(config('horizontcms.version'), $this->getRequiredCoreVersion());
+		return \Composer\Semver\Comparator::greaterThanOrEqualTo(ltrim(config('horizontcms.version'), 'v'), ltrim($this->getRequiredCoreVersion(), 'v'));
 	}
 }
