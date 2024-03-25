@@ -197,11 +197,11 @@ class Plugin extends Model
 
 	public function getRequiredCoreVersion()
 	{
-		return empty($this->getInfo('requires')->core)? '0.0.0' : $this->getInfo('requires')->core;
+		return ltrim(empty($this->getInfo('requires')->core)? 'v0.0.0' : $this->getInfo('requires')->core, 'v');
 	}
 
 	public function isCompatibleWithCore()
 	{
-		return \Composer\Semver\Comparator::greaterThanOrEqualTo(ltrim(config('horizontcms.version'), 'v'), ltrim($this->getRequiredCoreVersion(), 'v'));
+		return \Composer\Semver\Comparator::greaterThanOrEqualTo(ltrim(config('horizontcms.version'), 'v'), $this->getRequiredCoreVersion());
 	}
 }

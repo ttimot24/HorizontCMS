@@ -62,7 +62,7 @@
 
                                     @if (!$current_plugin->isCompatibleWithCore())
                                         <p class='text-danger m-0 p-0'>
-                                        Required core version: v{{ltrim($current_plugin->getRequiredCoreVersion(), 'v')}}
+                                        Required core version: v{{$current_plugin->getRequiredCoreVersion()}}
                                         </p>
                                     @endif
 
