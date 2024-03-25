@@ -29,7 +29,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'username' ,'email', 'password', 'phone', 'role_id', 'active',
+        'name', 'username' ,'email', 'password', 'phone', 'role_id', 'api_token' , 'active',
     ];
 
     protected $search = ['name', 'username', 'email'];

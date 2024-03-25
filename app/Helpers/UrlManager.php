@@ -1,10 +1,13 @@
 <?php
 
+
 /* This helper is for legacy theme compability purposes */
 
+/**
+ * @deprecated deprecated since version 1.0.0
+ */
 class UrlManager
 {
-
 
 	public static function seo_url($string)
 	{

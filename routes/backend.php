@@ -28,6 +28,7 @@ Route::group(['middleware' => ['admin','plugin','can:global-authorization']],fun
 			if(is_file($plugin->getPath().DIRECTORY_SEPARATOR.CONTROLLER_PATH."/".$file)){
 				$actualName = pathinfo($file, PATHINFO_FILENAME);
 
+				//FIXME Use rtrim instead replace
 				$plugin_name_prefix = 'plugin.'.str_slug($plugin->root_dir).'.'.strtolower(str_replace("Controller","",$actualName));
 
 				Route::resource(
