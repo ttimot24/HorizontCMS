@@ -88,7 +88,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     public function comments(){
-    	return $this->hasMany(\App\Model\BlogpostComment::class,'user_id','id');
+    	return $this->hasMany(\App\Model\BlogpostComment::class,'author_id','id');
     }
 
 
