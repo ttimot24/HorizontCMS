@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Http\Events\RequestHandled;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
 
                 $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
         }
+
+        // TODO Use these
+        // View::share('css', \Config::get('horizontcms.css'));
+        // View::share('js', \Config::get('horizontcms.js'));
         
     }
 

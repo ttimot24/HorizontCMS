@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 abstract class Controller extends BaseController {
 	
+    protected $request;
     protected $view;
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -19,17 +20,6 @@ abstract class Controller extends BaseController {
     	$this->request = $request;	
 
         $this->view = $viewResolver;
-
-        
-       if(app()->isInstalled()){
-            foreach(app()->plugins as $plugin){
-
-                    foreach($plugin->getRegister('injectAdminJs',[]) as $js){
-                           $this->view->data['jsplugins'][] = $plugin->getPath().'/'.$js; 
-                    }
-
-            }
-        }
     }
 
     public function redirect($location){
