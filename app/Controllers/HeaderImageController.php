@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Controllers\Trait\UploadsImage;
 use Illuminate\Http\Request;
 use App\Libs\Controller;
 
@@ -9,6 +10,8 @@ use App\Model\HeaderImage;
 
 class HeaderImageController extends Controller
 {
+
+    use UploadsImage;
 
     protected $imagePath = 'images/header_images';
 
@@ -81,10 +84,7 @@ class HeaderImageController extends Controller
         $header_image = new HeaderImage($request->all());
         $header_image->author()->associate($request->user());
 
-        if ($request->hasFile('up_file')) {
-
-            $header_image->attachImage($request->up_file->store($this->imagePath));
-        }
+        $this->uploadImage($header_image);
 
         if ($header_image->save()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);

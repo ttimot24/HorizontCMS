@@ -37,7 +37,7 @@ class ScheduleController extends Controller
     {
 
         $task = new ScheduledTask($request->all());
-        $task->author_id = \Auth::user()->id;
+        $task->author()->associate($request->user());
         $task->active = 1;
 
         if ($task->save()) {

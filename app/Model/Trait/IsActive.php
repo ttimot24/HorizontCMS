@@ -4,6 +4,14 @@ namespace App\Model\Trait;
  
 trait IsActive {
 
+    public function activate(){
+        $this->active = 1;
+    }
+
+    public function deactivate(){
+        $this->active = 0;
+    }
+
     public function isActive(){
         return $this->active > 0;
     }

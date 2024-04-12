@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Controllers\Trait\UploadsImage;
 use Illuminate\Http\Request;
 use App\Libs\Controller;
 
@@ -10,6 +11,7 @@ use App\Model\BlogpostCategory;
 class BlogpostCategoryController extends Controller
 {
 
+    use UploadsImage;
 
     protected $itemPerPage = 25;
 
@@ -49,12 +51,9 @@ class BlogpostCategoryController extends Controller
 
 
         $blogpost_category = new BlogpostCategory($request->all());
-        $blogpost_category->author_id = \Auth::user()->id;
+        $blogpost_category->author()->associate($request->user());
 
-        if ($request->hasFile('up_file')) {
-
-            $blogpost_category->image = str_replace('images/blogpostscategories/', '', $request->up_file->store('images/blogpostscategories'));
-        }
+        $this->uploadImage($blogpost_category);
 
         if ($blogpost_category->save()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost_category')]);
@@ -102,10 +101,7 @@ class BlogpostCategoryController extends Controller
 
         $blogpostcategory->name = $request->input('name');
 
-        if ($request->hasFile('up_file')) {
-
-            $blogpostcategory->image = str_replace('images/blogpostscategories/', '', $request->up_file->store('images/blogpostscategories'));
-        }
+        $this->uploadImage($blogpostcategory);
 
         if ($blogpostcategory->save()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_updated_blogpost_category')]);
@@ -123,11 +119,9 @@ class BlogpostCategoryController extends Controller
     public function destroy(BlogpostCategory $blogpostcategory)
     {
 
-
         if ($blogpostcategory->delete()) {
             return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpost_category')]);
         }
-
 
         return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }

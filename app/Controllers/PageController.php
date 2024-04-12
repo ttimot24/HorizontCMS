@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Controllers\Trait\UploadsImage;
 use Illuminate\Http\Request;
 use App\Libs\Controller;
 use App\Model\Page;
@@ -9,6 +10,7 @@ use App\Model\Page;
 class PageController extends Controller
 {
 
+    use UploadsImage;
 
     protected $itemPerPage = 25;
     protected $imagePath = 'images/pages';
@@ -70,23 +72,12 @@ class PageController extends Controller
 
         $page = new Page($request->all());
         $page->slug = str_slug($request->input('name'), "-");
-        $page->parent_id = $request->input('parent_select') == 0 ? NULL : $request->input('parent_id');
+        $page->parent_id = $request->input('parent_select') == 0 ? null : $request->input('parent_id');
         $page->queue = 99;
         $page->page = clean($request->input('page'));
         $page->author()->associate($request->user());
 
-
-        if ($request->hasFile('up_file')) {
-
-            $img = $request->up_file->store($this->imagePath);
-
-            $page->attachImage($img);
-
-
-            if (extension_loaded('gd')) {
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($page->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $page->image);
-            }
-        }
+        $this->uploadImage($page);
 
         if ($page->save()) {
             return $this->redirect(route("page.edit", ['page' => $page]))->withMessage(['success' => trans('message.successfully_created_page')]);
@@ -144,18 +135,7 @@ class PageController extends Controller
         $page->parent_id = $request->input('parent_select') == 0 ? NULL : $request->input('parent_id');
         $page->page = clean($request->input('page'));
 
-        if ($request->hasFile('up_file')) {
-
-            $img = $request->up_file->store($this->imagePath);
-
-            $page->attachImage($img);
-
-            if (extension_loaded('gd')) {
-                // TODO Thumbnail size to config
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($page->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $page->image);
-            }
-        }
-
+        $this->uploadImage($page);
 
         if ($page->save()) {
             return $this->redirect(route("page.edit", ['page' => $page]))->withMessage(['success' => trans('message.successfully_updated_page')]);

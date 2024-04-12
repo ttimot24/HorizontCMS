@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 use App\Libs\Controller;
 
 use App\Model\Settings;
-use \VisualAppeal\AutoUpdate;
 use \Jackiedo\LogReader\Facades\LogReader;
-use Illuminate\Support\Facades\File;
 
 class SettingsController extends Controller
 {

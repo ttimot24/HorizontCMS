@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Controllers\Trait\UploadsImage;
 use Illuminate\Http\Request;
 use App\Libs\Controller;
 use App\Model\User;
@@ -9,6 +10,7 @@ use App\Model\User;
 class UserController extends Controller
 {
 
+    use UploadsImage;
 
     protected $itemPerPage = 100;
     protected $imagePath = 'images/users';
@@ -74,18 +76,7 @@ class UserController extends Controller
         $user->visits = 0;
         $user->active = 1;
 
-
-        if ($request->hasFile('up_file')) {
-
-            $img = $request->up_file->store($this->imagePath);
-
-            $user->attachImage($img);
-
-            if (extension_loaded('gd')) {
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($user->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $user->image);
-            }
-        }
-
+        $this->uploadImage($user);
 
         if ($user->save()) {
 
@@ -145,17 +136,8 @@ class UserController extends Controller
         if ($request->has('password')) {
             $user->password = $request->input('password');
         } 
-
-        if ($request->hasFile('up_file')) {
-
-            $img = $request->up_file->store($this->imagePath);
-
-            $user->attachImage($img);
-
-            if (extension_loaded('gd')) {
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($user->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $user->image);
-            }
-        }
+        
+        $this->uploadImage($user);
 
         if ($user->save()) {
             return $this->redirect(route("user.edit", ['user' => $user]))->withMessage(['success' => trans('message.successfully_updated_user')]);

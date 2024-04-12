@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Controllers\Trait\UploadsImage;
 use \Illuminate\Http\Request;
 use App\Libs\Controller;
 use App\Model\Blogpost;
@@ -9,6 +10,7 @@ use App\Model\Blogpost;
 class BlogpostController extends Controller
 {
 
+    use UploadsImage;
 
     protected $itemPerPage = 25;
 
@@ -67,15 +69,7 @@ class BlogpostController extends Controller
         $blogpost->author()->associate($request->user());
         $blogpost->comments_enabled = 1;
 
-        if ($request->hasFile('up_file')) {
-
-            //TODO Use model path
-            $img = $request->up_file->store($this->imagePath);
-            $blogpost->attachImage($img);
-            if (extension_loaded('gd')) {
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($blogpost->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $blogpost->image);
-            }
-        }
+        $this->uploadImage($blogpost);
 
         return $blogpost->save() ? $this->redirect(route("blogpost.edit", ['blogpost' => $blogpost]))->withMessage(['success' => trans('message.successfully_created_blogpost')])
             : $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
@@ -132,18 +126,7 @@ class BlogpostController extends Controller
         
         $blogpost->author()->associate($request->user());
 
-
-        if ($request->hasFile('up_file')) {
-
-            $img = $request->up_file->store($this->imagePath);
-
-            $blogpost->attachImage($img);
-
-            if (extension_loaded('gd')) {
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($blogpost->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $blogpost->image);
-            }
-        }
-
+        $this->uploadImage($blogpost);
 
         if ($blogpost->save()) {
             return $this->redirectToSelf()->with('blogpost', $blogpost)->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
