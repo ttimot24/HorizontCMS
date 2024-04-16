@@ -22,7 +22,7 @@ trait UploadsImage {
         if (request()->hasFile($this->form_field_name)) {
 
             File::ensureDirectoryExists($this->getStrippedDirectoryPath($model));
-            $img = request()->up_file->store($this->getStrippedDirectoryPath($model));
+            $img = request()->{$this->form_field_name}->store($this->getStrippedDirectoryPath($model));
             $model->attachImage($img);
             if (extension_loaded('gd')) {
 		        File::ensureDirectoryExists($this->getStrippedDirectoryPath($model) . '/thumbs');
