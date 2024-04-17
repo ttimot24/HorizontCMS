@@ -21,11 +21,11 @@ trait UploadsImage {
 
         if (request()->hasFile($this->form_field_name)) {
 
-            File::ensureDirectoryExists($this->getStrippedDirectoryPath($model));
+            File::ensureDirectoryExists($model->getImageDirectory());
             $img = request()->{$this->form_field_name}->store($this->getStrippedDirectoryPath($model));
             $model->attachImage($img);
             if (extension_loaded('gd')) {
-		        File::ensureDirectoryExists($this->getStrippedDirectoryPath($model) . '/thumbs');
+		        File::ensureDirectoryExists($model->getImageDirectory() . '/thumbs');
                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($model->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $model->image);
             }
 
