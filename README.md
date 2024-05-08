@@ -6,7 +6,6 @@
 [![Bootstrap 5.3](https://img.shields.io/badge/Bootstrap-5.2-563d7c.svg)](http://getbootstrap.com)
 [![VueJs 2.6](https://img.shields.io/badge/VueJs-2.6-green.svg)](http://vuejs.org)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ttimot24/HorizontCMS&amp;utm_campaign=Badge_Grade)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&utm_medium=referral&utm_content=ttimot24/HorizontCMS&utm_campaign=Badge_Coverage)
 
 **HorizontCMS** is an open-source, responsive Content Management System (CMS) built on the powerful combination of Laravel 9, Vue.js 2.6, and Bootstrap 5.2. With its sleek design and robust features, HorizontCMS empowers developers like you to create stunning websites and blogs for the next generation.
 
