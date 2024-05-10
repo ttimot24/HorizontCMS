@@ -24,6 +24,10 @@ Route::group(['middleware' => ['admin','plugin','can:global-authorization']],fun
 
 	app()->plugins->each(function($plugin){
 
+		if(!file_exists($plugin->getPath().DIRECTORY_SEPARATOR.CONTROLLER_PATH)){
+			return;
+		}
+
 		foreach(array_diff(scandir($plugin->getPath().DIRECTORY_SEPARATOR.CONTROLLER_PATH), ['.', '..']) as $file){
 			if(is_file($plugin->getPath().DIRECTORY_SEPARATOR.CONTROLLER_PATH."/".$file)){
 				$actualName = pathinfo($file, PATHINFO_FILENAME);
