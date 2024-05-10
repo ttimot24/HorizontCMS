@@ -46,6 +46,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
 
+
         if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
             return redirect()->route('login');
         }
@@ -59,6 +60,10 @@ class Handler extends ExceptionHandler
     		if ($request->expectsJson()) {
     			return response()->json(['error' => $exception->getMessage()], 500);
     		}
+
+            if(app()->environment('production')){
+                return redirect()->back()->withMessage(['danger' => $exception->getMessage()]);
+            }
     		
     		return response()->view('errors.exception', ['exception' => $exception]);
     	}
