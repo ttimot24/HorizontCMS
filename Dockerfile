@@ -1,17 +1,17 @@
-FROM php:8.1-apache
+FROM php:8.3-apache
 COPY ./ /var/www/html/
 
-RUN rm /var/www/html/.env && \
-    rm -rf /var/www/html/plugins/*
+RUN rm -rf /var/www/html/plugins/*
 
 RUN apt-get update && \
-    apt-get install -y git zip cron	npm nodejs
+    apt-get install -y git zip cron	npm nodejs libzip-dev
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
 # Apache configuration
 RUN chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions zip pdo_mysql &&  \  
+    install-php-extensions zip pdo_mysql pdo_pgsql pdo_sqlite pdo_sqlsrv mongodb &&  \
+   # pecl install mongodb && \  
     a2enmod rewrite && \
     echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
     sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf

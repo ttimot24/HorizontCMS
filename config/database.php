@@ -97,6 +97,12 @@ return [
             'prefix' => '',
         ],
 
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'dsn' => 'mongodb+srv://'.env('DB_USERNAME', 'forge').':'.env('DB_PASSSWORD', 'forge').'@'.env('DB_HOST', 'localhost').':'.env('DB_PORT', '27017'),
+            'database' => env('DB_DATABASE', 'forge'),
+          ],
+
     ],
 
     /*

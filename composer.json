@@ -20,7 +20,8 @@
         "mews/purifier": "^3.3",
         "laravel/ui": "^4.0",
         "codedge/laravel-selfupdater": "^3.4",
-        "nunomaduro/collision": "^6.1"
+        "nunomaduro/collision": "^6.1",
+        "mongodb/laravel-mongodb": "^3.5"
     },
     "require-dev": {
         "phpunit/phpunit" : "^9.0",
