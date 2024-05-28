@@ -45,6 +45,7 @@ services:
         DB_PASSWORD: 'password'
         DB_DATABASE: 'hcms_database'
         DB_TABLE_PREFIX: 'hcms_'
+        LOG_CHANNEL: stderr
 
   hcms_admin_user:
     image: ttimot24/horizont-cms:latest
@@ -60,6 +61,8 @@ services:
         DB_PASSWORD: 'password'
         DB_DATABASE: 'hcms_database'
         DB_TABLE_PREFIX: 'hcms_'
+        LOG_CHANNEL: stderr
+
 
   hcms_web:
     build:
@@ -78,6 +81,7 @@ services:
         DB_PASSWORD: 'password'
         DB_DATABASE: 'hcms_database'
         DB_TABLE_PREFIX: 'hcms_'
+        LOG_CHANNEL: stderr
     ports:
       - '8099:80'
     volumes:
