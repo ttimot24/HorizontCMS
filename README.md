@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/ttimot24/HorizontCMS/blob/master/resources/logo.png" height="200"></p>
+<p align="center"><img src="./resources/logo.png" height="200"></p>
 
 <h1 align="center">HorizontCMS</h1>
 
@@ -49,10 +49,15 @@ Every release is published to DockerHub.
 https://hub.docker.com/repository/docker/ttimot24/horizont-cms  
 
 #### Docker Compose
-Build and run HorizontCMS locally.
+Build and run HorizontCMS locally. 
 
 ```bash
 docker-compose up
+```
+
+#### Kubernetes
+```bash
+kubectl create deployment horizont-cms --image=ttimot24/horizont-cms:latest
 ```
   
 ### Sample plugin

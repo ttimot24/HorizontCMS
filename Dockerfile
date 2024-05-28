@@ -11,7 +11,6 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 # Apache configuration
 RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions zip pdo_mysql pdo_pgsql pdo_sqlite pdo_sqlsrv mongodb &&  \
-   # pecl install mongodb && \  
     a2enmod rewrite && \
     echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
     sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
