@@ -4,7 +4,7 @@ COPY ./ /var/www/html/
 RUN rm -rf /var/www/html/plugins/*
 
 RUN apt-get update && \
-    apt-get install -y git zip cron	npm nodejs libzip-dev
+    apt-get install -y git zip cron	npm nodejs libzip-dev vim
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
