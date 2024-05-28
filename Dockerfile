@@ -1,7 +1,8 @@
-FROM php:8.0-apache
+FROM php:8.1-apache
 COPY ./ /var/www/html/
 
-ENV INSTALLER_HASH='e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02'
+RUN rm /var/www/html/.env && \
+    rm -rf /var/www/html/plugins/*
 
 RUN apt-get update && \
     apt-get install -y git zip cron	npm nodejs
@@ -17,7 +18,6 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 
 # Composer install
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php -r "if (hash_file('sha384', 'composer-setup.php') === '${INSTALLER_HASH}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');" && \
     chown -R www-data /var/www/html && \
@@ -26,7 +26,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 RUN chown -R root /var/www/html && chmod -R 777 /var/www/html && chmod -R 777 /var/www/html/storage
 
 # NPM install
-RUN npm install --global cross-env && npm install --global webpack && npm ci && npm run dev
+RUN npm install --global cross-env && npm install --global webpack && npm ci --force && npm run dev && rm -rf /var/www/html/node_modules
 
 RUN (crontab -l ; echo "* * * * * php /var/www/html/artisan schedule:run >> /dev/null 2>&1")| crontab -
 
