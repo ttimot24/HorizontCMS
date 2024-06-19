@@ -24,6 +24,8 @@ interface PluginInterface {
 
 	public function addMiddlewares(): array;
 
+	public function addAliases(): array;
+
     public function cliCommands(): array;
 
 }

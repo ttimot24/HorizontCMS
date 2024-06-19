@@ -30,6 +30,7 @@ class PluginServiceProvider extends ServiceProvider
 
                 $this->registerPluginRoutes();
                 $this->registerPluginProviders();
+                $this->registerPluginAliases();
                 $this->registerPluginMiddlewares();
                 $this->registerPluginEvents();
                 $this->registerPluginLanguage();
@@ -190,6 +191,18 @@ class PluginServiceProvider extends ServiceProvider
                 );
             }
         }
+    }
+
+    private function registerPluginAliases()
+    {
+
+        foreach (app()->plugins as $plugin) {
+
+            foreach ($plugin->getRegister('addAliases', []) as $key => $value) {
+                class_alias($value, $key);
+            }
+        }
+
     }
 
     /**
