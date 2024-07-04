@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
+use \App\Libs\Theme;
 
 class ThemeServiceProvider extends ServiceProvider
 {
@@ -13,21 +15,51 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // For website
-        if (!app()->runningInConsole() && app()->isInstalled() && !\Request::is(\Config::get('horizontcms.backend_prefix') . "/*")) {
-            $theme = \App\Model\Settings::get('theme');
-            $this->loadJsonTranslationsFrom(base_path("themes/" . $theme . "/resources/lang"));
+        if (!app()->runningInConsole() && app()->isInstalled()) {
+
+            $theme = new Theme(\App\Model\Settings::get('theme'));
+
+            // For website
+            if (!\Request::is(\Config::get('horizontcms.backend_prefix') . "/*")) {
+                $this->loadJsonTranslationsFrom(base_path($theme->getPath() . "resources/lang"));
+            }
+
+            $this->registerThemeViews($theme);
+
+            $this->registerThemeRoutes($theme);
+
+        }
+    }
+
+    protected function registerThemeViews(Theme $theme){
+        \View::addNamespace('theme', [
+            $theme->getPath() . "app" . DIRECTORY_SEPARATOR . "View",
+            $theme->getPath() . "resources" . DIRECTORY_SEPARATOR . "views",
+        ]);
+    }
+
+    protected function registerThemeRoutes(Theme $theme)
+    {
+
+        if (file_exists($theme->getPath() . 'routes/web.php')) {
+
+            Route::group(
+                ['middleware' => 'web'],
+                function ($router) use ($theme) {
+                    require base_path($theme->getPath() . '/routes/web.php');
+                }
+            );
         }
 
-        // For everything
-        if(!app()->runningInConsole() && app()->isInstalled()){
-            $theme = \App\Model\Settings::get('theme');
-            \View::addNamespace('theme', [
-                "themes/".$theme."/app".DIRECTORY_SEPARATOR."View",
-                "themes/".$theme."/resources".DIRECTORY_SEPARATOR."views",
-            ]);
-        }
+        if (file_exists($theme->getPath() . 'routes/api.php')) {
 
+            Route::group(
+                ['middleware' => 'api'],
+                function ($router) use ($theme) {
+                    require base_path($theme->getPath() . '/routes/api.php');
+                }
+            );
+        }
     }
 
     /**
@@ -37,6 +69,5 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 }
