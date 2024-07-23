@@ -7,6 +7,13 @@ on:
     branches: [ "master" ]
 
 jobs:
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PHP syntax errors
+        uses: overtrue/phplint@9.4.1
+            
   test:
     runs-on: ubuntu-latest 
     env:
