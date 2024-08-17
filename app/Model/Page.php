@@ -22,6 +22,11 @@ class Page extends Model {
         'name', 'url' ,'visibility', 'parent_id', 'language' , 'queue', 'page', 'active',
     ];
 
+    public static $rules = [
+        'name' => 'required',
+        'visibility' => 'required'
+    ];
+
     protected $search = ['name', 'page'];
 
     protected $defaultImage = "resources/images/icons/page.png";

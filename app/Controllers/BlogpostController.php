@@ -32,13 +32,18 @@ class BlogpostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $blogposts = Blogpost::orderBy('id', 'desc')->paginate($this->itemPerPage);
+
+        if($request->wantsJson()){
+            return response()->json($blogposts);
+        }
 
         $this->view->title(trans('blogpost.blogposts'));
         return $this->view->render('blogposts/index', [
             'number_of_blogposts' => Blogpost::count(),
-            'all_blogposts' => Blogpost::orderBy('id', 'desc')->paginate($this->itemPerPage),
+            'all_blogposts' =>  $blogposts,
         ]);
     }
 
@@ -63,6 +68,8 @@ class BlogpostController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate(Blogpost::$rules);
 
         $blogpost = new Blogpost($request->all());
         $blogpost->slug = str_slug($request->input('title'), "-");

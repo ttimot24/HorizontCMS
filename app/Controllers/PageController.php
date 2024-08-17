@@ -30,15 +30,20 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $pages = Page::orderBy('queue')->paginate($this->itemPerPage);
+
+        if($request->wantsJson()){
+            return response()->json($pages);
+        }
 
         $this->view->js('resources/js/dragndrop.js');
 
         $this->view->title(trans('page.pages'));
         return $this->view->render('pages/index', [
             'number_of_pages' => Page::count(),
-            'all_pages' => Page::orderBy('queue')->paginate($this->itemPerPage),
+            'all_pages' => $pages,
             'visible_pages' => Page::where('visibility', 1)->count(),
             'home_page' => Page::find($this->request->settings['home_page']),
         ]);
@@ -69,6 +74,7 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(Page::$rules);
 
         $page = new Page($request->all());
         $page->slug = str_slug($request->input('name'), "-");
@@ -92,8 +98,11 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Page $page)
+    public function show(Request $request, Page $page)
     {
+        if($request->wantsJson()){
+            return response()->json($page);
+        }
 
         $this->view->title(trans('page.view_page'));
         return $this->view->render('pages/view', ['page' => $page]);
@@ -128,6 +137,7 @@ class PageController extends Controller
      */
     public function update(Request $request, Page $page)
     {
+        $request->validate(Page::$rules);
 
         $page->fill($request->all());
 
@@ -169,11 +179,8 @@ class PageController extends Controller
             return $this->redirect(route("page.index"))->withMessage(['success' => trans('message.successfully_deleted_page')]);
         }
 
-
         return $this->redirect(route("page.index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
-
-
 
 
     public function reorder()

@@ -36,36 +36,16 @@ Route::post('/auth', function (Request $request) {
     return response()->json(['error'=>'Username or password incorrect'], 401);
 });
 
-Route::get('/me', function (Request $request) {
-    $request->user()->image = $request->user()->getImage();
-    return $request->user();
-})->middleware(['auth.basic']);
 
+Route::apiResource('blogposts', \App\Controllers\BlogpostController::class)
+            ->only(['index', 'show']);
 
-Route::get('/blogposts',function(Request $request){
+Route::apiResource('categories', \App\Controllers\BlogpostCategoryController::class)
+            ->only(['index', 'show']);
 
-    $blogposts = \App\Model\Blogpost::getPublished()->forPage($request->input('page'),$request->input('num'));
-   // $blogposts->load('author');
-    $blogposts->load('category');
+Route::apiResource('pages', \App\Controllers\PageController::class)
+            ->only(['index', 'show']);
 
-    return $blogposts;
-});
-
-Route::get('/pages',function(Request $request){
-
-    $pages = \App\Model\Page::active()->forPage($request->input('page'),$request->input('num'));
-   // $pages->load('author');
-    $pages->load('parent');
-
-    return $pages;
-});
-
-Route::get('/categories',function(Request $request){
-
-    $categories = \App\Model\BlogpostCategory::all()->forPage($request->input('page'),$request->input('num'));
-
-    return $categories;
-});
 
 Route::get('/users',function(Request $request){
 

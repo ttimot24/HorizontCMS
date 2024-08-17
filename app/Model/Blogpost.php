@@ -27,6 +27,11 @@ class Blogpost extends Model
         'title', 'summary', 'text', 'category_id', 'comments_enabled', 'active',
     ];
 
+    public static $rules = [
+        'title' => 'required',
+        'category_id' => 'required'
+    ];
+
     protected $search = ['title', 'summary', 'text'];
 
     protected $defaultImage = "resources/images/icons/newspaper.png";

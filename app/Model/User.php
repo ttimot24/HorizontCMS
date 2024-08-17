@@ -33,6 +33,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     protected $search = ['name', 'username', 'email'];
+    
+    /**
+     * Validation rules for fields.
+    */
+    public static $rules = [
+        'name' => 'required',
+        'email' => 'required|email|unique',
+        'password' => 'required|confirmed|min:6'
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
