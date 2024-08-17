@@ -88,8 +88,12 @@ class BlogpostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Blogpost $blogpost)
+    public function show(Request $request, Blogpost $blogpost)
     {
+    
+        if($request->wantsJson()){
+            return response()->json($blogpost);
+        }
 
         $this->view->title(trans('blogpost.view_blogpost'));
         return $this->view->render('blogposts/view', [
