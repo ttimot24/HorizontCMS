@@ -67,10 +67,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'password' => 'required|confirmed|min:6'
-        ]);
-
+        $request->validate(User::$rules);
+        
         $user = new User($request->all());
         $user->slug = str_slug($request->input('username'), "-");
         $user->visits = 0;

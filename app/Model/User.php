@@ -32,6 +32,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'name', 'username' ,'email', 'password', 'phone', 'role_id', 'api_token' , 'active',
     ];
 
+    public static $rules = [
+        'name' => 'required',
+        'email' => 'required|email|unique',
+        'password' => 'required|confirmed|min:6'
+    ];
+
     protected $search = ['name', 'username', 'email'];
 
     /**
