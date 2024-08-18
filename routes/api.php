@@ -14,10 +14,15 @@ use Illuminate\Support\Str;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::post('/auth', function (Request $request) {
+
+    $request->validate([
+        'password' => 'required'
+    ]);
    
-    if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){ 
+    if(Auth::attempt(['username' => $request->username, 'password' => $request->password]) || 
+       Auth::attempt(['email' => $request->email, 'password' => $request->password])
+    ){ 
 
         $user = Auth::user(); 
 
