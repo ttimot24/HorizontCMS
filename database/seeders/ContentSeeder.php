@@ -77,6 +77,7 @@ class ContentSeeder extends Seeder
             'id' => 1,
             'title' => 'default',
             'image' => 'abovethecity.jpg',
+            'author_id' => 1,
             'active' => 1
         ]);
 
