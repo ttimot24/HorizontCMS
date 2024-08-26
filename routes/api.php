@@ -51,6 +51,8 @@ Route::apiResource('categories', \App\Controllers\BlogpostCategoryController::cl
 Route::apiResource('pages', \App\Controllers\PageController::class)
             ->only(['index', 'show']);
 
+Route::apiResource('header-images', \App\Controllers\HeaderImageController::class)
+            ->only(['index', 'show']);
 
 Route::get('/users',function(Request $request){
 

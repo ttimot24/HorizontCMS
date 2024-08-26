@@ -25,12 +25,17 @@ class HeaderImageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $activeImages = HeaderImage::active()->orderBy('order', 'ASC')->get();
+
+        if($request->wantsJson()){
+            return response()->json($activeImages);
+        }
 
         $this->view->title(trans('Header Images'));
         return $this->view->render('media/header_images', [
-            'slider_images' => HeaderImage::active()->orderBy('order', 'ASC')->get(),
+            'slider_images' => $activeImages,
             'slider_disabled' => HeaderImage::inactive()->orderBy('order','ASC')->get(),
         ]);
     }
