@@ -37,7 +37,6 @@ class UserController extends Controller
 
         $this->view->title(trans('user.users'));
         return $this->view->render('users/index', [
-            'number_of_users' => User::count(),
             'all_users' => User::paginate($this->itemPerPage),
             'active_users' => User::where('active', 1)->count(),
         ]);

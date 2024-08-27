@@ -9,9 +9,9 @@
                         'links' => [['name' => 'Content'], ['name' => trans('user.users'), 'url' => route('user.index')]],
                         'page_title' => trans('user.registered_users'),
                         'stats' => [
-                            ['label'=> trans('user.all'), 'value'=> $number_of_users],
+                            ['label'=> trans('user.all'), 'value'=> $all_users->total()],
                             ['label'=> trans('user.active'), 'value'=> $active_users],
-                            ['label'=> trans('user.inactive'), 'value'=> $number_of_users - $active_users]
+                            ['label'=> trans('user.inactive'), 'value'=> $all_users->total() - $active_users]
                         ],
                         'buttons' => [
                             [
@@ -133,4 +133,5 @@
 
 
         </div>
+    </div>
     @endsection

@@ -8,9 +8,9 @@
             @include('breadcrumb', [
                 'links' => [['name' => 'Content'], ['name' => trans('page.pages'), 'url' => route('page.index')]],
                 'page_title' => trans('page.pages'),
-                'stats' => [['label' => trans('page.all'), 'value' => $number_of_pages],
+                'stats' => [['label' => trans('page.all'), 'value' => $all_pages->total()],
                 ['label' => trans('page.visible'), 'value' => $visible_pages],
-                ['label' => trans('page.invisible'), 'value' => $number_of_pages - $visible_pages]],
+                ['label' => trans('page.invisible'), 'value' => $all_pages->total() - $visible_pages]],
                 'buttons' => [
                    [
                         'label' => trans('page.create_page_button'),

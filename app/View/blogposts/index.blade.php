@@ -7,7 +7,7 @@
             @include('breadcrumb', [
                 'links' => [['name' => 'Content'], ['name' => 'Blog', 'url' => route('blogpost.index')]],
                 'page_title' => trans('blogpost.blogposts'),
-                'stats' => [['label' => trans('blogpost.all'), 'value' => $all_blogposts->count()]],
+                'stats' => [['label' => trans('blogpost.all'), 'value' => $all_blogposts->total()]],
                 'buttons' => [
                     [
                         'label' => trans('blogpost.new_post_button'),

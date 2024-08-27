@@ -40,10 +40,8 @@ class BlogpostController extends Controller
             return response()->json($blogposts);
         }
 
-
         $this->view->title(trans('blogpost.blogposts'));
         return $this->view->render('blogposts/index', [
-            'number_of_blogposts' => Blogpost::count(),
             'all_blogposts' =>  $blogposts,
         ]);
     }

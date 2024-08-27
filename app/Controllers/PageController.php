@@ -42,7 +42,6 @@ class PageController extends Controller
 
         $this->view->title(trans('page.pages'));
         return $this->view->render('pages/index', [
-            'number_of_pages' => Page::count(),
             'all_pages' => $pages,
             'visible_pages' => Page::where('visibility', 1)->count(),
             'home_page' => Page::find($this->request->settings['home_page']),
