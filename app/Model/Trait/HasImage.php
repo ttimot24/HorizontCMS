@@ -33,7 +33,7 @@ trait HasImage
 
     public function thumbnailFileExists()
     {
-        return $this->hasImage() && file_exists($this->getImageDirectory() . DIRECTORY_SEPARATOR . $this->image);
+        return $this->hasImage() && file_exists($this->getThumbnailDirectory() . DIRECTORY_SEPARATOR . $this->image);
     }
 
     public function getThumb()
