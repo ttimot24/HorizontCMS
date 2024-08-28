@@ -55,9 +55,7 @@ class PageController extends Controller
      */
     public function create(Request $request)
     {
-
-        $request->validate(Page::$rules);
-
+        
         $this->view->js('resources/js/pages.js');
 
         $this->view->title(trans('page.new_page'));
@@ -75,7 +73,8 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-
+        $request->validate(Page::$rules);
+        
         $page = new Page($request->all());
         $page->slug = str_slug($request->input('name'), "-");
         $page->parent_id = $request->input('parent_select') == 0 ? null : $request->input('parent_id');
