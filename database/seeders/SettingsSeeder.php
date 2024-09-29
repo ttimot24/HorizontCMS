@@ -239,6 +239,13 @@ class SettingsSeeder extends Seeder
             'more' => '1',
         ]);
 
+
+        DB::table('settings')->insert([
+            'setting' => 'scheduler',
+            'value' => "",
+            'more' => '1',
+        ]);
+
     }
 }
 

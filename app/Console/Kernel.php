@@ -15,6 +15,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+
+        \Settings::where('setting', 'scheduler')->update(['value' => 'running']);
+
         if(\App\HorizontCMS::isInstalled()){
             foreach(\App\Model\ScheduledTask::where('active',1)->get() as $task){
                 $schedule->command($task->command.' '.$task->arguments)->cron($task->frequency)->before(function() use ($task) {
