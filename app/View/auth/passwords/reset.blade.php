@@ -1,4 +1,6 @@
-@extends('layout')
+@extends('layout', [
+    'title' => "Forgot password"
+])
 
 @section('content')
     <div class='jumbotron'>

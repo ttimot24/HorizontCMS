@@ -3,8 +3,7 @@
 namespace App\Controllers;
 
 use Illuminate\Http\Request;
-use App\Libs\Controller;
-use App\Http\Requests;
+use Illuminate\Routing\Controller;
 use App\Model\UserRole;
 
 class UserRoleController extends Controller
@@ -12,9 +11,7 @@ class UserRoleController extends Controller
 
     public function index()
     {
-
-        $this->view->title('User roles');
-        return $this->view->render('users/roles/index', [
+        return view('users.roles.index', [
             'all_user_roles' => \App\Model\UserRole::all(),
             'permission_list' => $this->getPermissionList(),
         ]);
@@ -27,10 +24,7 @@ class UserRoleController extends Controller
      */
     public function create()
     {
-
-
-        $this->view->title('Create role');
-        return $this->view->render('users/roles/create', [
+        return view('users.roles.create', [
             'permission_list' => $this->getPermissionList(),
         ]);
     }
@@ -80,9 +74,9 @@ class UserRoleController extends Controller
         $role->permission = 0;
 
         if ($role->save()) {
-            return $this->redirect(route('userrole.index'))->withMessage(['success' => trans('User role created succesfully!')]);
+            return redirect(route('userrole.index'))->withMessage(['success' => trans('User role created succesfully!')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -116,12 +110,12 @@ class UserRoleController extends Controller
     public function update(UserRole $userrole)
     {
 
-        $userrole->rights = array_keys($this->request->except('_token'));
+        $userrole->rights = array_keys(request()->except('_token'));
 
         if ($userrole->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('Rights saved succesfully!')]);
+            return redirect()->back()->withMessage(['success' => trans('Rights saved succesfully!')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -135,9 +129,9 @@ class UserRoleController extends Controller
     {
 
         if ($userrole->delete()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('User role deleted succesfully!')]);
+            return redirect()->back()->withMessage(['success' => trans('User role deleted succesfully!')]);
         }
 
-        return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 }

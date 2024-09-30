@@ -7,9 +7,12 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class PluginModelTest extends TestCase
 {
 
+    private $plugin;
+
     private $dummyName = "TestPlugin";
 
-    private function getDummyInfo(){
+    private function getDummyInfo()
+    {
         $info = new \stdClass();
         $info->name = $this->dummyName;
         $info->version = "1.0";
@@ -23,20 +26,22 @@ class PluginModelTest extends TestCase
     }
 
 
-    protected function setUp() : void {
+    protected function setUp(): void
+    {
         parent::setUp();
         $this->plugin = new \App\Model\Plugin($this->dummyName);
     }
 
 
-    public function testPluginInitiation(){
-        
-        $this->assertInstanceOf(\App\Model\Plugin::class,$this->plugin);
+    public function testPluginInitiation()
+    {
 
+        $this->assertInstanceOf(\App\Model\Plugin::class, $this->plugin);
     }
 
 
-    public function testInfoUsage(){
+    public function testInfoUsage()
+    {
 
 
         $this->assertFalse($this->plugin->hasInfo());
@@ -45,52 +50,53 @@ class PluginModelTest extends TestCase
 
         $this->assertTrue($this->plugin->hasInfo());
 
-        $this->assertEquals($this->plugin->getInfo("name"),$this->dummyName);
+        $this->assertEquals($this->plugin->getInfo("name"), $this->dummyName);
 
-        $this->assertEquals($this->plugin->getInfo("version"),$this->getDummyInfo()->version);
+        $this->assertEquals($this->plugin->getInfo("version"), $this->getDummyInfo()->version);
 
-        $this->assertEquals($this->plugin->getInfo("requires"),$this->getDummyInfo()->requires);
-
+        $this->assertEquals($this->plugin->getInfo("requires"), $this->getDummyInfo()->requires);
     }
 
-    public function testRootDirSetter(){
+    public function testRootDirSetter()
+    {
 
         $this->plugin->setRootDir($this->dummyName);
-        $this->assertEquals($this->plugin->root_dir,$this->dummyName);
+        $this->assertEquals($this->plugin->root_dir, $this->dummyName);
     }
 
 
-    public function testAllGetter(){
+    public function testAllGetter()
+    {
 
 
         $this->plugin->setAllInfo($this->getDummyInfo());
 
         $this->assertEquals($this->plugin->getName(), $this->dummyName);
-        $this->assertEquals($this->plugin->getNamespaceFor("controller"),"\Plugin\\".$this->dummyName."\\App\\Controller\\");
-        $this->assertEquals($this->plugin->getSlug(),namespace_to_slug($this->dummyName));
-        $this->assertEquals($this->plugin->getPath(),"plugins".DIRECTORY_SEPARATOR.$this->dummyName.DIRECTORY_SEPARATOR);
+        $this->assertEquals($this->plugin->getNamespaceFor("controller"), "\Plugin\\" . $this->dummyName . "\\App\\Controller\\");
+        $this->assertEquals($this->plugin->getSlug(), namespace_to_slug($this->dummyName));
+        $this->assertEquals($this->plugin->getPath(), "plugins" . DIRECTORY_SEPARATOR . $this->dummyName . DIRECTORY_SEPARATOR);
         //$this->plugin->getDatabaseFilesPath();
         //$this->plugin->getIcon();
-        $this->assertEquals($this->plugin->getShortCode(), "{[".$this->dummyName."]}");
-        $this->assertEquals($this->plugin->getRegisterClass(),"\Plugin\\".$this->dummyName."\Register");
+        $this->assertEquals($this->plugin->getShortCode(), "{[" . $this->dummyName . "]}");
+        $this->assertEquals($this->plugin->getRegisterClass(), "\Plugin\\" . $this->dummyName . "\Register");
 
-        $this->assertEquals($this->plugin->getRequirements(),$this->getDummyInfo()->requires);
-        $this->assertEquals($this->plugin->getRequiredCoreVersion(),$this->getDummyInfo()->requires->core);
-
+        $this->assertEquals($this->plugin->getRequirements(), $this->getDummyInfo()->requires);
+        $this->assertEquals($this->plugin->getRequiredCoreVersion(), $this->getDummyInfo()->requires->core);
     }
 
-    public function testMethodsDependingOnRegister(){
+    public function testMethodsDependingOnRegister()
+    {
 
 
-    	$returnRouteOptions = [
-				'middleware' => ['web'],
-				'namespace' => "\Plugin\\".$this->dummyName."\\App\\",
-				'prefix' => $this->plugin->getSlug(),
-		];
+        $returnRouteOptions = [
+            'middleware' => ['web'],
+            'namespace' => "\Plugin\\" . $this->dummyName . "\\App\\",
+            'prefix' => $this->plugin->getSlug(),
+        ];
 
-		$this->assertFalse($this->plugin->hasRegisterClass());
+        $this->assertFalse($this->plugin->hasRegisterClass());
 
-    	$externalMock = \Mockery::mock("overload:\Plugin\\".$this->dummyName."\\Register");
+        $externalMock = \Mockery::mock("overload:\Plugin\\" . $this->dummyName . "\\Register");
         $externalMock->shouldReceive('webRouteOptions')
             ->andReturn($returnRouteOptions);
 
@@ -98,9 +104,9 @@ class PluginModelTest extends TestCase
 
         $default = ['test'];
         $this->assertNull($this->plugin->getRegister("dummy"));
-        $this->assertEquals($this->plugin->getRegister("dummy",$default),$default);
-       // $this->assertInternalType('array',$this->plugin->getRegister('webRouteOptions'));
-       // $this->assertEquals($this->plugin->getRegister('webRouteOptions'),$returnRouteOptions);
+        $this->assertEquals($this->plugin->getRegister("dummy", $default), $default);
+        // $this->assertInternalType('array',$this->plugin->getRegister('webRouteOptions'));
+        // $this->assertEquals($this->plugin->getRegister('webRouteOptions'),$returnRouteOptions);
 
     }
 
@@ -118,5 +124,4 @@ class PluginModelTest extends TestCase
        // $this->assertFalse($this->plugin->isCompatibleWithCore());
 
     }*/
-
 }

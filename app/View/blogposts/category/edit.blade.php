@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['title' => trans('blogpost.edit_blogpost')])
 
 @section('content')
     <div class='container main-container'>

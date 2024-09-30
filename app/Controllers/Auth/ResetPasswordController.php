@@ -3,11 +3,9 @@
 namespace App\Controllers\Auth;
 
 
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use \App\Libs\ViewResolver;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
@@ -31,21 +29,20 @@ class ResetPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct(Request $request,ViewResolver $viewResolver)
+    public function __construct()
     {
-        $this->view = $viewResolver;
         $this->middleware('guest');
-
     }
 
 
     public function showResetForm(Request $request, $token = null)
     {
-        $this->view->title("Password reset");
-        return $this->view->render('auth/passwords/reset',['token' => $token, 'email' => $request->email,
-                                                            'app_name' => \Config::get('app.name'),
-                                                            'admin_logo' => url(\Config::get('horizontcms.admin_logo')),
-                                                          ]);
+        return view('auth.passwords.reset', [
+            'token' => $token,
+            'email' => $request->email,
+            'app_name' => \Config::get('app.name'),
+            'admin_logo' => url(\Config::get('horizontcms.admin_logo')),
+        ]);
     }
 
 
@@ -69,5 +66,4 @@ class ResetPasswordController extends Controller
 
         $this->guard()->login($user);
     }
-
 }

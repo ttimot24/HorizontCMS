@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['title' => trans('SocialMedia')])
 
 @section('content')
     <div class='container main-container'>

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', [ 'title' => trans('Server') ])
 
 @section('content')
     <div class='container'>

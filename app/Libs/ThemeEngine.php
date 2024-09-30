@@ -2,7 +2,7 @@
 
 namespace App\Libs;
 
-class ThemeEngine{
+class ThemeEngine {
 
 	protected $theme;
 	protected $page_template = 'index';

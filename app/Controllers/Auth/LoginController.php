@@ -2,11 +2,9 @@
 
 namespace App\Controllers\Auth;
 
-
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use \App\Libs\ViewResolver;
 
 class LoginController extends Controller
 {
@@ -28,9 +26,8 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct(Request $request, ViewResolver $viewResolver){
-        parent::__construct($request,$viewResolver);
-
+    public function __construct()
+    {
         $this->middleware('guest', ['except' => 'logout']);
     }
 
@@ -39,16 +36,18 @@ class LoginController extends Controller
      *
      * @var string
      */
-    public function redirectTo(){
+    public function redirectTo()
+    {
         return route('dashboard.index');
     }
 
     /**
-    *
-    * Returns if email or username is for authentication.
-    */
+     *
+     * Returns if email or username is for authentication.
+     */
 
-    public function username(){
+    public function username()
+    {
         return 'username';
     }
 
@@ -58,18 +57,19 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showLoginForm(){
+    public function showLoginForm()
+    {
 
-        $this->view->title('Welcome');
-        return $this->view->render('auth/login',[
-                                                    'app_name' => \Config::get('app.name'),
-                                                    'admin_logo' => url(\Config::get('horizontcms.admin_logo')),
-                                                ]);
+        return view('auth.login', [
+            'app_name' => \Config::get('app.name'),
+            'admin_logo' => url(\Config::get('horizontcms.admin_logo')),
+        ]);
     }
 
 
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
 
         $this->guard()->logout();
         $request->session()->flush();
@@ -77,6 +77,4 @@ class LoginController extends Controller
 
         return redirect(route('login'));
     }
-
-    
 }

@@ -2,7 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FileManagerController extends Controller
@@ -16,10 +17,9 @@ class FileManagerController extends Controller
     public function index()
     {
 
+        $mode = request()->get('mode');
 
-        $mode = $this->request->get('mode');
-
-        $current_dir = str_replace_first("storage/", "", $this->request->get('path') == NULL ? "" : ltrim($this->request->get('path'), "/"));
+        $current_dir = str_replace_first("storage/", "", request()->get('path') == null ? "" : ltrim(request()->get('path'), "/"));
 
         $data = [
             'old_path' => ($current_dir == "" ? "" : $current_dir . "/"),
@@ -37,12 +37,11 @@ class FileManagerController extends Controller
         ];
 
 
-        if ($this->request->ajax()) {
+        if (request()->ajax()) {
             return response()->json($data);
         }
 
-        $this->view->title(trans('File Manager'));
-        return $this->view->render($mode == 'embed' ? 'media/embed' : 'media/fmframe', $data);
+        return view($mode == 'embed' ? 'media.embed' : 'media.fmframe', $data);
     }
 
     /**
@@ -52,49 +51,47 @@ class FileManagerController extends Controller
      */
     public function store()
     {
+        if (request()->isMethod('POST')) {
 
+            if (request()->hasFile('up_file')) {
 
-        if ($this->request->isMethod('POST')) {
+                $dir = str_replace("storage/", "", request()->input('dir_path'));
 
-            if ($this->request->hasFile('up_file')) {
-
-                $dir = str_replace("storage/", "", $this->request->input('dir_path'));
-
-                foreach ($this->request->up_file as $file) {
+                foreach (request()->up_file as $file) {
                     if (!\Security::isExecutable($file)) {
                         $images[] = $file->store($dir);
                     }
                 }
 
-                if ($this->request->ajax()) {
+                if (request()->ajax()) {
                     return response()->json(['success' => 'Files uploaded successfully!', 'uploadedFileNames' => $images]);
                 }
 
-                return $this->redirectToSelf()->withMessage(['success' => 'Files uploaded successfully!']);
+                return redirect()->back()->withMessage(['success' => 'Files uploaded successfully!']);
             } else {
 
-                if ($this->request->ajax()) {
+                if (request()->ajax()) {
                     return response()->json(['danger' => 'Could not upload files!']);
                 }
 
-                return $this->redirectToSelf()->withMessage(['danger' => 'Could not upload files!']);
+                return redirect()->back()->withMessage(['danger' => 'Could not upload files!']);
             }
         }
 
-        if ($this->request->ajax()) {
+        if (request()->ajax()) {
             return response()->json(['warning' => 'Only POST method allowed!']);
         }
 
-        return $this->redirectToSelf()->withMessage(['warning' => 'Only POST method allowed!']);
+        return redirect()->back()->withMessage(['warning' => 'Only POST method allowed!']);
     }
 
 
     public function download()
     {
 
-        if ($this->request->has('file')) {
+        if (request()->has('file')) {
 
-            $file = $this->request->input('file');
+            $file = request()->input('file');
 
             $headers = [
                 'Content-Type' => 'application/*',
@@ -103,38 +100,38 @@ class FileManagerController extends Controller
             return response()->download($file, basename($file), $headers);
         }
 
-        return $this->redirectToSelf()->withMessage(['warning' => 'Bad request!']);
+        return redirect()->back()->withMessage(['warning' => 'Bad request!']);
     }
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $this->request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function newFolder()
     {
 
-        if ($this->request->isMethod('POST')) {
+        if (request()->isMethod('POST')) {
 
-            $directory = "storage/" . str_replace("storage/", "", $this->request->input('dir_path')) . "/" . $this->request->input('new_folder_name');
+            $directory = "storage/" . str_replace("storage/", "", request()->input('dir_path')) . "/" . request()->input('new_folder_name');
 
             if (!file_exists($directory)) {
                 \File::makeDirectory($directory, $mode = 0777, true, true);
 
-                if ($this->request->ajax()) {
+                if (request()->ajax()) {
                     return response()->json(['success' => 'Folder created successfully!']);
                 }
 
-                return $this->redirectToSelf()->withMessage(['success' => 'Folder created successfully!']);
+                return redirect()->back()->withMessage(['success' => 'Folder created successfully!']);
             } else {
 
-                if ($this->request->ajax()) {
+                if (request()->ajax()) {
                     return response()->json(['danger' => 'Folder already exists!']);
                 }
 
-                return $this->redirectToSelf()->withMessage(['danger' => 'Folder already exists!']);
+                return redirect()->back()->withMessage(['danger' => 'Folder already exists!']);
             }
         }
     }
@@ -149,39 +146,38 @@ class FileManagerController extends Controller
     public function destroy()
     {
 
-
-        $toDelete = str_replace("storage/", "", $this->request->input('file'));
+        $toDelete = str_replace("storage/", "", request()->input('file'));
 
         if (!file_exists('storage/' . $toDelete)) {
-            if ($this->request->ajax()) {
+            if (request()->ajax()) {
                 return response()->json(['warning' => trans("File " . $toDelete . " doesn't exists")]);
             }
 
-            return $this->redirectToSelf()->withMessage(['warning' => trans("File " . $toDelete . " doesn't exists")]);
+            return redirect()->back()->withMessage(['warning' => trans("File " . $toDelete . " doesn't exists")]);
         }
 
 
         if (!is_dir('storage/' . $toDelete) && Storage::delete($toDelete)) {
 
-            if ($this->request->ajax()) {
+            if (request()->ajax()) {
                 return response()->json(['success' => trans('File deleted successfully')]);
             }
 
-            return $this->redirectToSelf()->withMessage(['success' => trans('File deleted successfully')]);
+            return redirect()->back()->withMessage(['success' => trans('File deleted successfully')]);
         } else if (is_dir('storage/' . $toDelete) && Storage::deleteDirectory($toDelete)) {
 
-            if ($this->request->ajax()) {
+            if (request()->ajax()) {
                 return response()->json(['success' => trans('Directory deleted successfully')]);
             }
 
-            return $this->redirectToSelf()->withMessage(['success' => trans('Directory deleted successfully')]);
+            return redirect()->back()->withMessage(['success' => trans('Directory deleted successfully')]);
         } else {
 
-            if ($this->request->ajax()) {
+            if (request()->ajax()) {
                 return response()->json(['danger' => trans('message.something_went_wrong')]);
             }
 
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -190,11 +186,11 @@ class FileManagerController extends Controller
     public function upload()
     {
 
-        if ($this->request->isMethod('POST')) {
+        if (request()->isMethod('POST')) {
 
-            if ($this->request->hasFile('upload')) {
+            if (request()->hasFile('upload')) {
 
-                $image = $this->request->upload->store('images/' . $this->request->input('module'));
+                $image = request()->upload->store('images/' . request()->input('module'));
 
                 if ($image) {
                     // if($this->request->ajax()){
@@ -217,21 +213,21 @@ class FileManagerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $this->request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function rename()
     {
 
-        $new_file = trim($this->request->input('new_file'), "/");
+        $new_file = trim(request()->input('new_file'), "/");
 
-        if (!\Security::isExecutable($new_file) && \Storage::move($this->request->input('old_file'), $new_file)) {
-            if ($this->request->ajax()) {
+        if (!\Security::isExecutable($new_file) && \Storage::move(request()->input('old_file'), $new_file)) {
+            if (request()->ajax()) {
                 return response()->json(['success' => trans('File successfully renamed!')]);
             }
         } else {
-            if ($this->request->ajax()) {
+            if (request()->ajax()) {
                 return response()->json(['danger' => trans('message.something_went_wrong')]);
             }
         }

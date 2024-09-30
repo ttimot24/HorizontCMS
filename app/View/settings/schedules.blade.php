@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['title' => trans('Schedules')])
 
 @section('content')
     <div class='container'>
@@ -14,6 +14,12 @@
                         'label' => trans('Schedule task'),
                         'class' => 'btn-warning',
                         'data' => 'data-bs-toggle=modal data-bs-target=.new_task',
+                    ],
+                ],
+                'buttons_right' => [
+                    [
+                        'label' => "Scheduler: ".$scheduler->value,
+                        'class' => 'badge '.(\Carbon\Carbon::now()->diffInMinutes($scheduler->updated_at) > 5)? 'text-bg-danger' : 'text-bg-success',
                     ],
                 ],
             ])

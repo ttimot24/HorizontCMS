@@ -15,23 +15,22 @@ class InstallerMiddlewareTest extends TestCase
 
         $middleware = new \App\Http\Middleware\InstallerMiddleware;
 
-        $response = $middleware->handle($request, function () { });
+        $response = $middleware->handle($request, function () {});
 
-        $this->assertNull($response); 
+        $this->assertNull($response);
     }
 
     /** @test */
     public function testInstallerIsNotAvailableAfterInstalled()
-        {
-            $request = \Request::create('/admin/install', 'GET');
-    
-            $middleware = new \App\Http\Middleware\InstallerMiddleware;
-    
-            $response = $middleware->handle($request, function () { });
-    
-            $this->assertNotNull($response);
-            $this->assertEquals($response->getStatusCode(),302); 
-            $this->assertEquals($response->headers->get('Location'),\Config::get('app.url').'/admin/login');
-        }
+    {
+        $request = \Request::create('/admin/install', 'GET');
 
+        $middleware = new \App\Http\Middleware\InstallerMiddleware;
+
+        $response = $middleware->handle($request, function () {});
+
+        $this->assertNotNull($response);
+        $this->assertEquals($response->getStatusCode(), 302);
+        $this->assertEquals($response->headers->get('Location'), \Config::get('app.url') . '/admin/login');
+    }
 }

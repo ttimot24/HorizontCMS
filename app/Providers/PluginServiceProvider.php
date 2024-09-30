@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Libs\ViewResolver;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;

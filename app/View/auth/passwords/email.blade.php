@@ -1,4 +1,7 @@
-@extends('layout')
+@extends('layout', [
+    'title' => "Password reset"
+])
+
 
 <div class='jumbotron'>
     <div class='container my-5'>

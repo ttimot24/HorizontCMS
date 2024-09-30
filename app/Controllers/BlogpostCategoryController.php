@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\Trait\UploadsImage;
 use Illuminate\Http\Request;
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 
 use App\Model\BlogpostCategory;
 
@@ -22,11 +22,7 @@ class BlogpostCategoryController extends Controller
      */
     public function index()
     {
-
-
-
-        $this->view->title(trans('category.category'));
-        return $this->view->render('blogposts/category/index', [
+        return view('blogposts.category.index', [
             'all_category' => BlogpostCategory::all(),
         ]);
     }
@@ -36,9 +32,7 @@ class BlogpostCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -56,9 +50,9 @@ class BlogpostCategoryController extends Controller
         $this->uploadImage($blogpost_category);
 
         if ($blogpost_category->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_created_blogpost_category')]);
+            return redirect()->back()->withMessage(['success' => trans('message.successfully_created_blogpost_category')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -70,8 +64,7 @@ class BlogpostCategoryController extends Controller
      */
     public function show(BlogpostCategory $blogpostcategory)
     {
-        $this->view->title(trans('category.category'));
-        return $this->view->render('blogposts.category.view', ['category' => $blogpostcategory]);
+        return view('blogposts.category.view', ['category' => $blogpostcategory]);
     }
 
     /**
@@ -82,9 +75,8 @@ class BlogpostCategoryController extends Controller
      */
     public function edit(BlogpostCategory $blogpostcategory)
     {
-        $this->view->title(trans('blogpost.edit_blogpost'));
 
-        return $this->view->render('blogposts/category/edit', [
+        return view('blogposts.category.edit', [
             'category' => $blogpostcategory,
         ]);
     }
@@ -104,9 +96,9 @@ class BlogpostCategoryController extends Controller
         $this->uploadImage($blogpostcategory);
 
         if ($blogpostcategory->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_updated_blogpost_category')]);
+            return redirect()->back()->withMessage(['success' => trans('message.successfully_updated_blogpost_category')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -120,9 +112,9 @@ class BlogpostCategoryController extends Controller
     {
 
         if ($blogpostcategory->delete()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpost_category')]);
+            return redirect()->back()->withMessage(['success' => trans('message.successfully_deleted_blogpost_category')]);
         }
 
-        return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 }

@@ -3,8 +3,7 @@
 namespace App\Controllers;
 
 use Composer\Semver\Comparator;
-use App\Libs\Controller;
-use App\Libs\ViewResolver;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
 class UpgradeController extends Controller
@@ -12,9 +11,9 @@ class UpgradeController extends Controller
 
     private $updateManager = null;
 
-    public function __construct(Request $request,ViewResolver $viewResolver, \Codedge\Updater\UpdaterManager $updater){
+    public function __construct(Request $request, \Codedge\Updater\UpdaterManager $updater){
 
-        parent::__construct($request, $viewResolver);
+        parent::__construct($request);
 
         $this->updateManager = $updater;
     }
@@ -35,8 +34,7 @@ class UpgradeController extends Controller
 
         $available_list = $releases->filter(fn($release) => Comparator::greaterThan($release['tag_name'], 'v'.$this->updateManager->source()->getVersionInstalled()));
 
-        $this->view->title(trans('settings.settings'));
-        return $this->view->render('upgrade/index', [
+        return view('upgrade.index', [
             'current_version' => $this->updateManager->source()->getVersionInstalled(),
             'available_list' => $available_list,
             'upgrade_list' => $releases->filter(fn($release) => Comparator::lessThanOrEqualTo($release['tag_name'], $this->updateManager->source()->getVersionInstalled()))->slice(0,5),

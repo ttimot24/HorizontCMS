@@ -2,7 +2,7 @@
 
 <head>
     <base href="{{ config('app.url') }}" />
-    <title>{{ $title }} - {{ config('app.name') }}</title>
+    <title>{{ trans('File Manager') }} - {{ config('app.name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="shortcut icon" type="image/png" href="resources/images/icons/favicon16.png" />
 

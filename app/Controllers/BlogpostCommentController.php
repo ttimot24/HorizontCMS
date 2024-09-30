@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Illuminate\Http\Request;
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 
 use App\Model\BlogpostComment;
 
@@ -33,7 +33,7 @@ class BlogpostCommentController extends Controller
         $blogpost_comment->blogpost_id = $request->input('blogpost_id');
         $blogpost_comment->author()->associate($request->user());
 
-        return $this->redirectToSelf()->withMessage(
+        return redirect()->back()->withMessage(
             $blogpost_comment->save() ? ['success' => trans('message.successfully_created_blogpost_comment')]
                 : ['danger' => trans('message.something_went_wrong')]
         );
@@ -64,7 +64,7 @@ class BlogpostCommentController extends Controller
         $blogpost_comment->author()->associate($this->request->user());
 
 
-        return $this->redirectToSelf()->withMessage(
+        return redirect()->back()->withMessage(
             $blogpost_comment->save() ? ['success' => trans('message.successfully_updated_blogpost_comment')]
                 : ['danger' => trans('message.something_went_wrong')]
         );
@@ -80,7 +80,7 @@ class BlogpostCommentController extends Controller
     {
 
 
-        return $this->redirectToSelf()->withMessage(
+        return redirect()->back()->withMessage(
             $blogpostcomment->delete() ? ['success' => trans('message.successfully_deleted_blogpost_comment')]
                 : ['danger' => trans('message.something_went_wrong')]
         );

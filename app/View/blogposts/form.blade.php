@@ -1,4 +1,6 @@
-@extends('layout')
+@extends('layout', [
+    'title' => isset($blogpost)? trans('blogpost.edit_blogpost') : trans('blogpost.new_blogpost') 
+])
 
 @section('content')
     <div class='container main-container'>

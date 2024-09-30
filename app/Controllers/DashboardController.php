@@ -2,8 +2,7 @@
 
 namespace App\Controllers;
 
-use Illuminate\Http\Request;
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 
 
 class DashboardController extends Controller
@@ -19,21 +18,19 @@ class DashboardController extends Controller
 
         $updater = new \Codedge\Updater\UpdaterManager(app());
 
-        $admin_logo = $this->request->settings['admin_logo'];
+        $admin_logo = request()->settings['admin_logo'];
 
-        $this->view->title(trans('dashboard.title'));
-        return $this->view->render("dashboard/index", [
 
-            'domain' => $this->request->getHost(),
+        return view("dashboard.index", [
+            'domain' => request()->getHost(),
             'server_ip' => isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : "unknown",
-            'client_ip' => $this->request->ip(),
+            'client_ip' => request()->ip(),
             'blogposts'  => \App\Model\Blogpost::count(),
             'users' => \App\Model\User::count(),
             'visits' => \App\Model\Visits::count(),
             'admin_logo' => ($admin_logo != "" && file_exists("storage/images/logos/" . $admin_logo)) ? "storage/images/logos/" . $admin_logo : \Config::get('horizontcms.admin_logo'),
             'disk_space' => @((disk_free_space("/") ?: 1) / (disk_total_space("/") ?: 1)) * 100,
-            'upgrade' => $this->request->settings['auto_upgrade_check'] == 1 && \Auth::user()->hasPermission('upgrade')? $updater->source() : null,
-
+            'upgrade' => request()->settings['auto_upgrade_check'] == 1 && \Auth::user()->hasPermission('upgrade')? $updater->source() : null,
         ]);
     }
 
@@ -44,13 +41,11 @@ class DashboardController extends Controller
 
     public function unauthorized()
     {
-        $this->view->title('Access denied');
-        return $this->view->render('errors/unauthorized');
+        return view('errors.unauthorized');
     }
 
     public function notfound()
     {
-        $this->view->title('Access denied');
-        return $this->view->render('errors/404');
+        return view('errors.404');
     }
 }

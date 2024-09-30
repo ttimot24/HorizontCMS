@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['title' => trans('Access denied')])
 
 @section('content')
 <div class="p-5">
