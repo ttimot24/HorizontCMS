@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Illuminate\Http\Request;
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 
 
 class PluginController extends Controller
@@ -56,8 +56,6 @@ class PluginController extends Controller
             $plugins = [];
             $repo_status = false;
         }
-
-
 
         return view('plugin.store', ['online_plugins' => $plugins, 'repo_status' => $repo_status]);
     }
