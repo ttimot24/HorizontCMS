@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['title' => isset($user)? trans('user.edit_user') : trans('user.create_user')])
 
 @section('content')
     <div class='container main-container'>

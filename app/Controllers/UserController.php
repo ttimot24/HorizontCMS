@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\Trait\UploadsImage;
 use Illuminate\Http\Request;
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 use App\Model\User;
 
 class UserController extends Controller
@@ -33,10 +33,7 @@ class UserController extends Controller
      */
     public function index()
     {
-
-
-        $this->view->title(trans('user.users'));
-        return $this->view->render('users/index', [
+        return view('users.index', [
             'all_users' => User::paginate($this->itemPerPage),
             'active_users' => User::where('active', 1)->count(),
         ]);
@@ -49,10 +46,8 @@ class UserController extends Controller
      */
     public function create()
     {
-
-        $this->view->title(trans('user.create_user'));
-        return $this->view->render('users/form', [
-            'current_user' => $this->request->user(),
+        return view('users.form', [
+            'current_user' => request()->user(),
             'role_options' => \App\Model\UserRole::all()
         ]);
     }
@@ -77,9 +72,9 @@ class UserController extends Controller
 
         if ($user->save()) {
 
-            return $this->redirect(route("user.edit", ['user' => $user]))->withMessage(['success' => trans('message.successfully_created_user')]);
+            return redirect(route("user.edit", ['user' => $user]))->withMessage(['success' => trans('message.successfully_created_user')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -91,9 +86,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-
-        $this->view->title(trans('user.view_user'));
-        return $this->view->render('users/view', [
+        return view('users.view', [
             'user' => $user,
             'previous_user' => User::where('id', '<', $user->id)->max('id'),
             'next_user' =>  User::where('id', '>', $user->id)->min('id'),
@@ -108,10 +101,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-
-        $this->view->title(trans('user.edit_user'));
-        return $this->view->render('users/form', [
-            'current_user' => $this->request->user(),
+        return view('users.form', [
+            'current_user' => request()->user(),
             'user' => $user,
             'role_options' => \App\Model\UserRole::all(),
         ]);
@@ -137,9 +128,9 @@ class UserController extends Controller
         $this->uploadImage($user);
 
         if ($user->save()) {
-            return $this->redirect(route("user.edit", ['user' => $user]))->withMessage(['success' => trans('message.successfully_updated_user')]);
+            return redirect(route("user.edit", ['user' => $user]))->withMessage(['success' => trans('message.successfully_updated_user')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -156,9 +147,9 @@ class UserController extends Controller
         $user->active = 1;
 
         if ($user->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('User successfully activated!')]);
+            return redirect()->back()->withMessage(['success' => trans('User successfully activated!')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -173,10 +164,10 @@ class UserController extends Controller
     {
 
         if ($user->delete()) {
-            return $this->redirect(route("user.index"))->withMessage(['success' => trans('message.successfully_deleted_user')]);
+            return redirect(route("user.index"))->withMessage(['success' => trans('message.successfully_deleted_user')]);
         }
 
 
-        return $this->redirect(route("user.index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return redirect(route("user.index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 }
