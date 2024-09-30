@@ -22,15 +22,11 @@ class PluginController extends Controller
      */
     public function index()
     {
-
-        $this->view->title(trans('Applications'));
-        return $this->view->render('plugin/index', [
+        return view('plugin.index', [
             'all_plugin' => collect(\File::directories(base_path() . DIRECTORY_SEPARATOR . "plugins"))->map(function ($dir) {
                 return new \App\Model\Plugin(str_replace(base_path() . DIRECTORY_SEPARATOR . "plugins" . DIRECTORY_SEPARATOR, "", $dir));
             }),
-
             'zip_enabled' => class_exists('ZipArchive'),
-
         ]);
     }
 
@@ -52,9 +48,6 @@ class PluginController extends Controller
      */
     public function onlinestore()
     {
-
-        $this->view->title(trans('App center'));
-
         $repo_status = true;
 
         try {
@@ -66,7 +59,7 @@ class PluginController extends Controller
 
 
 
-        return $this->view->render('plugin/store', ['online_plugins' => $plugins, 'repo_status' => $repo_status]);
+        return view('plugin.store', ['online_plugins' => $plugins, 'repo_status' => $repo_status]);
     }
 
 
@@ -86,12 +79,12 @@ class PluginController extends Controller
 
             if (file_exists("plugins/" . $plugin_name)) {
                 @\Storage::delete("framework" . DIRECTORY_SEPARATOR . "temp" . DIRECTORY_SEPARATOR . $plugin_name . ".zip");
-                return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully downloaded ' . $plugin_name)]);
+                return redirect()->back()->withMessage(['success' => trans('Succesfully downloaded ' . $plugin_name)]);
             } else {
-                return $this->redirectToSelf()->withMessage(['danger' => trans('Could not extract the plugin: ' . $plugin_name . "")]);
+                return redirect()->back()->withMessage(['danger' => trans('Could not extract the plugin: ' . $plugin_name . "")]);
             }
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('Could not download the plugin: ' . $plugin_name . "")]);
+            return redirect()->back()->withMessage(['danger' => trans('Could not download the plugin: ' . $plugin_name . "")]);
         }
     }
 
@@ -110,7 +103,7 @@ class PluginController extends Controller
             $plugin = new \App\Model\Plugin($plugin_name);
 
             if (!$plugin->isCompatibleWithCore()) {
-                return $this->redirectToSelf()->withMessage(['warning' => trans('plugin.not_compatible_with_core', ['min_core_ver' => $plugin->getRequiredCoreVersion()])]);
+                return redirect()->back()->withMessage(['warning' => trans('plugin.not_compatible_with_core', ['min_core_ver' => $plugin->getRequiredCoreVersion()])]);
             }
 
 
@@ -141,17 +134,16 @@ class PluginController extends Controller
 
             $plugin->save();
 
-            foreach(\App\Model\UserRole::all() as $role){
-                if($role->isAdminRole()){
+            foreach (\App\Model\UserRole::all() as $role) {
+                if ($role->isAdminRole()) {
                     $role->addRight(str_slug($plugin->root_dir));
                     $role->save();
                 }
             }
 
-
-            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully installed ' . $plugin_name)]);
+            return redirect()->back()->withMessage(['success' => trans('Succesfully installed ' . $plugin_name)]);
         } catch (\Exception $e) {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong') . " " . $e->getMessage()]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong') . " " . $e->getMessage()]);
         }
     }
 
@@ -168,9 +160,9 @@ class PluginController extends Controller
         $plugin->active = 1;
 
         if ($plugin->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully activated ' . $plugin_name)]);
+            return redirect()->back()->withMessage(['success' => trans('Succesfully activated ' . $plugin_name)]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -188,9 +180,9 @@ class PluginController extends Controller
 
 
         if ($plugin->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully deactivated ' . $plugin_name)]);
+            return redirect()->back()->withMessage(['success' => trans('Succesfully deactivated ' . $plugin_name)]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -223,20 +215,19 @@ class PluginController extends Controller
                 \Storage::disk('plugins')->deleteDirectory($plugin);
             }
         } catch (\Exception $e) {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong') . " " . $e->getMessage()]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong') . " " . $e->getMessage()]);
         }
 
-
-        return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully deleted the plugin!')]);
+        return redirect()->back()->withMessage(['success' => trans('Succesfully deleted the plugin!')]);
     }
 
 
     public function upload()
     {
 
-        if ($this->request->hasFile('up_file')) {
+        if (request()->hasFile('up_file')) {
 
-            $file_name = $this->request->up_file[0]->store('framework/temp');
+            $file_name = request()->up_file[0]->store('framework/temp');
         }
 
         $zip = new \ZipArchive;
@@ -246,9 +237,9 @@ class PluginController extends Controller
 
             \Storage::delete("storage/" . $file_name);
 
-            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully uploaded the plugin!')]);
+            return redirect()->back()->withMessage(['success' => trans('Succesfully uploaded the plugin!')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 }

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['title' => trans('File Manager')])
 
 @section('content')
 
