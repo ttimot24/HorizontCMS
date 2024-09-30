@@ -16,32 +16,27 @@ class AppTest extends TestCase
 
 
         $this->assertInstanceOf(\App\HorizontCMS::class, $this->app);
-
-
     }
 
 
-    public function testAppRootDir(){
+    public function testAppRootDir()
+    {
 
-        $this->assertEquals($this->app->publicPath(),getcwd().DIRECTORY_SEPARATOR);
-
+        $this->assertEquals($this->app->publicPath(), getcwd() . DIRECTORY_SEPARATOR);
     }
 
 
-    public function testIsInstalled(){
+    public function testIsInstalled()
+    {
 
-        if(file_exists(base_path(".env")) || env("INSTALLED","")!=""){
+        if (file_exists(base_path(".env")) || env("INSTALLED", "") != "") {
 
             $this->assertTrue($this->app->isInstalled());
-            $this->assertNotNull('array',$this->app->plugins);
-
-        }else{
+            $this->assertNotNull('array', $this->app->plugins);
+        } else {
 
             $this->assertFalse($this->app->isInstalled());
             $this->assertNull($this->app->plugins);
-
         }
-
     }
-
 }

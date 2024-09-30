@@ -7,16 +7,15 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SettingsMiddlewareTest extends TestCase
 {
-     /** @test */
-     public function testSettingsAreSet()
-     {
-         $request = new Request;
- 
-         $middleware = new \App\Http\Middleware\SettingsMiddleware;
+    /** @test */
+    public function testSettingsAreSet()
+    {
+        $request = new Request;
 
-         $middleware->handle($request, function ($req) {
-             $this->assertNotNull($req->settings);
-         });
-     }
+        $middleware = new \App\Http\Middleware\SettingsMiddleware;
 
+        $middleware->handle($request, function ($req) {
+            $this->assertNotNull($req->settings);
+        });
+    }
 }

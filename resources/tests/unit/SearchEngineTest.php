@@ -9,7 +9,8 @@ class SearchEngineTest extends TestCase
 
     protected $engine;
 
-    protected function setUp() : void {
+    protected function setUp(): void
+    {
         parent::setUp();
         $this->engine = new \App\Libs\SearchEngine();
     }
@@ -19,66 +20,66 @@ class SearchEngineTest extends TestCase
      *
      * @return void
      */
-    public function testSearchEngineInitiation(){
+    public function testSearchEngineInitiation()
+    {
 
 
-        $this->assertInstanceOf(\App\Libs\SearchEngine::class,$this->engine);
-        
-        $this->assertObjectHasProperty('searchModels',$this->engine);
-        $this->assertObjectHasProperty('searchKey',$this->engine);
+        $this->assertInstanceOf(\App\Libs\SearchEngine::class, $this->engine);
+
+        $this->assertObjectHasProperty('searchModels', $this->engine);
+        $this->assertObjectHasProperty('searchKey', $this->engine);
     }
 
 
-    public function testRoutingMethodExistance(){
+    public function testRoutingMethodExistance()
+    {
 
 
-         $methods = [
-                    'registerModel',
-                    'executeSearch',
-                    'getResultsFor',
-                    ];
+        $methods = [
+            'registerModel',
+            'executeSearch',
+            'getResultsFor',
+        ];
 
-         foreach($methods as $method){
-            $this->assertTrue(method_exists($this->engine, $method),'Method ['.$method.'] does not exists in class ['.get_class($this->engine).']');
-         }
-
-
+        foreach ($methods as $method) {
+            $this->assertTrue(method_exists($this->engine, $method), 'Method [' . $method . '] does not exists in class [' . get_class($this->engine) . ']');
+        }
     }
 
 
-    public function testGetterAndSetterModel(){
+    public function testGetterAndSetterModel()
+    {
 
-       $this->assertIsArray($this->engine->getRegisteredModels());
-       $this->assertEquals(0,count($this->engine->getRegisteredModels()));
-       $this->engine->registerModel(\App\Model\Page::class);
-       $this->assertEquals(1,count($this->engine->getRegisteredModels()));
-
-       $this->assertEquals(0,count($this->engine->getResultsFor(\App\Libs\Page::class)));
-
-    }
-
-    public function testExecuteSearch(){
-    
+        $this->assertIsArray($this->engine->getRegisteredModels());
+        $this->assertEquals(0, count($this->engine->getRegisteredModels()));
         $this->engine->registerModel(\App\Model\Page::class);
-        $this->engine->executeSearch('home'); 
-        $this->assertEquals(1,count($this->engine->getResultsFor(\App\Model\Page::class)));
+        $this->assertEquals(1, count($this->engine->getRegisteredModels()));
 
+        $this->assertEquals(0, count($this->engine->getResultsFor(\App\Libs\Page::class)));
     }
 
-    public function testClearResults(){
+    public function testExecuteSearch()
+    {
+
         $this->engine->registerModel(\App\Model\Page::class);
-        $this->engine->executeSearch('home'); 
-        $this->assertEquals(1,count($this->engine->getResultsFor(\App\Model\Page::class)));
-        $this->engine->clearResults();
-        $this->assertEquals(0,count($this->engine->getResultsFor(\App\Model\Page::class)));
-
+        $this->engine->executeSearch('home');
+        $this->assertEquals(1, count($this->engine->getResultsFor(\App\Model\Page::class)));
     }
 
-    public function testSearchKey(){
-        $this->engine->executeSearch('home'); 
-        $this->assertEquals('home',$this->engine->getSearchKey());
+    public function testClearResults()
+    {
+        $this->engine->registerModel(\App\Model\Page::class);
+        $this->engine->executeSearch('home');
+        $this->assertEquals(1, count($this->engine->getResultsFor(\App\Model\Page::class)));
         $this->engine->clearResults();
-        $this->assertEquals(null,$this->engine->getSearchKey());
+        $this->assertEquals(0, count($this->engine->getResultsFor(\App\Model\Page::class)));
     }
 
+    public function testSearchKey()
+    {
+        $this->engine->executeSearch('home');
+        $this->assertEquals('home', $this->engine->getSearchKey());
+        $this->engine->clearResults();
+        $this->assertEquals(null, $this->engine->getSearchKey());
+    }
 }

@@ -22,9 +22,9 @@ class AdminMiddlewareTest extends TestCase
 
         $middleware = new \App\Http\Middleware\AdminMiddleware;
 
-        $response = $middleware->handle($request, function () { });
+        $response = $middleware->handle($request, function () {});
 
-        $this->assertEquals(302, $response->getStatusCode()); 
+        $this->assertEquals(302, $response->getStatusCode());
     }
 
 
@@ -50,7 +50,7 @@ class AdminMiddlewareTest extends TestCase
 
         $this->assertEquals(null, $response);
     }
-    
+
 
     /** @test */
     public function testNonActiveAdminsAreRedirected()
@@ -69,9 +69,8 @@ class AdminMiddlewareTest extends TestCase
 
         $middleware = new \App\Http\Middleware\AdminMiddleware;
 
-        $response = $middleware->handle($request, function () { });
+        $response = $middleware->handle($request, function () {});
 
-        $this->assertEquals(302, $response->getStatusCode()); 
+        $this->assertEquals(302, $response->getStatusCode());
     }
-
 }
