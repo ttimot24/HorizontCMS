@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['title' => trans('search.title')])
 
 @section('content')
     <div class='container main-container'>
