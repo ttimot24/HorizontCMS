@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['title' => trans('Not found')])
 
 @section('content')
 <div class="p-5">

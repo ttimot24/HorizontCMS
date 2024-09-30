@@ -29,7 +29,7 @@
 
 </head>
 
-<body @if (Auth::user()) style="padding-top: 5rem;" @endif>
+<body @style(["padding-top: 5rem;" => Auth::user()])>
 
     <div id="hcms">
 

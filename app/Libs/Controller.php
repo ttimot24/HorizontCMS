@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Libs\ViewResolver;
 use Illuminate\Http\Request;
 
+/**
+ * @deprecated deprecated since version 1.0.0
+ */
 abstract class Controller extends BaseController {
 	
     protected $request;

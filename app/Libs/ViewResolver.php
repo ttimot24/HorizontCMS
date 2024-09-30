@@ -15,7 +15,6 @@ class ViewResolver
 	public function __construct()
 	{
 		$this->data['title'] = null;
-		$this->data['meta'][] = ['viewport', 'width=device-width, initial-scale=1'];
 		$this->data['css'] = Config::get('horizontcms.css');
 		$this->data['js'] = Config::get('horizontcms.js');
 	}
@@ -42,10 +41,5 @@ class ViewResolver
 	{
 		$this->data['js'][] = $file;
 	}
-
-
-	public function meta($name, $content)
-	{
-		$this->data['meta'][] = [$name, $content];
-	}
+	
 }

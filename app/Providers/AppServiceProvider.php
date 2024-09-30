@@ -33,9 +33,10 @@ class AppServiceProvider extends ServiceProvider
                 $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
         }
 
-        // TODO Use these
-        // View::share('css', \Config::get('horizontcms.css'));
-        // View::share('js', \Config::get('horizontcms.js'));
+
+        View::share('title', "");
+        View::share('css', \Config::get('horizontcms.css'));
+        View::share('js', \Config::get('horizontcms.js'));
         
     }
 
