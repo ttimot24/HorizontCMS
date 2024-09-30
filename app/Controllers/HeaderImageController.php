@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\Trait\UploadsImage;
 use Illuminate\Http\Request;
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 
 use App\Model\HeaderImage;
 
@@ -33,8 +33,7 @@ class HeaderImageController extends Controller
             return response()->json($activeImages);
         }
 
-        $this->view->title(trans('Header Images'));
-        return $this->view->render('media/header_images', [
+        return view('media.header_images', [
             'slider_images' => $activeImages,
             'slider_disabled' => HeaderImage::inactive()->orderBy('order','ASC')->get(),
         ]);
@@ -57,9 +56,9 @@ class HeaderImageController extends Controller
         $header_image->active = 1;
 
         if ($header_image->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
+            return redirect()->back()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -70,12 +69,12 @@ class HeaderImageController extends Controller
         $header_image->active = 0;
 
         if ($header_image->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
+            return redirect()->back()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
 
-        return $this->redirectToSelf();
+        return redirect()->back();
     }
 
     /**
@@ -92,12 +91,10 @@ class HeaderImageController extends Controller
         $this->uploadImage($header_image);
 
         if ($header_image->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
-        } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-
-        return $this->redirectToSelf();
+            return redirect()->back()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
+        } 
+        
+        return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
     /**
@@ -135,12 +132,11 @@ class HeaderImageController extends Controller
         $headerimage->author()->associate($request->user());
 
         if($headerimage->save()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
-        } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
         }
 
-        return $this->redirectToSelf();
+        return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
+
     }
 
 
@@ -154,10 +150,9 @@ class HeaderImageController extends Controller
     {
 
         if ($headerimage->delete()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_deleted_blogpost')]);
+            return redirect()->back()->withMessage(['success' => trans('message.successfully_deleted_blogpost')]);
         }
 
-
-        return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 }
