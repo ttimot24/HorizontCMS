@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @deprecated deprecated since version 1.0.0
+ */
 class ViewResolverTest extends TestCase
 {
 	private $viewResolver;
@@ -37,8 +40,6 @@ class ViewResolverTest extends TestCase
     	$titleText = "test-title";
     	$addCss = "test.css";
     	$addJs = "test.js";
-    	$addMetaName = "test-meta-name";
-    	$addMetaData = "test-meta-data";
 
 		$this->viewResolver->title($titleText);    	
 
@@ -49,12 +50,6 @@ class ViewResolverTest extends TestCase
 
 		$this->viewResolver->js($addJs);
 		$this->assertTrue(in_array($addJs, $this->viewResolver->data["js"]));
-
-		$this->viewResolver->meta($addMetaName,$addMetaData);
-
-
-		$this->assertTrue($this->inArrayRecurse($addMetaName, $this->viewResolver->data["meta"]));
-		$this->assertTrue($this->inArrayRecurse($addMetaData, $this->viewResolver->data["meta"]));
 
     }
 

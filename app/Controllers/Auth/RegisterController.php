@@ -2,11 +2,10 @@
 
 namespace App\Controllers\Auth;
 
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 use App\Model\User;
 use Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use \App\Libs\ViewResolver;
 
 class RegisterController extends Controller
 {
@@ -35,19 +34,14 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct(ViewResolver $viewResolver)
+    public function __construct()
     {
-
-        $this->view = $viewResolver;
-
         $this->middleware('guest');
-
-        $this->view->title("Register");
     }
 
     public function showRegistrationForm()
     {
-        return $this->view->render('auth/register');
+        return view('auth.register');
     }
 
 

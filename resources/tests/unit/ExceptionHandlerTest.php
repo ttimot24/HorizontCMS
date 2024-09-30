@@ -7,6 +7,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class ExceptionHandler extends TestCase
 {
 
+    private $requestMock;
+    private $exceptionHandler;
+
     /** @before */
     public function instantiateExceptionHandler(){
 

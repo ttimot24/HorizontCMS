@@ -2,9 +2,8 @@
 
 namespace App\Controllers\Auth;
 
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use \App\Libs\ViewResolver;
 
 class ForgotPasswordController extends Controller
 {
@@ -26,21 +25,16 @@ class ForgotPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct(ViewResolver $viewResolver)
+    public function __construct()
     {
-
-        $this->view = $viewResolver;
         $this->middleware('guest');
-
     }
 
     public function showLinkRequestForm()
     {
-        $this->view->title("Forgot password");
-        return $this->view->render('auth/passwords/email',[
-                                                    'app_name' => \Config::get('app.name'),
-                                                    'admin_logo' => url(\Config::get('horizontcms.admin_logo')),
-                                                ]);
+        return view('auth.passwords.email', [
+            'app_name' => \Config::get('app.name'),
+            'admin_logo' => url(\Config::get('horizontcms.admin_logo')),
+        ]);
     }
-
 }

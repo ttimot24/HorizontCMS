@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class RouteResolverTest extends TestCase
 {
 
+    private $router;
 
     /** @before */
     public function instantiateRouter(){
@@ -24,8 +25,8 @@ class RouteResolverTest extends TestCase
 
         $this->assertInstanceOf(\App\Http\RouteResolver::class,$this->router);
         
-        $this->assertObjectHasAttribute('defaultNamespace',$this->router);
-        $this->assertObjectHasAttribute('namespace',$this->router);
+        $this->assertObjectHasProperty('defaultNamespace',$this->router);
+        $this->assertObjectHasProperty('namespace',$this->router);
 
 
     }

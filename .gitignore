@@ -16,3 +16,5 @@ Homestead.yaml
 /resources/assets/ckeditor45
 /resources/assets/ckeditor/samples
 /database/*.db
+.phpunit.result.cache
+TESTS-*.xml

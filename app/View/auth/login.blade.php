@@ -1,4 +1,7 @@
-@extends('layout')
+@extends('layout', [
+    'title' => 'Welcome'
+])
+
 <div class='jumbotron'>
     <div class='container my-5'>
         <div class="row">

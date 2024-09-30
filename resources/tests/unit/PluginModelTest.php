@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class PluginModelTest extends TestCase
 {
 
+    private $plugin;
+
     private $dummyName = "TestPlugin";
 
     private function getDummyInfo(){

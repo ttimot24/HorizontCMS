@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class SearchEngineTest extends TestCase
 {
 
+    protected $engine;
 
     protected function setUp() : void {
         parent::setUp();
@@ -23,8 +24,8 @@ class SearchEngineTest extends TestCase
 
         $this->assertInstanceOf(\App\Libs\SearchEngine::class,$this->engine);
         
-        $this->assertObjectHasAttribute('searchModels',$this->engine);
-        $this->assertObjectHasAttribute('searchKey',$this->engine);
+        $this->assertObjectHasProperty('searchModels',$this->engine);
+        $this->assertObjectHasProperty('searchKey',$this->engine);
     }
 
 
