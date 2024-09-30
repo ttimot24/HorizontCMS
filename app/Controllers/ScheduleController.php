@@ -19,6 +19,7 @@ class ScheduleController extends Controller
         return view('settings.schedules', [
             'commands' => rescue(fn() => \Artisan::all(), fn() => []),
             'scheduled_tasks' => \App\Model\ScheduledTask::all(),
+            'scheduler' => \Settings::where('setting','scheduler')->first()
         ]);
     }
 
