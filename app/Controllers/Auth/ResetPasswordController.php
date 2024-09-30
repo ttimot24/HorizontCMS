@@ -29,7 +29,7 @@ class ResetPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct(Request $request)
+    public function __construct()
     {
         $this->middleware('guest');
     }

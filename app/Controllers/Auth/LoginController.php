@@ -26,10 +26,8 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct(Request $request)
+    public function __construct()
     {
-        parent::__construct($request);
-
         $this->middleware('guest', ['except' => 'logout']);
     }
 

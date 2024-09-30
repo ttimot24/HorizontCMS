@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Illuminate\Http\Request;
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 use App\Model\ScheduledTask;
 
 class ScheduleController extends Controller
@@ -16,9 +16,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-
-        $this->view->title("Schedules");
-        return $this->view->render('settings/schedules', [
+        return view('settings.schedules', [
             'commands' => rescue(fn() => \Artisan::all(), fn() => []),
             'scheduled_tasks' => \App\Model\ScheduledTask::all(),
         ]);
@@ -41,9 +39,9 @@ class ScheduleController extends Controller
         $task->active = 1;
 
         if ($task->save()) {
-            return $this->redirectToSelf()->withMessage(['succes' => trans('Succesfully scheduled a task!')]);
+            return redirect()->back()->withMessage(['succes' => trans('Succesfully scheduled a task!')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -73,9 +71,9 @@ class ScheduleController extends Controller
 
 
         if ($schedule->delete()) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('Successfully deleted the task!')]);
+            return redirect()->back()->withMessage(['success' => trans('Successfully deleted the task!')]);
         }
 
-        return $this->redirect(route("settings.show", ['setting' => 'schedules']))->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return redirect(route("settings.show", ['setting' => 'schedules']))->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 }

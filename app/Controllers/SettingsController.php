@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Illuminate\Http\Request;
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 
 use App\Model\Settings;
 use \Jackiedo\LogReader\Facades\LogReader;
@@ -25,7 +25,7 @@ class SettingsController extends Controller
             Settings::updateOrCreate(['setting' => $key], ['value' => $value, 'more' => 1]);
         }
 
-        return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
+        return redirect()->back()->withMessage(['success' => trans('message.successfully_saved_settings')]);
     }
 
     private function getSettingsPanels()
@@ -51,9 +51,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-
-        $this->view->title(trans('settings.settings'));
-        return $this->view->render('settings/index', [
+        return view('settings.index', [
             'panels' => $this->getSettingsPanels(),
         ]);
     }
@@ -78,10 +76,7 @@ class SettingsController extends Controller
      */
     public function website()
     {
-
-
-        $this->view->title(trans('settings.settings'));
-        return $this->view->render('settings/website', [
+        return view('settings.website', [
             'available_logos' => array_slice(scandir("storage/images/logos"), 2),
             'user_roles' => \App\Model\UserRole::all(),
         ]);
@@ -95,10 +90,7 @@ class SettingsController extends Controller
      */
     public function adminarea()
     {
-
-
-        $this->view->title(trans('settings.settings'));
-        return $this->view->render('settings/adminarea', [
+        return view('settings.adminarea', [
             'languages' => ['en' => 'English', 'hu' => 'Magyar'],
             'available_logos' => array_slice(scandir("storage/images/logos"), 2),
             'dateFormats' => ['Y.m.d H:i:s', 'Y-m-d H:i:s', 'Y. M. d H:i:s', 'd-m-Y H:i:s', 'd/m/Y H:i:s', 'm/d/Y H:i:s'],
@@ -107,9 +99,8 @@ class SettingsController extends Controller
 
     public function server()
     {
-        $this->view->title("Server");
-        return $this->view->render('settings/server', [
-            'server' => $this->request->server(),
+        return view('settings.server', [
+            'server' => request()->server(),
         ]);
     }
 
@@ -133,8 +124,7 @@ class SettingsController extends Controller
                 $tables = [['name' => 'Could not get table informations']];
         }
 
-        $this->view->title(trans('settings.database'));
-        return $this->view->render('settings/database', [
+        return view('settings.database', [
             'tables' =>  $tables,
 
         ]);
@@ -146,17 +136,16 @@ class SettingsController extends Controller
     {
 
 
-        if ($this->request->isMethod('POST')) {
+        if (request()->isMethod('POST')) {
 
-            foreach ($this->request->all() as $key => $value) {
+            foreach (request()->all() as $key => $value) {
                 Settings::where('setting', '=', "social_link_" . $key)->update(['value' => $value]);
             }
 
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
+            return redirect()->back()->withMessage(['success' => trans('message.successfully_saved_settings')]);
         }
 
-        $this->view->title("SocialMedia");
-        return $this->view->render('settings/socialmedia', [
+        return view('settings.socialmedia', [
             'all_socialmedia' => \SocialLink::all(),
         ]);
     }
@@ -179,9 +168,7 @@ class SettingsController extends Controller
         }
 
         // dd($entries);
-
-        $this->view->title("Log files");
-        return $this->view->render('settings/log', [
+        return view('settings.log', [
             'all_files' => $files->reverse(),
             'entries' => $entries->reverse(),
             'entry_number' => $entries->count(),

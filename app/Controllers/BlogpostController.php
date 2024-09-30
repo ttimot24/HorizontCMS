@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\Trait\UploadsImage;
 use \Illuminate\Http\Request;
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 use App\Model\Blogpost;
 
 class BlogpostController extends Controller
@@ -24,7 +24,7 @@ class BlogpostController extends Controller
     public function before()
     {
         //TODO Use model path
-		\File::ensureDirectoryExists($this->imagePath . '/thumbs');
+        \File::ensureDirectoryExists($this->imagePath . '/thumbs');
     }
 
     /**
@@ -36,12 +36,11 @@ class BlogpostController extends Controller
     {
         $blogposts = Blogpost::orderBy('id', 'desc')->paginate($this->itemPerPage);
 
-        if($request->wantsJson()){
+        if ($request->wantsJson()) {
             return response()->json($blogposts);
         }
 
-        $this->view->title(trans('blogpost.blogposts'));
-        return $this->view->render('blogposts/index', [
+        return view('blogposts.index', [
             'all_blogposts' =>  $blogposts,
         ]);
     }
@@ -54,8 +53,7 @@ class BlogpostController extends Controller
     public function create()
     {
 
-        $this->view->title(trans('blogpost.new_blogpost'));
-        return $this->view->render('blogposts/form', [
+        return view('blogposts.form', [
             'categories' => \App\Model\BlogpostCategory::all(),
         ]);
     }
@@ -76,8 +74,8 @@ class BlogpostController extends Controller
 
         $this->uploadImage($blogpost);
 
-        return $blogpost->save() ? $this->redirect(route("blogpost.edit", ['blogpost' => $blogpost]))->withMessage(['success' => trans('message.successfully_created_blogpost')])
-            : $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return $blogpost->save() ? redirect(route("blogpost.edit", ['blogpost' => $blogpost]))->withMessage(['success' => trans('message.successfully_created_blogpost')])
+            : redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
     /**
@@ -88,13 +86,13 @@ class BlogpostController extends Controller
      */
     public function show(Request $request, Blogpost $blogpost)
     {
-    
-        if($request->wantsJson()){
+
+        if ($request->wantsJson()) {
             return response()->json($blogpost);
         }
 
-        $this->view->title(trans('blogpost.view_blogpost'));
-        return $this->view->render('blogposts/view', [
+
+        return view('blogposts.view', [
             'blogpost' => $blogpost,
             'previous_blogpost' => Blogpost::where('id', '<', $blogpost->id)->max('id'),
             'next_blogpost' =>  Blogpost::where('id', '>', $blogpost->id)->min('id'),
@@ -110,9 +108,7 @@ class BlogpostController extends Controller
     public function edit(Blogpost $blogpost)
     {
 
-        $this->view->title(trans('blogpost.edit_blogpost'));
-
-        return $this->view->render('blogposts/form', [
+        return view('blogposts.form', [
             'blogpost' => $blogpost,
             'categories' => \App\Model\BlogpostCategory::all(),
         ]);
@@ -128,19 +124,19 @@ class BlogpostController extends Controller
     public function update(Request $request, Blogpost $blogpost)
     {
 
-	    $blogpost->fill($request->all());
+        $blogpost->fill($request->all());
 
         $blogpost->slug = str_slug($request->input('title', $blogpost->title), "-");
         $blogpost->category_id = $request->input('category_id', $blogpost->category_id);
-        
+
         $blogpost->author()->associate($request->user());
 
         $this->uploadImage($blogpost);
 
         if ($blogpost->save()) {
-            return $this->redirectToSelf()->with('blogpost', $blogpost)->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
+            return redirect()->back()->with('blogpost', $blogpost)->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -154,11 +150,10 @@ class BlogpostController extends Controller
     {
 
         if ($blogpost->delete()) {
-            return $this->redirect(route("blogpost.index"))->withMessage(['success' => trans('message.successfully_deleted_blogpost')]);
+            return redirect(route("blogpost.index"))->withMessage(['success' => trans('message.successfully_deleted_blogpost')]);
         }
 
 
-        return $this->redirect(route("blogpost.index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return redirect(route("blogpost.index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
-
 }

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['title' => trans("Log files")])
 
 @section('content')
     <div class='container card'>
