@@ -14,12 +14,12 @@ class FileManagerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
 
-        $mode = $request->get('mode');
+        $mode = request()->get('mode');
 
-        $current_dir = str_replace_first("storage/", "", $request->get('path') == null ? "" : ltrim($request->get('path'), "/"));
+        $current_dir = str_replace_first("storage/", "", request()->get('path') == null ? "" : ltrim(request()->get('path'), "/"));
 
         $data = [
             'old_path' => ($current_dir == "" ? "" : $current_dir . "/"),
@@ -37,7 +37,7 @@ class FileManagerController extends Controller
         ];
 
 
-        if ($request->ajax()) {
+        if (request()->ajax()) {
             return response()->json($data);
         }
 
@@ -49,28 +49,28 @@ class FileManagerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        if ($request->isMethod('POST')) {
+        if (request()->isMethod('POST')) {
 
-            if ($request->hasFile('up_file')) {
+            if (request()->hasFile('up_file')) {
 
-                $dir = str_replace("storage/", "", $request->input('dir_path'));
+                $dir = str_replace("storage/", "", request()->input('dir_path'));
 
-                foreach ($request->up_file as $file) {
+                foreach (request()->up_file as $file) {
                     if (!\Security::isExecutable($file)) {
                         $images[] = $file->store($dir);
                     }
                 }
 
-                if ($request->ajax()) {
+                if (request()->ajax()) {
                     return response()->json(['success' => 'Files uploaded successfully!', 'uploadedFileNames' => $images]);
                 }
 
                 return redirect()->back()->withMessage(['success' => 'Files uploaded successfully!']);
             } else {
 
-                if ($request->ajax()) {
+                if (request()->ajax()) {
                     return response()->json(['danger' => 'Could not upload files!']);
                 }
 
@@ -78,7 +78,7 @@ class FileManagerController extends Controller
             }
         }
 
-        if ($request->ajax()) {
+        if (request()->ajax()) {
             return response()->json(['warning' => 'Only POST method allowed!']);
         }
 
