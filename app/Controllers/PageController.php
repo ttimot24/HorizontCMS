@@ -4,10 +4,9 @@ namespace App\Controllers;
 
 use App\Controllers\Trait\UploadsImage;
 use Illuminate\Http\Request;
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 use App\Model\Page;
 
-// TODO
 class PageController extends Controller
 {
 
@@ -39,13 +38,10 @@ class PageController extends Controller
             return response()->json($pages);
         }
 
-        // TODO
-        $this->view->js('resources/js/dragndrop.js');
-
         return view('pages.index', [
             'all_pages' => $pages,
             'visible_pages' => Page::where('visibility', 1)->count(),
-            'home_page' => Page::find($this->request->settings['home_page']),
+            'home_page' => Page::find($request->settings['home_page']),
         ]);
     }
 
@@ -56,8 +52,6 @@ class PageController extends Controller
      */
     public function create(Request $request)
     {
-        // TODO
-        $this->view->js('resources/js/pages.js');
 
         return view('pages.form', [
             'all_page' => Page::all(),
@@ -84,11 +78,11 @@ class PageController extends Controller
 
         $this->uploadImage($page);
 
-        if ($page->save()) {
+        if($page->save()) {
             return redirect(route("page.edit", ['page' => $page]))->withMessage(['success' => trans('message.successfully_created_page')]);
-        } else {
-            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
+        } 
+            
+        return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
     /**
@@ -114,8 +108,6 @@ class PageController extends Controller
      */
     public function edit(Request $request, Page $page)
     {
-        // TODO
-        $this->view->js('resources/js/pages.js');
 
         return view('pages.form', [
             'page' => $page,
@@ -146,9 +138,9 @@ class PageController extends Controller
 
         if ($page->save()) {
             return redirect(route("page.edit", ['page' => $page]))->withMessage(['success' => trans('message.successfully_updated_page')]);
-        } else {
-            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
+        } 
+
+        return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
 
@@ -157,9 +149,9 @@ class PageController extends Controller
 
         if (\App\Model\Settings::where("setting", "home_page")->update(['value' => $id])) {
             return redirect()->back()->withMessage(['success' => trans('message.successfully_set_homepage')]);
-        } else {
-            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
+        } 
+
+        return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
 
@@ -176,12 +168,8 @@ class PageController extends Controller
             return redirect(route("page.index"))->withMessage(['success' => trans('message.successfully_deleted_page')]);
         }
 
-
         return redirect(route("page.index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
-
-
-
 
     public function reorder()
     {

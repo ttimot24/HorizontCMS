@@ -1,4 +1,4 @@
-@extends('layout', ['title' => isset($page)? trans('page.edit_page') : trans('page.new_page')])
+@extends('layout', ['title' => isset($page)? trans('page.edit_page') : trans('page.new_page'), 'js' => array_merge($js, ['resources/js/pages.js'])])
 
 @section('content')
     <div class='container main-container'>
