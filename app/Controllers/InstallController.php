@@ -2,15 +2,12 @@
 
 namespace App\Controllers;
 
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 use Session;
 use Config;
 
-// TODO User routes
 class InstallController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +18,7 @@ class InstallController extends Controller
 
         \File::ensureDirectoryExists('framework/upgrade/cache');
 
-        $this->view->title("Install");
-        return $this->view->render("install/index", ['enable_continue' => true]);
+        return view("install.index", ['enable_continue' => true]);
     }
 
     public function show($id){
@@ -39,8 +35,7 @@ class InstallController extends Controller
         // TODO Read language file list
         $languages = ['English', 'Magyar', 'Deutsch'];
 
-        $this->view->title("Install");
-        return $this->view->render("install/step1", ['languages' => $languages]);
+        return view("install.step1", ['languages' => $languages]);
     }
 
     /**
@@ -52,13 +47,11 @@ class InstallController extends Controller
     public function step2()
     {
 
-
         foreach (Config::get('database.connections') as $database) {
             $db_drivers[$database['alias']] = $database['driver'];
         }
 
-        $this->view->title("Install");
-        return $this->view->render("install/step2", ['db_drivers' => $db_drivers]);
+        return view("install.step2", ['db_drivers' => $db_drivers]);
     }
 
     /**
@@ -69,21 +62,18 @@ class InstallController extends Controller
      */
     public function checkConnection()
     {
-
-
-        $this->request->flash();
+        request()->flash();
 
         try {
 
-
-            switch ($this->request->input('db_driver', 'mysql')) {
+            switch (request()->input('db_driver', 'mysql')) {
 
                 case 'mysql':
 
                     new \PDO(
-                        'mysql:host=' . $this->request->input('server') . ';database=' . $this->request->input('database'),
-                        $this->request->input('username'),
-                        $this->request->input('password')
+                        'mysql:host=' . request()->input('server') . ';database=' . request()->input('database'),
+                        request()->input('username'),
+                        request()->input('password')
                     );
 
                     break;
@@ -91,37 +81,34 @@ class InstallController extends Controller
                 case 'pgsql':
 
                     new \PDO(
-                        "pgsql:dbname=" . $this->request->input('database') . ";host=" . $this->request->input('server'),
-                        $this->request->input('username'),
-                        $this->request->input('password')
+                        "pgsql:dbname=" . request()->input('database') . ";host=" . request()->input('server'),
+                        request()->input('username'),
+                        request()->input('password')
                     );
 
                     break;
 
                 case 'sqlite':
 
-                    $database = $this->request->input('database');
+                    $database = request()->input('database');
 
                     (substr($database, -3) === ".db") ?: $database .= '.db';
 
 
                     $sqlite = base_path('database' . DIRECTORY_SEPARATOR . $database);
 
-                    $this->request->merge(['database' => $sqlite]);
+                    request()->merge(['database' => $sqlite]);
 
                     new \PDO('sqlite:' . $sqlite);
 
                     break;
             }
 
+            Session::put('step2', request()->all());
 
-
-
-            Session::put('step2', $this->request->all());
-
-            return $this->redirect(route('install.show', 'step3'))->withMessage(['success' => trans('Connection to database established!')]);
+            return redirect(route('install.show', 'step3'))->withMessage(['success' => trans('Connection to database established!')]);
         } catch (\PDOException $except) {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('Can not establish the connection: ' . $except->getMessage())]);
+            return redirect()->back()->withMessage(['danger' => trans('Can not establish the connection: ' . $except->getMessage())]);
         }
     }
 
@@ -134,10 +121,9 @@ class InstallController extends Controller
     public function step3()
     {
 
-        $this->request->flash();
+        request()->flash();
 
-        $this->view->title("Install");
-        return $this->view->render("install/step3");
+        return view("install.step3");
     }
 
     /**
@@ -150,7 +136,7 @@ class InstallController extends Controller
     public function migrate()
     {
 
-        $this->request->flash();
+        request()->flash();
 
         try {
             Config::set('database.default', Session::get('step2.db_driver'));
@@ -165,22 +151,22 @@ class InstallController extends Controller
 
             $administrator = new \App\Model\User();
             $administrator->name = 'Administrator';
-            $administrator->username = $this->request->input('ad_username');
-            $administrator->slug = str_slug($this->request->input('ad_username'));
-            $administrator->password = $this->request->input('ad_password');
-            $administrator->email = $this->request->input('ad_email');
+            $administrator->username = request()->input('ad_username');
+            $administrator->slug = str_slug(request()->input('ad_username'));
+            $administrator->password = request()->input('ad_password');
+            $administrator->email = request()->input('ad_email');
             $administrator->role_id = 6;
             $administrator->active = 1;
 
             if (!$administrator->save()) {
-                return $this->redirect(route('install.show', 'step4'))->withMessage(['danger' => 'Something went wrong!'])->withError(true);
+                return redirect(route('install.show', 'step4'))->withMessage(['danger' => 'Something went wrong!'])->withError(true);
             }
         } catch (\Exception $e) {
 
-            return $this->redirect(route('install.show', 'step4'))->withMessage(['danger' => $e->getMessage()])->withError(true);
+            return redirect(route('install.show', 'step4'))->withMessage(['danger' => $e->getMessage()])->withError(true);
         }
 
-        return $this->redirect(route('install.show', 'step4'))->withMessage(['success' => 'Succesfully installed!']);
+        return redirect(route('install.show', 'step4'))->withMessage(['success' => 'Succesfully installed!']);
     }
 
     /**
@@ -191,8 +177,6 @@ class InstallController extends Controller
      */
     public function step4()
     {
-
-        //$this->request->flash();
 
         if (!Session::has('error')) {
             $dotenv = new \App\Libs\DotEnvGenerator();
@@ -205,7 +189,6 @@ class InstallController extends Controller
             $dotenv->generate();
         }
 
-        $this->view->title("Install finished!");
-        return $this->view->render("install/step4");
+        return view("install.step4");
     }
 }

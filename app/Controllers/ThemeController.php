@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Illuminate\Http\Request;
-use App\Libs\Controller;
+use Illuminate\Routing\Controller;
 
 use App\Model\Settings;
 
@@ -18,10 +18,7 @@ class ThemeController extends Controller
      */
     public function index(Request $request)
     {
-
-
-        $this->view->title(trans('theme.themes'));
-        return $this->view->render("theme/index", [
+        return view("theme.index", [
             'active_theme' => new \App\Libs\Theme($request->settings['theme']),
             'all_themes' => collect(array_slice(scandir("themes"), 2))->map(function ($theme) {
                 return new \App\Libs\Theme($theme);
@@ -48,20 +45,19 @@ class ThemeController extends Controller
     public function config($slug)
     {
 
-        $websiteController = new \App\Controllers\WebsiteController($this->request, new \App\Libs\ViewResolver());
+        $websiteController = new \App\Controllers\WebsiteController(request());
         $websiteController->before();
 
-        $theme_engine = new \App\Libs\ThemeEngine($this->request);
-        $theme_engine->setTheme(new \App\Libs\Theme($this->request->settings['theme']));
+        $theme_engine = new \App\Libs\ThemeEngine(request());
+        $theme_engine->setTheme(new \App\Libs\Theme(request()->settings['theme']));
 
         $theme_engine->boot();
 
         \Website::initalize($theme_engine);
 
-        $this->view->title(trans('theme.config'));
-        return $this->view->render("theme/config", [
-            'active_theme' => new \App\Libs\Theme($this->request->settings['theme']),
-            'website_content' => $websiteController->index($this->request->input('page')),
+        return view("theme.config", [
+            'active_theme' => new \App\Libs\Theme(request()->settings['theme']),
+            'website_content' => $websiteController->index(request()->input('page')),
         ]);
     }
 
@@ -77,7 +73,7 @@ class ThemeController extends Controller
             $theme_css->save();
         }
 
-        $theme = new \App\Libs\Theme($theme == null ? $this->request->settings['theme'] : $theme);
+        $theme = new \App\Libs\Theme($theme == null ? request()->settings['theme'] : $theme);
 
         $translations = [];
 
@@ -85,30 +81,28 @@ class ThemeController extends Controller
             $translations[$lang] = json_decode(file_get_contents($theme->getPath() . $theme->languagePath . "/" . $lang . ".json"));
         }
 
-
-        $this->view->title(trans('Theme options'));
-        return $this->view->render('theme.options', ['option' => empty($this->request->input('option')) ? 'style' : $this->request->input('option'), 'translations' => $translations, 'theme' => $theme->root_dir, 'settings' => $this->request->settings]);
+        return view('theme.options', ['option' => empty(request()->input('option')) ? 'style' : request()->input('option'), 'translations' => $translations, 'theme' => $theme->root_dir, 'settings' => request()->settings]);
     }
 
     public function updateTranslations($theme)
     {
 
-        if ($this->request->isMethod('POST')) {
+        if (request()->isMethod('POST')) {
 
             try {
-                $theme = new \App\Libs\Theme($theme == null ? $this->request->settings['theme'] : $theme);
+                $theme = new \App\Libs\Theme($theme == null ? request()->settings['theme'] : $theme);
 
                 $translations = [];
 
                 foreach ($theme->getSupportedLanguages() as $lang) {
 
-                    file_put_contents($theme->getPath() . "lang/" . $lang . ".json", json_encode($this->request->input($lang, new \stdClass())));
+                    file_put_contents($theme->getPath() . "lang/" . $lang . ".json", json_encode(request()->input($lang, new \stdClass())));
                 }
 
-                return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_saved_settings')]);
+                return redirect()->back()->withMessage(['success' => trans('message.successfully_saved_settings')]);
             } catch (\Exception $e) {
                 \Log::error($e);
-                return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+                return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
             }
         }
     }
@@ -123,9 +117,9 @@ class ThemeController extends Controller
     {
 
         if (Settings::where('setting', 'theme')->update(['value' => $theme])) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_changed_theme')]);
+            return redirect()->back()->withMessage(['success' => trans('message.successfully_changed_theme')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -151,9 +145,9 @@ class ThemeController extends Controller
 
             \Storage::delete("storage/" . $file_name);
 
-            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully uploaded the theme!')]);
+            return redirect()->back()->withMessage(['success' => trans('Succesfully uploaded the theme!')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -162,17 +156,14 @@ class ThemeController extends Controller
     {
 
         if (\File::deleteDirectory("themes/" . $theme)) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('Succesfully deleted the theme!')]);
+            return redirect()->back()->withMessage(['success' => trans('Succesfully deleted the theme!')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
     public function onlinestore()
     {
-
-        $this->view->title(trans('Theme center'));
-
         $repo_status = true;
 
         try {
@@ -187,6 +178,6 @@ class ThemeController extends Controller
             $repo_status = false;
         }
 
-        return $this->view->render('theme/store', ['online_themes' => $themes, 'repo_status' => $repo_status]);
+        return view('theme.store', ['online_themes' => $themes, 'repo_status' => $repo_status]);
     }
 }

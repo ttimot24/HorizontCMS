@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['title' => trans('Theme center')])
 
 @section('content')
     <div class='container main-container'>

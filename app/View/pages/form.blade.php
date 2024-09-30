@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['title' => isset($page)? trans('page.edit_page') : trans('page.new_page')])
 
 @section('content')
     <div class='container main-container'>

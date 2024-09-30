@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['title' => trans('theme.themes')])
 
 @section('content')
     <div class='container'>

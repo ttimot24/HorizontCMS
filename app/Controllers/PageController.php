@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Libs\Controller;
 use App\Model\Page;
 
+// TODO
 class PageController extends Controller
 {
 
@@ -38,10 +39,10 @@ class PageController extends Controller
             return response()->json($pages);
         }
 
+        // TODO
         $this->view->js('resources/js/dragndrop.js');
 
-        $this->view->title(trans('page.pages'));
-        return $this->view->render('pages/index', [
+        return view('pages.index', [
             'all_pages' => $pages,
             'visible_pages' => Page::where('visibility', 1)->count(),
             'home_page' => Page::find($this->request->settings['home_page']),
@@ -55,11 +56,10 @@ class PageController extends Controller
      */
     public function create(Request $request)
     {
-        
+        // TODO
         $this->view->js('resources/js/pages.js');
 
-        $this->view->title(trans('page.new_page'));
-        return $this->view->render('pages/form', [
+        return view('pages.form', [
             'all_page' => Page::all(),
             'page_templates' => (new \App\Libs\Theme($request->settings['theme']))->templates(),
         ]);
@@ -85,9 +85,9 @@ class PageController extends Controller
         $this->uploadImage($page);
 
         if ($page->save()) {
-            return $this->redirect(route("page.edit", ['page' => $page]))->withMessage(['success' => trans('message.successfully_created_page')]);
+            return redirect(route("page.edit", ['page' => $page]))->withMessage(['success' => trans('message.successfully_created_page')]);
         } else {
-            return $this->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -103,8 +103,7 @@ class PageController extends Controller
             return response()->json($page);
         }
 
-        $this->view->title(trans('page.view_page'));
-        return $this->view->render('pages/view', ['page' => $page]);
+        return view('pages.view', ['page' => $page]);
     }
 
     /**
@@ -115,12 +114,10 @@ class PageController extends Controller
      */
     public function edit(Request $request, Page $page)
     {
-
+        // TODO
         $this->view->js('resources/js/pages.js');
 
-        $this->view->title(trans('page.edit_page'));
-
-        return $this->view->render('pages/form', [
+        return view('pages.form', [
             'page' => $page,
             'all_page' => Page::all(),
             'page_templates' => (new \App\Libs\Theme($request->settings['theme']))->templates(),
@@ -148,9 +145,9 @@ class PageController extends Controller
         $this->uploadImage($page);
 
         if ($page->save()) {
-            return $this->redirect(route("page.edit", ['page' => $page]))->withMessage(['success' => trans('message.successfully_updated_page')]);
+            return redirect(route("page.edit", ['page' => $page]))->withMessage(['success' => trans('message.successfully_updated_page')]);
         } else {
-            return $this->redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -159,9 +156,9 @@ class PageController extends Controller
     {
 
         if (\App\Model\Settings::where("setting", "home_page")->update(['value' => $id])) {
-            return $this->redirectToSelf()->withMessage(['success' => trans('message.successfully_set_homepage')]);
+            return redirect()->back()->withMessage(['success' => trans('message.successfully_set_homepage')]);
         } else {
-            return $this->redirectToSelf()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
 
@@ -176,11 +173,11 @@ class PageController extends Controller
     {
 
         if ($page->delete()) {
-            return $this->redirect(route("page.index"))->withMessage(['success' => trans('message.successfully_deleted_page')]);
+            return redirect(route("page.index"))->withMessage(['success' => trans('message.successfully_deleted_page')]);
         }
 
 
-        return $this->redirect(route("page.index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
+        return redirect(route("page.index"))->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
 
@@ -191,7 +188,7 @@ class PageController extends Controller
 
         try {
 
-            $order = json_decode($this->request->input("order"), true);
+            $order = json_decode(request()->input("order"), true);
 
             for ($i = 0; $i < count($order); $i++) {
                 $page = \App\Model\Page::find($order[$i]);
