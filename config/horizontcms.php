@@ -2,7 +2,7 @@
 
 return [
 
-	'version' => 'v1.1.0',
+	'version' => 'v1.2.0',
 
 	'backend_prefix' => env('HCMS_ADMIN_PREFIX','admin'),
 
