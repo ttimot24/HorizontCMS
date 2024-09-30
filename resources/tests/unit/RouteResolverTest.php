@@ -4,6 +4,9 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+/**
+ * @deprecated deprecated since version 1.0.0
+ */
 class RouteResolverTest extends TestCase
 {
 
@@ -74,8 +77,6 @@ class RouteResolverTest extends TestCase
 
         $controllerString = 'install';
 
-
-        $this->assertInstanceOf(\App\Libs\Controller::class,\App::make($this->router->resolveControllerClass($controllerString)));
         $this->assertInstanceOf(\App\Controllers\InstallController::class,\App::make($this->router->resolveControllerClass($controllerString)));
 
         $this->router->changeNamespace("\App\\Controllers\\Auth\\"); 

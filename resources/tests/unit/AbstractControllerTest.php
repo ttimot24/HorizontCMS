@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * @deprecated deprecated since version 1.0.0
+ */
 class AbstractControllerImplementation extends \App\Libs\Controller
 {
 
@@ -10,7 +12,9 @@ class AbstractControllerImplementation extends \App\Libs\Controller
     }
 }
 
-
+/**
+ * @deprecated deprecated since version 1.0.0
+ */
 class AbstractControllerTest extends TestCase
 {
 
