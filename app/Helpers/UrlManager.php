@@ -9,6 +9,9 @@
 class UrlManager
 {
 
+	/**
+	 * @deprecated deprecated since version 1.0.0
+	 */
 	public static function seo_url($string)
 	{
 
@@ -28,7 +31,9 @@ class UrlManager
 		}
 	}
 
-
+	/**
+	 * @deprecated deprecated since version 1.0.0
+	 */
 	public static function http_protocol($string)
 	{
 

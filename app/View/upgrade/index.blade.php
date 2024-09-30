@@ -1,4 +1,6 @@
-@extends('layout')
+@extends('layout', [
+    'title' => trans('settings.settings')
+])
 
 @section('content')
     <div class='container main-container'>
