@@ -242,7 +242,7 @@ class SettingsSeeder extends Seeder
 
         DB::table('settings')->insert([
             'setting' => 'scheduler',
-            'value' => "",
+            'value' => "not configured",
             'more' => '1',
         ]);
 
