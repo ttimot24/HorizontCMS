@@ -36,6 +36,7 @@
                             <th>{{ trans('schedules.th_frequency') }}</th>
                             <th>{{ trans('schedules.th_ping_before') }}</th>
                             <th>{{ trans('schedules.th_ping_after') }}</th>
+                            <th>{{ trans('Active') }}</th>
                             <th class='text-center'>{{ trans('schedules.th_action') }}</th>
                         </tr>
                     </thead>
@@ -49,6 +50,14 @@
                                 <td>{{ $task->frequency }}</td>
                                 <td>{{ $task->ping_before }}</td>
                                 <td>{{ $task->ping_after }}</td>
+                                <td>
+                                    <div class='form-check form-switch'>
+                                        <input type="hidden" name="active" value="0">
+                                        <input class="form-check-input" type="checkbox" name="active" value="1"
+                                            role="switch" id="flexSwitchCheckDefault"
+                                            {{ $task->active==1? 'checked' : '' }}>
+                                    </div>
+                                </td>
                                 <td class='text-center'>
                                     <div class="dropdown">
                                         <div data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
