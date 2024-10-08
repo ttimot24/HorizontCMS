@@ -38,7 +38,7 @@
         "bootstrap-fileinput": "^5.5.0",
         "bootstrap-icons": "^1.8.3",
         "bootstrap-scss": "^5.2.3",
-        "ckeditor4-vue": "^2.2.2",
+        "ckeditor4-vue": "^3.2.0",
         "fontawesome-4.7": "^4.7.0",
         "jquery": "^3.6.0",
         "jquery-ui": "^1.13.1",

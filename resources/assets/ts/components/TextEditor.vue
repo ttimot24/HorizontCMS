@@ -8,6 +8,7 @@
 <script lang="ts">
 
 	import { defineComponent } from '@vue/composition-api';
+    import { environment } from '../environments/environment';
 
 	export default defineComponent({
         name: 'text-editor',
@@ -38,8 +39,9 @@
         data: function() {
             return {
                 content: this.data,
-                editorUrl: 'https://cdn.ckeditor.com/4.21.0/full/ckeditor.js',
+                editorUrl: 'https://cdn.ckeditor.com/'+environment.CKEDITOR_VERSION+'/full/ckeditor.js',
                 editorConfig: {
+                    versionCheck: false,
                     language: this.language,
                     skin: 'moono-lisa',
                     filebrowserUploadMethod: 'form',

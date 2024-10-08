@@ -13,7 +13,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "environment": () => (/* binding */ environment)
 /* harmony export */ });
 var environment = {
-  REST_API_BASE: "api/v1"
+  REST_API_BASE: "api/v1",
+  CKEDITOR_VERSION: "4.22.1"
 };
 
 /***/ }),
