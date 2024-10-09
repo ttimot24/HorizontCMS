@@ -140,4 +140,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     	$this->attributes['password'] = \Hash::make($value);
     }
 
+    public function scopeEmail($query, $email){
+        return $query->where('email', $email);
+    }
+
 }
