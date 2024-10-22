@@ -41,6 +41,10 @@ Route::post('/auth', function (Request $request) {
     return response()->json(['error'=>'Username or password incorrect'], 401);
 });
 
+Route::get('/blogposts/slug/{slug}', function($slug){
+  $blogpost = \App\Model\Blogpost::findBySlug($slug);
+  return response()->json($blogpost);
+});
 
 Route::apiResource('blogposts', \App\Controllers\BlogpostController::class)
             ->only(['index', 'show']);

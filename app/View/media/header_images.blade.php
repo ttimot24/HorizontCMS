@@ -277,7 +277,7 @@
 
             <div class='modal upload_images' id='create_file' tabindex='-1' role='dialog'
                 aria-labelledby='myModalLabel' aria-hidden='true'>
-                <div class='modal-dialog modal-xl'>
+                <div class='modal-dialog modal-xl p-5'>
                     <div class='modal-content'>
                         <div class='modal-header modal-header-primary bg-primary'>
                             <h4 class='modal-title text-white'>Upload images</h4>

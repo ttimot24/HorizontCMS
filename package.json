@@ -30,6 +30,7 @@
         "webpack-cli": "^5.0.2"
     },
     "dependencies": {
+        "@eonasdan/tempus-dominus": "^6.9.11",
         "@popperjs/core": "^2.11.6",
         "@vue/compiler-sfc": "^3.2.37",
         "@vue/composition-api": "^1.7.0",
