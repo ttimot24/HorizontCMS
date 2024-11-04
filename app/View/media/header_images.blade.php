@@ -231,7 +231,7 @@
                                                         </div>
                                                         <div class="col-2">
                                                             <label for="header-image-image"
-                                                                class="form-label">Media</label>
+                                                                class="form-label">Type</label>
                                                             <input type="text" class="form-control disabled"
                                                                 id="header-image-type" value="{{ $each->type }}"
                                                                 disabled>
