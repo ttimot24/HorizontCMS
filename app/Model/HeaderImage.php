@@ -19,7 +19,7 @@ class HeaderImage extends Model {
      * @var array
      */
     protected $fillable = [
-        'title', 'link' ,'description', 'image', 'active',
+        'title', 'type' ,'link' ,'description', 'image', 'active',
     ];
 
 }
