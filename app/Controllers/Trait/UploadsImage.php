@@ -24,7 +24,7 @@ trait UploadsImage {
             File::ensureDirectoryExists($model->getImageDirectory());
             $img = request()->{$this->form_field_name}->store($this->getStrippedDirectoryPath($model));
             $model->attachImage($img);
-            if (extension_loaded('gd')) {
+            if (extension_loaded('gd') && starts_with(request()->{$this->form_field_name}->getMimeType(), 'image/')) {
 		        File::ensureDirectoryExists($model->getImageDirectory() . '/thumbs');
                 \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($model->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $model->image);
             }

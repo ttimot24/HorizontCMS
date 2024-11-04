@@ -76,6 +76,7 @@ class ContentSeeder extends Seeder
         DB::table('header_images')->insert([
             'id' => 1,
             'title' => 'default',
+            'type' => 'image',
             'image' => 'abovethecity.jpg',
             'author_id' => 1,
             'active' => 1

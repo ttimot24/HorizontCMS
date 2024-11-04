@@ -88,6 +88,10 @@ class HeaderImageController extends Controller
         $header_image = new HeaderImage($request->all());
         $header_image->author()->associate($request->user());
 
+        if($request->hasFile($this->form_field_name)){
+            $header_image->type = explode('/',request()->{$this->form_field_name}->getMimeType())[0];
+        }
+
         $this->uploadImage($header_image);
 
         if ($header_image->save()) {

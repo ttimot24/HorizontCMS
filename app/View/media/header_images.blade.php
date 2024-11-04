@@ -37,10 +37,19 @@
                                         <span class='fa fa-pencil' aria-hidden='true'
                                             style=' font-size: 1.4em;z-index:15;top:3px;right:3px;margin-bottom:-15px;'></span>
                                     </a>
+
+                                    @if($each->type === 'video')
+                                        <video controls width='100%' height='75%;' style="object-fit:cover;">
+                                            <source src="storage/images/header_images/{{ $each->image }}" >
+                                            Your browser does not support the video tag.
+                                        </video> 
+                                    @else
                                     <img src='storage/images/header_images/{{ $each->image }}' alt=''
                                         class='card-img-top' width='100%' height='75%;' style="object-fit:cover;">
+                                    @endif
+
                                     <div class="card-body text-black">
-                                        <h5 class="card-title">{{ $each->title }}</h5>
+                                        <h5 class="card-title">{{ $each->title }} <small> | {{$each->type}}</small></h5>
                                     </div>
                                     <ul class="list-group list-group-flush mb-3">
                                         <a class='btn btn-danger btn-xs btn-block'
@@ -175,8 +184,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if($each->type === 'video')
+                                <video controls width='100%' height='75%;' style="object-fit:cover;">
+                                    <source src="storage/images/header_images/{{ $each->image }}" >
+                                    Your browser does not support the video tag.
+                                </video> 
+                                @else
                                 <img src='storage/images/header_images/{{ $each->image }}' alt=''
                                     class='card-img-top' width='100%' height='75%;' style="object-fit:cover;">
+                                @endif
                                 <div class="card-body text-black">
                                     <h5 class="card-title">{{ $each->title }}</h5>
                                 </div>
@@ -289,7 +305,7 @@
                                 @csrf
                                 <div class='form-group'>
                                     <label for='file'>Upload file:</label>
-                                    <input name='up_file' id='input-2' type='file' class='file' accept="image/*"
+                                    <input name='up_file' id='input-2' type='file' class='file' accept="image/*, video/*"
                                         multiple='true' data-show-upload='false' data-show-caption='true' required>
                                 </div>
                                 <div class="mb-3">
