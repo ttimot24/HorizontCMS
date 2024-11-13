@@ -42,7 +42,7 @@ if (app()->isInstalled()) {
 	}
 
 
-	Route::any('/{slug?}/{args?}', function ($slug = "", $args = null, Request $request, Container $container) use ($_THEME_NAME) {
+	Route::any('/{slug?}/{args?}', function ($slug = "", $args = null) use ($_THEME_NAME) {
 
 		try {
 
@@ -76,9 +76,9 @@ if (app()->isInstalled()) {
 				throw $e;
 			}
 		} catch (Exception $e) {
-			$handler = new \App\Exceptions\WebsiteExceptionHandler($container);
+			$handler = new \App\Exceptions\WebsiteExceptionHandler(app());
 
-			return $handler->render($request, $e);
+			return $handler->render(request(), $e);
 		}
 	})->where('args', '(.*)');
 }
