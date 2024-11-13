@@ -11,9 +11,7 @@ class UpgradeController extends Controller
 
     private $updateManager = null;
 
-    public function __construct(Request $request, \Codedge\Updater\UpdaterManager $updater){
-
-        parent::__construct($request);
+    public function __construct(\Codedge\Updater\UpdaterManager $updater){
 
         $this->updateManager = $updater;
     }
