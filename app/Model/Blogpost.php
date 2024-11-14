@@ -29,6 +29,7 @@ class Blogpost extends Model
 
     public static $rules = [
         'title' => 'required',
+        'summary' => 'max:255',
         'category_id' => 'required'
     ];
 

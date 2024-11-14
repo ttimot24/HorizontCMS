@@ -23,7 +23,7 @@
                         <div class='form-group pull-left col-xs-12 col-md-8'>
                             <div class='form-group'>
                                 <label for='name'>{{ trans('user.create_name') }}:</label>
-                                <input type='text' class='form-control' id='name' name='name'
+                                <input type='text' class='form-control @error('name') is-invalid @enderror' id='name' name='name'
                                     value="{{ old('name', isset($user) ? $user->name : '') }}" required autofocus>
                             </div>
 
@@ -61,8 +61,14 @@
 
                             <div class='form-group'>
                                 <label for='title'>{{ trans('user.create_email') }}:</label>
-                                <input type='email' class='form-control' id='title' name='email'
+                                <input type='email' class='form-control  @error('email') is-invalid @enderror' id='email' name='email'
                                     value="{{ old('email', isset($user) ? $user->email : '') }}" required>
+                                
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class='form-group'>

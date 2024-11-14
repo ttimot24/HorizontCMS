@@ -21,14 +21,20 @@
 
                         <div class="col-xs-12 col-md-8">
 
-                            <div class='form-group pull-left col-12'>
-                                <label for='title'>{{ trans('blogpost.title') }}:</label>
-                                <input type='text' class='form-control' id='title' name='title'
+                            <div class='form-group col mb-4'>
+                                <label for='title'>{{ trans('blogpost.title') }}</label>
+                                <input type='text' class='form-control @error('title') is-invalid @enderror' id='title' name='title'
                                     value="{{ old('title', isset($blogpost) ? $blogpost->title : '') }}" required>
+
+                                @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('title') }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
-                            <div class='form-group pull-left col-6'>
-                                <label for='sel1'>{{ trans('blogpost.select_category') }}:</label>
+                            <div class='form-group col-6 mb-4'>
+                                <label for='sel1'>{{ trans('blogpost.select_category') }}</label>
                                 <select class='form-select' name='category_id' id='sel1'>
 
                                     @foreach ($categories as $category)
@@ -40,10 +46,16 @@
                                 </select>
                             </div>
 
-                            <div class='form-group pull-left col-12'>
-                                <label for='title'>{{ trans('blogpost.summary') }}:</label>
-                                <input type='text' class='form-control' id='title' name='summary'
-                                    value="{{ old('summary', isset($blogpost) ? $blogpost->summary : '') }}"></br>
+                            <div class='form-group col  mb-4'>
+                                <label for='title'>{{ trans('blogpost.summary') }}</label>
+                                <textarea type='text' class='form-control @error('summary') is-invalid @enderror' id='summary' name='summary'>{{ old('summary', isset($blogpost) ? $blogpost->summary : '') }}</textarea>
+                                </br>
+
+                                @error('summary')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('summary') }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                         </div>
@@ -57,7 +69,7 @@
                             @endif
 
                             <div class='form-group'>
-                                <label for='file'>{{ trans('actions.upload_image') }}:</label>
+                                <label for='file'>{{ trans('actions.upload_image') }}</label>
                                 <input name='up_file' accept='image/*' id='input-2' type='file' class='file'
                                     multiple='true'
                                     data-drop-zone-enabled="{{ isset($blogpost) && $blogpost->hasImage() ? 'false' : 'true' }}"
@@ -68,7 +80,7 @@
 
                         <div class="col-12">
                             <div class='form-group pull-left col-12'>
-                                <label for='text'>{{ trans('blogpost.post') }}:</label>
+                                <label for='text'>{{ trans('blogpost.post') }}</label>
                                 <text-editor id="texteditor" :name="'text'"
                                     :data="'{{ remove_linebreaks(old('blogpost', isset($blogpost) ? $blogpost->text : '')) }}'"
                                     :language="'{{ config('app.locale') }}'"
