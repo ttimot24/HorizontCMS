@@ -19,12 +19,9 @@ class WebsiteController extends Controller
 
     private $theme;
 
-    public function __construct(Request $request){
-
+    public function __construct(Request $request, \App\Libs\Theme $theme){
         $this->request = $request;
-
-        $this->theme = new \App\Libs\Theme(\Settings::get('theme'));
-
+        $this->theme = $theme;
     }
 
     /**
