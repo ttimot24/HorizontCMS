@@ -11,7 +11,7 @@ Route::group(['prefix'=>'/install'],function(){
 
 	Route::any('/{action?}/{args?}/', 
 		function($action = 'index', $args = null){
-
+				/* TODO Use resource controller */
 		        return $this->router->resolve('install',$action,$args);
 
   		 })->where('args', '(.*)');

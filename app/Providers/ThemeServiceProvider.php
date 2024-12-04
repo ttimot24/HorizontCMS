@@ -19,7 +19,7 @@ class ThemeServiceProvider extends ServiceProvider
 
             $theme = new Theme(\App\Model\Settings::get('theme'));
 
-            $this->app->bind(Theme::class, function ($app) use($theme) {
+            $this->app->singleton(Theme::class, function ($app) use($theme) {
                 return $theme;
             });
 
