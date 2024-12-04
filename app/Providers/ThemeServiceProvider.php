@@ -15,7 +15,7 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (!app()->runningInConsole() && app()->isInstalled()) {
+        if (app()->isInstalled()) {
 
             $theme = new Theme(\App\Model\Settings::get('theme'));
 
