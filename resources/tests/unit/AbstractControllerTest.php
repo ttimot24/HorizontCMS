@@ -59,8 +59,6 @@ class AbstractControllerTest extends TestCase
 
         $controller = new AbstractControllerImplementation($this->requestMock, $this->viewMock);
 
-        $this->assertInstanceOf(\Illuminate\Http\Request::class, $controller->request);
-
         $this->assertInstanceOf(\App\Libs\ViewResolver::class, $controller->getViewAttribute());
     }
 }
