@@ -20,7 +20,7 @@ class HorizontCMS extends \Illuminate\Foundation\Application
 
     public static function isInstalled()
     {
-        return config('horizontcms.installed');
+        return file_exists(base_path(".env")) || config('horizontcms.installed', false);
     }
 
     public function publicPath()
