@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SearchEngineTest extends TestCase
 {
+    use RefreshDatabase;
 
     protected $engine;
 

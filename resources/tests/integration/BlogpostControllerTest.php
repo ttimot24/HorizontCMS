@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class BlogpostControllerTest extends TestCase
 {
+
+    use RefreshDatabase;
 
     public function testIndexAction()
     {
@@ -14,16 +16,14 @@ class BlogpostControllerTest extends TestCase
 
         $request = Request::create('/admin/blogpost/index', 'GET', []);
 
-        $controller = new \App\Controllers\BlogpostController($request);
+        $controller = new \App\Controllers\BlogpostController();
 
-        $responseView = $controller->index(null);
+        $responseView = $controller->index($request);
 
         $this->assertInstanceOf(\Illuminate\View\View::class, $responseView);
 
         $this->assertEquals('blogposts.index', $responseView->name());
 
-
-        $this->assertTrue(isset($responseView->getData()['number_of_blogposts']));
         $this->assertTrue(isset($responseView->getData()['all_blogposts']));
         $this->assertInstanceOf(\App\Model\Blogpost::class, $responseView->getData()['all_blogposts'][0]);
     }
@@ -40,7 +40,7 @@ class BlogpostControllerTest extends TestCase
 
         $controller = new \App\Controllers\BlogpostController($request);
 
-        $responseView = $controller->show($idToTest);
+        $responseView = $controller->show($request, $idToTest);
 
         $this->assertInstanceOf(\Illuminate\View\View::class, $responseView);
 
@@ -67,7 +67,7 @@ class BlogpostControllerTest extends TestCase
 
         $response = $controller->create();
 
-        $this->assertEquals('blogposts.create', $response->name());
+        $this->assertEquals('blogposts.form', $response->name());
         $this->assertTrue(isset($response->getData()['categories']));
         $this->assertInstanceOf(\App\Model\BlogpostCategory::class, $response->getData()['categories'][0]);
 

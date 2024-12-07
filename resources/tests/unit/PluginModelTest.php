@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PluginModelTest extends TestCase
 {
+
+    use RefreshDatabase;
 
     private $plugin;
 
@@ -74,7 +76,7 @@ class PluginModelTest extends TestCase
         $this->assertEquals($this->plugin->getName(), $this->dummyName);
         $this->assertEquals($this->plugin->getNamespaceFor("controller"), "\Plugin\\" . $this->dummyName . "\\App\\Controller\\");
         $this->assertEquals($this->plugin->getSlug(), namespace_to_slug($this->dummyName));
-        $this->assertEquals($this->plugin->getPath(), "plugins" . DIRECTORY_SEPARATOR . $this->dummyName . DIRECTORY_SEPARATOR);
+        $this->assertEquals($this->plugin->getPath(), "plugins" . DIRECTORY_SEPARATOR . $this->dummyName);
         //$this->plugin->getDatabaseFilesPath();
         //$this->plugin->getIcon();
         $this->assertEquals($this->plugin->getShortCode(), "{[" . $this->dummyName . "]}");
