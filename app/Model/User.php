@@ -99,12 +99,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
 
     public function hasPermission($permission){
-
-        if(!isset($this->role->rights) || $this->role->rights==NULL || $this->role->rights==""){
-            return false;
-        }
-
-        return in_array($permission, $this->role->rights);
+        return empty($this->role->rights)? false : in_array($permission, $this->role->rights);
     }
 
     /**

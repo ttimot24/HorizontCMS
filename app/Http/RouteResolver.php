@@ -15,6 +15,10 @@ class RouteResolver{
 		$this->resetNamespace();
 	}
 
+	public function getNamespace(){
+		return $this->namespace;
+	}
+
 	public function resetNamespace(){
 		$this->namespace = $this->defaultNamespace;
 	}

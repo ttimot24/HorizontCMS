@@ -57,17 +57,17 @@ class RouteResolverTest extends TestCase
 
         $defaultNamespace = "\App\\Controllers\\";
 
-        $this->assertEquals($this->router->namespace, $defaultNamespace);
+        $this->assertEquals($this->router->getNamespace(), $defaultNamespace);
 
         $changeNamespaceTo = "\App\TestingNamespace";
 
         $this->router->changeNamespace($changeNamespaceTo);
 
-        $this->assertEquals($this->router->namespace, $changeNamespaceTo);
+        $this->assertEquals($this->router->getNamespace(), $changeNamespaceTo);
 
         $this->router->resetNamespace();
 
-        $this->assertEquals($this->router->namespace, $defaultNamespace);
+        $this->assertEquals($this->router->getNamespace(), $defaultNamespace);
     }
 
 

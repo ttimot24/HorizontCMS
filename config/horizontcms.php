@@ -4,6 +4,8 @@ return [
 
 	'version' => 'v1.2.0',
 
+	'installed' => env('INSTALLED', false),
+
 	'backend_prefix' => env('HCMS_ADMIN_PREFIX','admin'),
 
 	'charset' => 'utf-8',

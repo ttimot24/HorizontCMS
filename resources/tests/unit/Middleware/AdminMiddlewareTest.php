@@ -4,6 +4,8 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use Illuminate\Http\Request;
+
 class AdminMiddlewareTest extends TestCase
 {
 
@@ -15,9 +17,11 @@ class AdminMiddlewareTest extends TestCase
         $permissions = [];
 
         $user = ModelFactory::createUser(true);
+        $user->save();
+        $user->role = new \App\Model\UserRole(['name' => 'admin']);
         $user->role->setRightsAttribute($permissions);
 
-        $request = \Request::create('/admin', 'GET');
+        $request = Request::create('/admin', 'GET');
 
         $request->setUserResolver(function () use ($user) {
             return $user;
@@ -37,6 +41,8 @@ class AdminMiddlewareTest extends TestCase
         $permissions = ['admin_area'];
 
         $user = ModelFactory::createUser(true);
+        $user->save();
+        $user->role = new \App\Model\UserRole(['name' => 'admin']);
         $user->role->setRightsAttribute($permissions);
 
         $this->actingAs($user);
@@ -58,15 +64,16 @@ class AdminMiddlewareTest extends TestCase
     /** @test */
     public function testNonActiveAdminsAreRedirected()
     {
-        $permissions = ['admin_area'];
 
-        $user = ModelFactory::createUser();
+        $user = ModelFactory::createUser(true);
 
-        $user->role->setRightsAttribute($permissions);
-
-        $request = \Request::create('/admin', 'GET');
+        $request = Request::create('/admin', 'GET');
 
         $request->setUserResolver(function () use ($user) {
+
+            $role = new \App\Model\UserRole(['name' => 'admin', 'rights' => ['admin_area' => 1]]);
+            $user->role = $role;
+
             return $user;
         });
 

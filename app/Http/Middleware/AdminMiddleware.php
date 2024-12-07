@@ -13,7 +13,6 @@ class AdminMiddleware {
      * @return mixed
      */
     public function handle($request, Closure $next){
-        
         if(!$request->user()->isAdmin() || !$request->user()->isActive()){
 
             \Auth::logout();
