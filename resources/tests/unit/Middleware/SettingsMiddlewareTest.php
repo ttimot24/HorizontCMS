@@ -15,6 +15,9 @@ class SettingsMiddlewareTest extends TestCase
     /** @test */
     public function testSettingsAreSet()
     {
+
+        \Config::set('horizontcms.installed', true);
+
         $request = new Request;
 
         $middleware = new \App\Http\Middleware\SettingsMiddleware(new Settings());

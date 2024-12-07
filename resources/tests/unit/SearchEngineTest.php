@@ -73,6 +73,11 @@ class SearchEngineTest extends TestCase
 
     public function testClearResults()
     {
+
+        $page = new \App\Model\Page(['name' => 'Home','slug'=>'home', 'visibility' => 1, 'parent_id' => 1, 'queue' => 1, 'page' => 'asd', 'active' => 1]);
+        $page->author_id = 1;
+        $page->save();
+
         $this->engine->registerModel(\App\Model\Page::class);
         $this->engine->executeSearch('home');
         $this->assertEquals(1, count($this->engine->getResultsFor(\App\Model\Page::class)));
