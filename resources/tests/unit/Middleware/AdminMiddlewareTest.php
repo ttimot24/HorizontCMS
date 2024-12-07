@@ -65,19 +65,20 @@ class AdminMiddlewareTest extends TestCase
     public function testNonActiveAdminsAreRedirected()
     {
 
-        $user = ModelFactory::createUser(true);
+        $user = ModelFactory::createUser(false);
 
         $request = Request::create('/admin', 'GET');
 
         $request->setUserResolver(function () use ($user) {
 
-            $role = new \App\Model\UserRole(['name' => 'admin', 'rights' => ['admin_area' => 1]]);
+            $role = new \App\Model\UserRole(['name' => 'admin']);
+            $role->setRightsAttribute(['admin_area']);
             $user->role = $role;
 
             return $user;
         });
 
-        $middleware = new \App\Http\Middleware\AdminMiddleware;
+        $middleware = new \App\Http\Middleware\AdminMiddleware();
 
         $response = $middleware->handle($request, function () {});
 

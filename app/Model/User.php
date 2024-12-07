@@ -86,7 +86,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     */
     public function role(){
 
-        if(\App\Model\UserRole::find($this->role_id)==NULL){
+        if(\App\Model\UserRole::find($this->role_id)==null){
             $this->role_id = 1;
         }
          
@@ -98,7 +98,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
 
-    public function hasPermission($permission){
+    public function hasPermission(string $permission): bool {
+
         return empty($this->role->rights)? false : in_array($permission, $this->role->rights);
     }
 
