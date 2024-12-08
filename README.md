@@ -2,7 +2,7 @@
 
 <h1 align="center">HorizontCMS</h1>
 
-[![Laravel 9](https://img.shields.io/badge/Laravel-9-orange.svg)](http://laravel.com)
+[![Laravel 9](https://img.shields.io/badge/Laravel-10-orange.svg)](http://laravel.com)
 [![Bootstrap 5.3](https://img.shields.io/badge/Bootstrap-5.3-563d7c.svg)](http://getbootstrap.com)
 [![VueJs 2.6](https://img.shields.io/badge/VueJs-2.6-green.svg)](http://vuejs.org)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d645b6be9b6a42a8b6189cc32ea8f546)](https://www.codacy.com/app/ttimot24/HorizontCMS?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ttimot24/HorizontCMS&amp;utm_campaign=Badge_Grade)
@@ -12,7 +12,7 @@
 This lightweight CMS platform is not just about functionality—it's about empowerment. Whether you're a seasoned developer or a novice user, HorizontCMS provides intuitive tools and a seamless interface to extend and build your online presence with ease. With just one click, you can unlock endless possibilities and unleash your creativity.
 
 
-### Latest version: [v1.1.0](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.1.0)
+### Latest version: [v1.2.0](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.2.0)
 
 ### Try out
 
