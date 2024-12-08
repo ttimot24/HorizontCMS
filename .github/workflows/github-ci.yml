@@ -29,9 +29,11 @@ jobs:
         run: export INSTALLED=YES
       - name: Run unit tests
         run: XDEBUG_MODE=coverage vendor/bin/phpunit --testsuite Unit,Integration --coverage-clover reports/coverage.xml
-      - name: After test steps
+    #  - name: Upload coverage
+    #    run: | 
+    #      if [ -f "reports/coverage.xml" ]; then vendor/bin/codacycoverage clover reports/coverage.xml; fi 
+      - name: Show versions
         run: | 
-          if [ -f "reports/coverage.xml" ]; then vendor/bin/codacycoverage clover reports/coverage.xml; fi
           php artisan --version
           php artisan hcms:version   
     strategy:
