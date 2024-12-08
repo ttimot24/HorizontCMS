@@ -20,57 +20,38 @@ jobs:
             
   test:
     runs-on: ubuntu-latest 
-    env:
-      DB_HOST: localhost
-      DB_CONNECTION: mysql
-      DB_DATABASE: horizontlaravel
-      DB_USERNAME: root
-      DB_PASSWORD: password
-      LOG_CHANNEL: stderr
-    services:
-      mysql:
-        image: mysql:latest
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: false
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: horizontlaravel
-        ports:
-          - 3306/tcp
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v3
       - uses: php-actions/composer@v6
         with:
           args: --ignore-platform-reqs
-      - name: Set up before tests
-        run: | 
-          php artisan migrate --no-interaction --force 
-          php artisan db:seed --no-interaction --force
       - name: Force installed variable
         run: export INSTALLED=YES
       - name: Run unit tests
-        run: INSTALLED=YES XDEBUG_MODE=coverage vendor/bin/phpunit --testsuite Unit,Integration --coverage-clover reports/coverage.xml
-      - name: After test steps
+        run: XDEBUG_MODE=coverage vendor/bin/phpunit --testsuite Unit,Integration --coverage-clover reports/coverage.xml
+    #  - name: Upload coverage
+    #    run: | 
+    #      if [ -f "reports/coverage.xml" ]; then vendor/bin/codacycoverage clover reports/coverage.xml; fi 
+      - name: Show versions
         run: | 
-          if [ -f "reports/coverage.xml" ]; then vendor/bin/codacycoverage clover reports/coverage.xml; fi
           php artisan --version
           php artisan hcms:version   
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['8.1', '8.2']
+        php-versions: ['8.1', '8.2', '8.3']
     
   docker_image:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Log in to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
         context: .
         push: true

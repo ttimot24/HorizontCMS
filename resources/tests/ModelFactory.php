@@ -24,8 +24,6 @@ class ModelFactory
             ]
         );
 
-        $user->save();
-
         return $user;
     }
 }

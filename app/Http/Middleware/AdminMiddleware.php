@@ -13,13 +13,12 @@ class AdminMiddleware {
      * @return mixed
      */
     public function handle($request, Closure $next){
-        
-        if(!$request->user()->isAdmin() || !$request->user()->isActive()){
 
-            \Auth::logout();
-            return redirect()->back();
+        if($request->user()->isAdmin() && $request->user()->isActive()){
+            return $next($request);
         }
 
-        return $next($request);
+        \Auth::logout();
+        return redirect()->back();
     }
 }

@@ -43,10 +43,11 @@ class Settings extends Model {
 
 	public static function getAll(){
 
+		$array = [];
+
 		foreach(self::all() as $each){
 			$array[$each->setting] = $each->value;
 		}
-
 
 		return $array;
 	}

@@ -1,29 +1,32 @@
 <?php
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class BlogpostControllerTest extends TestCase
 {
 
+    use RefreshDatabase;
+
     public function testIndexAction()
     {
+        $post = new \App\Model\Blogpost(['title' => 'Test post', 'slug' => 'test-post', 'summary' => 'vmi', 'text' => 'asd', 'category_id' => 1, 'comments_enabled' => 1, 'active' => 1]);
+        $post->author_id = 1;
+        $post->save();
 
         \Event::fake();
 
         $request = Request::create('/admin/blogpost/index', 'GET', []);
 
-        $controller = new \App\Controllers\BlogpostController($request);
+        $controller = new \App\Controllers\BlogpostController();
 
-        $responseView = $controller->index(null);
+        $responseView = $controller->index($request);
 
         $this->assertInstanceOf(\Illuminate\View\View::class, $responseView);
 
         $this->assertEquals('blogposts.index', $responseView->name());
 
-
-        $this->assertTrue(isset($responseView->getData()['number_of_blogposts']));
         $this->assertTrue(isset($responseView->getData()['all_blogposts']));
         $this->assertInstanceOf(\App\Model\Blogpost::class, $responseView->getData()['all_blogposts'][0]);
     }
@@ -40,7 +43,10 @@ class BlogpostControllerTest extends TestCase
 
         $controller = new \App\Controllers\BlogpostController($request);
 
-        $responseView = $controller->show($idToTest);
+        $post =  new \App\Model\Blogpost(['title' => 'Test post']);
+        $post->id = 1;
+
+        $responseView = $controller->show($request, $post);
 
         $this->assertInstanceOf(\Illuminate\View\View::class, $responseView);
 
@@ -59,6 +65,10 @@ class BlogpostControllerTest extends TestCase
     public function testCreateAction()
     {
 
+        $category = new \App\Model\BlogpostCategory(['name' => 'def']);
+        $category->author_id = 1;
+        $category->save();
+
         \Event::fake();
 
         $requestGet = Request::create('/admin/blogpost/show', 'GET', []);
@@ -67,11 +77,11 @@ class BlogpostControllerTest extends TestCase
 
         $response = $controller->create();
 
-        $this->assertEquals('blogposts.create', $response->name());
+        $this->assertEquals('blogposts.form', $response->name());
         $this->assertTrue(isset($response->getData()['categories']));
         $this->assertInstanceOf(\App\Model\BlogpostCategory::class, $response->getData()['categories'][0]);
 
-        $requestPost = Request::create('/admin/blogpost/show', 'POST', [
+        $requestPost = Request::create('/admin/blogpost/store', 'POST', [
             'title' => 'AutomatedTest',
             'category_id' => 1,
             'summary' => 'This is the summary of the test blogpost',
@@ -80,14 +90,15 @@ class BlogpostControllerTest extends TestCase
         ]);
 
         $user =  ModelFactory::createUser(true);
+        $user->save();
 
         $requestPost->setUserResolver(function () use ($user) {
             return $user;
         });
 
-        $controller = new \App\Controllers\BlogpostController($requestPost);
+        $controller = new \App\Controllers\BlogpostController();
 
-        $response = $controller->create();
+        $response = $controller->store($requestPost);
 
         $this->assertInstanceOf(\Illuminate\Http\RedirectResponse::class, $response);
 

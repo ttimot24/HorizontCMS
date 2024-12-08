@@ -19,7 +19,7 @@ class Page extends Model {
      * @var array
      */
     protected $fillable = [
-        'name', 'url' ,'visibility', 'parent_id', 'language' , 'queue', 'page', 'active',
+        'name','slug', 'url' ,'visibility', 'parent_id', 'language' , 'queue', 'page', 'active',
     ];
 
     public static $rules = [

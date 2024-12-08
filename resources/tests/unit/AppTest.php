@@ -29,14 +29,15 @@ class AppTest extends TestCase
     public function testIsInstalled()
     {
 
-        if (file_exists(base_path(".env")) || env("INSTALLED", "") != "") {
+        if (file_exists(base_path(".env")) || !empty(env("INSTALLED", ""))) {
 
             $this->assertTrue($this->app->isInstalled());
-            $this->assertNotNull('array', $this->app->plugins);
+            $this->assertInstanceOf(Illuminate\Database\Eloquent\Collection::class, $this->app->plugins);
         } else {
 
             $this->assertFalse($this->app->isInstalled());
-            $this->assertNull($this->app->plugins);
+            $this->assertNotNull($this->app->plugins);
+            $this->assertEquals(true, $this->app->plugins->isEmpty());
         }
     }
 }

@@ -1,10 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-class ExceptionHandler extends TestCase
+class ExceptionHandlerTest extends TestCase
 {
 
     private $requestMock;

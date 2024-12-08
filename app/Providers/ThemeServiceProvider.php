@@ -15,19 +15,27 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (!app()->runningInConsole() && app()->isInstalled()) {
+        if (app()->isInstalled()) {
 
             $theme = new Theme(\App\Model\Settings::get('theme'));
 
-            // For website
-            if (!\Request::is(\Config::get('horizontcms.backend_prefix') . "/*")) {
-                $this->loadJsonTranslationsFrom(base_path($theme->getPath() . "resources/lang"));
-            }
+            $this->app->singleton(Theme::class, function ($app) use($theme) {
+                return $theme;
+            });
+
+
+            $this->registerTranslations($theme);
 
             $this->registerThemeViews($theme);
 
             $this->registerThemeRoutes($theme);
 
+        }
+    }
+
+    protected function registerTranslations(Theme $theme){
+        if (!\Request::is(\Config::get('horizontcms.backend_prefix') . "/*")) {
+            $this->loadJsonTranslationsFrom(base_path($theme->getPath() . "resources/lang"));
         }
     }
 

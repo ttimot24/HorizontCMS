@@ -1,21 +1,26 @@
 <?php
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 
 class InstallerMiddlewareTest extends TestCase
 {
 
+    use RefreshDatabase;
+
     /** @test */
     public function testNotRedirectIfInstalled()
     {
+
+        \Config::set('horizontcms.installed', true);
+
         $request = \Request::create('/admin/dashboard', 'GET');
 
-        $middleware = new \App\Http\Middleware\InstallerMiddleware;
+        $middleware = new \App\Http\Middleware\InstallerMiddleware();
 
-        $response = $middleware->handle($request, function () {});
+        $response = $middleware->handle($request, function () { return null; });
 
         $this->assertNull($response);
     }
@@ -23,11 +28,13 @@ class InstallerMiddlewareTest extends TestCase
     /** @test */
     public function testInstallerIsNotAvailableAfterInstalled()
     {
+        \Config::set('horizontcms.installed', true);
+
         $request = \Request::create('/admin/install', 'GET');
 
-        $middleware = new \App\Http\Middleware\InstallerMiddleware;
+        $middleware = new \App\Http\Middleware\InstallerMiddleware();
 
-        $response = $middleware->handle($request, function () {});
+        $response = $middleware->handle($request, function () { return null; });
 
         $this->assertNotNull($response);
         $this->assertEquals($response->getStatusCode(), 302);

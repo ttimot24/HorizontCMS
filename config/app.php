@@ -171,14 +171,12 @@ return [
 
         Madnest\Madzipper\MadzipperServiceProvider::class,
 //        Chumper\Zipper\ZipperServiceProvider::class,
-        Jackiedo\LogReader\LogReaderServiceProvider::class,
-    #    Maatwebsite\Excel\ExcelServiceProvider::class,
-
+        Jackiedo\LogReader\LogReaderServiceProvider::class
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Class Aliases
+    | Class Aliasesnew $this->engines[$this->theme->getConfig('theme_engine', 'hcms')]($this->request)
     |--------------------------------------------------------------------------
     |
     | This array of class aliases will be registered when this application

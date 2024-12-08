@@ -29,8 +29,6 @@ class AppServiceProvider extends ServiceProvider
                             dd($queries);
                     });
                 }
-
-                $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
         }
 
 

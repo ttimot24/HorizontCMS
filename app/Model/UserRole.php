@@ -14,14 +14,13 @@ class UserRole extends Model {
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name', 'rights'
     ];
 
 	
 	public function users(){
 		return $this->hasMany(\App\Model\User::class,'role_id','id');
 	}
-
 
 	/**
     * Accessor for rights

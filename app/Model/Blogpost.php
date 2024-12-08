@@ -24,7 +24,7 @@ class Blogpost extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'summary', 'text', 'category_id', 'comments_enabled', 'active',
+        'title','slug', 'summary', 'text', 'category_id', 'comments_enabled', 'active',
     ];
 
     public static $rules = [
