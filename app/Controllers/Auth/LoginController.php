@@ -5,6 +5,7 @@ namespace App\Controllers\Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -66,7 +67,11 @@ class LoginController extends Controller
         ]);
     }
 
-
+    protected function authenticated(Request $request, $user)
+    {
+        $user->api_token = Str::random(60);
+        $user->save();
+    }
 
     public function logout(Request $request)
     {
