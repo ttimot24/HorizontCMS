@@ -7,6 +7,7 @@
             @include('breadcrumb', [
                 'links' => [['name' => trans('settings.settings'), 'url' => route('settings.index')]],
                 'page_title' => trans('settings.database'),
+                'stats' => [['label' => 'driver', 'value' => config('database.default')]],
             ])
 
             <div class="card-body">
