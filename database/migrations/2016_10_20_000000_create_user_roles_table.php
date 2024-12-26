@@ -22,6 +22,7 @@ class CreateUserRolesTable extends Migration
             $table->string('name');
             $table->integer('permission')->nullable();
             $table->text('rights')->nullable();
+            $table->timestamps();
         });
     }
 

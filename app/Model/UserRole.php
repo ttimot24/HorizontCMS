@@ -17,24 +17,13 @@ class UserRole extends Model {
         'name', 'rights'
     ];
 
+    protected $casts = [
+        'rights' => 'array',
+    ];
 	
 	public function users(){
 		return $this->hasMany(\App\Model\User::class,'role_id','id');
 	}
-
-	/**
-    * Accessor for rights
-    */
-    public function getRightsAttribute(){
-    	return json_decode($this->attributes['rights']);
-    }
-
-	/**
-    * Mutator for rights
-    */
-    public function setRightsAttribute($value){
-    	$this->attributes['rights'] = json_encode($value);
-    }
 
     public function addRight($right){
         $all_rights = $this->getRightsAttribute();
@@ -43,7 +32,7 @@ class UserRole extends Model {
     }
 
     public function isAdminRole(){
-        $roles = $this->getRightsAttribute();
+        $roles = $this->attributes['rights'];
 
         return $roles? in_array('admin_area',$roles) : false;
     }
