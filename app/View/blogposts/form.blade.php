@@ -48,7 +48,7 @@
 
                             <div class='form-group col  mb-4'>
                                 <label for='title'>{{ trans('blogpost.summary') }}</label>
-                                <textarea type='text' class='form-control @error('summary') is-invalid @enderror' id='summary' name='summary'>{{ old('summary', isset($blogpost) ? $blogpost->summary : '') }}</textarea>
+                                <textarea type='text' maxlength="255" class='form-control @error('summary') is-invalid @enderror' id='summary' name='summary'>{{ old('summary', isset($blogpost) ? $blogpost->summary : '') }}</textarea>
                                 </br>
 
                                 @error('summary')

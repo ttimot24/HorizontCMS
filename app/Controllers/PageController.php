@@ -173,6 +173,7 @@ class PageController extends Controller
 
     public function reorder()
     {
+        //TODO Return JSON response
 
         try {
 
