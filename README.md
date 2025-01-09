@@ -14,13 +14,6 @@ This lightweight CMS platform is not just about functionality—it's about empow
 
 ### Latest version: [v1.2.0](https://github.com/ttimot24/HorizontCMS/releases/tag/v1.2.0)
 
-### Try out
-
-Frontend: [http://horizontcms.herokuapp.com/](https://horizontcms.herokuapp.com/)
-
-Backend: [http://horizontcms.herokuapp.com/admin](https://horizontcms.herokuapp.com/admin)
-
-> Username & password: admin/admin
 
 ### Installation
 #### Browser
