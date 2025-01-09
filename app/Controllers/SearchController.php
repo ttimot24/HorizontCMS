@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Libs\SearchEngine;
+use App\Services\SearchEngine;
 
 class SearchController extends Controller
 {

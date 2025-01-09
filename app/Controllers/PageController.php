@@ -55,7 +55,7 @@ class PageController extends Controller
 
         return view('pages.form', [
             'all_page' => Page::all(),
-            'page_templates' => (new \App\Libs\Theme($request->settings['theme']))->templates(),
+            'page_templates' => (new \App\Services\Theme($request->settings['theme']))->templates(),
         ]);
     }
 
@@ -112,7 +112,7 @@ class PageController extends Controller
         return view('pages.form', [
             'page' => $page,
             'all_page' => Page::all(),
-            'page_templates' => (new \App\Libs\Theme($request->settings['theme']))->templates(),
+            'page_templates' => (new \App\Services\Theme($request->settings['theme']))->templates(),
         ]);
     }
 

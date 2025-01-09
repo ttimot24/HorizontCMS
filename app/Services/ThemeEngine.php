@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Libs;
+namespace App\Services;
 
 class ThemeEngine {
 
@@ -17,7 +17,7 @@ class ThemeEngine {
 		return $this->theme;
 	}
 
-	public function setTheme(\App\Libs\Theme $theme){
+	public function setTheme(\App\Services\Theme $theme){
 		$this->theme = $theme;
 	}
 

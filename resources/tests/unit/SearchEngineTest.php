@@ -13,7 +13,7 @@ class SearchEngineTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->engine = new \App\Libs\SearchEngine();
+        $this->engine = new \App\Services\SearchEngine();
     }
 
     /**
@@ -25,7 +25,7 @@ class SearchEngineTest extends TestCase
     {
 
 
-        $this->assertInstanceOf(\App\Libs\SearchEngine::class, $this->engine);
+        $this->assertInstanceOf(\App\Services\SearchEngine::class, $this->engine);
 
         $this->assertObjectHasProperty('searchModels', $this->engine);
         $this->assertObjectHasProperty('searchKey', $this->engine);
@@ -56,7 +56,7 @@ class SearchEngineTest extends TestCase
         $this->engine->registerModel(\App\Model\Page::class);
         $this->assertEquals(1, count($this->engine->getRegisteredModels()));
 
-        $this->assertEquals(0, count($this->engine->getResultsFor(\App\Libs\Page::class)));
+        $this->assertEquals(0, count($this->engine->getResultsFor(\App\Model\Page::class)));
     }
 
     public function testExecuteSearch()

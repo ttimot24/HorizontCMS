@@ -179,7 +179,7 @@ class InstallController extends Controller
     {
 
         if (!Session::has('error')) {
-            $dotenv = new \App\Libs\DotEnvGenerator();
+            $dotenv = new \App\Services\DotEnvGenerator(); //TODO Inject
             $dotenv->addEnvVar('DB_HOST', Session::get('step2.server'));
             $dotenv->addEnvVar('DB_CONNECTION',  Session::get('step2.db_driver'));
             $dotenv->addEnvVar('DB_USERNAME',  Session::get('step2.username'));

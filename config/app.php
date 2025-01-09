@@ -222,6 +222,7 @@ return [
 
         'Menu'       => Lavary\Menu\Facade::class,
         'Settings' => \App\Model\Settings::class,
+        'Website' => \App\Services\Website::class,
         'Zipper' => Madnest\Madzipper\Madzipper::class,
     ],
 
