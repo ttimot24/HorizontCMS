@@ -58,6 +58,14 @@ Route::apiResource('pages', \App\Controllers\PageController::class)
 Route::apiResource('header-images', \App\Controllers\HeaderImageController::class)
             ->only(['index', 'show']);
 
+Route::get('/settings', function(Request $request){
+
+    $settings = \App\Model\Settings::group('website')->get();
+
+    return response()->json($settings);
+
+});
+
 Route::get('/users',function(Request $request){
 
     if(\Auth::user()->hasPermission("users")){

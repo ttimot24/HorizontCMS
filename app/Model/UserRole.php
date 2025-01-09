@@ -26,15 +26,13 @@ class UserRole extends Model {
 	}
 
     public function addRight($right){
-        $all_rights = $this->getRightsAttribute();
+        $all_rights = $this->rights;
         array_push($all_rights, $right);
-        $this->setRightsAttribute($all_rights);
+        $this->rights = $all_rights;
     }
 
     public function isAdminRole(){
-        $roles = $this->attributes['rights'];
-
-        return $roles? in_array('admin_area',$roles) : false;
+        return $this->rights? in_array('admin_area',$this->rights) : false;
     }
 
 }
