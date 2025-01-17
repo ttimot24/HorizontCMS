@@ -20,10 +20,17 @@ class BlogpostCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $all_categories = BlogpostCategory::all();
+
+        if ($request->wantsJson()) {
+            return response()->json($all_categories);
+        }
+
         return view('blogposts.category.index', [
-            'all_category' => BlogpostCategory::all(),
+            'all_category' => $all_categories,
         ]);
     }
 
