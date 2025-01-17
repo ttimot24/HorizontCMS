@@ -7,7 +7,7 @@ class WidgetResolverTest extends TestCase
 	public function testSetterAndGetter()
 	{
 
-		$widgetResolver = new \App\Libs\ShortCode();
+		$widgetResolver = new \App\Services\ShortCode();
 
 		$widgetResolver->addWidget('{[TestingWidget]}', 'WidgetResolved');
 
@@ -20,7 +20,7 @@ class WidgetResolverTest extends TestCase
 
 		$content = "Some sample text for testing the {[TestingWidget1]} and {[TestingWidget2]} resolving";
 
-		$widgetResolver = new \App\Libs\ShortCode();
+		$widgetResolver = new \App\Services\ShortCode();
 
 		$widgetResolver->addWidget('{[TestingWidget1]}', 'WidgetResolved1');
 

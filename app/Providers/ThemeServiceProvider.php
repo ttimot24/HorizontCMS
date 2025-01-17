@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
-use \App\Libs\Theme;
+use \App\Services\Theme;
 
 class ThemeServiceProvider extends ServiceProvider
 {
