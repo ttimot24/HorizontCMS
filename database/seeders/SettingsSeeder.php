@@ -264,6 +264,13 @@ class SettingsSeeder extends Seeder
 
         DB::table('settings')->insert([
             'group' => 'website', 
+            'setting' => 'social_link_tiktok',
+            'value' => "",
+            'more' => '1',
+        ]);
+
+        DB::table('settings')->insert([
+            'group' => 'website', 
             'setting' => 'social_link_steam',
             'value' => "",
             'more' => '1',

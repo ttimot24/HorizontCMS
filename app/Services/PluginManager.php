@@ -1,11 +1,11 @@
 <?php 
 
-namespace App\Libs;
+namespace App\Services;
 
 /**
  * @deprecated deprecated since version 1.0.0
  */
-class PluginManager extends Model{
+class PluginManager extends Model {
 
 	/**
 	 * @deprecated deprecated since version 1.0.0

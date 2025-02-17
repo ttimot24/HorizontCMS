@@ -11,7 +11,7 @@ class WebsiteMiddleware
 
     private $widgets;
 
-    public function __construct(\App\Libs\ShortCode $shortcode_engine){
+    public function __construct(\App\Services\ShortCode $shortcode_engine){
         $this->widgets = $shortcode_engine;
     }
 
