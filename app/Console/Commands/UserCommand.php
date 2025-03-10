@@ -49,10 +49,7 @@ class USerCommand extends Command
 
         try{
 
-            $user = new \App\Model\User();
-            $user->name = $admin["name"];
-            $user->email = $admin['email'];
-            $user->username =  $admin['username'];
+            $user = new \App\Model\User($admin);
             $user->slug = str_slug($admin['username']);
             $user->password = $admin['password'];
             $user->role_id = 6;
