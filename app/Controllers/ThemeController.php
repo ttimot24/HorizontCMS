@@ -82,7 +82,7 @@ class ThemeController extends Controller
             $translations[$lang] = json_decode(file_get_contents($theme->getPath() . $theme->languagePath . "/" . $lang . ".json"));
         }
 
-        return view('theme.options', ['option' => empty(request()->input('option')) ? 'style' : request()->input('option'), 'translations' => $translations, 'theme' => $theme->root_dir, 'settings' => request()->settings]);
+        return view('theme.options', ['option' => empty(request()->input('option')) ? 'style' : request()->input('option'), 'translations' => $translations, 'theme' => $theme->getRootDir(), 'settings' => request()->settings]);
     }
 
     public function updateTranslations($theme)

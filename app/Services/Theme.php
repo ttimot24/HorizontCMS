@@ -5,9 +5,11 @@ namespace App\Services;
 class Theme
 {
 
+	public $info;
+	public $config;
 	public $languagePath = "resources/lang";
 
-	public function __construct($root_dir)
+	public function __construct(private $root_dir)
 	{
 		$this->root_dir = $root_dir;
 		//$this->info = file_exists($this->getPath()."theme_info.xml")? simplexml_load_file($this->getPath()."theme_info.xml") : NULL;
@@ -17,6 +19,10 @@ class Theme
 		$this->config = file_exists($this->getPath() . "config.php") ? require($this->getPath() . "config.php") : NULL;
 	}
 
+	public function getRootDir(): string
+	{
+		return $this->root_dir;
+	}
 
 	public function templates()
 	{
