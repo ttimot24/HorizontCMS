@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
-use \App\Services\Theme;
+use \App\Libs\Theme;
 
 class ThemeServiceProvider extends ServiceProvider
 {
@@ -37,10 +37,6 @@ class ThemeServiceProvider extends ServiceProvider
 
     private function registerThemeAutoLoaders(Theme $theme)
     {
-
-
-
-
         $autoloader = $theme->getPath() . "/vendor/autoload.php";
         if (file_exists($autoloader)) {
             require_once($autoloader);
@@ -105,7 +101,6 @@ class ThemeServiceProvider extends ServiceProvider
             }
         } catch (\Exception $e) {
             \Log::error($e->getMessage());
-            throw $e;
         }
     }
 
