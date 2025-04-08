@@ -12,14 +12,14 @@ class WebsiteController extends Controller
     private $request;
 
     private $engines = [
-        'hcms' => \App\Libs\ThemeEngine::class,
-        'blade' => \App\Libs\BladeThemeEngine::class,
-        //'twig' => \App\Libs\TwigThemeEngine::class,
+        'hcms' => \App\Services\ThemeEngine::class,
+        'blade' => \App\Services\BladeThemeEngine::class,
+        //'twig' => \App\Services\TwigThemeEngine::class,
     ];
 
     private $theme;
 
-    public function __construct(Request $request, \App\Libs\Theme $theme){
+    public function __construct(Request $request, \App\Services\Theme $theme){
         $this->request = $request;
         $this->theme = $theme;
     }
@@ -140,7 +140,7 @@ class WebsiteController extends Controller
             }
 
 
-            $search_engine = new \App\Libs\SearchEngine();
+            $search_engine = new \App\Services\SearchEngine();
 
             $search_engine->registerModel(\App\Model\Blogpost::class);
             $search_engine->registerModel(\App\Model\Page::class);

@@ -4,6 +4,8 @@ namespace App\Controllers\Trait;
 
 use TypeError;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 trait UploadsImage {
 
@@ -26,7 +28,7 @@ trait UploadsImage {
             $model->attachImage($img);
             if (extension_loaded('gd') && starts_with(request()->{$this->form_field_name}->getMimeType(), 'image/')) {
 		        File::ensureDirectoryExists($model->getImageDirectory() . '/thumbs');
-                \Intervention\Image\ImageManagerStatic::make(storage_path($img))->fit(300, 200)->save($model->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $model->image);
+                (new ImageManager(new Driver()))->read(storage_path($img))->resize(300, 200)->save($model->getThumbnailDirectory(). DIRECTORY_SEPARATOR . $model->image);
             }
 
             return true;

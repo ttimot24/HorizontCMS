@@ -11,7 +11,7 @@ class VersionCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'hcms:version';
+    protected $signature = 'hcms:version {--no-banner : Do not display the banner}';
 
     /**
      * The console command description.
@@ -19,6 +19,16 @@ class VersionCommand extends Command
      * @var string
      */
     protected $description = 'Prints the application version.';
+
+    private $banner = 
+  ",--.  ,--.              ,--.                        ,--.   ,-----.,--.   ,--. ,---.   
+|  '--'  | ,---. ,--.--.`--',-----. ,---. ,--,--, ,-'  '-.'  .--./|   `.'   |'   .-'  
+|  .--.  || .-. ||  .--',--.`-.  / | .-. ||      \'-.  .-'|  |    |  |'.'|  |`.  `-.  
+|  |  |  |' '-' '|  |   |  | /  `-.' '-' '|  ||  |  |  |  '  '--'\|  |   |  |.-'    | 
+`--'  `--' `---' `--'   `--'`-----' `---' `--''--'  `--'   `-----'`--'   `--'`-----'  
+                                                                                    
+app.name - {app.version}
+Closer to the WEB";
 
     /**
      * Create a new command instance.
@@ -37,6 +47,10 @@ class VersionCommand extends Command
      */
     public function handle()
     {
-        $this->info(PHP_EOL.\Config::get('app.name')." - ".\Config::get('horizontcms.version').PHP_EOL);
+        if(!$this->option('no-banner')){
+            $this->info(PHP_EOL.str_Replace("app.name",\Config::get('app.name'),str_replace("{app.version}",\Config::get('horizontcms.version'), $this->banner)).PHP_EOL);
+        }else {
+            $this->info(PHP_EOL.\Config::get('app.name')." - ".\Config::get('horizontcms.version').PHP_EOL);
+        }
     }
 }
