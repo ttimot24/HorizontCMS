@@ -34,7 +34,7 @@ Route::post('/auth', function (Request $request) {
 
             $user->load('role');
 
-            return response()->json($user, 200);
+            return response()->json($user->makeVisible('api_token'), 200);
         }
     } 
 
