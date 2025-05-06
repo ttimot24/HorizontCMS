@@ -33,8 +33,11 @@ Route::post('/auth', function (Request $request) {
             $user->save();
 
             $user->load('role');
+            
+            $user->makeVisible('api_token');
+            $user->role->makeVisible('rights');
 
-            return response()->json($user->makeVisible('api_token'), 200);
+            return response()->json($user, 200);
         }
     } 
 
