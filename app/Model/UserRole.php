@@ -20,6 +20,15 @@ class UserRole extends Model {
     protected $casts = [
         'rights' => 'array',
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'rights',
+    ];
 	
 	public function users(){
 		return $this->hasMany(\App\Model\User::class,'role_id','id');
