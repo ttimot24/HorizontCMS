@@ -69,8 +69,16 @@ class BlogpostCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(BlogpostCategory $blogpostcategory)
+    public function show(Request $request, BlogpostCategory $blogpostcategory)
     {
+
+        if ($request->wantsJson()) {
+            foreach($request->get('with', []) as $relation) {
+                $blogpostcategory->load($relation);
+            }
+            return response()->json($blogpostcategory);
+        }
+
         return view('blogposts.category.view', ['category' => $blogpostcategory]);
     }
 

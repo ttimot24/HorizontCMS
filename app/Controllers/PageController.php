@@ -34,7 +34,10 @@ class PageController extends Controller
     {
         $pages = Page::orderBy('queue')->paginate($this->itemPerPage);
 
-        if($request->wantsJson()){
+        if ($request->wantsJson()) {
+            foreach($request->get('with', []) as $relation) {
+                $pages->load($relation);
+            }
             return response()->json($pages);
         }
 
@@ -93,7 +96,10 @@ class PageController extends Controller
      */
     public function show(Request $request, Page $page)
     {
-        if($request->wantsJson()){
+        if ($request->wantsJson()) {
+            foreach($request->get('with', []) as $relation) {
+                $page->load($relation);
+            }
             return response()->json($page);
         }
 

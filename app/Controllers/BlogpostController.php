@@ -37,6 +37,9 @@ class BlogpostController extends Controller
         $blogposts = Blogpost::orderBy('id', 'desc')->paginate($this->itemPerPage);
 
         if ($request->wantsJson()) {
+            foreach($request->get('with', []) as $relation) {
+                $blogposts->load($relation);
+            }
             return response()->json($blogposts);
         }
 
@@ -88,6 +91,9 @@ class BlogpostController extends Controller
     {
 
         if ($request->wantsJson()) {
+            foreach($request->get('with', []) as $relation) {
+                $blogpost->load($relation);
+            }
             return response()->json($blogpost);
         }
 
