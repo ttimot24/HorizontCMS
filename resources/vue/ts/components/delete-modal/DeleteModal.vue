@@ -30,33 +30,4 @@
 </div><!-- /.modal -->
 </template>
 
-<script lang="ts">
-
-import { defineComponent } from '@vue/composition-api';
-
-export default defineComponent({
-    name: 'DeleteModal',
-    props: {
-      id: {
-        type: String,
-        required: true
-      },
-      route: {
-        type: String
-      },
-      delete_text: {
-        type: String,
-      },
-      header: {
-        type: String,
-      },
-      name: {
-        type: String,
-      },
-      cancel: {
-        type: String,
-      }
-    }
-});
-
-</script>
+<script lang="ts" src="./DeleteModal.ts" />

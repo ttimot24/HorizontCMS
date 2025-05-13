@@ -1,10 +1,10 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/assets/ts/dragndrop.js":
-/*!******************************************!*\
-  !*** ./resources/assets/ts/dragndrop.js ***!
-  \******************************************/
+/***/ "./resources/vue/ts/dragndrop.js":
+/*!***************************************!*\
+  !*** ./resources/vue/ts/dragndrop.js ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29815,10 +29815,10 @@ return jQuery;
 
 /***/ }),
 
-/***/ "./resources/assets/sass/horizontcms-next.scss":
-/*!*****************************************************!*\
-  !*** ./resources/assets/sass/horizontcms-next.scss ***!
-  \*****************************************************/
+/***/ "./resources/vue/sass/horizontcms-next.scss":
+/*!**************************************************!*\
+  !*** ./resources/vue/sass/horizontcms-next.scss ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29989,8 +29989,8 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/horizontcms-next"], () => (__webpack_require__("./resources/assets/ts/dragndrop.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/horizontcms-next"], () => (__webpack_require__("./resources/assets/sass/horizontcms-next.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/horizontcms-next"], () => (__webpack_require__("./resources/vue/ts/dragndrop.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/horizontcms-next"], () => (__webpack_require__("./resources/vue/sass/horizontcms-next.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

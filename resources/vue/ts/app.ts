@@ -7,10 +7,9 @@ import * as bootstrap from "bootstrap";
 import "bootstrap-fileinput";
 
 import CKEditor from 'ckeditor4-vue';
-import TextEditor from './components/TextEditor.vue';
-import LockScreen from './components/LockScreen.vue';
-import FileManager from './components/FileManager.vue';
-import { createI18n, useI18n } from 'vue-i18n-composable';
+import TextEditor from './components/text-editor/TextEditor.vue';
+import LockScreen from './components/lock-screen/LockScreen.vue';
+import FileManager from './components/file-manager/FileManager.vue';
 
 window.vue.use(CKEditor);
 

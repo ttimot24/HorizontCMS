@@ -20,9 +20,9 @@ mix.autoload({
 
 mix.i18n('resources/lang');
 
-mix.ts('resources/assets/ts/app.ts', 'js')
-   .ts('resources/assets/ts/main.ts', 'js')
-   .ts('resources/assets/ts/pages.ts', 'js')
-   .js('resources/assets/ts/dragndrop.js', 'js')
+mix.ts('resources/vue/ts/app.ts', 'js')
+   .ts('resources/vue/ts/main.ts', 'js')
+   .ts('resources/vue/ts/pages.ts', 'js')
+   .js('resources/vue/ts/dragndrop.js', 'js')
    .vue()
-   .sass('resources/assets/sass/horizontcms-next.scss', 'css');
+   .sass('resources/vue/sass/horizontcms-next.scss', 'css');

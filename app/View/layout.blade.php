@@ -4,6 +4,11 @@
 <head>
     <base href="{{ config('app.url') }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+    @if(auth()->check())
+        <meta name="api-token" content="{{ auth()->user()->api_token }}" />
+    @endif
+
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <title>{{ $title }} - {{ config('app.name') }}</title>

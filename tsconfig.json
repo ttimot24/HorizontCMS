@@ -30,10 +30,11 @@
       ]
     },
     "include": [
-      "resources/assets/ts/**/*.ts", 
-      "resources/assets/ts/**/*.d.ts", 
-      "resources/assets/ts/**/*.tsx", 
-      "resources/assets/ts/**/*.vue", "resources/assets/ts/dragndrop.js", 
+      "resources/vue/ts/**/*.ts", 
+      "resources/vue/ts/**/*.d.ts", 
+      "resources/vue/ts/**/*.tsx", 
+      "resources/vue/ts/**/*.vue", 
+      "resources/vue/ts/**/*.js", 
     ], 
     "exclude": ["docs/**/*"],
     "angularCompilerOptions": {

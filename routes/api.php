@@ -61,6 +61,9 @@ Route::apiResource('pages', \App\Controllers\PageController::class)
 Route::apiResource('header-images', \App\Controllers\HeaderImageController::class)
             ->only(['index', 'show']);
 
+Route::apiResource('file-manager', \App\Controllers\FileManagerController::class)
+            ->middleware('auth:api');
+
 Route::get('/settings', function(Request $request){
 
     $settings = \App\Model\Settings::group('website')->get();
@@ -93,6 +96,7 @@ Route::get('/plugins',function(Request $request){
 
 })->middleware('auth:api');
 
+
 Route::post('lock-up',function(Request $request){
 
     $user = \App\Model\User::find($request->input('id'));
@@ -106,6 +110,9 @@ Route::post('lock-up',function(Request $request){
 });
 
 
+/**
+ * @deprecated deprecated since version 1.3.0
+ */
 Route::get('get-page-slug/{title}',function($title){
 	 return response()->json(str_slug($title));
 });

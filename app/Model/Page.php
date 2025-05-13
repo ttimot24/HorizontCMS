@@ -27,6 +27,11 @@ class Page extends Model {
         'visibility' => 'required'
     ];
 
+    public $casts = [
+        'parent_id' => 'int',
+        'visibility' => 'int'
+    ];
+
     protected $search = ['name', 'page'];
 
     protected $defaultImage = "resources/images/icons/page.png";
