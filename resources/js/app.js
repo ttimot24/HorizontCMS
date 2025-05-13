@@ -3534,23 +3534,20 @@ function _typeof(obj) {
       var vm = this;
       var file = vm.currentDirectory.concat('/').concat($('[name="old_name"]').val());
       console.log(file);
-      $.ajax({
-        type: "PUT",
-        url: event.target.action,
-        contentType: "application/json",
-        data: JSON.stringify({
-          _token: vm.csrfToken,
-          old_file: vm.currentDirectory.concat('/').concat($('[name="old_name"]').val()),
-          new_file: vm.currentDirectory.concat('/').concat($('[name="new_name"]').val())
-        }),
-        success: function success(data) {
-          if (_typeof(data.success) !== undefined) {
-            vm.open(vm.currentDirectory);
-            vm.modalRename.hide();
-            $('[name="new_name"]').val('');
-          } else {
-            console.log(data);
-          }
+      this.http.put(event.target.action, {
+        _token: vm.csrfToken,
+        old_file: vm.currentDirectory.concat('/').concat($('[name="old_name"]').val()),
+        new_file: vm.currentDirectory.concat('/').concat($('[name="new_name"]').val())
+      }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_5__.catchError)(function (error) {
+        console.error(error);
+        return (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.of)(error);
+      })).subscribe(function (data) {
+        if (_typeof(data.success) !== undefined) {
+          vm.open(vm.currentDirectory);
+          vm.modalRename.hide();
+          $('[name="new_name"]').val('');
+        } else {
+          console.log(data);
         }
       });
     },
@@ -3558,23 +3555,16 @@ function _typeof(obj) {
       var vm = this;
       var deleteSubmit = $("#delete-submit");
       var file = vm.currentDirectory.concat('/').concat(deleteSubmit.data('file'));
-      $.post('admin/file-manager/destroy', {
-        _token: vm.csrfToken,
-        file: file
-      }, function (data) {
-        if (_typeof(data.success) !== undefined) {
-          var index = vm.files.indexOf(deleteSubmit.data('file'));
-          if (index > -1) {
-            vm.files.splice(index, 1);
-          }
-          index = vm.folders.indexOf(deleteSubmit.data('file'));
-          if (index > -1) {
-            vm.folders.splice(index, 1);
-          }
-          vm.modalDelete.hide();
-        } else {
-          console.log(data);
-        }
+      this.http["delete"](_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.REST_API_BASE + '/file-manager/file?file=' + file).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_3__.retry)(_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.API_RETRY), (0,rxjs__WEBPACK_IMPORTED_MODULE_5__.catchError)(function (error) {
+        console.error(error);
+        return (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.of)(error);
+      })).subscribe(function (data) {
+        ['files', 'folders'].forEach(function (key) {
+          vm[key] = vm[key].filter(function (item) {
+            return item !== deleteSubmit.data('file');
+          });
+        });
+        vm.modalDelete.hide();
       });
     },
     getUrlVar: function getUrlVar(location, vary) {

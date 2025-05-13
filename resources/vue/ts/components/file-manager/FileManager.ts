@@ -3,6 +3,7 @@ import DeleteModal from '../delete-modal/DeleteModal.vue';
 import { environment } from '../../environments/environment';
 import { FileManagerResponse } from '../../model/FileManagerResponse';
 import { catchError, of, map, retry } from 'rxjs';
+import axios from 'axios';
 
 export default defineComponent({
     name: 'FileManager',
@@ -271,24 +272,22 @@ export default defineComponent({
             var file = vm.currentDirectory.concat('/').concat($('[name="old_name"]').val());
             console.log(file);
 
-            $.ajax({
-                type: "PUT",
-                url: event.target.action,
-                contentType: "application/json",
-                data: JSON.stringify({
-                    _token: vm.csrfToken,
-                    old_file: vm.currentDirectory.concat('/').concat($('[name="old_name"]').val()),
-                    new_file: vm.currentDirectory.concat('/').concat($('[name="new_name"]').val())
-                }),
-                success: function (data: any) {
-                    if (typeof data.success !== undefined) {
-                        vm.open(vm.currentDirectory);
-                        vm.modalRename.hide();
-                        $('[name="new_name"]').val('');
-                    } else {
-                        console.log(data);
-                    }
-
+            this.http.put(event.target.action,{
+                _token: vm.csrfToken,
+                old_file: vm.currentDirectory.concat('/').concat($('[name="old_name"]').val()),
+                new_file: vm.currentDirectory.concat('/').concat($('[name="new_name"]').val())
+            }).pipe(
+                catchError((error: any) => {
+                    console.error(error);
+                    return of(error);
+                })
+            ).subscribe((data: any) => {
+                if (typeof data.success !== undefined) {
+                    vm.open(vm.currentDirectory);
+                    vm.modalRename.hide();
+                    $('[name="new_name"]').val('');
+                } else {
+                    console.log(data);
                 }
             });
 
@@ -299,34 +298,24 @@ export default defineComponent({
 
             var deleteSubmit = $("#delete-submit");
 
-            var file = vm.currentDirectory.concat('/').concat(deleteSubmit.data('file'));
+            const file = vm.currentDirectory.concat('/').concat(deleteSubmit.data('file'));
 
+            this.http.delete(environment.REST_API_BASE + '/file-manager/file?file=' + file)
+            .pipe(
+                retry(environment.API_RETRY),
+                catchError((error: any) => {
+                    console.error(error);
+                    return of(error);
+                })
+            ).subscribe((data: any) => {
 
-            $.post('admin/file-manager/destroy',
-                {
-                    _token: vm.csrfToken,
-                    file: file
-                },
-                function (data: any) {
-                    if (typeof data.success !== undefined) {
+                ['files', 'folders'].forEach(key => {
+                    vm[key] = vm[key].filter((item: string) => item !== deleteSubmit.data('file'));
+                });
 
-                        var index = vm.files.indexOf(deleteSubmit.data('file'));
-                        if (index > -1) {
-                            vm.files.splice(index, 1);
-                        }
+                vm.modalDelete.hide();
 
-                        index = vm.folders.indexOf(deleteSubmit.data('file'));
-                        if (index > -1) {
-                            vm.folders.splice(index, 1);
-                        }
-
-                        vm.modalDelete.hide();
-
-                    } else {
-                        console.log(data);
-                    }
-                }
-            );
+            });
 
         },
         getUrlVar: function (location: string, vary: any): any {
