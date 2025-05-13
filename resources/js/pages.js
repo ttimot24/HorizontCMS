@@ -1,10 +1,10 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/assets/ts/environments/environment.ts":
-/*!*********************************************************!*\
-  !*** ./resources/assets/ts/environments/environment.ts ***!
-  \*********************************************************/
+/***/ "./resources/vue/ts/environments/environment.ts":
+/*!******************************************************!*\
+  !*** ./resources/vue/ts/environments/environment.ts ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -14,6 +14,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var environment = {
   REST_API_BASE: "api/v1",
+  API_RETRY: 2,
   CKEDITOR_VERSION: "4.22.1"
 };
 
@@ -29809,16 +29810,16 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!**************************************!*\
-  !*** ./resources/assets/ts/pages.ts ***!
-  \**************************************/
+/*!***********************************!*\
+  !*** ./resources/vue/ts/pages.ts ***!
+  \***********************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ajaxGetSlug": () => (/* binding */ ajaxGetSlug)
 /* harmony export */ });
 /* harmony import */ var jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery-ui-bundle */ "./node_modules/jquery-ui-bundle/jquery-ui.js");
 /* harmony import */ var jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_bundle__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./environments/environment */ "./resources/assets/ts/environments/environment.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./environments/environment */ "./resources/vue/ts/environments/environment.ts");
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /**
  * First we will load all of this project's JavaScript dependencies which

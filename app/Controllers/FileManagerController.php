@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use Illuminate\Routing\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FileManagerController extends Controller
@@ -19,7 +18,7 @@ class FileManagerController extends Controller
 
         $mode = request()->get('mode');
 
-        $current_dir = str_replace_first("storage/", "", request()->get('path') == null ? "" : ltrim(request()->get('path'), "/"));
+        $current_dir = str_replace_first("storage/", "", request()->has('path')? ltrim(request()->get('path'), "/") : "");
 
         $data = [
             'old_path' => ($current_dir == "" ? "" : $current_dir . "/"),
@@ -37,7 +36,7 @@ class FileManagerController extends Controller
         ];
 
 
-        if (request()->ajax()) {
+        if (request()->wantsJson()) {
             return response()->json($data);
         }
 
@@ -51,7 +50,7 @@ class FileManagerController extends Controller
      */
     public function store()
     {
-        if (request()->isMethod('POST')) {
+        if (request()->isMethod('POST') && auth()->user()->isAdmin()) {
 
             if (request()->hasFile('up_file')) {
 
@@ -63,22 +62,22 @@ class FileManagerController extends Controller
                     }
                 }
 
-                if (request()->ajax()) {
-                    return response()->json(['success' => 'Files uploaded successfully!', 'uploadedFileNames' => $images]);
+                if (request()->wantsJson()) {
+                    return response()->json(['success' => 'Files uploaded successfully!', 'uploadedFileNames' => $images, "uploaded" => 1, "url" => asset('storage/'. $images[0])]);
                 }
 
                 return redirect()->back()->withMessage(['success' => 'Files uploaded successfully!']);
             } else {
 
-                if (request()->ajax()) {
-                    return response()->json(['danger' => 'Could not upload files!']);
+                if (request()->wantsJson()) {
+                    return response()->json(['error' => 'Could not upload files!', 'uploaded' => 0]);
                 }
 
                 return redirect()->back()->withMessage(['danger' => 'Could not upload files!']);
             }
         }
 
-        if (request()->ajax()) {
+        if (request()->wantsJson()) {
             return response()->json(['warning' => 'Only POST method allowed!']);
         }
 
@@ -120,14 +119,14 @@ class FileManagerController extends Controller
             if (!file_exists($directory)) {
                 \File::makeDirectory($directory, $mode = 0777, true, true);
 
-                if (request()->ajax()) {
+                if (request()->wantsJson()) {
                     return response()->json(['success' => 'Folder created successfully!']);
                 }
 
                 return redirect()->back()->withMessage(['success' => 'Folder created successfully!']);
             } else {
 
-                if (request()->ajax()) {
+                if (request()->wantsJson()) {
                     return response()->json(['danger' => 'Folder already exists!']);
                 }
 
@@ -149,7 +148,7 @@ class FileManagerController extends Controller
         $toDelete = str_replace("storage/", "", request()->input('file'));
 
         if (!file_exists('storage/' . $toDelete)) {
-            if (request()->ajax()) {
+            if (request()->wantsJson()) {
                 return response()->json(['warning' => trans("File " . $toDelete . " doesn't exists")]);
             }
 
@@ -159,53 +158,25 @@ class FileManagerController extends Controller
 
         if (!is_dir('storage/' . $toDelete) && Storage::delete($toDelete)) {
 
-            if (request()->ajax()) {
+            if (request()->wantsJson()) {
                 return response()->json(['success' => trans('File deleted successfully')]);
             }
 
             return redirect()->back()->withMessage(['success' => trans('File deleted successfully')]);
         } else if (is_dir('storage/' . $toDelete) && Storage::deleteDirectory($toDelete)) {
 
-            if (request()->ajax()) {
+            if (request()->wantsJson()) {
                 return response()->json(['success' => trans('Directory deleted successfully')]);
             }
 
             return redirect()->back()->withMessage(['success' => trans('Directory deleted successfully')]);
         } else {
 
-            if (request()->ajax()) {
+            if (request()->wantsJson()) {
                 return response()->json(['danger' => trans('message.something_went_wrong')]);
             }
 
             return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-    }
-
-
-
-    public function upload()
-    {
-
-        if (request()->isMethod('POST')) {
-
-            if (request()->hasFile('upload')) {
-
-                $image = request()->upload->store('images/' . request()->input('module'));
-
-                if ($image) {
-                    // if($this->request->ajax()){
-                    return response()->json(["uploaded" => 1, "fileName" => basename($image), "url" => "storage/" . $image]);
-                    /*                    }else{
-                        return "Image uploaded successfully!";*/
-                    //}
-                } else {
-                    /* if($this->request->ajax()){*/
-                    return response()->json(["uploaded" => 0]);
-                    /* }else{
-                        return "Something went wrong!";
-                    }*/
-                }
-            }
         }
     }
 
@@ -223,11 +194,11 @@ class FileManagerController extends Controller
         $new_file = trim(request()->input('new_file'), "/");
 
         if (!\Security::isExecutable($new_file) && \Storage::move(request()->input('old_file'), $new_file)) {
-            if (request()->ajax()) {
+            if (request()->wantsJson()) {
                 return response()->json(['success' => trans('File successfully renamed!')]);
             }
         } else {
-            if (request()->ajax()) {
+            if (request()->wantsJson()) {
                 return response()->json(['danger' => trans('message.something_went_wrong')]);
             }
         }

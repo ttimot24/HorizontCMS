@@ -85,7 +85,7 @@
                                     :data="'{{ remove_linebreaks(old('blogpost', isset($blogpost) ? $blogpost->text : '')) }}'"
                                     :language="'{{ config('app.locale') }}'"
                                     :filebrowserBrowseUrl="'{{ route('filemanager.index', ['path' => 'images/blogposts', 'mode' => 'embed']) }}'"
-                                    :filebrowserUploadUrl="'{{ route('filemanager.store', ['module' => 'blogpost']) }}'">
+                                    :filebrowserUploadUrl="'{{ route('file-manager.store', ['dir_path' => 'storage/images/blogposts']) }}'">
                                 </text-editor>
                             </div>
 
