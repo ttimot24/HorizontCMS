@@ -4,6 +4,9 @@
     <base href="{{ config('app.url') }}" />
     <title>{{ trans('File Manager') }} - {{ config('app.name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    @if(auth()->check())
+        <meta name="api-token" content="{{ auth()->user()->api_token }}" />
+    @endif
     <link rel="shortcut icon" type="image/png" href="resources/images/icons/favicon16.png" />
 
         @foreach ($css as $each_css)
