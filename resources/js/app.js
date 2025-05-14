@@ -3551,6 +3551,16 @@ function _typeof(obj) {
         }
       });
     },
+    shareLink: function shareLink(file) {
+      var baseUrl = window.location.origin;
+      var path = "storage/".concat(this.currentDirectory, "/").concat(file);
+      var fullUrl = "".concat(baseUrl, "/").concat(path);
+      navigator.clipboard.writeText(fullUrl).then(function () {
+        alert('Link copied to clipboard: ' + fullUrl);
+      })["catch"](function (err) {
+        console.error('Failed to copy:', err);
+      });
+    },
     deleteFile: function deleteFile() {
       var vm = this;
       var deleteSubmit = $("#delete-submit");
@@ -29942,6 +29952,19 @@ var render = function () {
                             },
                             [
                               _c("div", { staticClass: "file-nav text-end" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "me-1",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.shareLink(file)
+                                      },
+                                    },
+                                  },
+                                  [_c("i", { staticClass: "fa fa-link" })]
+                                ),
+                                _vm._v(" "),
                                 _c(
                                   "a",
                                   {

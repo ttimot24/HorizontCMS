@@ -93,14 +93,16 @@
                                                     select(file)
                                             ">
                                             <div class="file-nav text-end">
-                                                <a class="me-1" v-on:click=" renameModal(file) "><i class="fa fa-pencil"
+                                                <a class="me-1" v-on:click="shareLink(file)"><i
+                                                    class="fa fa-link"></i></a>
+                                                <a class="me-1" v-on:click="renameModal(file)"><i class="fa fa-pencil"
                                                         aria-hidden="true"></i></a>
                                                 <a class="me-1" :href=" 'storage/' + currentDirectory + '/' + file "><i
                                                         class="fa fa-download"></i></a>
-                                                <a class="me-1" v-on:click=" deleteModal(file) "><i
+                                                <a class="me-1" v-on:click="deleteModal(file)"><i
                                                         class="fa fa-trash"></i></a>
                                             </div>
-                                            <img class="w-100 mb-3" v-if=" isKnownExtension(file) "
+                                            <img class="w-100 mb-3" v-if="isKnownExtension(file)"
                                                 :src=" 'storage/' + currentDirectory + '/' + file " />
                                             <img class="w-100 mb-3" v-else src="resources/images/icons/file.png" />
                                             <b>{{ file }}</b>

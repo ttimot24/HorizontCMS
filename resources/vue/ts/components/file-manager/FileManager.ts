@@ -292,6 +292,19 @@ export default defineComponent({
             });
 
         },
+        shareLink(file: string): void {
+            const baseUrl = window.location.origin;
+            const path = `storage/${this.currentDirectory}/${file}`;
+            const fullUrl = `${baseUrl}/${path}`;
+        
+            navigator.clipboard.writeText(fullUrl)
+                .then(() => {
+                    alert('Link copied to clipboard: '+ fullUrl);
+                })
+                .catch(err => {
+                    console.error('Failed to copy:', err);
+                });
+        },
         deleteFile: function (): void {
 
             var vm = this;
