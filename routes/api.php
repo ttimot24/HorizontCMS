@@ -64,6 +64,10 @@ Route::apiResource('header-images', \App\Controllers\HeaderImageController::clas
 Route::apiResource('file-manager', \App\Controllers\FileManagerController::class)
             ->middleware('auth:api');
 
+Route::apiResource('search', \App\Controllers\SearchController::class)
+            ->only(['index', 'show']);
+
+
 Route::get('/settings', function(Request $request){
 
     $settings = \App\Model\Settings::group('website')->get();

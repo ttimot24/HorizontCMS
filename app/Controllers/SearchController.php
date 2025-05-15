@@ -8,24 +8,41 @@ use App\Services\SearchEngine;
 
 class SearchController extends Controller
 {
+
+    public function __construct(private SearchEngine $search_engine) {
+
+    }
+
+    public function index(Request $request)
+    {
+
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, SearchEngine $search_engine)
+    public function show(Request $request)
     {
+
         $search_key = "%" . $request->input('search') . "%";
 
-        $search_engine->registerModel(\App\Model\Blogpost::class);
-        $search_engine->registerModel(\App\Model\User::class);
-        $search_engine->registerModel(\App\Model\Page::class);
+        $this->search_engine->registerModel(\App\Model\Blogpost::class);
+        if(auth()->check() && auth()->user()->hasPermission('user')){
+            $this->search_engine->registerModel(\App\Model\User::class);
+        }
+        $this->search_engine->registerModel(\App\Model\Page::class);
 
-        $search_engine->executeSearch($search_key);
+        $this->search_engine->executeSearch($search_key);
+
+        if($request->wantsJson()){
+            return response()->json($this->search_engine->getAllResults());
+        }
 
         return view("search.index", [
             'search_for' => $request->input('search'),
-            'search_engine' => $search_engine,
+            'search_engine' => $this->search_engine,
             'files' => [],
         ]);
     }

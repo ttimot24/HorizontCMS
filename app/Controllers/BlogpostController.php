@@ -34,7 +34,7 @@ class BlogpostController extends Controller
      */
     public function index(Request $request)
     {
-        $blogposts = Blogpost::orderBy('id', 'desc')->paginate($this->itemPerPage);
+        $blogposts = Blogpost::orderBy('id', 'desc')->paginate($request->input('per_page', $this->itemPerPage));
 
         if ($request->wantsJson()) {
             foreach($request->get('with', []) as $relation) {
