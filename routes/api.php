@@ -46,8 +46,23 @@ Route::post('/auth', function (Request $request) {
 
 Route::get('/blogposts/slug/{slug}', function($slug){
   $blogpost = \App\Model\Blogpost::findBySlug($slug);
+
+    foreach(request()->get('with', []) as $relation) {
+        $blogpost->load($relation);
+    }
+
   return response()->json($blogpost);
 });
+
+Route::get('/pages/slug/{slug}', function($slug){
+    $page = \App\Model\Page::findBySlug($slug);
+  
+      foreach(request()->get('with', []) as $relation) {
+          $page->load($relation);
+      }
+  
+    return response()->json($page);
+  });
 
 Route::apiResource('blogposts', \App\Controllers\BlogpostController::class)
             ->only(['index', 'show']);
