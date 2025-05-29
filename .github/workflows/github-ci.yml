@@ -26,7 +26,7 @@ jobs:
         with:
           args: --ignore-platform-reqs
       - name: Running Phpstan
-        run: ./vendor/bin/phpstan analyse app
+        run: ./vendor/bin/phpstan analyse app bootstrap config database routes
             
   test:
     runs-on: ubuntu-latest 
