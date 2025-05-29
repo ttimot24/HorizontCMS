@@ -17,6 +17,18 @@ jobs:
           args: --ignore-platform-reqs
       - name: Check PHP syntax errors
         uses: overtrue/phplint@9.4.1
+
+  phpstan: 
+    name: Larastan Check
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/checkout@v3
+      - uses: php-actions/composer@v6
+        with:
+          args: --ignore-platform-reqs
+      - name: Running Phpstan
+        run: ./vendor/bin/phpstan analyse
             
   test:
     runs-on: ubuntu-latest 
