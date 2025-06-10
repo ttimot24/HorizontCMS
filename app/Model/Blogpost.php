@@ -7,7 +7,7 @@ use \App\Model\Trait\HasAuthor;
 use \App\Model\Trait\Draftable;
 use App\Model\Trait\HasImage;
 use App\Model\Trait\IsActive;
-use App\Model\Trait\Searchable;
+use App\Model\Trait\PaginateSortAndFilter;
 
 class Blogpost extends Model
 {
@@ -15,7 +15,7 @@ class Blogpost extends Model
     use HasImage;
     use HasAuthor;
     use Draftable;
-    use Searchable;
+    use PaginateSortAndFilter;
     use IsActive;
 
     /**
@@ -33,7 +33,7 @@ class Blogpost extends Model
         'category_id' => 'required'
     ];
 
-    protected $search = ['title', 'summary', 'text'];
+    protected $filterableFields  = ['title', 'summary', 'text'];
 
     protected $defaultImage = "resources/images/icons/newspaper.png";
     

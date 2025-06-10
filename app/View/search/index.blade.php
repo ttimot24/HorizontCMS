@@ -39,7 +39,7 @@
 
         @if (\Auth::user()->hasPermission('blogpost'))
             <h3 style='clear:both;'>{{ trans('blogpost.blogposts') }}
-                ({{ $search_engine->getResultsFor(\App\Model\Blogpost::class)->count() }})</h3>
+                ({{ count($search_engine->getResultsFor(\App\Model\Blogpost::class)) }})</h3>
             <div class='container'>
                 @foreach ($search_engine->getResultsFor(\App\Model\Blogpost::class) as $each)
                     <a href="{{ route('blogpost.show', ['blogpost' => $each]) }}">{{ $each->title }}</a><br />
@@ -49,7 +49,7 @@
 
 
         @if (\Auth::user()->hasPermission('user'))
-            <h3>{{ trans('user.users') }} ({{ $search_engine->getResultsFor(\App\Model\User::class)->count() }})</h3>
+            <h3>{{ trans('user.users') }} ({{ count($search_engine->getResultsFor(\App\Model\User::class)) }})</h3>
             <div class='container'>
                 @foreach ($search_engine->getResultsFor(\App\Model\User::class) as $each)
                     <a href="{{ route('user.show', ['user' => $each]) }}">{{ $each->username }}</a><br />
@@ -59,7 +59,7 @@
 
 
         @if (\Auth::user()->hasPermission('page'))
-            <h3>{{ trans('page.pages') }} ({{ $search_engine->getResultsFor(\App\Model\Page::class)->count() }})</h3>
+            <h3>{{ trans('page.pages') }} ({{ count($search_engine->getResultsFor(\App\Model\Page::class)) }})</h3>
             <div class='container'>
                 @foreach ($search_engine->getResultsFor(\App\Model\Page::class) as $each)
                     <a href="{{ route('page.show', ['page' => $each]) }}">{{ $each->name }}</a><br />

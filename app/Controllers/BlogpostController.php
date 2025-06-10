@@ -12,8 +12,6 @@ class BlogpostController extends Controller
 
     use UploadsImage;
 
-    protected $itemPerPage = 25;
-
     //TODO Use model path
     protected $imagePath = 'images/blogposts';
 
@@ -34,7 +32,7 @@ class BlogpostController extends Controller
      */
     public function index(Request $request)
     {
-        $blogposts = Blogpost::orderBy('id', 'desc')->paginate($request->input('per_page', $this->itemPerPage));
+        $blogposts = Blogpost::orderBy('id', 'desc')->paginateSortAndFilter();
 
         if ($request->wantsJson()) {
             foreach($request->get('with', []) as $relation) {
