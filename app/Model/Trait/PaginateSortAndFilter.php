@@ -68,16 +68,18 @@ trait PaginateSortAndFilter
     {
 
         $paginateSortAndFilter = $paginateSortAndFilter ?? request()->all();
+
         // Filtering
         if (isset($paginateSortAndFilter['filter'])) {
             foreach ($paginateSortAndFilter['filter'] as $field => $value) {
+
                 if (!in_array($field, $this->getFilterableFields() ?? [])) {
                     continue; // Skip fields that are not enabled for filtering
                 }
                 if (is_array($value)) {
-                    $query->whereIn($field, $value);
+                    $query->orWhereIn($field, $value);
                 } else {
-                    $query->where($field, 'like', "%$value%");
+                    $query->orWhere($field, 'like', "%".$value."%");
                 }
             }
         }
