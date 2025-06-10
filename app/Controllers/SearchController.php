@@ -25,16 +25,17 @@ class SearchController extends Controller
      */
     public function show(Request $request)
     {
-
-        $search_key = "%" . $request->input('search') . "%";
-
+        $request->validate([
+            'search' => 'required|string|min:3|max:100',
+        ]);
+        
         $this->search_engine->registerModel(\App\Model\Blogpost::class);
         if(auth()->check() && auth()->user()->hasPermission('user')){
             $this->search_engine->registerModel(\App\Model\User::class);
         }
         $this->search_engine->registerModel(\App\Model\Page::class);
 
-        $this->search_engine->executeSearch($search_key);
+        $this->search_engine->executeSearch($request->input('search'));
 
         if($request->wantsJson()){
             return response()->json($this->search_engine->getAllResults());

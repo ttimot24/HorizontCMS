@@ -30,8 +30,11 @@ class SearchEngine
         $this->searchKey = $search_key;
 
         foreach ($this->searchModels as $model => $values) {
-            if (method_exists($model, 'scopeSearch')) {
-                $this->searchModels[$model] = $model::search($this->getSearchKey())->get();
+            if (method_exists($model, 'scopePaginateSortAndFilter')) {
+
+                $filter['filter'] = collect((new $model)->getFilterableFields())->mapWithKeys(fn($item) => [$item => $search_key])->toArray();
+
+                $this->searchModels[$model] = $model::paginateSortAndFilter($filter);
             }
         }
     }
@@ -67,7 +70,7 @@ class SearchEngine
         $total_count = 0;
 
         foreach ($this->getAllResults() as $key => $values) {
-            $total_count += $values->count();
+            $total_count += count($values);
         }
 
         return $total_count;

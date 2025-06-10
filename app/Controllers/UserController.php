@@ -12,7 +12,6 @@ class UserController extends Controller
 
     use UploadsImage;
 
-    protected $itemPerPage = 100;
     protected $imagePath = 'images/users';
 
     /**
@@ -34,7 +33,7 @@ class UserController extends Controller
     public function index()
     {
         return view('users.index', [
-            'all_users' => User::paginate($this->itemPerPage),
+            'all_users' => User::paginateSortAndFilter(),
             'active_users' => User::where('active', 1)->count(),
         ]);
     }

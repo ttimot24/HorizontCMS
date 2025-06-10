@@ -5,13 +5,13 @@ namespace App\Model;
 use \Illuminate\Database\Eloquent\Model;
 use App\Model\Trait\HasAuthor;
 use App\Model\Trait\HasImage;
-use App\Model\Trait\Searchable;
+use App\Model\Trait\PaginateSortAndFilter;
 
 class Page extends Model {
 
     use HasImage;
     use HasAuthor;
-    use Searchable;
+    use PaginateSortAndFilter;
 
     /**
      * The attributes that are mass assignable.
@@ -32,7 +32,7 @@ class Page extends Model {
         'visibility' => 'int'
     ];
 
-    protected $search = ['name', 'page'];
+    protected $filterableFields  = ['name', 'page'];
 
     protected $defaultImage = "resources/images/icons/page.png";
 
