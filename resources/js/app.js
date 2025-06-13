@@ -3744,7 +3744,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     height: {
       type: Number,
-      "default": 500
+      "default": 750
     }
   },
   mounted: function mounted() {

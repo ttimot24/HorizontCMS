@@ -38,15 +38,14 @@
                                 <div class="panel-heading bg-primary p-3">
                                     <h4 class="text-white">
                                         {{ $role->name }} <small class="text-dark">({{ $role->users->count() }})</small>
-                                        <small>
+                                        <div class="pull-right" >
                                             
                                             @if (\Auth::user()->role->is($role))
 
-                                                <img src="{{ \Auth::user()->getThumb() }}" class='img-rounded pull-right' style='width:15%;height:15%;' />
+                                                <img src="{{ \Auth::user()->getThumb() }}" style='width:3rem;height:3rem;margin-top:-.5rem;'  />
 
                                             @endif
-                                            
-                                        </small>
+                                        </div>
                                     </h4>
 
                                 </div>
