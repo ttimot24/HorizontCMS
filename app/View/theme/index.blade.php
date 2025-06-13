@@ -62,7 +62,7 @@
 
                         <div class='col-sm-6 col-md-4 g-2 float-left'>
                             <div class="card p-2 bg-dark">
-                                <img class="card-img-top" src="<?= $theme->getImage() ?>" style="height:200px;"
+                                <img class="card-img-top" src="<?= $theme->getImage() ?>" style="height:15rem;"
                                     alt="Theme screenshot">
                                 <div class="card-body text-white">
                                     <h3><?= $theme->getName() ?></h3>

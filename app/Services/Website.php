@@ -80,9 +80,9 @@ class Website {
 		foreach(app()->plugins as $plugin){
 			foreach($plugin->getRegister('injectWebsiteJs',[]) as $js){
 				if(file_exists($plugin->getPath().$js)){
-					echo Html::jsFile($plugin->getPath().$js);
+					echo \Html::jsFile($plugin->getPath().$js);
 				}else{
-					echo Html::jsFile($js);
+					echo \Html::jsFile($js);
 				}
 			}
 		}

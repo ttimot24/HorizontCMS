@@ -24,7 +24,7 @@ export default defineComponent({
         },
         height: {
             type: Number,
-            default: 500
+            default: 750
         }
     },
     mounted() {
