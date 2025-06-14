@@ -25,10 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('accessAdminArea',function($user) {
-            return $user->isAdmin() && $user->isActive();
-        });
-
+        \App\Providers\Gates\PermissionsGate::register();
 
         $prefix = \Config::get('horizontcms.backend_prefix');
 

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Gate;
 use App\Services\SearchEngine;
 
 class SearchController extends Controller
@@ -30,7 +31,7 @@ class SearchController extends Controller
         ]);
         
         $this->search_engine->registerModel(\App\Model\Blogpost::class);
-        if(auth()->check() && auth()->user()->hasPermission('user')){
+        if(auth()->check() && Gate::allows('access', 'upgrade')){
             $this->search_engine->registerModel(\App\Model\User::class);
         }
         $this->search_engine->registerModel(\App\Model\Page::class);

@@ -3,65 +3,69 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Gate;
 
 class NavbarPluginMiddleware
 {
-  /**
-   * Handle an incoming request.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \Closure  $next
-   * @return mixed
-   */
-  public function handle($request, Closure $next)
-  {
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        if (app()->plugins != null && !app()->plugins->isEmpty()) {
 
-    if (app()->plugins != null && !app()->plugins->isEmpty()) {
+            $main_menu = \Menu::get('MainMenu');
+            $right_menu = \Menu::get('RightMenu');
 
-      $main_menu = \Menu::get('MainMenu');
-      $right_menu = \Menu::get('RightMenu');
+            foreach (app()->plugins as $plugin) {
+                try {
+                    $permissionKey = str_slug($plugin->root_dir, '_');
 
+                    // Használjuk a Gate-et a hozzáférés ellenőrzésére
+                    if (!Gate::allows('access', $permissionKey)) {
+                        continue;
+                    }
 
-      foreach (app()->plugins as $plugin) {
+                    $plugin_nav = $plugin->getRegister('navigation', []);
 
-        try {
+                    foreach ($plugin_nav as $key => $item) {
 
-          if (!auth()->user()->hasPermission(str_slug($plugin->root_dir, '_'))) {
-            continue;
-          }
+                        $item['url'] = $item['url'] ?? rescue(
+                            fn() => route('plugin.' . str_slug($plugin->root_dir) . '.start.index'),
+                            fn() => plugin_link(namespace_to_slug($plugin->root_dir))
+                        );
 
-          $plugin_nav = $plugin->getRegister('navigation', []);
-
-          foreach ($plugin_nav as $key => $item) {
-
-            $item['url'] = isset($item['url']) ? $item['url'] :
-
-              rescue(function () use ($plugin) {
-                return route('plugin.' . str_slug($plugin->root_dir) . ".start.index");
-              }, function () use ($plugin) {
-                return plugin_link(namespace_to_slug($plugin->root_dir));
-              });
-
-            if (!isset($item['menu']) || $item['menu'] == 'main') {
-              if (isset($item['submenu_of'])) {
-                $main_menu->find($item['submenu_of'])->add($item['label'], $item['url'])->id($key);
-              } else {
-                $main_menu->add($item['label'], $item['url'])->id($key);
-              }
-            } else if (isset($item['menu']) && $item['menu'] == 'right') {
-              if (isset($item['submenu_of'])) {
-                $right_menu->find($item['submenu_of'])->add($item['label'], $item['url'])->id($key);
-              } else {
-                $right_menu->add($item['label'], $item['url'])->id($key);
-              }
+                        if (!isset($item['menu']) || $item['menu'] === 'main') {
+                            if (isset($item['submenu_of'])) {
+                                $main_menu->find($item['submenu_of'])->add($item['label'], $item['url'])->id($key);
+                            } else {
+                                $main_menu->add($item['label'], $item['url'])->id($key);
+                            }
+                        } elseif ($item['menu'] === 'right') {
+                            if (isset($item['submenu_of'])) {
+                                $right_menu->find($item['submenu_of'])->add($item['label'], $item['url'])->id($key);
+                            } else {
+                                $right_menu->add($item['label'], $item['url'])->id($key);
+                            }
+                        }
+                    }
+                } catch (\Throwable $e) {
+                    // Log the error or handle it as needed
+                    \Log::warning('Error processing plugin navigation: ' . $e->getMessage(), [
+                        'plugin' => $plugin->root_dir,
+                        'exception' => $e,
+                    ]);
+                    
+                    // Optionally, you can continue or rethrow the exception based on your needs
+                    continue;
+                }
             }
-          }
-        } catch (\Error $e) {
-          // throw $e;
         }
-      }
-    }
 
-    return $next($request);
-  }
+        return $next($request);
+    }
 }

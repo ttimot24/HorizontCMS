@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,7 +94,7 @@ Route::get('/settings', function(Request $request){
 
 Route::get('/users',function(Request $request){
 
-    if(\Auth::user()->hasPermission("users")){
+    if(Gate::allows('access', 'user')){
         return response()->json(['message' => 'Permission denied!'], 403);
     }
 
@@ -105,7 +106,7 @@ Route::get('/users',function(Request $request){
 
 Route::get('/plugins',function(Request $request){
 
-    if(\Auth::user()->hasPermission("plugins")){
+    if(Gate::allows('access', 'plugins')){
         return response()->json(['message' => 'Permission denied!'], 403);
     }
 

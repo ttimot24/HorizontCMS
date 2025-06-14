@@ -32,7 +32,7 @@
             <div class='col m-auto '>
 
 
-                @if (\Auth::user()->hasPermission('search'))
+                @can('access', 'search')
                     <form class='form-inline mt-4 ' action="{{ route('search.show', ['search' => 'search']) }}" method='GET'>
                         @csrf
                         <div class='form-group'>
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                     </form>
-                @endif
+                @endcan
 
 
                 @if ($upgrade != null && $upgrade->isNewVersionAvailable())
