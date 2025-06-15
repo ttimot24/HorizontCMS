@@ -26,7 +26,7 @@ class UserRole extends Model {
     * Accessor for rights
     */
     public function getRightsAttribute(){
-    	return json_decode($this->attributes['rights']);
+        return json_decode($this->attributes['rights'], true) ?? [];
     }
 
 	/**
