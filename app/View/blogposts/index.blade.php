@@ -75,6 +75,7 @@
                                             <i class="bi bi-three-dots-vertical text-dark"></i>
                                         </div>
                                         <ul class="dropdown-menu text-dark">
+                                            @can('update', 'blogpost')
                                             <li>
                                                 <a href="{{ route('blogpost.edit', ['blogpost' => $blogpost]) }}"
                                                     class="dropdown-item text-decoration-none text-dark">
@@ -82,6 +83,8 @@
                                                     {{ trans('actions.edit') }}
                                                 </a>
                                             </li>
+                                            @endcan
+                                            @can('delete', 'blogpost')
                                             <li>
                                                 <a data-bs-toggle='modal' data-bs-target=#delete_<?= $blogpost->id ?>
                                                     class="dropdown-item text-danger text-decoration-none"
@@ -90,6 +93,7 @@
                                                     {{ trans('actions.delete') }}
                                                 </a>
                                             </li>
+                                            @endcan
                                         </ul>
                                     </div>
             </div>
@@ -108,17 +112,19 @@
 
         </div>
 
-        @foreach ($all_blogposts as $blogpost)
-            @include('confirm_delete', [
-                'route' => route('blogpost.destroy', ['blogpost' => $blogpost]),
-                'id' => 'delete_' . $blogpost->id,
-                'header' => trans('actions.are_you_sure'),
-                'name' => $blogpost->title,
-                'content_type' => 'post',
-                'delete_text' => trans('actions.delete'),
-                'cancel' => trans('actions.cancel'),
-            ])
-        @endforeach
+        @can('delete', 'blogpost')
+            @foreach ($all_blogposts as $blogpost)
+                @include('confirm_delete', [
+                    'route' => route('blogpost.destroy', ['blogpost' => $blogpost]),
+                    'id' => 'delete_' . $blogpost->id,
+                    'header' => trans('actions.are_you_sure'),
+                    'name' => $blogpost->title,
+                    'content_type' => 'post',
+                    'delete_text' => trans('actions.delete'),
+                    'cancel' => trans('actions.cancel'),
+                ])
+            @endforeach
+        @endcan
 
     </div>
 @endsection

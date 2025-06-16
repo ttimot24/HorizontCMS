@@ -23,10 +23,10 @@ class NavbarPluginMiddleware
 
             foreach (app()->plugins as $plugin) {
                 try {
-                    $permissionKey = str_slug($plugin->root_dir, '_');
+                    $permissionKey = strtolower($plugin->root_dir);
 
                     // Használjuk a Gate-et a hozzáférés ellenőrzésére
-                    if (!Gate::allows('access', $permissionKey)) {
+                    if (!Gate::allows('view', $permissionKey)) {
                         continue;
                     }
 

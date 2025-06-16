@@ -14,7 +14,7 @@
                     ])
 
                     <div class='card-body'>
-
+                        @can('create', 'blogpostcategory')
                         <form action="{{ route('blogpostcategory.store') }}" class='form-inline pull-right my-3' role='form'
                             method='POST'>
 
@@ -37,6 +37,7 @@
                             </div>
 
                         </form>
+                        @endcan
 
 
                         <table class='table table-hover'>
@@ -73,6 +74,7 @@
                                                     <i class="bi bi-three-dots-vertical text-dark"></i>
                                                 </div>
                                                 <ul class="dropdown-menu text-dark">
+                                                    @can('update', 'blogpostcategory')
                                                     <li>
                                                         <a href="{{ route('blogpostcategory.edit', ['blogpostcategory' => $each]) }}"
                                                             class="dropdown-item text-decoration-none text-dark">
@@ -80,6 +82,8 @@
                                                             {{ trans('actions.edit') }}
                                                         </a>
                                                     </li>
+                                                    @endcan
+                                                    @can('delete', 'blogpostcategory')
                                                     <li>
                                                         <a data-bs-toggle='modal' data-bs-target=#delete_<?= $each->id ?>
                                                             class="dropdown-item text-danger text-decoration-none"
@@ -88,6 +92,7 @@
                                                             {{ trans('actions.delete') }}
                                                         </a>
                                                     </li>
+                                                    @endcan
                                                 </ul>
                                             </div>
 
@@ -98,6 +103,7 @@
                             </tbody>
                         </table>
 
+                        @can('delete', 'blogpostcategory')
                         @foreach ($all_category as $each)
                             @include('confirm_delete', [
                                 'route' => route('blogpostcategory.destroy', [
@@ -111,6 +117,7 @@
                                 'cancel' => trans('actions.cancel'),
                             ])
                         @endforeach
+                        @endcan
                     </div>
 
                 </div>

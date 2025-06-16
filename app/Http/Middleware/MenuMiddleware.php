@@ -23,44 +23,54 @@ class MenuMiddleware
 
             $menu->add("<i class='fa fa-circle-o-notch'></i>" . trans('navbar.dashboard'), route("dashboard.index"));
 
-            if (Gate::allows('access', 'blogpost')) {
+            if (Gate::allows('view', 'blogpost')) {
                 $menu->add(trans('navbar.news'), '#')->id('news');
                 $menu->find('news')->add("<i class='fa fa-newspaper-o'></i> " . trans('navbar.posted_news'), route('blogpost.index'));
-                $menu->find('news')->add("<i class='fa fa-pencil'></i> " . trans('navbar.create_post'), route('blogpost.create'));
-                $menu->find('news')->add("<i class='fa fa-list-ul'></i> " . trans('navbar.categories'), route('blogpostcategory.index'));
+
+                if (Gate::allows('create', 'blogpost')) {
+                    $menu->find('news')->add("<i class='fa fa-pencil'></i> " . trans('navbar.create_post'), route('blogpost.create'));
+                }
+
+                if (Gate::allows('view', 'blogpostcategory')) {
+                    $menu->find('news')->add("<i class='fa fa-list-ul'></i> " . trans('navbar.categories'), route('blogpostcategory.index'));
+                }
             }
 
-            if (Gate::allows('access', 'user')) {
+            if (Gate::allows('view', 'user')) {
                 $menu->add(trans('navbar.users'), '#')->id('users');
                 $menu->find('users')->add("<i class='fa fa-users'></i> " . trans('navbar.user_list'), route('user.index'));
-                $menu->find('users')->add("<i class='fa fa-user-plus'></i> " . trans('navbar.user_add'), route('user.create'));
-                $menu->find('users')->add("<i class='fa fa-gavel'></i> " . trans('navbar.user_groups'), route('userrole.index'));
+                if (Gate::allows('create', 'user')) {
+                    $menu->find('users')->add("<i class='fa fa-user-plus'></i> " . trans('navbar.user_add'), route('user.create'));
+                }
+                if (Gate::allows('view', 'userrole')) {
+                    $menu->find('users')->add("<i class='fa fa-gavel'></i> " . trans('navbar.user_groups'), route('userrole.index'));
+                }
             }
 
-            if (Gate::allows('access', 'page')) {
+            if (Gate::allows('view', 'page')) {
                 $menu->add(trans('navbar.pages'), '#')->id('pages');
                 $menu->find('pages')->add("<i class='fa fa-files-o'></i> " . trans('navbar.page_list'), route('page.index'));
                 $menu->find('pages')->add("<i class='fa fa-pencil-square-o'></i> " . trans('navbar.page_add'), route('page.create'));
             }
 
-            if (Gate::allows('access', 'filemanager') || Gate::allows('access', 'headerimages')) {
+            if (Gate::allows('view', 'filemanager') || Gate::allows('view', 'headerimage')) {
                 $menu->add(trans('navbar.media'), '#')->id('media');
-                if (Gate::allows('access', 'filemanager')) {
+                if (Gate::allows('view', 'filemanager')) {
                     $menu->find('media')->add("<i class='fa fa-folder-open-o'></i> " . trans('navbar.filemanager'), route('filemanager.index'));
                 }
-                if (Gate::allows('access', 'headerimages')) {
+                if (Gate::allows('view', 'headerimage')) {
                     $menu->find('media')->add("<i class='fa fa-picture-o'></i> " . trans('navbar.header_images'), route('headerimage.index'));
                 }
             }
 
-            if (Gate::allows('access', 'theme') || Gate::allows('access', 'plugin')) {
+            if (Gate::allows('view', 'theme') || Gate::allows('view', 'plugin')) {
                 $menu->add(trans('navbar.themes_apps'), '#')->id('themes_apps');
 
-                if (Gate::allows('access', 'theme')) {
+                if (Gate::allows('view', 'theme')) {
                     $menu->find('themes_apps')->add("<i class='fa fa-desktop'></i> " . trans('navbar.theme'), route('theme.index'));
                 }
 
-                if (Gate::allows('access', 'plugin')) {
+                if (Gate::allows('view', 'plugin')) {
                     $menu->find('themes_apps')->add("<i class='fa fa-cubes'></i> " . trans('navbar.plugin'), route('plugin.index'));
                 }
             }
@@ -74,7 +84,7 @@ class MenuMiddleware
             $menu->find('current_user')->add(trans('navbar.profile_view'), ['route' => ['user.show', 'user' => \Auth::user()]])->id('view_account');
             $menu->find('current_user')->add(trans('navbar.profile_settings'), ['route' => ['user.edit', 'user' => \Auth::user()]])->id('account_settings');
 
-            if (Gate::allows('access', 'settings')) {
+            if (Gate::allows('view', 'settings')) {
                 $menu->add("<i class='fa fa-cogs'></i> ", route('settings.index'))->id('settings');
             }
 

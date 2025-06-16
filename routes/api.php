@@ -94,7 +94,7 @@ Route::get('/settings', function(Request $request){
 
 Route::get('/users',function(Request $request){
 
-    if(Gate::allows('access', 'user')){
+    if(Gate::allows('view', 'user')){
         return response()->json(['message' => 'Permission denied!'], 403);
     }
 
@@ -106,7 +106,7 @@ Route::get('/users',function(Request $request){
 
 Route::get('/plugins',function(Request $request){
 
-    if(Gate::allows('access', 'plugins')){
+    if(Gate::allows('view', 'plugin')){
         return response()->json(['message' => 'Permission denied!'], 403);
     }
 
