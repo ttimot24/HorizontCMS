@@ -19,7 +19,7 @@
                 'buttons_right' => [
                     [
                         'label' => "Scheduler: ".$scheduler->value,
-                        'class' => 'badge '.((\Carbon\Carbon::now()->diffInMinutes(isset($scheduler->updated_at)? $scheduler->updated_at : \Carbon\Carbon::now()->startOfDay()) > 5)? 'text-bg-danger' : 'text-bg-success'),
+                        'class' => 'badge '.optional($scheduler->updated_at)->diffInMinutes(now()) > 5 ? 'text-bg-danger': 'text-bg-success',
                     ],
                 ],
             ])

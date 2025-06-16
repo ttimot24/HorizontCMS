@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
             foreach($jobs as $task){
                 $schedule->command($task->command.' '.$task->arguments)->cron($task->frequency)
                 ->before(function() use ($task) {
-                    \Log::info("Scheduled run : ".$task->name." [".$task->command."]");
+                   // \Log::info("Scheduled run : ".$task->name." [".$task->command."]");
                 })
                 ->pingBefore(empty($task->ping_before)? 'google.com' : $task->ping_before)->thenPing(empty($task->ping_after)? 'google.com' : $task->ping_after)->withoutOverlapping();
             }

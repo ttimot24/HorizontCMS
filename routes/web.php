@@ -28,7 +28,7 @@ if (app()->isInstalled()) {
 		define('THEME_CONTROLLER_PATH', 'themes' . DIRECTORY_SEPARATOR . $_THEME_NAME . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Controllers');
 	}
 
-	foreach (array_diff(scandir(THEME_CONTROLLER_PATH), ['.', '..']) as $file) {
+	foreach (array_diff(scandir(base_path(THEME_CONTROLLER_PATH)), ['.', '..']) as $file) {
 		if (is_file(THEME_CONTROLLER_PATH . "/" . $file)) {
 			$actualName = pathinfo($file, PATHINFO_FILENAME);
 			$controller_route = strtolower(str_replace("Controller", "", $actualName));
