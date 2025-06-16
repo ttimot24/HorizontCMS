@@ -17,7 +17,7 @@ function module_loader($class)
 
 	$module = $split[0] ?? null;
 
-	$config = require('config' . DIRECTORY_SEPARATOR . 'horizontcms.php');
+	$config = require base_path('config/horizontcms.php');
 
 	if (empty($module) || empty($config['modules'])) {
 		return;
