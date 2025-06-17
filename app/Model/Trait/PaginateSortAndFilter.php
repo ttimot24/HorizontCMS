@@ -73,6 +73,8 @@ trait PaginateSortAndFilter
         if (isset($paginateSortAndFilter['filter'])) {
             foreach ($paginateSortAndFilter['filter'] as $field => $value) {
 
+                $value = trim($value);
+
                 if (!in_array($field, $this->getFilterableFields() ?? [])) {
                     continue; // Skip fields that are not enabled for filtering
                 }

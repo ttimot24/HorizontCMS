@@ -171,6 +171,7 @@
                                                     style=' font-size: 1.4em;z-index:15;'></span>
                                             </a>
                                         </div>
+                                        @can('delete', 'headerimage')
                                         <div class="col-2">
                                             <form action="{{ route('headerimage.destroy', ['headerimage' => $each]) }}"
                                                 method="POST">
@@ -182,6 +183,7 @@
                                                 </button>
                                             </form>
                                         </div>
+                                        @endcan
                                     </div>
                                 </div>
                                 @if($each->type === 'video')
