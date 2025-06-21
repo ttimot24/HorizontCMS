@@ -16,4 +16,6 @@ return [
     'failed' => 'Invalid email/username or password.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
+    'acces_denied' => 'Access denied',
+    'access_denied_message' => 'You are not allowed to perform this action. Please contact the administrator if you think this is a mistake.',
 ];
