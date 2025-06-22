@@ -2,6 +2,8 @@
 
 
 return [
+	'email' => 'Email',
+	'enter_email' => 'Írd be az email címed',
 	'username' => 'Felhasználónév',
 	'enter_username' => 'Írd be a felhasználóneved',
 	'password' => 'Jelszó',

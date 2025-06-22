@@ -25,19 +25,19 @@
             <div class="container">
                 <div class='col-xs-12 col-md-4 p-5'>
                     <div class="form-group">
-                        <label for='text'>{{ trans('login.username') }}:</label>
-                        <input type='text' class="form-control  @error('username') is-invalid @enderror"
-                            id='username' name='username' placeholder="{{ trans('login.enter_username') }}" autofocus
+                        <label for='text'><b>{{ trans('login.email') }}</b></label>
+                        <input type='email' class="form-control  @error('email') is-invalid @enderror"
+                            id='email' name='email' placeholder="{{ trans('login.enter_email') }}" autofocus
                             required>
-                        @error('username')
+                        @error('email')
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('username') }}</strong>
+                                <strong>{{ $errors->first('email') }}</strong>
                             </span>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for='pwd'>{{ trans('login.password') }}:</label>
+                        <label for='pwd'><b>{{ trans('login.password') }}</b></label>
                         <input type='password' class="form-control  @error('password') is-invalid @enderror"
                             id='pwd' name='password' placeholder="{{ trans('login.enter_password') }}" required>
                         @error('password')
@@ -53,7 +53,7 @@
                             <input type='submit' name='submit_login' class='btn btn-default col-6'
                                 value='{{ trans('login.login') }}'>
 
-                            @if ($errors->has('username') || $errors->has('password'))
+                            @if ($errors->has('email') || $errors->has('password'))
                                 <div class="col-6 text-center">
                                     <b><a href="{{ route('password.reset', ['token' => 'empty']) }}"
                                             style="font-size:10px;">{{ trans('login.forgot_password') }}</a></b>
