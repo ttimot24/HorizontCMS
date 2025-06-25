@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        @can('access', 'blogpost')
+        @can('view', 'blogpost')
             <h3 style='clear:both;'>{{ trans('blogpost.blogposts') }}
                 ({{ count($search_engine->getResultsFor(\App\Model\Blogpost::class)) }})</h3>
             <div class='container'>
@@ -48,7 +48,7 @@
         @endcan
 
 
-        @can('access', 'user')
+        @can('view', 'user')
             <h3>{{ trans('user.users') }} ({{ count($search_engine->getResultsFor(\App\Model\User::class)) }})</h3>
             <div class='container'>
                 @foreach ($search_engine->getResultsFor(\App\Model\User::class) as $each)
@@ -58,7 +58,7 @@
         @endcan
 
 
-        @can('access', 'page')
+        @can('view', 'page')
             <h3>{{ trans('page.pages') }} ({{ count($search_engine->getResultsFor(\App\Model\Page::class)) }})</h3>
             <div class='container'>
                 @foreach ($search_engine->getResultsFor(\App\Model\Page::class) as $each)
@@ -69,7 +69,7 @@
 
 
 
-        @can('access', 'media')
+        @can('view', 'media')
             <h3>{{ trans('file.files') }} ({{ count($files) }})</h3>
             <div class='container'>
             </div>

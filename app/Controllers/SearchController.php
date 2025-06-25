@@ -30,11 +30,15 @@ class SearchController extends Controller
             'search' => 'required|string|min:3|max:100',
         ]);
         
-        $this->search_engine->registerModel(\App\Model\Blogpost::class);
-        if(auth()->check() && Gate::allows('access', 'upgrade')){
+        if(auth()->check() && Gate::allows('view', 'blogpost')){
+            $this->search_engine->registerModel(\App\Model\Blogpost::class);
+        }
+        if(auth()->check() && Gate::allows('view', 'user')){
             $this->search_engine->registerModel(\App\Model\User::class);
         }
-        $this->search_engine->registerModel(\App\Model\Page::class);
+        if(auth()->check() && Gate::allows('view', 'page')){
+            $this->search_engine->registerModel(\App\Model\Page::class);
+        }
 
         $this->search_engine->executeSearch($request->input('search'));
 
