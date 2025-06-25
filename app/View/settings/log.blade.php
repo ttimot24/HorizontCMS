@@ -18,7 +18,7 @@
             <div class='col-3'>
                 <div class="list-group">
                     @foreach ($all_files as $file)
-                        <a href="{{ config('horizontcms.backend_prefix') }}/settings/log/{{ basename($file) }}"
+                        <a href="{{ route('log.show', ['log' => basename($file)]) }}"
                             class="list-group-item @if (basename($file) == basename($current_file)) bg-primary border-0 text-white @endif">{{ basename($file) }}</a>
 
                         @if ($entry_number == $max_files)
