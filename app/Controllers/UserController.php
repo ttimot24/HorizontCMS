@@ -116,42 +116,25 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-
+ 
         $user->fill($request->all());
-        $user->slug = str_slug($request->input('username'), "-");
+        
+        if ($request->has('username')) {
+            $user->slug = str_slug($request->input('username'), "-");
+        }
 
         if ($request->has('password')) {
             $user->password = $request->input('password');
-        } 
-        
+        }
+
         $this->uploadImage($user);
 
         if ($user->save()) {
-            return redirect(route("user.edit", ['user' => $user]))->withMessage(['success' => trans('message.successfully_updated_user')]);
+            return redirect()->back()->withMessage(['success' => trans('message.successfully_updated_user')]);
         } else {
             return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
     }
-
-    /**
-     * Activates a user
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function activate($id)
-    {
-        $user = \App\Model\User::find($id);
-
-        $user->active = 1;
-
-        if ($user->save()) {
-            return redirect()->back()->withMessage(['success' => trans('User successfully activated!')]);
-        } else {
-            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-    }
-
 
     /**
      * Remove the specified resource from database.

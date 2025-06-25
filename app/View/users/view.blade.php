@@ -102,8 +102,18 @@
 
                                         {{ trans('user.inactive_about', ['day_count' => $user->created_at->diffForHumans()]) }}
 
-                                    </font> <a href='admin/user/activate/{{ $user->id }}'
-                                        class='btn btn-sm btn-danger pull-right'>Force activate</a>
+                                    </font> 
+                                    
+                                    
+                                    <form method="POST" action="{{ route('user.update', ['user' => $user]) }}" class="d-inline">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="active" value="1">
+                                        <button type="submit" class="btn btn-sm btn-danger pull-right">
+                                            {{ trans('Force activate') }}
+                                        </button>
+                                    </form>
+                                    
                                 </div>
                             </div>
                         @endif
