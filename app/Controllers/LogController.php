@@ -25,7 +25,7 @@ class LogController extends Controller
 
             $current_file = empty($file)?  basename($files->last()) : $file;
 
-            $entries = LogReader::filename($current_file)->orderBy('date', 'desc')->paginate(500);
+            $entries = LogReader::filename($current_file)->orderBy('date', 'desc')->paginate(250);
         }
 
         // dd($entries);
