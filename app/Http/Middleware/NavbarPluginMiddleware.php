@@ -55,10 +55,10 @@ class NavbarPluginMiddleware
                     }
                 } catch (\Throwable $e) {
                     // Log the error or handle it as needed
-                    \Log::warning('Error processing plugin navigation: ' . $e->getMessage(), [
+                   /* \Log::warning('Error processing plugin navigation: ' . $e->getMessage(), [
                         'plugin' => $plugin->root_dir,
                         'exception' => $e,
-                    ]);
+                    ]); */
                     
                     // Optionally, you can continue or rethrow the exception based on your needs
                     continue;

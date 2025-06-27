@@ -25,14 +25,13 @@ class LogController extends Controller
 
             $current_file = empty($file)?  basename($files->last()) : $file;
 
-            $entries = LogReader::filename($current_file)->get();
+            $entries = LogReader::filename($current_file)->orderBy('date', 'desc')->paginate(500);
         }
 
         // dd($entries);
         return view('settings.log', [
             'all_files' => $files->reverse(),
-            'entries' => $entries->reverse(),
-            'entry_number' => $entries->count(),
+            'entries' => $entries,
             'all_file_entries' => LogReader::count(),
             'current_file' => isset($current_file) ? $current_file : null,
             'max_files' => 15

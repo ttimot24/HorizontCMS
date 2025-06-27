@@ -21,7 +21,7 @@
                         <a href="{{ route('log.show', ['log' => basename($file)]) }}"
                             class="list-group-item @if (basename($file) == basename($current_file)) bg-primary border-0 text-white @endif">{{ basename($file) }}</a>
 
-                        @if ($entry_number == $max_files)
+                        @if ($entries->total() == $max_files)
                         @break
                     @endif
                 @endforeach
@@ -64,14 +64,18 @@
 
             <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
 
+                @php
+                    $entry_num = $entries->total();
+                @endphp
+
                 @foreach ($entries as $entry)
                     <div class="accordion-item">
-                        <h2 class="accordion-header mt-0" id="heading{{ $entry_number }}">
+                        <h2 class="accordion-header mt-0" id="heading{{ $entry_num }}">
                             <button class="accordion-button bg-{{ $colors[$entry->level] }} text-white" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapse{{ $entry_number }}"
-                                aria-expanded="true" aria-controls="collapse{{ $entry_number }}">
+                                data-bs-toggle="collapse" data-bs-target="#collapse{{ $entry_num }}"
+                                aria-expanded="true" aria-controls="collapse{{ $entry_num }}">
                                 <div class='col-8'>
-                                    #{{ $entry_number }} <i class="fa fa-exclamation-triangle pl-2"
+                                    #{{ $entry_num}} <i class="fa fa-exclamation-triangle pl-2"
                                         aria-hidden="true"></i> {{ ucfirst($entry->level) }} - {{ $entry->id }}
                                 </div>
                                 <div class='col-4 text-end'>
@@ -79,8 +83,8 @@
                                 </div>
                             </button>
                         </h2>
-                        <div id="collapse{{ $entry_number }}" class="accordion-collapse collapse show"
-                            aria-labelledby="heading{{ $entry_number }}" data-bs-parent="#accordion">
+                        <div id="collapse{{ $entry_num }}" class="accordion-collapse collapse show"
+                            aria-labelledby="heading{{ $entry_num }}" data-bs-parent="#accordion">
                             <div class="accordion-body bg-dark text-white">
                                 {!! $entry->context !!}
                             </div>
@@ -88,11 +92,14 @@
                     </div>
 
 
-                    <?php $entry_number--; ?>
+                    <?php $entry_num--; ?>
                 @endforeach
 
             </div>
 
+            <div class="d-flex justify-content-center mt-5">
+                {{ $entries->links() }}
+            </div>
 
         </div>
 
