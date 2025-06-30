@@ -52,6 +52,8 @@ RUN install-php-extensions zip pdo_mysql pdo_pgsql pdo_sqlite pdo_sqlsrv &&  \
 COPY --from=builder --chown=appuser /var/www/html /var/www/html
 COPY --from=builder --chown=appuser /etc/apache2/apache2.conf /etc/apache2/apache2.conf
 
+RUN echo "error_log = /dev/stderr" >> /usr/local/etc/php/php.ini
+
 USER appuser
 
 RUN (crontab -l ; echo "* * * * * php /var/www/html/artisan schedule:run >> /dev/null 2>&1")| crontab -
