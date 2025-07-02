@@ -18,7 +18,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset($each_css) }}">
     @endforeach
 
-    <script type="text/javascript" src="{{ asset('resources/js/main.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('resources/public/main.js') }}" defer></script>
 
     @yield('head')
 

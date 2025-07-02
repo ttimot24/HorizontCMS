@@ -81,7 +81,7 @@
                                             </div>
 
                                             <div clas='row'>
-                                                <img style="width:7rem;" src='resources/images/icons/dir.png'>
+                                                <img style="width:7rem;" src='../../../../images/icons/dir.png'>
                                             </div>
                                             <b>{{ folder }}</b>
                                         </div>
@@ -104,7 +104,7 @@
                                             </div>
                                             <img class="w-100 mb-3" v-if="isKnownExtension(file)"
                                                 :src=" 'storage/' + currentDirectory + '/' + file " />
-                                            <img class="w-100 mb-3" v-else src="resources/images/icons/file.png" />
+                                            <img class="w-100 mb-3" v-else src="../../../../images/icons/file.png" />
                                             <b>{{ file }}</b>
                                         </div>
                                     </div>
