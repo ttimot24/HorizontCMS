@@ -27,7 +27,6 @@
 		}
 	?>
 
-	<!-- \App\Services\PluginManager::render('OpenGraph'); -->
 </head>
 
 <body style="background-color:rgba(0,0,0,0.1);font-family:Lato;">
