@@ -1,0 +1,1 @@
+import"./jquery-ui.js";$(document).ready(function(){var e=$("#submenus");e.hide(),$("#level").change(function(){$(this).find("option:selected").val()=="1"?e.show():e.hide()}),$("#selected-image").hide()});

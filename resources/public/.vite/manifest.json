@@ -1,0 +1,70 @@
+{
+  "_jquery-ui.js": {
+    "file": "jquery-ui.js",
+    "name": "jquery-ui"
+  },
+  "_jquery.js": {
+    "file": "jquery.js",
+    "name": "jquery"
+  },
+  "_retry.js": {
+    "file": "retry.js",
+    "name": "retry"
+  },
+  "resources/images/icons/dir.png": {
+    "file": "dir.png",
+    "src": "resources/images/icons/dir.png"
+  },
+  "resources/images/icons/file.png": {
+    "file": "file.png",
+    "src": "resources/images/icons/file.png"
+  },
+  "resources/vue/scss/horizontcms-next.scss": {
+    "file": "horizontcms-next.css",
+    "src": "resources/vue/scss/horizontcms-next.scss",
+    "isEntry": true
+  },
+  "resources/vue/ts/app.ts": {
+    "file": "app.js",
+    "name": "app",
+    "src": "resources/vue/ts/app.ts",
+    "isEntry": true,
+    "imports": [
+      "_jquery.js",
+      "_retry.js"
+    ],
+    "assets": [
+      "file.png",
+      "dir.png"
+    ]
+  },
+  "resources/vue/ts/dragndrop.js": {
+    "file": "dragndrop.js",
+    "name": "dragndrop",
+    "src": "resources/vue/ts/dragndrop.js",
+    "isEntry": true,
+    "imports": [
+      "_jquery.js",
+      "_jquery-ui.js"
+    ]
+  },
+  "resources/vue/ts/main.ts": {
+    "file": "main.js",
+    "name": "main",
+    "src": "resources/vue/ts/main.ts",
+    "isEntry": true,
+    "imports": [
+      "_jquery.js",
+      "_retry.js"
+    ]
+  },
+  "resources/vue/ts/pages.ts": {
+    "file": "pages.js",
+    "name": "pages",
+    "src": "resources/vue/ts/pages.ts",
+    "isEntry": true,
+    "imports": [
+      "_jquery-ui.js"
+    ]
+  }
+}

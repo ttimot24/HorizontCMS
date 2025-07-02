@@ -21,7 +21,8 @@ class AppServiceProvider extends ServiceProvider
         \Config::set('self-update.version_installed', \Config::get('horizontcms.version'));
 
         Paginator::useBootstrap();
-        Vite::useBuildDirectory('/resources/public');
+        Vite::useManifestFilename('../resources/public/manifest.json');
+        Vite::useBuildDirectory('../resources/public');
 
         if (!app()->runningInConsole() && ($this->app->environment("local") || $this->app->environment("testing")) ) {
                 \DB::connection()->enableQueryLog();
