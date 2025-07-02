@@ -14,17 +14,13 @@
     <title>{{ $title }} - {{ config('app.name') }}</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('resources/images/icons/favicon16.png') }}" />
 
-    @foreach ($css as $each_css)
-        <link rel="stylesheet" type="text/css" href="{{ asset($each_css) }}">
-    @endforeach
+    @vite($css)
 
     <script type="text/javascript" src="{{ asset('resources/js/main.js') }}" defer></script>
 
     @yield('head')
 
-    @foreach ($js as $each_js)
-        <script type="text/javascript" src="{{ asset($each_js) }}" defer></script>
-    @endforeach
+    @vite($js)
 
     @if(isset($jsplugins))
         @foreach ($jsplugins as $each_js)

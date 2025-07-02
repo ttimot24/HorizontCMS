@@ -1,0 +1,97 @@
+{
+  "_index-yZrRRHUu.js": {
+    "file": "assets/index-yZrRRHUu.js",
+    "name": "index",
+    "imports": [
+      "_jquery-DnwCpJFG.js"
+    ]
+  },
+  "_jquery-DnwCpJFG.js": {
+    "file": "assets/jquery-DnwCpJFG.js",
+    "name": "jquery"
+  },
+  "_jquery-ui-CCcl9FDc.js": {
+    "file": "assets/jquery-ui-CCcl9FDc.js",
+    "name": "jquery-ui"
+  },
+  "resources/fonts/vendor/bootstrap-icons/bootstrap-icons.woff2": {
+    "file": "assets/bootstrap-icons-B-HDIRHF.woff2",
+    "src": "resources/fonts/vendor/bootstrap-icons/bootstrap-icons.woff2"
+  },
+  "resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.eot": {
+    "file": "assets/fontawesome-webfont-G5YE5S7X.eot",
+    "src": "resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.eot"
+  },
+  "resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.svg": {
+    "file": "assets/fontawesome-webfont-D13rzr4g.svg",
+    "src": "resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.svg"
+  },
+  "resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.ttf": {
+    "file": "assets/fontawesome-webfont-CQDK8MU3.ttf",
+    "src": "resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.ttf"
+  },
+  "resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.woff": {
+    "file": "assets/fontawesome-webfont-CDK5bt4p.woff",
+    "src": "resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.woff"
+  },
+  "resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.woff2": {
+    "file": "assets/fontawesome-webfont-B-jkhYfk.woff2",
+    "src": "resources/fonts/vendor/fontawesome-4.7/fontawesome-webfont.woff2"
+  },
+  "resources/images/icons/dir.png": {
+    "file": "assets/dir-B1zPsYUC.png",
+    "src": "resources/images/icons/dir.png"
+  },
+  "resources/images/icons/file.png": {
+    "file": "assets/file-B_b2mbx5.png",
+    "src": "resources/images/icons/file.png"
+  },
+  "resources/vue/sass/horizontcms-next.scss": {
+    "file": "assets/horizontcms-next-B3U4Couf.css",
+    "src": "resources/vue/sass/horizontcms-next.scss",
+    "isEntry": true
+  },
+  "resources/vue/ts/app.ts": {
+    "file": "assets/app-B1P6lxDP.js",
+    "name": "app",
+    "src": "resources/vue/ts/app.ts",
+    "isEntry": true,
+    "imports": [
+      "_jquery-DnwCpJFG.js",
+      "_index-yZrRRHUu.js"
+    ],
+    "assets": [
+      "assets/file-B_b2mbx5.png",
+      "assets/dir-B1zPsYUC.png"
+    ]
+  },
+  "resources/vue/ts/dragndrop.js": {
+    "file": "assets/dragndrop-BU3TKnJJ.js",
+    "name": "dragndrop",
+    "src": "resources/vue/ts/dragndrop.js",
+    "isEntry": true,
+    "imports": [
+      "_jquery-DnwCpJFG.js",
+      "_jquery-ui-CCcl9FDc.js"
+    ]
+  },
+  "resources/vue/ts/main.ts": {
+    "file": "assets/main-Bh1OKmsz.js",
+    "name": "main",
+    "src": "resources/vue/ts/main.ts",
+    "isEntry": true,
+    "imports": [
+      "_jquery-DnwCpJFG.js",
+      "_index-yZrRRHUu.js"
+    ]
+  },
+  "resources/vue/ts/pages.ts": {
+    "file": "assets/pages-BuZbl1ty.js",
+    "name": "pages",
+    "src": "resources/vue/ts/pages.ts",
+    "isEntry": true,
+    "imports": [
+      "_jquery-ui-CCcl9FDc.js"
+    ]
+  }
+}
