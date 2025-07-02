@@ -37,7 +37,6 @@ class UserRolesSeeder extends Seeder
         DB::table('user_roles')->insert([
             'name' => 'Editor',
             'permission' => 3,
-            'rights' => json_encode(['admin_area','blogpost','blogpostcategory','blogpostcomment','user','page','filemanager','headerimage','search']),
             'rights' => json_encode(["admin_area","blogpostcategory.view","blogpostcomment.view","blogpost.view","filemanager.view","headerimage.view","page.view","search.view","user.view",
                                                   "blogpostcategory.create","blogpostcomment.create","blogpost.create","filemanager.create","headerimage.create","page.create","search.create","user.create",
                                                   "blogpostcategory.update","blogpostcomment.update","blogpost.update","filemanager.update","headerimage.update","page.update","search.update","user.update",
