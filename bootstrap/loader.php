@@ -15,20 +15,20 @@ function module_loader($class)
 
 	$class = array_pop($split);
 
-	//$modules = config('horizontcms.modules',[]);
+	$module = $split[0] ?? null;
 
-	$config = require('config' . DIRECTORY_SEPARATOR . 'horizontcms.php');
+	$config = require base_path('config/horizontcms.php');
 
-
-	if (!isset($split[0])) {
+	if (empty($module) || empty($config['modules'])) {
 		return;
 	}
 
-	if (!in_array($split[0], array_keys($config['modules']))) {
+	if (!in_array($module, array_keys($config['modules']))) {
 		return;
 	}
 
-	$module_base = base_path($config['modules'][$split[0]] . DIRECTORY_SEPARATOR . $split[1]);
+
+	$module_base = base_path($config['modules'][$module] . DIRECTORY_SEPARATOR . $split[1]);
 
 	$in_app = false;
 

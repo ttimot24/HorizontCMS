@@ -1,5 +1,8 @@
-FROM php:8.3-apache
-COPY ./ /var/www/html/
+FROM php:8.3-apache AS builder
+
+WORKDIR /var/www/html
+
+COPY ./ /var/www/html
 
 RUN rm -rf /var/www/html/plugins/*
 
@@ -10,7 +13,7 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 
 # Apache configuration
 RUN chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions zip pdo_mysql pdo_pgsql pdo_sqlite pdo_sqlsrv mongodb &&  \
+    install-php-extensions zip pdo_mysql pdo_pgsql pdo_sqlite pdo_sqlsrv &&  \
     a2enmod rewrite && \
     echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
     sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
@@ -22,10 +25,36 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     chown -R www-data /var/www/html && \
     php composer.phar install
 
-RUN chown -R root /var/www/html && chmod -R 777 /var/www/html && chmod -R 777 /var/www/html/storage
-
 # NPM install
-RUN npm install --global cross-env && npm install --global webpack && npm ci --force && npm run dev && rm -rf /var/www/html/node_modules
+RUN npm install --global cross-env && \ 
+    npm install --global webpack && \
+    npm ci --force && npm run dev && \
+    rm -rf /var/www/html/node_modules
+
+RUN chmod -R 775 /var/www/html && \
+    chmod -R 775 /var/www/html/storage
+
+## --- Production image ---
+
+FROM php:8.3-apache
+
+WORKDIR /var/www/html
+
+COPY --from=builder /usr/local/bin/ /usr/local/bin/
+
+RUN install-php-extensions zip pdo_mysql pdo_pgsql pdo_sqlite pdo_sqlsrv &&  \
+    a2enmod rewrite && \
+    adduser --disabled-password --gecos "" appuser && \
+    usermod -aG sudo appuser && \
+    apt-get update && \
+    apt-get install -y zip cron	vim
+
+COPY --from=builder --chown=appuser /var/www/html /var/www/html
+COPY --from=builder --chown=appuser /etc/apache2/apache2.conf /etc/apache2/apache2.conf
+
+RUN echo "error_log = /dev/stderr" >> /usr/local/etc/php/php.ini
+
+USER appuser
 
 RUN (crontab -l ; echo "* * * * * php /var/www/html/artisan schedule:run >> /dev/null 2>&1")| crontab -
 

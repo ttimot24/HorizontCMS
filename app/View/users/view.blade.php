@@ -48,13 +48,18 @@
 
                                 <div class="my-3">
                                     <div class='btn-group' role='group'>
+                                        @can('update', 'user')
                                         <a href='#' type='button' class='btn btn-warning me-1'><span
                                                 class='fa fa-star' aria-hidden='true'></span>
                                             {{ trans('actions.deactivate') }}</a>
+                                        @endcan
+                                        @can('update', 'user')
                                         <a href="{{ route('user.edit', ['user' => $user]) }}" type='button'
                                             class='btn btn-warning'><span class='fa fa-pencil' aria-hidden='true'></span>
                                             {{ trans('actions.edit') }}</a>
+                                        @endcan
                                     </div>
+                                    @can('delete', 'user')
                                     @if ($user->role_id < \Auth::user()->role_id && !$user->is(Auth::user()))
                                         <button type='button' class='btn btn-danger' data-bs-toggle='modal'
                                             data-bs-target='#delete_{{ $user->id }}'>
@@ -62,6 +67,7 @@
                                             {{ trans('actions.remove') }}
                                         </button>
                                     @endif
+                                    @endcan
                                 </div>
 
                                 <b class="d-block text-center mb-3">{{ trans('user.view_full_name') }} : <a
@@ -85,6 +91,7 @@
 
                     <div valign='top' class='col-md-8'>
 
+                        @can('update', 'user')
                         @if (!$user->isActive())
                             <div class='card mb-3'>
                                 <div class='card-header bg-danger'>
@@ -95,13 +102,24 @@
 
                                         {{ trans('user.inactive_about', ['day_count' => $user->created_at->diffForHumans()]) }}
 
-                                    </font> <a href='admin/user/activate/{{ $user->id }}'
-                                        class='btn btn-sm btn-danger pull-right'>Force activate</a>
+                                    </font> 
+                                    
+                                    
+                                    <form method="POST" action="{{ route('user.update', ['user' => $user]) }}" class="d-inline">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="active" value="1">
+                                        <button type="submit" class="btn btn-sm btn-danger pull-right">
+                                            {{ trans('Force activate') }}
+                                        </button>
+                                    </form>
+                                    
                                 </div>
                             </div>
                         @endif
+                        @endcan
 
-
+                        @can('view', 'blogpost')
                         @if ($user->isAdmin())
                             <div class="card">
                                 <div class="card-header">
@@ -153,10 +171,11 @@
 
                 </br></br>
                 @endif
+                @endcan
 
                 @include('image_details', ['modal_id' => $user->id, 'image' => $user->getImage()])
 
-
+                @can('delete', 'user')
                 @include('confirm_delete', [
                     'route' => route('user.destroy', ['user' => $user]),
                     'id' => 'delete_' . $user->id,
@@ -166,7 +185,9 @@
                     'delete_text' => trans('actions.delete'),
                     'cancel' => trans('actions.cancel'),
                 ])
+                @endcan
 
+                @can('view', 'blogpostcomment')
                 <div class="card">
 
                     <div class="card-header">
@@ -206,6 +227,7 @@
                     </div>
 
                 </div>
+                @endcan
             </div>
 
         </div>

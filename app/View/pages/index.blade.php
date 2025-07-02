@@ -56,9 +56,11 @@
                                     @if ($each->is($home_page))
                                         <i class='fa fa-home' style='font-size:20px;'></i>
                                     @else
+                                    @can('update', 'page')
                                         <a href='admin/#' data-bs-toggle='modal'
                                             data-bs-target='.mo-{{ $each->id }}'><i class='fa fa-home' id='hidden-home'
                                                 style='font-size:20px;'></i></a>
+                                    @endcan
                                     @endif
 
                                     <br><span class='badge bg-secondary'>{{ strtoupper($each->language) }} </span>
@@ -104,6 +106,7 @@
                                             <i class="bi bi-three-dots-vertical text-dark"></i>
                                         </div>
                                         <ul class="dropdown-menu text-dark">
+                                            @can('update', 'page')
                                             <li>
                                                 <a href="{{ route('page.edit', ['page' => $each]) }}"
                                                     class="dropdown-item text-decoration-none text-dark">
@@ -111,6 +114,8 @@
                                                     {{ trans('actions.edit') }}
                                                 </a>
                                             </li>
+                                            @endcan
+                                            @can('delete', 'page')
                                             <li>
                                                 <a data-bs-toggle='modal' data-bs-target=#delete_<?= $each->id ?>
                                                     class="dropdown-item text-danger text-decoration-none"
@@ -119,6 +124,7 @@
                                                     {{ trans('actions.delete') }}
                                                 </a>
                                             </li>
+                                            @endcan
                                         </ul>
                                     </div>
 
@@ -164,6 +170,7 @@
 
             </div>
 
+            @can('delete', 'page')
             @foreach ($all_pages as $each)
                 @include('confirm_delete', [
                     'route' => route('page.destroy', ['page' => $each]),
@@ -175,6 +182,7 @@
                     'cancel' => trans('actions.cancel'),
                 ])
             @endforeach
+            @endif
 
         </div>
     @endsection

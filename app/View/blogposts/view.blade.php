@@ -75,16 +75,20 @@
 
                                         </form>
                                     @endif
+                                    @can('update', 'blogpost')
                                     <a href="{{ route('blogpost.edit', ['blogpost' => $blogpost]) }}" type='button'
                                         class='btn btn-warning'><span class='glyphicon glyphicon-pencil'
                                             aria-hidden='true'></span>
                                         {{ trans('actions.edit') }} </a>
+                                    @endcan
 
+                                    @can('delete', 'blogpost')
                                     <button type='button' class='btn btn-danger' data-bs-toggle='modal'
                                         data-bs-target='#delete_{{ $blogpost->id }}'>
                                         <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
                                         {{ trans('actions.remove') }}
                                     </button>
+                                    @endcan
                                 </div>
 
                                 @if ($blogpost->isDraft())
@@ -144,6 +148,7 @@
                         'image' => $blogpost->getImage(),
                     ])
 
+                    @can('delete', 'blogpost')
                     @include('confirm_delete', [
                         'route' => route('blogpost.destroy', ['blogpost' => $blogpost]),
                         'id' => 'delete_' . $blogpost->id,
@@ -153,8 +158,11 @@
                         'delete_text' => trans('actions.delete'),
                         'cancel' => trans('actions.cancel'),
                     ])
+                    @endcan
 
+                    @can('view', 'blogpostcomment')
                     @include('blogposts.comments', ['user' => \Auth::user()])
+                    @endcan
 
 
                 </div>

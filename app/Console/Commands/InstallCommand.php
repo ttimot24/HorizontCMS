@@ -117,7 +117,7 @@ class InstallCommand extends Command
 
         $this->info("3. Generating .env file...");
 
-        $dotenv = new \App\Libs\DotEnvGenerator();
+        $dotenv = new \App\Services\DotEnvGenerator();
         $dotenv->addEnvVar('DB_HOST', '127.0.0.1');
         $dotenv->addEnvVar('DB_CONNECTION', $database['driver']);
         $dotenv->addEnvVar('DB_USERNAME', $database['username']);

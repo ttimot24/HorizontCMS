@@ -12,7 +12,6 @@ class PageController extends Controller
 
     use UploadsImage;
 
-    protected $itemPerPage = 25;
     protected $imagePath = 'images/pages';
 
     /**
@@ -32,9 +31,12 @@ class PageController extends Controller
      */
     public function index(Request $request)
     {
-        $pages = Page::orderBy('queue')->paginate($this->itemPerPage);
+        $pages = Page::orderBy('queue')->paginateSortAndFilter();
 
-        if($request->wantsJson()){
+        if ($request->wantsJson()) {
+            foreach($request->get('with', []) as $relation) {
+                $pages->load($relation);
+            }
             return response()->json($pages);
         }
 
@@ -55,7 +57,7 @@ class PageController extends Controller
 
         return view('pages.form', [
             'all_page' => Page::all(),
-            'page_templates' => (new \App\Libs\Theme($request->settings['theme']))->templates(),
+            'page_templates' => (new \App\Services\Theme($request->settings['theme']))->templates(),
         ]);
     }
 
@@ -93,7 +95,10 @@ class PageController extends Controller
      */
     public function show(Request $request, Page $page)
     {
-        if($request->wantsJson()){
+        if ($request->wantsJson()) {
+            foreach($request->get('with', []) as $relation) {
+                $page->load($relation);
+            }
             return response()->json($page);
         }
 
@@ -112,7 +117,7 @@ class PageController extends Controller
         return view('pages.form', [
             'page' => $page,
             'all_page' => Page::all(),
-            'page_templates' => (new \App\Libs\Theme($request->settings['theme']))->templates(),
+            'page_templates' => (new \App\Services\Theme($request->settings['theme']))->templates(),
         ]);
     }
 

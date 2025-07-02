@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 use App\Model\Settings;
-use \Jackiedo\LogReader\Facades\LogReader;
 
 class SettingsController extends Controller
 {
@@ -38,7 +37,7 @@ class SettingsController extends Controller
             ['name' => trans('settings.update_center'), 'link' => route('upgrade.index'), 'icon' => 'fa fa-arrow-circle-o-up'],
             ['name' => trans('settings.server'), 'link' => route('settings.show', ['setting' => 'server']), 'icon' => 'fa fa-server'],
             ['name' => trans('settings.social_media'), 'link' => route('settings.show', ['setting' => 'socialmedia']), 'icon' => 'fa fa-thumbs-o-up'],
-            ['name' => trans('Log'), 'link' => route('settings.show', ['setting' => 'log']), 'icon' => 'fa fa-bug'],
+            ['name' => trans('Log'), 'link' => route('log.index'), 'icon' => 'fa fa-bug'],
             ['name' => trans('settings.database'), 'link' => route('settings.show', ['setting' => 'database']), 'icon' => 'fa fa-database'],
             ['name' => trans('settings.scheduler'), 'link' => route('schedule.index', ['setting' => 'schedules']), 'icon' => 'fa fa-clock-o'],
         ];
@@ -147,34 +146,6 @@ class SettingsController extends Controller
 
         return view('settings.socialmedia', [
             'all_socialmedia' => \SocialLink::all(),
-        ]);
-    }
-
-
-
-    public function log($file = null)
-    {
-
-        LogReader::setLogPath(dirname(\Config::get('logging.channels.' . \Config::get('logging.default') . '.path')));
-
-        $entries = collect();
-        $files = collect(LogReader::getLogFilenameList());
-
-        if ($files->isNotEmpty()) {
-
-            $current_file = (isset($file) && $file != "" && $file != NULL) ? $file : basename($files->last());
-
-            $entries = LogReader::filename($current_file)->get();
-        }
-
-        // dd($entries);
-        return view('settings.log', [
-            'all_files' => $files->reverse(),
-            'entries' => $entries->reverse(),
-            'entry_number' => $entries->count(),
-            'all_file_entries' => LogReader::count(),
-            'current_file' => isset($current_file) ? $current_file : null,
-            'max_files' => 15
         ]);
     }
 

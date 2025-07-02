@@ -58,45 +58,52 @@
 
 
                     <div class="container row">
-                        <?php foreach($all_themes as $theme): ?>
+                        @foreach($all_themes as $theme)
 
                         <div class='col-sm-6 col-md-4 g-2 float-left'>
                             <div class="card p-2 bg-dark">
-                                <img class="card-img-top" src="<?= $theme->getImage() ?>" style="height:200px;"
+                                <img class="card-img-top" src="{{ $theme->getImage() }}" style="height:15rem;"
                                     alt="Theme screenshot">
                                 <div class="card-body text-white">
                                     <h3><?= $theme->getName() ?></h3>
-                                    <p>version: <?= $theme->getInfo('version') ?> | author: <?= $theme->getInfo('author') ?>
+                                    <p>version: {{ $theme->getInfo('version') }} | author: {{ $theme->getInfo('author') }}
                                     </p>
                                     <p class="mb-0">
-                                        <a href='admin/theme/set/<?= $theme->root_dir ?>'
+
+                                        @can('update', 'theme')
+                                        <a href='admin/theme/set/<?= $theme->getRootDir() ?>'
                                             class="btn btn-primary <?php if ($theme->isCurrentTheme()) {
                                                 echo 'disabled';
                                             } ?> " role="button">Activate</a>
-                                        <!--<a href="#" class="btn btn-default" role="button" data-toggle='modal' data-target='.<?= $theme->root_dir ?>-modal-xl'>Preview</a>-->
-                                        <a href='admin/theme/options/<?= $theme->root_dir ?>' class="btn btn-warning"
+                                        <!--<a href="#" class="btn btn-default" role="button" data-toggle='modal' data-target='.<?= $theme->getRootDir() ?>-modal-xl'>Preview</a>-->
+                                        <a href='admin/theme/options/<?= $theme->getRootDir() ?>' class="btn btn-warning"
                                             role="button">{{ trans('actions.options') }}</a>
+                                        @endcan
+                                        @can('delete', 'theme')
                                         <button class='btn btn-danger' data-bs-toggle='modal'
-                                            data-bs-target='#delete_<?= $theme->root_dir ?>'
+                                            data-bs-target='#delete_<?= $theme->getRootDir() ?>'
                                             <?php if ($all_themes->count() == 1) {
                                                 echo 'disabled';
                                             } ?>>{{ trans('actions.delete') }}</button>
+                                        @endcan
                                     </p>
                                 </div>
                             </div>
                         </div>
 
+                        @can('delete', 'theme')
                         @include('confirm_delete', [
-                            'route' => route('theme.destroy', ['theme' => $theme->root_dir]),
-                            'id' => 'delete_' . $theme->root_dir,
+                            'route' => route('theme.destroy', ['theme' => $theme->getRootDir()]),
+                            'id' => 'delete_' . $theme->getRootDir(),
                             'header' => trans('actions.are_you_sure'),
                             'name' => $theme->getName(),
                             'content_type' => 'theme',
                             'delete_text' => trans('actions.delete'),
                             'cancel' => trans('actions.cancel'),
                         ])
+                        @endcan
 
-                        <?php endforeach; ?>
+                        @endforeach
                     </div>
 
                 </div>

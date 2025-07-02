@@ -4,7 +4,7 @@ namespace App\Model;
 
 use App\Model\Trait\HasImage;
 use App\Model\Trait\IsActive;
-use App\Model\Trait\Searchable;
+use App\Model\Trait\PaginateSortAndFilter;
 use \Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 //use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,7 +21,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use Notifiable, Authenticatable, Authorizable, CanResetPassword;
     use HasImage;
     use IsActive;
-    use Searchable;
+    use PaginateSortAndFilter;
 
     /**
      * The attributes that are mass assignable.
@@ -38,7 +38,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password' => 'required|confirmed|min:6'
     ];
 
-    protected $search = ['name', 'username', 'email'];
+    protected $filterableFields  = ['name', 'username', 'email'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -46,7 +46,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'api_token' , 'remember_token',
     ];
 
 

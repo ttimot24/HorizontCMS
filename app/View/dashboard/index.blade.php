@@ -32,7 +32,7 @@
             <div class='col m-auto '>
 
 
-                @if (\Auth::user()->hasPermission('search'))
+                @can('view', 'search')
                     <form class='form-inline mt-4 ' action="{{ route('search.show', ['search' => 'search']) }}" method='GET'>
                         @csrf
                         <div class='form-group'>
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                     </form>
-                @endif
+                @endcan
 
 
                 @if ($upgrade != null && $upgrade->isNewVersionAvailable())
@@ -59,8 +59,9 @@
                         <p class="fw-bold"> {{ trans('dashboard.update_available') . ' ' . $upgrade->getVersionAvailable() }}</p>
                         <p class="pt-1">{{ trans('dashboard.update_message') }}</p>
 
+                        @can('update', 'upgrade')
                         <a href="{{ route('upgrade.index') }}" class='btn btn-primary w-100' >{{ trans('dashboard.update_now') }}</a>
-
+                        @endcan
 
                     </div>
                 </div>

@@ -181,7 +181,7 @@ class Plugin extends Model
 
 			$instance = new $plugin_namespace();
 
-			if ($instance instanceof \App\Libs\PluginInterface) {
+			if ($instance instanceof \App\Interfaces\PluginInterface || /* BACKWARD COMPATIBILITY*/ $instance instanceof \App\Libs\PluginInterface) {
 				return $instance->$register();
 			}
 		}

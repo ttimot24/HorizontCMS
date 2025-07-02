@@ -1,2 +1,7 @@
+.github
+.git
+node_modules
 plugins
 themes
+!themes/TheWright
+vendor

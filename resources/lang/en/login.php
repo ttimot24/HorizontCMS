@@ -2,6 +2,8 @@
 
 
 return [
+	'email' => 'Email',
+	'enter_email' => 'Enter email address',
 	'username' => 'Username',
 	'enter_username' => 'Enter username',
 	'password' => 'Password',

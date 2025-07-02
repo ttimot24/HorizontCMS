@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
+use App\Services\Theme;
 use App\Model\Settings;
 
 class ThemeController extends Controller
@@ -19,9 +20,9 @@ class ThemeController extends Controller
     public function index(Request $request)
     {
         return view("theme.index", [
-            'active_theme' => new \App\Libs\Theme($request->settings['theme']),
+            'active_theme' => new Theme($request->settings['theme']),
             'all_themes' => collect(array_slice(scandir("themes"), 2))->map(function ($theme) {
-                return new \App\Libs\Theme($theme);
+                return new Theme($theme);
             })
         ]);
     }
@@ -48,15 +49,15 @@ class ThemeController extends Controller
         $websiteController = new \App\Controllers\WebsiteController(request());
         $websiteController->before();
 
-        $theme_engine = new \App\Libs\ThemeEngine(request());
-        $theme_engine->setTheme(new \App\Libs\Theme(request()->settings['theme']));
+        $theme_engine = new \App\Services\ThemeEngine(request());
+        $theme_engine->setTheme(new Theme(request()->settings['theme']));
 
         $theme_engine->boot();
 
         \Website::initalize($theme_engine);
 
         return view("theme.config", [
-            'active_theme' => new \App\Libs\Theme(request()->settings['theme']),
+            'active_theme' => new Theme(request()->settings['theme']),
             'website_content' => $websiteController->index(request()->input('page')),
         ]);
     }
@@ -73,7 +74,7 @@ class ThemeController extends Controller
             $theme_css->save();
         }
 
-        $theme = new \App\Libs\Theme($theme == null ? request()->settings['theme'] : $theme);
+        $theme = new Theme($theme == null ? request()->settings['theme'] : $theme);
 
         $translations = [];
 
@@ -81,7 +82,7 @@ class ThemeController extends Controller
             $translations[$lang] = json_decode(file_get_contents($theme->getPath() . $theme->languagePath . "/" . $lang . ".json"));
         }
 
-        return view('theme.options', ['option' => empty(request()->input('option')) ? 'style' : request()->input('option'), 'translations' => $translations, 'theme' => $theme->root_dir, 'settings' => request()->settings]);
+        return view('theme.options', ['option' => empty(request()->input('option')) ? 'style' : request()->input('option'), 'translations' => $translations, 'theme' => $theme->getRootDir(), 'settings' => request()->settings]);
     }
 
     public function updateTranslations($theme)
@@ -90,7 +91,7 @@ class ThemeController extends Controller
         if (request()->isMethod('POST')) {
 
             try {
-                $theme = new \App\Libs\Theme($theme == null ? request()->settings['theme'] : $theme);
+                $theme = new Theme($theme == null ? request()->settings['theme'] : $theme);
 
                 $translations = [];
 

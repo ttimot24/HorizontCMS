@@ -68,7 +68,7 @@ class PluginServiceProvider extends ServiceProvider
 
         foreach ($this->app->plugins as $plugin) {
 
-            $autoloader = $plugin->getPath() . "/vendor/autoload.php";
+            $autoloader =  base_path($plugin->getPath() . "/vendor/autoload.php");
             if (file_exists($autoloader)) {
                 require_once($autoloader);
             }

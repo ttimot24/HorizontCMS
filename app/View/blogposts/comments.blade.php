@@ -6,12 +6,15 @@
                 <div class="col">
                     <div class="row">
 
+                        @can('create', 'blogpostcomment')
                         <div class="col d-flex justify-content-end">
                             <a class='btn btn-warning' data-bs-toggle='modal'
                                 data-bs-target='#comment-modal-xl'>{{ trans('comment.write_comment_button') }}</a>
                         </div>
+                        @endcan
 
                         <div class="col">
+                            @can('update', 'blogpost')
                             <form method="POST" action="{{ route('blogpost.update', ['blogpost' => $blogpost]) }}">
                                 @csrf
                                 @method('PUT')
@@ -21,6 +24,7 @@
                                     class='btn btn-danger btn-sm mt-1'>{{ trans('comment.disable_comments_button') }}</button>
 
                             </form>
+                            @endcan
                         </div>
                     </div>
 

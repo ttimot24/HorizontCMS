@@ -72,9 +72,12 @@
 
 
                                     @if (!$current_plugin->isInstalled() && $current_plugin->isCompatibleWithCore())
+                                    @can('create', 'plugin')
                                         <a id='install' class='btn btn-primary btn-block'
                                             href='{{ config('horizontcms.backend_prefix') }}/plugin/install/{{ $current_plugin->root_dir }}'>Install</a>
+                                    @endcan
                                     @elseif($current_plugin->isInstalled())
+                                    @can('update', 'plugin')
                                         @if (!$current_plugin->isActive())
                                             <a class='btn btn-success btn-block'
                                                 href='{{ config('horizontcms.backend_prefix') }}/plugin/activate/{{ $current_plugin->root_dir }}'>Activate</a>
@@ -82,13 +85,14 @@
                                             <a class='btn btn-info btn-block'
                                                 href='{{ config('horizontcms.backend_prefix') }}/plugin/deactivate/{{ $current_plugin->root_dir }}'>Deactivate</a>
                                         @endif
+                                    @endcan
                                     @endif
 
 
-
+                                    @can('delete', 'plugin')
                                     <button class='btn btn-danger btn-block' data-bs-toggle='modal'
                                         data-bs-target='#delete_{{ $current_plugin->root_dir }}'>{{ trans('actions.delete') }}</button>
-
+                                    @endcan
 
                                 </div>
 
@@ -98,7 +102,7 @@
 
                         </div>
 
-
+                        @can('delete', 'plugin')
                         @include('confirm_delete', [
                             'route' => route('plugin.destroy', ['plugin' => $current_plugin->root_dir]),
                             'id' => 'delete_' . $current_plugin->root_dir,
@@ -108,6 +112,7 @@
                             'delete_text' => trans('actions.delete'),
                             'cancel' => trans('actions.cancel'),
                         ])
+                        @endcan
                     @endforeach
 
 

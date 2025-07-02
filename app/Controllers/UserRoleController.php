@@ -29,21 +29,36 @@ class UserRoleController extends Controller
         ]);
     }
 
+    private function getEscapedRights(Request $request){
+        $actions = ['view', 'create', 'update', 'delete'];
+
+        $rights = array_map(function ($item) use ($actions) {
+            foreach ($actions as $action) {
+                if (str_ends_with($item, '_' . $action)) {
+                    return preg_replace('/_(?=' . $action . '$)/', '.', $item);
+                }
+            }
+            return $item;
+        }, array_keys($request->except(['_token', 'name', '_method'])));
+
+        return $rights;
+    }
 
     private function getPermissionList()
     {
 
         $controllers = array_slice(scandir(app_path('Controllers')), 3);
 
-        $permission_list['admin_area'] = 'Admin area';
-
         foreach ($controllers as $controller) {
+            
+            if (!str_ends_with($controller, 'Controller.php') || in_array($controller, ['WebsiteController.php', 'InstallController.php', 'DashboardController.php'])) {
+                continue;
+            }
+
             $name = str_replace("Controller.php", "", $controller);
             $permission_list[str_slug($name)] = $name;
+            
         }
-
-        unset($permission_list['website'], $permission_list['install'], $permission_list['dashboard']);
-
 
         foreach (\App\Model\Plugin::all() as $plugin) {
 
@@ -70,7 +85,7 @@ class UserRoleController extends Controller
     {
 
         $role = new \App\Model\UserRole($request->all());
-        $role->rights = array_keys($request->except(['_token', 'name']));
+        $role->rights = $this->getEscapedRights($request);
         $role->permission = 0;
 
         if ($role->save()) {
@@ -107,10 +122,10 @@ class UserRoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRole $userrole)
+    public function update(UserRole $userrole, Request $request)
     {
 
-        $userrole->rights = array_keys(request()->except('_token'));
+        $userrole->rights = $this->getEscapedRights($request);
 
         if ($userrole->save()) {
             return redirect()->back()->withMessage(['success' => trans('Rights saved succesfully!')]);

@@ -83,6 +83,7 @@
                                             <i class="bi bi-three-dots-vertical text-dark"></i>
                                         </div>
                                         <ul class="dropdown-menu text-dark">
+                                            @can('update', 'user')
                                             <li>
                                                 <a href="{{ route('user.edit', ['user' => $each]) }}"
                                                     class="dropdown-item text-decoration-none text-dark">
@@ -90,6 +91,8 @@
                                                     {{ trans('actions.edit') }}
                                                 </a>
                                             </li>
+                                            @endcan
+                                            @can('delete', 'user')
                                             @if ($each->role_id <= \Auth::user()->role_id && !$each->is(Auth::user()))
                                             <li>
                                                 <a data-bs-toggle='modal' data-bs-target=#delete_<?= $each->id ?>
@@ -100,6 +103,7 @@
                                                 </a>
                                             </li>
                                             @endif
+                                            @endcan
                                         </ul>
                                     </div>
 
@@ -116,7 +120,7 @@
                 </div>
 
             </div>
-
+            @can('delete', 'user')
                         @foreach ($all_users as $each)
                             @if($each->role_id <= \Auth::user()->role_id && !$each->is(Auth::user()))
                                 @include('confirm_delete', [
@@ -130,7 +134,7 @@
                                 ])
                             @endif
                         @endforeach
-
+            @endcan
 
         </div>
     </div>

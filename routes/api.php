@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ Route::post('/auth', function (Request $request) {
             $user->save();
 
             $user->load('role');
+            
+            $user->makeVisible('api_token');
+            $user->role->makeVisible('rights');
 
             return response()->json($user, 200);
         }
@@ -43,8 +47,23 @@ Route::post('/auth', function (Request $request) {
 
 Route::get('/blogposts/slug/{slug}', function($slug){
   $blogpost = \App\Model\Blogpost::findBySlug($slug);
+
+    foreach(request()->get('with', []) as $relation) {
+        $blogpost->load($relation);
+    }
+
   return response()->json($blogpost);
 });
+
+Route::get('/pages/slug/{slug}', function($slug){
+    $page = \App\Model\Page::findBySlug($slug);
+  
+      foreach(request()->get('with', []) as $relation) {
+          $page->load($relation);
+      }
+  
+    return response()->json($page);
+  });
 
 Route::apiResource('blogposts', \App\Controllers\BlogpostController::class)
             ->only(['index', 'show']);
@@ -58,6 +77,13 @@ Route::apiResource('pages', \App\Controllers\PageController::class)
 Route::apiResource('header-images', \App\Controllers\HeaderImageController::class)
             ->only(['index', 'show']);
 
+Route::apiResource('file-manager', \App\Controllers\FileManagerController::class)
+            ->middleware('auth:api');
+
+Route::apiResource('search', \App\Controllers\SearchController::class)
+            ->only(['index', 'show']);
+
+
 Route::get('/settings', function(Request $request){
 
     $settings = \App\Model\Settings::group('website')->get();
@@ -68,7 +94,7 @@ Route::get('/settings', function(Request $request){
 
 Route::get('/users',function(Request $request){
 
-    if(\Auth::user()->hasPermission("users")){
+    if(Gate::allows('view', 'user')){
         return response()->json(['message' => 'Permission denied!'], 403);
     }
 
@@ -80,7 +106,7 @@ Route::get('/users',function(Request $request){
 
 Route::get('/plugins',function(Request $request){
 
-    if(\Auth::user()->hasPermission("plugins")){
+    if(Gate::allows('view', 'plugin')){
         return response()->json(['message' => 'Permission denied!'], 403);
     }
 
@@ -89,6 +115,7 @@ Route::get('/plugins',function(Request $request){
     return $plugins;
 
 })->middleware('auth:api');
+
 
 Route::post('lock-up',function(Request $request){
 
@@ -103,6 +130,9 @@ Route::post('lock-up',function(Request $request){
 });
 
 
+/**
+ * @deprecated deprecated since version 1.3.0
+ */
 Route::get('get-page-slug/{title}',function($title){
 	 return response()->json(str_slug($title));
 });

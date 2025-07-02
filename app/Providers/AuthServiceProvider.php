@@ -25,33 +25,59 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('accessAdminArea',function($user) {
-            return $user->isAdmin() && $user->isActive();
-        });
-
+        \App\Providers\Gates\PermissionsGate::register();
 
         $prefix = \Config::get('horizontcms.backend_prefix');
 
-        if($this->app->request->is($prefix.'*') && !$this->app->request->is($prefix.'/install*') 
-                                                && !$this->app->request->is($prefix.'/login*')){
+        if (
+            $this->app->request->is($prefix . '*') && !$this->app->request->is($prefix . '/install*')
+            && !$this->app->request->is($prefix . '/login*')
+        ) {
 
-            Gate::define('global-authorization',function($user) use ($prefix) {
+            Gate::define('global-authorization', function ($user) use ($prefix) {
+                $request = app()->request;
 
-                if($this->app->request->segment(2) == null || $this->app->request->is($prefix.'/dashboard*')){
+                // Admin dashboard vagy root esetén engedélyezett
+                if ($request->segment(2) === null || $request->is($prefix . '/dashboard*')) {
                     return true;
                 }
 
+                // Meghatározzuk a modul nevét
+                $isPluginRun = $request->is($prefix . '/plugin/run/*');
+                $isPlugin = $request->is($prefix . '/plugin/*');
 
-                if(
-                    !in_array(str_replace("-","",$this->app->request->is($prefix.'/plugin/run/*')? $this->app->request->segment(4) : $this->app->request->segment(2)),$user->role->rights) &&
-                    !in_array(str_replace("-","",$this->app->request->is($prefix.'/plugin/*')? $this->app->request->segment(3) : $this->app->request->segment(1)),$user->role->rights)
-                ){
-                    return false;
+                $segment = $isPluginRun
+                    ? $request->segment(4)
+                    : ($isPlugin ? $request->segment(3) : $request->segment(2));
+
+                $segment = str_replace('-', '', $segment); // kötőjelek eltávolítása
+
+                // Meghatározzuk az akciót (módszert) - pl. view, create stb.
+                $action = $request->route()?->getActionMethod(); // pl. index, show, create, store, edit, update, destroy
+
+                // Akció térképezés az engedély típusokhoz
+                $actionMap = [
+                    'index'   => 'view',
+                    'show'    => 'view',
+                    'create'  => 'create',
+                    'store'   => 'create',
+                    'edit'    => 'update',
+                    'update'  => 'update',
+                    'destroy' => 'delete',
+                    'delete'  => 'delete',
+                ];
+
+                $mappedAction = $actionMap[$action] ?? null;
+
+                if (!$mappedAction) {
+                    return false; // Ismeretlen akció
                 }
 
-                return true;
+                // Teljes permission kulcs: pl. blogpost.view
+                $permissionKey = "{$segment}.{$mappedAction}";
+
+                return in_array($permissionKey, $user->role->rights);
             });
         }
-
     }
 }

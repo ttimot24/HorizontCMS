@@ -20,10 +20,21 @@ class BlogpostCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $all_categories = BlogpostCategory::paginate($request->input('per_page', $this->itemPerPage));
+
+
+        if ($request->wantsJson()) {
+            foreach($request->get('with', []) as $relation) {
+                $all_categories->load($relation);
+            }
+            return response()->json($all_categories);
+        }
+
         return view('blogposts.category.index', [
-            'all_category' => BlogpostCategory::all(),
+            'all_category' => $all_categories,
         ]);
     }
 
@@ -62,8 +73,16 @@ class BlogpostCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(BlogpostCategory $blogpostcategory)
+    public function show(Request $request, BlogpostCategory $blogpostcategory)
     {
+
+        if ($request->wantsJson()) {
+            foreach($request->get('with', []) as $relation) {
+                $blogpostcategory->load($relation);
+            }
+            return response()->json($blogpostcategory);
+        }
+
         return view('blogposts.category.view', ['category' => $blogpostcategory]);
     }
 

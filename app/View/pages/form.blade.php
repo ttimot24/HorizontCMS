@@ -115,7 +115,7 @@
                                 :data="'{{ remove_linebreaks(old('page', isset($page) ? $page->page : '')) }}'"
                                 :language="'{{ config('app.locale') }}'"
                                 :filebrowserBrowseUrl="'{{ route('filemanager.index', ['path' => 'images/pages', 'mode' => 'embed']) }}'"
-                                :filebrowserUploadUrl="'{{ route('filemanager.store', ['module' => 'pages']) }}'">
+                                :filebrowserUploadUrl="'{{ route('file-manager.store', ['dir_path' => 'storage/images/pages']) }}'">
                             </text-editor>
 
                         </div>
