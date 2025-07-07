@@ -93,12 +93,12 @@ class PluginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function install($plugin_name)
+    public function store(Request $request)
     {
 
         try {
 
-            $plugin = new \App\Model\Plugin($plugin_name);
+            $plugin = new \App\Model\Plugin($request->input('plugin'));
 
             if (!$plugin->isCompatibleWithCore()) {
                 return redirect()->back()->withMessage(['warning' => trans('plugin.not_compatible_with_core', ['min_core_ver' => $plugin->getRequiredCoreVersion()])]);
@@ -111,7 +111,7 @@ class PluginController extends Controller
                 \Artisan::call("migrate", ['--path' => $plugin->getDatabaseFilesPath() . DIRECTORY_SEPARATOR . "migrations", '--no-interaction' => '', '--force' => true]);
 
 
-                $seed_class = '\\Plugin\\' . $plugin_name . '\\Database\\Seeds\\PluginSeeder';
+                $seed_class = '\\Plugin\\' . $plugin->root_dir . '\\Database\\Seeds\\PluginSeeder';
 
                 if (class_exists($seed_class)) {
                     \Artisan::call('db:seed', ['--class' => $seed_class, '--no-interaction' => '', '--force' => true]);
@@ -139,7 +139,7 @@ class PluginController extends Controller
                 }
             }
 
-            return redirect()->back()->withMessage(['success' => trans('Succesfully installed ' . $plugin_name)]);
+            return redirect()->back()->withMessage(['success' => trans('Succesfully installed ' . $plugin->root_dir)]);
         } catch (\Exception $e) {
             return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong') . " " . $e->getMessage()]);
         }
