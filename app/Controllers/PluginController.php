@@ -5,7 +5,6 @@ namespace App\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-
 class PluginController extends Controller
 {
 
@@ -146,54 +145,23 @@ class PluginController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function activate($plugin_name)
-    {
-
-        $plugin = \App\Model\Plugin::rootDir($plugin_name)->first();
-        $plugin->active = 1;
-
-        if ($plugin->save()) {
-            return redirect()->back()->withMessage(['success' => trans('Succesfully activated ' . $plugin_name)]);
-        } else {
-            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function deactivate($plugin_name)
-    {
-
-        $plugin = \App\Model\Plugin::rootDir($plugin_name)->first();
-        $plugin->active = 0;
-
-
-        if ($plugin->save()) {
-            return redirect()->back()->withMessage(['success' => trans('Succesfully deactivated ' . $plugin_name)]);
-        } else {
-            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, \App\Model\Plugin $plugin)
     {
-        //
+        $plugin = \App\Model\Plugin::rootDir($request->input('plugin_name'))->firstOrFail();
+        $plugin->active = $plugin->active==0? 1 : 0;
+
+
+        if ($plugin->save()) {
+            return redirect()->back()->withMessage(['success' => trans('Succesfully modified ' . $plugin->root_dir)]);
+        } else {
+            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
+        }
     }
 
     /**

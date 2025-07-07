@@ -44,11 +44,8 @@ class AuthServiceProvider extends ServiceProvider
 
                 // Meghatározzuk a modul nevét
                 $isPluginRun = $request->is($prefix . '/plugin/run/*');
-                $isPlugin = $request->is($prefix . '/plugin/*');
 
-                $segment = $isPluginRun
-                    ? $request->segment(4)
-                    : ($isPlugin ? $request->segment(3) : $request->segment(2));
+                $segment = $isPluginRun? $request->segment(4): $request->segment(2);
 
                 $segment = str_replace('-', '', $segment); // kötőjelek eltávolítása
 
