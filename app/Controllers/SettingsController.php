@@ -133,17 +133,6 @@ class SettingsController extends Controller
 
     public function socialmedia()
     {
-
-
-        if (request()->isMethod('POST')) {
-
-            foreach (request()->all() as $key => $value) {
-                Settings::where('setting', '=', "social_link_" . $key)->update(['value' => $value]);
-            }
-
-            return redirect()->back()->withMessage(['success' => trans('message.successfully_saved_settings')]);
-        }
-
         return view('settings.socialmedia', [
             'all_socialmedia' => \SocialLink::all(),
         ]);

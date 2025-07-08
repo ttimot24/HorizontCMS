@@ -9,12 +9,12 @@
                 'page_title' => trans('Social media'),
             ])
             <div class="card-body">
-                <form action='' role='form' method='POST'>
+                <form action='{{ route('settings.store') }}' role='form' method='POST'>
                     @csrf
 
                     <table id='settings' class="w-100">
 
-                        <tbody style='text-align:center;font-weight:bolder;'>
+                        <tbody class="text-center fw-bold">
 
                             @foreach ($all_socialmedia as $each)
                                 <tr>
@@ -23,18 +23,20 @@
                                         {{ ucfirst($each->getName()) }}
                                     </td>
                                     <td>
-                                        <input type='text' class='form-control' name='{{ $each->getName() }}'
+                                        <input type='text' class='form-control' name='{{ $each->setting }}'
                                             value='{{ htmlspecialchars($each->value) }}'>
                                     </td>
                                 </tr>
                             @endforeach
 
-
                             <tr>
                                 <td></td>
-                                <td><button type='submit' class='btn btn-primary'>
+                                <td>
+                                    <button type='submit' class='btn btn-primary'>
                                         <span class='fa fa-floppy-o' aria-hidden='true'></span>
-                                        {{ trans('settings.adminarea_save_settings') }}</button> </td>
+                                        {{ trans('settings.adminarea_save_settings') }}
+                                    </button> 
+                                </td>
                             </tr>
 
                         </tbody>
@@ -42,4 +44,5 @@
                 </form>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
