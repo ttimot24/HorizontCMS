@@ -10,9 +10,8 @@
                 'page_title' => trans('search.title'),
             ])
 
-    <div class="container">
-        <div class="row py-4">
-
+    <div class="container p-4">
+        <div class="row">
 
             <h2 class='col-md-8'>{!! trans('search.found_matches', ['quantity' => $search_engine->getTotalCount(), 'search_word' => $search_for]) !!}</h2>
 
@@ -38,33 +37,83 @@
         </div>
 
         @can('view', 'blogpost')
-            <h3 style='clear:both;'>{{ trans('blogpost.blogposts') }}
-                ({{ count($search_engine->getResultsFor(\App\Model\Blogpost::class)) }})</h3>
+        @if(count($search_engine->getResultsFor(\App\Model\Blogpost::class)) > 0)
+        <div class="mt-5">
             <div class='container'>
+                <h3>{{ trans('blogpost.blogposts') }}({{ count($search_engine->getResultsFor(\App\Model\Blogpost::class)) }})</h3>
+                <table class='table table-hover'>
+                    <thead class="bg-dark text-white">
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Created At</th>
+                    </thead>
+                    <tbody>
                 @foreach ($search_engine->getResultsFor(\App\Model\Blogpost::class) as $each)
-                    <a href="{{ route('blogpost.show', ['blogpost' => $each]) }}">{{ $each->title }}</a><br />
+                <tr>
+                    <td>{{ $each->id }}</td>
+                    <td><a href="{{ route('blogpost.show', ['blogpost' => $each]) }}">{{ $each->title }}</a></td>
+                    <td>{{ $each->created_at }}</td>
+                </tr>
                 @endforeach
+                    </tbody>
+                </table>
             </div>
+        </div>
+        @endif
         @endcan
 
 
         @can('view', 'user')
-            <h3>{{ trans('user.users') }} ({{ count($search_engine->getResultsFor(\App\Model\User::class)) }})</h3>
+        @if(count($search_engine->getResultsFor(\App\Model\User::class)) > 0)
+        <div class="mt-5">
             <div class='container'>
+                <h3>{{ trans('user.users') }} ({{ count($search_engine->getResultsFor(\App\Model\User::class)) }})</h3>
+                <table class='table table-hover'>
+                    <thead class="bg-dark text-white">
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Created At</th>
+                    </thead>
+                    <tbody>
                 @foreach ($search_engine->getResultsFor(\App\Model\User::class) as $each)
-                    <a href="{{ route('user.show', ['user' => $each]) }}">{{ $each->username }}</a><br />
+                <tr>
+                    <td>{{ $each->id }}</td>
+                    <td><a href="{{ route('user.show', ['user' => $each]) }}">{{ $each->name }}</a></td>
+                    <td>{{ $each->created_at }}</td>
+                </tr>
                 @endforeach
+                    </tbody>
+                </table>
             </div>
+        </div>
+        @endif
         @endcan
 
 
         @can('view', 'page')
-            <h3>{{ trans('page.pages') }} ({{ count($search_engine->getResultsFor(\App\Model\Page::class)) }})</h3>
+        @if(count($search_engine->getResultsFor(\App\Model\Page::class)) > 0)
+        <div class="mt-5">
             <div class='container'>
+                <h3>{{ trans('page.pages') }} ({{ count($search_engine->getResultsFor(\App\Model\Page::class)) }})</h3>
+                <table class='table table-hover'>
+                    <thead class="bg-dark text-white">
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Created At</th>
+                    </thead>
+                    <tbody>
                 @foreach ($search_engine->getResultsFor(\App\Model\Page::class) as $each)
-                    <a href="{{ route('page.show', ['page' => $each]) }}">{{ $each->name }}</a><br />
+                <tr>
+                    <td>{{ $each->id }}</td>
+                    <td><a href="{{ route('page.show', ['page' => $each]) }}">{{ $each->name }}</a></td>
+                    <td>{{ $each->created_at }}</td>
+                </tr>
                 @endforeach
+                    </tbody>
+                </table>
             </div>
+        </div>
+        @endif
         @endcan
 
 

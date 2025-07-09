@@ -14,19 +14,30 @@
 
 
                     <div class="card-body">
-                        <h3>{{ trans('category.view_category_blogposts') }} ({{ $category->blogposts->count() }})</h3>
+                        
 
+                        @can('view', 'blogpost')
                         <div>
-                            @foreach ($category->blogposts->reverse() as $blogpost)
-                                <div class="col-md-4 mb-3">
-                                    <a
-                                        href="{{ route('blogpost.show', ['blogpost' => $blogpost]) }}">{{ $blogpost->title }}</a>
-                                    @if ($blogpost->isDraft())
-                                        <span class="ms-2 badge bg-info">{{ trans('actions.draft') }}</span>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
+                            <div class='container'>
+                                <h3>{{ trans('category.view_category_blogposts') }} ({{ $category->blogposts->count() }})</h3>
+                                <table class='table table-hover'>
+                                    <thead class="bg-dark text-white">
+                                        <th>Id</th>
+                                        <th>Title</th>
+                                        <th>Created At</th>
+                                    </thead>
+                                    <tbody>
+                                @foreach ($category->blogposts->reverse() as $each)
+                                <tr>
+                                    <td>{{ $each->id }}</td>
+                                    <td><a href="{{ route('blogpost.show', ['blogpost' => $each]) }}">{{ $each->title }}</a></td>
+                                    <td>{{ $each->created_at }}</td>
+                                </tr>
+                                @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endcan
                     </div>
                 </div>
             </div>
