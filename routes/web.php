@@ -58,7 +58,7 @@ if (app()->isInstalled()) {
 
 				if ($e instanceof \App\Exceptions\FileNotFoundException || $e instanceof BadMethodCallException) {
 
-					$controller = \App::make('\App\Controllers\WebsiteController');
+					$controller = \App::make(\App\Controllers\WebsiteController::class);
 
 					if (method_exists($controller, 'before')) {
 						$controller->before();

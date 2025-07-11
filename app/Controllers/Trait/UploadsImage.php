@@ -17,7 +17,7 @@ trait UploadsImage {
 
     public function uploadImage($model): bool {
 
-        if(!in_array('App\Model\Trait\HasImage', class_uses($model, true))){
+        if(!in_array(\App\Model\Trait\HasImage::class, class_uses($model, true))){
            throw new TypeError('Class['.get_class($model).'] does not use HasImage trait');
         }
 
