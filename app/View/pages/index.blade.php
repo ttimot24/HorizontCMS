@@ -67,8 +67,16 @@
 
 
                                 </td>
-                                <td><img src='{{ $each->getThumb() }}' width='70' height='50'
-                                        class='img img-rounded' /></td>
+                                <td>
+                                @if($blogpost->getFeaturedMediaType()==='video')
+                                    <video controls="false" width=70 height=50 >
+                                        <source src="{{ $blogpost->getImage()}}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
+                                    <img src='{{ $blogpost->getThumb() }}' class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> 
+                                @endif
+                                </td>
                                 <td>{{ $each->name }}
                                 </td>
                                 <td>@if($each->url)<span class='badge bg-dark'> {{$each->url}}</span> @endif</td>

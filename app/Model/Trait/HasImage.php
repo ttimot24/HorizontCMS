@@ -36,11 +36,19 @@ trait HasImage
         return $this->hasImage() && file_exists($this->getThumbnailDirectory() . DIRECTORY_SEPARATOR . $this->image);
     }
 
+    public function getImageFilePath(){
+        return $this->getImageDirectory() . DIRECTORY_SEPARATOR . $this->image;
+    }
+
+    public function getThumbnailFilePath(){
+        return $this->getThumbnailDirectory() . DIRECTORY_SEPARATOR . $this->image;
+    }
+
     public function getThumb()
     {
 
         if ($this->thumbnailFileExists()) {
-            return url($this->getThumbnailDirectory() . DIRECTORY_SEPARATOR . $this->image);
+            return url($this->getThumbnailFilePath());
         } else {
             return $this->getImage();
         }
@@ -50,10 +58,14 @@ trait HasImage
     {
 
         if ($this->imageFileExists()) {
-            return url($this->getImageDirectory() . DIRECTORY_SEPARATOR . $this->image);
+            return url($this->getImageFilePath());
         } else {
             return url($this->getDefaultImage());
         }
+    }
+
+    public function getFeaturedMediaType(){
+        return explode('/', mime_content_type($this->getImageFilePath()))[0];
     }
 
     public function getDefaultImage()

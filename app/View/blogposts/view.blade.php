@@ -43,7 +43,15 @@
                         <div class="card">
                             <button type='button' class='btn btn-link w-100' data-bs-toggle='modal'
                                 data-bs-target='#modal-xl-{{ $blogpost->id }}'>
-                                <img src='{{ $blogpost->getImage() }}' width='350' class='img img-thumbnail mt-3' />
+
+                                @if($blogpost->getFeaturedMediaType()==='video')
+                                    <video controls class="w-100" style="max-height:500px;">
+                                        <source src="{{ $blogpost->getImage()}}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
+                                    <img src='{{ $blogpost->getImage() }}' width='350' class='img img-thumbnail mt-3' />
+                                @endif
                             </button>
 
                             <div class="text-center">
@@ -145,7 +153,7 @@
 
                     @include('image_details', [
                         'modal_id' => $blogpost->id,
-                        'image' => $blogpost->getImage(),
+                        'image' => $blogpost->getImageFilePath(),
                     ])
 
                     @can('delete', 'blogpost')

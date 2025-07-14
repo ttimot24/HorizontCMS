@@ -40,8 +40,18 @@
                         @foreach ($all_blogposts as $blogpost)
                             <tr>
                                 <td><?= $blogpost->id ?></td>
-                                <td><img src='{{ $blogpost->getThumb() }}' class='img img-rounded' style='object-fit:cover;'
-                                        width=70 height=50 /> </td>
+                                <td>
+                                @if($blogpost->getFeaturedMediaType()==='video')
+                                    <video controls="false" width=70 height=50 >
+                                        <source src="{{ $blogpost->getImage()}}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
+                                    <img src='{{ $blogpost->getThumb() }}' class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> 
+                                @endif
+                                    
+                                    
+                                  </td>
                                 <td><a
                                         href="{{ route('blogpost.show', ['blogpost' => $blogpost]) }}">{{ $blogpost->title }}</a><br>
                                     @if ($blogpost->isDraft())
