@@ -46,6 +46,9 @@ trait HasImage
 
     public function getThumb()
     {
+        if($this->isUrl($this->image)){
+            return $this->image;
+        }
 
         if ($this->thumbnailFileExists()) {
             return url($this->getThumbnailFilePath());
@@ -56,6 +59,9 @@ trait HasImage
 
     public function getImage()
     {
+        if($this->isUrl($this->image)){
+            return $this->image;
+        }
 
         if ($this->imageFileExists()) {
             return url($this->getImageFilePath());
@@ -64,8 +70,8 @@ trait HasImage
         }
     }
 
-    public function getFeaturedMediaType(){
-        return explode('/', mime_content_type($this->getImageFilePath()))[0];
+    public function getFeaturedMediaType(): string {
+        return rescue(fn() => explode('/', mime_content_type($this->getImageFilePath()))[0], 'image');
     }
 
     public function getDefaultImage()
@@ -73,9 +79,13 @@ trait HasImage
         return $this->defaultImage;
     }
 
-
     public function setDefaultImage($image)
     {
         $this->defaultImage = $image;
     }
+
+    public function isUrl($string): bool {
+        return filter_var($string, FILTER_VALIDATE_URL);
+    }
+
 }

@@ -1,6 +1,6 @@
     <?php
 
-        $type = explode('/', mime_content_type($image))[0];
+        $type = rescue(fn() => explode('/', mime_content_type($this->getImageFilePath()))[0], 'unknown');
 
         if ($type === "image") {
             $size = getimagesize($image);
@@ -20,6 +20,11 @@
 
             $display_type = 'video';
         } else {
+
+            $image_size_width[0] = "N/A";
+            $image_size_height[0] = "N/A";
+            $size['mime'] = 'unknown';
+
             $display_type = 'unknown';
         }
    
