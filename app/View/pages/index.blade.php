@@ -68,13 +68,13 @@
 
                                 </td>
                                 <td>
-                                @if($page->getFeaturedMediaType()==='video')
+                                @if($each->getFeaturedMediaType()==='video')
                                     <video controls="false" width=70 height=50 >
-                                        <source src="{{ $page->getImage()}}">
+                                        <source src="{{ $each->getImage()}}">
                                         Your browser does not support the video tag.
                                     </video>
                                 @else
-                                    <img src='{{ $page->getThumb() }}' class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> 
+                                    <img src='{{ $each->getThumb() }}' class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> 
                                 @endif
                                 </td>
                                 <td>{{ $each->name }}
