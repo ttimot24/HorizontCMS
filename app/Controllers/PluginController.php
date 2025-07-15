@@ -133,7 +133,9 @@ class PluginController extends Controller
 
             foreach (\App\Model\UserRole::all() as $role) {
                 if ($role->isAdminRole()) {
-                    $role->addRight(str_slug($plugin->root_dir));
+                    foreach(["view","crete","update","delete"] as $action){
+                        $role->addRight(str_slug($plugin->root_dir).'.'.$action);
+                    }
                     $role->save();
                 }
             }
