@@ -79,9 +79,9 @@ trait PaginateSortAndFilter
                     continue; // Skip fields that are not enabled for filtering
                 }
                 if (is_array($value)) {
-                    $query->orWhereIn($field, $value);
+                    $query->whereIn($field, $value);
                 } else {
-                    $query->orWhere($field, 'like', "%".$value."%");
+                    $query->where($field, 'like', "%".$value."%");
                 }
             }
         }

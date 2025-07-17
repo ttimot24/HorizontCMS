@@ -30,7 +30,7 @@ class FileManagerController extends Controller
                 return basename($file);
             })->toArray()),
             'allowed_extensions' => [
-                'image' => ['jpg', 'png', 'jpeg']
+                'image' => ['jpg', 'png', 'jpeg', 'webp', 'gif']
             ],
             'mode' => $mode,
         ];
