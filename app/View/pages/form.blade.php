@@ -93,7 +93,14 @@
                             @if (isset($page) && $page->hasImage())
                                 <button type='button' class='btn btn-link mb-5 w-100' data-bs-toggle='modal'
                                     data-bs-target='#modal-xl-{{ $page->id }}'>
-                                    <img src='{{ $page->getThumb() }}' class='img img-thumbnail w-100'>
+                                    @if($page->getFeaturedMediaType()==='video')
+                                        <video controls class="w-100" style="max-height:500px;">
+                                            <source src="{{ $page->getImage()}}">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    @else
+                                        <img src='{{ $page->getThumb() }}' class='img img-thumbnail w-100'>
+                                    @endif
                                 </button>
                             @endif
 
