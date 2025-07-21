@@ -89,7 +89,7 @@
                             <div class='form-group pull-left col-12'>
                                 <label for='text'>{{ trans('blogpost.post') }}</label>
                                 <text-editor id="texteditor" :name="'text'"
-                                    :data="'{{ remove_linebreaks(old('blogpost', isset($blogpost) ? $blogpost->text : '')) }}'"
+                                    :data="'{{ remove_linebreaks(old('blogpost', isset($blogpost) ? str_replace("'", "&#39;", $blogpost->text) : '')) }}'"
                                     :language="'{{ config('app.locale') }}'"
                                     :filebrowserBrowseUrl="'{{ route('filemanager.index', ['path' => 'images/blogposts', 'mode' => 'embed']) }}'"
                                     :filebrowserUploadUrl="'{{ route('file-manager.store', ['dir_path' => 'storage/images/blogposts']) }}'">
