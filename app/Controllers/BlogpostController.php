@@ -32,11 +32,11 @@ class BlogpostController extends Controller
      */
     public function index(Request $request)
     {
-        $blogposts = Blogpost::paginateSortAndFilter([
-            'sort' => $request->input('sort', 'id,desc'),
-        ]);
-
+        
         if ($request->wantsJson()) {
+
+            $blogposts = Blogpost::paginateSortAndFilter();
+
             foreach($request->get('with', []) as $relation) {
                 $blogposts->load($relation);
             }
@@ -44,7 +44,9 @@ class BlogpostController extends Controller
         }
 
         return view('blogposts.index', [
-            'all_blogposts' =>  $blogposts,
+            'all_blogposts' =>  Blogpost::paginateSortAndFilter([
+                'sort' => $request->input('sort', 'id,desc'),
+            ]),
         ]);
     }
 

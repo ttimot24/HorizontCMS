@@ -93,7 +93,14 @@
                             @if (isset($page) && $page->hasImage())
                                 <button type='button' class='btn btn-link mb-5 w-100' data-bs-toggle='modal'
                                     data-bs-target='#modal-xl-{{ $page->id }}'>
-                                    <img src='{{ $page->getThumb() }}' class='img img-thumbnail w-100'>
+                                    @if($page->getFeaturedMediaType()==='video')
+                                        <video controls class="w-100" style="max-height:500px;">
+                                            <source src="{{ $page->getImage()}}">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    @else
+                                        <img src='{{ $page->getThumb() }}' class='img img-thumbnail w-100'>
+                                    @endif
                                 </button>
                             @endif
 
@@ -112,7 +119,7 @@
                             <label for='text'>{{ trans('page.page_content') }}</label>
 
                             <text-editor id="texteditor" :name="'page'"
-                                :data="'{{ remove_linebreaks(old('page', isset($page) ? $page->page : '')) }}'"
+                                :data="'{{ remove_linebreaks(old('page', isset($page) ? str_replace("'", "&#39;", $page->page) : '')) }}'"
                                 :language="'{{ config('app.locale') }}'"
                                 :filebrowserBrowseUrl="'{{ route('filemanager.index', ['path' => 'images/pages', 'mode' => 'embed']) }}'"
                                 :filebrowserUploadUrl="'{{ route('file-manager.store', ['dir_path' => 'storage/images/pages']) }}'">
