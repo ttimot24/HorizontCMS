@@ -9,7 +9,13 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 trait UploadsImage {
 
+    protected $maxFileSize = 2560; // 2.5 MB
+
     protected $form_field_name = 'up_file';
+
+    private function getMaxImageSize(){
+        return $this->maxFileSize;
+    }
 
     private function getStrippedDirectoryPath($model){
         return str_replace('storage/', '', $model->getImageDirectory());
@@ -22,6 +28,10 @@ trait UploadsImage {
         }
 
         if (request()->hasFile($this->form_field_name)) {
+
+            request()->validate([
+                $this->form_field_name => 'nullable|image|max:' . $this->getMaxImageSize(),
+            ]);
 
             File::ensureDirectoryExists($model->getImageDirectory());
             $img = request()->{$this->form_field_name}->store($this->getStrippedDirectoryPath($model));

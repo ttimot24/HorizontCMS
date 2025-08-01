@@ -317,6 +317,13 @@
                                     <label for='file'>Upload file</label>
                                     <input name='up_file' id='input-2' type='file' class='file' accept="image/*, video/*"
                                         multiple='true' data-show-upload='false' data-show-caption='true' required>
+
+
+                                    @error('up_file')
+                                        <div class="text-danger" role="alert">
+                                            <strong>{{ $errors->first('up_file') }}</strong>
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="header-image-title" class="form-label">Tagline</label>

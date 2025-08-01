@@ -110,6 +110,13 @@
                                     multiple='true'
                                     data-drop-zone-enabled="{{ isset($page) && $page->hasImage() ? 'false' : 'true' }}"
                                     data-show-upload='false' data-show-caption='true'>
+
+                                
+                                @error('up_file')
+                                    <div class="text-danger" role="alert">
+                                        <strong>{{ $errors->first('up_file') }}</strong>
+                                    </div>
+                                @enderror
                             </div>
 
                         </div>

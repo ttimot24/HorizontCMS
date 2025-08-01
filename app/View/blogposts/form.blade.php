@@ -83,6 +83,13 @@
                                     data-remove-class="btn btn-default" data-show-upload='false' data-show-caption='true'>
                             </div>
 
+
+                            @error('up_file')
+                                <div class="text-danger" role="alert">
+                                    <strong>{{ $errors->first('up_file') }}</strong>
+                                </div>
+                            @enderror
+
                         </div>
 
                         <div class="col-12">
