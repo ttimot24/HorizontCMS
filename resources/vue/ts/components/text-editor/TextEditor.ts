@@ -68,7 +68,7 @@ export default defineComponent({
                 fullPage: true,
                 allowedContent: true,
                 extraPlugins: 'uploadimage',
-                uploadImage_supportedTypes: /image\/(jpeg|png|gif|bmp|webp)/
+                uploadImage_supportedTypes: /image\/(jpeg|png|gif|bmp|webp|svg)/
             }
         };
     },

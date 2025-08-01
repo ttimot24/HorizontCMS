@@ -1,30 +1,33 @@
     <?php
 
-        $type = rescue(fn() => explode('/', mime_content_type($this->getImageFilePath()))[0], 'unknown');
+        try {
 
-        if ($type === "image") {
-            $size = getimagesize($image);
-            $image_size = $size[3];
-            $image_size_width = explode("width=\"", $image_size);
-            $image_size_width = explode("\"", $image_size_width[1]);
+            $type = rescue(fn() => explode('/', mime_content_type($this->getImageFilePath()))[0], 'image');
 
-            $image_size_height = explode("height=\"", $image_size);
-            $image_size_height = explode("\"", $image_size_height[1]);
+            if ($type === "image") {
+                $size = getimagesize($image);
+                $image_size = $size[3];
+                $image_size_width = explode("width=\"", $image_size);
+                $image_size_width = explode("\"", $image_size_width[1]);
 
-            $display_type = 'image';
+                $image_size_height = explode("height=\"", $image_size);
+                $image_size_height = explode("\"", $image_size_height[1]);
 
-        } else if ($type === "video") {
-            $image_size_width[0] = "N/A";
-            $image_size_height[0] = "N/A";
-            $size['mime'] = mime_content_type($image);
+                $display_type = 'image';
 
-            $display_type = 'video';
-        } else {
+            } else if ($type === "video") {
+                $image_size_width[0] = "N/A";
+                $image_size_height[0] = "N/A";
+                $size['mime'] = mime_content_type($image);
 
+                $display_type = 'video';
+            }
+
+        } catch (\Exception $e) {
+            $image = '';
             $image_size_width[0] = "N/A";
             $image_size_height[0] = "N/A";
             $size['mime'] = 'unknown';
-
             $display_type = 'unknown';
         }
    

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use App\Model\Settings;
 
@@ -23,6 +24,8 @@ class SettingsController extends Controller
         foreach ($request->all() as $key => $value) {
             Settings::updateOrCreate(['setting' => $key], ['value' => $value, 'more' => 1]);
         }
+
+        Cache::forget('settings');
 
         return redirect()->back()->withMessage(['success' => trans('message.successfully_saved_settings')]);
     }
