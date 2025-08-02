@@ -64,7 +64,14 @@
                             @if (isset($blogpost) && $blogpost->hasImage())
                                 <button type='button' class='btn btn-link mb-5 w-100' data-bs-toggle='modal'
                                     data-bs-target='#modal-xl-{{ $blogpost->id }}'>
+                                @if($blogpost->getFeaturedMediaType()==='video')
+                                    <video controls class="w-100" style="max-height:500px;">
+                                        <source src="{{ $blogpost->getImage()}}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
                                     <img src='{{ $blogpost->getThumb() }}' class='img img-thumbnail w-100'>
+                                @endif
                                 </button>
                             @endif
 
@@ -76,13 +83,20 @@
                                     data-remove-class="btn btn-default" data-show-upload='false' data-show-caption='true'>
                             </div>
 
+
+                            @error('up_file')
+                                <div class="text-danger" role="alert">
+                                    <strong>{{ $errors->first('up_file') }}</strong>
+                                </div>
+                            @enderror
+
                         </div>
 
                         <div class="col-12">
                             <div class='form-group pull-left col-12'>
                                 <label for='text'>{{ trans('blogpost.post') }}</label>
                                 <text-editor id="texteditor" :name="'text'"
-                                    :data="'{{ remove_linebreaks(old('blogpost', isset($blogpost) ? $blogpost->text : '')) }}'"
+                                    :data="'{{ remove_linebreaks(old('blogpost', isset($blogpost) ? str_replace("'", "&#39;", $blogpost->text) : '')) }}'"
                                     :language="'{{ config('app.locale') }}'"
                                     :filebrowserBrowseUrl="'{{ route('filemanager.index', ['path' => 'images/blogposts', 'mode' => 'embed']) }}'"
                                     :filebrowserUploadUrl="'{{ route('file-manager.store', ['dir_path' => 'storage/images/blogposts']) }}'">
@@ -123,7 +137,7 @@
     </div>
 
     @if (isset($blogpost) && $blogpost->hasImage())
-        @include('image_details', ['modal_id' => $blogpost->id, 'image' => $blogpost->getImage()])
+        @include('image_details', ['modal_id' => $blogpost->id, 'image' => $blogpost->getImageFilePath()])
     @endif
 
 @endsection

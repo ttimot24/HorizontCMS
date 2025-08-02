@@ -115,6 +115,13 @@
                                 <input name='up_file' accept='image/*' id='input-2' type='file' class='file'
                                     multiple='true' data-drop-zone-enabled="{{ isset($user) ? 'false' : 'true' }}"
                                     data-show-upload='false' data-show-caption='true'>
+
+
+                                @error('up_file')
+                                    <div class="text-danger" role="alert">
+                                        <strong>{{ $errors->first('up_file') }}</strong>
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 

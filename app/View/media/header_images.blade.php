@@ -38,13 +38,13 @@
                                             style=' font-size: 1.4em;z-index:15;top:3px;right:3px;margin-bottom:-15px;'></span>
                                     </a>
 
-                                    @if($each->type === 'video')
+                                    @if($each->getFeaturedMediaType()==='video')
                                         <video controls width='100%' height='75%;' style="object-fit:cover;">
-                                            <source src="storage/images/header_images/{{ $each->image }}" >
+                                            <source src="{{ $each->getImage() }}" >
                                             Your browser does not support the video tag.
                                         </video> 
                                     @else
-                                    <img src='storage/images/header_images/{{ $each->image }}' alt=''
+                                    <img src='{{ $each->getImage() }}' alt=''
                                         class='card-img-top' width='100%' height='75%;' style="object-fit:cover;">
                                     @endif
 
@@ -186,13 +186,13 @@
                                         @endcan
                                     </div>
                                 </div>
-                                @if($each->type === 'video')
+                                @if($each->getFeaturedMediaType()==='video')
                                 <video controls width='100%' height='75%;' style="object-fit:cover;">
-                                    <source src="storage/images/header_images/{{ $each->image }}" >
+                                    <source src="{{ $each->getImage() }}" >
                                     Your browser does not support the video tag.
                                 </video> 
                                 @else
-                                <img src='storage/images/header_images/{{ $each->image }}' alt=''
+                                <img src='{{ $each->getImage() }}' alt=''
                                     class='card-img-top' width='100%' height='75%;' style="object-fit:cover;">
                                 @endif
                                 <div class="card-body text-black">
@@ -317,6 +317,13 @@
                                     <label for='file'>Upload file</label>
                                     <input name='up_file' id='input-2' type='file' class='file' accept="image/*, video/*"
                                         multiple='true' data-show-upload='false' data-show-caption='true' required>
+
+
+                                    @error('up_file')
+                                        <div class="text-danger" role="alert">
+                                            <strong>{{ $errors->first('up_file') }}</strong>
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="header-image-title" class="form-label">Tagline</label>

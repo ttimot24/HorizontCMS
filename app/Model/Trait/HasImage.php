@@ -36,11 +36,22 @@ trait HasImage
         return $this->hasImage() && file_exists($this->getThumbnailDirectory() . DIRECTORY_SEPARATOR . $this->image);
     }
 
+    public function getImageFilePath(){
+        return $this->getImageDirectory() . DIRECTORY_SEPARATOR . $this->image;
+    }
+
+    public function getThumbnailFilePath(){
+        return $this->getThumbnailDirectory() . DIRECTORY_SEPARATOR . $this->image;
+    }
+
     public function getThumb()
     {
+        if($this->isUrl($this->image)){
+            return $this->image;
+        }
 
         if ($this->thumbnailFileExists()) {
-            return url($this->getThumbnailDirectory() . DIRECTORY_SEPARATOR . $this->image);
+            return url($this->getThumbnailFilePath());
         } else {
             return $this->getImage();
         }
@@ -48,12 +59,19 @@ trait HasImage
 
     public function getImage()
     {
+        if($this->isUrl($this->image)){
+            return $this->image;
+        }
 
         if ($this->imageFileExists()) {
-            return url($this->getImageDirectory() . DIRECTORY_SEPARATOR . $this->image);
+            return url($this->getImageFilePath());
         } else {
             return url($this->getDefaultImage());
         }
+    }
+
+    public function getFeaturedMediaType(): string {
+        return rescue(fn() => explode('/', mime_content_type($this->getImageFilePath()))[0], 'image');
     }
 
     public function getDefaultImage()
@@ -61,9 +79,13 @@ trait HasImage
         return $this->defaultImage;
     }
 
-
     public function setDefaultImage($image)
     {
         $this->defaultImage = $image;
     }
+
+    public function isUrl($string): bool {
+        return filter_var($string, FILTER_VALIDATE_URL);
+    }
+
 }
