@@ -49,34 +49,6 @@ class HeaderImageController extends Controller
 
     }
 
-    public function addToSlider($id)
-    {
-
-        $header_image = \App\Model\HeaderImage::find($id);
-        $header_image->active = 1;
-
-        if ($header_image->save()) {
-            return redirect()->back()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
-        } else {
-            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-    }
-
-    public function removeFromSlider($id)
-    {
-
-        $header_image = \App\Model\HeaderImage::find($id);
-        $header_image->active = 0;
-
-        if ($header_image->save()) {
-            return redirect()->back()->withMessage(['success' => trans('message.successfully_added_headerimage')]);
-        } else {
-            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-
-        return redirect()->back();
-    }
-
     /**
      * Store a newly created resource in storage.
      *

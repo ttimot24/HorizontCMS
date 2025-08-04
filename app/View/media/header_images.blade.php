@@ -51,10 +51,16 @@
                                     <div class="card-body text-black">
                                         <h5 class="card-title">{{ $each->title }}<small> | {{$each->type}}</small></h5>
                                     </div>
-                                    <ul class="list-group list-group-flush mb-3">
-                                        <a class='btn btn-danger btn-xs btn-block'
-                                            href='admin/header-image/remove-from-slider/{{ $each->id }}'>Remove from
-                                            slider</a>
+                                    <ul class="list-group list-group-flush mb-3 pt-3">
+                                        <form action="{{ route('headerimage.update', ['headerimage' => $each]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="active" value="0">
+                                            <button type="submit" class="btn btn-danger btn-xs w-100">
+                                                Remove from slider
+                                            </button>
+                                        </form>
                                     </ul>
                                 </div>
 
@@ -160,15 +166,21 @@
                                 <div class="card-header py-2 px-0 bg-white">
                                     <div class="row">
                                         <div class="col-9">
-                                            <a class='btn-sm'
-                                                href='admin/header-image/add-to-slider/{{ $each->id }}'>Add to
-                                                slider</a>
+                                            <form action="{{ route('headerimage.update', ['headerimage' => $each]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="active" value="1">
+                                                <button type="submit" class="btn  btn-link p-0">
+                                                    Add to slider
+                                                </button>
+                                            </form>
                                         </div>
                                         <div class="col-1">
                                             <a href="#" data-bs-toggle='modal'
                                                 data-bs-target='#headline-image-{{ $each->id }}'>
                                                 <span class='fa fa-pencil' aria-hidden='true'
-                                                    style=' font-size: 1.4em;z-index:15;'></span>
+                                                    style='font-size: 1.4em;z-index:15;'></span>
                                             </a>
                                         </div>
                                         @can('delete', 'headerimage')
