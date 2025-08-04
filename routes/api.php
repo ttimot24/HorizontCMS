@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +87,9 @@ Route::apiResource('search', \App\Controllers\SearchController::class)
 
 Route::get('/settings', function(Request $request){
 
-    $settings = \App\Model\Settings::group('website')->get();
+    $settings = Cache::get('settings', function () {
+        return \App\Model\Settings::group('website')->get();
+    });
 
     return response()->json($settings);
 

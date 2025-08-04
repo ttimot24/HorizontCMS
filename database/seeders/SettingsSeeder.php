@@ -236,6 +236,13 @@ class SettingsSeeder extends Seeder
 
         DB::table('settings')->insert([
             'group' => 'website', 
+            'setting' => 'social_link_pinterest',
+            'value' => "",
+            
+        ]);
+
+        DB::table('settings')->insert([
+            'group' => 'website', 
             'setting' => 'social_link_github',
             'value' => "",
             
