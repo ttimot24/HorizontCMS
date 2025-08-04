@@ -113,6 +113,7 @@
                             <div class='form-group'>
                                 <label for='file'>{{ trans('actions.upload_image') }}:</label>
                                 <input name='up_file' accept='image/*' id='input-2' type='file' class='file'
+                                    data-max-file-size="{{ config('horizontcms.max_upload_file_size', 2560) }}KB"
                                     multiple='true' data-drop-zone-enabled="{{ isset($user) ? 'false' : 'true' }}"
                                     data-show-upload='false' data-show-caption='true'>
 

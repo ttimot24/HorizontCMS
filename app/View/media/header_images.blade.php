@@ -328,6 +328,7 @@
                                 <div class='form-group'>
                                     <label for='file'>Upload file</label>
                                     <input name='up_file' id='input-2' type='file' class='file' accept="image/*, video/*"
+                                        data-max-file-size="{{ config('horizontcms.max_upload_file_size', 2560) }}KB"
                                         multiple='true' data-show-upload='false' data-show-caption='true' required>
 
 

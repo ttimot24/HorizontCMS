@@ -14,7 +14,9 @@ return [
 
 	'admin_logo' => 'resources/logo.png',
 	
-	'default_date_format' => 'Y.m.d H:i:s',
+	'default_date_format' => env('HCMS_DEFAULT_DATE_FORMAT', 'Y.m.d H:i:s'),
+
+	'max_upload_file_size' => env('HCMS_MAX_UPLOAD_FILE_SIZE', 2560), // 2.5 MB
 
 	'sattelite_url' => env('HCMS_CENTRAL_REPO','http://eterfesztival.hu/hcms_online_store/satellite/public/api'),
 

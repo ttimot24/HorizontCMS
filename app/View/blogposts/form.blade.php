@@ -79,6 +79,7 @@
                                 <label for='file'>{{ trans('actions.upload_image') }}</label>
                                 <input name='up_file' accept='image/*' id='input-2' type='file' class='file'
                                     multiple='true'
+                                    data-max-file-size="{{ config('horizontcms.max_upload_file_size', 2560) }}KB"
                                     data-drop-zone-enabled="{{ isset($blogpost) && $blogpost->hasImage() ? 'false' : 'true' }}"
                                     data-remove-class="btn btn-default" data-show-upload='false' data-show-caption='true'>
                             </div>

@@ -9,12 +9,10 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 trait UploadsImage {
 
-    protected $maxFileSize = 2560; // 2.5 MB
-
     protected $form_field_name = 'up_file';
 
     private function getMaxImageSize(){
-        return $this->maxFileSize;
+        return config('horizontcms.max_upload_file_size', 2560); // 2.5 MB
     }
 
     private function getStrippedDirectoryPath($model){
