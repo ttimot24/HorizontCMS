@@ -37,12 +37,12 @@ class SettingsController extends Controller
         return [
             ['name' => trans('settings.website'), 'link' => route('settings.show', ['setting' => 'website']), 'icon' => 'fa fa-globe'],
             ['name' => trans('settings.admin_area'), 'link' => route('settings.show', ['setting' => 'adminarea']), 'icon' => 'fa fa-desktop'],
-            ['name' => trans('settings.update_center'), 'link' => route('upgrade.index'), 'icon' => 'fa fa-arrow-circle-o-up'],
+            ['name' => trans('settings.update_center'), 'link' => route('upgrade.index'), 'icon' => 'fa fa-arrow-circle-up'],
             ['name' => trans('settings.server'), 'link' => route('settings.show', ['setting' => 'server']), 'icon' => 'fa fa-server'],
-            ['name' => trans('settings.social_media'), 'link' => route('settings.show', ['setting' => 'socialmedia']), 'icon' => 'fa fa-thumbs-o-up'],
+            ['name' => trans('settings.social_media'), 'link' => route('settings.show', ['setting' => 'socialmedia']), 'icon' => 'fa fa-thumbs-up'],
             ['name' => trans('Log'), 'link' => route('log.index'), 'icon' => 'fa fa-bug'],
             ['name' => trans('settings.database'), 'link' => route('settings.show', ['setting' => 'database']), 'icon' => 'fa fa-database'],
-            ['name' => trans('settings.scheduler'), 'link' => route('schedule.index', ['setting' => 'schedules']), 'icon' => 'fa fa-clock-o'],
+            ['name' => trans('settings.scheduler'), 'link' => route('schedule.index', ['setting' => 'schedules']), 'icon' => 'fa fa-clock'],
         ];
     }
 

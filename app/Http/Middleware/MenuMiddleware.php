@@ -21,11 +21,11 @@ class MenuMiddleware
 
         \Menu::make('MainMenu', function ($menu) {
 
-            $menu->add("<i class='fa fa-circle-o-notch'></i>" . trans('navbar.dashboard'), route("dashboard.index"));
+            $menu->add("<i class='fa fa-circle-notch'></i>" . trans('navbar.dashboard'), route("dashboard.index"));
 
             if (Gate::allows('view', 'blogpost')) {
                 $menu->add(trans('navbar.news'), '#')->id('news');
-                $menu->find('news')->add("<i class='fa fa-newspaper-o'></i> " . trans('navbar.posted_news'), route('blogpost.index'));
+                $menu->find('news')->add("<i class='fa fa-newspaper'></i> " . trans('navbar.posted_news'), route('blogpost.index'));
 
                 if (Gate::allows('create', 'blogpost')) {
                     $menu->find('news')->add("<i class='fa fa-pencil'></i> " . trans('navbar.create_post'), route('blogpost.create'));
@@ -49,17 +49,17 @@ class MenuMiddleware
 
             if (Gate::allows('view', 'page')) {
                 $menu->add(trans('navbar.pages'), '#')->id('pages');
-                $menu->find('pages')->add("<i class='fa fa-files-o'></i> " . trans('navbar.page_list'), route('page.index'));
-                $menu->find('pages')->add("<i class='fa fa-pencil-square-o'></i> " . trans('navbar.page_add'), route('page.create'));
+                $menu->find('pages')->add("<i class='fa fa-file'></i> " . trans('navbar.page_list'), route('page.index'));
+                $menu->find('pages')->add("<i class='fa fa-pencil-square'></i> " . trans('navbar.page_add'), route('page.create'));
             }
 
             if (Gate::allows('view', 'filemanager') || Gate::allows('view', 'headerimage')) {
                 $menu->add(trans('navbar.media'), '#')->id('media');
                 if (Gate::allows('view', 'filemanager')) {
-                    $menu->find('media')->add("<i class='fa fa-folder-open-o'></i> " . trans('navbar.filemanager'), route('filemanager.index'));
+                    $menu->find('media')->add("<i class='fa fa-folder-open'></i> " . trans('navbar.filemanager'), route('filemanager.index'));
                 }
                 if (Gate::allows('view', 'headerimage')) {
-                    $menu->find('media')->add("<i class='fa fa-picture-o'></i> " . trans('navbar.header_images'), route('headerimage.index'));
+                    $menu->find('media')->add("<i class='fa fa-images'></i> " . trans('navbar.header_images'), route('headerimage.index'));
                 }
             }
 

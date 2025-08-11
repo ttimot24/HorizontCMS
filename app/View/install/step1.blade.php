@@ -26,9 +26,9 @@
                     </select>
                 </div>
                 </br></br>
-                <a href="{{ route('install.index') }}" class='btn btn-secondary btn-sm'><i class="fa fa-arrow-circle-o-left"
+                <a href="{{ route('install.index') }}" class='btn btn-secondary btn-sm'><i class="fa fa-arrow-circle-left"
                         aria-hidden="true"></i> Previous</a>
-                <button type='submit' class='btn btn-primary btn-md px-3'>Next <i class="fa fa-arrow-circle-o-right ml-2"
+                <button type='submit' class='btn btn-primary btn-md px-3'>Next <i class="fa fa-arrow-circle-right ml-2"
                         aria-hidden="true"></i></button>
             </form>
 

@@ -88,9 +88,9 @@
                 </div>
                 <div class="pt-5">
                     <a href="{{route('install.show', 'step1')}}"><button type='button' class='btn btn-secondary btn-sm'><i
-                                class="fa fa-arrow-circle-o-left" aria-hidden="true"></i> Previous</button></a>
+                                class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</button></a>
                     <button type='submit' class='btn btn-primary btn-md px-3'>Next <i
-                            class="fa fa-arrow-circle-o-right ml-2" aria-hidden="true"></i></button>
+                            class="fa fa-arrow-circle-right ml-2" aria-hidden="true"></i></button>
                 </div>
             </form>
 

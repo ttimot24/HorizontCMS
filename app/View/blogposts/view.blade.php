@@ -30,7 +30,7 @@
                 @endphp
 
                 @include('breadcrumb', [
-                    'links' => [['name' => 'Content'], ['name' => 'Blog', 'url' => route('blogpost.index')]],
+                    'links' => [['name' => 'Content'], ['name' => 'Blog', 'url' => route('blogpost.index')], ['name' => $blogpost->title, 'url' => route('blogpost.show', ['blogpost' => $blogpost])], ['name' => 'View']],
                     'page_title' => trans('blogpost.view_blogpost'),
                     'buttons' => null,
                     'buttons_right' => $buttons,
@@ -85,15 +85,15 @@
                                     @endif
                                     @can('update', 'blogpost')
                                     <a href="{{ route('blogpost.edit', ['blogpost' => $blogpost]) }}" type='button'
-                                        class='btn btn-warning'><span class='glyphicon glyphicon-pencil'
-                                            aria-hidden='true'></span>
+                                        class='btn btn-warning'><i class='fa fa-pencil'
+                                            aria-hidden='true'></i>
                                         {{ trans('actions.edit') }} </a>
                                     @endcan
 
                                     @can('delete', 'blogpost')
                                     <button type='button' class='btn btn-danger' data-bs-toggle='modal'
                                         data-bs-target='#delete_{{ $blogpost->id }}'>
-                                        <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
+                                        <i class='fa fa-trash' aria-hidden='true'></i>
                                         {{ trans('actions.remove') }}
                                     </button>
                                     @endcan

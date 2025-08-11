@@ -109,7 +109,7 @@
                                     @endcan
 
                                     @can('delete', 'userrole')
-                                    <a data-bs-toggle='modal' data-bs-target='#delete_{{ $role->id }}' class='btn btn-danger btn-sm w-25' {{ $disable }}><i class='fa fa-trash-o' aria-hidden='true'></i></a>
+                                    <a data-bs-toggle='modal' data-bs-target='#delete_{{ $role->id }}' class='btn btn-danger btn-sm w-25' {{ $disable }}><i class='fa fa-trash' aria-hidden='true'></i></a>
                                     @endcan
                                 </div>
                             </div>

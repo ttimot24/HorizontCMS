@@ -76,7 +76,7 @@
                             </td>
                             <td class='col' style='text-align:justify;'>{{ $comment->comment }}</td>
                             <td>{{ $comment->created_at->format('Y.m.d') }} </br>
-                                <font size='2'><i>at {{ $comment->created_at->format('H:i:s') }}</i></font>
+                                <i>at {{ $comment->created_at->format('H:i:s') }}</i>
                             </td>
 
                             <td class="text-center">
@@ -84,14 +84,14 @@
 
                                 <div class="dropdown">
                                     <div data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
-                                        <i class="bi bi-three-dots-vertical text-dark"></i>
+                                        <i class="fa-solid fa-ellipsis-vertical text-dark fs-5"></i>
                                     </div>
                                     <ul class="dropdown-menu text-dark">
                                         <li>
                                             <a data-bs-toggle='modal' data-bs-target=#delete_<?= $comment->id ?>
                                                 class="dropdown-item text-danger text-decoration-none"
                                                 style="cursor: pointer;">
-                                                <i class="fa fa-trash-o me-2" aria-hidden="true"></i>
+                                                <i class="fa fa-trash me-2" aria-hidden="true"></i>
                                                 {{ trans('actions.delete') }}
                                             </a>
                                         </li>
@@ -122,7 +122,7 @@
                         <div class='modal-header-warning bg-warning text-white p-2'>
                             <button type='button' class='btn-close col-md-6 float-end' data-bs-dismiss='modal'
                                 aria-label='Close'></button>
-                            <h4 class='modal-title col-md-6'><span class='fa fa-comment-o'></span>
+                            <h4 class='modal-title col-md-6'><span class='fa fa-comment'></span>
                                 {{ trans('comment.write_comment_button') }}</h4>
                         </div>
 

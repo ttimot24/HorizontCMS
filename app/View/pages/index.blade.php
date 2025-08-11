@@ -111,7 +111,7 @@
 
                                     <div class="dropdown">
                                         <div data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
-                                            <i class="bi bi-three-dots-vertical text-dark"></i>
+                                            <i class="fa-solid fa-ellipsis-vertical text-dark fs-5"></i>
                                         </div>
                                         <ul class="dropdown-menu text-dark">
                                             @can('update', 'page')
@@ -128,7 +128,7 @@
                                                 <a data-bs-toggle='modal' data-bs-target=#delete_<?= $each->id ?>
                                                     class="dropdown-item text-danger text-decoration-none"
                                                     style="cursor: pointer;">
-                                                    <i class="fa fa-trash-o me-2" aria-hidden="true"></i>
+                                                    <i class="fa fa-trash me-2" aria-hidden="true"></i>
                                                     {{ trans('actions.delete') }}
                                                 </a>
                                             </li>

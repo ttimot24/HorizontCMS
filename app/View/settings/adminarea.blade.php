@@ -122,8 +122,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button type='submit' class='btn btn-primary btn-lg'><span class='fa fa-floppy-o'
-                                aria-hidden='true'></span> {{ trans('settings.adminarea_save_settings') }}</button>
+                        <button type='submit' class='btn btn-primary btn-lg'><i class="fa-solid fa-floppy-disk"></i> {{ trans('settings.adminarea_save_settings') }}</button>
                     </div>
                 </form>
 

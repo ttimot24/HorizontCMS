@@ -82,7 +82,7 @@
                         <div class='panel-heading  bg-primary text-white p-2'>
                             <h6 class='panel-title mb-0 p-1'>
                                 <b>{{ trans('dashboard.posted_news_count') }}</b>
-                                <div class='pull-right'><i class='fa fa-newspaper-o'></i></div>
+                                <div class='float-end'><i class='fa fa-newspaper'></i></div>
                             </h6>
                         </div>
                         <div class='panel-body bg-dark text-center text-white'>
@@ -97,7 +97,7 @@
                         <div class='panel-heading bg-primary text-white p-2'>
                             <h6 class='panel-title mb-0 p-1'>
                                 <b>{{ trans('dashboard.registered_users_count') }}</b>
-                                <div class='pull-right'><i class='fa fa-users'></i></div>
+                                <div class='float-end'><i class='fa fa-users'></i></div>
                             </h6>
                         </div>
                         <div class='panel-body bg-dark text-center text-white'>
@@ -111,7 +111,7 @@
                         <div class='panel-heading  bg-primary text-white p-2'>
                             <h6 class='panel-title mb-0 p-1'>
                                 <b>{{ trans('dashboard.visits_count') }}</b>
-                                <div class='pull-right'><i class='fa fa-binoculars'></i></div>
+                                <div class='float-end'><i class='fa fa-binoculars'></i></div>
                             </h6>
                         </div>
                         <div class='panel-body bg-dark text-center text-white'>

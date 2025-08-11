@@ -3784,7 +3784,7 @@ __webpack_require__.r(__webpack_exports__);
         fullPage: true,
         allowedContent: true,
         extraPlugins: 'uploadimage',
-        uploadImage_supportedTypes: /image\/(jpeg|png|gif|bmp|webp)/
+        uploadImage_supportedTypes: /image\/(jpeg|png|gif|bmp|webp|svg)/
       }
     };
   },
