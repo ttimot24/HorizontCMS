@@ -87,6 +87,27 @@
                                         <ul class="dropdown-menu text-dark">
                                             @can('update', 'blogpost')
                                             <li>
+                                                <form method="POST"
+                                                action="{{ route('blogpost.update', ['blogpost' => $blogpost]) }}">
+                                                @csrf
+                                                @method('PUT')
+    
+                                                @if($blogpost->isDraft())
+                                                    <input type="hidden" name="active" value="1">
+                                                    <button type="submit" class='dropdown-item text-decoration-none text-darks'>
+                                                        <span class='fa fa-plus me-2' aria-hidden='true'></span>
+                                                        {{ trans('Publish') }}
+                                                    </button>
+                                                @else
+                                                    <input type="hidden" name="active" value="0">
+                                                    <button type="submit" class='dropdown-item text-decoration-none text-darks'>
+                                                        <span class='fa fa-minus me-2' aria-hidden='true'></span>
+                                                        {{ trans('Unpublish') }}
+                                                    </button>
+                                                @endif
+                                            </form>
+                                            </li>
+                                            <li>
                                                 <a href="{{ route('blogpost.edit', ['blogpost' => $blogpost]) }}"
                                                     class="dropdown-item text-decoration-none text-dark">
                                                     <i class="fa fa-pencil me-2" aria-hidden="true"></i>
