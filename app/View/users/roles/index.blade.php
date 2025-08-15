@@ -45,7 +45,7 @@
                                         {{ $role->name }} <small class="text-dark">({{ $role->users->count() }})</small>
 
                                         
-                                        <div class="pull-right" >
+                                        <div class="w-25 float-end justify-content-end text-end" >
                                             
                                             @if (\Auth::user()->role->is($role))
 
@@ -92,7 +92,12 @@
                                     
                                     @endphp
                                         
-                                        <li class='list-group-item bg-dark text-white'>{!! $perm_name !!} <input type='checkbox' class='pull-right' name='{{ $key }}_{{ $action }}' value='1' {{ $check }} {{ $disable }}></li>
+                                        <li class='list-group-item bg-dark text-white'>
+                                            <div class="row">
+                                            <div class="col">{{ $perm_name }}</div>
+                                            <div class="col text-end"><input type='checkbox' name='{{ $key }}_{{ $action }}' value='1' {{ $check }} {{ $disable }}></div>
+                                            </div>
+                                        </li>
                                     @endforeach
                             
 
