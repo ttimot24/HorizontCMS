@@ -6,6 +6,7 @@ use App\Controllers\Trait\UploadsImage;
 use \Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Model\Blogpost;
+use Illuminate\Support\Facades\Gate;
 
 class BlogpostController extends Controller
 {
@@ -14,16 +15,6 @@ class BlogpostController extends Controller
 
     //TODO Use model path
     protected $imagePath = 'images/blogposts';
-
-    /**
-     * Creates image directories if they not exists.
-     *
-     */
-    public function before()
-    {
-        //TODO Use model path
-        \File::ensureDirectoryExists($this->imagePath . '/thumbs');
-    }
 
     /**
      * Display a listing of the resource.
@@ -59,6 +50,9 @@ class BlogpostController extends Controller
     {
 
         return view('blogposts.form', [
+            'users' => \App\Model\User::whereHas('role', function ($query) {
+                $query->whereJsonContains('rights', 'user.update');
+            })->get(),
             'categories' => \App\Model\BlogpostCategory::all(),
         ]);
     }
@@ -74,8 +68,12 @@ class BlogpostController extends Controller
 
         $blogpost = new Blogpost($request->all());
         $blogpost->slug = str_slug($request->input('title'), "-");
-        $blogpost->author()->associate($request->user());
         $blogpost->comments_enabled = 1;
+
+        $blogpost->author()->associate(
+            Gate::allows('update','user') && $request->has('author_id')? 
+            \App\Model\User::findOrFail($request->input('author_id')) : $request->user()
+        );
 
         $this->uploadImage($blogpost);
 
@@ -119,6 +117,9 @@ class BlogpostController extends Controller
         return view('blogposts.form', [
             'blogpost' => $blogpost,
             'categories' => \App\Model\BlogpostCategory::all(),
+            'users' => \App\Model\User::whereHas('role', function ($query) {
+                $query->whereJsonContains('rights', 'user.update');
+            })->get(),
         ]);
     }
 
@@ -137,7 +138,10 @@ class BlogpostController extends Controller
         $blogpost->slug = str_slug($request->input('title', $blogpost->title), "-");
         $blogpost->category_id = $request->input('category_id', $blogpost->category_id);
 
-        $blogpost->author()->associate($request->user());
+        $blogpost->author()->associate(
+            Gate::allows('update','user') && $request->has('author_id')? 
+            \App\Model\User::findOrFail($request->input('author_id')) : $request->user()
+        );
 
         $this->uploadImage($blogpost);
 

@@ -23,7 +23,7 @@
 
                             <div class='form-group col mb-4'>
                                 <label for='title'>{{ trans('blogpost.title') }}</label>
-                                <input type='text' class='form-control @error('title') is-invalid @enderror' id='title' name='title'
+                                <input type='text' class='form-control form-control-lg @error('title') is-invalid @enderror' id='title' name='title'
                                     value="{{ old('title', isset($blogpost) ? $blogpost->title : '') }}" required>
 
                                 @error('title')
@@ -33,6 +33,7 @@
                                 @enderror
                             </div>
 
+                            <div class="row">
                             <div class='form-group col-6 mb-4'>
                                 <label for='sel1'>{{ trans('blogpost.select_category') }}</label>
                                 <select class='form-select' name='category_id' id='sel1'>
@@ -46,9 +47,25 @@
                                 </select>
                             </div>
 
-                            <div class='form-group col  mb-4'>
+                            @can('update', 'user')
+                                <div class='form-group col-6 mb-4'>
+                                    <label for='sel1'>{{ trans('blogpost.author') }}</label>
+                                    <select class='form-select' name='author_id' id='sel1'>
+
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}"
+                                                {{ (isset($blogpost->author) && $user->is($blogpost->author)) || ($user->is(auth()->user())) ? 'selected' : '' }}>
+                                                {{ $user->name }}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                            @endcan
+                            </div>
+
+                            <div class='form-group col mb-4'>
                                 <label for='title'>{{ trans('blogpost.summary') }}</label>
-                                <textarea type='text' maxlength="255" class='form-control @error('summary') is-invalid @enderror' id='summary' name='summary'>{{ old('summary', isset($blogpost) ? $blogpost->summary : '') }}</textarea>
+                                <textarea type='text' maxlength="255" rows="3" class='form-control @error('summary') is-invalid @enderror' id='summary' name='summary'>{{ old('summary', isset($blogpost) ? $blogpost->summary : '') }}</textarea>
                                 </br>
 
                                 @error('summary')
