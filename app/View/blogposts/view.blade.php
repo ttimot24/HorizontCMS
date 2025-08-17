@@ -119,6 +119,11 @@
                                         class="color-primary">{{ $blogpost->getSlug() }}</a></b>
                                 <b class="d-block mb-3">{{ trans('blogpost.published_on') }} : <a
                                         class="color-primary">{{ $blogpost->created_at->format(\Settings::get('date_format', \Config::get('horizontcms.default_date_format'), true)) }}</a></b>
+                                
+                                @if($blogpost->updated_at)
+                                <b class="d-block mb-3">{{ trans('blogpost.last_updated_at') }} : <a
+                                            class="color-primary">{{ $blogpost->updated_at->format(\Settings::get('date_format', \Config::get('horizontcms.default_date_format'), true)) }}</a></b>
+                                @endif
 
                                 @if ($blogpost->category)
                                     <b class="d-block mb-3">{{ trans('blogpost.category') }} : <a class="color-primary"
@@ -136,9 +141,9 @@
                         </div>
                         </div>
 
-                        <div class="col-md-8 mt-2">
-                            <div class='well bg-dark text-white p-4 overflow-auto'>
-                                <h3>{{ $blogpost->title }}</h3>
+                        <div class="col-md-8">
+                            <div class='card bg-dark text-white p-4 overflow-auto'>
+                                <h3 class="fw-bold">{{ $blogpost->title }}</h3>
                                 <hr />
                                 <b>{{ $blogpost->summary }}</b>
                                 <p class="pt-4">

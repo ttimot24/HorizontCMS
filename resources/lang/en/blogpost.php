@@ -32,6 +32,7 @@ return [
 	'author' => 'Author',
 	'slug' => 'Slug',
 	'published_on' => 'Published on',
+	'last_updated_at' => 'Last updated at',
 	'category' => 'Category',
 	'characters' => 'Characters',
 	'words' => 'Words',
