@@ -22,6 +22,7 @@ class CreateHeaderImagesTable extends Migration
             $table->string('title')->nullable();
             $table->string('type')->nullable();
             $table->string('link')->nullable();
+            $table->string('language')->default('en');
             $table->text('description')->nullable();
             $table->string('image');
             $table->integer('order')->nullable();

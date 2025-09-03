@@ -62,12 +62,7 @@
                                     <select name='language' class='form-select'>
 
                                         @foreach ($languages as $key => $language)
-                                            @if ($key == $settings['language'])
-                                                <option value='{{ $key }}' selected>{{ ucfirst($language) }}
-                                                </option>
-                                            @else
-                                                <option value='{{ $key }}'>{{ ucfirst($language) }}</option>
-                                            @endif
+                                            <option value='{{ $key }}' {{ $key == $settings['language']? "selected" : "" }}>{{ ucfirst($language) }}</option>
                                         @endforeach
 
                                     </select>
@@ -105,6 +100,15 @@
                                         <input type='checkbox' class='form-check-input' name='auto_upgrade_check'
                                             value='1' @if ($settings['auto_upgrade_check'] == 1) checked @endif>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <h6 class="text-dark fw-bold">Store URL</h6>
+                                    <p class="text-muted">The plugin and theme repository URL.</p>
+                                </div>
+                                <div class="col-12 col-md-6 mt-3">
+                                    <input type='text' class='form-control' value="{{ config('horizontcms.sattelite_url') }}" disabled>
                                 </div>
                             </div>
                             <hr>

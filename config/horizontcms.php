@@ -18,7 +18,7 @@ return [
 
 	'max_upload_file_size' => env('HCMS_MAX_UPLOAD_FILE_SIZE', 2560), // 2.5 MB
 
-	'sattelite_url' => env('HCMS_CENTRAL_REPO','http://eterfesztival.hu/hcms_online_store/satellite/public/api'),
+	'sattelite_url' => env('HCMS_CENTRAL_REPO','https://smartnow.hu/hcms_online_store/satellite/public/api'),
 
 	'css' => [
 				'resources/css/horizontcms-next.css',
@@ -40,6 +40,10 @@ return [
 				'Plugin' => 'plugins',
 			],
 
-
+	'creator' => [
+				'name' => 'Timot Tarjani',
+				'twitter' => 'http://www.twitter.com/timottarjani',
+				'github' => ''
+	]
 
 ];

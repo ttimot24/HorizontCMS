@@ -39,7 +39,9 @@
 
                         @foreach ($all_blogposts as $blogpost)
                             <tr>
-                                <td><?= $blogpost->id ?></td>
+                                <td>{{  $blogpost->id }}
+                                <br><span class='badge bg-secondary'>{{ strtoupper($blogpost->language) }} </span>
+                                </td>
                                 <td>
                                 @if($blogpost->getFeaturedMediaType()==='video')
                                     <video controls="false" width=70 height=50 >

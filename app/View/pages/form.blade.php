@@ -33,7 +33,8 @@
                                 </div>
                             </div>
 
-                            <div class='form-group pull-left col-xs-12 col-md-12'>
+                            <div class="row p-3">
+                            <div class='form-group pull-left col-xs-12 col-md-8'>
                                 <label for='title'>{{ trans('page.page_template') }}</label>
                                 <select class='form-select' name='url'>
                                     <option value=''>{{ trans('page.default_template') }}</option>
@@ -46,6 +47,21 @@
                                     @endforeach
 
                                 </select>
+                            </div>
+
+                            <div class='form-group pull-left col-xs-12 col-md-4'>
+                                <label for='title'>{{ trans('settings.adminarea_language') }}</label>
+                                <select class='form-select' name='language'>
+
+                                    @foreach (['en' => 'English', 'hu' => 'Magyar'] as $key => $value)
+                                        <option value='{{ $key }}'
+                                            @if ((isset($page) && $key == $page->language) || (!isset($page) && $key == \Settings::get('language'))) selected @endif>
+                                            {{ $value }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
                             </div>
 
                             <div class="row p-3">

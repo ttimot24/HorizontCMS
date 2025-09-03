@@ -55,8 +55,8 @@
                     <div class='col-lg-6 col-sm-12 text-center text-lg-start'>
                         <p class='text-muted credit mb-0'>
                             {{ config('app.name') }} &copy 2015 - {{ date('Y') }} 
-                            <a href='http://www.twitter.com/timottarjani' class="me-1">Timot Tarjani</a>
-                            <a href='https://github.com/ttimot24/HorizontCMS'><i style='font-size: 1.2em'
+                            <a href='{{ config('horizontcms.creator.twitter') }}' class="me-1">{{ config('horizontcms.creator.name') }}</a>
+                            <a href='{{ config('horizontcms.creator.github') }}'><i style='font-size: 1.2em'
                                     class="fab fa-github" aria-hidden="true"></i></a>
                         </p>
                     </div>

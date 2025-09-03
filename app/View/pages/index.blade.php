@@ -79,13 +79,13 @@
                                 </td>
                                 <td>{{ $each->name }}
                                 </td>
-                                <td>@if($each->url)<span class='badge bg-dark'> {{$each->url}}</span> @endif</td>
+                                <td>@if($each->url)<span class='badge bg-dark w-75'> {{$each->url}}</span> @endif</td>
                                 <td>
 
                                     @if ($each->visibility == 1)
-                                        <span class='badge rounded-pill bg-success'>{{ trans('page.visible') }}</span>
+                                        <span class='badge bg-success w-75'>{{ trans('page.visible') }}</span>
                                     @else
-                                        <span class='badge rounded-pill bg-danger'>{{ trans('page.invisible') }}</span>
+                                        <span class='badge bg-danger w-75'>{{ trans('page.invisible') }}</span>
                                     @endif
 
                                 </td>
@@ -94,7 +94,7 @@
                                     @if ($each->parent == null)
                                         <b>{{ trans('page.menu_type1') }}</b>
                                     @else
-                                        <span class='badge bg-info'>
+                                        <span class='badge bg-info w-75'>
                                             {!! trans('page.menu_type2', ['parent_menu' => $each->parent->name]) !!}
                                         </span>
                                     @endif

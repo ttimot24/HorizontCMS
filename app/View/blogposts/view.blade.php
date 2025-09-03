@@ -114,7 +114,7 @@
                                     <b class="d-block mb-3">{{ trans('blogpost.author') }} : <a class="color-primary">
                                             {{ trans('blogpost.removed_user') }} </a> </b>
                                 @endif
-
+                                <b class="d-block mb-3">{{ trans('settings.adminarea_language') }} :  <span class='badge bg-secondary'>{{ strtoupper($blogpost->language) }} </span></b>
                                 <b class="d-block mb-3">{{ trans('blogpost.slug') }} : <a
                                         class="color-primary">{{ $blogpost->getSlug() }}</a></b>
                                 <b class="d-block mb-3">{{ trans('blogpost.published_on') }} : <a

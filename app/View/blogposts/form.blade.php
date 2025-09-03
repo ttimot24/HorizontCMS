@@ -47,6 +47,22 @@
                                 </select>
                             </div>
 
+                            <div class='form-group pull-left col-xs-12 col-md-6'>
+                                <label for='title'>{{ trans('settings.adminarea_language') }}</label>
+                                <select class='form-select' name='language'>
+
+                                    @foreach (['en' => 'English', 'hu' => 'Magyar'] as $key => $value)
+                                        <option value='{{ $key }}'
+                                            @if ((isset($blogpost) && $key == $blogpost->language) || (!isset($blogpost) && $key == \Settings::get('language'))) selected @endif>
+                                            {{ $value }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+
+                            </div>
+                            <div class="row">
                             @can('update', 'user')
                                 <div class='form-group col-6 mb-4'>
                                     <label for='sel1'>{{ trans('blogpost.author') }}</label>
