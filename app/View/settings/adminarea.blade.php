@@ -61,7 +61,7 @@
                                 <div class="col-12 col-md-6 mt-3">
                                     <select name='language' class='form-select'>
 
-                                        @foreach ($languages as $key => $language)
+                                        @foreach (config('horizontcms.languages') as $key => $language)
                                             <option value='{{ $key }}' {{ $key == $settings['language']? "selected" : "" }}>{{ ucfirst($language) }}</option>
                                         @endforeach
 

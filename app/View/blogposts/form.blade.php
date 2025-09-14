@@ -51,7 +51,7 @@
                                 <label for='title'>{{ trans('settings.adminarea_language') }}</label>
                                 <select class='form-select' name='language'>
 
-                                    @foreach (['en' => 'English', 'hu' => 'Magyar'] as $key => $value)
+                                    @foreach (config('horizontcms.languages') as $key => $value)
                                         <option value='{{ $key }}'
                                             @if ((isset($blogpost) && $key == $blogpost->language) || (!isset($blogpost) && $key == \Settings::get('language'))) selected @endif>
                                             {{ $value }}

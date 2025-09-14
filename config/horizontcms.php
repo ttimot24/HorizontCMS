@@ -40,6 +40,11 @@ return [
 				'Plugin' => 'plugins',
 			],
 
+	'languages' => [ //available languages
+				'en' => 'English',
+				'hu' => 'Magyar',
+			],
+
 	'creator' => [
 				'name' => 'Timot Tarjani',
 				'twitter' => 'http://www.twitter.com/timottarjani',

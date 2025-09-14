@@ -93,7 +93,6 @@ class SettingsController extends Controller
     public function adminarea()
     {
         return view('settings.adminarea', [
-            'languages' => ['en' => 'English', 'hu' => 'Magyar'],
             'available_logos' => array_slice(scandir("storage/images/logos"), 2),
             'dateFormats' => ['Y.m.d H:i:s', 'Y-m-d H:i:s', 'Y. M. d H:i:s', 'd-m-Y H:i:s', 'd/m/Y H:i:s', 'm/d/Y H:i:s'],
         ]);

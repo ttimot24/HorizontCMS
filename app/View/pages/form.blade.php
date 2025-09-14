@@ -53,7 +53,7 @@
                                 <label for='title'>{{ trans('settings.adminarea_language') }}</label>
                                 <select class='form-select' name='language'>
 
-                                    @foreach (['en' => 'English', 'hu' => 'Magyar'] as $key => $value)
+                                    @foreach (config('horizontcms.languages') as $key => $value)
                                         <option value='{{ $key }}'
                                             @if ((isset($page) && $key == $page->language) || (!isset($page) && $key == \Settings::get('language'))) selected @endif>
                                             {{ $value }}
@@ -78,10 +78,14 @@
                                 <div class='form-group col-xs-12 col-md-6' id='submenus'>
                                     <label for='submenus'>Parent menu:</label>
                                     <select class='form-select' name='parent_id'>
-                                        @foreach ($all_page as $each)
-                                            <option value="{{ $each->id }}"
-                                                {{ isset($page) && $page->parent != null && $each->is($page->parent) ? 'selected' : '' }}>
-                                                {{ $each->name }}</option>
+                                        @foreach (config('horizontcms.languages') as $key => $value)
+                                        <optgroup label='{{ $value }}'>
+                                            @foreach ($all_page->filter(fn($page) => $page->language == $key) as $each)
+                                                <option value="{{ $each->id }}"
+                                                    {{ isset($page) && $page->parent != null && $each->is($page->parent) ? 'selected' : '' }}>
+                                                    {{ $each->name }}</option>
+                                            @endforeach
+                                        </optgroup>
                                         @endforeach
                                     </select>
                                 </div>
