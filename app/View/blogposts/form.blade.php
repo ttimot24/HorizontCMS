@@ -34,32 +34,20 @@
                             </div>
 
                             <div class="row">
-                            <div class='form-group col-6 mb-4'>
+                            <div class='form-group col-12 mb-4'>
                                 <label for='sel1'>{{ trans('blogpost.select_category') }}</label>
-                                <select class='form-select' name='category_id' id='sel1'>
+                                <select class='form-select' name='category_ids[]' id='category_select' multiple>
 
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}"
-                                            {{ isset($blogpost) && $category->is($blogpost->category) ? 'selected' : '' }}>
+                                            {{ isset($blogpost) && $blogpost->categories->contains($category->id) ? 'selected' : '' }}>
                                             {{ $category->name }}</option>
                                     @endforeach
 
                                 </select>
                             </div>
 
-                            <div class='form-group pull-left col-xs-12 col-md-6'>
-                                <label for='title'>{{ trans('settings.adminarea_language') }}</label>
-                                <select class='form-select' name='language'>
 
-                                    @foreach (config('horizontcms.languages') as $key => $value)
-                                        <option value='{{ $key }}'
-                                            @if ((isset($blogpost) && $key == $blogpost->language) || (!isset($blogpost) && $key == \Settings::get('language'))) selected @endif>
-                                            {{ $value }}
-                                        </option>
-                                    @endforeach
-
-                                </select>
-                            </div>
 
                             </div>
                             <div class="row">
@@ -77,6 +65,19 @@
                                     </select>
                                 </div>
                             @endcan
+                            <div class='form-group pull-left col-xs-12 col-md-6'>
+                                <label for='title'>{{ trans('settings.adminarea_language') }}</label>
+                                <select class='form-select' name='language'>
+
+                                    @foreach (config('horizontcms.languages') as $key => $value)
+                                        <option value='{{ $key }}'
+                                            @if ((isset($blogpost) && $key == $blogpost->language) || (!isset($blogpost) && $key == \Settings::get('language'))) selected @endif>
+                                            {{ $value }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
                             </div>
 
                             <div class='form-group col mb-4'>
@@ -174,4 +175,19 @@
         @include('image_details', ['modal_id' => $blogpost->id, 'image' => $blogpost->getImageFilePath()])
     @endif
 
+@endsection
+
+@section('head')
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type='text/javascript' defer>
+
+            $(document).ready(function() {
+
+                $("#category_select").select2({
+                    theme: "bootstrap-5",
+                });
+
+            });
+    </script>
+    
 @endsection

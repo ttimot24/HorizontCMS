@@ -15,6 +15,8 @@
 
                 $display_type = 'image';
 
+                $thumbnail = str_replace(basename($image), 'thumbs/'.basename($image), $image);
+
             } else if ($type === "video") {
                 $image_size_width[0] = "N/A";
                 $image_size_height[0] = "N/A";
@@ -55,11 +57,20 @@
                             @else
                                 <p>Unsupported media type.</p>
                             @endif
+
+                            @if($thumbnail)
+                            <div class="row">
+                                <div class="col">
+                                    <img src='{{ $thumbnail }}' class='img img-thumbnail' style='max-height:100px; margin-top:10px;cursor: pointer;' onclick="window.open('{{ $image }}', '_blank');" title='Download'>
+                                </div>
+                            </div>
+                            @endif
+
                         </div>
                         <div class='col-7' valign='top'>
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 style="margin-top: .5rem !important; margin-bottom: .5rem !important;">Details</h4>
+                                    <h5 style="margin-top: .5rem !important; margin-bottom: .5rem !important;">Details</h5>
                                 </div>
                                 <div class="card-body">
                                     <h4>File name</h4> {{ basename($image) }}

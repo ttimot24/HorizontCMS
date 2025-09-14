@@ -75,6 +75,8 @@ class BlogpostController extends Controller
             \App\Model\User::findOrFail($request->input('author_id')) : $request->user()
         );
 
+        $blogpost->categories()->sync($request->input('category_ids', []));
+
         $this->uploadImage($blogpost);
 
         return $blogpost->save() ? redirect(route("blogpost.edit", ['blogpost' => $blogpost]))->withMessage(['success' => trans('message.successfully_created_blogpost')])
@@ -136,7 +138,7 @@ class BlogpostController extends Controller
         $blogpost->fill($request->all());
 
         $blogpost->slug = str_slug($request->input('title', $blogpost->title), "-");
-        $blogpost->category_id = $request->input('category_id', $blogpost->category_id);
+        $blogpost->categories()->sync($request->input('category_ids', $blogpost->category_ids()->pluck('id')->toArray()));
 
         $blogpost->author()->associate(
             Gate::allows('update','user') && $request->has('author_id')? 

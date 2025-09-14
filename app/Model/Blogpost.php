@@ -30,7 +30,8 @@ class Blogpost extends Model
     public static $rules = [
         'title' => 'required',
         'summary' => 'max:255',
-        'category_id' => 'required'
+        'category_ids' => 'required|array|min:1',
+        'category_ids.*' => 'exists:blogpost_categories,id',
     ];
 
     protected $filterableFields  = ['title', 'summary', 'text'];
@@ -83,6 +84,10 @@ class Blogpost extends Model
         return $this->hasOne(BlogpostCategory::class, 'id', 'category_id'); //In db it has to be category_id else it won't work because Laravel priority is attr -> function
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(BlogpostCategory::class, 'blogpost_categories_pivot');
+    }
 
     public function comments()
     {

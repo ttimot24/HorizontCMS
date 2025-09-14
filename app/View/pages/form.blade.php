@@ -27,7 +27,7 @@
                                     onkeyup="ajaxGetSlug();" value="{{ old('name', isset($page) ? $page->name : '') }}"
                                     required>
                                 <div class="form-text">
-                                    <b>{{ trans('page.semantic_url') }}:</b>&nbsp&nbsp&nbsp{{ rtrim(Config::get('app.url'), '/') }}<a
+                                    <b>{{ trans('page.semantic_url') }}:</b>&nbsp&nbsp&nbsp{{ rtrim(config('app.url'), '/') }}<a
                                         class='text-muted'
                                         id='ajaxSlug'>{{ isset($page) ? UrlManager::seo_url($page->name) : '' }}</a>
                                 </div>
@@ -178,7 +178,7 @@
 @endsection
 
 @section('head')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type='text/javascript' defer>
 
             $(document).ready(function() {

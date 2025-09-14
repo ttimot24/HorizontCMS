@@ -3,8 +3,10 @@
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
  */
+import * as $ from "jquery";
 import * as bootstrap from "bootstrap";
 import "bootstrap-fileinput";
+import "select2";
 
 import CKEditor from 'ckeditor4-vue';
 import TextEditor from './components/text-editor/TextEditor.vue';
@@ -58,3 +60,6 @@ export default hcms;
 window.hcms = hcms;
 
 window.bootstrap = bootstrap;
+
+(window as any).$ = $;
+(window as any).jQuery = $;
