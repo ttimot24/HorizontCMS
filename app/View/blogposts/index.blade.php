@@ -64,8 +64,8 @@
                                 </td>
                                 <td class="text-center"><span
                                         class="badge rounded-pill bg-dark">{{ count($blogpost->comments) }}</span></td>
-                                <td class='hidden-xs text-center col-1'><?= $blogpost->created_at->format('Y-m-d') ?></br>
-                                    <font size='2'><i>at</i> <?= $blogpost->created_at->format('H:i:s') ?></font>
+                                <td class='hidden-xs text-center justify-content-center align-items-center col-1'>{{ $blogpost->created_at->format('Y-m-d') }}</br>
+                                    <font size='2'><i>at</i> {{ $blogpost->created_at->format('H:i:s') }}</font>
                                 </td>
                                 @if ($blogpost->author)
                                     <td><a
@@ -74,9 +74,14 @@
                                 @else
                                     <td>{{ trans('blogpost.removed_user') }}</td>
                                 @endif
-                                @if ($blogpost->category)
-                                    <td class='hidden-xs'><span class="badge bg-success d-block"
-                                            style='font-size:13px;'>{{ $blogpost->category->name }}</span></td>
+                                @if ($blogpost->categories)
+                                    <td class='hidden-xs col-1'>
+                                    @foreach($blogpost->categories as $category)
+
+                                        <span class="badge bg-success {{ $blogpost->categories->count()==1? 'd-block' : '' }}" style='font-size:13px;'>{{ $category->name }}</span>
+                                  
+                                    @endforeach
+                                    </td>
                                 @else
                                     <td class='hidden-xs'>none</td>
                                 @endif

@@ -36,7 +36,7 @@
                             <div class="row">
                             <div class='form-group col-12 mb-4'>
                                 <label for='sel1'>{{ trans('blogpost.select_category') }}</label>
-                                <select class='form-select' name='category_ids[]' id='category_select' multiple>
+                                <select class='form-select' name='category_ids[]' id='category_select' multiple required>
 
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}"
