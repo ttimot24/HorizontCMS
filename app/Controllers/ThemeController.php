@@ -33,9 +33,35 @@ class ThemeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($theme)
     {
-        return $this->{$id}();
+
+        if (request()->wantsJson()) {
+            $theme = new Theme($theme);
+
+            return response()->json($theme);
+        }
+
+        return null;
+    }
+
+    public function create()
+    {
+        $repo_status = true;
+
+        try {
+
+            $themes = json_decode(file_get_contents(\Config::get('horizontcms.sattelite_url') . '/get_themes.php'));
+
+            if ($themes == null) {
+                throw ErrorException('Could not fetch Themes');
+            }
+        } catch (\ErrorException $e) {
+            $themes = [];
+            $repo_status = false;
+        }
+
+        return view('theme.store', ['online_themes' => $themes, 'repo_status' => $repo_status]);
     }
 
     /**
@@ -63,7 +89,7 @@ class ThemeController extends Controller
     }
 
 
-    public function options($theme)
+    public function edit($theme)
     {
 
         if (!Settings::has('custom_css_' . snake_case($theme))) {
@@ -82,49 +108,8 @@ class ThemeController extends Controller
             $translations[$lang] = json_decode(file_get_contents($theme->getPath() . $theme->languagePath . "/" . $lang . ".json"));
         }
 
-        return view('theme.options', ['option' => empty(request()->input('option')) ? 'style' : request()->input('option'), 'translations' => $translations, 'theme' => $theme->getRootDir(), 'settings' => request()->settings]);
+        return view('theme.form', ['option' => empty(request()->input('option')) ? 'style' : request()->input('option'), 'translations' => $translations, 'theme' => $theme->getRootDir(), 'settings' => request()->settings]);
     }
-
-    public function updateTranslations($theme)
-    {
-
-        if (request()->isMethod('POST')) {
-
-            try {
-                $theme = new Theme($theme == null ? request()->settings['theme'] : $theme);
-
-                $translations = [];
-
-                foreach ($theme->getSupportedLanguages() as $lang) {
-
-                    file_put_contents($theme->getPath() . "lang/" . $lang . ".json", json_encode(request()->input($lang, new \stdClass())));
-                }
-
-                return redirect()->back()->withMessage(['success' => trans('message.successfully_saved_settings')]);
-            } catch (\Exception $e) {
-                \Log::error($e);
-                return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-            }
-        }
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function set($theme)
-    {
-
-        if (Settings::where('setting', 'theme')->update(['value' => $theme])) {
-            return redirect()->back()->withMessage(['success' => trans('message.successfully_changed_theme')]);
-        } else {
-            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
-        }
-    }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -152,6 +137,50 @@ class ThemeController extends Controller
         }
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update($theme)
+    {
+        if(!request()->has('theme_subject')) {
+
+            request()->validate([
+                'theme' => 'required|string',
+            ]);
+
+            if (Settings::where('setting', 'theme')->update(['value' => $theme])) {
+                return redirect()->back()->withMessage(['success' => trans('message.successfully_changed_theme')]);
+            } else {
+                return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            } 
+
+        } else if( request()->input('theme_subject') == 'translations' ) {
+            return $this->updateTranslations($theme);
+        }
+    }
+
+    public function updateTranslations($theme)
+    {
+
+            try {
+                $theme = new Theme($theme == null ? request()->settings['theme'] : $theme);
+
+                $translations = [];
+
+                foreach ($theme->getSupportedLanguages() as $lang) {
+
+                    file_put_contents($theme->getPath() . "lang/" . $lang . ".json", json_encode(request()->input($lang, new \stdClass())));
+                }
+
+                return redirect()->back()->withMessage(['success' => trans('message.successfully_saved_settings')]);
+            } catch (\Exception $e) {
+                \Log::error($e);
+                return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            }
+    }
+
 
     public function destroy($theme)
     {
@@ -163,22 +192,4 @@ class ThemeController extends Controller
         }
     }
 
-    public function onlinestore()
-    {
-        $repo_status = true;
-
-        try {
-
-            $themes = json_decode(file_get_contents(\Config::get('horizontcms.sattelite_url') . '/get_themes.php'));
-
-            if ($themes == null) {
-                throw ErrorException('Could not fetch Themes');
-            }
-        } catch (\ErrorException $e) {
-            $themes = [];
-            $repo_status = false;
-        }
-
-        return view('theme.store', ['online_themes' => $themes, 'repo_status' => $repo_status]);
-    }
 }
