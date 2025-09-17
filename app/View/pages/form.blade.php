@@ -42,7 +42,7 @@
                                     @foreach ($page_templates as $template)
                                         <option value='{{ $template }}'
                                             @if (isset($page) && $template == $page->url) selected @endif>
-                                            {{ ucfirst(rtrim(rtrim($template, '.php'), '.blade')) }}
+                                            {{ ucfirst(basename(basename($template, '.php'), '.blade')) }}
                                         </option>
                                     @endforeach
 

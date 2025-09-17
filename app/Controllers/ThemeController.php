@@ -167,11 +167,9 @@ class ThemeController extends Controller
             try {
                 $theme = new Theme($theme == null ? request()->settings['theme'] : $theme);
 
-                $translations = [];
-
                 foreach ($theme->getSupportedLanguages() as $lang) {
 
-                    file_put_contents($theme->getPath() . "lang/" . $lang . ".json", json_encode(request()->input($lang, new \stdClass())));
+                    file_put_contents($theme->getPath() . config("theme:theme.language.path","resources/lang") . $lang . ".json", json_encode(request()->input($lang, new \stdClass())));
                 }
 
                 return redirect()->back()->withMessage(['success' => trans('message.successfully_saved_settings')]);

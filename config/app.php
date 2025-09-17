@@ -176,7 +176,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Class Aliasesnew $this->engines[$this->theme->getConfig('theme_engine', 'hcms')]($this->request)
+    | Class Aliases
     |--------------------------------------------------------------------------
     |
     | This array of class aliases will be registered when this application
