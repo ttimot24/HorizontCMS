@@ -3351,7 +3351,8 @@ function _typeof(obj) {
       knownFileExtensions: ['jpg', 'png', 'jpeg'],
       messages: [],
       filter: null,
-      selected: null
+      selected: null,
+      currentDisk: 'local'
     };
   },
   mounted: function mounted() {
@@ -3406,6 +3407,11 @@ function _typeof(obj) {
     getModal: function getModal(id) {
       return new this.bootstrap.Modal(document.getElementById(id) || {});
     },
+    switchDisk: function switchDisk(disk) {
+      this.currentDisk = disk;
+      this.currentDirectory = '';
+      this.open('', false);
+    },
     select: function select(file) {
       var vm = this;
       vm.selected = (event === null || event === void 0 ? void 0 : event.currentTarget).id;
@@ -3423,7 +3429,7 @@ function _typeof(obj) {
         var folderToOpen = folder;
       }
       console.debug(vm);
-      this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.REST_API_BASE + '/file-manager?path=' + folderToOpen).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_3__.retry)(_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.API_RETRY), (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.map)(function (response) {
+      this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.REST_API_BASE + '/file-manager?disk=' + vm.currentDisk + '&path=' + folderToOpen).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_3__.retry)(_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.API_RETRY), (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.map)(function (response) {
         return response.data;
       }), (0,rxjs__WEBPACK_IMPORTED_MODULE_5__.catchError)(function (error) {
         console.error(error);
@@ -35899,11 +35905,11 @@ var render = function () {
               "div",
               {
                 staticClass: "panel panel-default col-2 bg-dark p-3",
-                staticStyle: { "min-height": "500px" },
+                staticStyle: { "min-height": "600px" },
               },
               [
                 _c("h4", { staticClass: "p-2 bg-dark text-white" }, [
-                  _vm._v("Drivers"),
+                  _vm._v("Disks"),
                 ]),
                 _vm._v(" "),
                 _c(
@@ -35917,14 +35923,17 @@ var render = function () {
                         on: {
                           click: function ($event) {
                             $event.preventDefault()
-                            return _vm.open(disk, false)
+                            return _vm.switchDisk(disk)
                           },
                         },
                       },
                       [
                         _c(
                           "li",
-                          { staticClass: "list-group-item bg-dark text-white" },
+                          {
+                            staticClass: "list-group-item bg-dark text-white",
+                            class: disk === _vm.currentDisk ? "active" : "",
+                          },
                           [_vm._v(_vm._s(disk))]
                         ),
                       ]

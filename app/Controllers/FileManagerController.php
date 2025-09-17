@@ -18,17 +18,17 @@ class FileManagerController extends Controller
 
         $mode = request()->get('mode');
 
+        $disk = request()->get('disk', 'local');
+
         $current_dir = str_replace_first("storage/", "", request()->has('path')? ltrim(request()->get('path'), "/") : "");
 
         $data = [
             'old_path' => ($current_dir == "" ? "" : $current_dir . "/"),
             'current_dir' => $current_dir,
-            'dirs' => array_values(collect(\File::directories(storage_path($current_dir)))->map(function ($dir) {
-                return basename($dir);
-            })->toArray()),
-            'files' => array_values(collect(\File::files(storage_path($current_dir)))->map(function ($file) {
-                return basename($file);
-            })->toArray()),
+            'dirs' => collect(Storage::disk($disk)->directories($current_dir))
+                        ->map(fn ($dir) => basename($dir))->values()->toArray(),
+            'files' =>  collect(Storage::disk($disk)->files($current_dir))
+                        ->map(fn ($dir) => basename($dir))->values()->toArray(),
             'allowed_extensions' => [
                 'image' => ['jpg', 'png', 'jpeg', 'webp', 'gif']
             ],

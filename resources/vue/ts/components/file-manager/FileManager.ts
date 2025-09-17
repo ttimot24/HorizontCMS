@@ -36,6 +36,7 @@ export default defineComponent({
             messages: [],
             filter: null,
             selected: null,
+            currentDisk: 'local',
         }
     },
     mounted: function () {
@@ -92,6 +93,11 @@ export default defineComponent({
         getModal: function (id: string): bootstrap.Modal {
             return (new this.bootstrap.Modal(document.getElementById(id) || {} as HTMLElement));
         },
+        switchDisk: function (disk: string): void {
+            this.currentDisk = disk;
+            this.currentDirectory = '';
+            this.open('', false);
+        },
         select: function (file: string): void {
             var vm = this;
 
@@ -113,7 +119,7 @@ export default defineComponent({
 
             console.debug(vm);
 
-            this.http.get(environment.REST_API_BASE + '/file-manager?path='+folderToOpen)
+            this.http.get(environment.REST_API_BASE + '/file-manager?disk='+vm.currentDisk+'&path='+folderToOpen)
             .pipe(
                 retry(environment.API_RETRY),
                 map((response: any) => response.data as FileManagerResponse),

@@ -7,13 +7,13 @@
 
                     <div class="row">
 
-                        <div class='panel panel-default col-2 bg-dark p-3' style="min-height:500px;">
-                            <h4 class="p-2 bg-dark text-white">Drivers</h4>
+                        <div class='panel panel-default col-2 bg-dark p-3' style="min-height:600px;">
+                            <h4 class="p-2 bg-dark text-white">Disks</h4>
                             <ul class="list-group">
 
                                 <!-- v-on:click.prevent="open('{{ isset($value['root']) ? basename($value['root']) : '' }}', false);" -->
-                                <a href="#" v-for="(disk) in disks" v-on:click.prevent="open(disk, false)">
-                                    <li class="list-group-item bg-dark text-white">{{ disk }}</li>
+                                <a href="#" v-for="(disk) in disks" v-on:click.prevent="switchDisk(disk)">
+                                    <li class="list-group-item bg-dark text-white" :class="disk===currentDisk? 'active' : '' ">{{ disk }}</li>
                                 </a>
 
                             </ul>
