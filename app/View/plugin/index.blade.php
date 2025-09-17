@@ -6,7 +6,7 @@
         <div class="card mb-3">
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => trans('Plugins'), 'url' => route('plugin.index')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => trans('Plugins'), 'url' => route('plugin.index')]],
                 'page_title' => trans('Plugin manager'),
                 'stats' => [['label' => trans('user.all'), 'value' => $all_plugin->count()]],
                 'buttons_right' => [

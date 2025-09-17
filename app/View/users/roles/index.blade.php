@@ -7,7 +7,7 @@
 
             @include('breadcrumb', [
                 'links' => [
-                    ['name' => 'Content'],
+                    ['name' => trans('dashboard.content')],
                     ['name' => trans('user.users'), 'url' => route('user.index')],
                     ['name' => 'Roles', 'url' => route('userrole.index')],
                 ],

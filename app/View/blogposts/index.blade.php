@@ -5,7 +5,7 @@
         <div class="card mb-3">
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => 'Blog', 'url' => route('blogpost.index')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => 'Blog', 'url' => route('blogpost.index')]],
                 'page_title' => trans('blogpost.blogposts'),
                 'stats' => [['label' => trans('blogpost.all'), 'value' => $all_blogposts->total()]],
                 'buttons' => [

@@ -6,7 +6,7 @@
         <div class="card mb-3">
 
                 @include('breadcrumb', [
-                        'links' => [['name' => 'Content'], ['name' => trans('user.users'), 'url' => route('user.index')]],
+                        'links' => [['name' => trans('dashboard.content')], ['name' => trans('user.users'), 'url' => route('user.index')]],
                         'page_title' => trans('user.registered_users'),
                         'stats' => [
                             ['label'=> trans('user.all'), 'value'=> $all_users->total()],

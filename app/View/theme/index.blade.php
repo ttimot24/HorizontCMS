@@ -7,13 +7,13 @@
 
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => trans('Themes'), 'url' => route('theme.index')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => trans('theme.themes'), 'url' => route('theme.index')]],
                 'page_title' => trans('theme.themes'),
                 'stats' => [['label' => trans('theme.all'), 'value' => $all_themes->count()]],
                 'buttons_right' => [
                     [
                         'icon' => 'fa-cloud-download',
-                        'label' => 'Download themes',
+                        'label' => trans('theme.download_themes'),
                         'route' => route('theme.create'),
                         'class' => 'btn-info',
                     ],
@@ -65,7 +65,7 @@
                                     alt="Theme screenshot">
                                 <div class="card-body text-white">
                                     <h3><?= $theme->getName() ?></h3>
-                                    <p>version: {{ $theme->getInfo('version') }} | author: {{ $theme->getInfo('author') }}
+                                    <p>{{ trans('theme.version') }}: {{ $theme->getInfo('version') }} | {{ trans('theme.author') }}: {{ $theme->getInfo('author') }}
                                     </p>
                                     <p class="mb-0">
 
@@ -75,7 +75,7 @@
                                                 @method('PUT')
                                                 <input type='hidden' name='theme' value='{{ $theme->getRootDir() }}' />
                                                 <button type='submit' class="btn btn-primary {{ $theme->isCurrentTheme()? 'disabled' : '' }}">
-                                                    Activate
+                                                    {{ trans('theme.activate') }}
                                                 </button>
                                             </form>
 

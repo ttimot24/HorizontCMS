@@ -7,7 +7,7 @@
 
             @include('breadcrumb', [
                 'links' => [
-                    ['name' => 'Content'],
+                    ['name' => trans('dashboard.content')],
                     ['name' => trans('Plugin manager'), 'url' => route('plugin.index')],
                 ],
                 'page_title' => trans('Online Store'),

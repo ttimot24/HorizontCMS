@@ -6,7 +6,7 @@
         <div class="card mb-3">
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => trans('Media')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => trans('Media')]],
                 'page_title' => trans('Header images'),
                 'stats' => [
                     ['label' => trans('user.all'), 'value' => $slider_images->count()+$slider_disabled->count()],

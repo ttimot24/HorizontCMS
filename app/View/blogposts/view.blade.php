@@ -30,7 +30,7 @@
                 @endphp
 
                 @include('breadcrumb', [
-                    'links' => [['name' => 'Content'], ['name' => 'Blog', 'url' => route('blogpost.index')], ['name' => $blogpost->title, 'url' => route('blogpost.show', ['blogpost' => $blogpost])], ['name' => 'View']],
+                    'links' => [['name' => trans('dashboard.content')], ['name' => 'Blog', 'url' => route('blogpost.index')], ['name' => $blogpost->title, 'url' => route('blogpost.show', ['blogpost' => $blogpost])], ['name' => 'View']],
                     'page_title' => trans('blogpost.view_blogpost'),
                     'buttons' => null,
                     'buttons_right' => $buttons,

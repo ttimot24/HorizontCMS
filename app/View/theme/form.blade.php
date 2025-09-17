@@ -7,11 +7,11 @@
 
             @include('breadcrumb', [
                 'links' => [
-                    ['name' => 'Content'],
-                    ['name' => trans('Themes'), 'url' => route('theme.index')],
+                    ['name' => trans('dashboard.content')],
+                    ['name' => trans('theme.themes'), 'url' => route('theme.index')],
                     ['name' => $theme],
                 ],
-                'page_title' => trans('Theme options'),
+                'page_title' => trans('theme.options'),
             ])
 
 

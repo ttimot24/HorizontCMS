@@ -6,7 +6,7 @@
         <div class="card mb-3">
 
                     @include('breadcrumb', [
-                        'links' => [['name' => 'Content'], ['name' => trans('user.users'), 'url' => route('user.index')]],
+                        'links' => [['name' => trans('dashboard.content')], ['name' => trans('user.users'), 'url' => route('user.index')]],
                         'page_title' => trans(isset($user) ? 'user.edit_user' : 'user.create_user'),
                     ])
         

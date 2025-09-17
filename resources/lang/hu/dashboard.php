@@ -2,6 +2,7 @@
 
 return [
 
+    'content' => 'Tartalom',
     'title' => 'Vezérlőpult',
     'server_ip' => 'Szerver ip: ',
     'client_ip'     => 'Te ip-d: ',

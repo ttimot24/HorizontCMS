@@ -5,7 +5,7 @@
 @section('content')
     <div class='container main-container'>
         <div class="card mb-3">
-            @include('breadcrumb', ['links' => [['name'=> 'Content'], ['name'=> 'Blog', 'url' => route('blogpost.index')]], 'page_title' => trans(isset($blogpost) ? 'blogpost.edit_blogpost' : 'blogpost.new_blogpost') ] )
+            @include('breadcrumb', ['links' => [['name'=> trans('dashboard.content')], ['name'=> 'Blog', 'url' => route('blogpost.index')]], 'page_title' => trans(isset($blogpost) ? 'blogpost.edit_blogpost' : 'blogpost.new_blogpost') ] )
             <div class="card-body">
 
                 <form role='form'

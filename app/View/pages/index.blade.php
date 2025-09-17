@@ -6,7 +6,7 @@
         <div class="card mb-3">
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => trans('page.pages'), 'url' => route('page.index')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => trans('page.pages'), 'url' => route('page.index')]],
                 'page_title' => trans('page.pages'),
                 'stats' => [['label' => trans('page.all'), 'value' => $all_pages->total()],
                 ['label' => trans('page.visible'), 'value' => $visible_pages],
