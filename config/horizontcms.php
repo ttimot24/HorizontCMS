@@ -44,6 +44,12 @@ return [
 				'en' => 'English',
 				'hu' => 'Magyar',
 			],
+	
+	
+	'theme_engines' => [ //available theme engines
+			 	'hcms' => \App\Services\ThemeEngine::class,
+        		'blade' => \App\Services\BladeThemeEngine::class,
+	],
 
 	'creator' => [
 				'name' => 'Timot Tarjani',
