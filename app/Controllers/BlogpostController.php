@@ -77,6 +77,10 @@ class BlogpostController extends Controller
 
         $this->uploadImage($blogpost);
 
+        $blogpost->save();
+    
+        $blogpost->categories()->attach($request->input('category_ids', []));
+
         return $blogpost->save() ? redirect(route("blogpost.edit", ['blogpost' => $blogpost]))->withMessage(['success' => trans('message.successfully_created_blogpost')])
             : redirect()->back()->withInput()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
@@ -136,7 +140,7 @@ class BlogpostController extends Controller
         $blogpost->fill($request->all());
 
         $blogpost->slug = str_slug($request->input('title', $blogpost->title), "-");
-        $blogpost->category_id = $request->input('category_id', $blogpost->category_id);
+        $blogpost->categories()->sync($request->input('category_ids', $blogpost->categories->pluck('id')->toArray()));
 
         $blogpost->author()->associate(
             Gate::allows('update','user') && $request->has('author_id')? 

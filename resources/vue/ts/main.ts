@@ -1,4 +1,3 @@
-import * as jquery from "jquery";
 import Vue from 'vue';
 import VueResource from "vue-resource";
 //import VueI18n from 'vue-i18n';
@@ -29,5 +28,4 @@ Vue.mixin({
     }
 });
 
-window.$ = jquery;
 window.vue = Vue;
