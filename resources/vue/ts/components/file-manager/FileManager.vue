@@ -26,7 +26,7 @@
                                         <nav aria-label="breadcrumb p-0 m-0">
                                             <ol class="breadcrumb bg-dark p-0 pt-3 m-0">
                                                 <li class="breadcrumb-item"><a href="storage"
-                                                        v-on:click.prevent="open('', false); ">storage</a></li>
+                                                        v-on:click.prevent="open('', false); ">{{ currentDisk }}: storage</a></li>
                                                 <li class="breadcrumb-item" v-for="(  bcrumb  ) in   breadcrumb  "><a
                                                         :href=" bcrumb.link "
                                                         v-on:click.prevent=" open(bcrumb.link, false); ">{{ bcrumb.text
@@ -68,7 +68,14 @@
                                 </div>
                                 <div id="workspace" class="col-md-12 py-3 pe-5">
 
-                                    <div class="row text-white">
+                                    <div v-if="openError" class="alert alert-danger d-flex align-items-center" role="alert">
+                                        <i class="fa-solid fa-circle-exclamation me-3"></i>
+                                        <div>
+                                            Could not open folder: {{openError.error}}
+                                        </div>
+                                    </div>
+
+                                    <div v-if="!openError" class="row text-white">
                                         <div class='folder col-md-2 col-sm-4 col-xs-4 text-center text-white'
                                             v-for="  folder   in   folders  " :id=" folder " v-on:click=" select(folder) "
                                             v-on:dblclick=" open(folder); ">

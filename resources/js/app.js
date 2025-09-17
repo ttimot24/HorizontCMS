@@ -3306,7 +3306,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/dist/esm5/internal/operators/retry.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/dist/esm5/internal/operators/map.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/dist/esm5/internal/operators/catchError.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/dist/esm5/internal/observable/of.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/dist/esm5/internal/observable/throwError.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/dist/esm5/internal/observable/of.js");
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -3352,7 +3353,8 @@ function _typeof(obj) {
       messages: [],
       filter: null,
       selected: null,
-      currentDisk: 'local'
+      currentDisk: 'local',
+      openError: null
     };
   },
   mounted: function mounted() {
@@ -3421,8 +3423,10 @@ function _typeof(obj) {
       console.log('Selected file: ' + vm.selected);
     },
     open: function open(folder) {
+      var _this2 = this;
       var useCurrent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var vm = this;
+      vm.openError = null;
       if (useCurrent) {
         var folderToOpen = vm.currentDirectory + '/' + folder;
       } else {
@@ -3432,8 +3436,12 @@ function _typeof(obj) {
       this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.REST_API_BASE + '/file-manager?disk=' + vm.currentDisk + '&path=' + folderToOpen).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_3__.retry)(_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.API_RETRY), (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.map)(function (response) {
         return response.data;
       }), (0,rxjs__WEBPACK_IMPORTED_MODULE_5__.catchError)(function (error) {
+        var _a;
         console.error(error);
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.of)(error);
+        _this2.openError = ((_a = error.response) === null || _a === void 0 ? void 0 : _a.data) || {
+          error: 'Unknown error'
+        };
+        return (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.throwError)(error);
       })).subscribe(function (data) {
         console.debug(vm);
         vm.previousDirectory = vm.currentDirectory;
@@ -3546,7 +3554,7 @@ function _typeof(obj) {
         new_file: vm.currentDirectory.concat('/').concat($('[name="new_name"]').val())
       }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_5__.catchError)(function (error) {
         console.error(error);
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.of)(error);
+        return (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.of)(error);
       })).subscribe(function (data) {
         if (_typeof(data.success) !== undefined) {
           vm.open(vm.currentDirectory);
@@ -3573,7 +3581,7 @@ function _typeof(obj) {
       var file = vm.currentDirectory.concat('/').concat(deleteSubmit.data('file'));
       this.http["delete"](_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.REST_API_BASE + '/file-manager/file?file=' + file).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_3__.retry)(_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.API_RETRY), (0,rxjs__WEBPACK_IMPORTED_MODULE_5__.catchError)(function (error) {
         console.error(error);
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.of)(error);
+        return (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.of)(error);
       })).subscribe(function (data) {
         ['files', 'folders'].forEach(function (key) {
           vm[key] = vm[key].filter(function (item) {
@@ -27462,6 +27470,30 @@ function of() {
 
 /***/ }),
 
+/***/ "./node_modules/rxjs/dist/esm5/internal/observable/throwError.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/rxjs/dist/esm5/internal/observable/throwError.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "throwError": () => (/* binding */ throwError)
+/* harmony export */ });
+/* harmony import */ var _Observable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Observable */ "./node_modules/rxjs/dist/esm5/internal/Observable.js");
+/* harmony import */ var _util_isFunction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/isFunction */ "./node_modules/rxjs/dist/esm5/internal/util/isFunction.js");
+
+
+function throwError(errorOrErrorFactory, scheduler) {
+    var errorFactory = (0,_util_isFunction__WEBPACK_IMPORTED_MODULE_0__.isFunction)(errorOrErrorFactory) ? errorOrErrorFactory : function () { return errorOrErrorFactory; };
+    var init = function (subscriber) { return subscriber.error(errorFactory()); };
+    return new _Observable__WEBPACK_IMPORTED_MODULE_1__.Observable(scheduler ? function (subscriber) { return scheduler.schedule(init, 0, subscriber); } : init);
+}
+//# sourceMappingURL=throwError.js.map
+
+/***/ }),
+
 /***/ "./node_modules/rxjs/dist/esm5/internal/observable/timer.js":
 /*!******************************************************************!*\
   !*** ./node_modules/rxjs/dist/esm5/internal/observable/timer.js ***!
@@ -35968,7 +36000,7 @@ var render = function () {
                                     },
                                   },
                                 },
-                                [_vm._v("storage")]
+                                [_vm._v(_vm._s(_vm.currentDisk) + ": storage")]
                               ),
                             ]),
                             _vm._v(" "),
@@ -36087,169 +36119,220 @@ var render = function () {
                     attrs: { id: "workspace" },
                   },
                   [
-                    _c(
-                      "div",
-                      { staticClass: "row text-white" },
-                      [
-                        _vm._l(_vm.folders, function (folder) {
-                          return _c(
-                            "div",
-                            {
+                    _vm.openError
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "alert alert-danger d-flex align-items-center",
+                            attrs: { role: "alert" },
+                          },
+                          [
+                            _c("i", {
                               staticClass:
-                                "folder col-md-2 col-sm-4 col-xs-4 text-center text-white",
-                              attrs: { id: folder },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.select(folder)
+                                "fa-solid fa-circle-exclamation me-3",
+                            }),
+                            _vm._v(" "),
+                            _c("div", [
+                              _vm._v(
+                                "\n                                        Could not open folder: " +
+                                  _vm._s(_vm.openError.error) +
+                                  "\n                                    "
+                              ),
+                            ]),
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.openError
+                      ? _c(
+                          "div",
+                          { staticClass: "row text-white" },
+                          [
+                            _vm._l(_vm.folders, function (folder) {
+                              return _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "folder col-md-2 col-sm-4 col-xs-4 text-center text-white",
+                                  attrs: { id: folder },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.select(folder)
+                                    },
+                                    dblclick: function ($event) {
+                                      return _vm.open(folder)
+                                    },
+                                  },
                                 },
-                                dblclick: function ($event) {
-                                  return _vm.open(folder)
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "file-nav text-end" },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "me-1",
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.renameModal(folder)
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fa fa-pencil",
+                                          }),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "me-1",
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.deleteModal(folder)
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fa fa-trash",
+                                          }),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._m(1, true),
+                                  _vm._v(" "),
+                                  _c("b", [_vm._v(_vm._s(folder))]),
+                                ]
+                              )
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.files, function (file) {
+                              return _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "file col-md-2 col-sm-4 col-xs-4 text-center",
+                                  attrs: { id: file },
+                                  on: {
+                                    click: function ($event) {
+                                      _vm.mode === "embed"
+                                        ? _vm.returnFileUrl(
+                                            "storage/" +
+                                              _vm.currentDirectory +
+                                              "/" +
+                                              file
+                                          )
+                                        : _vm.select(file)
+                                    },
+                                  },
                                 },
-                              },
-                            },
-                            [
-                              _c("div", { staticClass: "file-nav text-end" }, [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "me-1",
-                                    on: {
-                                      click: function ($event) {
-                                        return _vm.renameModal(folder)
-                                      },
-                                    },
-                                  },
-                                  [_c("i", { staticClass: "fa fa-pencil" })]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "me-1",
-                                    on: {
-                                      click: function ($event) {
-                                        return _vm.deleteModal(folder)
-                                      },
-                                    },
-                                  },
-                                  [_c("i", { staticClass: "fa fa-trash" })]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _vm._m(1, true),
-                              _vm._v(" "),
-                              _c("b", [_vm._v(_vm._s(folder))]),
-                            ]
-                          )
-                        }),
-                        _vm._v(" "),
-                        _vm._l(_vm.files, function (file) {
-                          return _c(
-                            "div",
-                            {
-                              staticClass:
-                                "file col-md-2 col-sm-4 col-xs-4 text-center",
-                              attrs: { id: file },
-                              on: {
-                                click: function ($event) {
-                                  _vm.mode === "embed"
-                                    ? _vm.returnFileUrl(
-                                        "storage/" +
-                                          _vm.currentDirectory +
-                                          "/" +
-                                          file
-                                      )
-                                    : _vm.select(file)
-                                },
-                              },
-                            },
-                            [
-                              _c("div", { staticClass: "file-nav text-end" }, [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "me-1",
-                                    on: {
-                                      click: function ($event) {
-                                        return _vm.shareLink(file)
-                                      },
-                                    },
-                                  },
-                                  [_c("i", { staticClass: "fa fa-link" })]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "me-1",
-                                    on: {
-                                      click: function ($event) {
-                                        return _vm.renameModal(file)
-                                      },
-                                    },
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fa fa-pencil",
-                                      attrs: { "aria-hidden": "true" },
-                                    }),
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "me-1",
-                                    attrs: {
-                                      href:
-                                        "storage/" +
-                                        _vm.currentDirectory +
-                                        "/" +
-                                        file,
-                                    },
-                                  },
-                                  [_c("i", { staticClass: "fa fa-download" })]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "me-1",
-                                    on: {
-                                      click: function ($event) {
-                                        return _vm.deleteModal(file)
-                                      },
-                                    },
-                                  },
-                                  [_c("i", { staticClass: "fa fa-trash" })]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _vm.isKnownExtension(file)
-                                ? _c("img", {
-                                    staticClass: "w-100 mb-3",
-                                    attrs: {
-                                      src:
-                                        "storage/" +
-                                        _vm.currentDirectory +
-                                        "/" +
-                                        file,
-                                    },
-                                  })
-                                : _c("img", {
-                                    staticClass: "w-100 mb-3",
-                                    attrs: {
-                                      src: "resources/images/icons/file.png",
-                                    },
-                                  }),
-                              _vm._v(" "),
-                              _c("b", [_vm._v(_vm._s(file))]),
-                            ]
-                          )
-                        }),
-                      ],
-                      2
-                    ),
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "file-nav text-end" },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "me-1",
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.shareLink(file)
+                                            },
+                                          },
+                                        },
+                                        [_c("i", { staticClass: "fa fa-link" })]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "me-1",
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.renameModal(file)
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fa fa-pencil",
+                                            attrs: { "aria-hidden": "true" },
+                                          }),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "me-1",
+                                          attrs: {
+                                            href:
+                                              "storage/" +
+                                              _vm.currentDirectory +
+                                              "/" +
+                                              file,
+                                          },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fa fa-download",
+                                          }),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "me-1",
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.deleteModal(file)
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fa fa-trash",
+                                          }),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.isKnownExtension(file)
+                                    ? _c("img", {
+                                        staticClass: "w-100 mb-3",
+                                        attrs: {
+                                          src:
+                                            "storage/" +
+                                            _vm.currentDirectory +
+                                            "/" +
+                                            file,
+                                        },
+                                      })
+                                    : _c("img", {
+                                        staticClass: "w-100 mb-3",
+                                        attrs: {
+                                          src: "resources/images/icons/file.png",
+                                        },
+                                      }),
+                                  _vm._v(" "),
+                                  _c("b", [_vm._v(_vm._s(file))]),
+                                ]
+                              )
+                            }),
+                          ],
+                          2
+                        )
+                      : _vm._e(),
                   ]
                 ),
               ]),
