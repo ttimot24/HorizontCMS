@@ -80,10 +80,10 @@ trait PaginateSortAndFilter
                 if (is_array($value)) {
                     $query->whereIn($field, $value);
                 } else {
-                    if(isset($paginateSortAndFilter['relation']) && $paginateSortAndFilter['relation']==='and'){
-                        $query->where($field, 'like', "%".$value."%");
-                    } else {
+                    if(isset($paginateSortAndFilter['relation']) && $paginateSortAndFilter['relation']==='or'){
                         $query->orWhere($field, 'like', "%".$value."%");
+                    } else {
+                        $query->where($field, 'like', "%".$value."%");
                     }
                 }
             }

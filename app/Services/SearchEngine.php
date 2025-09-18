@@ -33,6 +33,7 @@ class SearchEngine
        
             if (method_exists($model, 'scopePaginateSortAndFilter')) {
 
+                $filter['relation'] = 'or';
                 $filter['filter'] = collect((new $model)->getFilterableFields())->mapWithKeys(fn($item) => [$item => $this->searchKey])->toArray();
 
                 $this->searchModels[$model] = $model::paginateSortAndFilter($filter);
