@@ -80,6 +80,7 @@ class SearchEngineTest extends TestCase
 
         $this->engine->registerModel(\App\Model\Page::class);
         $this->engine->executeSearch('home');
+
         $this->assertEquals(1, count($this->engine->getResultsFor(\App\Model\Page::class)));
         $this->engine->clearResults();
         $this->assertEquals(0, count($this->engine->getResultsFor(\App\Model\Page::class)));
