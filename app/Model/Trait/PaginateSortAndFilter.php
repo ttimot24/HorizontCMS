@@ -66,7 +66,6 @@ trait PaginateSortAndFilter
      */
     public function scopePaginateSortAndFilter(Builder $query, $paginateSortAndFilter = null): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-
         $paginateSortAndFilter = $paginateSortAndFilter ?? request()->all();
 
         // Filtering
@@ -79,9 +78,13 @@ trait PaginateSortAndFilter
                     continue; // Skip fields that are not enabled for filtering
                 }
                 if (is_array($value)) {
-                    $query->orWhereIn($field, $value);
+                    $query->whereIn($field, $value);
                 } else {
-                    $query->orWhere($field, 'like', "%".$value."%");
+                    if(isset($paginateSortAndFilter['relation']) && $paginateSortAndFilter['relation']==='or'){
+                        $query->orWhere($field, 'like', "%".$value."%");
+                    } else {
+                        $query->where($field, 'like', "%".$value."%");
+                    }
                 }
             }
         }

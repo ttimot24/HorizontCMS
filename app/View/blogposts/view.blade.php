@@ -30,7 +30,7 @@
                 @endphp
 
                 @include('breadcrumb', [
-                    'links' => [['name' => 'Content'], ['name' => 'Blog', 'url' => route('blogpost.index')]],
+                    'links' => [['name' => trans('dashboard.content')], ['name' => 'Blog', 'url' => route('blogpost.index')], ['name' => $blogpost->title, 'url' => route('blogpost.show', ['blogpost' => $blogpost])], ['name' => 'View']],
                     'page_title' => trans('blogpost.view_blogpost'),
                     'buttons' => null,
                     'buttons_right' => $buttons,
@@ -43,7 +43,15 @@
                         <div class="card">
                             <button type='button' class='btn btn-link w-100' data-bs-toggle='modal'
                                 data-bs-target='#modal-xl-{{ $blogpost->id }}'>
-                                <img src='{{ $blogpost->getImage() }}' width='350' class='img img-thumbnail mt-3' />
+
+                                @if($blogpost->getFeaturedMediaType()==='video')
+                                    <video controls class="w-100" style="max-height:500px;">
+                                        <source src="{{ $blogpost->getImage()}}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
+                                    <img src='{{ $blogpost->getImage() }}' width='350' class='img img-thumbnail mt-3' />
+                                @endif
                             </button>
 
                             <div class="text-center">
@@ -77,15 +85,15 @@
                                     @endif
                                     @can('update', 'blogpost')
                                     <a href="{{ route('blogpost.edit', ['blogpost' => $blogpost]) }}" type='button'
-                                        class='btn btn-warning'><span class='glyphicon glyphicon-pencil'
-                                            aria-hidden='true'></span>
+                                        class='btn btn-warning'><i class='fa fa-pencil'
+                                            aria-hidden='true'></i>
                                         {{ trans('actions.edit') }} </a>
                                     @endcan
 
                                     @can('delete', 'blogpost')
                                     <button type='button' class='btn btn-danger' data-bs-toggle='modal'
                                         data-bs-target='#delete_{{ $blogpost->id }}'>
-                                        <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
+                                        <i class='fa fa-trash' aria-hidden='true'></i>
                                         {{ trans('actions.remove') }}
                                     </button>
                                     @endcan
@@ -106,11 +114,16 @@
                                     <b class="d-block mb-3">{{ trans('blogpost.author') }} : <a class="color-primary">
                                             {{ trans('blogpost.removed_user') }} </a> </b>
                                 @endif
-
+                                <b class="d-block mb-3">{{ trans('settings.adminarea_language') }} :  <span class='badge bg-secondary'>{{ strtoupper($blogpost->language) }} </span></b>
                                 <b class="d-block mb-3">{{ trans('blogpost.slug') }} : <a
                                         class="color-primary">{{ $blogpost->getSlug() }}</a></b>
                                 <b class="d-block mb-3">{{ trans('blogpost.published_on') }} : <a
                                         class="color-primary">{{ $blogpost->created_at->format(\Settings::get('date_format', \Config::get('horizontcms.default_date_format'), true)) }}</a></b>
+                                
+                                @if($blogpost->updated_at)
+                                <b class="d-block mb-3">{{ trans('blogpost.last_updated_at') }} : <a
+                                            class="color-primary">{{ $blogpost->updated_at->format(\Settings::get('date_format', \Config::get('horizontcms.default_date_format'), true)) }}</a></b>
+                                @endif
 
                                 @if ($blogpost->category)
                                     <b class="d-block mb-3">{{ trans('blogpost.category') }} : <a class="color-primary"
@@ -128,9 +141,9 @@
                         </div>
                         </div>
 
-                        <div class="col-md-8 mt-2">
-                            <div class='well bg-dark text-white p-4 overflow-auto'>
-                                <h3>{{ $blogpost->title }}</h3>
+                        <div class="col-md-8">
+                            <div class='card bg-dark text-white p-4 overflow-auto'>
+                                <h3 class="fw-bold">{{ $blogpost->title }}</h3>
                                 <hr />
                                 <b>{{ $blogpost->summary }}</b>
                                 <p class="pt-4">
@@ -145,7 +158,7 @@
 
                     @include('image_details', [
                         'modal_id' => $blogpost->id,
-                        'image' => $blogpost->getImage(),
+                        'image' => $blogpost->getImageFilePath(),
                     ])
 
                     @can('delete', 'blogpost')

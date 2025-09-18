@@ -24,9 +24,13 @@ class BlogpostCategory extends Model {
 
 	public $timestamps = false;
     
-	public function blogposts(){
+	/*public function blogposts(){
 		 return $this->hasMany(\App\Model\Blogpost::class,'category_id','id');
-	}
+	}*/
 
+    public function blogposts()
+    {
+        return $this->belongsToMany(Blogpost::class, 'blogpost_categories_pivot');
+    }
 
 }

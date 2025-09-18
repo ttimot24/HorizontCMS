@@ -61,13 +61,8 @@
                                 <div class="col-12 col-md-6 mt-3">
                                     <select name='language' class='form-select'>
 
-                                        @foreach ($languages as $key => $language)
-                                            @if ($key == $settings['language'])
-                                                <option value='{{ $key }}' selected>{{ ucfirst($language) }}
-                                                </option>
-                                            @else
-                                                <option value='{{ $key }}'>{{ ucfirst($language) }}</option>
-                                            @endif
+                                        @foreach (config('horizontcms.languages') as $key => $language)
+                                            <option value='{{ $key }}' {{ $key == $settings['language']? "selected" : "" }}>{{ ucfirst($language) }}</option>
                                         @endforeach
 
                                     </select>
@@ -107,6 +102,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <h6 class="text-dark fw-bold">Store URL</h6>
+                                    <p class="text-muted">The plugin and theme repository URL.</p>
+                                </div>
+                                <div class="col-12 col-md-6 mt-3">
+                                    <input type='text' class='form-control' value="{{ config('horizontcms.sattelite_url') }}" disabled>
+                                </div>
+                            </div>
                             <hr>
                             <div class="row">
                                 <div class="col-12 col-md-6">
@@ -122,8 +126,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button type='submit' class='btn btn-primary btn-lg'><span class='fa fa-floppy-o'
-                                aria-hidden='true'></span> {{ trans('settings.adminarea_save_settings') }}</button>
+                        <button type='submit' class='btn btn-primary btn-lg'><i class="fa-solid fa-floppy-disk"></i> {{ trans('settings.adminarea_save_settings') }}</button>
                     </div>
                 </form>
 

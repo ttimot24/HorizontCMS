@@ -2,7 +2,7 @@ import { defineComponent } from '@vue/composition-api';
 import DeleteModal from '../delete-modal/DeleteModal.vue';
 import { environment } from '../../environments/environment';
 import { FileManagerResponse } from '../../model/FileManagerResponse';
-import { catchError, of, map, retry } from 'rxjs';
+import { catchError, of, map, retry, throwError } from 'rxjs';
 import axios from 'axios';
 
 export default defineComponent({
@@ -36,6 +36,8 @@ export default defineComponent({
             messages: [],
             filter: null,
             selected: null,
+            currentDisk: 'local',
+            openError: null,
         }
     },
     mounted: function () {
@@ -92,6 +94,11 @@ export default defineComponent({
         getModal: function (id: string): bootstrap.Modal {
             return (new this.bootstrap.Modal(document.getElementById(id) || {} as HTMLElement));
         },
+        switchDisk: function (disk: string): void {
+            this.currentDisk = disk;
+            this.currentDirectory = '';
+            this.open('', false);
+        },
         select: function (file: string): void {
             var vm = this;
 
@@ -105,6 +112,8 @@ export default defineComponent({
 
             const vm = this;
 
+            vm.openError = null;
+
             if (useCurrent) {
                 var folderToOpen = vm.currentDirectory + '/' + folder;
             } else {
@@ -113,13 +122,14 @@ export default defineComponent({
 
             console.debug(vm);
 
-            this.http.get(environment.REST_API_BASE + '/file-manager?path='+folderToOpen)
+            this.http.get(environment.REST_API_BASE + '/file-manager?disk='+vm.currentDisk+'&path='+folderToOpen)
             .pipe(
                 retry(environment.API_RETRY),
                 map((response: any) => response.data as FileManagerResponse),
                 catchError((error: any) => {
                     console.error(error);
-                    return of(error);
+                    this.openError = error.response?.data || { error: 'Unknown error' };
+                    return throwError(error);
                 })
             )
             .subscribe((data: FileManagerResponse) => {

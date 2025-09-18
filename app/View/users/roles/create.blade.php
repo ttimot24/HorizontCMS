@@ -6,7 +6,7 @@
         <div class="card mb-3">
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => trans('user.users'), 'url' => route('user.index')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => trans('user.users'), 'url' => route('user.index')]],
                 'page_title' => 'Create User Group',
             ])
 
@@ -53,11 +53,12 @@
                                             <ul class="list-group">
 
                                                 @foreach ($permission_list as $key => $perm_name)
-                                                    <?php $perm_name = str_replace('Admin area', "<b style='color:red;'>Admin area</b>", $perm_name); ?>
-
                                                     <li class='list-group-item bg-dark text-white'>
-                                                        {{ $perm_name }}<input type='checkbox' class='pull-right'
-                                                            name="{{ $key . '_' . $action }}" value='1'></li>
+                                                        <div class="row">
+                                                        <div class="col">{{ $perm_name }}</div>
+                                                        <div class="col text-end"><input type="checkbox" name="{{ $key }}_{{ $action }}" value="1"></div>
+                                                        </div>
+                                                    </li>
                                                 @endforeach
 
 

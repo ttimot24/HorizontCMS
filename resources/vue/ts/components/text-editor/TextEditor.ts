@@ -66,7 +66,9 @@ export default defineComponent({
                 filebrowserBrowseUrl: this.filebrowserbrowseurl,
                 filebrowserUploadUrl: this.filebrowseruploadurl,
                 fullPage: true,
-                allowedContent: true
+                allowedContent: true,
+                extraPlugins: 'uploadimage',
+                uploadImage_supportedTypes: /image\/(jpeg|png|gif|bmp|webp|svg)/
             }
         };
     },

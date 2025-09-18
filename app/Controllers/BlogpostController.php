@@ -6,6 +6,7 @@ use App\Controllers\Trait\UploadsImage;
 use \Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Model\Blogpost;
+use Illuminate\Support\Facades\Gate;
 
 class BlogpostController extends Controller
 {
@@ -16,27 +17,17 @@ class BlogpostController extends Controller
     protected $imagePath = 'images/blogposts';
 
     /**
-     * Creates image directories if they not exists.
-     *
-     */
-    public function before()
-    {
-        //TODO Use model path
-        \File::ensureDirectoryExists($this->imagePath . '/thumbs');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $blogposts = Blogpost::paginateSortAndFilter([
-            'sort' => $request->input('sort', 'id,desc'),
-        ]);
-
+        
         if ($request->wantsJson()) {
+
+            $blogposts = Blogpost::paginateSortAndFilter();
+
             foreach($request->get('with', []) as $relation) {
                 $blogposts->load($relation);
             }
@@ -44,7 +35,9 @@ class BlogpostController extends Controller
         }
 
         return view('blogposts.index', [
-            'all_blogposts' =>  $blogposts,
+            'all_blogposts' =>  Blogpost::paginateSortAndFilter([
+                'sort' => $request->input('sort', 'id,desc'),
+            ]),
         ]);
     }
 
@@ -57,6 +50,9 @@ class BlogpostController extends Controller
     {
 
         return view('blogposts.form', [
+            'users' => \App\Model\User::whereHas('role', function ($query) {
+                $query->whereJsonContains('rights', 'user.update');
+            })->get(),
             'categories' => \App\Model\BlogpostCategory::all(),
         ]);
     }
@@ -72,13 +68,21 @@ class BlogpostController extends Controller
 
         $blogpost = new Blogpost($request->all());
         $blogpost->slug = str_slug($request->input('title'), "-");
-        $blogpost->author()->associate($request->user());
         $blogpost->comments_enabled = 1;
+
+        $blogpost->author()->associate(
+            Gate::allows('update','user') && $request->has('author_id')? 
+            \App\Model\User::findOrFail($request->input('author_id')) : $request->user()
+        );
 
         $this->uploadImage($blogpost);
 
+        $blogpost->save();
+    
+        $blogpost->categories()->attach($request->input('category_ids', []));
+
         return $blogpost->save() ? redirect(route("blogpost.edit", ['blogpost' => $blogpost]))->withMessage(['success' => trans('message.successfully_created_blogpost')])
-            : redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
+            : redirect()->back()->withInput()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
     /**
@@ -117,6 +121,9 @@ class BlogpostController extends Controller
         return view('blogposts.form', [
             'blogpost' => $blogpost,
             'categories' => \App\Model\BlogpostCategory::all(),
+            'users' => \App\Model\User::whereHas('role', function ($query) {
+                $query->whereJsonContains('rights', 'user.update');
+            })->get(),
         ]);
     }
 
@@ -133,17 +140,20 @@ class BlogpostController extends Controller
         $blogpost->fill($request->all());
 
         $blogpost->slug = str_slug($request->input('title', $blogpost->title), "-");
-        $blogpost->category_id = $request->input('category_id', $blogpost->category_id);
+        $blogpost->categories()->sync($request->input('category_ids', $blogpost->categories->pluck('id')->toArray()));
 
-        $blogpost->author()->associate($request->user());
+        $blogpost->author()->associate(
+            Gate::allows('update','user') && $request->has('author_id')? 
+            \App\Model\User::findOrFail($request->input('author_id')) : $request->user()
+        );
 
         $this->uploadImage($blogpost);
 
         if ($blogpost->save()) {
             return redirect()->back()->with('blogpost', $blogpost)->withMessage(['success' => trans('message.successfully_updated_blogpost')]);
-        } else {
-            return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
         }
+        
+        return redirect()->back()->withInput()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 
     /**

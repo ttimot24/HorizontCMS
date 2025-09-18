@@ -27,6 +27,7 @@ class PluginServiceProvider extends ServiceProvider
 
                 $this->registerPluginAutoloaders();
 
+                $this->registerPluginConfigs();
                 $this->registerPluginRoutes();
                 $this->registerPluginProviders();
                 $this->registerPluginAliases();
@@ -44,6 +45,17 @@ class PluginServiceProvider extends ServiceProvider
                 throw $e;
             }
         }
+    }
+
+    private function registerPluginConfigs()
+    {
+
+        foreach ($this->app->plugins as $plugin) {
+            foreach (glob($plugin->getPath().'/config/*.php') as $file) {
+                $this->mergeConfigFrom(base_path($file), strtolower('plugin:'.$plugin->root_dir.':'.basename($file, '.php')));
+            }
+        }
+
     }
 
     private function registerPluginJSScripts()

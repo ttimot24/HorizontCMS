@@ -7,14 +7,14 @@
 
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => trans('Themes'), 'url' => route('theme.index')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => trans('theme.themes'), 'url' => route('theme.index')]],
                 'page_title' => trans('theme.themes'),
                 'stats' => [['label' => trans('theme.all'), 'value' => $all_themes->count()]],
                 'buttons_right' => [
                     [
                         'icon' => 'fa-cloud-download',
-                        'label' => 'Download themes',
-                        'route' => config('horizontcms.backend_prefix') . '/theme/onlinestore',
+                        'label' => trans('theme.download_themes'),
+                        'route' => route('theme.create'),
                         'class' => 'btn-info',
                     ],
                     [
@@ -49,9 +49,8 @@
                                 @endif
                                 <p style='font-size:1em'>{{ trans('theme.author') }}: {{ $active_theme->getInfo('author') }}
                                     |
-                                    {{ trans('theme.website') }}: <a target='_blank'
-                                        href='<?= UrlManager::http_protocol($active_theme->getInfo('author_url'))
-                                        ?>'>{{ $active_theme->getInfo('author_url') }}</a></p>
+                                    {{ trans('theme.website') }}: 
+                                    <a target='_blank' href='{{  UrlManager::http_protocol($active_theme->getInfo('author_url')) }} '>{{ $active_theme->getInfo('author_url') }}</a></p>
                             </div>
                         </div>
                     </div>
@@ -66,25 +65,24 @@
                                     alt="Theme screenshot">
                                 <div class="card-body text-white">
                                     <h3><?= $theme->getName() ?></h3>
-                                    <p>version: {{ $theme->getInfo('version') }} | author: {{ $theme->getInfo('author') }}
+                                    <p>{{ trans('theme.version') }}: {{ $theme->getInfo('version') }} | {{ trans('theme.author') }}: {{ $theme->getInfo('author') }}
                                     </p>
                                     <p class="mb-0">
 
                                         @can('update', 'theme')
-                                        <a href='admin/theme/set/<?= $theme->getRootDir() ?>'
-                                            class="btn btn-primary <?php if ($theme->isCurrentTheme()) {
-                                                echo 'disabled';
-                                            } ?> " role="button">Activate</a>
-                                        <!--<a href="#" class="btn btn-default" role="button" data-toggle='modal' data-target='.<?= $theme->getRootDir() ?>-modal-xl'>Preview</a>-->
-                                        <a href='admin/theme/options/<?= $theme->getRootDir() ?>' class="btn btn-warning"
-                                            role="button">{{ trans('actions.options') }}</a>
+                                            <form class='d-inline' method='POST' action='{{ route('theme.update', ['theme' => $theme->getRootDir()]) }}'>
+                                                @csrf
+                                                @method('PUT')
+                                                <input type='hidden' name='theme' value='{{ $theme->getRootDir() }}' />
+                                                <button type='submit' class="btn btn-primary {{ $theme->isCurrentTheme()? 'disabled' : '' }}">
+                                                    {{ trans('theme.activate') }}
+                                                </button>
+                                            </form>
+
+                                            <a href='{{ route('theme.edit', ['theme' => $theme->getRootDir()]) }}' class="btn btn-warning" role="button">{{ trans('actions.options') }}</a>
                                         @endcan
                                         @can('delete', 'theme')
-                                        <button class='btn btn-danger' data-bs-toggle='modal'
-                                            data-bs-target='#delete_<?= $theme->getRootDir() ?>'
-                                            <?php if ($all_themes->count() == 1) {
-                                                echo 'disabled';
-                                            } ?>>{{ trans('actions.delete') }}</button>
+                                            <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#delete_{{ $theme->getRootDir() }}' {{ $all_themes->count() == 1? 'disabled' : '' }}>{{ trans('actions.delete') }}</button>
                                         @endcan
                                     </p>
                                 </div>

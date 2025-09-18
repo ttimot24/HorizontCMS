@@ -6,7 +6,7 @@
         <div class="card mb-3">
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => trans('Media')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => trans('Media')]],
                 'page_title' => trans('Header images'),
                 'stats' => [
                     ['label' => trans('user.all'), 'value' => $slider_images->count()+$slider_disabled->count()],
@@ -38,23 +38,29 @@
                                             style=' font-size: 1.4em;z-index:15;top:3px;right:3px;margin-bottom:-15px;'></span>
                                     </a>
 
-                                    @if($each->type === 'video')
+                                    @if($each->getFeaturedMediaType()==='video')
                                         <video controls width='100%' height='75%;' style="object-fit:cover;">
-                                            <source src="storage/images/header_images/{{ $each->image }}" >
+                                            <source src="{{ $each->getImage() }}" >
                                             Your browser does not support the video tag.
                                         </video> 
                                     @else
-                                    <img src='storage/images/header_images/{{ $each->image }}' alt=''
+                                    <img src='{{ $each->getImage() }}' alt=''
                                         class='card-img-top' width='100%' height='75%;' style="object-fit:cover;">
                                     @endif
 
                                     <div class="card-body text-black">
                                         <h5 class="card-title">{{ $each->title }}<small> | {{$each->type}}</small></h5>
                                     </div>
-                                    <ul class="list-group list-group-flush mb-3">
-                                        <a class='btn btn-danger btn-xs btn-block'
-                                            href='admin/header-image/remove-from-slider/{{ $each->id }}'>Remove from
-                                            slider</a>
+                                    <ul class="list-group list-group-flush mb-3 pt-3">
+                                        <form action="{{ route('headerimage.update', ['headerimage' => $each]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="active" value="0">
+                                            <button type="submit" class="btn btn-danger btn-xs w-100">
+                                                Remove from slider
+                                            </button>
+                                        </form>
                                     </ul>
                                 </div>
 
@@ -160,15 +166,21 @@
                                 <div class="card-header py-2 px-0 bg-white">
                                     <div class="row">
                                         <div class="col-9">
-                                            <a class='btn-sm'
-                                                href='admin/header-image/add-to-slider/{{ $each->id }}'>Add to
-                                                slider</a>
+                                            <form action="{{ route('headerimage.update', ['headerimage' => $each]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="active" value="1">
+                                                <button type="submit" class="btn  btn-link p-0">
+                                                    Add to slider
+                                                </button>
+                                            </form>
                                         </div>
                                         <div class="col-1">
                                             <a href="#" data-bs-toggle='modal'
                                                 data-bs-target='#headline-image-{{ $each->id }}'>
                                                 <span class='fa fa-pencil' aria-hidden='true'
-                                                    style=' font-size: 1.4em;z-index:15;'></span>
+                                                    style='font-size: 1.4em;z-index:15;'></span>
                                             </a>
                                         </div>
                                         @can('delete', 'headerimage')
@@ -186,13 +198,13 @@
                                         @endcan
                                     </div>
                                 </div>
-                                @if($each->type === 'video')
+                                @if($each->getFeaturedMediaType()==='video')
                                 <video controls width='100%' height='75%;' style="object-fit:cover;">
-                                    <source src="storage/images/header_images/{{ $each->image }}" >
+                                    <source src="{{ $each->getImage() }}" >
                                     Your browser does not support the video tag.
                                 </video> 
                                 @else
-                                <img src='storage/images/header_images/{{ $each->image }}' alt=''
+                                <img src='{{ $each->getImage() }}' alt=''
                                     class='card-img-top' width='100%' height='75%;' style="object-fit:cover;">
                                 @endif
                                 <div class="card-body text-black">
@@ -316,7 +328,15 @@
                                 <div class='form-group'>
                                     <label for='file'>Upload file</label>
                                     <input name='up_file' id='input-2' type='file' class='file' accept="image/*, video/*"
+                                        data-max-file-size="{{ config('horizontcms.max_upload_file_size', 2560) }}KB"
                                         multiple='true' data-show-upload='false' data-show-caption='true' required>
+
+
+                                    @error('up_file')
+                                        <div class="text-danger" role="alert">
+                                            <strong>{{ $errors->first('up_file') }}</strong>
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="header-image-title" class="form-label">Tagline</label>

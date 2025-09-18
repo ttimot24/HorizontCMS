@@ -5,7 +5,7 @@
 
             <div class="card mb-3">
 
-         @include('breadcrumb', ['links' => [['name'=> 'Content'], ['name'=> 'Blog', 'url' => route('blogpost.index')]], 'page_title' => trans('category.edit_category')  ] )
+         @include('breadcrumb', ['links' => [['name'=> trans('dashboard.content')], ['name'=> 'Blog', 'url' => route('blogpost.index')]], 'page_title' => trans('category.edit_category')  ] )
 
 
         <div class='card-body'>

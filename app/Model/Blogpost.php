@@ -24,13 +24,16 @@ class Blogpost extends Model
      * @var array
      */
     protected $fillable = [
-        'title','slug', 'summary', 'text', 'category_id', 'comments_enabled', 'active',
+        'title','slug', 'summary', 'text', 'language', 'author_id', 'comments_enabled', 'active',
     ];
+
+    protected $appends = ['category_ids'];
 
     public static $rules = [
         'title' => 'required',
         'summary' => 'max:255',
-        'category_id' => 'required'
+        'category_ids' => 'required|array|min:1',
+        'category_ids.*' => 'exists:blogpost_categories,id',
     ];
 
     protected $filterableFields  = ['title', 'summary', 'text'];
@@ -59,6 +62,11 @@ class Blogpost extends Model
         return null;
     }
 
+    public function getCategoryIdsAttribute()
+    {
+        return $this->categories()->pluck('blogpost_categories.id'); 
+    }
+
     //TODO Use local scope
     public static function getPublished($num = null, $order = 'ASC')
     {
@@ -77,12 +85,10 @@ class Blogpost extends Model
         return self::where('active', 2)->orderBy('created_at', $order)->paginate($num);
     }
 
-    public function category()
+    public function categories()
     {
-
-        return $this->hasOne(BlogpostCategory::class, 'id', 'category_id'); //In db it has to be category_id else it won't work because Laravel priority is attr -> function
+        return $this->belongsToMany(BlogpostCategory::class, 'blogpost_categories_pivot');
     }
-
 
     public function comments()
     {

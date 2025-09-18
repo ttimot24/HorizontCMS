@@ -5,7 +5,7 @@
         <div class="card mb-3">
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => 'Blog', 'url' => route('blogpost.index')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => 'Blog', 'url' => route('blogpost.index')]],
                 'page_title' => trans('blogpost.blogposts'),
                 'stats' => [['label' => trans('blogpost.all'), 'value' => $all_blogposts->total()]],
                 'buttons' => [
@@ -39,9 +39,21 @@
 
                         @foreach ($all_blogposts as $blogpost)
                             <tr>
-                                <td><?= $blogpost->id ?></td>
-                                <td><img src='{{ $blogpost->getThumb() }}' class='img img-rounded' style='object-fit:cover;'
-                                        width=70 height=50 /> </td>
+                                <td>{{  $blogpost->id }}
+                                <br><span class='badge bg-secondary'>{{ strtoupper($blogpost->language) }} </span>
+                                </td>
+                                <td>
+                                @if($blogpost->getFeaturedMediaType()==='video')
+                                    <video controls="false" width=70 height=50 >
+                                        <source src="{{ $blogpost->getImage()}}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
+                                    <img src='{{ $blogpost->getThumb() }}' class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> 
+                                @endif
+                                    
+                                    
+                                  </td>
                                 <td><a
                                         href="{{ route('blogpost.show', ['blogpost' => $blogpost]) }}">{{ $blogpost->title }}</a><br>
                                     @if ($blogpost->isDraft())
@@ -52,8 +64,8 @@
                                 </td>
                                 <td class="text-center"><span
                                         class="badge rounded-pill bg-dark">{{ count($blogpost->comments) }}</span></td>
-                                <td class='hidden-xs text-center col-1'><?= $blogpost->created_at->format('Y-m-d') ?></br>
-                                    <font size='2'><i>at</i> <?= $blogpost->created_at->format('H:i:s') ?></font>
+                                <td class='hidden-xs text-center justify-content-center align-items-center col-1'>{{ $blogpost->created_at->format('Y-m-d') }}</br>
+                                    <font size='2'><i>at</i> {{ $blogpost->created_at->format('H:i:s') }}</font>
                                 </td>
                                 @if ($blogpost->author)
                                     <td><a
@@ -62,9 +74,14 @@
                                 @else
                                     <td>{{ trans('blogpost.removed_user') }}</td>
                                 @endif
-                                @if ($blogpost->category)
-                                    <td class='hidden-xs'><span class="badge bg-success d-block"
-                                            style='font-size:13px;'>{{ $blogpost->category->name }}</span></td>
+                                @if ($blogpost->categories)
+                                    <td class='hidden-xs col-1'>
+                                    @foreach($blogpost->categories as $category)
+
+                                        <span class="badge bg-success {{ $blogpost->categories->count()==1? 'd-block' : '' }}" style='font-size:13px;'>{{ $category->name }}</span>
+                                  
+                                    @endforeach
+                                    </td>
                                 @else
                                     <td class='hidden-xs'>none</td>
                                 @endif
@@ -72,10 +89,31 @@
 
                                     <div class="dropdown">
                                         <div data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
-                                            <i class="bi bi-three-dots-vertical text-dark"></i>
+                                            <i class="fa-solid fa-ellipsis-vertical text-dark fs-5"></i>
                                         </div>
                                         <ul class="dropdown-menu text-dark">
                                             @can('update', 'blogpost')
+                                            <li>
+                                                <form method="POST"
+                                                action="{{ route('blogpost.update', ['blogpost' => $blogpost]) }}">
+                                                @csrf
+                                                @method('PUT')
+    
+                                                @if($blogpost->isDraft())
+                                                    <input type="hidden" name="active" value="1">
+                                                    <button type="submit" class='dropdown-item text-decoration-none text-darks'>
+                                                        <span class='fa fa-plus me-2' aria-hidden='true'></span>
+                                                        {{ trans('Publish') }}
+                                                    </button>
+                                                @else
+                                                    <input type="hidden" name="active" value="0">
+                                                    <button type="submit" class='dropdown-item text-decoration-none text-darks'>
+                                                        <span class='fa fa-minus me-2' aria-hidden='true'></span>
+                                                        {{ trans('Unpublish') }}
+                                                    </button>
+                                                @endif
+                                            </form>
+                                            </li>
                                             <li>
                                                 <a href="{{ route('blogpost.edit', ['blogpost' => $blogpost]) }}"
                                                     class="dropdown-item text-decoration-none text-dark">
@@ -89,7 +127,7 @@
                                                 <a data-bs-toggle='modal' data-bs-target=#delete_<?= $blogpost->id ?>
                                                     class="dropdown-item text-danger text-decoration-none"
                                                     style="cursor: pointer;">
-                                                    <i class="fa fa-trash-o me-2" aria-hidden="true"></i>
+                                                    <i class="fa fa-trash me-2" aria-hidden="true"></i>
                                                     {{ trans('actions.delete') }}
                                                 </a>
                                             </li>

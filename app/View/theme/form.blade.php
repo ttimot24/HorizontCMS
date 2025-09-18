@@ -7,11 +7,11 @@
 
             @include('breadcrumb', [
                 'links' => [
-                    ['name' => 'Content'],
-                    ['name' => trans('Themes'), 'url' => route('theme.index')],
+                    ['name' => trans('dashboard.content')],
+                    ['name' => trans('theme.themes'), 'url' => route('theme.index')],
                     ['name' => $theme],
                 ],
-                'page_title' => trans('Theme options'),
+                'page_title' => trans('theme.options'),
             ])
 
 
@@ -56,9 +56,10 @@
                                     </div>
                                     <div class="card-body">
                                         <form
-                                            action="{{ config('horizontcms.backend_prefix') . '/theme/update-translations/' . $theme }}"
+                                            action="{{ route('theme.update', ['theme' => $theme]) }}"
                                             method="POST">
                                             @csrf
+                                            @method('PUT')
                                             @foreach ($translations as $lang => $value)
                                                 <h3 class="m-0 p-0">{{ $lang }}</h3>
                                                 <table class="table">
@@ -84,6 +85,7 @@
                                                     </tbody>
                                                 </table>
                                             @endforeach
+                                            <input type="hidden" name="theme_subject" value="translations">
                                             <input type="submit" class="btn btn-primary my-3" value="{{trans('actions.save')}}">
                                         </form>
                                     </div>

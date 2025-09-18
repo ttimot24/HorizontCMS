@@ -24,6 +24,8 @@ class ThemeServiceProvider extends ServiceProvider
             });
 
 
+            $this->registerThemeConfigs($theme);
+
             $this->registerTranslations($theme);
 
             $this->registerThemeViews($theme);
@@ -32,6 +34,15 @@ class ThemeServiceProvider extends ServiceProvider
 
         }
     }
+
+    protected function registerThemeConfigs(Theme $theme)
+    {
+        foreach (glob($theme->getPath().'/config/*.php') as $file) {
+            $this->mergeConfigFrom(base_path($file), strtolower('theme:'.basename($file, '.php')));
+        }
+
+    }
+
 
     protected function registerTranslations(Theme $theme){
         if (!\Request::is(\Config::get('horizontcms.backend_prefix') . "/*")) {

@@ -14,8 +14,8 @@
 
                     <div class="row">
                         @foreach ($panels as $each)
-                            <div class='well col-md-3 text-center mb-5 bg-dark py-4'>
-                                <a href='<?= $each['link'] ?>'>
+                            <div class='col-md-3 text-center mb-5 bg-dark py-4'>
+                                <a href="{{ $each['link'] }}">
                                     <i class="{{ $each['icon'] }} text-white mb-2" style='font-size:60px;'></i>
                                     <h4 class="text-white">{{ $each['name'] }}</h4>
                                 </a>

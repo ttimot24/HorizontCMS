@@ -7,7 +7,7 @@
 
             @include('breadcrumb', [
                 'links' => [
-                    ['name' => 'Content'],
+                    ['name' => trans('dashboard.content')],
                     ['name' => trans('user.users'), 'url' => route('user.index')],
                     ['name' => 'Roles', 'url' => route('userrole.index')],
                 ],
@@ -45,7 +45,7 @@
                                         {{ $role->name }} <small class="text-dark">({{ $role->users->count() }})</small>
 
                                         
-                                        <div class="pull-right" >
+                                        <div class="w-25 float-end justify-content-end text-end" >
                                             
                                             @if (\Auth::user()->role->is($role))
 
@@ -92,7 +92,12 @@
                                     
                                     @endphp
                                         
-                                        <li class='list-group-item bg-dark text-white'>{!! $perm_name !!} <input type='checkbox' class='pull-right' name='{{ $key }}_{{ $action }}' value='1' {{ $check }} {{ $disable }}></li>
+                                        <li class='list-group-item bg-dark text-white'>
+                                            <div class="row">
+                                            <div class="col">{{ $perm_name }}</div>
+                                            <div class="col text-end"><input type='checkbox' name='{{ $key }}_{{ $action }}' value='1' {{ $check }} {{ $disable }}></div>
+                                            </div>
+                                        </li>
                                     @endforeach
                             
 
@@ -109,7 +114,7 @@
                                     @endcan
 
                                     @can('delete', 'userrole')
-                                    <a data-bs-toggle='modal' data-bs-target='#delete_{{ $role->id }}' class='btn btn-danger btn-sm w-25' {{ $disable }}><i class='fa fa-trash-o' aria-hidden='true'></i></a>
+                                    <a data-bs-toggle='modal' data-bs-target='#delete_{{ $role->id }}' class='btn btn-danger btn-sm w-25' {{ $disable }}><i class='fa fa-trash' aria-hidden='true'></i></a>
                                     @endcan
                                 </div>
                             </div>

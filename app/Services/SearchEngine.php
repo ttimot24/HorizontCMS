@@ -30,9 +30,11 @@ class SearchEngine
         $this->searchKey = $search_key;
 
         foreach ($this->searchModels as $model => $values) {
+       
             if (method_exists($model, 'scopePaginateSortAndFilter')) {
 
-                $filter['filter'] = collect((new $model)->getFilterableFields())->mapWithKeys(fn($item) => [$item => $search_key])->toArray();
+                $filter['relation'] = 'or';
+                $filter['filter'] = collect((new $model)->getFilterableFields())->mapWithKeys(fn($item) => [$item => $this->searchKey])->toArray();
 
                 $this->searchModels[$model] = $model::paginateSortAndFilter($filter);
             }
@@ -43,7 +45,7 @@ class SearchEngine
     {
 
         if (!array_key_exists($model, $this->searchModels)) {
-            return collect();
+            return [];
         }
 
         return $this->searchModels[$model];

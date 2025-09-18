@@ -19,7 +19,8 @@ class CreateBlogpostCategoryTable extends Migration
 
         Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');;
+            $table->string('name');
+            $table->string('language')->default('en');
             $table->integer('author_id');
             $table->string('image')->nullable();
             $table->timestamps();

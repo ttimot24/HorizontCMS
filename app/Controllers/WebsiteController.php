@@ -11,12 +11,6 @@ class WebsiteController extends Controller
 
     private $request;
 
-    private $engines = [
-        'hcms' => \App\Services\ThemeEngine::class,
-        'blade' => \App\Services\BladeThemeEngine::class,
-        //'twig' => \App\Services\TwigThemeEngine::class,
-    ];
-
     private $theme;
 
     public function __construct(Request $request, \App\Services\Theme $theme){
@@ -42,7 +36,9 @@ class WebsiteController extends Controller
             \App::setLocale($this->request->input("lang"));
         }
 
-        $theme_engine = new $this->engines[$this->theme->getConfig('theme_engine', 'hcms')]($this->request);
+        $engines = config('horizontcms.theme_engines');
+
+        $theme_engine = new $engines[config('theme:theme.engine', 'hcms')]($this->request);
         $theme_engine->setTheme($this->theme);
 
         $theme_engine->boot();
@@ -146,7 +142,7 @@ class WebsiteController extends Controller
             $search_engine->registerModel(\App\Model\Page::class);
             $search_engine->registerModel(\App\Model\User::class);
 
-            foreach ($this->theme->getConfig('search_models', []) as $model) {
+            foreach (config('theme:search.models', []) as $model) {
                 $search_engine->registerModel($model);
             }
 

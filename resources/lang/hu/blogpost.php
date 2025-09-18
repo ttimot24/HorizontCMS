@@ -32,6 +32,7 @@ return [
 	'author' => 'Szerző',
 	'slug' => 'Slug',
 	'published_on' => 'Közzétéve',
+	'last_updated_at' => 'Utoljára módosítva',
 	'category' => 'Kategória',
 	'characters' => 'Karakterek száma',
 	'words' => 'Szavak száma',

@@ -2,6 +2,7 @@
 
 return [
 
+    'content' => 'Content',
     'title' => 'Dashboard',
     'server_ip' => 'Server ip: ',
     'client_ip'     => 'Your ip: ',
@@ -15,6 +16,5 @@ return [
     'update_available' => 'Update available!',
     'update_message' => 'There\'s a new version available of HorizontCMS!',
     'update_now' => 'Update now',
-
 
 ];

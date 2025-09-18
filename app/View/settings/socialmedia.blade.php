@@ -33,7 +33,7 @@
                                 <td></td>
                                 <td>
                                     <button type='submit' class='btn btn-primary'>
-                                        <span class='fa fa-floppy-o' aria-hidden='true'></span>
+                                        <i class="fa-solid fa-floppy-disk"></i> 
                                         {{ trans('settings.adminarea_save_settings') }}
                                     </button> 
                                 </td>

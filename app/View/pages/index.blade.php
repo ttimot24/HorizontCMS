@@ -6,7 +6,7 @@
         <div class="card mb-3">
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => trans('page.pages'), 'url' => route('page.index')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => trans('page.pages'), 'url' => route('page.index')]],
                 'page_title' => trans('page.pages'),
                 'stats' => [['label' => trans('page.all'), 'value' => $all_pages->total()],
                 ['label' => trans('page.visible'), 'value' => $visible_pages],
@@ -67,17 +67,25 @@
 
 
                                 </td>
-                                <td><img src='{{ $each->getThumb() }}' width='70' height='50'
-                                        class='img img-rounded' /></td>
+                                <td>
+                                @if($each->getFeaturedMediaType()==='video')
+                                    <video controls="false" width=70 height=50 >
+                                        <source src="{{ $each->getImage()}}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
+                                    <img src='{{ $each->getThumb() }}' class='img img-rounded' style='object-fit:cover;' width=70 height=50 /> 
+                                @endif
+                                </td>
                                 <td>{{ $each->name }}
                                 </td>
-                                <td>@if($each->url)<span class='badge bg-dark'> {{$each->url}}</span> @endif</td>
+                                <td>@if($each->url)<span class='badge bg-dark w-75'> {{$each->url}}</span> @endif</td>
                                 <td>
 
                                     @if ($each->visibility == 1)
-                                        <span class='badge rounded-pill bg-success'>{{ trans('page.visible') }}</span>
+                                        <span class='badge bg-success w-75'>{{ trans('page.visible') }}</span>
                                     @else
-                                        <span class='badge rounded-pill bg-danger'>{{ trans('page.invisible') }}</span>
+                                        <span class='badge bg-danger w-75'>{{ trans('page.invisible') }}</span>
                                     @endif
 
                                 </td>
@@ -86,7 +94,7 @@
                                     @if ($each->parent == null)
                                         <b>{{ trans('page.menu_type1') }}</b>
                                     @else
-                                        <span class='badge bg-info'>
+                                        <span class='badge bg-info w-75'>
                                             {!! trans('page.menu_type2', ['parent_menu' => $each->parent->name]) !!}
                                         </span>
                                     @endif
@@ -103,7 +111,7 @@
 
                                     <div class="dropdown">
                                         <div data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
-                                            <i class="bi bi-three-dots-vertical text-dark"></i>
+                                            <i class="fa-solid fa-ellipsis-vertical text-dark fs-5"></i>
                                         </div>
                                         <ul class="dropdown-menu text-dark">
                                             @can('update', 'page')
@@ -120,7 +128,7 @@
                                                 <a data-bs-toggle='modal' data-bs-target=#delete_<?= $each->id ?>
                                                     class="dropdown-item text-danger text-decoration-none"
                                                     style="cursor: pointer;">
-                                                    <i class="fa fa-trash-o me-2" aria-hidden="true"></i>
+                                                    <i class="fa fa-trash me-2" aria-hidden="true"></i>
                                                     {{ trans('actions.delete') }}
                                                 </a>
                                             </li>

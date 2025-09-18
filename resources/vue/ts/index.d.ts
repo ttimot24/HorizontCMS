@@ -1,4 +1,3 @@
-declare var $: any;
 
 declare module "*.vue" {
     import { defineComponent } from '@vue/composition-api';

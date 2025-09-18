@@ -6,7 +6,7 @@
         <div class="card mb-3">
 
                     @include('breadcrumb', [
-                        'links' => [['name' => 'Content'], ['name' => trans('user.users'), 'url' => route('user.index')]],
+                        'links' => [['name' => trans('dashboard.content')], ['name' => trans('user.users'), 'url' => route('user.index')]],
                         'page_title' => trans(isset($user) ? 'user.edit_user' : 'user.create_user'),
                     ])
         
@@ -113,8 +113,16 @@
                             <div class='form-group'>
                                 <label for='file'>{{ trans('actions.upload_image') }}:</label>
                                 <input name='up_file' accept='image/*' id='input-2' type='file' class='file'
+                                    data-max-file-size="{{ config('horizontcms.max_upload_file_size', 2560) }}KB"
                                     multiple='true' data-drop-zone-enabled="{{ isset($user) ? 'false' : 'true' }}"
                                     data-show-upload='false' data-show-caption='true'>
+
+
+                                @error('up_file')
+                                    <div class="text-danger" role="alert">
+                                        <strong>{{ $errors->first('up_file') }}</strong>
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 

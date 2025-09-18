@@ -4,7 +4,7 @@
 
         @if($mode!=='embed')
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => trans('Media')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => trans('Media')]],
                 'page_title' => trans('File manager'),
             ])
         @endif

@@ -83,7 +83,7 @@ class BlogpostControllerTest extends TestCase
 
         $requestPost = Request::create('/admin/blogpost/store', 'POST', [
             'title' => 'AutomatedTest',
-            'category_id' => 1,
+            'category_ids' => [1],
             'summary' => 'This is the summary of the test blogpost',
             'text' => 'A very long blogpost text',
             'active' => 1

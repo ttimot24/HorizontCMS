@@ -54,14 +54,14 @@
                 <div class="row py-5 px-3">
                     <div class='col-lg-6 col-sm-12 text-center text-lg-start'>
                         <p class='text-muted credit mb-0'>
-                            {{ config('app.name') }} &copy 2015 - {{ date('Y') }} <a
-                                href='http://www.twitter.com/timottarjani'>Timot Tarjani</a>
-                            &nbsp&nbsp<a href='https://github.com/ttimot24/HorizontCMS'><i style='font-size: 1.2em'
-                                    class="fa fa-github" aria-hidden="true"></i></a>
+                            {{ config('app.name') }} &copy 2015 - {{ date('Y') }} 
+                            <a href='{{ config('horizontcms.creator.twitter') }}' class="me-1">{{ config('horizontcms.creator.name') }}</a>
+                            <a href='{{ config('horizontcms.creator.github') }}'><i style='font-size: 1.2em'
+                                    class="fab fa-github" aria-hidden="true"></i></a>
                         </p>
                     </div>
                     <div class='col-lg-6 col-sm-12 text-center text-lg-end'>
-                        Version: {{ config('horizontcms.version') }}
+                        {{ trans('Version') }}: {{ config('horizontcms.version') }}
                     </div>
                 </div>
             </div>

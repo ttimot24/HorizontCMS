@@ -6,7 +6,7 @@
     <div class="card pb-5">
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => trans('Dashboard'), 'url' => route('dashboard.index')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => trans('Dashboard'), 'url' => route('dashboard.index')]],
                 'page_title' => trans('search.title'),
             ])
 

@@ -6,7 +6,6 @@ class Theme
 {
 
 	public $info;
-	public $config;
 	public $languagePath = "resources/lang";
 
 	public function __construct(private $root_dir)
@@ -16,7 +15,8 @@ class Theme
 
 		$this->parseThemeInfo();
 
-		$this->config = file_exists($this->getPath() . "config.php") ? require($this->getPath() . "config.php") : NULL;
+		$this->languagePath = config("theme:theme.language.path","resources/lang");
+
 	}
 
 	public function getRootDir(): string
@@ -58,11 +58,6 @@ class Theme
 	public function isCurrentTheme()
 	{
 		return $this->root_dir == \Settings::get('theme');
-	}
-
-	public function getConfig($config, $default = NULL)
-	{
-		return isset($this->config[$config]) ? $this->config[$config] : $default;
 	}
 
 	public function getName()

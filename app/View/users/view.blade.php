@@ -30,7 +30,7 @@
             @endphp
 
             @include('breadcrumb', [
-                'links' => [['name' => 'Content'], ['name' => trans('user.users'), 'url' => route('user.index')]],
+                'links' => [['name' => trans('dashboard.content')], ['name' => trans('user.users'), 'url' => route('user.index')]],
                 'page_title' => trans('user.view_user'),
                 'buttons' => null,
                 'buttons_right' => $buttons,

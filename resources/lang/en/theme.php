@@ -2,6 +2,14 @@
 
 
 return [
+	'options' => 'Options',
+	'active' => 'Active',
+	'activate' => 'Activate',
+	'deactivate' => 'Deactivate',
+	'current_theme' => 'Current Theme',
+	'no_themes' => 'No themes found',
+	'upload_theme' => 'Upload Theme',
+	'download_themes' => 'Download Theme',
 	'themes' => 'Themes',
 	'upload_theme_button' => 'Upload theme',
 	'version' => 'version',

@@ -5,7 +5,7 @@
 
         <div class="card mb-3">
                     @include('breadcrumb', [
-                        'links' => [['name' => 'Content'], ['name' => trans('page.pages'), 'url' => route('page.index')]],
+                        'links' => [['name' => trans('dashboard.content')], ['name' => trans('page.pages'), 'url' => route('page.index')]],
                         'page_title' => trans(isset($page) ? 'page.edit_page' : 'page.add_new_page_title'),
                     ])
             <div class="card-body">
@@ -27,13 +27,14 @@
                                     onkeyup="ajaxGetSlug();" value="{{ old('name', isset($page) ? $page->name : '') }}"
                                     required>
                                 <div class="form-text">
-                                    <b>{{ trans('page.semantic_url') }}:</b>&nbsp&nbsp&nbsp{{ rtrim(Config::get('app.url'), '/') }}<a
+                                    <b>{{ trans('page.semantic_url') }}:</b>&nbsp&nbsp&nbsp{{ rtrim(config('app.url'), '/') }}<a
                                         class='text-muted'
                                         id='ajaxSlug'>{{ isset($page) ? UrlManager::seo_url($page->name) : '' }}</a>
                                 </div>
                             </div>
 
-                            <div class='form-group pull-left col-xs-12 col-md-12'>
+                            <div class="row p-3">
+                            <div class='form-group pull-left col-xs-12 col-md-8'>
                                 <label for='title'>{{ trans('page.page_template') }}</label>
                                 <select class='form-select' name='url'>
                                     <option value=''>{{ trans('page.default_template') }}</option>
@@ -41,11 +42,26 @@
                                     @foreach ($page_templates as $template)
                                         <option value='{{ $template }}'
                                             @if (isset($page) && $template == $page->url) selected @endif>
-                                            {{ ucfirst(rtrim(rtrim($template, '.php'), '.blade')) }}
+                                            {{ ucfirst(basename(basename($template, '.php'), '.blade')) }}
                                         </option>
                                     @endforeach
 
                                 </select>
+                            </div>
+
+                            <div class='form-group pull-left col-xs-12 col-md-4'>
+                                <label for='title'>{{ trans('settings.adminarea_language') }}</label>
+                                <select class='form-select' name='language'>
+
+                                    @foreach (config('horizontcms.languages') as $key => $value)
+                                        <option value='{{ $key }}'
+                                            @if ((isset($page) && $key == $page->language) || (!isset($page) && $key == \Settings::get('language'))) selected @endif>
+                                            {{ $value }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
                             </div>
 
                             <div class="row p-3">
@@ -62,10 +78,14 @@
                                 <div class='form-group col-xs-12 col-md-6' id='submenus'>
                                     <label for='submenus'>Parent menu:</label>
                                     <select class='form-select' name='parent_id'>
-                                        @foreach ($all_page as $each)
-                                            <option value="{{ $each->id }}"
-                                                {{ isset($page) && $page->parent != null && $each->is($page->parent) ? 'selected' : '' }}>
-                                                {{ $each->name }}</option>
+                                        @foreach (config('horizontcms.languages') as $key => $value)
+                                        <optgroup label='{{ $value }}'>
+                                            @foreach ($all_page->filter(fn($page) => $page->language == $key) as $each)
+                                                <option value="{{ $each->id }}"
+                                                    {{ isset($page) && $page->parent != null && $each->is($page->parent) ? 'selected' : '' }}>
+                                                    {{ $each->name }}</option>
+                                            @endforeach
+                                        </optgroup>
                                         @endforeach
                                     </select>
                                 </div>
@@ -93,7 +113,14 @@
                             @if (isset($page) && $page->hasImage())
                                 <button type='button' class='btn btn-link mb-5 w-100' data-bs-toggle='modal'
                                     data-bs-target='#modal-xl-{{ $page->id }}'>
-                                    <img src='{{ $page->getThumb() }}' class='img img-thumbnail w-100'>
+                                    @if($page->getFeaturedMediaType()==='video')
+                                        <video controls class="w-100" style="max-height:500px;">
+                                            <source src="{{ $page->getImage()}}">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    @else
+                                        <img src='{{ $page->getThumb() }}' class='img img-thumbnail w-100'>
+                                    @endif
                                 </button>
                             @endif
 
@@ -101,8 +128,16 @@
                                 <label for='file'>{{ trans('actions.upload_image') }}:</label>
                                 <input name='up_file' accept='image/*' id='input-2' type='file' class='file'
                                     multiple='true'
+                                    data-max-file-size="{{ config('horizontcms.max_upload_file_size', 2560) }}KB"
                                     data-drop-zone-enabled="{{ isset($page) && $page->hasImage() ? 'false' : 'true' }}"
                                     data-show-upload='false' data-show-caption='true'>
+
+                                
+                                @error('up_file')
+                                    <div class="text-danger" role="alert">
+                                        <strong>{{ $errors->first('up_file') }}</strong>
+                                    </div>
+                                @enderror
                             </div>
 
                         </div>
@@ -112,7 +147,7 @@
                             <label for='text'>{{ trans('page.page_content') }}</label>
 
                             <text-editor id="texteditor" :name="'page'"
-                                :data="'{{ remove_linebreaks(old('page', isset($page) ? $page->page : '')) }}'"
+                                :data="'{{ remove_linebreaks(old('page', isset($page) ? str_replace("'", "&#39;", $page->page) : '')) }}'"
                                 :language="'{{ config('app.locale') }}'"
                                 :filebrowserBrowseUrl="'{{ route('filemanager.index', ['path' => 'images/pages', 'mode' => 'embed']) }}'"
                                 :filebrowserUploadUrl="'{{ route('file-manager.store', ['dir_path' => 'storage/images/pages']) }}'">
@@ -143,7 +178,7 @@
 @endsection
 
 @section('head')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type='text/javascript' defer>
 
             $(document).ready(function() {

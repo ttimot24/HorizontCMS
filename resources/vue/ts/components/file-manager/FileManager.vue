@@ -7,13 +7,13 @@
 
                     <div class="row">
 
-                        <div class='panel panel-default col-2 bg-dark p-3' style="min-height:500px;">
-                            <h4 class="p-2 bg-dark text-white">Drivers</h4>
+                        <div class='panel panel-default col-2 bg-dark p-3' style="min-height:600px;">
+                            <h4 class="p-2 bg-dark text-white">Disks</h4>
                             <ul class="list-group">
 
                                 <!-- v-on:click.prevent="open('{{ isset($value['root']) ? basename($value['root']) : '' }}', false);" -->
-                                <a href="#" v-for="(disk) in disks" v-on:click.prevent="open(disk, false)">
-                                    <li class="list-group-item bg-dark text-white">{{ disk }}</li>
+                                <a href="#" v-for="(disk) in disks" v-on:click.prevent="switchDisk(disk)">
+                                    <li class="list-group-item bg-dark text-white" :class="disk===currentDisk? 'active' : '' ">{{ disk }}</li>
                                 </a>
 
                             </ul>
@@ -26,7 +26,7 @@
                                         <nav aria-label="breadcrumb p-0 m-0">
                                             <ol class="breadcrumb bg-dark p-0 pt-3 m-0">
                                                 <li class="breadcrumb-item"><a href="storage"
-                                                        v-on:click.prevent="open('', false); ">storage</a></li>
+                                                        v-on:click.prevent="open('', false); ">{{ currentDisk }}: storage</a></li>
                                                 <li class="breadcrumb-item" v-for="(  bcrumb  ) in   breadcrumb  "><a
                                                         :href=" bcrumb.link "
                                                         v-on:click.prevent=" open(bcrumb.link, false); ">{{ bcrumb.text
@@ -68,7 +68,14 @@
                                 </div>
                                 <div id="workspace" class="col-md-12 py-3 pe-5">
 
-                                    <div class="row text-white">
+                                    <div v-if="openError" class="alert alert-danger d-flex align-items-center" role="alert">
+                                        <i class="fa-solid fa-circle-exclamation me-3"></i>
+                                        <div>
+                                            Could not open folder: {{openError.error}}
+                                        </div>
+                                    </div>
+
+                                    <div v-if="!openError" class="row text-white">
                                         <div class='folder col-md-2 col-sm-4 col-xs-4 text-center text-white'
                                             v-for="  folder   in   folders  " :id=" folder " v-on:click=" select(folder) "
                                             v-on:dblclick=" open(folder); ">
