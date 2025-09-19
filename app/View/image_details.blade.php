@@ -31,6 +31,7 @@
             $image_size_height[0] = "N/A";
             $size['mime'] = 'unknown';
             $display_type = 'unknown';
+            $thumbnail = '';
         }
    
    ?>
