@@ -1,119 +1,120 @@
-<?php 
+<?php
 
 namespace App\Services;
 
-class ThemeEngine {
+use App\Interfaces\ThemeEngineInterface;
 
-	protected $theme;
-	protected $page_template = 'index';
-	public $request;
+class ThemeEngine implements ThemeEngineInterface
+{
+    protected ?\App\Services\Theme $theme = null;
+    protected string $page_template = 'index';
+    public \Illuminate\Http\Request $request;
 
-	public function __construct(\Illuminate\Http\Request $request){
-		$this->request = $request;
-	}
+    public function __construct(\Illuminate\Http\Request $request)
+    {
+        $this->request = $request;
+    }
 
+    public function getTheme(): \App\Services\Theme
+    {
+        return $this->theme;
+    }
 
-	public function getTheme(){
-		return $this->theme;
-	}
+    public function setTheme(\App\Services\Theme|string $theme): void
+    {
+        $this->theme = is_string($theme) ? new \App\Services\Theme($theme) : $theme;
+    }
 
-	public function setTheme(\App\Services\Theme $theme){
-		$this->theme = $theme;
-	}
+    public function pageTemplate(string $page_template): void
+    {
+        $this->page_template = $page_template;
+    }
 
-	public function pageTemplate($page_template){
-		$this->page_template = $page_template;
-	}
+    public function defaultTemplateExists(string $template): bool
+    {
+        return file_exists($this->theme->getPath() . $template . '.php');
+    }
 
-	public function defaultTemplateExists($template){
-		return file_exists($this->theme->getPath().$template.'.php'); 
-	}
+    public function templateExists(string $template): bool
+    {
+        return file_exists($this->theme->getPath() . "page_templates" . DIRECTORY_SEPARATOR . $template . '.php');
+    }
 
-	public function templateExists($template){
-		return file_exists($this->theme->getPath()."page_templates/".$template.'.php'); 
-	}
+    public function boot(): void
+    {
+        if ($this->theme === null) {
+            throw new \Exception("<b>Theme is not set!</b>");
+        }
 
-	public function boot(){
+        \Website::initalize($this);
+    }
 
-		if($this->theme==NULL){
-			throw new \Exception("<b>Theme is not set!</b>");
-		}
+    public function render(array $data = null): string
+    {
+        if ($this->theme === null) {
+            throw new \Exception("Theme is not set!");
+        }
 
-		\Website::initalize($this);
-	}
+        ob_start();
 
+        $this->require_file('header.php');
+        $this->require_file('index.php');
+        $this->require_file('footer.php');
 
-	public function render(){
+        $output = ob_get_contents();
+        ob_end_clean();
 
-		
-		ob_start();
+        return trim($output);
+    }
 
-		$this->require_file('header.php');
-		$this->require_file('index.php');
-		$this->require_file('footer.php');
-	
-		$output = ob_get_contents();
+    private function require_file(string $file): void
+    {
+        $filePath = base_path($this->theme->getPath() . $file);
+        if (file_exists($filePath)) {
+            require_once $filePath;
+        }
+    }
 
-		ob_end_clean();
+    public function runScript(string $script_name)
+    {
 
-		return trim($output);
+        $script = config('theme:theme.scripts.'.$script_name, null);
+        if (is_callable($script)) {
+            return call_user_func($script);
+        }
 
-	}
+        return null;
+    }
 
+    public function render404()
+    {
+        ob_start();
 
-	private function require_file($file){
-		if(file_exists(base_path($this->theme->getPath().$file))){
-			require_once(base_path($this->theme->getPath().$file));
-		}
-	}
+        if ($this->theme->has404Template()) {
+            $this->require_file('404.php');
+        } else {
+            $this->require_file(resource_path('static/404.php'));
+        }
 
+        $output = ob_get_contents();
+        ob_end_clean();
 
-	public function runScript($script_name){
-		if(config('theme:scripts.'.$script_name, null)){
-			return call_user_func(config('theme:scripts.'.$script_name));
-		}
+        return response(trim($output), 404);
+    }
 
-		return NULL;
-	}
+    public function renderWebsiteDown()
+    {
+        ob_start();
 
-	public function render404(){
+        if ($this->theme->hasWebsiteDownTemplate()) {
+            $this->require_file('website_down.php');
+        } else {
+            $this->require_file(resource_path('static/website_down.php'));
+        }
 
-		ob_start();
-		
-		if($this->theme->has404Template()){
-			$this->require_file('404.php');
-		}else{
-			$this->require_file('../../resources/static/404.php');
-		}
-		
-		$output = ob_get_contents();
+        $output = ob_get_contents();
+        ob_end_clean();
 
-		ob_end_clean();
-
-		return response(trim($output),404);
-
-	}
-
-
-	public function renderWebsiteDown(){
-		
-		ob_start();
-
-		if($this->theme->hasWebsiteDownTemplate()){
-			$this->require_file('website_down.php');
-		}else{
-			$this->require_file('../../resources/static/website_down.php');
-		}
-
-		$output = ob_get_contents();
-
-		ob_end_clean();
-
-		return response(trim($output),503);
-
-	}
-
-
-
-
+        return response(trim($output), 503);
+    }
 }
