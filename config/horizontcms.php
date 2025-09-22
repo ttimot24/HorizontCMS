@@ -49,6 +49,7 @@ return [
 	'theme_engines' => [ //available theme engines
 			 	'hcms' => \App\Services\ThemeEngine::class,
         		'blade' => \App\Services\BladeThemeEngine::class,
+				'spa' => \App\Services\SpaThemeEngine::class,
 	],
 
 	'default_theme_engine' => env('HCMS_DEFAULT_THEME_ENGINE', 'hcms'),
