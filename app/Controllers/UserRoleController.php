@@ -66,7 +66,7 @@ class UserRoleController extends Controller
                 if ($plugin->isActive()) {
                     $permission_list[str_slug($plugin->root_dir)] = $plugin->getName();
                 }
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
             }
         }
 
