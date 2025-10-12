@@ -60,7 +60,7 @@ jobs:
       with:
         node-version: '22.x'
         cache: 'npm'
-    - run: npm install
+    - run: npm install --force
     - run: npm run build
     
   docker_image:
