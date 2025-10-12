@@ -16,14 +16,13 @@ class Plugin extends Model
 
 	private $info = null;
 
-	protected $image = "icon.jpg";
-
 	protected $defaultImage = "resources/images/icons/plugin.png";
 
 	protected $imageDir;
 
 	public function __construct($root_dir = null)
 	{
+		$this->image = "icon.jpg";
 
 		if (isset($root_dir) && !is_array($root_dir)) {
 

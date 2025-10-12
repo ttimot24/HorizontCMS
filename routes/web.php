@@ -44,9 +44,11 @@ if (app()->isInstalled()) {
 	}
 
 
-	Route::any('/{slug?}/{args?}', function ($slug = "", $args = null) use ($_THEME_NAME, $router) {
+	Route::any('/{slug?}/{args?}', function ($slug = "", $args = null) use ($_THEME_NAME) {
 
 		try {
+
+			$router = new \App\Http\RouteResolver();
 
 			try {
 

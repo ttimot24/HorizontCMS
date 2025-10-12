@@ -4,6 +4,7 @@ namespace App\Model\Trait;
 
 trait HasImage
 {
+    protected $image;
 
     public function attachImage($image)
     {
