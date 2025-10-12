@@ -12,11 +12,8 @@
     <testsuite name="Integration">
       <directory suffix="Test.php">resources/tests/integration</directory>
     </testsuite>
-    <testsuite name="Functional">
-      <directory suffix="Test.php">resources/tests/functional</directory>
-    </testsuite>
-    <testsuite name="Acceptance">
-      <directory suffix="Test.php">resources/tests/acceptance</directory>
+    <testsuite name="Gui">
+      <directory suffix="Test.php">resources/tests/gui</directory>
     </testsuite>
     <testsuite name="Full">
       <directory suffix="Test.php">resources/tests</directory>

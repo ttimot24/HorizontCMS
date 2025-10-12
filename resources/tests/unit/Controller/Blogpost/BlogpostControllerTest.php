@@ -31,7 +31,6 @@ class BlogpostControllerTest extends TestCase
         $this->assertInstanceOf(\App\Model\Blogpost::class, $responseView->getData()['all_blogposts'][0]);
     }
 
-
     public function testShowAction()
     {
 
