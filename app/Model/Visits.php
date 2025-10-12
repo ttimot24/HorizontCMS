@@ -16,7 +16,7 @@ class Visits extends Model {
     	try{
 
     		$visit = new Visits();
-    		$visit->date = date('Y-m-d');
+    		$visit->date = date('Y-m-d'); //TODO Use created_at instead
     		$visit->time = date('H:i:s');
     		$visit->ip = $request->ip();
     		$visit->host_name = gethostbyaddr($request->ip());
