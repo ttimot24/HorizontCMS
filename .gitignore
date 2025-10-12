@@ -18,3 +18,5 @@ Homestead.yaml
 /database/*.db
 .phpunit.result.cache
 TESTS-*.xml
+/reports
+.phpunit.cache

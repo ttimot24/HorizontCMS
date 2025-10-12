@@ -1,11 +1,12 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AppTest extends TestCase
 {
+
+    use RefreshDatabase;
+
     /**
      * A test for app creation
      *
@@ -13,8 +14,6 @@ class AppTest extends TestCase
      */
     public function testAppCreation()
     {
-
-
         $this->assertInstanceOf(\App\HorizontCMS::class, $this->app);
     }
 
@@ -40,4 +39,13 @@ class AppTest extends TestCase
             $this->assertEquals(true, $this->app->plugins->isEmpty());
         }
     }
+
+    public function testSetAndHoldPlugins()
+    {
+
+        $this->app->setPlugins(collect([new \App\Model\Plugin("test")]));
+        $this->assertEquals(1, $this->app->getPlugins()->count());
+        $this->assertEquals("test", $this->app->plugins->first()->root_dir);
+    }
+
 }

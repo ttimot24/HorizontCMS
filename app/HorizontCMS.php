@@ -2,14 +2,14 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 
 class HorizontCMS extends \Illuminate\Foundation\Application
 {
 
     // TODO Settings should be added here
-    public $plugins;
+    public Collection $plugins;
 
     public function __construct($basePath = null)
     {
@@ -28,11 +28,11 @@ class HorizontCMS extends \Illuminate\Foundation\Application
         return $this->basePath . DIRECTORY_SEPARATOR;
     }
 
-    public function setPlugins($plugins){
+    public function setPlugins(Collection $plugins){
         $this->plugins = $plugins;
     }
 
-    public function getPlugins(){
+    public function getPlugins(): Collection {
         return $this->plugins;
     }
 

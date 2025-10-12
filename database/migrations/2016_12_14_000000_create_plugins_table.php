@@ -20,9 +20,10 @@ class CreatePluginsTable extends Migration
         Schema::create($this->table_name, function (Blueprint $table) {
             $table->increments('id');
             $table->string('root_dir')->unique()->comment('Plugin context');
-            $table->integer('area')->nullable();
-            $table->integer('permission')->nullable();
-            $table->string('tables')->nullable();
+            $table->string('version')->nullable()->comment('Installed version');
+            $table->integer('area')->nullable()->comment('Main widget area');
+            $table->integer('permission')->nullable()->comment('Plugin maintained permissions');
+            $table->string('tables')->nullable()->comment('Plugin maintained tables');
             $table->timestamps();
             $table->integer('active');
         });

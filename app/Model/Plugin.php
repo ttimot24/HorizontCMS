@@ -12,7 +12,7 @@ class Plugin extends Model
 	use HasImage;
 	use IsActive;
 
-	protected $fillable = ['id', 'root_dir', 'area', 'permission', 'table_name', 'active'];
+	protected $fillable = ['id', 'root_dir', 'version', 'area', 'permission', 'table_name', 'active'];
 
 	private $info = null;
 
