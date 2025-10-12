@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\ThemeEngineInterface;
+use App\Services\Website;
 
 class ThemeEngine implements ThemeEngineInterface
 {
@@ -46,7 +47,7 @@ class ThemeEngine implements ThemeEngineInterface
             throw new \Exception("<b>Theme is not set!</b>");
         }
 
-        \Website::initalize($this);
+        Website::initalize($this);
     }
 
     public function render(array $data = null): string

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\ThemeEngineInterface;
+use Illuminate\Support\Facades\Route;
 
 class SpaThemeEngine implements ThemeEngineInterface
 {
@@ -63,7 +64,7 @@ class SpaThemeEngine implements ThemeEngineInterface
 
                 $realtive_path = str_replace($this->theme->getRootDir().''. DIRECTORY_SEPARATOR.'themes/'.$this->theme->getRootDir().$folder, '', $file->getPathname());
 
-                \Route::get('/'.$realtive_path, function() use ($file){
+                Route::get('/'.$realtive_path, function() use ($file){
                     return redirect(str_replace($this->theme->getRootDir().''. DIRECTORY_SEPARATOR, '', $file->getPathname()));
                 });
 
@@ -95,12 +96,14 @@ class SpaThemeEngine implements ThemeEngineInterface
         return trim($output);
     }
 
-    private function require_file(string $file): void
+    private function require_file(string $file): string|null
     {
         $filePath = base_path($this->theme->getPath() . $file);
         if (file_exists($filePath)) {
-            require_once $filePath;
+            return file_get_contents($filePath);
         }
+
+        return null;
     }
 
     private function injectScripts(): void
