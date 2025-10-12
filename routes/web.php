@@ -44,17 +44,17 @@ if (app()->isInstalled()) {
 	}
 
 
-	Route::any('/{slug?}/{args?}', function ($slug = "", $args = null) use ($_THEME_NAME) {
+	Route::any('/{slug?}/{args?}', function ($slug = "", $args = null) use ($_THEME_NAME, $router) {
 
 		try {
 
 			try {
 
-				$this->router->changeNamespace("Theme\\" . $_THEME_NAME . "\\App\\Controllers\\");
+				$router->changeNamespace("Theme\\" . $_THEME_NAME . "\\App\\Controllers\\");
 
 				$action = explode("/", $args)[0];
 
-				return $this->router->resolve($slug, $action, ltrim($args, $action . "/"));
+				return $router->resolve($slug, $action, ltrim($args, $action . "/"));
 			} catch (Exception $e) {
 
 

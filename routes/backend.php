@@ -7,12 +7,12 @@ if (!defined('CONTROLLER_PATH')) {
 	define('CONTROLLER_PATH', 'app'.DIRECTORY_SEPARATOR.'Controllers');
 }
 
-Route::group(['prefix'=>'/install'],function(){
+Route::group(['prefix'=>'/install'], function() use ($router){
 
 	Route::any('/{action?}/{args?}/', 
-		function($action = 'index', $args = null){
+		function($action = 'index', $args = null) use ($router) {
 				/* TODO Use resource controller */
-		        return $this->router->resolve('install',$action,$args);
+		        return $router->resolve('install',$action,$args);
 
   		 })->where('args', '(.*)');
 	
@@ -20,7 +20,7 @@ Route::group(['prefix'=>'/install'],function(){
 
 Route::auth();
 
-Route::group(['middleware' => ['admin','plugin','can:global-authorization']],function(){
+Route::group(['middleware' => ['admin','plugin','can:global-authorization']], function() use ($router) {
 
 	app()->plugins->each(function($plugin){
 
@@ -63,19 +63,19 @@ Route::group(['middleware' => ['admin','plugin','can:global-authorization']],fun
 
 
 	Route::any('/plugin/run/{plugin}/{controller?}/{action?}/{args?}/', 
-		function($plugin,$controller = 'start', $action = 'index', $args = null){
+		function($plugin,$controller = 'start', $action = 'index', $args = null) use ($router) {
 
-		       $this->router->changeNamespace("\Plugin\\".studly_case($plugin)."\\App\\Controllers\\");
+		       $router->changeNamespace("\Plugin\\".studly_case($plugin)."\\App\\Controllers\\");
 
-		       return $this->router->resolve($controller,$action,$args);
+		       return $router->resolve($controller,$action,$args);
 
   		 })->where('args', '(.*)');
 
 
 	Route::any('/{controller?}/{action?}/{args?}/', 
-		function($controller = 'dashboard', $action = 'index', $args = null){
+		function($controller = 'dashboard', $action = 'index', $args = null) use ($router){
 
-		        return $this->router->resolve($controller,$action,$args);
+		        return $router->resolve($controller,$action,$args);
 
   		 })->where('args', '(.*)');
 	

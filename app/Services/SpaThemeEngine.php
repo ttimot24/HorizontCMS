@@ -63,7 +63,7 @@ class SpaThemeEngine implements ThemeEngineInterface
 
                 $realtive_path = str_replace($this->theme->getRootDir().''. DIRECTORY_SEPARATOR.'themes/'.$this->theme->getRootDir().$folder, '', $file->getPathname());
 
-                Route::get('/'.$realtive_path, function() use ($file){
+                \Route::get('/'.$realtive_path, function() use ($file){
                     return redirect(str_replace($this->theme->getRootDir().''. DIRECTORY_SEPARATOR, '', $file->getPathname()));
                 });
 

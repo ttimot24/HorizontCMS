@@ -8,7 +8,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 class RouteServiceProvider extends ServiceProvider
 {
 
-
+    private $router;
     /**
      * The path to the "home" route for your application.
      *
@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+     
         $this->router = new \App\Http\RouteResolver();
 
         parent::boot();
