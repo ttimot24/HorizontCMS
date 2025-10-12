@@ -18,6 +18,7 @@ class BlogpostCommentController extends Controller
      */
     public function create()
     {
+        return null;
     }
 
     /**
@@ -47,6 +48,7 @@ class BlogpostCommentController extends Controller
      */
     public function show($id)
     {
+        return null;
     }
 
     /**
