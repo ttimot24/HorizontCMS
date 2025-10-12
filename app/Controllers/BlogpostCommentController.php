@@ -56,12 +56,12 @@ class BlogpostCommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BlogpostComment $blogpost_comment)
+    public function update(Request $request, BlogpostComment $blogpost_comment)
     {
 
-        $blogpost_comment->blogpost_id = $this->request->input('blogpost_id');
-        $blogpost_comment->comment = $this->request->input('comment');
-        $blogpost_comment->author()->associate($this->request->user());
+        $blogpost_comment->blogpost_id = $request->input('blogpost_id');
+        $blogpost_comment->comment = $request->input('comment');
+        $blogpost_comment->author()->associate($request->user());
 
 
         return redirect()->back()->withMessage(

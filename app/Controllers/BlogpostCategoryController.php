@@ -43,7 +43,9 @@ class BlogpostCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {}
+    public function create(Request $request) {
+        return $this->index($request);
+    }
 
     /**
      * Store a newly created resource in storage.

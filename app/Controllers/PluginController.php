@@ -51,7 +51,7 @@ class PluginController extends Controller
 
         try {
             $plugins = json_decode(file_get_contents(config('horizontcms.sattelite_url') . '/get_plugins.php'));
-        } catch (\ErrorException $e) {
+        } catch (\Exception $e) {
             $plugins = [];
             $repo_status = false;
         }
