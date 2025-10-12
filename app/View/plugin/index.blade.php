@@ -72,6 +72,20 @@
                                 <div class='col-md-2 col-sm-4 col-xs-4 text-end'>
 
                                     <div class="row align-items-center">
+                                        @if ($current_plugin->isUpdatable())
+                                            @can('update', 'plugin')
+                                                <div class="col-6 mb-3">
+                                                    <form action="{{ route('plugin.update', ['plugin' => 1]) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" name="plugin_name"
+                                                            value="{{ $current_plugin->root_dir }}">
+                                                        <button type="submit" id='install' name="upgrade" value="1"
+                                                            class='btn btn-primary btn-block w-100'>Update</button>
+                                                    </form>
+                                                </div>
+                                            @endcan
+                                        @endif
                                     @if (!$current_plugin->isInstalled() && $current_plugin->isCompatibleWithCore())
                                             @can('create', 'plugin')
                                                 <div class="col-6">
@@ -94,10 +108,10 @@
                                                         <input type="hidden" name="plugin_name"
                                                             value="{{ $current_plugin->root_dir }}">
                                                         @if (!$current_plugin->isActive())
-                                                        <button type="submit" id='update'
+                                                        <button type="submit" id='update'  name="active" value="1"
                                                             class='btn btn-success btn-block w-100'>Activate</button>
                                                         @else
-                                                        <button type="submit" id='update'
+                                                        <button type="submit" id='update' name="active" value="0"
                                                             class='btn btn-info btn-block w-100'>Deactivate</button>
                                                         @endif
                                                     </form>

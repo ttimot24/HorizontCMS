@@ -189,6 +189,18 @@ class Plugin extends Model
 		return $default;
 	}
 
+	public function isUpdatable()
+	{
+
+		if($this->isInstalled()
+		   && $this->isCompatibleWithCore()
+		   && \Composer\Semver\Comparator::lessThan(ltrim(empty($this->version)? "0.0" : $this->version, 'v'), ltrim($this->getInfo('version'),'v')) 
+		){
+			return true;
+		}
+		
+		return false;
+	}
 
 	public function getRequirements()
 	{
