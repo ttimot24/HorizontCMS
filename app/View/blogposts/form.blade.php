@@ -139,7 +139,7 @@
                             </div>
 
                             <div class='form-group col-12'>
-
+                                
                                 @if (!isset($blogpost))
                                     <button name="active" value="1" id='submit-btn' type='submit'
                                         class='btn btn-primary btn-lg'
@@ -157,9 +157,13 @@
                                             type='submit' class='btn btn-primary btn-lg'
                                             onclick='window.onbeforeunload = null;'>{{ trans('actions.publish') }}</button>
                                     @endif
+
+                                    <a name="active" target="_blank" href="{{ url(config('theme::theme.content.blogpost.preview.url', 'blogposts').'/'.$blogpost->getSlug()) }}" type='button'
+                                        class='btn btn-secondary'
+                                        onclick='window.onbeforeunload = null;'>{{ trans($blogpost->isDraft()? 'Preview': 'View') }}</a>
                                 @endif
                                 <a href="{{ route('blogpost.index') }}" type='button'
-                                    class='btn btn-default'>{{ trans('actions.cancel') }}</a>
+                                    class='btn btn-default float-end'>{{ trans('actions.cancel') }}</a>
                             </div>
                         </div>
 

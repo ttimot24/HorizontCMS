@@ -99,15 +99,21 @@
                                                 @csrf
                                                 @method('PUT')
     
+                                                <a target="_blank" href="{{ url(config('theme::theme.content.blogpost.preview.url', 'blogposts').'/'.$blogpost->getSlug()) }}" type='button'
+                                                    class='dropdown-item text-decoration-none text-dark'>
+                                                    <span class='fa fa-eye me-2' aria-hidden='true'></span>
+                                                    {{ trans($blogpost->isDraft()? 'Preview': 'View') }}
+                                                </a>
+
                                                 @if($blogpost->isDraft())
                                                     <input type="hidden" name="active" value="1">
-                                                    <button type="submit" class='dropdown-item text-decoration-none text-darks'>
+                                                    <button type="submit" class='dropdown-item text-decoration-none text-dark'>
                                                         <span class='fa fa-plus me-2' aria-hidden='true'></span>
                                                         {{ trans('Publish') }}
                                                     </button>
                                                 @else
                                                     <input type="hidden" name="active" value="0">
-                                                    <button type="submit" class='dropdown-item text-decoration-none text-darks'>
+                                                    <button type="submit" class='dropdown-item text-decoration-none text-dark'>
                                                         <span class='fa fa-minus me-2' aria-hidden='true'></span>
                                                         {{ trans('Unpublish') }}
                                                     </button>

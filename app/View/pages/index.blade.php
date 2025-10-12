@@ -114,6 +114,13 @@
                                             <i class="fa-solid fa-ellipsis-vertical text-dark fs-5"></i>
                                         </div>
                                         <ul class="dropdown-menu text-dark">
+                                            <li>
+                                                <a target="_blank" href="{{ url(config('theme::theme.content.page.preview.url', 'pages').'/'.$each->getSlug()) }}" type='button'
+                                                    class='dropdown-item text-decoration-none text-dark'>
+                                                    <span class='fa fa-eye me-2' aria-hidden='true'></span>
+                                                    {{ trans('View') }}
+                                                </a>
+                                            </li>
                                             @can('update', 'page')
                                             <li>
                                                 <a href="{{ route('page.edit', ['page' => $each]) }}"
