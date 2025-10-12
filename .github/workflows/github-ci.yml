@@ -38,7 +38,7 @@ jobs:
       - name: Force installed variable
         run: export INSTALLED=YES
       - name: Run unit tests
-        run: XDEBUG_MODE=coverage vendor/bin/phpunit --testsuite Unit,Integration --coverage-clover reports/coverage.xml
+        run: XDEBUG_MODE=coverage vendor/bin/phpunit --testsuite Unit,Integration --coverage-clover reports/coverage.xml --coverage-html ./reports/html
     #  - name: Upload coverage
     #    run: | 
     #      if [ -f "reports/coverage.xml" ]; then vendor/bin/codacycoverage clover reports/coverage.xml; fi 
@@ -49,7 +49,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['8.1', '8.2', '8.3']
+        php-versions: ['8.1', '8.2', '8.3', '8.4']
     
   docker_image:
     runs-on: ubuntu-latest
