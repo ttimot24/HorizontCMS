@@ -45,7 +45,7 @@ class Blogpost extends Model
     public static function findBySlug($slug)
     {
 
-        $blogpost = self::where('slug', $slug)->get()->first();
+        $blogpost = self::where('slug', $slug)->first();
 
         if (isset($blogpost)) {
             return $blogpost;

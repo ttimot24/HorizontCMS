@@ -55,7 +55,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public static function findBySlug($slug){
 
-        $user = self::where('slug',$slug)->get()->first();
+        $user = self::where('slug',$slug)->first();
 
         if($user!=NULL){
             return $user;

@@ -43,7 +43,7 @@ class Page extends Model {
 
     public static function findBySlug($slug){
 
-        $page = self::where('slug',$slug)->get()->first();
+        $page = self::where('slug',$slug)->first();
 
         if(isset($page)){
             return $page;

@@ -133,6 +133,8 @@ class FileManagerController extends Controller
                 return redirect()->back()->withMessage(['danger' => 'Folder already exists!']);
             }
         }
+
+        return redirect()->back()->withMessage(['danger' => 'Invalid HTTP method!']);
     }
 
 
@@ -202,5 +204,7 @@ class FileManagerController extends Controller
                 return response()->json(['danger' => trans('message.something_went_wrong')]);
             }
         }
+
+        return redirect()->back()->withMessage(['danger' => trans('message.something_went_wrong')]);
     }
 }

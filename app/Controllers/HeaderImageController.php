@@ -46,7 +46,7 @@ class HeaderImageController extends Controller
      */
     public function create()
     {
-
+        return null;
     }
 
     /**
@@ -81,6 +81,7 @@ class HeaderImageController extends Controller
      */
     public function show($id)
     {
+        return null;
     }
 
     /**
@@ -91,7 +92,7 @@ class HeaderImageController extends Controller
      */
     public function edit($id)
     {
-
+        return null;
     }
 
     /**
