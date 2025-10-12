@@ -50,6 +50,7 @@ class BlogpostController extends Controller
     {
 
         return view('blogposts.form', [
+            /** @phpstan-ignore method.unknown */
             'users' => \App\Model\User::whereHas('role', function ($query) {
                 $query->whereJsonContains('rights', 'user.update');
             })->get(),
@@ -121,6 +122,7 @@ class BlogpostController extends Controller
         return view('blogposts.form', [
             'blogpost' => $blogpost,
             'categories' => \App\Model\BlogpostCategory::all(),
+            /** @phpstan-ignore method.unknown */
             'users' => \App\Model\User::whereHas('role', function ($query) {
                 $query->whereJsonContains('rights', 'user.update');
             })->get(),

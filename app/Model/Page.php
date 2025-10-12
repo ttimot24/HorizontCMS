@@ -45,11 +45,11 @@ class Page extends Model {
 
         $page = self::where('slug',$slug)->first();
 
-        if(isset($page)){
+        if(!empty($page)){
             return $page;
         }else{
 
-            foreach (self::where('slug',NULL)->orWhere('slug',"")->get() as $page) {
+            foreach (self::where('slug',null)->orWhere('slug',"")->get() as $page) {
                 if(str_slug($page->name)==$slug){
                     return $page;
                 }
@@ -57,7 +57,7 @@ class Page extends Model {
 
         }
 
-        return NULL;
+        return null;
     }
 
     public function scopeWithTemplate($query, $template){
