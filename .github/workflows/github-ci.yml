@@ -50,6 +50,24 @@ jobs:
       fail-fast: false
       matrix:
         php-versions: ['8.1', '8.2', '8.3', '8.4']
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22.x'
+        cache: 'npm'
+    - run: npm install
+    - run: npm run build
+
+    # 👇 Store the dist folder
+    - uses: actions/upload-artifact@v3
+      with:
+        name: app-build
+        path: dist
     
   docker_image:
     runs-on: ubuntu-latest

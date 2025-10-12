@@ -42,7 +42,7 @@ WORKDIR /var/www/html
 
 COPY --from=builder /usr/local/bin/ /usr/local/bin/
 
-RUN install-php-extensions zip pdo_mysql pdo_pgsql pdo_sqlite pdo_sqlsrv &&  \
+RUN install-php-extensions zip pdo_mysql pdo_pgsql pdo_sqlite &&  \
     a2enmod rewrite && \
     adduser --disabled-password --gecos "" appuser && \
     usermod -aG sudo appuser && \
