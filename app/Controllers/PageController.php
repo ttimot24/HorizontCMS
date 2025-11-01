@@ -14,11 +14,6 @@ class PageController extends Controller
 
     protected $imagePath = 'images/pages';
 
-    /**
-     * Creates image directories if they not exists.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function before()
     {
         \File::ensureDirectoryExists($this->imagePath . '/thumbs');

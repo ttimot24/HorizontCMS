@@ -3,19 +3,17 @@
 namespace App\Listeners;
 
 use Illuminate\Auth\Events\Login;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-
-use App\Model\User;
+use \Illuminate\Http\Request;
 
 class UserEventListener
 {
+    private Request $request;
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct(\Illuminate\Http\Request $request)
+    public function __construct(Request $request)
     {
         $this->request = $request;
     }

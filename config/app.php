@@ -163,6 +163,7 @@ return [
         App\Providers\ModuleLoaderServiceProvider::class,
         App\Providers\PluginServiceProvider::class,
         App\Providers\ThemeServiceProvider::class,
+        App\Providers\ThemeEngineServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,

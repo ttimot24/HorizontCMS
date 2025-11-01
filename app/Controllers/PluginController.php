@@ -51,7 +51,7 @@ class PluginController extends Controller
 
         try {
             $plugins = json_decode(file_get_contents(config('horizontcms.sattelite_url') . '/get_plugins.php'));
-        } catch (\ErrorException $e) {
+        } catch (\Exception $e) {
             $plugins = [];
             $repo_status = false;
         }
@@ -85,6 +85,27 @@ class PluginController extends Controller
         }
     }
 
+    private function migrate(\App\Model\Plugin $plugin)
+    {
+
+        if ($plugin->getDatabaseFilesPath()) {
+            return \Artisan::call("migrate", ['--path' => $plugin->getDatabaseFilesPath() . DIRECTORY_SEPARATOR . "migrations", '--no-interaction' => '', '--force' => true]);
+        }
+        
+        return null;
+    }
+
+    private function seed(\App\Model\Plugin $plugin)
+    {
+        if ($plugin->getDatabaseFilesPath()) {
+
+            $seed_class = '\\Plugin\\' . $plugin->root_dir . '\\Database\\Seeds\\PluginSeeder';
+
+            if (class_exists($seed_class)) {
+                return \Artisan::call('db:seed', ['--class' => $seed_class, '--no-interaction' => '', '--force' => true]);
+            }
+        }
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -103,25 +124,13 @@ class PluginController extends Controller
                 return redirect()->back()->withMessage(['warning' => trans('plugin.not_compatible_with_core', ['min_core_ver' => $plugin->getRequiredCoreVersion()])]);
             }
 
+            $this->migrate($plugin);
 
-            if ($plugin->getDatabaseFilesPath()) {
-
-
-                \Artisan::call("migrate", ['--path' => $plugin->getDatabaseFilesPath() . DIRECTORY_SEPARATOR . "migrations", '--no-interaction' => '', '--force' => true]);
-
-
-                $seed_class = '\\Plugin\\' . $plugin->root_dir . '\\Database\\Seeds\\PluginSeeder';
-
-                if (class_exists($seed_class)) {
-                    \Artisan::call('db:seed', ['--class' => $seed_class, '--no-interaction' => '', '--force' => true]);
-                }
-            }
-
+            $this->seed($plugin);
 
             $plugin->getRegister('onInstall', []);
 
-
-            //$plugin->version should be added
+            $plugin->version = $plugin->getInfo('version');
             unset($plugin->info, $plugin->config);
             $plugin->area = 0;
             $plugin->permission = 0;
@@ -156,7 +165,22 @@ class PluginController extends Controller
     public function update(Request $request, \App\Model\Plugin $plugin)
     {
         $plugin = \App\Model\Plugin::rootDir($request->input('plugin_name'))->firstOrFail();
-        $plugin->active = $plugin->active==0? 1 : 0;
+
+        if($request->has('active')){
+            $plugin->active = $request->input('active');
+        }
+
+        if($request->has('upgrade')){
+            try{
+                $this->migrate($plugin);
+                $this->seed($plugin);
+                $plugin->getRegister('onUpgrade', [$plugin->version]);
+                $plugin->version = $plugin->getInfo('version');
+            } catch(\Exception $e){
+                \Log::error("Plugin upgrade error for ".$plugin->root_dir.": ".$e->getMessage());
+                return redirect()->back()->withMessage(['danger' => "Plugin upgrade error for ".$plugin->root_dir.": ".$e->getMessage()]);
+            };
+        }
 
 
         if ($plugin->save()) {

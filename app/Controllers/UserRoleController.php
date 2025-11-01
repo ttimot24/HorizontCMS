@@ -66,7 +66,7 @@ class UserRoleController extends Controller
                 if ($plugin->isActive()) {
                     $permission_list[str_slug($plugin->root_dir)] = $plugin->getName();
                 }
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
             }
         }
 
@@ -103,6 +103,7 @@ class UserRoleController extends Controller
      */
     public function show($id)
     {
+        return null;
     }
 
     /**
@@ -113,6 +114,10 @@ class UserRoleController extends Controller
      */
     public function edit($id)
     {
+        return view('users.roles.edit', [
+            'userrole' => \App\Model\UserRole::findOrFail($id),
+            'permission_list' => $this->getPermissionList(),
+        ]);
     }
 
     /**

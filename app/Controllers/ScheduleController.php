@@ -60,6 +60,7 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        return null;
     }
 
     /**

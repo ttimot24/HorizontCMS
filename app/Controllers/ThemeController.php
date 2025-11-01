@@ -54,9 +54,10 @@ class ThemeController extends Controller
             $themes = json_decode(file_get_contents(\Config::get('horizontcms.sattelite_url') . '/get_themes.php'));
 
             if ($themes == null) {
-                throw ErrorException('Could not fetch Themes');
+                throw new \Exception('Could not fetch Themes');
             }
-        } catch (\ErrorException $e) {
+        } catch (\Exception $e) {
+            \Log::warning("Could not fetch themes from repository: " . $e->getMessage());
             $themes = [];
             $repo_status = false;
         }
@@ -72,7 +73,7 @@ class ThemeController extends Controller
     public function config($slug)
     {
 
-        $websiteController = new \App\Controllers\WebsiteController(request());
+        $websiteController = new \App\Controllers\WebsiteController(request(), app()->make(\App\Interfaces\ThemeEngineInterface::class));
         $websiteController->before();
 
         $theme_engine = new \App\Services\ThemeEngine(request());
@@ -137,11 +138,7 @@ class ThemeController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function update($theme)
     {
         if(!request()->has('theme_subject')) {

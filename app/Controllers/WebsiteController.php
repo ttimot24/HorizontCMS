@@ -11,11 +11,11 @@ class WebsiteController extends Controller
 
     private $request;
 
-    private $theme;
+    private $engine;
 
-    public function __construct(Request $request, \App\Services\Theme $theme){
+    public function __construct(Request $request, \App\Interfaces\ThemeEngineInterface $engine){
         $this->request = $request;
-        $this->theme = $theme;
+        $this->engine = $engine;
     }
 
     /**
@@ -38,16 +38,13 @@ class WebsiteController extends Controller
 
         $engines = config('horizontcms.theme_engines');
 
-        $theme_engine = new $engines[config('theme:theme.engine', 'hcms')]($this->request);
-        $theme_engine->setTheme($this->theme);
+        $this->engine->boot();
 
-        $theme_engine->boot();
-
-        $theme_engine->runScript('before');
+        $this->engine->runScript('before');
 
 
         if ($this->request->settings['website_down'] == 1 && (\Auth::user() == null || !\Auth::user()->isAdmin())) {
-            return $theme_engine->renderWebsiteDown();
+            return $this->engine->renderWebsiteDown();
         }
 
 
@@ -58,23 +55,23 @@ class WebsiteController extends Controller
 
 
         if (!empty($requested_page)) {
-            if (!empty($requested_page->url) && $theme_engine->templateExists($requested_page->url)) {
+            if (!empty($requested_page->url) && $this->engine->templateExists($requested_page->url)) {
                 $template = "page_templates." . $requested_page->url;
             } else {
                 $template = 'page';
             }
         } else {
-            return $theme_engine->render404();
+            return $this->engine->render404();
         }
 
 
-        $theme_engine->pageTemplate($template);
+        $this->engine->pageTemplate($template);
 
 
-        $theme_engine->runScript('before_render');
+        $this->engine->runScript('before_render');
 
 
-        return $theme_engine->render([
+        return $this->engine->render([
             '_REQUESTED_PAGE' => $requested_page,
         ]);
     }

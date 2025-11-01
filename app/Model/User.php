@@ -55,13 +55,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public static function findBySlug($slug){
 
-        $user = self::where('slug',$slug)->get()->first();
+        $user = self::where('slug',$slug)->first();
 
-        if($user!=NULL){
+        if(!empty($user)){
             return $user;
         }else{
 
-            foreach (self::where('slug',NULL)->orWhere('slug',"")->get() as $user) {
+            foreach (self::where('slug',null)->orWhere('slug',"")->get() as $user) {
                 if(str_slug($user->username)==$slug){
                     return $user;
                 }
@@ -69,11 +69,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
         }
 
-        return NULL;
+        return null;
     }
 
 
-    public function blogposts(){
+    public function blogposts(): \Illuminate\Database\Eloquent\Relations\HasMany {
         return $this->hasMany(\App\Model\Blogpost::class,'author_id','id');
     }
 
@@ -84,7 +84,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     * return the default role. 
     *
     */
-    public function role(){
+    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo {
 
         if(\App\Model\UserRole::find($this->role_id)==null){
             $this->role_id = 1;
@@ -93,7 +93,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->belongsTo(\App\Model\UserRole::class,'role_id','id');
     }
 
-    public function comments(){
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany {
     	return $this->hasMany(\App\Model\BlogpostComment::class,'author_id','id');
     }
 
@@ -132,7 +132,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     /**
     * Mutator for passwords
     */
-    public function setPasswordAttribute($value){
+    public function setPasswordAttribute($value): void {
     	$this->attributes['password'] = \Hash::make($value);
     }
 

@@ -14,11 +14,7 @@ class UserController extends Controller
 
     protected $imagePath = 'images/users';
 
-    /**
-     * Creates image directories if they not exists.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function before()
     {
         \File::ensureDirectoryExists($this->imagePath . '/thumbs');

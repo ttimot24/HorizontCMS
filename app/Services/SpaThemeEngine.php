@@ -3,13 +3,20 @@
 namespace App\Services;
 
 use App\Interfaces\ThemeEngineInterface;
-use App\Services\Website;
+use Illuminate\Support\Facades\Route;
 
-class ThemeEngine implements ThemeEngineInterface
+class SpaThemeEngine implements ThemeEngineInterface
 {
     protected ?\App\Services\Theme $theme = null;
     protected string $page_template = 'index';
     public \Illuminate\Http\Request $request;
+
+    private $folders = [
+        '',
+        'public',
+        'dist',
+        'www',
+    ];
 
     public function __construct(\Illuminate\Http\Request $request)
     {
@@ -47,7 +54,24 @@ class ThemeEngine implements ThemeEngineInterface
             throw new \Exception("<b>Theme is not set!</b>");
         }
 
-        Website::initalize($this);
+        foreach($this->folders as $folder) {
+
+             if(!is_dir(base_path($this->theme->getPath() . $folder))){
+                continue;
+             }
+
+            foreach(\File::allFiles($this->theme->getPath().$folder) as $file) {
+
+                $realtive_path = str_replace($this->theme->getRootDir().''. DIRECTORY_SEPARATOR.'themes/'.$this->theme->getRootDir().$folder, '', $file->getPathname());
+
+                Route::get('/'.$realtive_path, function() use ($file){
+                    return redirect(str_replace($this->theme->getRootDir().''. DIRECTORY_SEPARATOR, '', $file->getPathname()));
+                });
+
+            }
+        }
+
+
     }
 
     public function render(array $data = null): string
@@ -58,9 +82,13 @@ class ThemeEngine implements ThemeEngineInterface
 
         ob_start();
 
-        $this->require_file('header.php');
-        $this->require_file('index.php');
-        $this->require_file('footer.php');
+        foreach($this->folders as $folder) {
+            if(!is_dir(base_path($this->theme->getPath() . $folder))){
+             continue;
+            }
+
+            echo $this->require_file($folder . '/index.html');
+        }
 
         $output = ob_get_contents();
         ob_end_clean();
@@ -68,12 +96,20 @@ class ThemeEngine implements ThemeEngineInterface
         return trim($output);
     }
 
-    private function require_file(string $file): void
+    private function require_file(string $file): string|null
     {
         $filePath = base_path($this->theme->getPath() . $file);
         if (file_exists($filePath)) {
-            require_once $filePath;
+            return file_get_contents($filePath);
         }
+
+        return null;
+    }
+
+    private function injectScripts(): void
+    {
+        $script = config('theme:theme.scripts', []); //TODO
+
     }
 
     public function runScript(string $script_name)

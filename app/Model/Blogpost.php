@@ -45,9 +45,9 @@ class Blogpost extends Model
     public static function findBySlug($slug)
     {
 
-        $blogpost = self::where('slug', $slug)->get()->first();
+        $blogpost = self::where('slug', $slug)->first();
 
-        if (isset($blogpost)) {
+        if(!empty($blogpost)) {
             return $blogpost;
         } else {
 
@@ -95,6 +95,10 @@ class Blogpost extends Model
         return $this->hasMany(BlogpostComment::class, 'blogpost_id', 'id');
     }
 
+    public function scopeSlug($query, $slug)
+    {
+        return $query->where('slug', $slug);
+    }
 
     public function getSlug()
     {

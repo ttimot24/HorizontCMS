@@ -83,6 +83,11 @@
 
                                         </form>
                                     @endif
+                                                      <a target="_blank" href="{{ url(config('theme::theme.content.blogpost.preview.url', 'blogposts').'/'.$blogpost->getSlug()) }}" type='button'
+                                        class='btn btn-secondary text-white'>
+                                        <span class='fa fa-eye me-2' aria-hidden='true'></span>
+                                        {{ trans($blogpost->isDraft()? 'Preview': 'View') }}
+                                </a>
                                     @can('update', 'blogpost')
                                     <a href="{{ route('blogpost.edit', ['blogpost' => $blogpost]) }}" type='button'
                                         class='btn btn-warning'><i class='fa fa-pencil'
@@ -105,7 +110,7 @@
                                             {{ trans('actions.draft') }}
                                         </span>
                                     </div>
-                                @endif
+                                @endif        
 
                                 @if ($blogpost->author)
                                     <b class="d-block mb-3">{{ trans('blogpost.author') }} : <a
