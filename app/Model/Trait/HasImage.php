@@ -4,11 +4,14 @@ namespace App\Model\Trait;
 
 trait HasImage
 {
-    protected $image;
-
+    
     public function attachImage($image)
     {
-        $this->image = basename($image);
+       if ($this->isUrl($image)) {
+            $this->image = $image;
+        } else {
+            $this->image = basename($image);
+        }
     }
 
     public function getImageDirectory()

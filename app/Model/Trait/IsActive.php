@@ -16,8 +16,8 @@ trait IsActive {
         return $this->active > 0;
     }
 
-    public function isInActive(){
-        return $this->active == 0;
+    public function isInactive(){
+        return $this->active == null || $this->active == 0;
     }
 
     public function scopeActive($query){
