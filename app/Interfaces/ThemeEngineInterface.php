@@ -8,7 +8,9 @@ interface ThemeEngineInterface {
     
     public function setTheme(\App\Services\Theme | string $theme): void; 
     
-    public function render(array $data); public function render404(); 
+    public function render(array $data); 
+    
+    public function render404(); 
     
     public function renderWebsiteDown(); 
 
