@@ -4,19 +4,19 @@ namespace App\Model\Trait;
  
 trait IsActive {
 
-    public function activate(){
+    public function activate(): void {
         $this->active = 1;
     }
 
-    public function deactivate(){
+    public function deactivate(): void {
         $this->active = 0;
     }
 
-    public function isActive(){
+    public function isActive(): bool {
         return $this->active > 0;
     }
 
-    public function isInactive(){
+    public function isInactive(): bool {
         return $this->active == null || $this->active == 0;
     }
 

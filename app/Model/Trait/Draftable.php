@@ -4,7 +4,7 @@ namespace App\Model\Trait;
  
 trait Draftable {
 
-    public function isDraft(){
+    public function isDraft(): bool{
         return $this->active == 0;
     }
 
